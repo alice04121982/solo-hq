@@ -3,7 +3,7 @@ import { Sparkles, ShieldCheck, Heart, PoundSterling, Clock } from "lucide-react
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
-  title: "Find IVF Clinics Near You | Solo HQ",
+  title: "Find IVF Clinics Near You | Flying Solo",
   description:
     "Search and compare HFEA-licensed IVF clinics near you. Real pricing, solo-friendliness ratings, and side-by-side comparison for solo mums by choice.",
 };
@@ -51,7 +51,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
               <div className="h-8 w-8 rounded-xl bg-navy flex items-center justify-center">
                 <Sparkles className="h-3.5 w-3.5 text-lime" />
               </div>
-              <span className="text-sm font-bold text-navy">Solo HQ</span>
+              <span className="text-sm font-bold text-navy">Flying Solo</span>
             </a>
             <span className="text-muted">/</span>
             <span className="text-sm text-muted">IVF Clinic Finder</span>

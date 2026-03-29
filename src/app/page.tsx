@@ -20,12 +20,12 @@ export default function Home() {
       <HeroSection />
 
       {/* IVF Clinic Finder — first interactive feature */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-4">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-0">
         <ClinicFinder />
       </section>
 
       {/* Stats Bento Grid */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-8 relative z-10">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
             value="54%"

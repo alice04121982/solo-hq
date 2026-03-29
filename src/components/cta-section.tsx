@@ -52,10 +52,10 @@ export function CTASection() {
           <div className="h-7 w-7 rounded-lg bg-navy flex items-center justify-center">
             <Sparkles className="h-3 w-3 text-lime" />
           </div>
-          <span className="text-sm font-bold text-navy">Solo HQ</span>
+          <span className="text-sm font-bold text-navy">Flying Solo</span>
         </div>
         <p className="text-xs text-muted">
-          &copy; {new Date().getFullYear()} Solo HQ. Made with grit and grace in the UK.
+          &copy; {new Date().getFullYear()} Flying Solo. Made with grit and grace in the UK.
         </p>
       </div>
     </section>
