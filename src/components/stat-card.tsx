@@ -19,21 +19,17 @@ export function StatCard({ value, label, icon, highlight = false }: StatCardProp
       transition={{ duration: 0.4 }}
       className={`rounded-[32px] p-8 flex flex-col items-start gap-3 ${
         highlight
-          ? "bg-lime text-charcoal"
+          ? "bg-lavender-light"
           : "bg-card-bg border border-card-border"
       }`}
     >
       {icon && <div className="text-lavender-dark">{icon}</div>}
-      <span
-        className={`text-4xl md:text-5xl font-bold tracking-tight ${
-          highlight ? "text-charcoal" : "text-navy"
-        }`}
-      >
+      <span className="text-4xl md:text-5xl font-bold tracking-tight text-navy">
         {value}
       </span>
       <span
         className={`text-sm font-medium leading-snug ${
-          highlight ? "text-charcoal/80" : "text-muted"
+          highlight ? "text-navy/70" : "text-muted"
         }`}
       >
         {label}

@@ -1,23 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f3eef9;
-  --foreground: #1e1b2e;
-  --lavender: #C7B8EA;
-  --lavender-light: #e0d6f5;
-  --lavender-dark: #a894d4;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --lavender: #bfcfff;
+  --lavender-light: #eef2ff;
+  --lavender-dark: #3b5bdb;
   --lime: #D9FF5F;
   --lime-dark: #b8e030;
-  --charcoal: #1e1b2e;
-  --navy: #2a2650;
-  --warm-white: #faf8fc;
+  --charcoal: #0f172a;
+  --navy: #0f172a;
+  --warm-white: #f8fafc;
   --card-bg: #ffffff;
-  --card-border: #e8e0f2;
-  --muted: #8b82a0;
+  --card-border: #e2e8f0;
+  --muted: #64748b;
 }
 
 @theme inline {
-  --font-heading: "Yeseva One", Georgia, ui-serif, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-lavender: var(--lavender);
@@ -34,6 +33,28 @@
   --font-sans: Tahoma, "Tahoma", ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-yeseva), Georgia, ui-serif, serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-display-xs: 1.5rem;
+  --text-display-xs--line-height: 2rem;
+  --text-display-sm: 1.875rem;
+  --text-display-sm--line-height: 2.375rem;
+  --text-display-md: 2.25rem;
+  --text-display-md--line-height: 2.75rem;
+  --text-display-lg: 3rem;
+  --text-display-lg--line-height: 1;
+  --text-display-xl: 3.75rem;
+  --text-display-xl--line-height: 1;
+  --text-display-2xl: 4.5rem;
+  --text-display-2xl--line-height: 1;
 }
 
 body {
@@ -52,10 +73,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--lavender-light);
+  background: var(--warm-white);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--lavender-dark);
+  background: var(--card-border);
   border-radius: 4px;
 }

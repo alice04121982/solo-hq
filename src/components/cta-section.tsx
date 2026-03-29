@@ -11,36 +11,36 @@ export function CTASection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto rounded-[32px] bg-navy p-10 md:p-16 text-center"
+        className="max-w-4xl mx-auto rounded-[32px] bg-lavender-light p-10 md:p-16 text-center"
       >
         <div className="relative">
-          <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-lime/20 mb-6">
-            <Sparkles className="h-6 w-6 text-lime" />
+          <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-lavender mb-6">
+            <Sparkles className="h-6 w-6 text-lavender-dark" />
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-warm-white mb-4 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-navy mb-4 leading-tight">
             You&rsquo;re not doing this alone.
             <br />
-            <span className="text-lime">Even if you&rsquo;re doing it solo.</span>
+            <span className="text-lavender-dark">Even if you&rsquo;re doing it solo.</span>
           </h2>
 
-          <p className="text-warm-white/60 max-w-lg mx-auto mb-8 leading-relaxed">
+          <p className="text-navy/60 max-w-lg mx-auto mb-8 leading-relaxed">
             Join thousands of solo mums by choice who are navigating the journey
             with honest information, real-world costs, and a community that
             actually gets it.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-lime text-charcoal px-8 py-3.5 text-sm font-bold hover:bg-lime-dark transition-colors">
+            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-navy text-white px-8 py-3.5 text-sm font-bold hover:bg-charcoal transition-colors">
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
             </button>
-            <button className="inline-flex items-center justify-center gap-2 rounded-full border border-warm-white/20 text-warm-white px-8 py-3.5 text-sm font-semibold hover:bg-warm-white/10 transition-colors">
+            <button className="inline-flex items-center justify-center gap-2 rounded-full border border-navy/20 text-navy px-8 py-3.5 text-sm font-semibold hover:bg-navy/5 transition-colors">
               Follow Our Journey
             </button>
           </div>
 
-          <p className="text-warm-white/30 text-xs mt-6">
+          <p className="text-navy/30 text-xs mt-6">
             No spam. No toxic positivity. Just the real stuff.
           </p>
         </div>
