@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { Logo } from "./logo";
 
 export function CTASection() {
   return (
@@ -14,8 +15,8 @@ export function CTASection() {
         className="max-w-4xl mx-auto rounded-[32px] bg-lavender-light p-10 md:p-16 text-center"
       >
         <div className="relative">
-          <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-lavender mb-6">
-            <Sparkles className="h-6 w-6 text-lavender-dark" />
+          <div className="inline-flex items-center justify-center mb-6">
+            <Logo height={72} />
           </div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-navy mb-4 leading-tight">
@@ -48,11 +49,8 @@ export function CTASection() {
 
       {/* Footer */}
       <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-card-border flex flex-col sm:flex-row items-center justify-between gap-4 px-4">
-        <div className="flex items-center gap-2">
-          <div className="h-7 w-7 rounded-lg bg-navy flex items-center justify-center">
-            <Sparkles className="h-3 w-3 text-lime" />
-          </div>
-          <span className="text-sm font-bold text-navy">Flying Solo</span>
+        <div className="flex items-center">
+          <Logo height={36} />
         </div>
         <p className="text-xs text-muted">
           &copy; {new Date().getFullYear()} Flying Solo. Made with grit and grace in the UK.

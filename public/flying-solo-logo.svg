@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@900&amp;display=swap');
+  </style>
+  <text x="250" y="180" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="900" font-size="120" fill="#0B3D2E" letter-spacing="-3">flying</text>
+  <text x="250" y="320" text-anchor="middle" font-family="'Nunito', sans-serif" font-weight="900" font-size="120" fill="#0B3D2E" letter-spacing="-3">solo</text>
+</svg>

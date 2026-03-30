@@ -1,46 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Sparkles, ArrowRight, Play } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { SiteNav } from "./site-nav";
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-white border-b border-card-border">
+    <section className="relative overflow-hidden bg-background border-b border-card-border">
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Nav bar */}
-        <nav className="flex items-center justify-between py-5">
-          <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl bg-navy flex items-center justify-center">
-              <Sparkles className="h-4 w-4 text-lime" />
-            </div>
-            <span className="text-lg font-bold text-navy tracking-tight">
-              Flying Solo
-            </span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-navy/50">
-            <a href="#calculator" className="hover:text-navy transition-colors">
-              Cost Calculator
-            </a>
-            <a href="#journey" className="hover:text-navy transition-colors">
-              Journey Map
-            </a>
-            <a href="#clinics" className="hover:text-navy transition-colors">
-              Compare Clinics
-            </a>
-            <a href="/ivf-finder" className="hover:text-navy transition-colors">
-              Clinic Finder
-            </a>
-          </div>
-          <a
-            href="/ivf-finder"
-            className="inline-flex items-center gap-2 rounded-full bg-navy text-white px-5 py-2.5 text-sm font-semibold hover:bg-charcoal transition-colors"
-          >
-            Find a Clinic
-            <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </nav>
+        <SiteNav />
 
         {/* Two-column hero */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-16 md:py-24">
@@ -58,7 +28,7 @@ export function HeroSection() {
 
             <p className="text-lg text-navy/60 leading-relaxed max-w-lg mb-10">
               Your comprehensive guide to solo motherhood. From choosing a donor
-              and navigating IVF to prepping for birth and thriving as a single
+              and navigating IVF to prepping for birth and thriving as a solo
               parent by choice.
             </p>
 

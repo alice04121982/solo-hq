@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Sparkles, ShieldCheck, Heart, PoundSterling, Clock } from "lucide-react";
+import { ShieldCheck, Heart, PoundSterling, Clock } from "lucide-react";
+import { SiteNav } from "@/components/site-nav";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
@@ -43,19 +44,9 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
   return (
     <main className="min-h-screen bg-background">
       {/* Page header */}
-      <section className="bg-lavender-light pt-12 pb-16 px-4 sm:px-6">
+      <section className="bg-lavender-light pt-4 pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          {/* Breadcrumb nav */}
-          <nav className="flex items-center gap-4 mb-10">
-            <a href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-xl bg-navy flex items-center justify-center">
-                <Sparkles className="h-3.5 w-3.5 text-lime" />
-              </div>
-              <span className="text-sm font-bold text-navy">Flying Solo</span>
-            </a>
-            <span className="text-muted">/</span>
-            <span className="text-sm text-muted">IVF Clinic Finder</span>
-          </nav>
+          <SiteNav />
 
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-warm-white/80 px-3 py-1 text-xs font-semibold text-navy border border-card-border mb-4">

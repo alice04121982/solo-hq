@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Abhaya_Libre } from "next/font/google";
+import { Poetsen_One, Google_Sans } from "next/font/google";
 import "./globals.css";
 
-const abhayaLibre = Abhaya_Libre({
-  variable: "--font-abhaya",
+const poetsenOne = Poetsen_One({
+  variable: "--font-poetsen",
   subsets: ["latin"],
-  weight: "500",
+  weight: "400",
+});
+
+const googleSans = Google_Sans({
+  variable: "--font-google-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${abhayaLibre.variable} h-full antialiased`}>
+    <html lang="en" className={`${poetsenOne.variable} ${googleSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

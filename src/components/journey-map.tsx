@@ -3,10 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  Lightbulb,
   Landmark,
   Search,
   Stethoscope,
+  FlaskConical,
   Heart,
+  Baby,
+  Sunrise,
+  Users,
   ChevronDown,
   Check,
 } from "lucide-react";
@@ -18,137 +23,223 @@ interface Phase {
   subtitle: string;
   icon: React.ReactNode;
   colour: string;
+  iconColour: string;
   description: string;
   actions: string[];
 }
 
 const PHASES: Phase[] = [
   {
-    id: "foundations",
+    id: "decision",
     number: 1,
-    title: "Foundations",
-    subtitle: "Before you begin",
-    icon: <Landmark className="h-6 w-6" />,
-    colour: "bg-lavender",
-    description:
-      "The solo IVF journey starts long before a clinic appointment. This phase is about getting your finances, support network, and mindset ready. It's the most overlooked — and arguably the most important.",
-    actions: [
-      "Complete a full financial audit (treatment + 12 months of solo maternity costs)",
-      "Build your 'village' — identify 3–5 reliable people who will show up",
-      "Research your employer's fertility and maternity policies",
-      "Sit with the 'SMC Choice' — journaling, therapy, or community groups",
-      "Set a realistic timeline and budget ceiling before contacting clinics",
-    ],
-  },
-  {
-    id: "donor-hunt",
-    number: 2,
-    title: "The Donor Hunt",
-    subtitle: "Navigating the sperm bank world",
-    icon: <Search className="h-6 w-6" />,
-    colour: "bg-lime",
-    description:
-      "Choosing a donor is deeply personal and logistically complex. You'll navigate international sperm banks, shipping regulations, and the Open-ID vs. Anonymous debate — all while managing the emotional weight of selecting half your child's genetics.",
-    actions: [
-      "Create accounts at major banks (Cryos, Xytex, European Sperm Bank, London Sperm Bank)",
-      "Understand Open-ID donors (child can contact at 18) vs. Anonymous (where still legal)",
-      "Budget for 2–4 vials per cycle attempt, plus long-term storage for siblings",
-      "Coordinate shipping logistics and tank rental with your clinic",
-      "Consider CMV status, blood type, and extended donor profile information",
-    ],
-  },
-  {
-    id: "protocol",
-    number: 3,
-    title: "The Protocol",
-    subtitle: "Treatment decisions",
-    icon: <Stethoscope className="h-6 w-6" />,
+    title: "The Decision",
+    subtitle: "Am I really doing this?",
+    icon: <Lightbulb className="h-5 w-5" />,
     colour: "bg-lavender-light",
+    iconColour: "text-lavender-dark",
     description:
-      "IUI or IVF? Natural or medicated? These decisions depend on your age, AMH levels, and clinical history. Understanding the protocols helps you advocate for yourself in consultations and avoid unnecessary upselling.",
+      "For most solo mums by choice, the decision takes months or years. There's no right timeline. This phase is about getting honest with yourself — about what you want, what you fear, and what 'good enough' conditions look like before you start.",
     actions: [
-      "Get baseline bloods done (AMH, FSH, TSH, prolactin) and an antral follicle count",
-      "Discuss IUI vs. IVF with your consultant — IUI is cheaper but has lower success rates",
-      "Understand stimulation protocols: long, short, and natural-modified",
-      "Prepare for the Two-Week Wait (2WW) — plan distractions and support",
-      "Know your rights: you can always ask for a second opinion or switch clinics",
+      "Sit with the question without rushing to an answer — most women take 6–24 months to decide",
+      "Read memoirs and join SMC communities before committing to anything clinical",
+      "Talk to a therapist experienced in fertility and solo parenthood — not to be talked out of it, but to be properly prepared",
+      "Have the honest conversation about your support network: who will actually show up?",
+      "Set a personal 'decision deadline' so the thinking doesn't go on forever",
+    ],
+  },
+  {
+    id: "foundations",
+    number: 2,
+    title: "Foundations",
+    subtitle: "Building your base",
+    icon: <Landmark className="h-5 w-5" />,
+    colour: "bg-lavender",
+    iconColour: "text-navy",
+    description:
+      "Before you book a consultation, do the groundwork. Financial clarity, employer research, and a realistic support structure are what separate women who feel prepared from those who feel blindsided.",
+    actions: [
+      "Complete a full financial audit: treatment costs + 12 months of solo maternity costs",
+      "Research your employer's fertility and enhanced maternity policies",
+      "Build your 'village' — identify 3–5 reliable people who will actually show up",
+      "Set a budget ceiling and a 'stop' point before you start — it's harder to think clearly mid-treatment",
+      "Explore fertility finance options: loans, employer schemes, NHS criteria",
+    ],
+  },
+  {
+    id: "donor",
+    number: 3,
+    title: "The Donor Hunt",
+    subtitle: "Navigating sperm banks",
+    icon: <Search className="h-5 w-5" />,
+    colour: "bg-lime",
+    iconColour: "text-charcoal",
+    description:
+      "Choosing a donor is deeply personal and logistically complex. You'll navigate international sperm banks, shipping regulations, open-ID vs. anonymous debates, and the emotional weight of selecting half your child's genetics.",
+    actions: [
+      "Create accounts at major banks: Cryos International, Xytex, European Sperm Bank, London Sperm Bank",
+      "Understand open-ID donors (child can contact at 18) vs. anonymous — UK law requires traceability",
+      "Budget for 2–4 vials per cycle attempt, plus additional storage for siblings",
+      "Coordinate shipping logistics and tank rental with your chosen clinic in advance",
+      "Consider CMV status, blood type matching, and extended family health history",
+    ],
+  },
+  {
+    id: "clinic",
+    number: 4,
+    title: "Choosing a Clinic",
+    subtitle: "More than just success rates",
+    icon: <Stethoscope className="h-5 w-5" />,
+    colour: "bg-warm-white",
+    iconColour: "text-navy",
+    description:
+      "HFEA success rates are a starting point, not the whole story. For solo patients, solo-friendliness, all-in pricing transparency, and communication quality matter as much as headline numbers.",
+    actions: [
+      "Always ask: 'Do you routinely treat single women?' — not all clinics are equally welcoming",
+      "Request a written quote covering everything: ICSI, donor sperm admin, counselling, storage",
+      "Check HFEA success rates for your age group — not the clinic's overall headline figure",
+      "Ask about waiting times for appointments and treatment slots",
+      "Consider location vs. cost: London clinics are 30–40% pricier on average",
+    ],
+  },
+  {
+    id: "treatment",
+    number: 5,
+    title: "Treatment",
+    subtitle: "IUI, IVF, or donor eggs",
+    icon: <FlaskConical className="h-5 w-5" />,
+    colour: "bg-lavender-light",
+    iconColour: "text-lavender-dark",
+    description:
+      "The clinical phase is intense — injections, scans, and a lot of waiting. Understanding your protocol helps you advocate for yourself and avoid costly add-ons with little evidence base.",
+    actions: [
+      "Get baseline bloods done: AMH, FSH, LH, TSH, prolactin, and an antral follicle count",
+      "Discuss IUI vs. IVF with your consultant — IUI is cheaper but lower success rates per cycle",
+      "Understand your stimulation protocol: long, short, or natural/modified",
+      "Know which add-ons have HFEA amber/green traffic light status and which are unproven",
+      "Prepare for the two-week wait — plan distractions, not obsessive symptom-tracking",
     ],
   },
   {
     id: "resilience",
-    number: 4,
-    title: "Resilience & Recovery",
+    number: 6,
+    title: "Resilience & Loss",
     subtitle: "When it doesn't go to plan",
-    icon: <Heart className="h-6 w-6" />,
-    colour: "bg-warm-white",
+    icon: <Heart className="h-5 w-5" />,
+    colour: "bg-card-bg",
+    iconColour: "text-navy",
     description:
-      "Not every cycle works. Miscarriage, failed transfers, and negative tests are part of many journeys — and facing them solo adds a unique layer of grief. This phase exists because no one should navigate loss without a plan.",
+      "Not every cycle works. Miscarriage, failed transfers, and negative tests are part of many journeys — and facing them alone adds a unique layer of grief. This phase exists because no one should navigate loss without a plan.",
     actions: [
-      "Have a 'Plan B' conversation with yourself before starting treatment",
-      "Identify a counsellor who specialises in fertility loss (not just general therapy)",
-      "Connect with the SMC community — those who've been there understand",
-      "Give yourself permission to grieve between cycles without a timeline",
-      "Review and adjust your financial plan — know when to pause vs. continue",
+      "Have a 'plan B' conversation with yourself before starting — not as defeat, but preparation",
+      "Identify a counsellor who specialises in fertility loss before you need one",
+      "Connect with the SMC community — those who've been there understand in a way others can't",
+      "Give yourself permission to grieve between cycles without a timeline or explanation",
+      "Review your financial plan: know when to pause, pivot, or stop",
+    ],
+  },
+  {
+    id: "pregnancy",
+    number: 7,
+    title: "Pregnancy",
+    subtitle: "Growing your family solo",
+    icon: <Baby className="h-5 w-5" />,
+    colour: "bg-lime",
+    iconColour: "text-charcoal",
+    description:
+      "A positive test is thrilling and terrifying in equal measure. Solo pregnancy comes with unique logistics — from who comes to scans to how you'll manage the physical demands without a partner at home.",
+    actions: [
+      "Decide who you'll tell and when — there's no single right answer here",
+      "Book a trusted 'scan buddy' for your 12-week and 20-week appointments",
+      "Review your maternity leave entitlement and start the employer conversation early",
+      "Arrange your birth partner: a close friend, doula, or both",
+      "Start thinking about childcare early — waiting lists are long in most areas",
+    ],
+  },
+  {
+    id: "birth",
+    number: 8,
+    title: "Birth & Early Days",
+    subtitle: "Your village matters most now",
+    icon: <Sunrise className="h-5 w-5" />,
+    colour: "bg-lavender",
+    iconColour: "text-navy",
+    description:
+      "The fourth trimester is relentless for every new parent — and doing it without a co-parent is hard in specific, practical ways. Planning ahead for the first 12 weeks makes a real difference.",
+    actions: [
+      "Create a postnatal support rota before you give birth — meals, visits, and practical help",
+      "Research local NCT groups and solo parent meetups in your area",
+      "If you can, book a postnatal doula or night nanny for the first few weeks",
+      "Set up your home for single-handed operation: formula prep, changing station, safe sleeping",
+      "Know the signs of postnatal depression and have someone to call — solo mums are at higher risk",
+    ],
+  },
+  {
+    id: "life-ahead",
+    number: 9,
+    title: "Life Ahead",
+    subtitle: "Thriving as a solo family",
+    icon: <Users className="h-5 w-5" />,
+    colour: "bg-warm-white",
+    iconColour: "text-navy",
+    description:
+      "Solo parenthood gets more manageable as your child grows — and often more joyful. The questions shift: from 'can I do this?' to 'how do I talk to my child about their donor?' and 'how do I build a full life alongside this?'",
+    actions: [
+      "Start thinking about donor disclosure early — the research clearly supports honesty from the beginning",
+      "Connect with donor-conceived adult communities for perspective on what children actually want to know",
+      "Build solo parent friendships — the shared experience is irreplaceable",
+      "Review finances annually: childcare, schooling, and your own retirement planning as a sole earner",
+      "Give yourself credit — choosing this, doing this, and being present for it is extraordinary",
     ],
   },
 ];
 
 export function JourneyMap() {
-  const [expandedId, setExpandedId] = useState<string | null>("foundations");
+  const [expandedId, setExpandedId] = useState<string | null>("decision");
 
   return (
-    <div className="p-6 md:p-10">
+    <div className="p-6 md:p-8">
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-navy">
+        <p className="text-xs font-semibold uppercase tracking-widest text-lavender-dark mb-2">
+          Full lifecycle
+        </p>
+        <h2 className="text-2xl font-normal text-navy leading-tight">
           The Solo Navigator
         </h2>
-        <p className="text-sm text-muted mt-1">
-          Your step-by-step journey map — because nobody handed us a roadmap
+        <p className="text-sm text-muted mt-1 leading-relaxed">
+          From &ldquo;am I really doing this?&rdquo; to thriving as a solo family — every phase mapped.
         </p>
       </div>
 
-      <div className="space-y-4">
-        {PHASES.map((phase) => {
+      <div className="space-y-2">
+        {PHASES.map((phase, idx) => {
           const isExpanded = expandedId === phase.id;
           return (
             <div key={phase.id} className="relative">
-              {/* Connector Line */}
-              {phase.number < PHASES.length && (
-                <div className="absolute left-7 top-[72px] w-0.5 h-[calc(100%-40px)] bg-card-border z-0" />
+              {/* Connector */}
+              {idx < PHASES.length - 1 && (
+                <div className="absolute left-[27px] top-[56px] w-0.5 h-[calc(100%-24px)] bg-card-border z-0" />
               )}
 
               <button
-                onClick={() =>
-                  setExpandedId(isExpanded ? null : phase.id)
-                }
-                className={`relative z-10 w-full flex items-center gap-4 rounded-2xl p-4 text-left transition-all duration-200 ${
-                  isExpanded
-                    ? "bg-warm-white shadow-sm"
-                    : "hover:bg-warm-white/50"
+                onClick={() => setExpandedId(isExpanded ? null : phase.id)}
+                className={`relative z-10 w-full flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-all duration-200 ${
+                  isExpanded ? "bg-card-bg shadow-sm border border-card-border" : "hover:bg-card-bg/60"
                 }`}
               >
-                <div
-                  className={`h-14 w-14 rounded-2xl ${phase.colour} flex items-center justify-center shrink-0 text-charcoal`}
-                >
+                <div className={`h-11 w-11 rounded-xl ${phase.colour} flex items-center justify-center shrink-0 ${phase.iconColour} border border-black/5`}>
                   {phase.icon}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-lavender-dark">
-                      PHASE {phase.number}
+                      {phase.number}
                     </span>
-                    <span className="text-xs text-muted">
-                      {phase.subtitle}
-                    </span>
+                    <span className="text-xs text-muted truncate">{phase.subtitle}</span>
                   </div>
-                  <p className="text-base font-bold text-navy mt-0.5">
-                    {phase.title}
-                  </p>
+                  <p className="text-sm font-semibold text-navy mt-0.5">{phase.title}</p>
                 </div>
                 <ChevronDown
-                  className={`h-5 w-5 text-muted transition-transform duration-200 shrink-0 ${
-                    isExpanded ? "rotate-180" : ""
-                  }`}
+                  className={`h-4 w-4 text-muted transition-transform duration-200 shrink-0 ${isExpanded ? "rotate-180" : ""}`}
                 />
               </button>
 
@@ -158,25 +249,20 @@ export function JourneyMap() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.25 }}
                     className="overflow-hidden"
                   >
-                    <div className="pl-[72px] pr-4 pb-4">
-                      <p className="text-sm text-navy/80 leading-relaxed mb-4">
+                    <div className="pl-[58px] pr-4 pb-4 pt-1">
+                      <p className="text-xs text-navy/70 leading-relaxed mb-3">
                         {phase.description}
                       </p>
-                      <div className="space-y-2">
+                      <div className="space-y-1.5">
                         {phase.actions.map((action) => (
-                          <div
-                            key={action}
-                            className="flex items-start gap-2.5"
-                          >
-                            <div className="h-5 w-5 rounded-full bg-lime/30 flex items-center justify-center shrink-0 mt-0.5">
-                              <Check className="h-3 w-3 text-charcoal" />
+                          <div key={action} className="flex items-start gap-2">
+                            <div className="h-4 w-4 rounded-full bg-lime/40 flex items-center justify-center shrink-0 mt-0.5">
+                              <Check className="h-2.5 w-2.5 text-charcoal" />
                             </div>
-                            <p className="text-sm text-navy/70 leading-relaxed">
-                              {action}
-                            </p>
+                            <p className="text-xs text-navy/60 leading-relaxed">{action}</p>
                           </div>
                         ))}
                       </div>

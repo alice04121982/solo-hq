@@ -5,6 +5,7 @@ import { ClinicComparison } from "@/components/clinic-comparison";
 import { BentoCard } from "@/components/bento-card";
 import { StatCard } from "@/components/stat-card";
 import { CTASection } from "@/components/cta-section";
+import { TestimonialsSection } from "@/components/testimonials-section";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 import {
   Users,
@@ -16,15 +17,15 @@ import {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero — contains embedded search bar */}
+      {/* Hero */}
       <HeroSection />
 
-      {/* IVF Clinic Finder — first interactive feature */}
+      {/* IVF Clinic Finder */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-0">
         <ClinicFinder />
       </section>
 
-      {/* Stats Bento Grid */}
+      {/* Stats */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-4 pb-8 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
@@ -51,25 +52,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Main Bento Content */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Cost Calculator — spans 2 columns */}
-          <BentoCard colSpan={2} delay={0.1}>
-            <CostCalculator />
-          </BentoCard>
+      {/* Solo Navigator — full-width, two-column */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12" id="journey">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Journey Map — takes 1 col on mobile, 1 col on desktop (scrollable) */}
+          <div className="lg:col-span-1">
+            <BentoCard delay={0.1}>
+              <JourneyMap />
+            </BentoCard>
+          </div>
 
-          {/* Journey Map — spans 1 column, 2 rows */}
-          <BentoCard colSpan={1} rowSpan={2} delay={0.2}>
-            <JourneyMap />
-          </BentoCard>
-
-          {/* Clinic Comparison — spans 2 columns */}
-          <BentoCard colSpan={2} delay={0.3}>
-            <ClinicComparison />
-          </BentoCard>
+          {/* Cost Calculator + Clinic Comparison stacked */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            <BentoCard delay={0.15}>
+              <CostCalculator />
+            </BentoCard>
+            <BentoCard delay={0.2}>
+              <ClinicComparison />
+            </BentoCard>
+          </div>
         </div>
       </section>
+
+      {/* Testimonials + Journey Stories */}
+      <TestimonialsSection />
 
       {/* CTA Footer */}
       <CTASection />
