@@ -1,83 +1,99 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F5F5F5;
-  --foreground: #0f172a;
-  --lavender: #bfcfff;
-  --lavender-light: #eef2ff;
-  --lavender-dark: #3b5bdb;
-  --lime: #D9FF5F;
-  --lime-dark: #b8e030;
-  --charcoal: #0f172a;
-  --navy: #0f172a;
-  --warm-white: #f8fafc;
-  --card-bg: #ffffff;
-  --card-border: #e2e8f0;
-  --muted: #64748b;
+  /* ── New palette ── */
+  --background:      #F4EFE6;
+  --background-alt:  #EDE6D8;
+  --foreground:      #1A1714;
+  --muted:           #6B645B;
+  --accent:          #C97B5C;
+  --accent-soft:     #E4B8A3;
+  --border:          #E5DFD4;
+
+  /* ── Legacy aliases (kept so existing classNames compile during sweep) ── */
+  --lavender:        #C97B5C;
+  --lavender-light:  #F0E6DF;
+  --lavender-dark:   #A85E3E;
+  --lime:            #C97B5C;
+  --lime-dark:       #A85E3E;
+  --charcoal:        #1A1714;
+  --navy:            #1A1714;
+  --warm-white:      #F4EFE6;
+  --card-bg:         #EDE6D8;
+  --card-border:     #E5DFD4;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-lavender: var(--lavender);
-  --color-lavender-light: var(--lavender-light);
-  --color-lavender-dark: var(--lavender-dark);
-  --color-lime: var(--lime);
-  --color-lime-dark: var(--lime-dark);
-  --color-charcoal: var(--charcoal);
-  --color-navy: var(--navy);
-  --color-warm-white: var(--warm-white);
-  --color-card-bg: var(--card-bg);
-  --color-card-border: var(--card-border);
-  --color-muted: var(--muted);
-  --font-sans: var(--font-google-sans), "Google Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-poetsen), "Poetsen One", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
-  --text-xs: 0.75rem;
-  --text-xs--line-height: 1rem;
-  --text-sm: 0.875rem;
-  --text-sm--line-height: 1.25rem;
-  --text-md: 1rem;
-  --text-md--line-height: 1.5rem;
-  --text-lg: 1.125rem;
-  --text-lg--line-height: 1.75rem;
-  --text-xl: 1.25rem;
-  --text-xl--line-height: 1.75rem;
-  --text-display-xs: 1.5rem;
-  --text-display-xs--line-height: 2rem;
-  --text-display-sm: 1.875rem;
-  --text-display-sm--line-height: 2.375rem;
-  --text-display-md: 2.25rem;
-  --text-display-md--line-height: 2.75rem;
-  --text-display-lg: 3rem;
-  --text-display-lg--line-height: 1;
-  --text-display-xl: 3.75rem;
-  --text-display-xl--line-height: 1;
-  --text-display-2xl: 4.5rem;
+  /* ── Semantic colours ── */
+  --color-background:      var(--background);
+  --color-background-alt:  var(--background-alt);
+  --color-foreground:      var(--foreground);
+  --color-muted:           var(--muted);
+  --color-accent:          var(--accent);
+  --color-accent-soft:     var(--accent-soft);
+  --color-border:          var(--border);
+
+  /* ── Legacy aliases ── */
+  --color-lavender:        var(--accent-soft);
+  --color-lavender-light:  #F0E6DF;
+  --color-lavender-dark:   #A85E3E;
+  --color-lime:            var(--accent);
+  --color-lime-dark:       #A85E3E;
+  --color-charcoal:        var(--foreground);
+  --color-navy:            var(--foreground);
+  --color-warm-white:      var(--background);
+  --color-card-bg:         var(--background-alt);
+  --color-card-border:     var(--border);
+
+  /* ── Fonts ── */
+  --font-sans:    var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
+  --font-heading: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
+  --font-mono:    ui-monospace, "Cascadia Code", monospace;
+
+  /* ── Text scale ── */
+  --text-xs:                      0.6875rem;
+  --text-xs--line-height:         1rem;
+  --text-sm:                      0.875rem;
+  --text-sm--line-height:         1.4rem;
+  --text-md:                      1rem;
+  --text-md--line-height:         1.6rem;
+  --text-lg:                      1.125rem;
+  --text-lg--line-height:         1.75rem;
+  --text-xl:                      1.25rem;
+  --text-xl--line-height:         1.875rem;
+  --text-display-xs:              1.5rem;
+  --text-display-xs--line-height: 1.15;
+  --text-display-sm:              1.875rem;
+  --text-display-sm--line-height: 1.1;
+  --text-display-md:              2.5rem;
+  --text-display-md--line-height: 1.05;
+  --text-display-lg:              3.5rem;
+  --text-display-lg--line-height: 1.05;
+  --text-display-xl:              4.5rem;
+  --text-display-xl--line-height: 1.02;
+  --text-display-2xl:             5.5rem;
   --text-display-2xl--line-height: 1;
 }
 
+/* ── Base ── */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 900;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.1;
+  font-optical-sizing: auto;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--warm-white);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--card-border);
-  border-radius: 4px;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--background-alt); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }

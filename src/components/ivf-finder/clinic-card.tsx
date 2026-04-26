@@ -162,10 +162,11 @@ export function ClinicCard({
             className="overflow-hidden"
           >
             <div className="px-5 pb-5 border-t border-card-border pt-4">
+              {/* Single-cycle pricing + success rates */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
-                    Pricing
+                    Single-cycle pricing
                   </p>
                   <div className="space-y-1.5">
                     {[
@@ -193,6 +194,8 @@ export function ClinicCard({
                       { label: "Under 35", val: clinic.successRates.under35 },
                       { label: "35–37", val: clinic.successRates.age35to37 },
                       { label: "38–39", val: clinic.successRates.age38to39 },
+                      { label: "40–42", val: clinic.successRates.age40to42 },
+                      { label: "43+", val: clinic.successRates.age43plus },
                     ].map(({ label, val }) => (
                       <div key={label} className="flex justify-between text-xs">
                         <span className="text-muted">{label}</span>
@@ -220,6 +223,44 @@ export function ClinicCard({
                   </div>
                 </div>
               </div>
+
+              {/* Multi-cycle & special packages */}
+              {clinic.packages && clinic.packages.length > 0 && (
+                <div className="mb-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
+                    Packages &amp; bundles
+                  </p>
+                  <div className="space-y-2">
+                    {clinic.packages.map((pkg) => (
+                      <div
+                        key={pkg.name}
+                        className="rounded-xl bg-warm-white p-3"
+                      >
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                          <p className="text-xs font-semibold text-navy leading-snug">
+                            {pkg.name}
+                          </p>
+                          <div className="text-right shrink-0">
+                            <p className="text-sm font-bold text-navy">
+                              {pkg.price === 0 ? "Free" : `£${pkg.price.toLocaleString()}`}
+                            </p>
+                            {pkg.saves != null && pkg.saves > 0 && (
+                              <p className="text-[10px] font-semibold text-lime-dark">
+                                Save £{pkg.saves.toLocaleString()}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        {pkg.description && (
+                          <p className="text-[11px] text-muted leading-relaxed">
+                            {pkg.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="flex flex-wrap gap-2">
                 {clinic.phone && (
