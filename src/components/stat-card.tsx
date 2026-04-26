@@ -1,37 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 interface StatCardProps {
   value: string;
   label: string;
-  icon?: ReactNode;
+  icon?: React.ReactNode;
   highlight?: boolean;
+  delay?: number;
 }
 
-export function StatCard({ value, label, icon, highlight = false }: StatCardProps) {
+export function StatCard({ value, label, delay = 0 }: StatCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4 }}
-      className={`rounded-[32px] p-8 flex flex-col items-start gap-3 ${
-        highlight
-          ? "bg-lavender-light"
-          : "bg-card-bg border border-card-border"
-      }`}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.7, delay, ease: EASE }}
+      className="flex flex-col gap-3 py-8 border-t border-border"
     >
-      {icon && <div className="text-lavender-dark">{icon}</div>}
-      <span className="text-4xl md:text-5xl font-bold tracking-tight text-navy">
+      <span
+        className="font-serif font-normal text-foreground leading-none"
+        style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", fontOpticalSizing: "auto" as never }}
+      >
         {value}
       </span>
-      <span
-        className={`text-sm font-medium leading-snug ${
-          highlight ? "text-navy/70" : "text-muted"
-        }`}
-      >
+      <span className="text-sm font-sans text-muted leading-snug" style={{ maxWidth: "28ch" }}>
         {label}
       </span>
     </motion.div>

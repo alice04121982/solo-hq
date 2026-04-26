@@ -21,7 +21,15 @@ export interface ClinicData {
     under35?: number;
     age35to37?: number;
     age38to39?: number;
+    age40to42?: number;
+    age43plus?: number;
   };
+  packages?: Array<{
+    name: string;
+    price: number;
+    saves?: number;
+    description?: string;
+  }>;
   waitingTimeWeeks?: number;
   nhsReferrals?: boolean;
   paymentPlans?: boolean;

@@ -122,6 +122,39 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
               );
             })}
 
+            {/* Packages & bundles */}
+            <tr>
+              <td colSpan={clinics.length + 1} className="px-4 pt-5 pb-1">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Packages &amp; Bundles</p>
+              </td>
+            </tr>
+            <tr className="border-t border-card-border/50 align-top">
+              <td className="p-4 text-xs text-muted sticky left-0 bg-card-bg">Available packages</td>
+              {clinics.map((clinic) => (
+                <td key={clinic.id} className="p-4">
+                  {clinic.packages && clinic.packages.length > 0 ? (
+                    <div className="space-y-2">
+                      {clinic.packages.map((pkg) => (
+                        <div key={pkg.name} className="rounded-lg bg-warm-white px-2.5 py-2">
+                          <p className="text-[11px] font-semibold text-navy leading-snug">{pkg.name}</p>
+                          <p className="text-xs font-bold text-navy mt-0.5">
+                            {pkg.price === 0 ? "Free / NHS" : `£${pkg.price.toLocaleString()}`}
+                          </p>
+                          {pkg.saves != null && pkg.saves > 0 && (
+                            <p className="text-[10px] font-semibold text-lime-dark">
+                              Save £{pkg.saves.toLocaleString()}
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <span className="text-muted text-sm">—</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+
             {/* Success rates */}
             <tr>
               <td colSpan={clinics.length + 1} className="px-4 pt-5 pb-1">
@@ -134,6 +167,8 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
               { label: "Success rate (under 35)", getter: (c: ClinicData) => c.successRates.under35 },
               { label: "Success rate (35–37)", getter: (c: ClinicData) => c.successRates.age35to37 },
               { label: "Success rate (38–39)", getter: (c: ClinicData) => c.successRates.age38to39 },
+              { label: "Success rate (40–42)", getter: (c: ClinicData) => c.successRates.age40to42 },
+              { label: "Success rate (43+)", getter: (c: ClinicData) => c.successRates.age43plus },
             ].map((row) => {
               const max = Math.max(
                 ...clinics.map(row.getter).filter((v): v is number => v != null)
