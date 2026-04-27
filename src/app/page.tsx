@@ -40,31 +40,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Tools — Solo Navigator + Calculator + Comparison */}
+      {/* Solo Navigator — its own section */}
       <section className="bg-background-alt border-y border-border" id="journey">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
-            Tools & guidance
+            Solo Navigator
           </p>
-          <h2 className="font-serif font-normal text-foreground mb-12" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
-            Everything you need to plan
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}> with confidence.</em>
+          <h2 className="font-serif font-normal text-foreground mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+            Where are you on your journey?
           </h2>
+          <BentoCard delay={0.05} white>
+            <JourneyMap />
+          </BentoCard>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1">
-              <BentoCard delay={0.05}>
-                <JourneyMap />
-              </BentoCard>
-            </div>
-            <div className="lg:col-span-2 flex flex-col gap-6">
-              <BentoCard delay={0.1}>
-                <CostCalculator />
-              </BentoCard>
-              <BentoCard delay={0.15}>
-                <ClinicComparison />
-              </BentoCard>
-            </div>
+      {/* Planning Tools — Cost Calculator + Clinic Comparison */}
+      <section className="bg-background border-b border-border" id="tools">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+            Planning tools
+          </p>
+          <h2 className="font-serif font-normal text-foreground mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+            Numbers you can actually use.
+          </h2>
+          <div className="flex flex-col gap-6">
+            <BentoCard delay={0.05}>
+              <CostCalculator />
+            </BentoCard>
+            <BentoCard delay={0.1}>
+              <ClinicComparison />
+            </BentoCard>
           </div>
         </div>
       </section>

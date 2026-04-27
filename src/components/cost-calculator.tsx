@@ -50,7 +50,7 @@ const ADD_ONS = [
   { id: "storage", label: "Annual Embryo Storage", cost: 350, note: "Per year; typically required from year 2 onwards" },
 ];
 
-const STEPS = ["Treatment", "You", "Clinic", "Add-ons", "Your Estimate"];
+const STEPS = ["Getting Started", "You", "Clinic", "Add-ons", "Your Estimate"];
 
 const TREATMENT_LABELS: Record<TreatmentPath, string> = { iui: "IUI", ivf: "IVF", "donor-egg": "Donor Egg IVF" };
 const CLINIC_LABELS: Record<ClinicTier, string> = { budget: "NHS-affiliated / budget", mid: "Independent mid-range", premium: "Premium" };

@@ -26,54 +26,49 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
+      {/* Nav */}
       <section className="bg-background border-b border-border px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <SiteNav />
         </div>
       </section>
 
-      {/* Hero */}
+      {/* Hero + integrated search */}
       <section className="bg-background-alt border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20 pb-0">
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             HFEA-licensed clinics only
           </p>
           <h1
-            className="font-serif font-normal text-foreground mb-5"
+            className="font-serif font-normal text-foreground mb-4"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
           >
             Find IVF Clinics
             <br />
             <em style={{ fontStyle: "italic", color: "var(--accent)" }}>Near You</em>
           </h1>
-          <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+          <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
             Real pricing. Solo-friendliness ratings. Side-by-side comparisons.
-            Everything you need to find the right clinic for your journey.
           </p>
+
+          {/* Search + results — sits inside the hero, expands downward */}
+          <ClinicFinder initialLocation={initialLocation} initialRadius={initialRadius} />
         </div>
       </section>
 
-      {/* What to look for */}
+      {/* What to look for — contextual guidance below */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
           What to look for as a solo parent
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
-          {WHAT_TO_LOOK_FOR.map((item, i) => (
+          {WHAT_TO_LOOK_FOR.map((item) => (
             <div key={item.title} className="py-6 border-t border-border">
               <div className="text-accent mb-3">{item.icon}</div>
               <p className="font-serif font-normal text-foreground text-base mb-2">{item.title}</p>
               <p className="text-sm font-sans text-muted leading-relaxed">{item.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Finder */}
-      <section className="bg-background-alt border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12">
-          <ClinicFinder initialLocation={initialLocation} initialRadius={initialRadius} />
         </div>
       </section>
     </main>
