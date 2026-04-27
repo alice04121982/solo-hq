@@ -90,7 +90,7 @@ export function LocationSearch({
               setError(null);
             }}
             placeholder="Enter postcode or town (e.g. Cambridge, CB1)"
-            className="w-full h-12 pl-10 pr-4 rounded-full border border-card-border bg-card-bg text-navy text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-lavender-dark focus:border-transparent"
+            className="w-full h-12 pl-10 pr-4 rounded-full border border-foreground/40 bg-card-bg text-navy text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-lavender-dark focus:border-transparent"
           />
         </div>
 
@@ -99,7 +99,7 @@ export function LocationSearch({
           <select
             value={radius}
             onChange={(e) => setRadius(parseInt(e.target.value, 10))}
-            className="h-12 pl-4 pr-8 rounded-full border border-card-border bg-card-bg text-navy text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-lavender-dark cursor-pointer"
+            className="h-12 pl-4 pr-8 rounded-full border border-foreground/40 bg-card-bg text-navy text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-lavender-dark cursor-pointer"
           >
             {RADIUS_OPTIONS.map((r) => (
               <option key={r} value={r}>
@@ -116,7 +116,7 @@ export function LocationSearch({
           onClick={handleGeolocate}
           disabled={geoLoading}
           title="Use my location"
-          className="h-12 w-12 shrink-0 rounded-full border border-card-border bg-card-bg flex items-center justify-center text-lavender-dark hover:bg-lavender-light transition-colors disabled:opacity-50"
+          className="h-12 w-12 shrink-0 rounded-full border border-foreground/40 bg-card-bg flex items-center justify-center text-lavender-dark hover:bg-lavender-light transition-colors disabled:opacity-50"
         >
           <LocateFixed className={`h-4 w-4 ${geoLoading ? "animate-spin" : ""}`} />
         </button>

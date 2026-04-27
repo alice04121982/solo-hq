@@ -119,8 +119,10 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
     tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
+  const hasContent = hasSearched || isLoading || selectedClinics.length >= 2;
+
   return (
-    <div className="pb-32">
+    <div className={hasContent ? "pb-32" : ""}>
       {/* Search */}
       <div className="rounded-[32px] bg-card-bg border border-card-border p-6 mb-6">
         <LocationSearch
