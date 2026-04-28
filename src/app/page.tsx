@@ -1,4 +1,7 @@
 import { HeroSection } from "@/components/hero-section";
+import { ForEveryoneSection } from "@/components/for-everyone-section";
+import { NewsletterSection } from "@/components/newsletter-section";
+import { MembersSection } from "@/components/members-section";
 import { CostCalculator } from "@/components/cost-calculator";
 import { JourneyMap } from "@/components/journey-map";
 import { BentoCard } from "@/components/bento-card";
@@ -13,6 +16,15 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       {/* Hero */}
       <HeroSection />
+
+      {/* For everyone — dark green brand statement */}
+      <ForEveryoneSection />
+
+      {/* Newsletter signup */}
+      <NewsletterSection />
+
+      {/* Member stories */}
+      <MembersSection />
 
       {/* Clinic Finder teaser */}
       <section className="bg-background-alt border-y border-border">

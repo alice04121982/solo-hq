@@ -60,6 +60,7 @@ export interface InternationalClinic {
   success_rate_ivf_35_to_37: number | null;
   success_rate_ivf_38_to_39: number | null;
   success_rate_ivf_40_to_42: number | null;
+  success_rate_ivf_43_plus: number | null;
   success_rate_year: number | null;
   success_rate_metric: string | null;
   success_rate_source_url: string | null;
@@ -73,6 +74,9 @@ export interface InternationalClinic {
   verification_status: "ai_researched" | "human_verified" | "clinic_confirmed";
   created_at: string;
   updated_at: string;
+  // Approximate coordinates (resolved from city lookup, not stored in DB)
+  lat?: number | null;
+  lng?: number | null;
   // Joined from clinic_countries
   country?: ClinicCountry;
 }

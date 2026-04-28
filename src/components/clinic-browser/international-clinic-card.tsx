@@ -20,6 +20,8 @@ interface InternationalClinicCardProps {
   /** Override which age group's success rate to display */
   ageGroupLabel?: string;
   ageGroupRate?: number | null;
+  /** Distance from user's location in miles */
+  distanceMiles?: number;
 }
 
 function PackagePill({ pkg }: { pkg: ClinicPackage }) {
@@ -69,6 +71,12 @@ function PackagePill({ pkg }: { pkg: ClinicPackage }) {
   );
 }
 
+function formatDistance(miles: number): string {
+  if (miles < 1) return "< 1 mile away";
+  if (miles < 10) return `${Math.round(miles)} miles away`;
+  return `${Math.round(miles / 5) * 5} miles away`;
+}
+
 export function InternationalClinicCard({
   clinic,
   isSelected = false,
@@ -77,6 +85,7 @@ export function InternationalClinicCard({
   showCompare = true,
   ageGroupLabel,
   ageGroupRate,
+  distanceMiles,
 }: InternationalClinicCardProps) {
   const [packagesOpen, setPackagesOpen] = useState(false);
 
@@ -131,10 +140,17 @@ export function InternationalClinicCard({
           </label>
         )}
 
-        {/* Location */}
-        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans pr-20">
-          {flag} {clinic.city}
-        </p>
+        {/* Location + distance */}
+        <div className="flex items-center gap-2 pr-20">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+            {flag} {clinic.city}
+          </p>
+          {distanceMiles != null && (
+            <span className="text-[11px] font-sans font-medium text-muted bg-background-alt border border-border rounded-full px-2 py-0.5 whitespace-nowrap">
+              {formatDistance(distanceMiles)}
+            </span>
+          )}
+        </div>
 
         {/* Clinic name */}
         <h3 className="font-serif font-semibold text-foreground text-xl leading-snug pr-4">
