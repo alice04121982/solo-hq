@@ -7,7 +7,7 @@ import { Logo } from "./logo";
 
 const NAV_LINKS = [
   { label: "Getting Started", href: "/" },
-  { label: "Find a Clinic", href: "/ivf-finder" },
+  { label: "Find a Clinic", href: "/clinics" },
   { label: "News", href: "/news" },
   { label: "Resources", href: "/resources" },
 ];
@@ -53,8 +53,8 @@ export function SiteNav() {
       {/* CTA */}
       <div className="hidden md:flex items-center">
         <a
-          href="/ivf-finder"
-          className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-sans hover:bg-accent transition-colors duration-200"
+          href="/clinics"
+          className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-6 py-2.5 text-sm font-sans hover:bg-primary-dark transition-colors duration-200"
         >
           Find a Clinic
           <ArrowRight className="h-3.5 w-3.5" />
@@ -86,8 +86,8 @@ export function SiteNav() {
             </a>
           ))}
           <a
-            href="/ivf-finder"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-sans mt-2 hover:bg-accent transition-colors"
+            href="/clinics"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white px-6 py-3 text-sm font-sans mt-2 hover:bg-primary-dark transition-colors"
           >
             Find a Clinic <ArrowRight className="h-3.5 w-3.5" />
           </a>

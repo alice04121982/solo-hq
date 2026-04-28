@@ -22,12 +22,12 @@ export function StatCard({ value, label, delay = 0 }: StatCardProps) {
       className="flex flex-col gap-3 py-8 border-t border-border"
     >
       <span
-        className="font-serif font-normal text-foreground leading-none"
+        className="font-serif font-semibold text-foreground leading-none"
         style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", fontOpticalSizing: "auto" as never }}
       >
         {value}
       </span>
-      <span className="text-sm font-sans text-muted leading-snug" style={{ maxWidth: "28ch" }}>
+      <span className="text-[16px] font-sans text-muted leading-snug" style={{ maxWidth: "28ch" }}>
         {label}
       </span>
     </motion.div>

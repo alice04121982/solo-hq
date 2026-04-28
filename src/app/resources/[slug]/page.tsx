@@ -50,18 +50,18 @@ export default async function GuidePage({ params }: PageProps) {
           </Link>
 
           <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-border px-3 py-1 text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-border px-3 py-1 text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
               <Tag className="h-3 w-3" />
               {guide.type}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+            <span className="inline-flex items-center gap-1.5 text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
               <Clock className="h-3 w-3" />
               {guide.readTime}
             </span>
           </div>
 
           <h1
-            className="font-serif font-normal text-foreground mb-5"
+            className="font-serif font-semibold text-foreground mb-5"
             style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.1 }}
           >
             {guide.title}
@@ -78,7 +78,7 @@ export default async function GuidePage({ params }: PageProps) {
         <div className="space-y-10">
           {guide.sections.map((section) => (
             <div key={section.heading}>
-              <h2 className="font-serif font-normal text-foreground mb-4" style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.2 }}>
+              <h2 className="font-serif font-semibold text-foreground mb-4" style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.2 }}>
                 {section.heading}
               </h2>
 
@@ -138,7 +138,7 @@ export default async function GuidePage({ params }: PageProps) {
         {/* Key takeaways */}
         {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
           <div className="mt-12 rounded-2xl bg-background-alt border border-border p-6 md:p-8">
-            <h2 className="font-serif font-normal text-foreground text-xl mb-5">Key takeaways</h2>
+            <h2 className="font-serif font-semibold text-foreground text-xl mb-5">Key takeaways</h2>
             <ul className="space-y-3">
               {guide.keyTakeaways.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">

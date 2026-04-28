@@ -11,6 +11,8 @@ interface ClinicResultsProps {
   onToggleCompare: (clinic: ClinicData) => void;
   isLoading: boolean;
   source?: "live" | "seed";
+  /** True when the global 4-clinic comparison cap is reached */
+  maxReached?: boolean;
 }
 
 function SkeletonCard() {
@@ -42,6 +44,7 @@ export function ClinicResults({
   onToggleCompare,
   isLoading,
   source,
+  maxReached = false,
 }: ClinicResultsProps) {
   if (isLoading) {
     return (
@@ -98,7 +101,7 @@ export function ClinicResults({
             clinic={clinic}
             isSelected={selectedIds.includes(clinic.id)}
             onToggleCompare={onToggleCompare}
-            compareDisabled={selectedIds.length >= 4 && !selectedIds.includes(clinic.id)}
+            compareDisabled={maxReached && !selectedIds.includes(clinic.id)}
           />
         ))}
       </motion.div>

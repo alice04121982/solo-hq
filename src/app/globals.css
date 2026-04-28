@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  /* ── New palette ── */
-  --background:      #F4EFE6;
-  --background-alt:  #EDE6D8;
-  --foreground:      #1A1714;
-  --muted:           #6B645B;
-  --accent:          #C97B5C;
-  --accent-soft:     #E4B8A3;
-  --border:          #E5DFD4;
+  /* ── Brand palette ── */
+  --background:      #F6F3ED;   /* Warm cream */
+  --background-alt:  #EDE8DF;   /* Warm sand — replaces Tender Pink */
+  --foreground:      #1C1C1A;   /* Warm near-black */
+  --muted:           #6B665F;   /* Warm neutral gray */
+  --primary:         #2E7A51;   /* Botanical mid green */
+  --primary-dark:    #1D5237;   /* Deep green — hover/active */
+  --primary-tint:    #EAF2EC;   /* Light green wash — subtle fills */
+  --accent:          #B5624A;   /* Antique terracotta */
+  --accent-soft:     #F2E8E4;   /* Terracotta wash */
+  --border:          #DDD7CB;   /* Warm neutral border */
 
-  /* ── Legacy aliases (kept so existing classNames compile during sweep) ── */
-  --lavender:        #C97B5C;
-  --lavender-light:  #F0E6DF;
-  --lavender-dark:   #A85E3E;
-  --lime:            #C97B5C;
-  --lime-dark:       #A85E3E;
-  --charcoal:        #1A1714;
-  --navy:            #1A1714;
-  --warm-white:      #F4EFE6;
-  --card-bg:         #EDE6D8;
-  --card-border:     #E5DFD4;
+  /* ── Legacy aliases (remapped for palette shift) ── */
+  --lavender:        #EAF2EC;   /* was #FFB3CF */
+  --lavender-light:  #EDE8DF;   /* was #FFE1F7 */
+  --lavender-dark:   #2E7A51;   /* was #FF4400 */
+  --lime:            #2E7A51;   /* was #00DF82 */
+  --lime-dark:       #1D5237;   /* was #1F2ADE */
+  --charcoal:        #1C1C1A;
+  --navy:            #2E7A51;   /* was #1F2ADE */
+  --warm-white:      #F6F3ED;
+  --card-bg:         #EDE8DF;   /* was #FFE1F7 */
+  --card-border:     #DDD7CB;   /* was #ECDDEF */
 }
 
 @theme inline {
@@ -29,51 +32,54 @@
   --color-background-alt:  var(--background-alt);
   --color-foreground:      var(--foreground);
   --color-muted:           var(--muted);
+  --color-primary:         var(--primary);
+  --color-primary-dark:    var(--primary-dark);
+  --color-primary-tint:    var(--primary-tint);
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
   --color-border:          var(--border);
 
   /* ── Legacy aliases ── */
-  --color-lavender:        var(--accent-soft);
-  --color-lavender-light:  #F0E6DF;
-  --color-lavender-dark:   #A85E3E;
-  --color-lime:            var(--accent);
-  --color-lime-dark:       #A85E3E;
-  --color-charcoal:        var(--foreground);
-  --color-navy:            var(--foreground);
-  --color-warm-white:      var(--background);
-  --color-card-bg:         var(--background-alt);
-  --color-card-border:     var(--border);
+  --color-lavender:        var(--lavender);
+  --color-lavender-light:  var(--lavender-light);
+  --color-lavender-dark:   var(--lavender-dark);
+  --color-lime:            var(--lime);
+  --color-lime-dark:       var(--lime-dark);
+  --color-charcoal:        var(--charcoal);
+  --color-navy:            var(--navy);
+  --color-warm-white:      var(--warm-white);
+  --color-card-bg:         var(--card-bg);
+  --color-card-border:     var(--card-border);
 
   /* ── Fonts ── */
-  --font-sans:    var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif:   var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
-  --font-heading: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
+  --font-sans:    var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   var(--font-lora), "Lora", ui-serif, Georgia, serif;
+  --font-heading: var(--font-lora), "Lora", ui-serif, Georgia, serif;
   --font-mono:    ui-monospace, "Cascadia Code", monospace;
 
-  /* ── Text scale ── */
-  --text-xs:                      0.6875rem;
-  --text-xs--line-height:         1rem;
-  --text-sm:                      0.875rem;
-  --text-sm--line-height:         1.4rem;
-  --text-md:                      1rem;
-  --text-md--line-height:         1.6rem;
-  --text-lg:                      1.125rem;
-  --text-lg--line-height:         1.75rem;
-  --text-xl:                      1.25rem;
-  --text-xl--line-height:         1.875rem;
-  --text-display-xs:              1.5rem;
-  --text-display-xs--line-height: 1.15;
-  --text-display-sm:              1.875rem;
-  --text-display-sm--line-height: 1.1;
-  --text-display-md:              2.5rem;
-  --text-display-md--line-height: 1.05;
-  --text-display-lg:              3.5rem;
-  --text-display-lg--line-height: 1.05;
-  --text-display-xl:              4.5rem;
-  --text-display-xl--line-height: 1.02;
-  --text-display-2xl:             5.5rem;
-  --text-display-2xl--line-height: 1;
+  /* ── Text scale (calmed down from editorial-extreme) ── */
+  --text-xs:                       0.6875rem;
+  --text-xs--line-height:          1rem;
+  --text-sm:                       0.875rem;
+  --text-sm--line-height:          1.4rem;
+  --text-md:                       1rem;
+  --text-md--line-height:          1.6rem;
+  --text-lg:                       1.125rem;
+  --text-lg--line-height:          1.75rem;
+  --text-xl:                       1.25rem;
+  --text-xl--line-height:          1.875rem;
+  --text-display-xs:               1.5rem;
+  --text-display-xs--line-height:  1.2;
+  --text-display-sm:               1.875rem;
+  --text-display-sm--line-height:  1.15;
+  --text-display-md:               2.25rem;
+  --text-display-md--line-height:  1.1;
+  --text-display-lg:               2.75rem;
+  --text-display-lg--line-height:  1.08;
+  --text-display-xl:               3.25rem;
+  --text-display-xl--line-height:  1.05;
+  --text-display-2xl:              3.75rem;
+  --text-display-2xl--line-height: 1.02;
 }
 
 /* ── Base ── */
@@ -88,8 +94,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.1;
+  font-weight: 600;
+  line-height: 1.15;
   font-optical-sizing: auto;
 }
 
