@@ -26,12 +26,15 @@ interface Selections {
 // ─── Cost data ────────────────────────────────────────────────────────────────
 
 const BASE_COSTS: Record<TreatmentPath, Record<ClinicTier, number>> = {
-  iui: { budget: 1200, mid: 1700, premium: 2400 },
-  ivf: { budget: 5500, mid: 8500, premium: 12000 },
-  "donor-egg": { budget: 8500, mid: 12000, premium: 16500 },
+  iui: { budget: 1000, mid: 1400, premium: 2000 },
+  ivf: { budget: 4500, mid: 6000, premium: 9500 },
+  "donor-egg": { budget: 7000, mid: 9500, premium: 14000 },
 };
 
-const LONDON_UPLIFT = 1.32;
+// Multi-cycle package discounts — most UK clinics offer ~15–20% off for 3 cycles
+const PACKAGE_DISCOUNT: Record<number, number> = { 1: 1.0, 2: 0.92, 3: 0.82 };
+
+const LONDON_UPLIFT = 1.28;
 
 const SOLO_COSTS = {
   donorSperm: { label: "Donor Sperm (2 vials)", cost: 1950, note: "Average Cryos/Xytex pricing at £975/vial" },
@@ -50,7 +53,7 @@ const ADD_ONS = [
   { id: "storage", label: "Annual Embryo Storage", cost: 350, note: "Per year; typically required from year 2 onwards" },
 ];
 
-const STEPS = ["Getting Started", "You", "Clinic", "Add-ons", "Your Estimate"];
+const STEPS = ["Choose your treatment route", "A little bit about you", "Choose your budget", "Select add-ons", "View your estimate"];
 
 const TREATMENT_LABELS: Record<TreatmentPath, string> = { iui: "IUI", ivf: "IVF", "donor-egg": "Donor Egg IVF" };
 const CLINIC_LABELS: Record<ClinicTier, string> = { budget: "NHS-affiliated / budget", mid: "Independent mid-range", premium: "Premium" };
@@ -63,9 +66,10 @@ function calcTotal(s: Selections): { line: LineItem[]; total: number } {
   if (!s.path || !s.clinic || !s.cycles || !s.location) return { line: [], total: 0 };
   const uplift = s.location === "london" ? LONDON_UPLIFT : 1;
   const base = BASE_COSTS[s.path][s.clinic] * uplift;
+  const discount = PACKAGE_DISCOUNT[s.cycles] ?? 1;
   const meds = MEDS_COST[s.path] * uplift;
   const line: LineItem[] = [
-    { label: `${TREATMENT_LABELS[s.path]} (${CLINIC_LABELS[s.clinic]} clinic)`, cost: base * s.cycles, perCycle: base },
+    { label: `${TREATMENT_LABELS[s.path]} (${CLINIC_LABELS[s.clinic]} clinic${s.cycles > 1 ? ` — ${s.cycles}-cycle package` : ""})`, cost: Math.round(base * s.cycles * discount), perCycle: base },
     { label: "Medications", cost: meds * s.cycles, perCycle: meds },
   ];
   if (s.path !== "donor-egg") {
@@ -96,19 +100,19 @@ function OptionRow({
       }`}
     >
       <div className="flex-1 min-w-0">
-        <p className={`text-sm font-sans leading-snug ${selected ? "text-foreground" : "text-foreground/70 group-hover:text-foreground"} transition-colors`}>
+        <p className={`text-[16px] font-sans leading-snug ${selected ? "text-foreground" : "text-foreground/70 group-hover:text-foreground"} transition-colors`}>
           {title}
         </p>
         {subtitle && (
-          <p className="text-xs font-sans text-muted mt-0.5 leading-relaxed">{subtitle}</p>
+          <p className="text-[14px] font-sans text-muted mt-1 leading-relaxed">{subtitle}</p>
         )}
       </div>
       <div className="flex items-center gap-2 shrink-0 pt-0.5">
         {tag && (
-          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-accent font-sans">{tag}</span>
+          <span className="text-[12px] font-[500] uppercase tracking-[0.1em] text-accent font-sans">{tag}</span>
         )}
         {badge && (
-          <span className="text-xs font-sans text-muted">{badge}</span>
+          <span className="text-[14px] font-sans text-muted">{badge}</span>
         )}
         <div className={`h-4 w-4 rounded-full border flex items-center justify-center transition-colors ${
           selected ? "border-foreground bg-foreground" : "border-border"
@@ -137,7 +141,7 @@ function StepYou({ s, setAge, setLocation, setCycles }: { s: Selections; setAge:
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Your age group</p>
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Your age group</p>
         {(["under35", "35to37", "38to40", "over40"] as AgeGroup[]).map((a) => (
           <OptionRow key={a} selected={s.age === a} onClick={() => setAge(a)}
             title={{ under35: "Under 35", "35to37": "35–37", "38to40": "38–40", over40: "Over 40" }[a]}
@@ -147,13 +151,13 @@ function StepYou({ s, setAge, setLocation, setCycles }: { s: Selections; setAge:
         <div className="border-t border-border" />
       </div>
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Location</p>
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Location</p>
         <OptionRow selected={s.location === "uk"} onClick={() => setLocation("uk")} title="Outside London" subtitle="Rest of UK pricing" />
         <OptionRow selected={s.location === "london"} onClick={() => setLocation("london")} title="London" subtitle="+32% average premium" tag="Higher cost" />
         <div className="border-t border-border" />
       </div>
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Cycles to budget for</p>
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Cycles to budget for</p>
         {([1, 2, 3] as CycleCount[]).map((c) => (
           <OptionRow key={c} selected={s.cycles === c} onClick={() => setCycles(c)}
             title={c === 1 ? "1 cycle" : c === 2 ? "2 cycles" : "3 cycles"}
@@ -207,11 +211,11 @@ function StepResults({ s }: { s: Selections }) {
       {/* Large number summary */}
       <div className="flex gap-8 mb-8 pt-2">
         <div>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Clinic quote</p>
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Clinic quote</p>
           <p className="font-serif text-foreground/40" style={{ fontSize: "2rem" }}>{fmt(clinicQuote)}</p>
         </div>
         <div>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Your real total</p>
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Your real total</p>
           <motion.p key={total} initial={{ opacity: 0.5 }} animate={{ opacity: 1 }} className="font-serif text-foreground" style={{ fontSize: "2.5rem", fontOpticalSizing: "auto" as never }}>
             {fmt(total)}
           </motion.p>
@@ -243,7 +247,7 @@ function StepResults({ s }: { s: Selections }) {
       </div>
 
       <div className="mt-6 flex items-end justify-between">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
           {s.cycles} {s.cycles === 1 ? "cycle" : "cycles"} &nbsp;·&nbsp; {s.location === "london" ? "London" : "UK"} &nbsp;·&nbsp; {TREATMENT_LABELS[s.path!]}
         </p>
         <p className="font-serif text-foreground" style={{ fontSize: "2rem" }}>{fmt(total)}</p>
@@ -278,7 +282,7 @@ export function CostCalculator() {
     <div className="p-6 md:p-8">
       {/* Header */}
       <div className="mb-6">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
           Step {step + 1} of {STEPS.length}
         </p>
         {/* Progress bar */}
@@ -287,7 +291,7 @@ export function CostCalculator() {
             <div key={i} className="flex-1 h-px transition-colors duration-300" style={{ background: i <= step ? "var(--foreground)" : "var(--border)" }} />
           ))}
         </div>
-        <h2 className="font-serif font-normal text-foreground text-2xl">{STEPS[step]}</h2>
+        <h2 className="font-serif font-semibold text-foreground text-2xl">{STEPS[step]}</h2>
       </div>
 
       {/* Content */}

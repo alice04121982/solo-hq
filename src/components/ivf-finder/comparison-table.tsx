@@ -136,7 +136,7 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
                     <div className="space-y-2">
                       {clinic.packages.map((pkg) => (
                         <div key={pkg.name} className="rounded-lg bg-warm-white px-2.5 py-2">
-                          <p className="text-[11px] font-semibold text-navy leading-snug">{pkg.name}</p>
+                          <p className="text-[12px] font-semibold text-navy leading-snug">{pkg.name}</p>
                           <p className="text-xs font-bold text-navy mt-0.5">
                             {pkg.price === 0 ? "Free / NHS" : `£${pkg.price.toLocaleString()}`}
                           </p>
