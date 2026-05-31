@@ -66,13 +66,13 @@ export function ClinicComparison() {
     <div className="p-6 md:p-8">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
           Clinic comparison
         </p>
-        <h2 className="font-serif font-normal text-foreground text-2xl leading-tight mb-1">
+        <h2 className="font-serif font-semibold text-foreground text-2xl leading-tight mb-1">
           Comparison Engine
         </h2>
-        <p className="text-sm font-sans text-muted">
+        <p className="text-[16px] font-sans text-muted">
           Ranked by solo mums, for solo mums. Based on HFEA data and community reviews.
         </p>
       </div>
@@ -85,7 +85,7 @@ export function ClinicComparison() {
             <button
               key={opt.field}
               onClick={() => setSortField(opt.field)}
-              className={`text-xs font-sans pb-1 transition-colors duration-150 ${
+              className={`text-[14px] font-sans pb-1 transition-colors duration-150 ${
                 sortField === opt.field
                   ? "text-foreground border-b border-foreground"
                   : "text-muted hover:text-foreground"
@@ -102,7 +102,7 @@ export function ClinicComparison() {
             <button
               key={f}
               onClick={() => setAgeFilter(f)}
-              className={`text-xs font-sans pb-1 transition-colors duration-150 ${
+              className={`text-[14px] font-sans pb-1 transition-colors duration-150 ${
                 ageFilter === f
                   ? "text-foreground border-b border-foreground"
                   : "text-muted hover:text-foreground"
@@ -137,7 +137,7 @@ export function ClinicComparison() {
                 <p className="font-serif text-foreground text-lg leading-tight">{clinic.name}</p>
                 <div className="flex items-center gap-1 mt-0.5">
                   <MapPin className="h-3 w-3 text-muted" />
-                  <p className="text-xs font-sans text-muted">{clinic.location}</p>
+                  <p className="text-[14px] font-sans text-muted">{clinic.location}</p>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ export function ClinicComparison() {
             {/* Metrics */}
             <div className="flex flex-wrap gap-x-8 gap-y-3 md:flex-1">
               <div>
-                <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
                   Success
                 </p>
                 <p className="font-serif text-foreground text-lg">
@@ -153,40 +153,40 @@ export function ClinicComparison() {
                 </p>
               </div>
               <div>
-                <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
                   Price Transparency
                 </p>
                 <Dots rating={clinic.priceTransparency} />
               </div>
               <div>
-                <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
                   Solo-Friendly
                 </p>
                 <Dots rating={clinic.soloFriendliness} />
               </div>
               <div className="hidden sm:block">
-                <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
                   Reviews
                 </p>
-                <p className="text-sm font-sans text-muted">{clinic.reviewCount}</p>
+                <p className="text-[16px] font-sans text-muted">{clinic.reviewCount}</p>
               </div>
             </div>
 
             {/* Pricing */}
             <div className="text-right md:w-auto shrink-0">
-              <p className="text-xs font-sans text-muted line-through">
+              <p className="text-[14px] font-sans text-muted line-through">
                 £{clinic.quotePrice.toLocaleString()} quoted
               </p>
               <p className="font-serif text-foreground text-xl">
                 £{clinic.realPrice.toLocaleString()}
               </p>
-              <p className="text-[10px] font-sans text-muted">est. real cost</p>
+              <p className="text-[12px] font-sans text-muted">est. real cost</p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <p className="text-[11px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-4" style={{ maxWidth: "70ch" }}>
+      <p className="text-[12px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-4" style={{ maxWidth: "70ch" }}>
         Success rates based on HFEA published data (2022/23). Real prices are community-reported
         estimates including solo essentials. All data is indicative — always verify directly with clinics.
       </p>

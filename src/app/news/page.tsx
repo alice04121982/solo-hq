@@ -69,8 +69,8 @@ export default function NewsPage() {
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
         {/* Header */}
         <div className="mb-16">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
-          <h1 className="font-serif font-normal text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
+          <h1 className="font-serif font-semibold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
             News &amp; Updates
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
@@ -80,10 +80,10 @@ export default function NewsPage() {
 
         {/* Featured — left-border pull style */}
         <div className="mb-16 border-l-2 border-accent pl-8 md:pl-12">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
             {featured.tag} &nbsp;·&nbsp; {featured.date} &nbsp;·&nbsp; {featured.readTime}
           </p>
-          <h2 className="font-serif font-normal text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
+          <h2 className="font-serif font-semibold text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
             {featured.title}
           </h2>
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "60ch" }}>
@@ -101,14 +101,14 @@ export default function NewsPage() {
               key={a.title}
               className="py-8 border-t border-border cursor-pointer group"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
                 {a.tag}
               </p>
-              <h3 className="font-serif font-normal text-foreground text-lg leading-snug mb-3 group-hover:text-accent transition-colors duration-150" style={{ maxWidth: "26ch" }}>
+              <h3 className="font-serif font-semibold text-foreground text-lg leading-snug mb-3 group-hover:text-accent transition-colors duration-150" style={{ maxWidth: "26ch" }}>
                 {a.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-4">{a.excerpt}</p>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
                 {a.date} &nbsp;·&nbsp; {a.readTime}
               </p>
             </div>

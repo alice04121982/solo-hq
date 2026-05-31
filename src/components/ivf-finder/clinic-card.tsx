@@ -252,7 +252,7 @@ export function ClinicCard({
                           </div>
                         </div>
                         {pkg.description && (
-                          <p className="text-[11px] text-muted leading-relaxed">
+                          <p className="text-[12px] text-muted leading-relaxed">
                             {pkg.description}
                           </p>
                         )}

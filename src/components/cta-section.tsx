@@ -17,12 +17,12 @@ export function CTASection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="max-w-2xl"
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
             Join the community
           </p>
 
           <h2
-            className="font-serif font-normal text-foreground mb-6"
+            className="font-serif font-semibold text-foreground mb-6"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.1 }}
           >
             You&rsquo;re not doing this alone.
@@ -39,11 +39,11 @@ export function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-8 py-3.5 text-sm font-sans hover:bg-accent transition-colors duration-200">
-              Join the Waitlist
+            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-white px-8 py-3.5 text-sm font-sans hover:bg-primary-dark transition-colors duration-200">
+              Join the Club
               <ArrowRight className="h-4 w-4" />
             </button>
-            <button className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans hover:bg-foreground hover:text-background transition-colors duration-200">
+            <button className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans hover:border-primary hover:text-primary transition-colors duration-200">
               Follow Our Journey
             </button>
           </div>

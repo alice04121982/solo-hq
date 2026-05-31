@@ -25,7 +25,7 @@ export function BentoCard({
   const colClass =
     colSpan === 3 ? "md:col-span-3" : colSpan === 2 ? "md:col-span-2" : "md:col-span-1";
   const rowClass = rowSpan === 2 ? "md:row-span-2" : "md:row-span-1";
-  const bgClass = white ? "bg-white" : "bg-background-alt";
+  const bgClass = white ? "bg-background" : "bg-background-alt";
 
   return (
     <motion.div

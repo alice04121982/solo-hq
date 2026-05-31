@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -43,6 +44,8 @@ const journeyStories = [
     tag: "Founder's story",
     title: "From 'someday' to mum of one in 22 months",
     body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Flying Solo because I wished something like it had existed when I was starting out.",
+    image: "/images/story-alice.jpg",
+    imageAlt: "Alice with her newborn daughter Iris",
   },
   {
     name: "Natalie",
@@ -50,6 +53,8 @@ const journeyStories = [
     tag: "Donor egg journey",
     title: "I used donor eggs and I'm not ashamed of it",
     body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then — after reading a dozen stories from women who'd been exactly here — at peace with it. My twins Evi and Rosa are two and a half.",
+    image: "/images/story-natalie.jpg",
+    imageAlt: "Natalie with her twin daughters Evi and Rosa",
   },
   {
     name: "Jo",
@@ -57,6 +62,8 @@ const journeyStories = [
     tag: "First IVF cycle",
     title: "The bit nobody talks about: the two-week wait, alone",
     body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the Flying Solo community during my wait.",
+    image: "/images/story-jo.jpg",
+    imageAlt: "Woman in quiet contemplation by the window",
   },
 ];
 
@@ -75,10 +82,10 @@ export function TestimonialsSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-20"
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Real women. Real journeys.
           </p>
-          <h2 className="font-serif font-normal text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
+          <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.
           </h2>
         </motion.div>
@@ -97,7 +104,7 @@ export function TestimonialsSection() {
           >
             &ldquo;{featured.quote}&rdquo;
           </blockquote>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
             {featured.name} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.stage}
           </p>
         </motion.div>
@@ -115,10 +122,10 @@ export function TestimonialsSection() {
               <blockquote className="font-serif italic text-foreground text-lg leading-snug mb-4">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
                 {t.name} &nbsp;·&nbsp; {t.location}
               </p>
-              <p className="text-xs text-muted mt-1 font-sans">{t.stage}</p>
+              <p className="text-sm text-muted mt-1 font-sans">{t.stage}</p>
             </motion.div>
           ))}
         </div>
@@ -131,10 +138,10 @@ export function TestimonialsSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-12"
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Personal stories
           </p>
-          <h2 className="font-serif font-normal text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+          <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
             In their own words.
           </h2>
         </motion.div>
@@ -149,14 +156,24 @@ export function TestimonialsSection() {
               transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
               className="flex flex-col gap-4"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
+              {/* Story image */}
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden mb-2">
+                <Image
+                  src={s.image}
+                  alt={s.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              </div>
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
                 {s.tag}
               </p>
-              <h3 className="font-serif font-normal text-foreground text-xl leading-snug">
+              <h3 className="font-serif font-semibold text-foreground text-xl leading-snug">
                 {s.title}
               </h3>
-              <p className="text-sm font-sans text-muted leading-relaxed flex-1">{s.body}</p>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans pt-4 border-t border-border">
+              <p className="text-[16px] font-sans text-muted leading-relaxed flex-1">{s.body}</p>
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans pt-4 border-t border-border">
                 {s.name}, {s.age}
               </p>
             </motion.article>
