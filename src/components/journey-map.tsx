@@ -244,7 +244,7 @@ export function JourneyMap() {
                 {/* Phase number — muted, serif */}
                 <span
                   className="shrink-0 font-serif text-[16px] leading-none select-none"
-                  style={{ color: "var(--border)", width: "2.25rem" }}
+                  style={{ color: "var(--muted)", width: "2.25rem" }}
                   aria-hidden="true"
                 >
                   {String(phase.number).padStart(2, "0")}

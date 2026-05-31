@@ -7,6 +7,7 @@ import { Logo } from "./logo";
 
 const NAV_LINKS = [
   { label: "Getting Started", href: "/" },
+  { label: "Solo Navigator", href: "/solo-navigator" },
   { label: "Find a Clinic", href: "/clinics" },
   { label: "News", href: "/news" },
   { label: "Resources", href: "/resources" },

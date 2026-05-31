@@ -522,6 +522,10 @@ export function ClinicBrowser({
               onToggle={() => toggle("agegroup")}
               onClose={close}
             >
+              <p className="px-4 pt-2 pb-1 text-[11px] font-sans text-muted leading-relaxed" style={{ maxWidth: "200px" }}>
+                Filters success rates shown on each card to your age group.
+              </p>
+              <div className="mx-3 mb-1 border-t border-border" />
               <RadioOption label="All ages" selected={selectedAgeGroup === null} onClick={() => { setSelectedAgeGroup(null); close(); }} />
               {AGE_GROUP_OPTIONS.map((ag) => (
                 <RadioOption key={ag.key} label={ag.label} selected={selectedAgeGroup === ag.key} onClick={() => { setSelectedAgeGroup(ag.key); close(); }} />

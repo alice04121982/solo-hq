@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ShieldAlert } from "lucide-react";
+import { ChevronDown, ShieldAlert, Info } from "lucide-react";
 import {
   InternationalClinic,
   ClinicPackage,
@@ -22,6 +22,51 @@ interface InternationalClinicCardProps {
   ageGroupRate?: number | null;
   /** Distance from user's location in miles */
   distanceMiles?: number;
+}
+
+function SuccessRateTooltip({ countryCode, ageLabel }: { countryCode: string; ageLabel: string }) {
+  const [open, setOpen] = useState(false);
+  const isUK = countryCode === "GB";
+  const source = isUK
+    ? "UK figures are from the HFEA — mandatory annual reporting to the UK regulator."
+    : "International figures are self-reported by the clinic. Ask for equivalent regulatory data during your consultation.";
+
+  return (
+    <span className="relative inline-flex items-center">
+      <button
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        onClick={() => setOpen((v) => !v)}
+        className="text-muted hover:text-foreground transition-colors cursor-help focus:outline-none"
+        aria-label="What does this success rate mean?"
+        type="button"
+      >
+        <Info className="h-3.5 w-3.5" />
+      </button>
+      {open && (
+        <span
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded-xl p-3 shadow-lg z-50 pointer-events-none"
+          style={{ background: "var(--foreground)", color: "var(--background)" }}
+          role="tooltip"
+        >
+          <span className="block text-[12px] font-sans leading-relaxed">
+            <strong className="font-semibold">Live births per cycle started</strong> for women aged {ageLabel}. Out of 100 women who began a cycle, this many had a baby.
+          </span>
+          <span className="block text-[11px] font-sans leading-relaxed mt-1.5 opacity-80">
+            {source}
+          </span>
+          {/* Arrow */}
+          <span
+            className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent"
+            style={{ borderTopColor: "var(--foreground)" }}
+            aria-hidden="true"
+          />
+        </span>
+      )}
+    </span>
+  );
 }
 
 function PackagePill({ pkg }: { pkg: ClinicPackage }) {
@@ -184,9 +229,12 @@ export function InternationalClinicCard({
         {/* Success rate */}
         {displayRate !== null && (
           <div>
-            <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans mb-0.5">
-              Success rate ({displayAgeLabel})
-            </p>
+            <div className="flex items-center gap-1.5 mb-0.5">
+              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+                Success rate ({displayAgeLabel})
+              </p>
+              <SuccessRateTooltip countryCode={clinic.country_code} ageLabel={displayAgeLabel} />
+            </div>
             <p className="text-base font-sans font-medium text-foreground">{successRate}</p>
           </div>
         )}
