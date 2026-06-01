@@ -8,11 +8,11 @@ import { StatCard } from "@/components/stat-card";
 import { CTASection } from "@/components/cta-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { ArrowRight } from "lucide-react";
-import { Users, TrendingUp, Building2, ShieldCheck } from "lucide-react";
+import { buttonVariants } from "@/components/ui";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-bg-secondary">
       {/* Hero */}
       <HeroSection />
 
@@ -26,19 +26,19 @@ export default function Home() {
       <MembersSection />
 
       {/* Clinic Finder teaser */}
-      <section className="bg-background-alt border-y border-border">
+      <section className="bg-bg-secondary border-y border-border-secondary">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
-            <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
+            <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary mb-2 font-sans">
               UK &amp; international clinics
             </p>
-            <p className="font-serif font-semibold text-foreground" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
+            <p className="font-serif font-semibold text-text-primary" style={{ fontSize: "clamp(1.25rem, 2vw, 1.5rem)" }}>
               Compare success rates and pricing — UK and abroad, side by side.
             </p>
           </div>
           <a
             href="/clinics"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-7 py-3 text-[15px] font-sans font-medium hover:bg-primary-dark transition-colors duration-200 shrink-0"
+            className={buttonVariants({ variant: "primary", size: "md" })}
           >
             Find a clinic
             <ArrowRight className="h-3.5 w-3.5" />
@@ -48,12 +48,12 @@ export default function Home() {
 
       {/* Stats — flat, no cards, separated by border-top */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+        <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary mb-3 font-sans">
           25 years of growth — HFEA data
         </p>
-        <p className="font-serif font-semibold text-foreground mb-10" style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "38ch" }}>
+        <p className="font-serif font-semibold text-text-primary mb-10" style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "38ch" }}>
           Solo treatment has grown{" "}
-          <em style={{ fontStyle: "italic", color: "var(--accent)" }}>24-fold</em>{" "}
+          <em className="not-italic text-text-brand-secondary">24-fold</em>{" "}
           since 1997. Here&apos;s what the numbers actually say.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
@@ -65,31 +65,31 @@ export default function Home() {
       </section>
 
       {/* Solo Navigator teaser */}
-      <section className="bg-background-alt border-y border-border" id="journey">
+      <section className="bg-bg-secondary border-y border-border-secondary" id="journey">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20 items-center">
             {/* Left — copy */}
             <div>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.2em] text-muted font-sans mb-5">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-tertiary font-sans mb-5">
                 Solo Navigator
               </p>
               <h2
-                className="font-serif font-semibold text-foreground mb-4"
+                className="font-serif font-semibold text-text-primary mb-4"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1 }}
               >
                 Where are you on{" "}
-                <em style={{ fontStyle: "italic", color: "var(--primary)" }}>
+                <em className="not-italic text-text-brand-secondary">
                   your journey?
                 </em>
               </h2>
-              <p className="text-[16px] font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "44ch" }}>
+              <p className="text-md font-sans text-text-secondary leading-relaxed mb-8" style={{ maxWidth: "44ch" }}>
                 From &ldquo;am I really doing this?&rdquo; to thriving as a solo
                 family. Seven stages of honest guidance, real tools, and a
                 community who gets it.
               </p>
               <a
                 href="/solo-navigator"
-                className="inline-flex items-center gap-2 rounded-full bg-primary text-white px-7 py-3.5 text-[15px] font-sans font-medium hover:bg-primary-dark transition-colors duration-200"
+                className={buttonVariants({ variant: "primary", size: "md" })}
               >
                 Explore the journey
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -109,15 +109,15 @@ export default function Home() {
               ].map((stage, i) => (
                 <div
                   key={stage}
-                  className="flex items-center gap-4 py-3.5 border-b border-border last:border-b-0"
+                  className="flex items-center gap-4 py-3.5 border-b border-border-secondary last:border-b-0"
                 >
                   <span
-                    className="shrink-0 font-serif text-[14px] leading-none select-none tabular-nums"
-                    style={{ color: "var(--border)", width: "1.75rem" }}
+                    className="shrink-0 font-serif text-sm leading-none select-none tabular-nums text-text-quaternary"
+                    style={{ width: "1.75rem" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-[15px] font-sans text-foreground font-medium">
+                  <span className="text-sm font-sans text-text-primary font-medium">
                     {stage}
                   </span>
                 </div>
@@ -128,12 +128,12 @@ export default function Home() {
       </section>
 
       {/* Planning Tools — Cost Calculator */}
-      <section className="bg-background border-b border-border" id="tools">
+      <section className="bg-bg-primary border-b border-border-secondary" id="tools">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary mb-3 font-sans">
             Get Started
           </p>
-          <h2 className="font-serif font-semibold text-foreground mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+          <h2 className="font-serif font-semibold text-text-primary mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
             Let&apos;s help you get started on the process
           </h2>
           <BentoCard delay={0.05}>

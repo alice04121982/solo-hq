@@ -18,9 +18,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Flying Solo — The Definitive Platform for Solo Mums by Choice",
+  title: "KLEO Fertility — Your Guide to Building the Family You've Always Wanted",
   description:
-    "Real costs. Real guidance. Real community. Everything you need to navigate the solo motherhood journey with clarity and confidence.",
+    "Real guidance for every path to parenthood. Whether you're going solo, using donor conception, or building a same-sex family — KLEO has you covered.",
 };
 
 export default function RootLayout({

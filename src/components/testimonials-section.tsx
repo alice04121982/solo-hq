@@ -71,7 +71,7 @@ export function TestimonialsSection() {
   const [featured, ...rest] = testimonials;
 
   return (
-    <section className="bg-background-alt">
+    <section className="bg-bg-secondary">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
 
         {/* Eyebrow + heading */}
@@ -82,29 +82,29 @@ export function TestimonialsSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-20"
         >
-          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary mb-4 font-sans">
             Real women. Real journeys.
           </p>
-          <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
+          <h2 className="font-serif font-semibold text-text-primary" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.
           </h2>
         </motion.div>
 
-        {/* Featured pull-quote */}
+        {/* Featured pull-quote — B1: brand border */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-20 border-l-2 border-accent pl-8 md:pl-12"
+          className="mb-20 border-l-2 border-border-brand pl-8 md:pl-12"
         >
           <blockquote
-            className="font-serif italic text-foreground mb-6"
+            className="font-serif italic text-text-primary mb-6"
             style={{ fontSize: "clamp(1.375rem, 2.5vw, 2rem)", lineHeight: 1.35 }}
           >
             &ldquo;{featured.quote}&rdquo;
           </blockquote>
-          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary font-sans">
             {featured.name} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.stage}
           </p>
         </motion.div>
@@ -119,13 +119,13 @@ export function TestimonialsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
             >
-              <blockquote className="font-serif italic text-foreground text-lg leading-snug mb-4">
+              <blockquote className="font-serif italic text-text-primary text-lg leading-snug mb-4">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary font-sans">
                 {t.name} &nbsp;·&nbsp; {t.location}
               </p>
-              <p className="text-sm text-muted mt-1 font-sans">{t.stage}</p>
+              <p className="text-sm text-text-tertiary mt-1 font-sans">{t.stage}</p>
             </motion.div>
           ))}
         </div>
@@ -138,10 +138,10 @@ export function TestimonialsSection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-12"
         >
-          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary mb-4 font-sans">
             Personal stories
           </p>
-          <h2 className="font-serif font-semibold text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+          <h2 className="font-serif font-semibold text-text-primary" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
             In their own words.
           </h2>
         </motion.div>
@@ -166,14 +166,14 @@ export function TestimonialsSection() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               </div>
-              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-brand-secondary font-sans">
                 {s.tag}
               </p>
-              <h3 className="font-serif font-semibold text-foreground text-xl leading-snug">
+              <h3 className="font-serif font-semibold text-text-primary text-xl leading-snug">
                 {s.title}
               </h3>
-              <p className="text-[16px] font-sans text-muted leading-relaxed flex-1">{s.body}</p>
-              <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans pt-4 border-t border-border">
+              <p className="text-md font-sans text-text-secondary leading-relaxed flex-1">{s.body}</p>
+              <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary font-sans pt-4 border-t border-border-secondary">
                 {s.name}, {s.age}
               </p>
             </motion.article>

@@ -69,18 +69,18 @@ function MemberCard({
 
       {/* Quote */}
       <blockquote
-        className="font-serif italic text-foreground leading-snug mb-4 flex-1"
+        className="font-serif italic text-text-primary leading-snug mb-4 flex-1"
         style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)" }}
       >
         &ldquo;{quote}&rdquo;
       </blockquote>
 
       {/* Attribution */}
-      <div className="border-t border-border pt-4 mt-auto">
-        <p className="font-sans font-semibold text-foreground text-sm">
+      <div className="border-t border-border-secondary pt-4 mt-auto">
+        <p className="font-sans font-semibold text-text-primary text-sm">
           {name}, {age} &nbsp;·&nbsp; {location}
         </p>
-        <p className="font-sans text-muted text-[13px] mt-0.5">{stage}</p>
+        <p className="font-sans text-text-tertiary text-sm mt-0.5">{stage}</p>
       </div>
     </div>
   );
@@ -88,31 +88,31 @@ function MemberCard({
 
 export function MembersSection() {
   return (
-    <section className="bg-background border-b border-border">
+    <section className="bg-bg-primary border-b border-border-secondary">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
 
         {/* Header */}
         <div className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <p className="text-[11px] font-[500] uppercase tracking-[0.2em] text-muted font-sans mb-4">
-              Flying Solo members
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-tertiary font-sans mb-4">
+              KLEO Fertility members
             </p>
             <h2
-              className="font-serif font-semibold text-foreground"
+              className="font-serif font-semibold text-text-primary"
               style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", lineHeight: 1.07, maxWidth: "20ch" }}
             >
               Life-changing moments,{" "}
-              <em style={{ fontStyle: "italic", color: "var(--primary)" }}>
+              <em className="not-italic text-text-brand-secondary">
                 shared.
               </em>
             </h2>
           </div>
           <p
-            className="font-sans text-muted leading-relaxed"
+            className="font-sans text-text-secondary leading-relaxed"
             style={{ maxWidth: "38ch", fontSize: "1rem" }}
           >
             Thousands of women have found their community, their confidence, and their
-            path to motherhood through Flying Solo. Here are a few of their stories.
+            path to motherhood through KLEO Fertility. Here are a few of their stories.
           </p>
         </div>
 

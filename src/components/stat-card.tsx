@@ -19,15 +19,15 @@ export function StatCard({ value, label, delay = 0 }: StatCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.7, delay, ease: EASE }}
-      className="flex flex-col gap-3 py-8 border-t border-border"
+      className="flex flex-col gap-3 py-8 border-t border-border-secondary"
     >
       <span
-        className="font-serif font-semibold text-foreground leading-none"
+        className="font-serif font-semibold text-text-primary leading-none"
         style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", fontOpticalSizing: "auto" as never }}
       >
         {value}
       </span>
-      <span className="text-[16px] font-sans text-muted leading-snug" style={{ maxWidth: "28ch" }}>
+      <span className="text-md font-sans text-text-tertiary leading-snug" style={{ maxWidth: "28ch" }}>
         {label}
       </span>
     </motion.div>
