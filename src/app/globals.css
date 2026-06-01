@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Brand palette ── */
-  --background:      #F6F3ED;   /* Warm cream */
-  --background-alt:  #EDE8DF;   /* Warm sand — replaces Tender Pink */
-  --foreground:      #1C1C1A;   /* Warm near-black */
-  --muted:           #6B665F;   /* Warm neutral gray */
-  --primary:         #2E7A51;   /* Botanical mid green */
-  --primary-dark:    #1D5237;   /* Deep green — hover/active */
-  --primary-tint:    #EAF2EC;   /* Light green wash — subtle fills */
-  --accent:          #B5624A;   /* Antique terracotta */
-  --accent-soft:     #F2E8E4;   /* Terracotta wash */
-  --border:          #DDD7CB;   /* Warm neutral border */
+  /* ── Brand palette (legacy — phased out in Stage 3–4) ── */
+  --background:      #F6F3ED;
+  --background-alt:  #EDE8DF;
+  --foreground:      #1C1C1A;
+  --muted:           #6B665F;
+  --primary:         #2E7A51;
+  --primary-dark:    #1D5237;
+  --primary-tint:    #EAF2EC;
+  --accent:          #B5624A;
+  --accent-soft:     #F2E8E4;
+  --border:          #DDD7CB;
 
-  /* ── Legacy aliases (remapped for palette shift) ── */
-  --lavender:        #EAF2EC;   /* was #FFB3CF */
-  --lavender-light:  #EDE8DF;   /* was #FFE1F7 */
-  --lavender-dark:   #2E7A51;   /* was #FF4400 */
-  --lime:            #2E7A51;   /* was #00DF82 */
-  --lime-dark:       #1D5237;   /* was #1F2ADE */
+  /* ── Legacy aliases (phased out in Stage 3–4) ── */
+  --lavender:        #EAF2EC;
+  --lavender-light:  #EDE8DF;
+  --lavender-dark:   #2E7A51;
+  --lime:            #2E7A51;
+  --lime-dark:       #1D5237;
   --charcoal:        #1C1C1A;
-  --navy:            #2E7A51;   /* was #1F2ADE */
+  --navy:            #2E7A51;
   --warm-white:      #F6F3ED;
-  --card-bg:         #EDE8DF;   /* was #FFE1F7 */
-  --card-border:     #DDD7CB;   /* was #ECDDEF */
+  --card-bg:         #EDE8DF;
+  --card-border:     #DDD7CB;
 }
 
 @theme inline {
-  /* ── Semantic colours ── */
+  /* ── Legacy colour aliases (phased out in Stage 3–4) ── */
   --color-background:      var(--background);
   --color-background-alt:  var(--background-alt);
   --color-foreground:      var(--foreground);
@@ -38,8 +38,6 @@
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
   --color-border:          var(--border);
-
-  /* ── Legacy aliases ── */
   --color-lavender:        var(--lavender);
   --color-lavender-light:  var(--lavender-light);
   --color-lavender-dark:   var(--lavender-dark);
@@ -51,34 +49,94 @@
   --color-card-bg:         var(--card-bg);
   --color-card-border:     var(--card-border);
 
+  /* ── KLEO surface tokens ── use as bg-bg-* ── */
+  --color-bg-primary:              #FFFFFF;   /* raised card / modal */
+  --color-bg-secondary:            #F6F3ED;   /* page canvas */
+  --color-bg-tertiary:             #EDE8DF;   /* recessed well / table header */
+  --color-bg-quaternary:           #DDD7CB;   /* deepest inset */
+  --color-bg-primary-hover:        #F6F3ED;
+  --color-bg-secondary-hover:      #EDE8DF;
+  --color-bg-active:               #F6F3ED;
+  --color-bg-disabled:             #EDE8DF;
+  --color-bg-disabled-subtle:      #F6F3ED;
+  --color-bg-brand-solid:          #2E7A51;   /* filled primary CTA */
+  --color-bg-brand-solid-hover:    #1D5237;
+  --color-bg-brand-primary:        #EAF2EC;   /* subtle green tint / banner */
+  --color-bg-brand-secondary:      #D4E9DB;
+  --color-bg-brand-section:        #1D5237;   /* dark brand footer / band */
+  --color-bg-error-primary:        #FEF3F2;
+  --color-bg-warning-primary:      #FFFAEB;
+  --color-bg-success-primary:      #ECFDF3;
+  --color-bg-overlay:              #1C1C1A;
+
+  /* ── KLEO border tokens ── use as border-border-* ── */
+  --color-border-primary:          #DDD7CB;   /* input outline (resting) */
+  --color-border-secondary:        #EDE8DF;   /* default card / container edge */
+  --color-border-tertiary:         #F6F3ED;   /* faintest separator */
+  --color-border-brand:            #2E7A51;   /* focus ring */
+  --color-border-error:            #F04438;
+  --color-border-error-subtle:     #FDA29B;
+  --color-border-success:          #079455;
+  --color-border-success-subtle:   #A9EFC5;
+  --color-border-warning:          #DC6803;
+  --color-border-warning-subtle:   #FEDF89;
+  --color-border-disabled:         #DDD7CB;
+  --color-border-disabled-subtle:  #EDE8DF;
+
+  /* ── KLEO text tokens ── use as text-text-* ── */
+  --color-text-primary:            #1C1C1A;   /* headings, key figures */
+  --color-text-secondary:          #6B665F;   /* body copy, labels */
+  --color-text-tertiary:           #8A8580;   /* help text, captions */
+  --color-text-quaternary:         #A09B96;   /* fine print */
+  --color-text-disabled:           #A09B96;
+  --color-text-placeholder:        #B0ABA5;
+  --color-text-white:              #FFFFFF;
+  --color-text-brand-secondary:    #2E7A51;   /* green links / emphasis */
+  --color-text-brand-tertiary:     #3A8A61;
+  --color-text-error-primary:      #D92D20;
+  --color-text-warning-primary:    #DC6803;
+  --color-text-success-primary:    #079455;
+
+  /* ── KLEO icon tokens ── use as text-fg-* (SVG uses currentColor) ── */
+  --color-fg-primary:              #1C1C1A;
+  --color-fg-secondary:            #6B665F;   /* default icon */
+  --color-fg-tertiary:             #8A8580;   /* supporting icon */
+  --color-fg-quaternary:           #B0ABA5;   /* decorative (chevrons, dots) */
+  --color-fg-disabled:             #B0ABA5;
+  --color-fg-white:                #FFFFFF;
+  --color-fg-brand-primary:        #2E7A51;
+  --color-fg-error-primary:        #D92D20;
+  --color-fg-success-primary:      #079455;
+  --color-fg-warning-primary:      #DC6803;
+
   /* ── Fonts ── */
   --font-sans:    var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif:   var(--font-lora), "Lora", ui-serif, Georgia, serif;
   --font-heading: var(--font-lora), "Lora", ui-serif, Georgia, serif;
   --font-mono:    ui-monospace, "Cascadia Code", monospace;
 
-  /* ── Text scale (calmed down from editorial-extreme) ── */
-  --text-xs:                       0.6875rem;
-  --text-xs--line-height:          1rem;
-  --text-sm:                       0.875rem;
+  /* ── Text scale (KLEO / Untitled UI aligned) ── */
+  --text-xs:                       0.75rem;      /* 12px */
+  --text-xs--line-height:          1.125rem;     /* 18px */
+  --text-sm:                       0.875rem;     /* 14px */
   --text-sm--line-height:          1.4rem;
-  --text-md:                       1rem;
-  --text-md--line-height:          1.6rem;
-  --text-lg:                       1.125rem;
+  --text-md:                       1rem;         /* 16px */
+  --text-md--line-height:          1.5rem;
+  --text-lg:                       1.125rem;     /* 18px */
   --text-lg--line-height:          1.75rem;
-  --text-xl:                       1.25rem;
+  --text-xl:                       1.25rem;      /* 20px */
   --text-xl--line-height:          1.875rem;
-  --text-display-xs:               1.5rem;
+  --text-display-xs:               1.5rem;       /* 24px */
   --text-display-xs--line-height:  1.2;
-  --text-display-sm:               1.875rem;
+  --text-display-sm:               1.875rem;     /* 30px */
   --text-display-sm--line-height:  1.15;
-  --text-display-md:               2.25rem;
+  --text-display-md:               2.25rem;      /* 36px */
   --text-display-md--line-height:  1.1;
-  --text-display-lg:               2.75rem;
+  --text-display-lg:               2.75rem;      /* 44px */
   --text-display-lg--line-height:  1.08;
-  --text-display-xl:               3.25rem;
+  --text-display-xl:               3.25rem;      /* 52px */
   --text-display-xl--line-height:  1.05;
-  --text-display-2xl:              3.75rem;
+  --text-display-2xl:              3.75rem;      /* 60px */
   --text-display-2xl--line-height: 1.02;
 }
 
@@ -87,8 +145,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: 1rem;   /* 16px = text-md */
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
