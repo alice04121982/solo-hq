@@ -64,7 +64,17 @@ export function TestimonialsSection() {
   const [featured, ...rest] = testimonials;
 
   return (
-    <section className="bg-background-alt">
+    <section
+      className="bg-lavender"
+      style={{
+        "--background":     "var(--lavender)",
+        "--background-alt": "#F5F1E6",
+        "--foreground":     "var(--warm-white)",
+        "--muted":          "rgba(245,241,230,0.6)",
+        "--border":         "rgba(245,241,230,0.2)",
+        "--accent":         "#C5E600",
+      } as React.CSSProperties}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
 
         {/* Eyebrow + heading */}

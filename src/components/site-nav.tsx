@@ -29,7 +29,7 @@ export function SiteNav() {
         scrolled ? "border-b border-border" : ""
       }`}
     >
-      <a href="/" className="flex items-center">
+      <a href="/" className="flex items-center text-foreground">
         <Logo height={44} />
       </a>
 
@@ -54,7 +54,7 @@ export function SiteNav() {
       <div className="hidden md:flex items-center">
         <a
           href="/ivf-finder"
-          className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
+          className="inline-flex items-center gap-2 rounded-full bg-accent text-charcoal px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
         >
           Find a Clinic
           <ArrowRight className="h-3.5 w-3.5" />

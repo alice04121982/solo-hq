@@ -9,7 +9,16 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background">
+    <section
+      className="relative overflow-hidden bg-navy"
+      style={{
+        "--background": "var(--navy)",
+        "--background-alt": "#4d1228",
+        "--foreground": "var(--warm-white)",
+        "--muted": "rgba(245,241,230,0.6)",
+        "--border": "rgba(245,241,230,0.15)",
+      } as React.CSSProperties}
+    >
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav />
 
@@ -55,7 +64,7 @@ export function HeroSection() {
               </button>
               <a
                 href="/ivf-finder"
-                className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full bg-accent text-charcoal px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
                 Find a clinic
                 <ArrowRight className="h-3.5 w-3.5" />
