@@ -39,7 +39,7 @@ export function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground text-background px-8 py-3.5 text-sm font-sans hover:bg-accent transition-colors duration-200">
+            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200">
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
             </button>

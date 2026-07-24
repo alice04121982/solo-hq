@@ -14,8 +14,8 @@ export function Logo({ height = 52, className = "" }: LogoProps) {
       className={className}
       aria-label="Flying Solo"
     >
-      <text x="148" y="78" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill="#0B3D2E">flying</text>
-      <text x="148" y="155" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill="#C97B5C">solo</text>
+      <text x="148" y="78" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill="#3D0D1B">flying</text>
+      <text x="148" y="155" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill="#C5E600">solo</text>
     </svg>
   );
 }

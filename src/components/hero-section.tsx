@@ -25,11 +25,12 @@ export function HeroSection() {
             </p>
 
             <h1
-              className="font-serif font-normal text-foreground mb-8"
+              className="font-serif font-bold text-foreground mb-8"
               style={{
                 fontSize: "clamp(2.75rem, 6vw, 5.5rem)",
-                lineHeight: 1.05,
+                lineHeight: 1.02,
                 fontOpticalSizing: "auto" as never,
+                fontVariationSettings: "'wght' 800",
               }}
             >
               Building Your Family
@@ -54,7 +55,7 @@ export function HeroSection() {
               </button>
               <a
                 href="/ivf-finder"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
                 Find a clinic
                 <ArrowRight className="h-3.5 w-3.5" />

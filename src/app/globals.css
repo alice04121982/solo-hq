@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  /* ── New palette ── */
-  --background:      #F4EFE6;
-  --background-alt:  #EDE6D8;
-  --foreground:      #1A1714;
-  --muted:           #6B645B;
-  --accent:          #C97B5C;
-  --accent-soft:     #E4B8A3;
-  --border:          #E5DFD4;
+  /* ── Palette ── */
+  --background:      #F5F1E6;
+  --background-alt:  #EDE8D6;
+  --foreground:      #1A0810;
+  --muted:           #7A5266;
+  --accent:          #C5E600;   /* lime / chartreuse */
+  --accent-soft:     #DCF04A;
+  --accent-dark:     #9BBB00;
+  --border:          #E2D6C8;
 
-  /* ── Legacy aliases (kept so existing classNames compile during sweep) ── */
-  --lavender:        #C97B5C;
-  --lavender-light:  #F0E6DF;
-  --lavender-dark:   #A85E3E;
-  --lime:            #C97B5C;
-  --lime-dark:       #A85E3E;
-  --charcoal:        #1A1714;
-  --navy:            #1A1714;
-  --warm-white:      #F4EFE6;
-  --card-bg:         #EDE6D8;
-  --card-border:     #E5DFD4;
+  /* ── Legacy aliases ── */
+  --lavender:        #D43878;   /* hot pink */
+  --lavender-light:  #F5D0E2;
+  --lavender-dark:   #A82060;
+  --lime:            #C5E600;
+  --lime-dark:       #9BBB00;
+  --charcoal:        #1A0810;
+  --navy:            #3D0D1B;   /* deep maroon */
+  --warm-white:      #F5F1E6;
+  --card-bg:         #EDE8D6;
+  --card-border:     #E2D6C8;
 }
 
 @theme inline {
@@ -34,16 +35,16 @@
   --color-border:          var(--border);
 
   /* ── Legacy aliases ── */
-  --color-lavender:        var(--accent-soft);
-  --color-lavender-light:  #F0E6DF;
-  --color-lavender-dark:   #A85E3E;
-  --color-lime:            var(--accent);
-  --color-lime-dark:       #A85E3E;
-  --color-charcoal:        var(--foreground);
-  --color-navy:            var(--foreground);
-  --color-warm-white:      var(--background);
-  --color-card-bg:         var(--background-alt);
-  --color-card-border:     var(--border);
+  --color-lavender:        var(--lavender);
+  --color-lavender-light:  var(--lavender-light);
+  --color-lavender-dark:   var(--lavender-dark);
+  --color-lime:            var(--lime);
+  --color-lime-dark:       var(--lime-dark);
+  --color-charcoal:        var(--charcoal);
+  --color-navy:            var(--navy);
+  --color-warm-white:      var(--warm-white);
+  --color-card-bg:         var(--card-bg);
+  --color-card-border:     var(--card-border);
 
   /* ── Fonts ── */
   --font-sans:    var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -88,9 +89,10 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.05;
   font-optical-sizing: auto;
+  letter-spacing: -0.01em;
 }
 
 /* ── Scrollbar ── */
