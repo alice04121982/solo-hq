@@ -6,10 +6,10 @@ import { useState, useEffect } from "react";
 import { Logo } from "./logo";
 
 const NAV_LINKS = [
-  { label: "Getting Started", href: "/" },
-  { label: "Find a Clinic", href: "/ivf-finder" },
-  { label: "News", href: "/news" },
+  { label: "Family Types", href: "/families" },
+  { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Resources", href: "/resources" },
+  { label: "News", href: "/news" },
 ];
 
 export function SiteNav() {

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { Logo } from "./logo";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -54,15 +53,6 @@ export function CTASection() {
         </motion.div>
       </div>
 
-      {/* Footer */}
-      <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <Logo height={32} />
-          <p className="text-xs font-sans text-muted">
-            &copy; {new Date().getFullYear()} Flying Solo. Made with grit and grace in the UK.
-          </p>
-        </div>
-      </div>
     </section>
   );
 }

@@ -1,11 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { SiteNav } from "./site-nav";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+const FAMILY_TYPE_PILLS = [
+  { label: "Solo mums by choice", slug: "solo-mum" },
+  { label: "Same-sex female couples", slug: "same-sex-female" },
+  { label: "Same-sex male couples", slug: "same-sex-male" },
+  { label: "Single men by choice", slug: "single-dad" },
+  { label: "Heterosexual couples", slug: "heterosexual-couple" },
+];
 
 export function HeroSection() {
   return (
@@ -13,74 +20,81 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24 md:py-32">
-          {/* Left — copy */}
+        <div className="py-20 md:py-28 lg:py-32">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
+            className="max-w-4xl"
           >
             <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
-              Solo mums by choice &nbsp;·&nbsp; UK guide
+              IVF clinic comparison &nbsp;·&nbsp; All family types &nbsp;·&nbsp; UK &amp; abroad
             </p>
 
             <h1
               className="font-serif font-bold text-foreground mb-8"
               style={{
-                fontSize: "clamp(2.75rem, 6vw, 5.5rem)",
-                lineHeight: 1.02,
-                fontOpticalSizing: "auto" as never,
+                fontSize: "clamp(3rem, 7vw, 6rem)",
+                lineHeight: 1.01,
                 fontVariationSettings: "'wght' 800",
               }}
             >
-              Building Your Family
+              IVF, made clear.
               <br />
               <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
-                on Your Own Terms
+                For every family.
               </em>
             </h1>
 
-            <p className="text-[17px] text-muted leading-[1.65] mb-10 font-sans" style={{ maxWidth: "52ch" }}>
-              Your comprehensive guide to solo motherhood. From choosing a donor
-              and navigating IVF to prepping for birth and thriving as a solo
-              parent by choice.
+            <p
+              className="text-[17px] text-muted leading-[1.65] mb-10 font-sans"
+              style={{ maxWidth: "58ch" }}
+            >
+              Drowning in clinic brochures, conflicting success-rate claims, and unexplained acronyms? Flying Solo cuts through the noise — giving you clear, honest data to compare clinics at home and abroad, understand your treatment options, and take your next step with confidence.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <button className="inline-flex items-center gap-2.5 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-foreground hover:text-background transition-colors duration-200">
-                <span className="h-6 w-6 rounded-full bg-accent/15 flex items-center justify-center">
-                  <Play className="h-2.5 w-2.5 text-accent fill-accent" />
-                </span>
-                Alice&rsquo;s story
-              </button>
+            <div className="flex flex-wrap items-center gap-4 mb-14">
               <a
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
-                Find a clinic
+                Compare clinics
                 <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="/families"
+                className="inline-flex items-center gap-2 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans hover:bg-foreground hover:text-background transition-colors duration-200"
+              >
+                Find your path
               </a>
             </div>
           </motion.div>
 
-          {/* Right — image */}
+          {/* Family type pills */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-            className="relative h-[480px] lg:h-[580px] rounded-2xl overflow-hidden"
+            transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+            className="flex flex-wrap gap-3"
           >
-            <Image
-              src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=900&q=80"
-              alt="Mother and child sharing a joyful moment"
-              fill
-              className="object-cover"
-              style={{ filter: "saturate(0.9) sepia(0.05)" }}
-              priority
-            />
+            <span className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans self-center mr-2">
+              For
+            </span>
+            {FAMILY_TYPE_PILLS.map((type) => (
+              <a
+                key={type.slug}
+                href={`/families/${type.slug}`}
+                className="inline-block rounded-full border border-border text-xs font-sans text-muted px-4 py-1.5 hover:border-foreground/40 hover:text-foreground transition-colors duration-150"
+              >
+                {type.label}
+              </a>
+            ))}
           </motion.div>
         </div>
       </div>
+
+      {/* Accent bar */}
+      <div className="h-px bg-border" />
     </section>
   );
 }
