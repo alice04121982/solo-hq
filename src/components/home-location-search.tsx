@@ -4,7 +4,11 @@ import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, LocateFixed } from "lucide-react";
 
-export function HomeLocationSearch() {
+interface HomeLocationSearchProps {
+  onDark?: boolean;
+}
+
+export function HomeLocationSearch({ onDark = false }: HomeLocationSearchProps) {
   const router = useRouter();
   const [location, setLocation] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +68,13 @@ export function HomeLocationSearch() {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit}>
-        <div className="flex items-stretch gap-0 rounded-full border border-foreground/25 bg-background overflow-hidden shadow-sm focus-within:border-foreground/50 transition-colors">
+        <div
+          className="flex items-stretch gap-0 rounded-full overflow-hidden shadow-sm transition-colors"
+          style={{
+            border: onDark ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(26,8,16,0.25)",
+            background: "#FFFFFF",
+          }}
+        >
           {/* Location input */}
           <div className="relative flex-1 flex items-center">
             <Search className="absolute left-5 h-4 w-4 text-muted pointer-events-none" />
