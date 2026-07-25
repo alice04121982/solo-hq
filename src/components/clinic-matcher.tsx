@@ -10,20 +10,29 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 type FamilyType = "solo-mum" | "solo-dad" | "female-couple" | "male-couple" | "straight-couple";
 type AgeGroup = "under35" | "35to37" | "38to40" | "over40";
+// For surrogacy paths this represents egg-donor age preference, not the user's own age
 type Condition = "pcos" | "low-reserve" | "endometriosis" | "recurrent-loss" | "male-factor" | "none";
+type SurrogacyStage = "exploring" | "matching" | "have-surrogate" | "open";
 type TravelWillingness = "uk-only" | "europe" | "anywhere";
-type BudgetRange = "under5k" | "5to10k" | "10to15k" | "over15k";
+type BudgetRange = "under5k" | "5to10k" | "10to15k" | "over15k" | "surrogacy-mid" | "surrogacy-full" | "surrogacy-premium";
 type DonorNeed = "sperm" | "egg" | "both" | "neither";
 
 interface WizardState {
   family: FamilyType | null;
   age: AgeGroup | null;
   conditions: Set<Condition>;
+  surrogacyStage: SurrogacyStage | null;
   travel: TravelWillingness | null;
   budget: BudgetRange | null;
 }
 
-// ─── Clinic data (shared with clinic-comparison) ──────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function isSurrogacyPath(family: FamilyType | null): boolean {
+  return family === "solo-dad" || family === "male-couple";
+}
+
+// ─── Clinic data ──────────────────────────────────────────────────────────────
 
 type TreatmentType = "ivf" | "icsi" | "iui" | "donor-egg" | "donor-sperm" | "double-donor";
 type AgeKey = "under35" | "age35to37" | "age38to39" | "age40to42" | "age43plus";
@@ -174,13 +183,22 @@ function ageToKey(age: AgeGroup): AgeKey {
 }
 
 function budgetMax(b: BudgetRange): number {
-  return { "under5k": 5000, "5to10k": 10000, "10to15k": 15000, "over15k": Infinity }[b];
+  return {
+    "under5k": 5000,
+    "5to10k": 10000,
+    "10to15k": 15000,
+    "over15k": Infinity,
+    "surrogacy-mid": 30000,
+    "surrogacy-full": 50000,
+    "surrogacy-premium": Infinity,
+  }[b];
 }
 
 function getDonorNeed(family: FamilyType, conditions: Set<Condition>): DonorNeed {
-  const needsEgg = conditions.has("low-reserve") || family === "male-couple";
-  const needsSperm = family === "solo-mum" || family === "female-couple" || family === "solo-dad" || family === "male-couple";
   if (family === "male-couple") return "both";
+  if (family === "solo-dad") return "both";
+  const needsEgg = conditions.has("low-reserve");
+  const needsSperm = family === "solo-mum" || family === "female-couple";
   if (needsEgg && needsSperm) return "both";
   if (needsEgg) return "egg";
   if (needsSperm) return "sperm";
@@ -197,13 +215,16 @@ interface ScoredClinic {
 function scoreClinic(clinic: Clinic, s: WizardState): ScoredClinic | null {
   if (!s.family || !s.age || !s.travel || !s.budget) return null;
 
+  const surrogacy = isSurrogacyPath(s.family);
+
   // Hard filter: travel
   if (s.travel === "uk-only" && clinic.region === "abroad") return null;
 
   // Hard filter: budget (real price — includes a rough travel cost for abroad)
   const travelEstimate = clinic.region === "abroad" ? 1500 : 0;
   const effectiveCost = clinic.realPriceGBP + travelEstimate;
-  if (effectiveCost > budgetMax(s.budget)) return null;
+  // For surrogacy paths the surrogacy org/legal cost is separate; don't apply same budget ceiling
+  if (!surrogacy && effectiveCost > budgetMax(s.budget)) return null;
 
   // Hard filter: donor need
   const donorNeed = getDonorNeed(s.family, s.conditions);
@@ -211,6 +232,7 @@ function scoreClinic(clinic: Clinic, s: WizardState): ScoredClinic | null {
   if (donorNeed === "egg" && !clinic.treatments.includes("donor-egg")) return null;
   if (donorNeed === "sperm" && !clinic.treatments.includes("donor-sperm")) return null;
 
+  // For surrogacy: use donor-egg success rates (age key based on donor preference, defaults to under35)
   const ageKey = ageToKey(s.age);
   const successRate = clinic.successRates[ageKey];
   const matchReasons: string[] = [];
@@ -233,32 +255,43 @@ function scoreClinic(clinic: Clinic, s: WizardState): ScoredClinic | null {
   score += (clinic.priceTransparency / 5) * 15;
   if (clinic.priceTransparency >= 4) matchReasons.push("Transparent pricing");
 
-  // Cost efficiency (max 20 pts) — lower is better, scaled
-  const costScore = Math.max(0, 1 - (effectiveCost - 3000) / 15000);
-  score += costScore * 20;
-
-  // Condition-based bonuses
-  if (s.conditions.has("low-reserve") && clinic.treatments.includes("donor-egg")) {
-    score += 10;
-    matchReasons.push("Offers donor egg IVF for low ovarian reserve");
+  // Cost efficiency (max 20 pts)
+  if (!surrogacy) {
+    const costScore = Math.max(0, 1 - (effectiveCost - 3000) / 15000);
+    score += costScore * 20;
   }
-  if (s.conditions.has("recurrent-loss") && clinic.priceTransparency >= 4) {
-    score += 5;
+
+  // Condition-based bonuses (non-surrogacy only)
+  if (!surrogacy) {
+    if (s.conditions.has("low-reserve") && clinic.treatments.includes("donor-egg")) {
+      score += 10;
+      matchReasons.push("Offers donor egg IVF for low ovarian reserve");
+    }
+  }
+
+  // Double-donor bonus for surrogacy paths
+  if (surrogacy && clinic.treatments.includes("double-donor")) {
+    score += 15;
+    matchReasons.push("Offers double-donor IVF for surrogacy");
   }
 
   // Travel note
   let travelNote: string | null = null;
   if (clinic.region === "abroad") {
-    travelNote = `Add ~£1,500 for flights + hotel (est. real total: £${(effectiveCost).toLocaleString("en-GB")})`;
+    travelNote = `Add ~£1,500 for flights + hotel (est. real total: £${effectiveCost.toLocaleString("en-GB")})`;
   }
 
-  // Success rate reason
-  matchReasons.push(`${successRate}% success rate for your age group`);
+  // Success rate reason — label differs for surrogacy
+  if (surrogacy) {
+    matchReasons.push(`${successRate}% donor egg success rate`);
+  } else {
+    matchReasons.push(`${successRate}% success rate for your age group`);
+  }
 
   return { clinic, score, matchReasons, travelNote };
 }
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+// ─── Shared UI ────────────────────────────────────────────────────────────────
 
 function OptionCard({
   selected, onClick, title, subtitle, icon,
@@ -269,9 +302,7 @@ function OptionCard({
     <button
       onClick={onClick}
       className={`w-full text-left p-4 rounded-xl border transition-all duration-150 ${
-        selected
-          ? "border-foreground bg-foreground/5"
-          : "border-border hover:border-foreground/40"
+        selected ? "border-foreground bg-foreground/5" : "border-border hover:border-foreground/40"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -296,11 +327,7 @@ function OptionCard({
   );
 }
 
-function ConditionChip({
-  selected, onClick, label,
-}: {
-  selected: boolean; onClick: () => void; label: string;
-}) {
+function ConditionChip({ selected, onClick, label }: { selected: boolean; onClick: () => void; label: string }) {
   return (
     <button
       onClick={onClick}
@@ -320,10 +347,10 @@ function ConditionChip({
 function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }) {
   const options: { value: FamilyType; title: string; subtitle: string; icon: string }[] = [
     { value: "solo-mum", title: "Solo mum by choice", subtitle: "Single woman using donor sperm", icon: "🌟" },
-    { value: "female-couple", title: "Female same-sex couple", subtitle: "Two women — donor sperm needed", icon: "🌈" },
-    { value: "male-couple", title: "Male same-sex couple", subtitle: "Two men — surrogate or double donor", icon: "🏳️‍🌈" },
-    { value: "straight-couple", title: "Couple needing donor", subtitle: "Heterosexual couple using donor eggs or sperm", icon: "💛" },
-    { value: "solo-dad", title: "Solo dad by choice", subtitle: "Single man — surrogacy or double donor pathway", icon: "⭐" },
+    { value: "female-couple", title: "Two mums", subtitle: "Female same-sex couple — donor sperm needed", icon: "🌈" },
+    { value: "male-couple", title: "Two dads", subtitle: "Male same-sex couple — surrogacy and donor egg pathway", icon: "🏳️‍🌈" },
+    { value: "straight-couple", title: "Mum and dad", subtitle: "Heterosexual couple — IVF, ICSI, or donor options", icon: "💛" },
+    { value: "solo-dad", title: "Solo dad by choice", subtitle: "Single man — surrogacy with donor egg", icon: "⭐" },
   ];
   return (
     <div className="space-y-3">
@@ -335,11 +362,12 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
   );
 }
 
-function StepAge({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
+// Standard age step — for mums and couples (relates to egg quality)
+function StepAgeStandard({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
   const options: { value: AgeGroup; title: string; subtitle: string }[] = [
     { value: "under35", title: "Under 35", subtitle: "Higher success rates per cycle — IUI may be worth trying first" },
     { value: "35to37", title: "35–37", subtitle: "Good outcomes with own eggs — time still on your side" },
-    { value: "38to40", title: "38–40", subtitle: "IVF is usually recommended — consider genetic testing of embryos" },
+    { value: "38to40", title: "38–40", subtitle: "IVF usually recommended — consider genetic testing of embryos" },
     { value: "over40", title: "Over 40", subtitle: "Donor eggs often give the best chance — clinics vary on this threshold" },
   ];
   return (
@@ -352,22 +380,72 @@ function StepAge({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
   );
 }
 
-function StepConditions({ s, toggle }: { s: WizardState; toggle: (c: Condition) => void }) {
+// Surrogacy path age step — about egg donor preference, not the intended father's age
+function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
+  return (
+    <div>
+      <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
+        <p className="text-xs font-sans text-muted leading-relaxed">
+          <strong className="text-foreground">For surrogacy, your age doesn&apos;t affect success rates.</strong>{" "}
+          What matters is the egg donor&apos;s age — most donors are under 35, which is why donor-egg success rates
+          are often 50–60% per transfer regardless of the intended father&apos;s age.
+        </p>
+      </div>
+      <p className="text-sm font-sans text-muted mb-4 leading-relaxed">
+        Tell us about your egg donor situation so we can show you the most relevant clinics:
+      </p>
+      <div className="space-y-3">
+        <OptionCard
+          selected={s.age === "under35"}
+          onClick={() => set("under35")}
+          title="Standard donor pool (under 35)"
+          subtitle="Most clinics use donors under 35 — this is the most common and highest-success route"
+        />
+        <OptionCard
+          selected={s.age === "35to37"}
+          onClick={() => set("35to37")}
+          title="Slightly older or unknown donor age"
+          subtitle="If using a known donor or a clinic with a broader age range"
+        />
+        <OptionCard
+          selected={s.age === "38to40"}
+          onClick={() => set("38to40")}
+          title="Known donor (friend or family member)"
+          subtitle="Using someone you know as an egg donor — clinic requirements will vary; discuss suitability with your chosen clinic"
+        />
+        <OptionCard
+          selected={s.age === "over40"}
+          onClick={() => set("over40")}
+          title="Haven&apos;t decided yet"
+          subtitle="I&apos;m still exploring — just show me what&apos;s available"
+        />
+      </div>
+    </div>
+  );
+}
+
+// Conditions step — for families who may have relevant fertility conditions
+function StepConditionsStandard({
+  s, toggle, family,
+}: {
+  s: WizardState; toggle: (c: Condition) => void; family: FamilyType | null;
+}) {
+  // male-factor is only relevant when there is a male partner providing sperm
+  const showMaleFactor = family === "straight-couple";
+
   const options: { value: Condition; label: string }[] = [
     { value: "pcos", label: "PCOS" },
     { value: "low-reserve", label: "Low ovarian reserve / high FSH" },
     { value: "endometriosis", label: "Endometriosis" },
     { value: "recurrent-loss", label: "Recurrent miscarriage" },
-    { value: "male-factor", label: "Male factor (low sperm quality)" },
+    ...(showMaleFactor ? [{ value: "male-factor" as Condition, label: "Male factor (low sperm quality)" }] : []),
     { value: "none", label: "No known conditions" },
   ];
 
   const handleToggle = (c: Condition) => {
     if (c === "none") {
-      // Clear all and select none
-      ["pcos", "low-reserve", "endometriosis", "recurrent-loss", "male-factor"].forEach((x) => {
-        if (s.conditions.has(x as Condition)) toggle(x as Condition);
-      });
+      const toRemove = ["pcos", "low-reserve", "endometriosis", "recurrent-loss", "male-factor"] as Condition[];
+      toRemove.forEach((x) => { if (s.conditions.has(x)) toggle(x); });
       if (!s.conditions.has("none")) toggle("none");
     } else {
       if (s.conditions.has("none")) toggle("none");
@@ -378,7 +456,7 @@ function StepConditions({ s, toggle }: { s: WizardState; toggle: (c: Condition) 
   return (
     <div>
       <p className="text-sm font-sans text-muted mb-4 leading-relaxed">
-        Select any that apply. This helps us recommend clinics with the right specialisms. Skip if you&rsquo;re not sure — you can always filter later.
+        Select any that apply. This helps us flag clinics with the right specialisms. Skip if you&apos;re not sure.
       </p>
       <div className="flex flex-wrap gap-2">
         {options.map((o) => (
@@ -390,17 +468,90 @@ function StepConditions({ s, toggle }: { s: WizardState; toggle: (c: Condition) 
   );
 }
 
-function StepTravel({ s, set }: { s: WizardState; set: (t: TravelWillingness) => void }) {
+// Conditions step — surrogacy path (different concerns entirely)
+function StepConditionsSurrogacy({
+  s, set,
+}: {
+  s: WizardState; set: (stage: SurrogacyStage) => void;
+}) {
+  const options: { value: SurrogacyStage; title: string; subtitle: string; icon: string }[] = [
+    {
+      value: "exploring",
+      title: "Just starting to explore",
+      subtitle: "I&apos;m at the research stage — understanding my options before committing",
+      icon: "🔍",
+    },
+    {
+      value: "matching",
+      title: "In the surrogate matching process",
+      subtitle: "I&apos;m working with a surrogacy organisation (e.g. Brilliant Beginnings, COTS) to find a match",
+      icon: "🤝",
+    },
+    {
+      value: "have-surrogate",
+      title: "I have a surrogate — need an IVF clinic",
+      subtitle: "The match is made; now I need a clinic experienced in surrogacy arrangements",
+      icon: "🏥",
+    },
+    {
+      value: "open",
+      title: "Open to exploring all routes",
+      subtitle: "I haven&apos;t decided yet — show me the full picture",
+      icon: "🌍",
+    },
+  ];
+  return (
+    <div>
+      <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
+        <p className="text-xs font-sans text-muted leading-relaxed">
+          Solo fatherhood via surrogacy is genuinely achievable — but it takes longer and costs more than other
+          routes. UK surrogacy is legal and altruistic; you&apos;ll need a parental order after birth to become the
+          legal parent. Getting a specialist solicitor on board early is essential.
+        </p>
+      </div>
+      <p className="text-sm font-sans text-muted mb-4 leading-relaxed">
+        Where are you in the process?
+      </p>
+      <div className="space-y-3">
+        {options.map((o) => (
+          <OptionCard key={o.value} selected={s.surrogacyStage === o.value} onClick={() => set(o.value)}
+            title={o.title} subtitle={o.subtitle} icon={o.icon} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWillingness) => void; isSurrogacy: boolean }) {
   const options: { value: TravelWillingness; title: string; subtitle: string; icon: string }[] = [
-    { value: "uk-only", title: "UK clinics only", subtitle: "I want HFEA regulation and no travel logistics", icon: "🇬🇧" },
-    { value: "europe", title: "Open to Europe", subtitle: "Happy to travel to Spain, Greece, Czech Republic etc.", icon: "✈️" },
-    { value: "anywhere", title: "Anywhere in the world", subtitle: "I'll go wherever gives me the best chance", icon: "🌍" },
+    {
+      value: "uk-only",
+      title: "UK clinics only",
+      subtitle: isSurrogacy
+        ? "UK surrogacy is well-regulated — most intended fathers start here"
+        : "I want HFEA regulation and no travel logistics",
+      icon: "🇬🇧",
+    },
+    {
+      value: "europe",
+      title: "Open to Europe",
+      subtitle: "Happy to travel to Spain, Greece, Czech Republic etc.",
+      icon: "✈️",
+    },
+    {
+      value: "anywhere",
+      title: "Anywhere in the world",
+      subtitle: "I&apos;ll go wherever gives me the best chance",
+      icon: "🌍",
+    },
   ];
   return (
     <div className="space-y-3">
-      <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
-        Clinics abroad can look cheaper — until you add flights, hotels, and 2–4 trips. We factor this into the real cost.
-      </p>
+      {!isSurrogacy && (
+        <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
+          Clinics abroad can look cheaper — until you add flights, hotels, and 2–4 trips. We factor this into the real cost.
+        </p>
+      )}
       {options.map((o) => (
         <OptionCard key={o.value} selected={s.travel === o.value} onClick={() => set(o.value)}
           title={o.title} subtitle={o.subtitle} icon={o.icon} />
@@ -409,17 +560,41 @@ function StepTravel({ s, set }: { s: WizardState; set: (t: TravelWillingness) =>
   );
 }
 
-function StepBudget({ s, set }: { s: WizardState; set: (b: BudgetRange) => void }) {
-  const options: { value: BudgetRange; title: string; subtitle: string }[] = [
+function StepBudget({ s, set, isSurrogacy }: { s: WizardState; set: (b: BudgetRange) => void; isSurrogacy: boolean }) {
+  const standardOptions: { value: BudgetRange; title: string; subtitle: string }[] = [
     { value: "under5k", title: "Under £5,000", subtitle: "One IUI cycle or a very budget IVF — limited options" },
     { value: "5to10k", title: "£5,000 – £10,000", subtitle: "1–2 IVF cycles at a budget or mid-range UK clinic" },
     { value: "10to15k", title: "£10,000 – £15,000", subtitle: "2–3 cycles, or premium UK/abroad" },
     { value: "over15k", title: "Over £15,000", subtitle: "Multiple cycles or premium options anywhere" },
   ];
+
+  const surrogacyOptions: { value: BudgetRange; title: string; subtitle: string }[] = [
+    {
+      value: "surrogacy-mid",
+      title: "Up to £30,000",
+      subtitle: "Covers IVF costs and some surrogate expenses — you'll likely need additional funds for the full journey",
+    },
+    {
+      value: "surrogacy-full",
+      title: "£30,000 – £50,000",
+      subtitle: "Realistic budget for a UK surrogacy journey: IVF, surrogate expenses, legal fees, and counselling",
+    },
+    {
+      value: "surrogacy-premium",
+      title: "Over £50,000",
+      subtitle: "Covers multiple cycles, premium clinic choice, or international options",
+    },
+  ];
+
+  const options = isSurrogacy ? surrogacyOptions : standardOptions;
+
   return (
     <div className="space-y-3">
       <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
-        This is your total budget — not just the headline clinic quote. We include donor costs, medications, and travel where relevant.
+        {isSurrogacy
+          ? "UK surrogacy typically costs £30,000–£50,000 all-in: IVF (£5,000–£12,000), surrogate expenses (£15,000–£25,000), legal fees (~£5,000), and counselling. This is separate from any egg donor costs."
+          : "This is your total budget — not just the headline clinic quote. We include donor costs, medications, and travel where relevant."
+        }
       </p>
       {options.map((o) => (
         <OptionCard key={o.value} selected={s.budget === o.value} onClick={() => set(o.value)}
@@ -449,21 +624,30 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   }, [s]);
 
   const ageKey = s.age ? ageToKey(s.age) : "under35";
+  const surrogacy = isSurrogacyPath(s.family);
   const donorNeed = s.family ? getDonorNeed(s.family, s.conditions) : "neither";
 
-  const donorNote = {
-    sperm: "You'll need donor sperm — budget an extra £1,950–£2,500 for 2 vials + shipping.",
-    egg: "Donor eggs will significantly increase per-cycle cost — expect £8,000–£14,000 total.",
-    both: "Double-donor cycles (egg + sperm) are complex. Only a handful of clinics offer this.",
-    neither: null,
-  }[donorNeed];
+  const donorNote = surrogacy
+    ? "You'll need a surrogate matched separately through a UK organisation (e.g. Brilliant Beginnings or COTS). The clinics below handle the IVF element. Budget £15,000–£25,000 on top for surrogate expenses and legal fees."
+    : {
+        sperm: "You'll need donor sperm — budget an extra £1,950–£2,500 for 2 vials + shipping.",
+        egg: "Donor eggs will significantly increase per-cycle cost — expect £8,000–£14,000 total.",
+        both: "Double-donor cycles (egg + sperm) are complex. Only a handful of clinics offer this.",
+        neither: null,
+      }[donorNeed];
+
+  const successLabel = surrogacy ? "Donor egg rate" : "Success rate";
+  const successSub = surrogacy ? "per transfer" : "your age group";
 
   if (results.length === 0) {
     return (
       <div className="py-6">
         <p className="text-foreground font-sans font-medium mb-2">No exact matches</p>
         <p className="text-sm font-sans text-muted mb-6 leading-relaxed">
-          Your current filters (especially budget and travel preference) are quite tight. Try increasing your budget or opening up to European clinics.
+          {surrogacy
+            ? "Try widening your travel preference — some of the best-equipped clinics for surrogacy arrangements are in Europe."
+            : "Your current filters (especially budget and travel preference) are quite tight. Try increasing your budget or opening up to European clinics."
+          }
         </p>
         <button onClick={onReset} className="text-sm font-sans text-muted hover:text-foreground underline underline-offset-4 transition-colors">
           Start over
@@ -495,7 +679,6 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
             transition={{ delay: idx * 0.06, duration: 0.35, ease: EASE }}
             className="rounded-xl border border-border overflow-hidden"
           >
-            {/* Card header */}
             <div className="flex items-start justify-between gap-4 p-4 border-b border-border">
               <div className="flex items-start gap-3">
                 <span className="font-sans text-muted/50 text-lg font-medium leading-none shrink-0 mt-0.5">
@@ -518,24 +701,23 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="font-sans font-medium text-foreground text-lg leading-tight">
                   £{r.clinic.realPriceGBP.toLocaleString()}
                 </p>
-                <p className="text-[10px] font-sans text-muted">est. real cost</p>
+                <p className="text-[10px] font-sans text-muted">IVF est. real cost</p>
               </div>
             </div>
 
-            {/* Metrics row */}
             <div className="grid grid-cols-3 gap-px bg-border">
               <div className="bg-background p-3">
                 <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
-                  Success rate
+                  {successLabel}
                 </p>
                 <p className="font-sans font-medium text-foreground text-lg leading-none">
                   {r.clinic.successRates[ageKey]}%
                 </p>
-                <p className="text-[10px] font-sans text-muted mt-0.5">your age group</p>
+                <p className="text-[10px] font-sans text-muted mt-0.5">{successSub}</p>
               </div>
               <div className="bg-background p-3">
                 <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
-                  Solo/LGBTQ+
+                  {s.family === "female-couple" || s.family === "male-couple" ? "LGBTQ+" : "Solo friendly"}
                 </p>
                 <Dots rating={s.family === "female-couple" || s.family === "male-couple"
                   ? r.clinic.lgbtqFriendliness : r.clinic.soloFriendliness} />
@@ -548,7 +730,6 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
               </div>
             </div>
 
-            {/* Match reasons + travel note */}
             <div className="p-4">
               <div className="flex flex-wrap gap-2 mb-3">
                 {r.matchReasons.slice(0, 3).map((reason) => (
@@ -586,16 +767,33 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   );
 }
 
-// ─── Main wizard ──────────────────────────────────────────────────────────────
+// ─── Step metadata (titles adapt to family type) ──────────────────────────────
 
-const STEPS = [
-  { id: "family", title: "Your family type", sub: "So we can match clinics to your specific situation" },
-  { id: "age", title: "Your age", sub: "Success rates vary significantly — this shapes our recommendations" },
-  { id: "conditions", title: "Any known conditions?", sub: "Optional — helps us flag relevant specialisms" },
-  { id: "travel", title: "How far will you travel?", sub: "We factor in flights and hotels in the real cost" },
-  { id: "budget", title: "Your total budget", sub: "All-in — not just the clinic's headline quote" },
-  { id: "results", title: "Your matched clinics", sub: "Ranked by fit — not just success rate" },
-];
+function getSteps(family: FamilyType | null) {
+  const surrogacy = isSurrogacyPath(family);
+  return [
+    { id: "family",     title: "Your family type",      sub: "So we can match clinics to your specific situation" },
+    {
+      id: "age",
+      title: surrogacy ? "About the egg donor"          : "Your age",
+      sub:   surrogacy ? "Success rates depend on donor age, not yours" : "Success rates vary significantly — this shapes our recommendations",
+    },
+    {
+      id: "conditions",
+      title: surrogacy ? "Where are you in the process?" : "Any known conditions?",
+      sub:   surrogacy ? "So we can tailor the results to where you are" : "Optional — helps us flag relevant specialisms",
+    },
+    { id: "travel",     title: "How far will you travel?", sub: "We factor in flights and hotels in the real cost" },
+    {
+      id: "budget",
+      title: "Your total budget",
+      sub: surrogacy ? "Surrogacy has significant costs beyond IVF alone" : "All-in — not just the clinic's headline quote",
+    },
+    { id: "results",    title: "Your matched clinics",   sub: "Ranked by fit — not just success rate" },
+  ];
+}
+
+// ─── Main wizard ──────────────────────────────────────────────────────────────
 
 export function ClinicMatcher() {
   const [step, setStep] = useState(0);
@@ -603,20 +801,23 @@ export function ClinicMatcher() {
     family: null,
     age: null,
     conditions: new Set(),
+    surrogacyStage: null,
     travel: null,
     budget: null,
   });
 
+  const surrogacy = isSurrogacyPath(s.family);
+  const STEPS = getSteps(s.family);
+  const isResults = step === STEPS.length - 1;
+
   const canAdvance = [
     s.family !== null,
     s.age !== null,
-    true, // conditions is optional
+    true,              // conditions/stage is optional
     s.travel !== null,
     s.budget !== null,
     false,
   ][step];
-
-  const isResults = step === STEPS.length - 1;
 
   const toggleCondition = (c: Condition) => {
     setS((prev) => {
@@ -628,15 +829,24 @@ export function ClinicMatcher() {
 
   const reset = () => {
     setStep(0);
-    setS({ family: null, age: null, conditions: new Set(), travel: null, budget: null });
+    setS({ family: null, age: null, conditions: new Set(), surrogacyStage: null, travel: null, budget: null });
+  };
+
+  // When family type changes, reset age + conditions since they're context-dependent
+  const setFamily = (f: FamilyType) => {
+    setS((p) => ({ ...p, family: f, age: null, conditions: new Set(), surrogacyStage: null }));
   };
 
   const stepContent = [
-    <StepFamily key="family" s={s} set={(f) => setS((p) => ({ ...p, family: f }))} />,
-    <StepAge key="age" s={s} set={(a) => setS((p) => ({ ...p, age: a }))} />,
-    <StepConditions key="conditions" s={s} toggle={toggleCondition} />,
-    <StepTravel key="travel" s={s} set={(t) => setS((p) => ({ ...p, travel: t }))} />,
-    <StepBudget key="budget" s={s} set={(b) => setS((p) => ({ ...p, budget: b }))} />,
+    <StepFamily key="family" s={s} set={setFamily} />,
+    surrogacy
+      ? <StepAgeSurrogacy key="age-surrogacy" s={s} set={(a) => setS((p) => ({ ...p, age: a }))} />
+      : <StepAgeStandard key="age-standard" s={s} set={(a) => setS((p) => ({ ...p, age: a }))} />,
+    surrogacy
+      ? <StepConditionsSurrogacy key="conditions-surrogacy" s={s} set={(stage) => setS((p) => ({ ...p, surrogacyStage: stage }))} />
+      : <StepConditionsStandard key="conditions-standard" s={s} toggle={toggleCondition} family={s.family} />,
+    <StepTravel key="travel" s={s} set={(t) => setS((p) => ({ ...p, travel: t }))} isSurrogacy={surrogacy} />,
+    <StepBudget key="budget" s={s} set={(b) => setS((p) => ({ ...p, budget: b }))} isSurrogacy={surrogacy} />,
     <StepResults key="results" s={s} onReset={reset} />,
   ];
 
@@ -663,14 +873,16 @@ export function ClinicMatcher() {
       {/* Step heading */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={step}
+          key={`${step}-${surrogacy}`}
           initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -12 }}
           transition={{ duration: 0.22, ease: EASE }}
         >
-          <h2 className="font-sans font-medium text-foreground mb-1"
-            style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}>
+          <h2
+            className="font-sans font-medium text-foreground mb-1"
+            style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
+          >
             {STEPS[step].title}
           </h2>
           <p className="text-sm font-sans text-muted mb-6 leading-relaxed">
