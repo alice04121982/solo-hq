@@ -8,7 +8,16 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function CTASection() {
   return (
-    <section className="bg-background">
+    <section
+      className="bg-navy"
+      style={{
+        "--background":     "var(--navy)",
+        "--background-alt": "#4d1228",
+        "--foreground":     "var(--warm-white)",
+        "--muted":          "rgba(245,241,230,0.6)",
+        "--border":         "rgba(245,241,230,0.15)",
+      } as React.CSSProperties}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -39,7 +48,7 @@ export function CTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200">
+            <button className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-charcoal px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200">
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
             </button>
@@ -57,7 +66,7 @@ export function CTASection() {
       {/* Footer */}
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <Logo height={32} />
+          <span className="text-foreground"><Logo height={32} /></span>
           <p className="text-xs font-sans text-muted">
             &copy; {new Date().getFullYear()} Flying Solo. Made with grit and grace in the UK.
           </p>
