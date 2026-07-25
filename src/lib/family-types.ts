@@ -39,7 +39,7 @@ export interface FamilyType {
 export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "solo-mum",
-    label: "Solo Mums by Choice",
+    label: "Solo Mums",
     headline: "Building your family,\nexactly as you envisioned it.",
     subHeadline: "Solo mums by choice · Donor sperm IVF · UK & abroad",
     heroCopy:
@@ -126,7 +126,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   },
   {
     slug: "same-sex-female",
-    label: "Same-Sex Female Couples",
+    label: "Two Mums",
     headline: "Two mums.\nOne family. Endless love.",
     subHeadline: "Same-sex female couples · Donor sperm · Reciprocal IVF",
     heroCopy:
@@ -213,7 +213,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   },
   {
     slug: "same-sex-male",
-    label: "Same-Sex Male Couples",
+    label: "Two Dads",
     headline: "Two dads.\nA family built with intention.",
     subHeadline: "Same-sex male couples · Surrogacy · Donor egg IVF",
     heroCopy:
@@ -300,7 +300,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   },
   {
     slug: "single-dad",
-    label: "Single Men by Choice",
+    label: "Solo Dads",
     headline: "Fatherhood,\non your terms.",
     subHeadline: "Single men by choice · Surrogacy · Donor egg IVF",
     heroCopy:
@@ -387,7 +387,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   },
   {
     slug: "heterosexual-couple",
-    label: "Heterosexual Couples",
+    label: "Mum and Dad",
     headline: "When love\nneeds a little science.",
     subHeadline: "Heterosexual couples · IVF & ICSI · All fertility challenges",
     heroCopy:
