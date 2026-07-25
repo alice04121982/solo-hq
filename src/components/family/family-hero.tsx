@@ -35,9 +35,9 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               {lines[1] && (
                 <>
                   <br />
-                  <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+                  <span style={{ color: "var(--accent)" }}>
                     {lines[1]}
-                  </em>
+                  </span>
                 </>
               )}
             </h1>

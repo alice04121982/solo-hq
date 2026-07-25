@@ -31,9 +31,9 @@ export default function FamiliesPage() {
         >
           Whoever you are,
           <br />
-          <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+          <span style={{ color: "var(--accent)" }}>
             your path starts here.
-          </em>
+          </span>
         </h1>
         <p
           className="text-[17px] font-sans text-muted leading-relaxed"

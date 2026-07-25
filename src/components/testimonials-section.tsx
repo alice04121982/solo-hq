@@ -92,7 +92,7 @@ export function TestimonialsSection() {
           className="mb-20 border-l-2 border-accent pl-8 md:pl-12"
         >
           <blockquote
-            className="font-serif italic text-foreground mb-6"
+            className="font-serif text-foreground mb-6"
             style={{ fontSize: "clamp(1.375rem, 2.5vw, 2rem)", lineHeight: 1.35 }}
           >
             &ldquo;{featured.quote}&rdquo;
@@ -112,7 +112,7 @@ export function TestimonialsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
             >
-              <blockquote className="font-serif italic text-foreground text-lg leading-snug mb-4">
+              <blockquote className="font-serif text-foreground text-lg leading-snug mb-4">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
               <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">

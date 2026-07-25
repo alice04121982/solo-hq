@@ -25,9 +25,9 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
           >
             Your complete guide
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+            <span style={{ color: "var(--accent)" }}>
               from first steps to family.
-            </em>
+            </span>
           </h2>
         </motion.div>
 

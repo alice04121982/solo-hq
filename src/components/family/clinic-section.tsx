@@ -25,9 +25,9 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             >
               Find the right clinic
               <br />
-              <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+              <span style={{ color: "var(--accent)" }}>
                 for your family.
-              </em>
+              </span>
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "48ch" }}>
               {clinicNote}

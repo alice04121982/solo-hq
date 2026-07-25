@@ -24,9 +24,9 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
             >
               The{" "}
-              <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+              <span style={{ color: "var(--accent)" }}>
                 real
-              </em>{" "}
+              </span>{" "}
               guide to building your family.
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "44ch" }}>

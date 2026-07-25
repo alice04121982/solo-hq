@@ -6,11 +6,17 @@ import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 
 const CARD_THEMES = [
-  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },  // lime
-  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#D43878" },  // pink
-  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },  // burgundy
-  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },  // lime
-  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#D43878" },  // pink
+  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
+  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
+  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
+];
+
+const STORY_THEMES = [
+  { frame: "#C5E600", label: "#3d5200",   footer: "#3d5200" },
+  { frame: "#D43878", label: "#fff",      footer: "#f9c6da" },
+  { frame: "#3D0D1B", label: "#C5E600",   footer: "#c4a0ae" },
 ];
 
 export default function Home() {
@@ -24,7 +30,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] text-muted mb-3 font-sans">
                 Every family
               </p>
               <h2
@@ -92,22 +98,23 @@ export default function Home() {
       </section>
 
       {/* 3 — Clinic finder teaser */}
-      <section className="border-b border-border" id="compare" style={{ background: "#3D0D1B" }}>
+      <section className="border-b border-border bg-background" id="compare">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Full-width burgundy card */}
+          <div className="rounded-2xl p-10 md:p-14 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style={{ background: "#3D0D1B" }}>
             <div>
-              <p className="text-[11px] font-[700] uppercase tracking-[0.18em] mb-4 font-sans" style={{ color: "#C5E600" }}>
+              <span className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6" style={{ background: "#C5E600", color: "#1A0810" }}>
                 The comparison tool
-              </p>
+              </span>
               <h2
-                className="font-sans font-medium mb-4"
+                className="font-sans font-medium mb-5"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#fff" }}
               >
                 The full picture —
                 <br />
-                <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+                <span style={{ color: "#C5E600" }}>
                   not the brochure version.
-                </em>
+                </span>
               </h2>
               <p className="text-sm font-sans leading-relaxed mb-4" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
                 Greece might look £4,000 cheaper. Add three return flights and two hotel stays and suddenly it isn&apos;t. We factor in travel and accommodation so the comparison is honest.
@@ -117,7 +124,7 @@ export default function Home() {
               </p>
               <a
                 href="/ivf-finder"
-                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-colors duration-200 hover:opacity-90"
                 style={{ background: "#C5E600", color: "#1A0810" }}
               >
                 Open comparison tool
@@ -149,17 +156,17 @@ export default function Home() {
       </section>
 
       {/* 3b — Honest intel callouts */}
-      <section className="border-b border-border bg-background-alt" id="know-before">
+      <section className="border-b border-border bg-background" id="know-before">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-          <p className="text-[11px] font-[700] uppercase tracking-[0.18em] text-muted mb-4 font-sans">
+          <span className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6" style={{ background: "#D43878", color: "#fff" }}>
             What clinics don&apos;t always tell you
-          </p>
+          </span>
           <h2
             className="font-sans font-medium text-foreground mb-10"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
           >
             The things worth knowing<br />
-            <em style={{ fontStyle: "italic", color: "var(--lavender)" }}>before you sign anything.</em>
+            before you sign anything.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -218,11 +225,11 @@ export default function Home() {
       </section>
 
       {/* 4 — Personal stories */}
-      <section className="border-b border-border" id="stories">
+      <section className="border-b border-border bg-background" id="stories">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-          <div className="flex items-end justify-between mb-12">
+          <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] text-muted mb-3 font-sans">
                 Real journeys
               </p>
               <h2
@@ -234,52 +241,54 @@ export default function Home() {
             </div>
             <a
               href="/stories"
-              className="hidden sm:inline-flex items-center gap-2 text-sm font-sans text-muted hover:text-foreground transition-colors duration-150 shrink-0"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-[500] text-foreground rounded-full border border-foreground px-5 py-2 hover:bg-foreground hover:text-background transition-colors duration-150 shrink-0"
             >
               See all stories <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {FEATURED_STORIES.map((story) => (
-              <article key={story.id} className="flex flex-col gap-4">
-                {/* Image */}
-                <div className="relative h-52 rounded-xl overflow-hidden bg-background-alt">
-                  <Image
-                    src={story.image}
-                    alt={story.imageAlt}
-                    fill
-                    className="object-cover"
-                    style={{ filter: "saturate(0.85) sepia(0.05)" }}
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col gap-3 flex-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-accent font-sans">
-                      {story.familyLabel}
-                    </span>
-                    <span className="text-[10px] text-border font-sans">·</span>
-                    <span className="text-[10px] font-sans text-muted">{story.treatment}</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {FEATURED_STORIES.map((story, i) => {
+              const theme = STORY_THEMES[i % STORY_THEMES.length];
+              return (
+                <article
+                  key={story.id}
+                  className="rounded-2xl overflow-hidden flex flex-col"
+                  style={{ background: theme.frame }}
+                >
+                  {/* Photo inset — coloured frame shows around it */}
+                  <div className="relative mx-3 mt-3 rounded-xl overflow-hidden" style={{ height: "260px" }}>
+                    <Image
+                      src={story.image}
+                      alt={story.imageAlt}
+                      fill
+                      className="object-cover"
+                    />
+                    {/* Text overlay box on the photo */}
+                    <div className="absolute bottom-3 left-3 right-3 bg-white rounded-xl p-4">
+                      <p className="text-[9px] font-[700] uppercase tracking-[0.14em] font-sans mb-1.5" style={{ color: theme.label }}>
+                        {story.familyLabel} &nbsp;·&nbsp; {story.treatment}
+                      </p>
+                      <h3 className="font-sans font-medium text-foreground text-base leading-snug">
+                        {story.title}
+                      </h3>
+                    </div>
                   </div>
-                  <h3 className="font-sans font-medium text-foreground text-xl leading-snug">
-                    {story.title}
-                  </h3>
-                  <p className="text-sm font-sans text-muted leading-relaxed flex-1">
-                    {story.excerpt}
-                  </p>
-                  <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
-                    {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
-                  </p>
-                </div>
-              </article>
-            ))}
+
+                  {/* Footer strip */}
+                  <div className="px-4 py-3">
+                    <p className="text-[11px] font-[500] font-sans uppercase tracking-[0.1em]" style={{ color: theme.footer }}>
+                      {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           <a
             href="/stories"
-            className="sm:hidden inline-flex items-center gap-2 text-sm font-sans text-muted hover:text-foreground transition-colors duration-150 mt-8"
+            className="sm:hidden inline-flex items-center gap-2 text-sm font-sans text-muted hover:text-foreground transition-colors duration-150 mt-6"
           >
             See all stories <ArrowRight className="h-3.5 w-3.5" />
           </a>

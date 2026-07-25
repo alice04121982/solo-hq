@@ -2,14 +2,14 @@
 
 :root {
   /* ── Palette ── */
-  --background:      #F5F1E6;
-  --background-alt:  #EDE8D6;
+  --background:      #FFFFFF;
+  --background-alt:  #F4F4F4;
   --foreground:      #1A0810;
-  --muted:           #7A5266;
-  --accent:          #C5E600;   /* lime / chartreuse */
+  --muted:           #5C4050;
+  --accent:          #C5E600;   /* lime */
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
-  --border:          #E2D6C8;
+  --border:          #E8E8E8;
 
   /* ── Legacy aliases ── */
   --lavender:        #D43878;   /* hot pink */
