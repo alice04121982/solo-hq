@@ -241,43 +241,106 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {FEATURED_STORIES.map((story, i) => {
-              const theme = STORY_THEMES[i % STORY_THEMES.length];
-              return (
-                <article
-                  key={story.id}
-                  className="rounded-2xl overflow-hidden flex flex-col"
-                  style={{ background: theme.frame }}
-                >
-                  {/* Photo inset — coloured frame shows around it */}
-                  <div className="relative mx-3 mt-3 rounded-xl overflow-hidden" style={{ height: "260px" }}>
-                    <Image
-                      src={story.image}
-                      alt={story.imageAlt}
-                      fill
-                      className="object-cover"
-                    />
-                    {/* Text overlay box on the photo */}
-                    <div className="absolute bottom-3 left-3 right-3 bg-white rounded-xl p-4">
-                      <p className="text-[9px] font-[700] uppercase tracking-[0.14em] font-sans mb-1.5" style={{ color: theme.label }}>
-                        {story.familyLabel} &nbsp;·&nbsp; {story.treatment}
-                      </p>
-                      <h3 className="font-sans font-medium text-foreground text-base leading-snug">
-                        {story.title}
-                      </h3>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-                  {/* Footer strip */}
-                  <div className="px-4 py-3">
-                    <p className="text-[11px] font-[500] font-sans uppercase tracking-[0.1em]" style={{ color: theme.footer }}>
-                      {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
+            {/* ── Card 1: cream bg · heading + badge top · photo below · attribution in corner ── */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F2EDE4" }}>
+              <div className="p-5 flex items-start justify-between gap-3">
+                <h3 className="font-sans font-medium text-[#1A0810] text-xl leading-tight">
+                  {FEATURED_STORIES[0].title}
+                </h3>
+                <span
+                  className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
+                  style={{ background: "#D43878", color: "#fff" }}
+                >
+                  {FEATURED_STORIES[0].familyLabel}
+                </span>
+              </div>
+              <div className="relative mx-3 mb-3 rounded-xl overflow-hidden" style={{ height: "280px" }}>
+                <Image
+                  src="/photos/story-hero.jpeg"
+                  alt="Solo mum story"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute bottom-3 right-3 text-right">
+                  <p className="text-xs font-sans font-[600] text-white" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+                    {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
+                  </p>
+                  <p className="text-[11px] font-sans text-white/80" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+                    {FEATURED_STORIES[0].location}
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            {/* ── Card 2: full-bleed photo · lime diagonal block · dark text on lime ── */}
+            <article className="rounded-2xl overflow-hidden relative" style={{ height: "420px" }}>
+              <Image
+                src={FEATURED_STORIES[1].image}
+                alt={FEATURED_STORIES[1].imageAlt}
+                fill
+                className="object-cover"
+              />
+              {/* Lime diagonal overlay */}
+              <div className="absolute inset-x-0 bottom-0 overflow-hidden">
+                <div
+                  className="px-6 pt-14 pb-6"
+                  style={{
+                    background: "#C5E600",
+                    clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)",
+                  }}
+                >
+                  <h3 className="font-sans font-medium text-[#1A0810] text-lg leading-snug mb-3">
+                    {FEATURED_STORIES[1].title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[11px] font-sans font-[600] text-[#3d5200] uppercase tracking-[0.1em]">
+                      {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
                     </p>
+                    <span className="rounded-full border border-[#1A0810] w-8 h-8 flex items-center justify-center text-[#1A0810] text-sm font-[600]">
+                      →
+                    </span>
                   </div>
-                </article>
-              );
-            })}
+                </div>
+              </div>
+            </article>
+
+            {/* ── Card 3: pink bg · burgundy heading top-left · angled photo right ── */}
+            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#D43878", height: "420px" }}>
+              {/* Heading top left */}
+              <div className="p-6 relative z-10 max-w-[65%]">
+                <h3 className="font-sans font-medium text-[#3D0D1B] text-2xl leading-tight">
+                  {FEATURED_STORIES[2].title}
+                </h3>
+              </div>
+              {/* Angled photo bottom right */}
+              <div
+                className="absolute bottom-0 right-0 overflow-hidden"
+                style={{
+                  width: "68%",
+                  height: "72%",
+                  clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                }}
+              >
+                <Image
+                  src={FEATURED_STORIES[2].image}
+                  alt={FEATURED_STORIES[2].imageAlt}
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              {/* Lime attribution pill — bottom left */}
+              <div className="absolute bottom-5 left-5 z-10">
+                <span
+                  className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5"
+                  style={{ background: "#C5E600", color: "#1A0810" }}
+                >
+                  {FEATURED_STORIES[2].name}, {FEATURED_STORIES[2].age} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
+                </span>
+              </div>
+            </article>
+
           </div>
 
           <a
