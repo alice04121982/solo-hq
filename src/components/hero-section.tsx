@@ -19,6 +19,22 @@ export function HeroSection() {
         "--border": "rgba(245,241,230,0.15)",
       } as React.CSSProperties}
     >
+      {/* Decorative background shapes */}
+      <div aria-hidden="true" className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+        <div className="absolute -top-48 -right-48 w-[650px] h-[650px] rounded-full border border-accent/20" />
+        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full border border-accent/10" />
+        <div className="absolute top-1/3 left-6 flex flex-col gap-2">
+          <div className="w-2 h-2 rounded-full bg-accent/50" />
+          <div className="w-1.5 h-1.5 rounded-full bg-accent/30" />
+          <div className="w-1 h-1 rounded-full bg-accent/20" />
+        </div>
+        <div
+          className="absolute top-1/2 -right-8 w-44 h-44 bg-lavender/20 -translate-y-1/2"
+          style={{ borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%" }}
+        />
+        <div className="absolute bottom-20 right-1/3 w-2.5 h-2.5 rounded-full bg-accent/30" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav />
 

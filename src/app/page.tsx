@@ -27,9 +27,9 @@ const LIME: React.CSSProperties = {
 const PINK: React.CSSProperties = {
   "--background":     "var(--lavender)",
   "--background-alt": "#F5F1E6",
-  "--foreground":     "var(--warm-white)",
-  "--muted":          "rgba(245,241,230,0.6)",
-  "--border":         "rgba(245,241,230,0.2)",
+  "--foreground":     "var(--navy)",
+  "--muted":          "rgba(61,13,27,0.55)",
+  "--border":         "rgba(61,13,27,0.12)",
 } as React.CSSProperties;
 
 export default function Home() {
