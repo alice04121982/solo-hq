@@ -7,10 +7,10 @@ import { HomeLocationSearch } from "./home-location-search";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const TRUST_SIGNALS = [
-  "400+ HFEA-licensed clinics",
-  "UK & abroad compared",
-  "6 treatment types",
-  "5 age brackets",
+  "True cost: flights + hotels included",
+  "Success rates verified where possible",
+  "HFEA-licensed UK clinics flagged",
+  "Donor sperm & egg options compared",
 ];
 
 export function HeroSection() {
@@ -25,30 +25,40 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
-              IVF clinic comparison &nbsp;·&nbsp; All family types &nbsp;·&nbsp; UK &amp; abroad
+            <p className="text-[11px] font-[600] uppercase tracking-[0.18em] text-muted mb-6 font-sans">
+              IVF clinic comparison &nbsp;·&nbsp; All family types &nbsp;·&nbsp; UK &amp; worldwide
             </p>
 
             <h1
               className="font-serif font-bold text-foreground mb-6"
               style={{
-                fontSize: "clamp(3rem, 7vw, 5.5rem)",
+                fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
                 lineHeight: 1.01,
-                fontVariationSettings: "'wght' 800",
               }}
             >
-              Find your clinic.
+              Don&apos;t just pick a clinic.
               <br />
               <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
-                Compare everything.
+                Know the real picture.
               </em>
             </h1>
 
             <p
-              className="text-[17px] text-muted leading-[1.65] mb-10 font-sans"
+              className="text-[17px] text-muted leading-[1.65] mb-4 font-sans"
+              style={{ maxWidth: "56ch" }}
+            >
+              Clinics in Spain, Greece, and the Czech Republic often look cheaper — until you add
+              flights, hotels, and multiple trips. Our tool shows the{" "}
+              <em>true cost</em> side by side with UK clinics, so you can decide with open eyes.
+            </p>
+
+            <p
+              className="text-[15px] text-muted leading-[1.6] mb-10 font-sans"
               style={{ maxWidth: "54ch" }}
             >
-              Enter your postcode below to compare IVF clinics near you — success rates by age, treatment types, solo- and LGBTQ+-friendliness, and real costs. UK clinics and abroad, side by side.
+              We&apos;re also honest about success rates: they can be presented selectively.
+              The HFEA regulates UK data, but even that has limits. We flag what&apos;s verified
+              and what to question.
             </p>
 
             {/* Location search */}

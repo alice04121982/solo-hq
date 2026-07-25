@@ -47,7 +47,7 @@
   --color-card-border:     var(--card-border);
 
   /* ── Fonts ── */
-  --font-sans:    var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    var(--font-general-sans), "General Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif:   var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-heading: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
   --font-mono:    ui-monospace, "Cascadia Code", monospace;
@@ -92,8 +92,14 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.05;
   font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
+
+/* ── Utility: bold card backgrounds ── */
+.card-lime   { background: var(--accent); color: var(--foreground); }
+.card-pink   { background: var(--lavender); color: #fff; }
+.card-maroon { background: var(--navy); color: #fff; }
+.card-cream  { background: var(--background); color: var(--foreground); }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
