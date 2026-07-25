@@ -66,7 +66,7 @@ export default function Home() {
             style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "38ch" }}
           >
             Solo treatment has grown{" "}
-            <em style={{ fontStyle: "italic" }}>24-fold</em>{" "}
+            24-fold{" "}
             since 1997.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">

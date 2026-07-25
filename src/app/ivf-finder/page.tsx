@@ -45,7 +45,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
           >
             Find IVF Clinics
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>Near You</em>
+            <span style={{ color: "var(--accent)" }}>Near You</span>
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
             Real pricing. Solo-friendliness ratings. Side-by-side comparisons.

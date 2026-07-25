@@ -60,9 +60,9 @@ export function HeroSection() {
             >
               Building Your Family
               <br />
-              <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+              <span style={{ color: "var(--accent)" }}>
                 on Your Own Terms
-              </em>
+              </span>
             </h1>
 
             <p className="text-[17px] text-muted leading-[1.65] mb-10 font-sans" style={{ maxWidth: "52ch" }}>

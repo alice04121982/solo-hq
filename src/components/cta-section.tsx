@@ -36,9 +36,9 @@ export function CTASection() {
           >
             You&rsquo;re not doing this alone.
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>
+            <span style={{ color: "var(--accent)" }}>
               Even if you&rsquo;re doing it solo.
-            </em>
+            </span>
           </h2>
 
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "50ch" }}>
