@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { SiteNav } from "./site-nav";
 import { HomeLocationSearch } from "./home-location-search";
 
@@ -60,8 +61,20 @@ export function HeroSection() {
             </p>
 
             {/* Location search */}
-            <div className="mb-8 max-w-xl">
+            <div className="mb-5 max-w-xl">
               <HomeLocationSearch />
+            </div>
+
+            {/* Primary CTA */}
+            <div className="mb-8">
+              <a
+                href="/get-started"
+                className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-colors duration-200"
+                style={{ background: "#C5E600", color: "#1A0810" }}
+              >
+                Find clinics matched to you
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
             </div>
 
             {/* Trust signals */}

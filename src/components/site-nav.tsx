@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Stories", href: "/stories" },
   { label: "Resources", href: "/resources" },
+  { label: "Get Started", href: "/get-started" },
 ];
 
 export function SiteNav() {
@@ -53,10 +54,10 @@ export function SiteNav() {
       {/* CTA */}
       <div className="hidden md:flex items-center">
         <a
-          href="/ivf-finder"
+          href="/get-started"
           className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
         >
-          Find a Clinic
+          Get Started
           <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </div>
@@ -86,10 +87,10 @@ export function SiteNav() {
             </a>
           ))}
           <a
-            href="/ivf-finder"
+            href="/get-started"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-foreground px-6 py-3 text-sm font-sans font-medium mt-2 hover:bg-accent-dark transition-colors"
           >
-            Find a Clinic <ArrowRight className="h-3.5 w-3.5" />
+            Get Started <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       )}
