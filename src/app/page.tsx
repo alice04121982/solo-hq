@@ -62,12 +62,6 @@ export default function Home() {
                   className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                   style={{ background: theme.bg, color: theme.text }}
                 >
-                  <span
-                    className="self-start text-[9px] font-[700] uppercase tracking-[0.14em] font-sans rounded-full px-2.5 py-1"
-                    style={{ background: theme.badge, color: theme.badgeText }}
-                  >
-                    {family.treatmentHighlight}
-                  </span>
                   <h3
                     className="font-sans font-medium text-lg leading-snug"
                     style={{ color: theme.text }}
