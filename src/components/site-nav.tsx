@@ -8,8 +8,8 @@ import { Logo } from "./logo";
 const NAV_LINKS = [
   { label: "Family Types", href: "/families" },
   { label: "Compare Clinics", href: "/ivf-finder" },
+  { label: "Stories", href: "/stories" },
   { label: "Resources", href: "/resources" },
-  { label: "News", href: "/news" },
 ];
 
 export function SiteNav() {
