@@ -47,9 +47,9 @@
   --color-card-border:     var(--card-border);
 
   /* ── Fonts ── */
-  --font-sans:    var(--font-quicksand), "Quicksand", ui-sans-serif, system-ui, sans-serif;
-  --font-serif:   "General Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-heading: "General Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   "Clash Display", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Clash Display", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    ui-monospace, "Cascadia Code", monospace;
 
   /* ── Text scale ── */
@@ -89,10 +89,9 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
-  font-weight: 700;
-  line-height: 1.05;
-  font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
 }
 
 /* ── Scrollbar ── */
