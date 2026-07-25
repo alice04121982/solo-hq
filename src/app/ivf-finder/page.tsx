@@ -40,7 +40,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
             HFEA-licensed clinics only
           </p>
           <h1
-            className="font-serif font-normal text-foreground mb-4"
+            className="font-sans font-medium text-foreground mb-4"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
           >
             Find IVF Clinics
@@ -65,7 +65,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
           {WHAT_TO_LOOK_FOR.map((item) => (
             <div key={item.title} className="py-6 border-t border-border">
               <div className="text-accent mb-3">{item.icon}</div>
-              <p className="font-serif font-normal text-foreground text-base mb-2">{item.title}</p>
+              <p className="font-sans font-medium text-foreground text-base mb-2">{item.title}</p>
               <p className="text-sm font-sans text-muted leading-relaxed">{item.desc}</p>
             </div>
           ))}

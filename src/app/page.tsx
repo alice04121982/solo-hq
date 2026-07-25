@@ -6,11 +6,11 @@ import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 
 const CARD_THEMES = [
-  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },
-  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#D43878" },
-  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
-  { bg: "#F5F1E6", text: "#1A0810", muted: "#7A5266", badge: "#3D0D1B", badgeText: "#F5F1E6" },
-  { bg: "#1A0810", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
+  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },  // lime
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#D43878" },  // pink
+  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },  // burgundy
+  { bg: "#C5E600", text: "#1A0810", muted: "#3d5200", badge: "#1A0810", badgeText: "#C5E600" },  // lime
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#D43878" },  // pink
 ];
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
                 Every family
               </p>
               <h2
-                className="font-serif font-normal text-foreground"
+                className="font-sans font-medium text-foreground"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
               >
                 Find your guide.
@@ -63,7 +63,7 @@ export default function Home() {
                     {family.treatmentHighlight}
                   </span>
                   <h3
-                    className="font-serif font-bold text-lg leading-snug"
+                    className="font-sans font-medium text-lg leading-snug"
                     style={{ color: theme.text }}
                   >
                     {family.label}
@@ -100,7 +100,7 @@ export default function Home() {
                 The comparison tool
               </p>
               <h2
-                className="font-serif font-bold mb-4"
+                className="font-sans font-medium mb-4"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#fff" }}
               >
                 The full picture —
@@ -135,7 +135,7 @@ export default function Home() {
               ].map((s) => (
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
                   <p
-                    className="font-serif font-bold mb-1"
+                    className="font-sans font-medium mb-1"
                     style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#C5E600" }}
                   >
                     {s.value}
@@ -155,7 +155,7 @@ export default function Home() {
             What clinics don&apos;t always tell you
           </p>
           <h2
-            className="font-serif font-bold text-foreground mb-10"
+            className="font-sans font-medium text-foreground mb-10"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
           >
             The things worth knowing<br />
@@ -168,7 +168,7 @@ export default function Home() {
               <span className="self-start text-[9px] font-[700] uppercase tracking-[0.14em] font-sans rounded-full px-2.5 py-1 bg-white text-pink-700">
                 Success rates
               </span>
-              <h3 className="font-serif font-bold text-white text-xl leading-snug">
+              <h3 className="font-sans font-medium text-white text-xl leading-snug">
                 Success rates can be misleading
               </h3>
               <p className="text-sm font-sans leading-relaxed" style={{ color: "#f9c6da" }}>
@@ -185,7 +185,7 @@ export default function Home() {
               <span className="self-start text-[9px] font-[700] uppercase tracking-[0.14em] font-sans rounded-full px-2.5 py-1 bg-foreground text-accent">
                 Donor sperm
               </span>
-              <h3 className="font-serif font-bold text-foreground text-xl leading-snug">
+              <h3 className="font-sans font-medium text-foreground text-xl leading-snug">
                 US sperm banks have no sibling cap
               </h3>
               <p className="text-sm font-sans text-foreground/70 leading-relaxed">
@@ -202,7 +202,7 @@ export default function Home() {
               <span className="self-start text-[9px] font-[700] uppercase tracking-[0.14em] font-sans rounded-full px-2.5 py-1" style={{ background: "#C5E600", color: "#1A0810" }}>
                 Going abroad
               </span>
-              <h3 className="font-serif font-bold text-white text-xl leading-snug">
+              <h3 className="font-sans font-medium text-white text-xl leading-snug">
                 Cheaper abroad? Run the full numbers
               </h3>
               <p className="text-sm font-sans leading-relaxed" style={{ color: "#c4a0ae" }}>
@@ -226,7 +226,7 @@ export default function Home() {
                 Real journeys
               </p>
               <h2
-                className="font-serif font-normal text-foreground"
+                className="font-sans font-medium text-foreground"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
               >
                 In their own words.
@@ -263,7 +263,7 @@ export default function Home() {
                     <span className="text-[10px] text-border font-sans">·</span>
                     <span className="text-[10px] font-sans text-muted">{story.treatment}</span>
                   </div>
-                  <h3 className="font-serif font-normal text-foreground text-xl leading-snug">
+                  <h3 className="font-sans font-medium text-foreground text-xl leading-snug">
                     {story.title}
                   </h3>
                   <p className="text-sm font-sans text-muted leading-relaxed flex-1">

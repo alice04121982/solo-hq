@@ -26,7 +26,7 @@ export default function FamiliesPage() {
           IVF for every family
         </p>
         <h1
-          className="font-serif font-normal text-foreground mb-6"
+          className="font-sans font-medium text-foreground mb-6"
           style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
         >
           Whoever you are,
@@ -60,7 +60,7 @@ export default function FamiliesPage() {
                 <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
                   {family.treatmentHighlight}
                 </p>
-                <h2 className="font-serif font-normal text-foreground text-2xl leading-snug mb-3 group-hover:text-accent transition-colors duration-150">
+                <h2 className="font-sans font-medium text-foreground text-2xl leading-snug mb-3 group-hover:text-accent transition-colors duration-150">
                   {family.label}
                 </h2>
                 <p className="text-sm font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "36ch" }}>
@@ -82,7 +82,7 @@ export default function FamiliesPage() {
           What you&apos;ll find
         </p>
         <h2
-          className="font-serif font-normal text-foreground mb-14"
+          className="font-sans font-medium text-foreground mb-14"
           style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1 }}
         >
           Every guide includes:
@@ -98,7 +98,7 @@ export default function FamiliesPage() {
               <p className="font-serif text-muted mb-3" style={{ fontSize: "1.5rem" }}>
                 {item.num}
               </p>
-              <p className="font-serif font-normal text-foreground text-lg mb-2">{item.title}</p>
+              <p className="font-sans font-medium text-foreground text-lg mb-2">{item.title}</p>
               <p className="text-sm font-sans text-muted leading-relaxed">{item.body}</p>
             </div>
           ))}

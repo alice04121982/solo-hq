@@ -78,7 +78,7 @@ export function TestimonialsSection() {
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Real women. Real journeys.
           </p>
-          <h2 className="font-serif font-normal text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
+          <h2 className="font-sans font-medium text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.
           </h2>
         </motion.div>
@@ -134,7 +134,7 @@ export function TestimonialsSection() {
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Personal stories
           </p>
-          <h2 className="font-serif font-normal text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+          <h2 className="font-sans font-medium text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
             In their own words.
           </h2>
         </motion.div>
@@ -152,7 +152,7 @@ export function TestimonialsSection() {
               <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
                 {s.tag}
               </p>
-              <h3 className="font-serif font-normal text-foreground text-xl leading-snug">
+              <h3 className="font-sans font-medium text-foreground text-xl leading-snug">
                 {s.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed flex-1">{s.body}</p>

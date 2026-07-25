@@ -20,7 +20,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               Clinic comparison
             </p>
             <h2
-              className="font-serif font-normal text-foreground mb-4"
+              className="font-sans font-medium text-foreground mb-4"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
             >
               Find the right clinic
@@ -66,7 +66,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             ].map((s) => (
               <div key={s.label} className="bg-background-alt p-6">
                 <p
-                  className="font-serif font-normal text-foreground mb-1"
+                  className="font-sans font-medium text-foreground mb-1"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
                 >
                   {s.value}

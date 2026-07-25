@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Fraunces } from "next/font/google";
 import localFont from "next/font/local";
 import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  display: "swap",
-});
 
 const generalSans = localFont({
   src: [
@@ -35,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${generalSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${generalSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         {children}
         <SiteFooter />

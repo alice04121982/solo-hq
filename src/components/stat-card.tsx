@@ -22,7 +22,7 @@ export function StatCard({ value, label, delay = 0 }: StatCardProps) {
       className="flex flex-col gap-3 py-8 border-t border-border"
     >
       <span
-        className="font-serif font-normal text-foreground leading-none"
+        className="font-sans font-medium text-foreground leading-none"
         style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", fontOpticalSizing: "auto" as never }}
       >
         {value}

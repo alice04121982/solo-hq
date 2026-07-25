@@ -48,8 +48,8 @@
 
   /* ── Fonts ── */
   --font-sans:    var(--font-general-sans), "General Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif:   var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
-  --font-heading: var(--font-fraunces), "Fraunces", ui-serif, Georgia, serif;
+  --font-serif:   var(--font-general-sans), "General Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-general-sans), "General Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    ui-monospace, "Cascadia Code", monospace;
 
   /* ── Text scale ── */
@@ -83,15 +83,15 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   font-size: 17px;
+  font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-weight: 500;
   line-height: 1.05;
-  font-optical-sizing: auto;
   letter-spacing: -0.02em;
 }
 
