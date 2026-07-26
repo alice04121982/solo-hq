@@ -7,11 +7,11 @@ import { FEATURED_STORIES } from "@/lib/stories";
 
 // On lime section background, cards must NOT be lime — use dark/bold
 const CARD_THEMES = [
-  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
-  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
-  { bg: "#1A0810", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
-  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
-  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
+  { bg: "#3D0D1B", text: "#f9c6da", muted: "#c4a0ae" },
+  { bg: "#D43878", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" },
+  { bg: "#1A0810", text: "#f9c6da", muted: "#c4a0ae" },
+  { bg: "#3D0D1B", text: "#f9c6da", muted: "#c4a0ae" },
+  { bg: "#D43878", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" },
 ];
 
 const RACING_GREEN = "#1A3A25";
@@ -27,12 +27,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#3d5200" }}>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#1A3A25" }}>
                 Every family
               </p>
               <h2
                 className="font-sans font-medium"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A0810" }}
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
               >
                 Find your guide.
               </h2>
@@ -40,7 +40,7 @@ export default function Home() {
             <a
               href="/families"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
-              style={{ color: "#1A0810" }}
+              style={{ color: "#1A3A25" }}
             >
               All family types <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -77,7 +77,7 @@ export default function Home() {
           <a
             href="/families"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#1A0810" }}
+            style={{ color: "#1A3A25" }}
           >
             All family types <ArrowRight className="h-3.5 w-3.5" />
           </a>
@@ -91,13 +91,13 @@ export default function Home() {
             <div>
               <span
                 className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
-                style={{ background: "#C5E600", color: "#1A0810" }}
+                style={{ background: "#C5E600", color: "#1A3A25" }}
               >
                 The comparison tool
               </span>
               <h2
                 className="font-sans font-medium mb-5"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#fff" }}
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
               >
                 The full picture —
                 <br />
@@ -112,7 +112,7 @@ export default function Home() {
               <a
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "#C5E600", color: "#1A0810" }}
+                style={{ background: "#C5E600", color: "#1A3A25" }}
               >
                 Open comparison tool
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -176,7 +176,7 @@ export default function Home() {
                 </h3>
                 <span
                   className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
-                  style={{ background: "#D43878", color: "#fff" }}
+                  style={{ background: "#D43878", color: "#3D0D1B" }}
                 >
                   {FEATURED_STORIES[0].familyLabel}
                 </span>
@@ -212,14 +212,14 @@ export default function Home() {
                   className="px-6 pt-14 pb-6"
                   style={{ background: "#C5E600", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
                 >
-                  <h3 className="font-sans font-medium text-lg leading-snug mb-3" style={{ color: "#1A0810" }}>
+                  <h3 className="font-sans font-medium text-lg leading-snug mb-3" style={{ color: "#1A3A25" }}>
                     {FEATURED_STORIES[1].title}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em]" style={{ color: "#3d5200" }}>
+                    <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em]" style={{ color: "#1A3A25" }}>
                       {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
                     </p>
-                    <span className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600]" style={{ borderColor: "#1A0810", color: "#1A0810" }}>
+                    <span className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600]" style={{ borderColor: "#1A3A25", color: "#1A3A25" }}>
                       →
                     </span>
                   </div>
@@ -248,7 +248,7 @@ export default function Home() {
               <div className="absolute bottom-5 left-5 z-10">
                 <span
                   className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5"
-                  style={{ background: "#C5E600", color: "#1A0810" }}
+                  style={{ background: "#C5E600", color: "#1A3A25" }}
                 >
                   {FEATURED_STORIES[2].name}, {FEATURED_STORIES[2].age} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
                 </span>

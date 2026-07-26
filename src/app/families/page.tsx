@@ -39,7 +39,7 @@ function CardCream({ family }: { family: FamilyType }) {
         <div className="absolute bottom-3 right-3 text-right">
           <span
             className="text-[11px] font-sans font-[600] rounded-full px-3 py-1.5 inline-block"
-            style={{ background: "#C5E600", color: "#1A0810" }}
+            style={{ background: "#C5E600", color: "#1A3A25" }}
           >
             Read the guide →
           </span>
@@ -68,14 +68,14 @@ function CardFullBleed({ family }: { family: FamilyType }) {
             clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)",
           }}
         >
-          <h2 className="font-sans font-medium text-[#1A0810] text-2xl leading-snug mb-3">
+          <h2 className="font-sans font-medium text-2xl leading-snug mb-3" style={{ color: "#1A3A25" }}>
             {family.label}
           </h2>
           <div className="flex items-center justify-between gap-3">
-            <p className="text-[11px] font-sans font-[600] text-[#3d5200] uppercase tracking-[0.1em] leading-tight" style={{ maxWidth: "28ch" }}>
+            <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em] leading-tight" style={{ maxWidth: "28ch", color: "#1A3A25" }}>
               {family.cardSummary}
             </p>
-            <span className="shrink-0 rounded-full border border-[#1A0810] w-9 h-9 flex items-center justify-center text-[#1A0810] text-base font-[600]">
+            <span className="shrink-0 rounded-full border w-9 h-9 flex items-center justify-center text-base font-[600]" style={{ borderColor: "#1A3A25", color: "#1A3A25" }}>
               →
             </span>
           </div>
@@ -94,7 +94,7 @@ function CardPink({ family }: { family: FamilyType }) {
         <h2 className="font-sans font-medium text-[#3D0D1B] text-3xl leading-tight group-hover:opacity-80 transition-opacity">
           {family.label}
         </h2>
-        <p className="text-sm font-sans text-[#f9c6da] mt-2 leading-relaxed" style={{ maxWidth: "28ch" }}>
+        <p className="text-sm font-sans mt-2 leading-relaxed" style={{ maxWidth: "28ch", color: "rgba(61,13,27,0.7)" }}>
           {family.cardSummary}
         </p>
       </div>
@@ -118,7 +118,7 @@ function CardPink({ family }: { family: FamilyType }) {
       <div className="absolute bottom-5 left-5 z-10">
         <span
           className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 inline-block"
-          style={{ background: "#C5E600", color: "#1A0810" }}
+          style={{ background: "#C5E600", color: "#1A3A25" }}
         >
           Read the guide →
         </span>
@@ -145,7 +145,7 @@ export default function FamiliesPage() {
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-12 pb-14 md:pt-16 md:pb-18 border-b border-border">
         <span
           className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
-          style={{ background: "#C5E600", color: "#1A0810" }}
+          style={{ background: "#C5E600", color: "#1A3A25" }}
         >
           IVF for every family
         </span>

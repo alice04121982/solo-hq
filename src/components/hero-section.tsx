@@ -28,7 +28,7 @@ export function HeroSection() {
           >
             <span
               className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
-              style={{ background: "#C5E600", color: "#1A0810" }}
+              style={{ background: "#C5E600", color: "#1A3A25" }}
             >
               IVF clinic comparison &nbsp;·&nbsp; All family types &nbsp;·&nbsp; UK &amp; worldwide
             </span>
@@ -38,7 +38,7 @@ export function HeroSection() {
               style={{
                 fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
                 lineHeight: 1.04,
-                color: "#FFFFFF",
+                color: "#f9c6da",
               }}
             >
               Don&apos;t just pick a clinic.
@@ -52,7 +52,7 @@ export function HeroSection() {
             >
               Clinics in Spain, Greece, and the Czech Republic often look cheaper — until you add
               flights, hotels, and multiple trips. Our tool shows the{" "}
-              <span style={{ color: "#fff" }}>true cost</span> side by side with UK clinics, so you can decide with open eyes.
+              <span style={{ color: "#f9c6da" }}>true cost</span> side by side with UK clinics, so you can decide with open eyes.
             </p>
 
             <p
@@ -74,7 +74,7 @@ export function HeroSection() {
               <a
                 href="/get-started"
                 className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "#C5E600", color: "#1A0810" }}
+                style={{ background: "#C5E600", color: "#1A3A25" }}
               >
                 Find clinics matched to you
                 <ArrowRight className="h-3.5 w-3.5" />
