@@ -86,7 +86,7 @@ export default function ResourcesPage() {
         {/* Header */}
         <div className="mb-16">
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Everything you need</p>
-          <h1 className="font-serif font-normal text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
+          <h1 className="font-sans font-medium text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
             Resources
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
@@ -99,7 +99,7 @@ export default function ResourcesPage() {
           {CATEGORIES.map((cat) => (
             <div key={cat.title} className="py-10 border-t border-border">
               <div className="text-accent mb-4">{cat.icon}</div>
-              <h2 className="font-serif font-normal text-foreground text-xl mb-5">{cat.title}</h2>
+              <h2 className="font-sans font-medium text-foreground text-xl mb-5">{cat.title}</h2>
               <ul className="space-y-3">
                 {cat.resources.map((r) => (
                   <li key={r.title}>

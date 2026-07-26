@@ -82,7 +82,7 @@ export function JourneyMap() {
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
           Full lifecycle
         </p>
-        <h2 className="font-serif font-normal text-foreground text-2xl leading-tight">
+        <h2 className="font-sans font-medium text-foreground text-2xl leading-tight">
           The Solo Navigator
         </h2>
         <p className="text-sm font-sans text-muted mt-1 leading-relaxed">
@@ -112,7 +112,7 @@ export function JourneyMap() {
                 </span>
 
                 <div className="flex-1 min-w-0">
-                  <p className={`font-serif font-normal text-base leading-tight transition-colors duration-150 ${isExpanded ? "text-foreground" : "text-foreground/60 group-hover:text-foreground"}`}>
+                  <p className={`font-sans font-medium text-base leading-tight transition-colors duration-150 ${isExpanded ? "text-foreground" : "text-foreground/60 group-hover:text-foreground"}`}>
                     {phase.title}
                   </p>
                   <p className="text-xs font-sans text-muted mt-0.5">{phase.subtitle}</p>

@@ -6,16 +6,22 @@ import { useState, useEffect } from "react";
 import { Logo } from "./logo";
 
 const NAV_LINKS = [
-  { label: "Getting Started", href: "/" },
-  { label: "Find a Clinic", href: "/ivf-finder" },
-  { label: "News", href: "/news" },
+  { label: "Family Types", href: "/families" },
+  { label: "Compare Clinics", href: "/ivf-finder" },
+  { label: "Stories", href: "/stories" },
   { label: "Resources", href: "/resources" },
+  { label: "Get Started", href: "/get-started" },
 ];
 
-export function SiteNav() {
+interface SiteNavProps {
+  theme?: "light" | "dark";
+}
+
+export function SiteNav({ theme = "light" }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isDark = theme === "dark";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -26,11 +32,11 @@ export function SiteNav() {
   return (
     <nav
       className={`relative flex items-center justify-between py-6 transition-all duration-300 ${
-        scrolled ? "border-b border-border" : ""
+        scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
       }`}
     >
       <a href="/" className="flex items-center">
-        <Logo height={44} />
+        <Logo height={44} onDark={isDark} />
       </a>
 
       {/* Desktop links */}
@@ -40,9 +46,9 @@ export function SiteNav() {
             key={l.href}
             href={l.href}
             className={`text-sm font-sans transition-colors duration-150 ${
-              pathname === l.href
-                ? "text-foreground"
-                : "text-muted hover:text-foreground"
+              isDark
+                ? pathname === l.href ? "text-white" : "text-white/60 hover:text-white"
+                : pathname === l.href ? "text-foreground" : "text-muted hover:text-foreground"
             }`}
           >
             {l.label}
@@ -53,17 +59,18 @@ export function SiteNav() {
       {/* CTA */}
       <div className="hidden md:flex items-center">
         <a
-          href="/ivf-finder"
-          className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
+          href="/get-started"
+          className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
+          style={{ background: "#C5E600", color: "#1A0810" }}
         >
-          Find a Clinic
+          Get Started
           <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </div>
 
       {/* Mobile burger */}
       <button
-        className="md:hidden p-2 text-foreground"
+        className={`md:hidden p-2 ${isDark ? "text-white" : "text-foreground"}`}
         onClick={() => setOpen((v) => !v)}
         aria-label="Toggle menu"
       >
@@ -86,10 +93,11 @@ export function SiteNav() {
             </a>
           ))}
           <a
-            href="/ivf-finder"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-foreground px-6 py-3 text-sm font-sans font-medium mt-2 hover:bg-accent-dark transition-colors"
+            href="/get-started"
+            className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium mt-2 transition-colors"
+            style={{ background: "#C5E600", color: "#1A0810" }}
           >
-            Find a Clinic <ArrowRight className="h-3.5 w-3.5" />
+            Get Started <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       )}

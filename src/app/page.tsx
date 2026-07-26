@@ -1,84 +1,273 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
-import { CostCalculator } from "@/components/cost-calculator";
-import { JourneyMap } from "@/components/journey-map";
-import { ClinicComparison } from "@/components/clinic-comparison";
-import { BentoCard } from "@/components/bento-card";
-import { StatCard } from "@/components/stat-card";
 import { CTASection } from "@/components/cta-section";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
-import { Users, TrendingUp, Building2, ShieldCheck } from "lucide-react";
+import { FAMILY_TYPES } from "@/lib/family-types";
+import { FEATURED_STORIES } from "@/lib/stories";
+
+// On lime section background, cards must NOT be lime — use dark/bold
+const CARD_THEMES = [
+  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
+  { bg: "#1A0810", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
+  { bg: "#3D0D1B", text: "#fff",    muted: "#c4a0ae", badge: "#C5E600", badgeText: "#1A0810" },
+  { bg: "#D43878", text: "#fff",    muted: "#f9c6da", badge: "#fff",    badgeText: "#3D0D1B" },
+];
+
+const RACING_GREEN = "#1A3A25";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      {/* Hero */}
+    <main className="min-h-screen">
+      {/* 1 — Hero: deep burgundy */}
       <HeroSection />
 
-      {/* Clinic Finder */}
-      <section className="bg-background-alt border-y border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12">
-          <ClinicFinder />
+      {/* 2 — Families carousel: fluorescent lime */}
+      <section style={{ background: "#C5E600" }} id="families">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#3d5200" }}>
+                Every family
+              </p>
+              <h2
+                className="font-sans font-medium"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A0810" }}
+              >
+                Find your guide.
+              </h2>
+            </div>
+            <a
+              href="/families"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
+              style={{ color: "#1A0810" }}
+            >
+              All family types <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+
+          {/* Scroll-snap on mobile, grid on desktop */}
+          <div
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:pb-0"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {FAMILY_TYPES.map((family, i) => {
+              const theme = CARD_THEMES[i % CARD_THEMES.length];
+              return (
+                <a
+                  key={family.slug}
+                  href={`/families/${family.slug}`}
+                  className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
+                  style={{ background: theme.bg, color: theme.text }}
+                >
+                  <h3 className="font-sans font-medium text-lg leading-snug" style={{ color: theme.text }}>
+                    {family.label}
+                  </h3>
+                  <p className="text-sm font-sans leading-relaxed flex-1" style={{ color: theme.muted, maxWidth: "28ch" }}>
+                    {family.cardSummary}
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.muted }}>
+                    Read the guide <ArrowRight className="h-3 w-3" />
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+
+          <a
+            href="/families"
+            className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
+            style={{ color: "#1A0810" }}
+          >
+            All family types <ArrowRight className="h-3.5 w-3.5" />
+          </a>
         </div>
       </section>
 
-      {/* Stats — flat, no cards, separated by border-top */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
-          25 years of growth — HFEA data
-        </p>
-        <p className="font-serif font-normal text-foreground mb-10" style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "38ch" }}>
-          Solo treatment has grown{" "}
-          <em style={{ fontStyle: "italic", color: "var(--accent)" }}>24-fold</em>{" "}
-          since 1997. Here&apos;s what the numbers actually say.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
-          <StatCard value="×24" label="increase in single women seeking fertility treatment since 1997 — from ~200 to 4,800 per year (HFEA)" delay={0} />
-          <StatCard value="4,800" label="single women began treatment in the UK in 2022. In 2015 it was 1,600. In 2012, just 1,400." delay={0.08} />
-          <StatCard value="89%" label="of social egg freezing cycles in the UK are by single women — we are the majority here" delay={0.16} />
-          <StatCard value="40%" label="live birth rate per cycle for single women aged 18–34 — higher than the 35% average for couples" delay={0.24} />
-        </div>
-      </section>
+      {/* 3 — Clinic comparison teaser: burgundy full section */}
+      <section style={{ background: "#3D0D1B" }} id="compare">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+              <span
+                className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
+                style={{ background: "#C5E600", color: "#1A0810" }}
+              >
+                The comparison tool
+              </span>
+              <h2
+                className="font-sans font-medium mb-5"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#fff" }}
+              >
+                The full picture —
+                <br />
+                <span style={{ color: "#C5E600" }}>not the brochure version.</span>
+              </h2>
+              <p className="text-sm font-sans leading-relaxed mb-4" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
+                Greece might look £4,000 cheaper. Add three return flights and two hotel stays and suddenly it isn&apos;t. We factor in travel and accommodation so the comparison is honest.
+              </p>
+              <p className="text-sm font-sans leading-relaxed mb-8" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
+                Success rates by age bracket, solo- and LGBTQ+-friendliness, HFEA-verified data flags, and all six treatment types: IVF, ICSI, IUI, donor egg, donor sperm, and double donor.
+              </p>
+              <a
+                href="/ivf-finder"
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
+                style={{ background: "#C5E600", color: "#1A0810" }}
+              >
+                Open comparison tool
+                <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
 
-      {/* Solo Navigator — its own section */}
-      <section className="bg-background-alt border-y border-border" id="journey">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
-            Solo Navigator
-          </p>
-          <h2 className="font-serif font-normal text-foreground mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
-            Where are you on your journey?
-          </h2>
-          <BentoCard delay={0.05} white>
-            <JourneyMap />
-          </BentoCard>
-        </div>
-      </section>
-
-      {/* Planning Tools — Cost Calculator + Clinic Comparison */}
-      <section className="bg-background border-b border-border" id="tools">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
-            Planning tools
-          </p>
-          <h2 className="font-serif font-normal text-foreground mb-10" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
-            Numbers you can actually use.
-          </h2>
-          <div className="flex flex-col gap-6">
-            <BentoCard delay={0.05}>
-              <CostCalculator />
-            </BentoCard>
-            <BentoCard delay={0.1}>
-              <ClinicComparison />
-            </BentoCard>
+            {/* Stats grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { value: "400+", label: "Clinics compared UK & worldwide" },
+                { value: "True cost", label: "Travel & stays factored in, not just clinic fees" },
+                { value: "5 brackets", label: "Success rates from under 35 to 43+" },
+                { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
+              ].map((s) => (
+                <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                  <p
+                    className="font-sans font-medium mb-1"
+                    style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#C5E600" }}
+                  >
+                    {s.value}
+                  </p>
+                  <p className="text-xs font-sans leading-snug" style={{ color: "#c4a0ae" }}>{s.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <TestimonialsSection />
+      {/* 4 — Personal stories: racing green */}
+      <section style={{ background: RACING_GREEN }} id="stories">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#C5E600" }}>
+                Real journeys
+              </p>
+              <h2
+                className="font-sans font-medium"
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#FFFFFF" }}
+              >
+                In their own words.
+              </h2>
+            </div>
+            <a
+              href="/stories"
+              className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
+              style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}
+            >
+              See all stories <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
 
-      {/* CTA + Footer */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+
+            {/* Card 1: cream bg, heading + badge top, photo below */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F2EDE4" }}>
+              <div className="p-5 flex items-start justify-between gap-3">
+                <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#1A0810" }}>
+                  {FEATURED_STORIES[0].title}
+                </h3>
+                <span
+                  className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
+                  style={{ background: "#D43878", color: "#fff" }}
+                >
+                  {FEATURED_STORIES[0].familyLabel}
+                </span>
+              </div>
+              <div className="relative mx-3 mb-3 rounded-xl overflow-hidden" style={{ height: "280px" }}>
+                <Image
+                  src="/photos/story-hero.jpeg"
+                  alt="Solo mum story"
+                  fill
+                  className="object-cover object-top"
+                />
+                <div className="absolute bottom-3 right-3 text-right">
+                  <p className="text-xs font-sans font-[600] text-white" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+                    {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
+                  </p>
+                  <p className="text-[11px] font-sans text-white/80" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+                    {FEATURED_STORIES[0].location}
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 2: full-bleed photo, lime diagonal */}
+            <article className="rounded-2xl overflow-hidden relative" style={{ height: "420px" }}>
+              <Image
+                src={FEATURED_STORIES[1].image}
+                alt={FEATURED_STORIES[1].imageAlt}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-x-0 bottom-0 overflow-hidden">
+                <div
+                  className="px-6 pt-14 pb-6"
+                  style={{ background: "#C5E600", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
+                >
+                  <h3 className="font-sans font-medium text-lg leading-snug mb-3" style={{ color: "#1A0810" }}>
+                    {FEATURED_STORIES[1].title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em]" style={{ color: "#3d5200" }}>
+                      {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
+                    </p>
+                    <span className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600]" style={{ borderColor: "#1A0810", color: "#1A0810" }}>
+                      →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 3: pink bg, angled photo */}
+            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#D43878", height: "420px" }}>
+              <div className="p-6 relative z-10 max-w-[65%]">
+                <h3 className="font-sans font-medium text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
+                  {FEATURED_STORIES[2].title}
+                </h3>
+              </div>
+              <div
+                className="absolute bottom-0 right-0 overflow-hidden"
+                style={{ width: "68%", height: "72%", clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+              >
+                <Image
+                  src={FEATURED_STORIES[2].image}
+                  alt={FEATURED_STORIES[2].imageAlt}
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <div className="absolute bottom-5 left-5 z-10">
+                <span
+                  className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5"
+                  style={{ background: "#C5E600", color: "#1A0810" }}
+                >
+                  {FEATURED_STORIES[2].name}, {FEATURED_STORIES[2].age} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
+                </span>
+              </div>
+            </article>
+
+          </div>
+
+          <a
+            href="/stories"
+            className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
+            style={{ color: "#C5E600" }}
+          >
+            See all stories <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </section>
+
+      {/* 5 — Newsletter + CTA: hot pink */}
       <CTASection />
     </main>
   );

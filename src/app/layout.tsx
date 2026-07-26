@@ -1,27 +1,22 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
+import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const generalSans = localFont({
+  src: [
+    { path: "./fonts/GeneralSans-Variable.woff2", style: "normal" },
+    { path: "./fonts/GeneralSans-VariableItalic.woff2", style: "italic" },
+  ],
+  variable: "--font-general-sans",
+  weight: "100 900",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Flying Solo — The Definitive Platform for Solo Mums by Choice",
+  title: "Flying Solo — IVF & Fertility Guidance for Every Family",
   description:
-    "Real costs. Real guidance. Real community. Everything you need to navigate the solo motherhood journey with clarity and confidence.",
+    "Compare IVF clinics, understand your options, and build your family with confidence. Clear, honest guidance for solo mums, same-sex couples, and all family types.",
 };
 
 export default function RootLayout({
@@ -30,8 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+    <html lang="en" className={`${generalSans.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-sans">
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

@@ -5,7 +5,7 @@ import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
   title: "Find IVF Clinics Near You | Flying Solo",
-  description: "Search and compare HFEA-licensed IVF clinics near you. Real pricing, solo-friendliness ratings, and side-by-side comparison for solo mums by choice.",
+  description: "Search and compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
 };
 
 interface PageProps {
@@ -14,7 +14,7 @@ interface PageProps {
 
 const WHAT_TO_LOOK_FOR = [
   { icon: <ShieldCheck className="h-4 w-4" />, title: "HFEA Licence", desc: "Every UK fertility clinic must be licensed by the HFEA. Always verify before booking — it's your legal protection." },
-  { icon: <Heart className="h-4 w-4" />, title: "Solo-Friendly Policy", desc: "Ask clinics directly: Do you treat single women? Some clinics excel here; others add unnecessary friction. Trust your gut in the consultation." },
+  { icon: <Heart className="h-4 w-4" />, title: "Inclusive Policy", desc: "Ask clinics directly about their policies for your family type. Some clinics excel here; others add unnecessary friction. Trust your gut in the consultation." },
   { icon: <PoundSterling className="h-4 w-4" />, title: "All-In Pricing", desc: "Always ask for a written quote covering donor sperm, ICSI, counselling, and storage — not just the headline IVF price." },
   { icon: <Clock className="h-4 w-4" />, title: "Waiting Times", desc: "Donor sperm availability and clinic waiting lists vary enormously. Factor this into your timeline, especially if your AMH is time-sensitive." },
 ];
@@ -40,15 +40,15 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
             HFEA-licensed clinics only
           </p>
           <h1
-            className="font-serif font-normal text-foreground mb-4"
+            className="font-sans font-medium text-foreground mb-4"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
           >
             Find IVF Clinics
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--accent)" }}>Near You</em>
+            <span style={{ color: "var(--accent)" }}>Near You</span>
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-            Real pricing. Solo-friendliness ratings. Side-by-side comparisons.
+            Real pricing. Verified success rates. Side-by-side comparisons.
           </p>
 
           {/* Search + results — sits inside the hero, expands downward */}
@@ -59,13 +59,13 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
       {/* What to look for — contextual guidance below */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
-          What to look for as a solo parent
+          What every patient should look for
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
           {WHAT_TO_LOOK_FOR.map((item) => (
             <div key={item.title} className="py-6 border-t border-border">
               <div className="text-accent mb-3">{item.icon}</div>
-              <p className="font-serif font-normal text-foreground text-base mb-2">{item.title}</p>
+              <p className="font-sans font-medium text-foreground text-base mb-2">{item.title}</p>
               <p className="text-sm font-sans text-muted leading-relaxed">{item.desc}</p>
             </div>
           ))}
