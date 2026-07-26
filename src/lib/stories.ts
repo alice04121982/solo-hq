@@ -95,11 +95,11 @@ export const ALL_STORIES: Story[] = [
   {
     id: "james-oscar",
     familyType: "single-dad",
-    familyLabel: "Single Man by Choice",
+    familyLabel: "Solo Dad by Choice",
     name: "James",
     age: 42,
     location: "London",
-    tag: "Single man by choice",
+    tag: "Solo dad by choice",
     title: "I decided at 40. My son was born at 43.",
     excerpt: "Two years of preparation, the right surrogate, one IVF cycle. James on what it means to become a solo father — and why every conversation mattered.",
     body: "The decision took me two years to fully commit to. Not because I doubted it — I've always wanted to be a father — but because I needed to understand what I was doing before I began. The matching process, the legal preparation, the IVF cycle — all of it was manageable because I'd done the groundwork. Oscar is three. He is everything.",

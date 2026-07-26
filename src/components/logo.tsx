@@ -4,20 +4,18 @@ interface LogoProps {
   onDark?: boolean;
 }
 
-export function Logo({ height = 52, className = "", onDark = false }: LogoProps) {
-  const width = Math.round(height * (296 / 170));
-  const flyingColor = onDark ? "#FFFFFF" : "#3D0D1B";
+export function Logo({ className = "", onDark = false }: LogoProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 296 170"
-      width={width}
-      height={height}
-      className={className}
-      aria-label="Flying Solo"
+    <span
+      className={`font-sans font-medium tracking-tight ${className}`}
+      style={{
+        fontSize: "1.25rem",
+        letterSpacing: "-0.02em",
+        color: onDark ? "#FFFFFF" : "#1A0810",
+      }}
+      aria-label="CairnFertility"
     >
-      <text x="148" y="78" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill={flyingColor}>flying</text>
-      <text x="148" y="155" textAnchor="middle" fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="70" fill="#C5E600">solo</text>
-    </svg>
+      Cairn<span style={{ color: "#C5E600" }}>Fertility</span>
+    </span>
   );
 }

@@ -302,11 +302,11 @@ export const FAMILY_TYPES: FamilyType[] = [
     slug: "single-dad",
     label: "Solo Dads",
     headline: "Fatherhood,\non your terms.",
-    subHeadline: "Single men by choice · Surrogacy · Donor egg IVF",
+    subHeadline: "Solo dads by choice · Surrogacy · Donor egg IVF",
     heroCopy:
       "More men than ever are choosing to become solo fathers. The path — surrogacy with a donor egg — is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
     cardSummary:
-      "For single men pursuing fatherhood independently via surrogacy and donor eggs.",
+      "For solo dads pursuing fatherhood independently via surrogacy and donor eggs.",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
     imageAlt: "Man smiling warmly, portrait",
@@ -315,12 +315,12 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 1,
         title: "Know your legal landscape",
-        body: "UK surrogacy is legal, altruistic, and well-established. The surrogate is the legal mother at birth — regardless of genetics — and you'll need a parental order to become the legal father. As a single man, the parental order process is slightly different from couples but equally achievable. Get specialist legal advice from a surrogacy solicitor at the very start.",
+        body: "UK surrogacy is legal, altruistic, and well-established. The surrogate is the legal mother at birth — regardless of genetics — and you'll need a parental order to become the legal father. As a solo dad, the parental order process is slightly different from couples but equally achievable. Get specialist legal advice from a surrogacy solicitor at the very start.",
       },
       {
         number: 2,
         title: "Connect with the solo surrogacy community",
-        body: "Solo fatherhood via surrogacy is less common than for couples, but not unusual. Organisations like COTS and Brilliant Beginnings have experience matching single men with surrogates. Reading other solo dads' stories before you start — understanding the emotional landscape — is genuinely valuable preparation.",
+        body: "Solo fatherhood via surrogacy is less common than for couples, but not unusual. Organisations like COTS and Brilliant Beginnings have experience matching solo dads with surrogates. Reading other solo dads' stories before you start — understanding the emotional landscape — is genuinely valuable preparation.",
       },
       {
         number: 3,
