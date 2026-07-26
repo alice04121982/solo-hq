@@ -32,9 +32,9 @@ export function CTASection() {
           </h2>
 
           <p className="text-[17px] font-sans leading-relaxed mb-10" style={{ maxWidth: "50ch", color: "#f9c6da" }}>
-            Join thousands of solo mums by choice who are navigating the journey
-            with honest information, real-world costs, and a community that
-            actually gets it.
+            Whatever your path — solo, same-sex, or as a couple — join thousands
+            of people navigating IVF with honest information, real-world costs,
+            and a community that actually gets it.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
