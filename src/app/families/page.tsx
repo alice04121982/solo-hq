@@ -21,16 +21,10 @@ function getOrdered(): FamilyType[] {
 function CardCream({ family }: { family: FamilyType }) {
   return (
     <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F2EDE4" }}>
-      <div className="p-5 flex items-start justify-between gap-3">
+      <div className="p-5">
         <h2 className="font-sans font-medium text-[#1A0810] text-2xl leading-tight group-hover:opacity-80 transition-opacity">
           {family.label}
         </h2>
-        <span
-          className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap mt-1"
-          style={{ background: "#D43878", color: "#fff" }}
-        >
-          {family.treatmentHighlight.split(" · ")[0]}
-        </span>
       </div>
       <p className="px-5 pb-4 text-sm font-sans text-[#5C4050] leading-relaxed" style={{ maxWidth: "38ch" }}>
         {family.cardSummary}
@@ -120,13 +114,13 @@ function CardPink({ family }: { family: FamilyType }) {
           className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
         />
       </div>
-      {/* Lime arrow pill bottom left */}
+      {/* Arrow pill bottom left */}
       <div className="absolute bottom-5 left-5 z-10">
         <span
           className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 inline-block"
           style={{ background: "#C5E600", color: "#1A0810" }}
         >
-          {family.treatmentHighlight.split(" · ")[0]} →
+          Read the guide →
         </span>
       </div>
     </a>
