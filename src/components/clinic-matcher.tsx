@@ -350,7 +350,7 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
     { value: "female-couple", title: "Two mums", subtitle: "Female same-sex couple — donor sperm needed", icon: "🌈" },
     { value: "male-couple", title: "Two dads", subtitle: "Male same-sex couple — surrogacy and donor egg pathway", icon: "🏳️‍🌈" },
     { value: "straight-couple", title: "Mum and dad", subtitle: "Heterosexual couple — IVF, ICSI, or donor options", icon: "💛" },
-    { value: "solo-dad", title: "Solo dad by choice", subtitle: "Single man — surrogacy with donor egg", icon: "⭐" },
+    { value: "solo-dad", title: "Solo dad by choice", subtitle: "Solo dad by choice — surrogacy with donor egg", icon: "⭐" },
   ];
   return (
     <div className="space-y-3">

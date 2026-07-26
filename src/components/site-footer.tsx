@@ -4,7 +4,7 @@ const FAMILY_LINKS = [
   { label: "Solo Mums by Choice", href: "/families/solo-mum" },
   { label: "Same-Sex Female Couples", href: "/families/same-sex-female" },
   { label: "Same-Sex Male Couples", href: "/families/same-sex-male" },
-  { label: "Single Men by Choice", href: "/families/single-dad" },
+  { label: "Solo Dads by Choice", href: "/families/single-dad" },
   { label: "Heterosexual Couples", href: "/families/heterosexual-couple" },
 ];
 
