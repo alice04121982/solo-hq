@@ -13,9 +13,9 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
         letterSpacing: "-0.02em",
         color: onDark ? "#FFFFFF" : "#1A0810",
       }}
-      aria-label="IVFCOMPARE"
+      aria-label="CairnFertility"
     >
-      IVF<span style={{ color: "#C5E600" }}>COMPARE</span>
+      Cairn<span style={{ color: "#C5E600" }}>Fertility</span>
     </span>
   );
 }
