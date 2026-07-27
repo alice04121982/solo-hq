@@ -20,8 +20,8 @@
   --charcoal:        #1A0810;
   --navy:            #3D0D1B;   /* deep maroon */
   --warm-white:      #F5F1E6;
-  --card-bg:         #EDE8D6;
-  --card-border:     #E2D6C8;
+  --card-bg:         #FDE8F2;
+  --card-border:     #f5c6dd;
 }
 
 @theme inline {
