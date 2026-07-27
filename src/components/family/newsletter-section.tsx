@@ -20,8 +20,8 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
               Stay informed
             </p>
             <h2
-              className="font-sans font-bold text-foreground mb-4"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+              className="font-sans font-bold mb-4"
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
             >
               The{" "}
               <span style={{ color: "var(--accent)" }}>

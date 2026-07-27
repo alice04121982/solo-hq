@@ -57,8 +57,8 @@ export default async function FamilyTypePage({ params }: PageProps) {
               Solo Navigator
             </p>
             <h2
-              className="font-sans font-bold text-foreground mb-10"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+              className="font-sans font-bold mb-10"
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
             >
               Where are you on your journey?
             </h2>

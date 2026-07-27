@@ -135,7 +135,7 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
                   </span>
                 )}
                 {clinic.soloFriendly && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-lavender/30 px-2 py-0.5 text-[9px] font-semibold text-navy">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[#E8E8E8] px-2 py-0.5 text-[9px] font-semibold text-navy">
                     <Heart className="h-2.5 w-2.5" />
                     Solo-friendly
                   </span>
@@ -223,7 +223,7 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
                   href={clinic.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-lavender-dark hover:text-navy transition-colors font-semibold"
+                  className="inline-flex items-center gap-1 text-xs text-muted hover:text-navy transition-colors font-semibold"
                 >
                   <Globe className="h-3 w-3" />
                   Visit

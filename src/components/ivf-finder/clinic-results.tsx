@@ -19,19 +19,19 @@ function SkeletonCard() {
   return (
     <div className="rounded-[32px] bg-white border border-border p-5 animate-pulse">
       <div className="flex gap-2 mb-3">
-        <div className="h-5 w-24 rounded-full bg-lavender-light" />
-        <div className="h-5 w-20 rounded-full bg-lavender-light" />
+        <div className="h-5 w-24 rounded-full bg-[#E8E8E8]" />
+        <div className="h-5 w-20 rounded-full bg-[#E8E8E8]" />
       </div>
-      <div className="h-5 w-3/4 rounded-lg bg-lavender-light mb-2" />
-      <div className="h-3 w-1/2 rounded-lg bg-lavender-light mb-4" />
+      <div className="h-5 w-3/4 rounded-lg bg-[#E8E8E8] mb-2" />
+      <div className="h-3 w-1/2 rounded-lg bg-[#E8E8E8] mb-4" />
       <div className="grid grid-cols-3 gap-2 mb-4">
         {[0, 1, 2].map((i) => (
-          <div key={i} className="h-14 rounded-xl bg-card-bg" />
+          <div key={i} className="h-14 rounded-xl bg-[#E8E8E8]" />
         ))}
       </div>
       <div className="flex gap-2">
-        <div className="h-9 flex-1 rounded-full bg-lavender-light" />
-        <div className="h-9 w-20 rounded-full bg-lavender-light" />
+        <div className="h-9 flex-1 rounded-full bg-[#E8E8E8]" />
+        <div className="h-9 w-20 rounded-full bg-[#E8E8E8]" />
       </div>
     </div>
   );
@@ -51,7 +51,7 @@ export function ClinicResults({
     return (
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <div className="h-2 w-2 rounded-full bg-lavender-dark animate-pulse" />
+          <div className="h-2 w-2 rounded-full bg-muted animate-pulse" />
           <p className="text-sm text-muted">
             Searching for clinics near <strong className="text-navy">{location}</strong>…
           </p>
@@ -91,7 +91,7 @@ export function ClinicResults({
           near <strong className="text-navy">{location}</strong>
         </p>
         {source === "seed" && (
-          <span className="text-[10px] bg-lavender-light text-lavender-dark px-2.5 py-1 rounded-full font-medium">
+          <span className="text-[10px] bg-[#E8E8E8] text-muted px-2.5 py-1 rounded-full font-medium">
             Indicative data — live results loading
           </span>
         )}

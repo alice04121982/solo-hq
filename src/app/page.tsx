@@ -5,7 +5,7 @@ import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 
-const CARD_THEME = { bg: "#FDE8F2", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" };
+const CARD_THEME = { bg: "#FAFAFA", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" };
 
 const RACING_GREEN = "#1A3A25";
 
@@ -16,16 +16,16 @@ export default function Home() {
       <HeroSection />
 
       {/* 2 — Families carousel: fluorescent lime */}
-      <section style={{ background: "#C5E600" }} id="families">
+      <section style={{ background: "#FDE8F2" }} id="families">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#1A3A25" }}>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#3D0D1B" }}>
                 Every family
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
               >
                 Find your guide.
               </h2>
@@ -33,7 +33,7 @@ export default function Home() {
             <a
               href="/families"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
-              style={{ color: "#1A3A25" }}
+              style={{ color: "#3D0D1B" }}
             >
               All family types <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -70,7 +70,7 @@ export default function Home() {
           <a
             href="/families"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#1A3A25" }}
+            style={{ color: "#3D0D1B" }}
           >
             All family types <ArrowRight className="h-3.5 w-3.5" />
           </a>

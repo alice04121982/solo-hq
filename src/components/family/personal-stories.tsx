@@ -22,8 +22,8 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
             Personal stories
           </p>
           <h2
-            className="font-sans font-bold text-foreground"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1 }}
+            className="font-sans font-bold"
+            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: "#1A3A25" }}
           >
             In their own words.
           </h2>
@@ -41,8 +41,8 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
             {featured.tag}
           </p>
           <h3
-            className="font-sans font-bold text-foreground mb-5"
-            style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch" }}
+            className="font-sans font-bold mb-5"
+            style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch", color: "#1A3A25" }}
           >
             {featured.title}
           </h3>
@@ -68,7 +68,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
                 {story.tag}
               </p>
-              <h3 className="font-sans font-bold text-foreground text-xl leading-snug mb-4">
+              <h3 className="font-sans font-bold text-xl leading-snug mb-4" style={{ color: "#1A3A25" }}>
                 {story.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-5">{story.body}</p>
