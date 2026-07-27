@@ -182,7 +182,7 @@ export default function Home() {
                   className="object-cover object-top"
                 />
                 <div className="absolute bottom-3 right-3">
-                  <div className="rounded-xl px-3 py-2 text-right" style={{ background: "rgba(250,250,250,0.92)", backdropFilter: "blur(4px)" }}>
+                  <div className="rounded-xl px-3 py-2 text-right" style={{ background: "#F0A8C4" }}>
                     <p className="text-xs font-sans font-[600]" style={{ color: "#3D0D1B" }}>
                       {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
                     </p>
