@@ -20,13 +20,13 @@ function getOrdered(): FamilyType[] {
 // ── Card lockup 1: cream bg, heading + badge top, photo below, attribution in photo corner ──
 function CardCream({ family }: { family: FamilyType }) {
   return (
-    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F2EDE4" }}>
+    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden flex flex-col" style={{ background: "#FDE8F2" }}>
       <div className="p-5">
-        <h2 className="font-sans font-medium text-[#1A0810] text-2xl leading-tight group-hover:opacity-80 transition-opacity">
+        <h2 className="font-sans font-medium text-2xl leading-tight group-hover:opacity-80 transition-opacity" style={{ color: "#3D0D1B" }}>
           {family.label}
         </h2>
       </div>
-      <p className="px-5 pb-4 text-sm font-sans text-[#5C4050] leading-relaxed" style={{ maxWidth: "38ch" }}>
+      <p className="px-5 pb-4 text-sm font-sans leading-relaxed" style={{ maxWidth: "38ch", color: "rgba(61,13,27,0.65)" }}>
         {family.cardSummary}
       </p>
       <div className="relative mx-3 mb-3 rounded-xl overflow-hidden flex-1" style={{ minHeight: "240px" }}>
@@ -88,7 +88,7 @@ function CardFullBleed({ family }: { family: FamilyType }) {
 // ── Card lockup 3: pink bg, burgundy heading top-left, angled photo bottom-right ──
 function CardPink({ family }: { family: FamilyType }) {
   return (
-    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden relative" style={{ background: "#D43878", minHeight: "400px" }}>
+    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", minHeight: "400px" }}>
       {/* Heading top left */}
       <div className="p-6 relative z-10 max-w-[60%]">
         <h2 className="font-sans font-medium text-[#3D0D1B] text-3xl leading-tight group-hover:opacity-80 transition-opacity">
