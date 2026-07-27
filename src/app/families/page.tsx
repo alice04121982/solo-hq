@@ -29,7 +29,7 @@ function CardCream({ family }: { family: FamilyType }) {
       <p className="px-5 pb-4 text-sm font-sans leading-relaxed" style={{ maxWidth: "38ch", color: "rgba(61,13,27,0.65)" }}>
         {family.cardSummary}
       </p>
-      <div className="relative mx-3 mb-3 rounded-xl overflow-hidden flex-1" style={{ minHeight: "240px" }}>
+      <div className="relative overflow-hidden flex-1" style={{ minHeight: "240px" }}>
         <Image
           src={family.image}
           alt={family.imageAlt}
