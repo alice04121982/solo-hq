@@ -22,7 +22,7 @@ function CardCream({ family }: { family: FamilyType }) {
   return (
     <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden flex flex-col" style={{ background: "#FDE8F2" }}>
       <div className="p-5">
-        <h2 className="font-sans font-medium text-2xl leading-tight group-hover:opacity-80 transition-opacity" style={{ color: "#3D0D1B" }}>
+        <h2 className="font-sans font-bold text-2xl leading-tight group-hover:opacity-80 transition-opacity" style={{ color: "#3D0D1B" }}>
           {family.label}
         </h2>
       </div>
@@ -68,7 +68,7 @@ function CardFullBleed({ family }: { family: FamilyType }) {
             clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)",
           }}
         >
-          <h2 className="font-sans font-medium text-2xl leading-snug mb-3" style={{ color: "#1A3A25" }}>
+          <h2 className="font-sans font-bold text-2xl leading-snug mb-3" style={{ color: "#1A3A25" }}>
             {family.label}
           </h2>
           <div className="flex items-center justify-between gap-3">
@@ -91,7 +91,7 @@ function CardPink({ family }: { family: FamilyType }) {
     <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", minHeight: "400px" }}>
       {/* Heading top left */}
       <div className="p-6 relative z-10 max-w-[60%]">
-        <h2 className="font-sans font-medium text-[#3D0D1B] text-3xl leading-tight group-hover:opacity-80 transition-opacity">
+        <h2 className="font-sans font-bold text-[#3D0D1B] text-3xl leading-tight group-hover:opacity-80 transition-opacity">
           {family.label}
         </h2>
         <p className="text-sm font-sans mt-2 leading-relaxed" style={{ maxWidth: "28ch", color: "rgba(61,13,27,0.7)" }}>
@@ -150,7 +150,7 @@ export default function FamiliesPage() {
           IVF for every family
         </span>
         <h1
-          className="font-sans font-medium text-foreground mb-4"
+          className="font-sans font-bold text-foreground mb-4"
           style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
         >
           Whoever you are,
@@ -187,7 +187,7 @@ export default function FamiliesPage() {
             What you&apos;ll find
           </p>
           <h2
-            className="font-sans font-medium text-foreground mb-12"
+            className="font-sans font-bold text-foreground mb-12"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
           >
             Every guide includes:

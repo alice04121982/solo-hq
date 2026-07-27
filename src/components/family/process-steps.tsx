@@ -20,7 +20,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
             Step by step
           </p>
           <h2
-            className="font-sans font-medium text-foreground"
+            className="font-sans font-bold text-foreground"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1 }}
           >
             Your complete guide
@@ -51,7 +51,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               </div>
               <div>
                 <h3
-                  className="font-sans font-medium text-foreground mb-3"
+                  className="font-sans font-bold text-foreground mb-3"
                   style={{ fontSize: "clamp(1.1rem, 1.5vw, 1.35rem)", lineHeight: 1.25 }}
                 >
                   {step.title}

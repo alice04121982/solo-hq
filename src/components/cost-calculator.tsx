@@ -287,7 +287,7 @@ export function CostCalculator() {
             <div key={i} className="flex-1 h-px transition-colors duration-300" style={{ background: i <= step ? "var(--foreground)" : "var(--border)" }} />
           ))}
         </div>
-        <h2 className="font-sans font-medium text-foreground text-2xl">{STEPS[step]}</h2>
+        <h2 className="font-sans font-bold text-foreground text-2xl">{STEPS[step]}</h2>
       </div>
 
       {/* Content */}

@@ -24,7 +24,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             </p>
 
             <h1
-              className="font-sans font-medium text-foreground mb-6"
+              className="font-sans font-bold text-foreground mb-6"
               style={{
                 fontSize: "clamp(2.5rem, 5.5vw, 4.75rem)",
                 lineHeight: 1.03,

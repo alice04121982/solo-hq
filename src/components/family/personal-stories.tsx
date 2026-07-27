@@ -22,7 +22,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
             Personal stories
           </p>
           <h2
-            className="font-sans font-medium text-foreground"
+            className="font-sans font-bold text-foreground"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1 }}
           >
             In their own words.
@@ -41,7 +41,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
             {featured.tag}
           </p>
           <h3
-            className="font-sans font-medium text-foreground mb-5"
+            className="font-sans font-bold text-foreground mb-5"
             style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch" }}
           >
             {featured.title}
@@ -68,7 +68,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
                 {story.tag}
               </p>
-              <h3 className="font-sans font-medium text-foreground text-xl leading-snug mb-4">
+              <h3 className="font-sans font-bold text-foreground text-xl leading-snug mb-4">
                 {story.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-5">{story.body}</p>

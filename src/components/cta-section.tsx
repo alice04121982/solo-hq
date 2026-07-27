@@ -21,7 +21,7 @@ export function CTASection() {
           </p>
 
           <h2
-            className="font-sans font-medium mb-6"
+            className="font-sans font-bold mb-6"
             style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
           >
             You&rsquo;re not doing this alone.

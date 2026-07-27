@@ -880,7 +880,7 @@ export function ClinicMatcher() {
           transition={{ duration: 0.22, ease: EASE }}
         >
           <h2
-            className="font-sans font-medium text-foreground mb-1"
+            className="font-sans font-bold text-foreground mb-1"
             style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
           >
             {STEPS[step].title}
