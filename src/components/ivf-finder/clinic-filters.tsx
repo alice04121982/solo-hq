@@ -79,10 +79,9 @@ function Chip({
 interface ClinicFiltersProps {
   filters: FilterState;
   onChange: (f: FilterState) => void;
-  availableCountries: string[];
 }
 
-export function ClinicFilters({ filters, onChange, availableCountries }: ClinicFiltersProps) {
+export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
   const hasActive =
     filters.countries.length > 0 ||
     filters.ageBracket !== "any" ||
@@ -133,9 +132,6 @@ export function ClinicFilters({ filters, onChange, availableCountries }: ClinicF
                 key={c.value}
                 label={c.label}
                 active={filters.countries.includes(c.value)}
-                disabled={
-                  availableCountries.length > 0 && !availableCountries.includes(c.value)
-                }
                 onClick={() => toggleCountry(c.value)}
               />
             ))}
