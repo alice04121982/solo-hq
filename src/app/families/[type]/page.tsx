@@ -54,7 +54,10 @@ export default async function FamilyTypePage({ params }: PageProps) {
       {family.slug === "solo-mum" && (
         <section className="bg-background border-b border-border">
           <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+            <p
+              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+              style={{ color: "rgba(26,58,37,0.65)" }}
+            >
               Solo Navigator
             </p>
             <h2
