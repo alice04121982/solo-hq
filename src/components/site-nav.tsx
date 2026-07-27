@@ -47,7 +47,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             href={l.href}
             className={`text-sm font-sans transition-colors duration-150 ${
               isDark
-                ? pathname === l.href ? "text-white" : "text-white/60 hover:text-white"
+                ? pathname === l.href ? "text-[#f9c6da]" : "text-[#c4a0ae] hover:text-[#f9c6da]"
                 : pathname === l.href ? "text-foreground" : "text-muted hover:text-foreground"
             }`}
           >
@@ -61,7 +61,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <a
           href="/get-started"
           className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
-          style={{ background: "#C5E600", color: "#1A0810" }}
+          style={{ background: "#C5E600", color: "#1A3A25" }}
         >
           Get Started
           <ArrowRight className="h-3.5 w-3.5" />
@@ -70,7 +70,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
       {/* Mobile burger */}
       <button
-        className={`md:hidden p-2 ${isDark ? "text-white" : "text-foreground"}`}
+        className={`md:hidden p-2 ${isDark ? "text-[#f9c6da]" : "text-foreground"}`}
         onClick={() => setOpen((v) => !v)}
         aria-label="Toggle menu"
       >
@@ -95,7 +95,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           <a
             href="/get-started"
             className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium mt-2 transition-colors"
-            style={{ background: "#C5E600", color: "#1A0810" }}
+            style={{ background: "#C5E600", color: "#1A3A25" }}
           >
             Get Started <ArrowRight className="h-3.5 w-3.5" />
           </a>

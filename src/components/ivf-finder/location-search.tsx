@@ -125,7 +125,7 @@ export function LocationSearch({
         <button
           type="submit"
           disabled={isLoading}
-          className="h-12 px-6 rounded-full bg-lime text-charcoal text-sm font-bold hover:bg-lime-dark transition-colors disabled:opacity-60 whitespace-nowrap"
+          className="h-12 px-6 rounded-full bg-lime text-[#1A3A25] text-sm font-bold hover:bg-lime-dark transition-colors disabled:opacity-60 whitespace-nowrap"
         >
           {isLoading ? "Searching…" : "Find Clinics"}
         </button>

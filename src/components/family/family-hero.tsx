@@ -52,7 +52,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="/ivf-finder"
-                className="inline-flex items-center gap-2 rounded-full bg-accent text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full bg-accent text-[#1A3A25] px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
                 Compare clinics
               </a>

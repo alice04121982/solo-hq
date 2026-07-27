@@ -17,7 +17,7 @@ export default function GetStartedPage() {
         {/* Page header */}
         <div className="max-w-2xl mb-12">
           <span className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
-            style={{ background: "#C5E600", color: "#1A0810" }}>
+            style={{ background: "#C5E600", color: "#1A3A25" }}>
             Personalised matching
           </span>
           <h1
