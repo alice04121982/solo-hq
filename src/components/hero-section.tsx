@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SiteNav } from "./site-nav";
-import { HomeLocationSearch } from "./home-location-search";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -55,13 +54,8 @@ export function HeroSection() {
               and what to question.
             </p>
 
-            {/* Location search */}
-            <div className="mb-5 max-w-xl">
-              <HomeLocationSearch onDark />
-            </div>
-
             {/* Primary CTA */}
-            <div className="mb-8">
+            <div className="mb-8 mt-2">
               <a
                 href="/get-started"
                 className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
