@@ -161,10 +161,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: hot pink bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F0A8C4" }}>
+            {/* Card 1: burgundy bg, heading + badge top, photo below */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#3D0D1B" }}>
               <div className="p-5 flex items-start justify-between gap-3">
-                <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#3D0D1B" }}>
+                <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#f9c6da" }}>
                   {FEATURED_STORIES[0].title}
                 </h3>
                 <span
@@ -181,13 +181,15 @@ export default function Home() {
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute bottom-3 right-3 text-right">
-                  <p className="text-xs font-sans font-[600] text-white" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
-                    {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
-                  </p>
-                  <p className="text-[11px] font-sans text-white/80" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
-                    {FEATURED_STORIES[0].location}
-                  </p>
+                <div className="absolute bottom-3 right-3">
+                  <div className="rounded-xl px-3 py-2 text-right" style={{ background: "rgba(250,250,250,0.92)", backdropFilter: "blur(4px)" }}>
+                    <p className="text-xs font-sans font-[600]" style={{ color: "#3D0D1B" }}>
+                      {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
+                    </p>
+                    <p className="text-[11px] font-sans" style={{ color: "rgba(61,13,27,0.6)" }}>
+                      {FEATURED_STORIES[0].location}
+                    </p>
+                  </div>
                 </div>
               </div>
             </article>
