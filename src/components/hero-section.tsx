@@ -27,7 +27,7 @@ export function HeroSection() {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <h1
-              className="font-sans font-medium mb-6"
+              className="font-sans font-bold mb-6"
               style={{
                 fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
                 lineHeight: 1.04,

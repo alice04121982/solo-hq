@@ -20,7 +20,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               Clinic comparison
             </p>
             <h2
-              className="font-sans font-medium text-foreground mb-4"
+              className="font-sans font-bold text-foreground mb-4"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
             >
               Find the right clinic

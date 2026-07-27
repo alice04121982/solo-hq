@@ -82,7 +82,7 @@ export function JourneyMap() {
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
           Full lifecycle
         </p>
-        <h2 className="font-sans font-medium text-foreground text-2xl leading-tight">
+        <h2 className="font-sans font-bold text-foreground text-2xl leading-tight">
           The Solo Navigator
         </h2>
         <p className="text-sm font-sans text-muted mt-1 leading-relaxed">

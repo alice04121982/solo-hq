@@ -32,7 +32,7 @@ export default function StoriesPage() {
           Real journeys
         </p>
         <h1
-          className="font-sans font-medium text-foreground mb-6"
+          className="font-sans font-bold text-foreground mb-6"
           style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
         >
           Personal stories
@@ -102,7 +102,7 @@ export default function StoriesPage() {
                   <span className="text-[10px] font-sans text-muted">{story.treatment}</span>
                 </div>
 
-                <h2 className="font-sans font-medium text-foreground text-xl leading-snug">
+                <h2 className="font-sans font-bold text-foreground text-xl leading-snug">
                   {story.title}
                 </h2>
 

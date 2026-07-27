@@ -24,7 +24,7 @@ export default function Home() {
                 Every family
               </p>
               <h2
-                className="font-sans font-medium"
+                className="font-sans font-bold"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
               >
                 Find your guide.
@@ -53,7 +53,7 @@ export default function Home() {
                   className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                   style={{ background: theme.bg, color: theme.text }}
                 >
-                  <h3 className="font-sans font-medium text-lg leading-snug" style={{ color: theme.text }}>
+                  <h3 className="font-sans font-bold text-lg leading-snug" style={{ color: theme.text }}>
                     {family.label}
                   </h3>
                   <p className="text-sm font-sans leading-relaxed flex-1" style={{ color: theme.muted, maxWidth: "28ch" }}>
@@ -89,7 +89,7 @@ export default function Home() {
                 The comparison tool
               </span>
               <h2
-                className="font-sans font-medium mb-5"
+                className="font-sans font-bold mb-5"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
               >
                 The full picture —
@@ -144,7 +144,7 @@ export default function Home() {
                 Real journeys
               </p>
               <h2
-                className="font-sans font-medium"
+                className="font-sans font-bold"
                 style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
               >
                 In their own words.
@@ -164,7 +164,7 @@ export default function Home() {
             {/* Card 1: hot pink bg, heading + badge top, photo below */}
             <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F0A8C4" }}>
               <div className="p-5 flex items-start justify-between gap-3">
-                <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#3D0D1B" }}>
+                <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[0].title}
                 </h3>
                 <span
@@ -205,7 +205,7 @@ export default function Home() {
                   className="px-6 pt-14 pb-6"
                   style={{ background: "#C5E600", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
                 >
-                  <h3 className="font-sans font-medium text-lg leading-snug mb-3" style={{ color: "#1A3A25" }}>
+                  <h3 className="font-sans font-bold text-lg leading-snug mb-3" style={{ color: "#1A3A25" }}>
                     {FEATURED_STORIES[1].title}
                   </h3>
                   <div className="flex items-center justify-between">
@@ -223,7 +223,7 @@ export default function Home() {
             {/* Card 3: light pink bg, angled photo */}
             <article className="rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", height: "420px" }}>
               <div className="p-6 relative z-10 max-w-[65%]">
-                <h3 className="font-sans font-medium text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
+                <h3 className="font-sans font-bold text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[2].title}
                 </h3>
               </div>
