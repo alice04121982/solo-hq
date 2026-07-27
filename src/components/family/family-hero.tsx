@@ -5,6 +5,8 @@ import Image from "next/image";
 import type { FamilyType } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const GREEN = "#1A3A25";
+const GREEN_SOFT = "rgba(26,58,37,0.65)";
 
 export function FamilyHero({ family }: { family: FamilyType }) {
   const lines = family.headline.split("\n");
@@ -20,7 +22,10 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             transition={{ duration: 0.7, ease: EASE }}
             className={family.hideHeroImage ? "max-w-3xl" : ""}
           >
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
+            <p
+              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-6 font-sans"
+              style={{ color: GREEN_SOFT }}
+            >
               {family.subHeadline}
             </p>
 
@@ -30,23 +35,21 @@ export function FamilyHero({ family }: { family: FamilyType }) {
                 fontSize: "clamp(2.5rem, 5.5vw, 4.75rem)",
                 lineHeight: 1.03,
                 fontVariationSettings: "'wght' 800",
-                color: "#1A3A25",
+                color: GREEN,
               }}
             >
               {lines[0]}
               {lines[1] && (
                 <>
                   <br />
-                  <span style={{ color: "var(--accent)" }}>
-                    {lines[1]}
-                  </span>
+                  {lines[1]}
                 </>
               )}
             </h1>
 
             <p
-              className="text-[17px] text-muted leading-[1.65] mb-10 font-sans"
-              style={{ maxWidth: "52ch" }}
+              className="text-[17px] leading-[1.65] mb-10 font-sans"
+              style={{ maxWidth: "52ch", color: GREEN }}
             >
               {family.heroCopy}
             </p>

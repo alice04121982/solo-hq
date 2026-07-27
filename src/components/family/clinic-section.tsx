@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const GREEN = "#1A3A25";
+const GREEN_SOFT = "rgba(26,58,37,0.65)";
 
 export function ClinicSection({ clinicNote }: { clinicNote: string }) {
   return (
@@ -16,20 +18,24 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+            <p
+              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
+              style={{ color: GREEN_SOFT }}
+            >
               Clinic comparison
             </p>
             <h2
               className="font-sans font-bold mb-4"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: GREEN }}
             >
               Find the right clinic
               <br />
-              <span style={{ color: "var(--accent)" }}>
-                for your family.
-              </span>
+              for your family.
             </h2>
-            <p className="text-sm font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "48ch" }}>
+            <p
+              className="text-sm font-sans leading-relaxed mb-8"
+              style={{ maxWidth: "48ch", color: GREEN }}
+            >
               {clinicNote}
             </p>
 
@@ -56,7 +62,8 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-            className="grid grid-cols-2 gap-px bg-border rounded-xl overflow-hidden"
+            className="grid grid-cols-2 gap-px rounded-xl overflow-hidden"
+            style={{ background: "rgba(249,198,218,0.2)" }}
           >
             {[
               { value: "400+", label: "HFEA-licensed clinics compared" },
@@ -64,14 +71,19 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               { value: "5 age brackets", label: "success rates from under 35 to 43+" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },
             ].map((s) => (
-              <div key={s.label} className="bg-card-bg p-6">
+              <div key={s.label} className="p-6" style={{ background: "#3D0D1B" }}>
                 <p
-                  className="font-sans font-medium text-[#1A3A25] mb-1"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
+                  className="font-sans font-bold mb-1"
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", color: "#f9c6da" }}
                 >
                   {s.value}
                 </p>
-                <p className="text-xs font-sans text-muted leading-snug">{s.label}</p>
+                <p
+                  className="text-xs font-sans leading-snug"
+                  style={{ color: "#c4a0ae" }}
+                >
+                  {s.label}
+                </p>
               </div>
             ))}
           </motion.div>

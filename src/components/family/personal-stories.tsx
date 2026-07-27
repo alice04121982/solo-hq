@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import type { Story } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const GREEN = "#1A3A25";
+const GREEN_SOFT = "rgba(26,58,37,0.65)";
 
 export function PersonalStories({ stories }: { stories: Story[] }) {
   const [featured, ...rest] = stories;
@@ -18,12 +20,15 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           transition={{ duration: 0.7, ease: EASE }}
           className="mb-14"
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
+          <p
+            className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+            style={{ color: GREEN_SOFT }}
+          >
             Personal stories
           </p>
           <h2
             className="font-sans font-bold"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: "#1A3A25" }}
+            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: GREEN }}
           >
             In their own words.
           </h2>
@@ -35,21 +40,31 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-16 border-l-2 border-accent pl-8 md:pl-12"
+          className="mb-16 border-l-2 pl-8 md:pl-12"
+          style={{ borderColor: GREEN }}
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
+          <p
+            className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
+            style={{ color: GREEN_SOFT }}
+          >
             {featured.tag}
           </p>
           <h3
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch", color: "#1A3A25" }}
+            style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch", color: GREEN }}
           >
             {featured.title}
           </h3>
-          <p className="text-[17px] font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "62ch" }}>
+          <p
+            className="text-[17px] font-sans leading-relaxed mb-6"
+            style={{ maxWidth: "62ch", color: GREEN }}
+          >
             {featured.body}
           </p>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+          <p
+            className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans"
+            style={{ color: GREEN_SOFT }}
+          >
             {featured.name}, {featured.age} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.treatment}
           </p>
         </motion.div>
@@ -65,17 +80,30 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
               className="py-8 border-t border-border"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
+              <p
+                className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+                style={{ color: GREEN_SOFT }}
+              >
                 {story.tag}
               </p>
-              <h3 className="font-sans font-bold text-xl leading-snug mb-4" style={{ color: "#1A3A25" }}>
+              <h3 className="font-sans font-bold text-xl leading-snug mb-4" style={{ color: GREEN }}>
                 {story.title}
               </h3>
-              <p className="text-sm font-sans text-muted leading-relaxed mb-5">{story.body}</p>
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+              <p
+                className="text-sm font-sans leading-relaxed mb-5"
+                style={{ color: GREEN }}
+              >
+                {story.body}
+              </p>
+              <p
+                className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans"
+                style={{ color: GREEN_SOFT }}
+              >
                 {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
               </p>
-              <p className="text-xs font-sans text-muted/70 mt-1">{story.treatment}</p>
+              <p className="text-xs font-sans mt-1" style={{ color: GREEN_SOFT }}>
+                {story.treatment}
+              </p>
             </motion.article>
           ))}
         </div>

@@ -4,10 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const GREEN = "#1A3A25";
+const GREEN_SOFT = "rgba(26,58,37,0.65)";
 
 export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
   return (
-    <section className="bg-background-alt border-y border-border">
+    <section className="border-y border-border" style={{ background: "#FAFAFA" }}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div
@@ -16,20 +18,22 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+            <p
+              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
+              style={{ color: GREEN_SOFT }}
+            >
               Stay informed
             </p>
             <h2
               className="font-sans font-bold mb-4"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: GREEN }}
             >
-              The{" "}
-              <span style={{ color: "var(--accent)" }}>
-                real
-              </span>{" "}
-              guide to building your family.
+              The real guide to building your family.
             </h2>
-            <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "44ch" }}>
+            <p
+              className="text-sm font-sans leading-relaxed"
+              style={{ maxWidth: "44ch", color: GREEN }}
+            >
               Get clinic comparison updates, new guides for {familyLabel.toLowerCase()}, and honest stories from people who&apos;ve done this — delivered once a fortnight, no noise.
             </p>
           </motion.div>
@@ -52,7 +56,7 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
                 <ArrowRight className="h-3.5 w-3.5" />
               </button>
             </div>
-            <p className="text-xs font-sans text-muted/60 pl-2">
+            <p className="text-xs font-sans pl-2" style={{ color: GREEN_SOFT }}>
               No spam. No toxic positivity. Just the real stuff, fortnightly.
             </p>
           </motion.div>
