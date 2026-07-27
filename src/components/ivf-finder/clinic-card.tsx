@@ -59,8 +59,8 @@ export function ClinicCard({
       layout
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`rounded-[32px] bg-card-bg border-2 transition-all duration-200 overflow-hidden ${
-        isSelected ? "border-lime-dark shadow-md" : "border-card-border shadow-sm"
+      className={`rounded-[32px] bg-white border-2 transition-all duration-200 overflow-hidden ${
+        isSelected ? "border-lime-dark shadow-md" : "border-border shadow-sm"
       }`}
     >
       {/* Main card content */}
@@ -102,13 +102,13 @@ export function ClinicCard({
 
         {/* Key metrics */}
         <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="rounded-xl bg-card-bg p-2.5 text-center">
+          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">IVF from</p>
             <p className="text-sm font-bold text-navy">
               {lowestPrice === Infinity ? "—" : `£${lowestPrice.toLocaleString()}`}
             </p>
           </div>
-          <div className="rounded-xl bg-card-bg p-2.5 text-center">
+          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">{rateLabel}</p>
             <p className="text-sm font-bold text-navy">
               {clinic.successRates[rateKey] != null
@@ -116,7 +116,7 @@ export function ClinicCard({
                 : "—"}
             </p>
           </div>
-          <div className="rounded-xl bg-card-bg p-2.5 text-center">
+          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">Wait</p>
             <p className="text-sm font-bold text-navy">
               {clinic.waitingTimeWeeks != null

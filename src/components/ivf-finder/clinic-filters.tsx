@@ -100,8 +100,7 @@ export function ClinicFilters({ filters, onChange, availableCountries }: ClinicF
 
   return (
     <div
-      className="rounded-2xl border border-card-border p-5 mb-5"
-      style={{ background: "#FDE8F2" }}
+      className="rounded-2xl border border-border bg-white p-5 mb-5"
     >
       <div className="flex items-center justify-between mb-4">
         <p

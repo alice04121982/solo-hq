@@ -160,7 +160,7 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
   return (
     <div className={hasContent ? "pb-32" : ""}>
       {/* Search */}
-      <div className="rounded-[32px] bg-card-bg border border-card-border p-6 mb-6">
+      <div className="rounded-[32px] bg-white border border-border p-6 mb-6">
         <LocationSearch
           initialLocation={initialLocation}
           initialRadius={initialRadius}
