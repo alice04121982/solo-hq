@@ -41,7 +41,7 @@ export function HeroSection() {
                 color: "#f9c6da",
               }}
             >
-              With you on every step of your Fertility journey with our unique Clinic comparison tool and custom guides for all family types.
+              IVF made clearer, for every kind of family.
             </h1>
 
             <p
