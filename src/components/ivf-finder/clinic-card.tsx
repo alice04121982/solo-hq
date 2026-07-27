@@ -90,13 +90,13 @@ export function ClinicCard({
 
         {/* Key metrics */}
         <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="rounded-xl bg-warm-white p-2.5 text-center">
+          <div className="rounded-xl bg-card-bg p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">IVF from</p>
             <p className="text-sm font-bold text-navy">
               {lowestPrice === Infinity ? "—" : `£${lowestPrice.toLocaleString()}`}
             </p>
           </div>
-          <div className="rounded-xl bg-warm-white p-2.5 text-center">
+          <div className="rounded-xl bg-card-bg p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">Success &lt;35</p>
             <p className="text-sm font-bold text-navy">
               {clinic.successRates.under35 != null
@@ -104,7 +104,7 @@ export function ClinicCard({
                 : "—"}
             </p>
           </div>
-          <div className="rounded-xl bg-warm-white p-2.5 text-center">
+          <div className="rounded-xl bg-card-bg p-2.5 text-center">
             <p className="text-xs text-muted leading-none mb-1">Wait</p>
             <p className="text-sm font-bold text-navy">
               {clinic.waitingTimeWeeks != null

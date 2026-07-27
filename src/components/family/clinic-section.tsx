@@ -64,7 +64,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               { value: "5 age brackets", label: "success rates from under 35 to 43+" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },
             ].map((s) => (
-              <div key={s.label} className="bg-background-alt p-6">
+              <div key={s.label} className="bg-card-bg p-6">
                 <p
                   className="font-sans font-medium text-foreground mb-1"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
