@@ -1,7 +1,10 @@
+export type AgeBracket = "any" | "under35" | "age35to37" | "age38to39" | "age40to42" | "age43plus";
+
 export interface ClinicData {
   id: string;
   name: string;
   address: string;
+  country?: string;
   phone?: string;
   website?: string;
   hfeaLicensed: boolean;

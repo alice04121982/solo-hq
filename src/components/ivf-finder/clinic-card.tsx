@@ -14,13 +14,23 @@ import {
   Clock,
   Stethoscope,
 } from "lucide-react";
-import type { ClinicData } from "@/types/clinic";
+import type { ClinicData, AgeBracket } from "@/types/clinic";
+
+const BRACKET_META: Record<AgeBracket, { key: keyof ClinicData["successRates"]; label: string }> = {
+  any:        { key: "under35",    label: "Success <35"   },
+  under35:    { key: "under35",    label: "Success <35"   },
+  age35to37:  { key: "age35to37", label: "Success 35–37" },
+  age38to39:  { key: "age38to39", label: "Success 38–39" },
+  age40to42:  { key: "age40to42", label: "Success 40–42" },
+  age43plus:  { key: "age43plus", label: "Success 43+"   },
+};
 
 interface ClinicCardProps {
   clinic: ClinicData;
   isSelected: boolean;
   onToggleCompare: (clinic: ClinicData) => void;
-  compareDisabled: boolean; // true when 4 already selected and this isn't one
+  compareDisabled: boolean;
+  ageBracket: AgeBracket;
 }
 
 function fmt(n?: number): string {
@@ -33,7 +43,9 @@ export function ClinicCard({
   isSelected,
   onToggleCompare,
   compareDisabled,
+  ageBracket,
 }: ClinicCardProps) {
+  const { key: rateKey, label: rateLabel } = BRACKET_META[ageBracket];
   const [expanded, setExpanded] = useState(false);
 
   const lowestPrice = Math.min(
@@ -97,10 +109,10 @@ export function ClinicCard({
             </p>
           </div>
           <div className="rounded-xl bg-card-bg p-2.5 text-center">
-            <p className="text-xs text-muted leading-none mb-1">Success &lt;35</p>
+            <p className="text-xs text-muted leading-none mb-1">{rateLabel}</p>
             <p className="text-sm font-bold text-navy">
-              {clinic.successRates.under35 != null
-                ? `${clinic.successRates.under35}%`
+              {clinic.successRates[rateKey] != null
+                ? `${clinic.successRates[rateKey]}%`
                 : "—"}
             </p>
           </div>
