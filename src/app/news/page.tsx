@@ -4,8 +4,8 @@ import { CTASection } from "@/components/cta-section";
 import { ArrowRight, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "News & Updates | Flying Solo",
-  description: "The latest news on solo motherhood, IVF policy, donor conception, and community stories from Flying Solo.",
+  title: "News & Updates | CairnFertility",
+  description: "The latest news on solo motherhood, IVF policy, donor conception, and community stories from CairnFertility.",
 };
 
 const ARTICLES = [

@@ -231,7 +231,7 @@ export const GUIDES: Guide[] = [
           "Enter the figures in a spreadsheet with three columns: Estimated cost, Actual cost, and Difference. Review it monthly throughout your treatment journey.",
         ],
         callout:
-          "Download the Flying Solo budget template as a Google Sheet — it includes pre-filled formulas and a month-by-month cash flow projection.",
+          "Download the CairnFertility budget template as a Google Sheet — it includes pre-filled formulas and a month-by-month cash flow projection.",
       },
     ],
     keyTakeaways: [

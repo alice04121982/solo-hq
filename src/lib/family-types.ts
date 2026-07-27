@@ -84,7 +84,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 7,
         title: "Pregnancy and birth",
-        body: "Solo pregnancy is common — and you'll be far from the only one navigating it without a co-parent. Build your support team early: a good midwife, a birth partner (friend, family member, or doula), and your community. Flying Solo's birth partner and doula guides cover the practical detail.",
+        body: "Solo pregnancy is common — and you'll be far from the only one navigating it without a co-parent. Build your support team early: a good midwife, a birth partner (friend, family member, or doula), and your community. CairnFertility's birth partner and doula guides cover the practical detail.",
       },
       {
         number: 8,
@@ -99,7 +99,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         location: "Bristol",
         tag: "IVF with donor sperm",
         title: "From 'someday' to mum of one in 22 months",
-        body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting — it was trusting myself to make this decision without anyone to share it with. The Flying Solo community gave me that.",
+        body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting — it was trusting myself to make this decision without anyone to share it with. The CairnFertility community gave me that.",
         treatment: "IUI × 2, IVF × 1",
       },
       {
@@ -350,7 +350,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Solo fatherhood: building your village",
-        body: "Solo parenting requires a village — and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. The Flying Solo community includes single dads by choice who are open about the real experience: hard in places, extraordinary overall.",
+        body: "Solo parenting requires a village — and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. The CairnFertility community includes single dads by choice who are open about the real experience: hard in places, extraordinary overall.",
       },
     ],
     stories: [

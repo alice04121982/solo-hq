@@ -97,10 +97,10 @@ export function SiteFooter() {
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="text-xs font-sans text-muted">
-            &copy; 2026 Flying Solo. Made with grit and grace in the UK.
+            &copy; 2026 CairnFertility. Made with grit and grace in the UK.
           </p>
           <p className="text-xs font-sans text-muted/60 leading-relaxed" style={{ maxWidth: "60ch" }}>
-            Flying Solo is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
           </p>
         </div>
       </div>
