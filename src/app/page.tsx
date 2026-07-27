@@ -162,7 +162,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
             {/* Card 1: hot pink bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#D43878" }}>
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F0A8C4" }}>
               <div className="p-5 flex items-start justify-between gap-3">
                 <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[0].title}
