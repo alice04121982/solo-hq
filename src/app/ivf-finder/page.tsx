@@ -40,12 +40,12 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
             HFEA-licensed clinics only
           </p>
           <h1
-            className="font-sans font-medium text-foreground mb-4"
-            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+            className="font-sans font-medium mb-4"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: "#1A3A25" }}
           >
             Find IVF Clinics
             <br />
-            <span style={{ color: "var(--accent)" }}>Near You</span>
+            Near You
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
             Real pricing. Verified success rates. Side-by-side comparisons.
