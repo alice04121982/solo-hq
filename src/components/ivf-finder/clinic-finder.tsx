@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { LocationSearch } from "./location-search";
 import { ClinicResults } from "./clinic-results";
+import { ClinicFilters, DEFAULT_FILTERS } from "./clinic-filters";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
 import { DisclaimerBanner } from "./disclaimer-banner";
 import type { ClinicData, ClinicSearchResponse } from "@/types/clinic";
+import type { FilterState } from "./clinic-filters";
 
 const LS_KEY = "solo-hq-compare";
 
@@ -28,6 +30,7 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
   const [searchLocation, setSearchLocation] = useState(initialLocation ?? "");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [selectedClinics, setSelectedClinics] = useState<ClinicData[]>([]);
+  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
 
   // Restore comparison from localStorage on mount
   useEffect(() => {
@@ -46,7 +49,6 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
   useEffect(() => {
     setSelectedClinics((prev) => {
       const fromCurrent = clinics.filter((c) => selectedIds.includes(c.id));
-      // Also keep any previously selected clinics not in current results
       const fromPrev = prev.filter(
         (c) => selectedIds.includes(c.id) && !fromCurrent.find((fc) => fc.id === c.id)
       );
@@ -67,8 +69,8 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
     setIsLoading(true);
     setHasSearched(true);
     setSearchLocation(location);
+    setFilters(DEFAULT_FILTERS);
 
-    // Update URL
     const params = new URLSearchParams({ location, radius: String(radius) });
     router.replace(`/ivf-finder?${params.toString()}`, { scroll: false });
 
@@ -97,11 +99,45 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Derive available countries from current results
+  const availableCountries = useMemo(
+    () => [...new Set(clinics.map((c) => c.country ?? "United Kingdom"))],
+    [clinics]
+  );
+
+  // Apply filters
+  const filteredClinics = useMemo(() => {
+    return clinics.filter((c) => {
+      // Country
+      if (filters.countries.length > 0) {
+        const country = c.country ?? "United Kingdom";
+        if (!filters.countries.includes(country)) return false;
+      }
+
+      // Max price (based on lowest of basicIvf / donorSpermIvf)
+      if (filters.maxPrice !== null) {
+        const low = Math.min(
+          c.prices.basicIvf ?? Infinity,
+          c.prices.donorSpermIvf ?? Infinity
+        );
+        if (low === Infinity || low > filters.maxPrice) return false;
+      }
+
+      // Min success rate (use selected bracket, default to under35 for "any")
+      if (filters.minSuccessRate !== null) {
+        const bracketKey =
+          filters.ageBracket === "any" ? "under35" : filters.ageBracket;
+        const rate = c.successRates[bracketKey];
+        if (rate == null || rate < filters.minSuccessRate) return false;
+      }
+
+      return true;
+    });
+  }, [clinics, filters]);
+
   const handleToggleCompare = useCallback((clinic: ClinicData) => {
     setSelectedIds((prev) => {
-      if (prev.includes(clinic.id)) {
-        return prev.filter((id) => id !== clinic.id);
-      }
+      if (prev.includes(clinic.id)) return prev.filter((id) => id !== clinic.id);
       if (prev.length >= 4) return prev;
       return [...prev, clinic.id];
     });
@@ -133,21 +169,32 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
         />
       </div>
 
+      {/* Filters — shown once we have results */}
+      {hasSearched && !isLoading && clinics.length > 0 && (
+        <ClinicFilters
+          filters={filters}
+          onChange={setFilters}
+          availableCountries={availableCountries}
+        />
+      )}
+
       {/* Results */}
       {(hasSearched || isLoading) && (
         <div className="mb-6">
           <ClinicResults
-            clinics={clinics}
+            clinics={filteredClinics}
+            totalCount={clinics.length}
             location={searchLocation}
             selectedIds={selectedIds}
             onToggleCompare={handleToggleCompare}
             isLoading={isLoading}
             source={source}
+            ageBracket={filters.ageBracket}
           />
         </div>
       )}
 
-      {/* Comparison Table (shown when 2+ selected) */}
+      {/* Comparison Table */}
       {selectedClinics.length >= 2 && (
         <div ref={tableRef} className="mb-6">
           <ComparisonTable clinics={selectedClinics} />
