@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { LocationSearch } from "./location-search";
 import { ClinicResults } from "./clinic-results";
-import { ClinicFilters, DEFAULT_FILTERS } from "./clinic-filters";
+import { DEFAULT_FILTERS } from "./clinic-filters";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
 import { DisclaimerBanner } from "./disclaimer-banner";
@@ -153,23 +153,17 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
 
   return (
     <div className={hasContent ? "pb-32" : ""}>
-      {/* Search */}
-      <div className="rounded-[32px] bg-white border border-border p-6 mb-6">
+      {/* Search + Filters */}
+      <div className="rounded-2xl bg-white border border-border overflow-hidden mb-6">
         <LocationSearch
           initialLocation={initialLocation}
           initialRadius={initialRadius}
+          filters={filters}
+          onFiltersChange={setFilters}
           onSearch={fetchClinics}
           isLoading={isLoading}
         />
       </div>
-
-      {/* Filters — shown once we have results */}
-      {hasSearched && !isLoading && clinics.length > 0 && (
-        <ClinicFilters
-          filters={filters}
-          onChange={setFilters}
-        />
-      )}
 
       {/* Results */}
       {(hasSearched || isLoading) && (
