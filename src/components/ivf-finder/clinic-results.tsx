@@ -17,7 +17,7 @@ interface ClinicResultsProps {
 
 function SkeletonCard() {
   return (
-    <div className="rounded-[32px] bg-card-bg border border-card-border p-5 animate-pulse">
+    <div className="rounded-[32px] bg-white border border-border p-5 animate-pulse">
       <div className="flex gap-2 mb-3">
         <div className="h-5 w-24 rounded-full bg-lavender-light" />
         <div className="h-5 w-20 rounded-full bg-lavender-light" />
@@ -67,7 +67,7 @@ export function ClinicResults({
 
   if (clinics.length === 0) {
     return (
-      <div className="rounded-[32px] bg-card-bg border border-card-border p-12 text-center">
+      <div className="rounded-[32px] bg-white border border-border p-12 text-center">
         <p className="text-navy font-semibold mb-1">No clinics match your filters</p>
         <p className="text-sm text-muted">Try relaxing a filter or clearing all filters to see all results.</p>
       </div>
