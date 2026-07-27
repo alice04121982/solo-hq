@@ -5,6 +5,7 @@ import { FamilyHero } from "@/components/family/family-hero";
 import { ProcessSteps } from "@/components/family/process-steps";
 import { PersonalStories } from "@/components/family/personal-stories";
 import { NewsletterSection } from "@/components/family/newsletter-section";
+import { ResourcesSection } from "@/components/family/resources-section";
 import { ClinicSection } from "@/components/family/clinic-section";
 import { JourneyMap } from "@/components/journey-map";
 import { BentoCard } from "@/components/bento-card";
@@ -71,6 +72,9 @@ export default async function FamilyTypePage({ params }: PageProps) {
 
       {/* Personal stories */}
       <PersonalStories stories={family.stories} />
+
+      {/* Resources */}
+      <ResourcesSection resources={family.resources} />
 
       {/* Newsletter */}
       <NewsletterSection familyLabel={family.label} />
