@@ -40,7 +40,7 @@ export function CTASection() {
           <div className="flex flex-col sm:flex-row gap-4">
             <button
               className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
-              style={{ background: "#C5E600", color: "#1A3A25" }}
+              style={{ background: "#1A3A25", color: "#f9c6da" }}
             >
               Join the Waitlist
               <ArrowRight className="h-4 w-4" />
