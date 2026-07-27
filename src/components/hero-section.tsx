@@ -41,9 +41,7 @@ export function HeroSection() {
                 color: "#f9c6da",
               }}
             >
-              Don&apos;t just pick a clinic.
-              <br />
-              <span style={{ color: "#C5E600" }}>Know the real picture.</span>
+              IVF made clearer, for every kind of family.
             </h1>
 
             <p
