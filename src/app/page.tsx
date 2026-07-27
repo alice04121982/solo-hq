@@ -135,17 +135,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 — Personal stories: racing green */}
-      <section style={{ background: RACING_GREEN }} id="stories">
+      {/* 4 — Personal stories: light pink */}
+      <section style={{ background: "#FDE8F2" }} id="stories">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#C5E600" }}>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "rgba(61,13,27,0.5)" }}>
                 Real journeys
               </p>
               <h2
                 className="font-sans font-medium"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#FFFFFF" }}
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
               >
                 In their own words.
               </h2>
@@ -153,7 +153,7 @@ export default function Home() {
             <a
               href="/stories"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
-              style={{ borderColor: "rgba(255,255,255,0.3)", color: "#fff" }}
+              style={{ borderColor: "rgba(61,13,27,0.3)", color: "#3D0D1B" }}
             >
               See all stories <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -161,15 +161,15 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: light pink bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#FDE8F2" }}>
+            {/* Card 1: hot pink bg, heading + badge top, photo below */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#D43878" }}>
               <div className="p-5 flex items-start justify-between gap-3">
                 <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[0].title}
                 </h3>
                 <span
                   className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
-                  style={{ background: "#D43878", color: "#3D0D1B" }}
+                  style={{ background: "#FDE8F2", color: "#3D0D1B" }}
                 >
                   {FEATURED_STORIES[0].familyLabel}
                 </span>
@@ -253,7 +253,7 @@ export default function Home() {
           <a
             href="/stories"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#C5E600" }}
+            style={{ color: "#3D0D1B" }}
           >
             See all stories <ArrowRight className="h-3.5 w-3.5" />
           </a>
