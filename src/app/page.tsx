@@ -174,7 +174,7 @@ export default function Home() {
                   {FEATURED_STORIES[0].familyLabel}
                 </span>
               </div>
-              <div className="relative mx-3 mb-3 rounded-xl overflow-hidden" style={{ height: "280px" }}>
+              <div className="relative overflow-hidden flex-1" style={{ minHeight: "280px" }}>
                 <Image
                   src="/photos/story-hero.jpeg"
                   alt="Solo mum story"
