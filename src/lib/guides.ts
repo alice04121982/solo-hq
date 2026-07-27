@@ -6,6 +6,8 @@ export interface GuideSection {
   postBullets?: string[];
   numbered?: string[];
   callout?: string;
+  calloutDownload?: string;
+  calloutCopy?: boolean;
 }
 
 export interface Guide {
@@ -231,7 +233,8 @@ export const GUIDES: Guide[] = [
           "Enter the figures in a spreadsheet with three columns: Estimated cost, Actual cost, and Difference. Review it monthly throughout your treatment journey.",
         ],
         callout:
-          "Download the CairnFertility budget template as a Google Sheet — it includes pre-filled formulas and a month-by-month cash flow projection.",
+          "Download the CairnFertility budget template — it includes pre-filled formulas and a month-by-month cash flow projection.",
+        calloutDownload: "/downloads/cairnfertility-ivf-budget-template.csv",
       },
     ],
     keyTakeaways: [
@@ -273,7 +276,8 @@ export const GUIDES: Guide[] = [
           "You do not need to disclose why you are asking at this stage. A simple initial message is enough.",
         ],
         callout:
-          "Sample email: 'Hi [Name], I wanted to ask whether our benefits package includes any support for fertility treatment or IVF. I understand this is becoming more common and wanted to understand what might be available before I make any plans. Happy to chat if useful. Thanks, [Your name]'",
+          "Hi [Name], I wanted to ask whether our benefits package includes any support for fertility treatment or IVF. I understand this is becoming more common and wanted to understand what might be available before I make any plans. Happy to chat if useful. Thanks, [Your name]",
+        calloutCopy: true,
       },
       {
         heading: "If there is no policy: making the case",
