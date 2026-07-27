@@ -541,7 +541,7 @@ function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWi
     {
       value: "anywhere",
       title: "Anywhere in the world",
-      subtitle: "I&apos;ll go wherever gives me the best chance",
+      subtitle: "I'll go wherever gives me the best chance",
       icon: "🌍",
     },
   ];

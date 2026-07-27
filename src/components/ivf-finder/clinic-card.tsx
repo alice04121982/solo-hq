@@ -76,7 +76,7 @@ export function ClinicCard({
                 </span>
               )}
               {clinic.soloFriendly && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-lavender px-2 py-0.5 text-[10px] font-semibold text-navy">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8E8E8] px-2 py-0.5 text-[10px] font-semibold text-navy">
                   <Heart className="h-3 w-3" />
                   Solo-friendly
                 </span>
@@ -92,7 +92,7 @@ export function ClinicCard({
           </div>
           {clinic.distanceMiles != null && (
             <div className="text-right shrink-0">
-              <p className="text-lg font-bold text-lavender-dark">
+              <p className="text-lg font-bold text-muted">
                 {clinic.distanceMiles}
               </p>
               <p className="text-[10px] text-muted">miles</p>
@@ -135,8 +135,8 @@ export function ClinicCard({
               isSelected
                 ? "bg-lime text-charcoal hover:bg-lime-dark"
                 : compareDisabled
-                  ? "bg-warm-white text-muted cursor-not-allowed border border-card-border"
-                  : "bg-warm-white text-navy hover:bg-lavender-light border border-card-border"
+                  ? "bg-white text-muted cursor-not-allowed border border-border"
+                  : "bg-white text-navy hover:bg-[#F0F0F0] border border-border"
             }`}
           >
             {isSelected ? (
@@ -153,7 +153,7 @@ export function ClinicCard({
           </button>
           <button
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1 h-9 px-3 rounded-full border border-card-border text-xs font-medium text-navy hover:bg-warm-white transition-colors"
+            className="flex items-center gap-1 h-9 px-3 rounded-full border border-border text-xs font-medium text-navy hover:bg-[#F0F0F0] transition-colors"
           >
             Details
             <ChevronDown
@@ -173,7 +173,7 @@ export function ClinicCard({
             transition={{ duration: 0.25 }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-5 border-t border-card-border pt-4">
+            <div className="px-5 pb-5 border-t border-border pt-4">
               {/* Single-cycle pricing + success rates */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 <div>
@@ -246,7 +246,7 @@ export function ClinicCard({
                     {clinic.packages.map((pkg) => (
                       <div
                         key={pkg.name}
-                        className="rounded-xl bg-warm-white p-3"
+                        className="rounded-xl bg-[#F5F5F5] p-3"
                       >
                         <div className="flex items-start justify-between gap-2 mb-1">
                           <p className="text-xs font-semibold text-navy leading-snug">
@@ -278,7 +278,7 @@ export function ClinicCard({
                 {clinic.phone && (
                   <a
                     href={`tel:${clinic.phone}`}
-                    className="inline-flex items-center gap-1.5 text-xs text-navy hover:text-lavender-dark transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-navy hover:text-muted transition-colors"
                   >
                     <Phone className="h-3 w-3" />
                     {clinic.phone}

@@ -24,11 +24,12 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             </p>
 
             <h1
-              className="font-sans font-bold text-foreground mb-6"
+              className="font-sans font-bold mb-6"
               style={{
                 fontSize: "clamp(2.5rem, 5.5vw, 4.75rem)",
                 lineHeight: 1.03,
                 fontVariationSettings: "'wght' 800",
+                color: "#1A3A25",
               }}
             >
               {lines[0]}
