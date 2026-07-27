@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Stories", href: "/stories" },
   { label: "Resources", href: "/resources" },
-  { label: "Get Started", href: "/get-started" },
 ];
 
 interface SiteNavProps {

@@ -1,10 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Lightbulb, Landmark, Search, Stethoscope, FlaskConical, Heart, Baby, Sunrise, Users, ChevronDown, Check } from "lucide-react";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { useRef } from "react";
+import { Lightbulb, Landmark, Search, Stethoscope, FlaskConical, Heart, Baby, Sunrise, Users } from "lucide-react";
 
 interface Phase {
   id: string;
@@ -74,15 +71,18 @@ const PHASES: Phase[] = [
 ];
 
 export function JourneyMap() {
-  const [expandedId, setExpandedId] = useState<string | null>("decision");
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="p-6 md:p-8">
-      <div className="mb-8">
+      <div className="mb-6">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3 font-sans">
           Full lifecycle
         </p>
-        <h2 className="font-sans font-bold text-foreground text-2xl leading-tight">
+        <h2
+          className="font-sans font-bold text-2xl leading-tight"
+          style={{ color: "#1A3A25" }}
+        >
           The Solo Navigator
         </h2>
         <p className="text-sm font-sans text-muted mt-1 leading-relaxed">
@@ -90,68 +90,72 @@ export function JourneyMap() {
         </p>
       </div>
 
-      <div>
-        {PHASES.map((phase, idx) => {
-          const isExpanded = expandedId === phase.id;
-          return (
-            <div key={phase.id}>
-              <button
-                onClick={() => setExpandedId(isExpanded ? null : phase.id)}
-                className="w-full flex items-center gap-4 py-4 border-t border-border text-left group"
-              >
-                {/* Number */}
+      {/* Scroll hint dots */}
+      <div
+        ref={scrollRef}
+        className="flex gap-3 overflow-x-auto pb-4 -mx-2 px-2"
+        style={{
+          scrollSnapType: "x mandatory",
+          WebkitOverflowScrolling: "touch",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        {PHASES.map((phase) => (
+          <div
+            key={phase.id}
+            className="shrink-0 rounded-2xl border border-border bg-white flex flex-col"
+            style={{
+              scrollSnapAlign: "start",
+              width: "calc(85vw - 2rem)",
+              maxWidth: "280px",
+              minHeight: "360px",
+            }}
+          >
+            {/* Card header */}
+            <div className="p-5 border-b border-border">
+              <div className="flex items-center gap-3 mb-3">
                 <span
-                  className="font-serif leading-none shrink-0 w-8 transition-colors duration-150"
-                  style={{
-                    fontSize: "1.5rem",
-                    color: isExpanded ? "var(--accent)" : "var(--border)",
-                    fontOpticalSizing: "auto" as never,
-                  }}
+                  className="font-serif leading-none"
+                  style={{ fontSize: "1.5rem", color: "var(--accent)" }}
                 >
                   {String(phase.number).padStart(2, "0")}
                 </span>
-
-                <div className="flex-1 min-w-0">
-                  <p className={`font-sans font-medium text-base leading-tight transition-colors duration-150 ${isExpanded ? "text-foreground" : "text-foreground/60 group-hover:text-foreground"}`}>
-                    {phase.title}
-                  </p>
-                  <p className="text-xs font-sans text-muted mt-0.5">{phase.subtitle}</p>
-                </div>
-
-                <ChevronDown className={`h-4 w-4 text-muted transition-transform duration-200 shrink-0 ${isExpanded ? "rotate-180" : ""}`} />
-              </button>
-
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: EASE }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pl-12 pr-2 pb-6">
-                      <p className="text-sm font-sans text-muted leading-relaxed mb-4">
-                        {phase.description}
-                      </p>
-                      <div className="space-y-2">
-                        {phase.actions.map((action) => (
-                          <div key={action} className="flex items-start gap-2.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0 mt-2" />
-                            <p className="text-xs font-sans text-muted leading-relaxed">{action}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {idx === PHASES.length - 1 && <div className="border-t border-border" />}
+                <span
+                  className="flex items-center justify-center h-7 w-7 rounded-full text-muted"
+                  style={{ background: "#F0F0F0" }}
+                >
+                  {phase.icon}
+                </span>
+              </div>
+              <p className="font-sans font-semibold text-sm leading-tight" style={{ color: "#1A3A25" }}>
+                {phase.title}
+              </p>
+              <p className="text-xs font-sans text-muted mt-0.5">{phase.subtitle}</p>
             </div>
-          );
-        })}
+
+            {/* Card body */}
+            <div className="p-5 flex flex-col gap-4 flex-1">
+              <p className="text-xs font-sans text-muted leading-relaxed">
+                {phase.description}
+              </p>
+              <div className="space-y-2">
+                {phase.actions.map((action) => (
+                  <div key={action} className="flex items-start gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0 mt-1.5" />
+                    <p className="text-xs font-sans text-muted leading-relaxed">{action}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Scroll indicator */}
+      <p className="text-[10px] font-sans text-muted text-center mt-1 opacity-60">
+        Swipe to explore all 9 steps →
+      </p>
     </div>
   );
 }

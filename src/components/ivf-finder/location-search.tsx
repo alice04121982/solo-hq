@@ -1,26 +1,77 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { Search, LocateFixed, ChevronDown } from "lucide-react";
+import { Search, LocateFixed, X } from "lucide-react";
 import { motion } from "framer-motion";
+import { AGE_BRACKETS, DEFAULT_FILTERS } from "./clinic-filters";
+import type { FilterState } from "./clinic-filters";
+
+const RADIUS_OPTIONS = [10, 25, 50, 100];
+
+const COUNTRIES = [
+  { value: "United Kingdom", label: "UK" },
+  { value: "Spain", label: "Spain" },
+  { value: "Greece", label: "Greece" },
+  { value: "Czech Republic", label: "Czech Republic" },
+];
+
+const SUCCESS_OPTS = [
+  { value: null as number | null, label: "Any" },
+  { value: 20, label: "20%+" },
+  { value: 30, label: "30%+" },
+  { value: 40, label: "40%+" },
+  { value: 50, label: "50%+" },
+];
+
+const PRICE_OPTS = [
+  { value: null as number | null, label: "Any" },
+  { value: 5000, label: "Under £5k" },
+  { value: 7500, label: "Under £7.5k" },
+  { value: 10000, label: "Under £10k" },
+];
+
+function Chip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150 whitespace-nowrap"
+      style={{
+        background: active ? "#1A3A25" : "#F0F0F0",
+        color: active ? "#e8f5d8" : "#3D0D1B",
+      }}
+    >
+      {label}
+    </button>
+  );
+}
 
 interface LocationSearchProps {
   initialLocation?: string;
   initialRadius?: number;
+  filters: FilterState;
+  onFiltersChange: (f: FilterState) => void;
   onSearch: (location: string, radius: number) => void;
   isLoading?: boolean;
 }
 
-const RADIUS_OPTIONS = [10, 25, 50, 100];
-
-// Loose UK postcode/city validator
-function isValidUKLocation(value: string): boolean {
+function isValidLocation(value: string): boolean {
   return value.trim().length >= 2;
 }
 
 export function LocationSearch({
   initialLocation = "",
   initialRadius = 25,
+  filters,
+  onFiltersChange,
   onSearch,
   isLoading = false,
 }: LocationSearchProps) {
@@ -29,11 +80,17 @@ export function LocationSearch({
   const [error, setError] = useState<string | null>(null);
   const [geoLoading, setGeoLoading] = useState(false);
 
+  const hasActiveFilters =
+    filters.countries.length > 0 ||
+    filters.ageBracket !== "any" ||
+    filters.minSuccessRate !== null ||
+    filters.maxPrice !== null;
+
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (!isValidUKLocation(location)) {
-        setError("Please enter a UK postcode or town name.");
+      if (!isValidLocation(location)) {
+        setError("Please enter a postcode or town name.");
         return;
       }
       setError(null);
@@ -64,82 +121,175 @@ export function LocationSearch({
             setError("Could not determine your postcode. Please type it manually.");
           }
         } catch {
-          setError("Could not determine your location. Please type it manually.");
+          setError("Could not get your location. Please type your postcode.");
         } finally {
           setGeoLoading(false);
         }
       },
       () => {
-        setError("Location access denied. Please type your postcode or town.");
+        setError("Location access denied. Please type your postcode.");
         setGeoLoading(false);
       }
     );
   }, [radius, onSearch]);
 
+  const toggleCountry = (c: string) => {
+    onFiltersChange({
+      ...filters,
+      countries: filters.countries.includes(c)
+        ? filters.countries.filter((x) => x !== c)
+        : [...filters.countries, c],
+    });
+  };
+
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="flex flex-col sm:flex-row gap-3">
-        {/* Location input */}
-        <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none" />
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => {
-              setLocation(e.target.value);
-              setError(null);
-            }}
-            placeholder="Enter postcode or town (e.g. Cambridge, CB1)"
-            className="w-full h-12 pl-10 pr-4 rounded-full border border-foreground/40 bg-white text-navy text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent"
-          />
-        </div>
-
-        {/* Radius selector */}
-        <div className="relative">
-          <select
-            value={radius}
-            onChange={(e) => setRadius(parseInt(e.target.value, 10))}
-            className="h-12 pl-4 pr-8 rounded-full border border-foreground/40 bg-white text-navy text-sm appearance-none focus:outline-none focus:ring-2 focus:ring-foreground/20 cursor-pointer"
-          >
-            {RADIUS_OPTIONS.map((r) => (
-              <option key={r} value={r}>
-                {r} miles
-              </option>
-            ))}
-          </select>
-          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none" />
-        </div>
-
-        {/* Geolocation */}
+      {/* ── Location input ── */}
+      <div className="flex items-center gap-3 px-5 py-4 border-b border-[#EFEFEF]">
+        <Search className="h-4 w-4 text-muted shrink-0" />
+        <input
+          type="text"
+          value={location}
+          onChange={(e) => {
+            setLocation(e.target.value);
+            setError(null);
+          }}
+          placeholder="Postcode or town — e.g. Cambridge, SW1"
+          className="flex-1 bg-transparent text-sm text-navy placeholder:text-muted focus:outline-none"
+        />
         <button
           type="button"
           onClick={handleGeolocate}
           disabled={geoLoading}
           title="Use my location"
-          className="h-12 w-12 shrink-0 rounded-full border border-foreground/40 bg-white flex items-center justify-center text-muted hover:bg-[#F0F0F0] transition-colors disabled:opacity-50"
+          className="shrink-0 flex items-center gap-1.5 text-xs text-muted hover:text-navy transition-colors disabled:opacity-50"
         >
-          <LocateFixed className={`h-4 w-4 ${geoLoading ? "animate-spin" : ""}`} />
-        </button>
-
-        {/* Submit */}
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="h-12 px-6 rounded-full bg-lime text-[#1A3A25] text-sm font-bold hover:bg-lime-dark transition-colors disabled:opacity-60 whitespace-nowrap"
-        >
-          {isLoading ? "Searching…" : "Find Clinics"}
+          <LocateFixed className={`h-3.5 w-3.5 ${geoLoading ? "animate-spin" : ""}`} />
+          <span className="hidden sm:inline font-medium">Locate me</span>
         </button>
       </div>
 
-      {error && (
-        <motion.p
-          initial={{ opacity: 0, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-2 text-xs text-red-500 pl-4"
+      {/* ── Radius ── */}
+      <div className="flex items-center gap-3 px-5 py-3.5 border-b border-[#EFEFEF]">
+        <span className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted shrink-0">
+          Within
+        </span>
+        <div className="flex gap-1.5 flex-wrap">
+          {RADIUS_OPTIONS.map((r) => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => setRadius(r)}
+              className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150"
+              style={{
+                background: radius === r ? "#1A3A25" : "#F0F0F0",
+                color: radius === r ? "#e8f5d8" : "#3D0D1B",
+              }}
+            >
+              {r} mi
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Filters ── */}
+      <div className="px-5 py-4 border-b border-[#EFEFEF] space-y-4">
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted">
+            Filters
+          </p>
+          {hasActiveFilters && (
+            <button
+              type="button"
+              onClick={() => onFiltersChange(DEFAULT_FILTERS)}
+              className="flex items-center gap-1 text-[10px] text-muted hover:text-navy transition-colors"
+            >
+              <X className="h-3 w-3" />
+              Clear all
+            </button>
+          )}
+        </div>
+
+        {/* Country */}
+        <div>
+          <p className="text-[10px] font-[600] text-muted mb-2">Country</p>
+          <div className="flex flex-wrap gap-1.5">
+            {COUNTRIES.map((c) => (
+              <Chip
+                key={c.value}
+                label={c.label}
+                active={filters.countries.includes(c.value)}
+                onClick={() => toggleCountry(c.value)}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Age bracket */}
+        <div>
+          <p className="text-[10px] font-[600] text-muted mb-2">Age bracket</p>
+          <div className="flex flex-wrap gap-1.5">
+            {AGE_BRACKETS.map((b) => (
+              <Chip
+                key={b.value}
+                label={b.label}
+                active={filters.ageBracket === b.value}
+                onClick={() => onFiltersChange({ ...filters, ageBracket: b.value })}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Min success rate */}
+        <div>
+          <p className="text-[10px] font-[600] text-muted mb-2">Min. success rate</p>
+          <div className="flex flex-wrap gap-1.5">
+            {SUCCESS_OPTS.map((opt) => (
+              <Chip
+                key={String(opt.value)}
+                label={opt.label}
+                active={filters.minSuccessRate === opt.value}
+                onClick={() => onFiltersChange({ ...filters, minSuccessRate: opt.value })}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Max price */}
+        <div>
+          <p className="text-[10px] font-[600] text-muted mb-2">Max. price</p>
+          <div className="flex flex-wrap gap-1.5">
+            {PRICE_OPTS.map((opt) => (
+              <Chip
+                key={String(opt.value)}
+                label={opt.label}
+                active={filters.maxPrice === opt.value}
+                onClick={() => onFiltersChange({ ...filters, maxPrice: opt.value })}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Submit ── */}
+      <div className="px-5 py-4">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full h-11 rounded-full bg-lime text-[#1A3A25] text-sm font-bold hover:bg-lime-dark transition-colors disabled:opacity-60"
         >
-          {error}
-        </motion.p>
-      )}
+          {isLoading ? "Searching…" : "Find clinics"}
+        </button>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-2 text-xs text-red-500 text-center"
+          >
+            {error}
+          </motion.p>
+        )}
+      </div>
     </form>
   );
 }
