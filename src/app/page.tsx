@@ -94,7 +94,7 @@ export default function Home() {
               >
                 The full picture —
                 <br />
-                <span style={{ color: "#C5E600" }}>not the brochure version.</span>
+                not the brochure version.
               </h2>
               <p className="text-sm font-sans leading-relaxed mb-4" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
                 Greece might look £4,000 cheaper. Add three return flights and two hotel stays and suddenly it isn&apos;t. We factor in travel and accommodation so the comparison is honest.
