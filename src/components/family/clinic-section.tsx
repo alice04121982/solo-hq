@@ -43,7 +43,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               </a>
               <a
                 href="/ivf-finder"
-                className="inline-flex items-center gap-2 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-foreground hover:text-background transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1A3A25]/20 text-[#1A3A25] px-8 py-3.5 text-sm font-sans font-medium hover:bg-[#1A3A25] hover:text-white transition-colors duration-200"
               >
                 Search by location
               </a>
@@ -66,7 +66,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             ].map((s) => (
               <div key={s.label} className="bg-card-bg p-6">
                 <p
-                  className="font-sans font-medium text-foreground mb-1"
+                  className="font-sans font-medium text-[#1A3A25] mb-1"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)" }}
                 >
                   {s.value}
