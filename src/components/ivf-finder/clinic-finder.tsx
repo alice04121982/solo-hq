@@ -45,6 +45,7 @@ export function ClinicFinder({ initialLocation, initialRadius = DEFAULT_RADIUS }
   // Comparison state
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [selectedClinics, setSelectedClinics] = useState<ClinicData[]>([]);
+  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
 
   // Geolocation
   const [geoLoading, setGeoLoading] = useState(false);
