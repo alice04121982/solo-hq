@@ -11,11 +11,11 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
       style={{
         fontSize: "1.25rem",
         letterSpacing: "-0.02em",
-        color: onDark ? "#f9c6da" : "#1A0810",
+        color: onDark ? "#FFFFFF" : "#1A0810",
       }}
       aria-label="CairnFertility"
     >
-      Cairn<span style={{ color: "#C5E600" }}>Fertility</span>
+      Cairn<span style={{ color: onDark ? "#FFFFFF" : "#C5E600" }}>Fertility</span>
     </span>
   );
 }
