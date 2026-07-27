@@ -5,14 +5,7 @@ import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 
-// On lime section background, cards must NOT be lime — use dark/bold
-const CARD_THEMES = [
-  { bg: "#3D0D1B", text: "#f9c6da", muted: "#c4a0ae" },
-  { bg: "#D43878", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" },
-  { bg: "#1A0810", text: "#f9c6da", muted: "#c4a0ae" },
-  { bg: "#3D0D1B", text: "#f9c6da", muted: "#c4a0ae" },
-  { bg: "#D43878", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" },
-];
+const CARD_THEME = { bg: "#FDE8F2", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" };
 
 const RACING_GREEN = "#1A3A25";
 
@@ -51,8 +44,8 @@ export default function Home() {
             className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:pb-0"
             style={{ scrollbarWidth: "none" }}
           >
-            {FAMILY_TYPES.map((family, i) => {
-              const theme = CARD_THEMES[i % CARD_THEMES.length];
+            {FAMILY_TYPES.map((family) => {
+              const theme = CARD_THEME;
               return (
                 <a
                   key={family.slug}
@@ -130,7 +123,7 @@ export default function Home() {
                 <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
                   <p
                     className="font-sans font-medium mb-1"
-                    style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#C5E600" }}
+                    style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#f9c6da" }}
                   >
                     {s.value}
                   </p>
@@ -168,10 +161,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: cream bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#F2EDE4" }}>
+            {/* Card 1: light pink bg, heading + badge top, photo below */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#FDE8F2" }}>
               <div className="p-5 flex items-start justify-between gap-3">
-                <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#1A0810" }}>
+                <h3 className="font-sans font-medium text-xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[0].title}
                 </h3>
                 <span
@@ -227,8 +220,8 @@ export default function Home() {
               </div>
             </article>
 
-            {/* Card 3: pink bg, angled photo */}
-            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#D43878", height: "420px" }}>
+            {/* Card 3: light pink bg, angled photo */}
+            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", height: "420px" }}>
               <div className="p-6 relative z-10 max-w-[65%]">
                 <h3 className="font-sans font-medium text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
                   {FEATURED_STORIES[2].title}
