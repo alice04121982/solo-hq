@@ -41,9 +41,7 @@ export function HeroSection() {
                 color: "#f9c6da",
               }}
             >
-              Don&apos;t just pick a clinic.
-              <br />
-              <span style={{ color: "#C5E600" }}>Know the real picture.</span>
+              With you on every step of your Fertility journey with our unique Clinic comparison tool and custom guides for all family types.
             </h1>
 
             <p
