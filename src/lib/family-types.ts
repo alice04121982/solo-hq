@@ -35,6 +35,7 @@ export interface FamilyType {
   steps: ProcessStep[];
   stories: Story[];
   clinicNote: string;
+  resources: string[];
 }
 
 export const FAMILY_TYPES: FamilyType[] = [
@@ -125,6 +126,14 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     clinicNote:
       "Filter our comparison tool for donor sperm availability and solo-patient friendliness to find clinics that genuinely specialise in supporting single women.",
+    resources: [
+      "complete-solo-ivf-cost-breakdown",
+      "how-to-choose-a-sperm-donor",
+      "consultation-questions",
+      "donor-conception-legal-parenthood",
+      "solo-pregnancy-support-team",
+      "uk-support-groups",
+    ],
   },
   {
     slug: "same-sex-female",
@@ -212,6 +221,14 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     clinicNote:
       "Use the LGBTQ+ filter in our comparison tool to find clinics with genuine experience supporting same-sex female couples, including reciprocal IVF.",
+    resources: [
+      "iui-vs-ivf-vs-donor-eggs",
+      "how-to-choose-a-sperm-donor",
+      "consultation-questions",
+      "donor-conception-legal-parenthood",
+      "talking-to-child-donor-conception",
+      "uk-support-groups",
+    ],
   },
   {
     slug: "same-sex-male",
@@ -299,6 +316,14 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     clinicNote:
       "Our comparison tool highlights clinics with surrogacy experience. Filter for donor egg IVF and ICSI availability when selecting your clinic.",
+    resources: [
+      "consultation-questions",
+      "donor-conception-legal-parenthood",
+      "hfea-register",
+      "known-donor-legal-agreements",
+      "talking-to-child-donor-conception",
+      "uk-support-groups",
+    ],
   },
   {
     slug: "single-dad",
@@ -386,6 +411,14 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     clinicNote:
       "Filter our comparison tool for donor egg IVF and ICSI availability. Look for clinics with experience working with single intended fathers and surrogacy arrangements.",
+    resources: [
+      "consultation-questions",
+      "donor-conception-legal-parenthood",
+      "hfea-register",
+      "childcare-planning",
+      "two-week-wait",
+      "uk-support-groups",
+    ],
   },
   {
     slug: "heterosexual-couple",
@@ -473,6 +506,14 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     clinicNote:
       "Use our comparison tool to filter by treatment type — IVF, ICSI, IUI, or donor gametes — and sort by success rate for your age bracket to find the clinic that gives you the best chance.",
+    resources: [
+      "iui-vs-ivf-vs-donor-eggs",
+      "consultation-questions",
+      "understanding-hfea-success-rates",
+      "fertility-finance-options",
+      "two-week-wait",
+      "when-treatment-fails",
+    ],
   },
 ];
 

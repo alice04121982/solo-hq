@@ -31,6 +31,88 @@ function extractJsonFromText(text: string): ClinicData[] | null {
   return null;
 }
 
+const ABROAD_COUNTRIES = ["Spain", "Greece", "Czech Republic"];
+
+function buildSearchPrompt(location: string, radius: number): string {
+  if (ABROAD_COUNTRIES.includes(location)) {
+    return `Search for IVF and fertility clinics in ${location} that treat international patients, including UK patients travelling abroad for treatment.
+
+For each clinic found, provide current data in this exact format and return ONLY a valid JSON array, no markdown, no preamble, no explanation:
+
+[
+  {
+    "id": "slug-from-name",
+    "name": "Full Clinic Name",
+    "address": "Full address including city and country",
+    "phone": "phone number or null",
+    "website": "https://... or null",
+    "country": "${location}",
+    "hfeaLicensed": false,
+    "hfeaNumber": null,
+    "soloFriendly": true/false based on whether they explicitly accept single women,
+    "distanceMiles": null,
+    "prices": {
+      "basicIvf": number in GBP equivalent or null,
+      "ivfIcsi": number in GBP equivalent or null,
+      "donorSpermIvf": number in GBP equivalent or null,
+      "donorEggIvf": number in GBP equivalent or null,
+      "embryoStorage": number per year in GBP equivalent or null,
+      "soloPackage": number in GBP equivalent or null,
+      "consultation": number in GBP equivalent or null
+    },
+    "successRates": {
+      "under35": live birth rate % as number or null,
+      "age35to37": live birth rate % as number or null,
+      "age38to39": live birth rate % as number or null
+    },
+    "waitingTimeWeeks": number or null,
+    "nhsReferrals": false,
+    "paymentPlans": true/false or null
+  }
+]
+
+Include up to 8 well-known clinics. Return ONLY the JSON array.`;
+  }
+
+  return `Search for IVF clinics within ${radius} miles of ${location}, UK.
+
+For each clinic found, provide current data in this exact format and return ONLY a valid JSON array, no markdown, no preamble, no explanation:
+
+[
+  {
+    "id": "slug-from-name",
+    "name": "Full Clinic Name",
+    "address": "Full street address including postcode",
+    "phone": "phone number or null",
+    "website": "https://... or null",
+    "country": "United Kingdom",
+    "hfeaLicensed": true,
+    "hfeaNumber": "HFEA number or null",
+    "soloFriendly": true/false based on whether they explicitly accept single women,
+    "distanceMiles": estimated miles from ${location},
+    "prices": {
+      "basicIvf": number in GBP or null,
+      "ivfIcsi": number in GBP or null,
+      "donorSpermIvf": number in GBP or null,
+      "donorEggIvf": number in GBP or null,
+      "embryoStorage": number per year in GBP or null,
+      "soloPackage": number in GBP or null,
+      "consultation": number in GBP or null
+    },
+    "successRates": {
+      "under35": live birth rate % as number or null,
+      "age35to37": live birth rate % as number or null,
+      "age38to39": live birth rate % as number or null
+    },
+    "waitingTimeWeeks": number or null,
+    "nhsReferrals": true/false or null,
+    "paymentPlans": true/false or null
+  }
+]
+
+Include up to 8 clinics. Prioritise those closest to ${location}. Return ONLY the JSON array.`;
+}
+
 function normaliseClinics(raw: ClinicData[], location: string): ClinicData[] {
   return raw.map((c, i) => ({
     id: c.id ?? `clinic-${i}`,
@@ -88,42 +170,7 @@ export async function GET(request: NextRequest) {
         messages: [
           {
             role: "user",
-            content: `Search for IVF clinics within ${radius} miles of ${location}, UK.
-
-For each clinic found, provide current data in this exact format and return ONLY a valid JSON array, no markdown, no preamble, no explanation:
-
-[
-  {
-    "id": "slug-from-name",
-    "name": "Full Clinic Name",
-    "address": "Full street address including postcode",
-    "phone": "phone number or null",
-    "website": "https://... or null",
-    "hfeaLicensed": true,
-    "hfeaNumber": "HFEA number or null",
-    "soloFriendly": true/false based on whether they explicitly accept single women,
-    "distanceMiles": estimated miles from ${location},
-    "prices": {
-      "basicIvf": number in GBP or null,
-      "ivfIcsi": number in GBP or null,
-      "donorSpermIvf": number in GBP or null,
-      "donorEggIvf": number in GBP or null,
-      "embryoStorage": number per year in GBP or null,
-      "soloPackage": number in GBP or null,
-      "consultation": number in GBP or null
-    },
-    "successRates": {
-      "under35": live birth rate % as number or null,
-      "age35to37": live birth rate % as number or null,
-      "age38to39": live birth rate % as number or null
-    },
-    "waitingTimeWeeks": number or null,
-    "nhsReferrals": true/false or null,
-    "paymentPlans": true/false or null
-  }
-]
-
-Include up to 8 clinics. Prioritise those closest to ${location}. Return ONLY the JSON array.`,
+            content: buildSearchPrompt(location, radius),
           },
         ],
       }),

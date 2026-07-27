@@ -8,8 +8,7 @@ import type { FilterState } from "./clinic-filters";
 
 const RADIUS_OPTIONS = [10, 25, 50, 100];
 
-const COUNTRIES = [
-  { value: "United Kingdom", label: "UK" },
+const ABROAD_COUNTRIES = [
   { value: "Spain", label: "Spain" },
   { value: "Greece", label: "Greece" },
   { value: "Czech Republic", label: "Czech Republic" },
@@ -54,6 +53,8 @@ function Chip({
   );
 }
 
+type SearchMode = "nearby" | "abroad";
+
 interface LocationSearchProps {
   initialLocation?: string;
   initialRadius?: number;
@@ -75,13 +76,14 @@ export function LocationSearch({
   onSearch,
   isLoading = false,
 }: LocationSearchProps) {
+  const [mode, setMode] = useState<SearchMode>("nearby");
   const [location, setLocation] = useState(initialLocation);
   const [radius, setRadius] = useState(initialRadius);
+  const [abroadCountry, setAbroadCountry] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [geoLoading, setGeoLoading] = useState(false);
 
   const hasActiveFilters =
-    filters.countries.length > 0 ||
     filters.ageBracket !== "any" ||
     filters.minSuccessRate !== null ||
     filters.maxPrice !== null;
@@ -89,14 +91,23 @@ export function LocationSearch({
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (!isValidLocation(location)) {
-        setError("Please enter a postcode or town name.");
-        return;
+      if (mode === "nearby") {
+        if (!isValidLocation(location)) {
+          setError("Please enter a postcode or town name.");
+          return;
+        }
+        setError(null);
+        onSearch(location.trim(), radius);
+      } else {
+        if (!abroadCountry) {
+          setError("Please select a country.");
+          return;
+        }
+        setError(null);
+        onSearch(abroadCountry, 0);
       }
-      setError(null);
-      onSearch(location.trim(), radius);
     },
-    [location, radius, onSearch]
+    [mode, location, radius, abroadCountry, onSearch]
   );
 
   const handleGeolocate = useCallback(() => {
@@ -133,66 +144,99 @@ export function LocationSearch({
     );
   }, [radius, onSearch]);
 
-  const toggleCountry = (c: string) => {
-    onFiltersChange({
-      ...filters,
-      countries: filters.countries.includes(c)
-        ? filters.countries.filter((x) => x !== c)
-        : [...filters.countries, c],
-    });
+  const switchMode = (next: SearchMode) => {
+    setMode(next);
+    setError(null);
+    onFiltersChange(DEFAULT_FILTERS);
   };
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      {/* ── Location input ── */}
-      <div className="flex items-center gap-3 px-5 py-4 border-b border-[#EFEFEF]">
-        <Search className="h-4 w-4 text-muted shrink-0" />
-        <input
-          type="text"
-          value={location}
-          onChange={(e) => {
-            setLocation(e.target.value);
-            setError(null);
-          }}
-          placeholder="Postcode or town — e.g. Cambridge, SW1"
-          className="flex-1 bg-transparent text-sm text-navy placeholder:text-muted focus:outline-none"
-        />
-        <button
-          type="button"
-          onClick={handleGeolocate}
-          disabled={geoLoading}
-          title="Use my location"
-          className="shrink-0 flex items-center gap-1.5 text-xs text-muted hover:text-navy transition-colors disabled:opacity-50"
-        >
-          <LocateFixed className={`h-3.5 w-3.5 ${geoLoading ? "animate-spin" : ""}`} />
-          <span className="hidden sm:inline font-medium">Locate me</span>
-        </button>
+      {/* ── Mode toggle ── */}
+      <div className="flex border-b border-[#EFEFEF]">
+        {(["nearby", "abroad"] as SearchMode[]).map((m) => (
+          <button
+            key={m}
+            type="button"
+            onClick={() => switchMode(m)}
+            className="flex-1 py-3.5 text-xs font-semibold font-sans transition-colors duration-150"
+            style={{
+              background: mode === m ? "#1A3A25" : "transparent",
+              color: mode === m ? "#e8f5d8" : "#3D0D1B",
+            }}
+          >
+            {m === "nearby" ? "Search nearby" : "Browse abroad"}
+          </button>
+        ))}
       </div>
 
-      {/* ── Radius ── */}
-      <div className="flex items-center gap-3 px-5 py-3.5 border-b border-[#EFEFEF]">
-        <span className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted shrink-0">
-          Within
-        </span>
-        <div className="flex gap-1.5 flex-wrap">
-          {RADIUS_OPTIONS.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRadius(r)}
-              className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150"
-              style={{
-                background: radius === r ? "#1A3A25" : "#F0F0F0",
-                color: radius === r ? "#e8f5d8" : "#3D0D1B",
+      {mode === "nearby" ? (
+        <>
+          {/* ── Location input ── */}
+          <div className="flex items-center gap-3 px-5 py-4 border-b border-[#EFEFEF]">
+            <Search className="h-4 w-4 text-muted shrink-0" />
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => {
+                setLocation(e.target.value);
+                setError(null);
               }}
+              placeholder="Postcode or town — e.g. Cambridge, SW1"
+              className="flex-1 bg-transparent text-sm text-navy placeholder:text-muted focus:outline-none"
+            />
+            <button
+              type="button"
+              onClick={handleGeolocate}
+              disabled={geoLoading}
+              title="Use my location"
+              className="shrink-0 flex items-center gap-1.5 text-xs text-muted hover:text-navy transition-colors disabled:opacity-50"
             >
-              {r} mi
+              <LocateFixed className={`h-3.5 w-3.5 ${geoLoading ? "animate-spin" : ""}`} />
+              <span className="hidden sm:inline font-medium">Locate me</span>
             </button>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* ── Filters ── */}
+          {/* ── Radius ── */}
+          <div className="flex items-center gap-3 px-5 py-3.5 border-b border-[#EFEFEF]">
+            <span className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted shrink-0">
+              Within
+            </span>
+            <div className="flex gap-1.5 flex-wrap">
+              {RADIUS_OPTIONS.map((r) => (
+                <Chip
+                  key={r}
+                  label={`${r} mi`}
+                  active={radius === r}
+                  onClick={() => setRadius(r)}
+                />
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        /* ── Abroad country ── */
+        <div className="px-5 py-4 border-b border-[#EFEFEF]">
+          <p className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted mb-3">
+            Country
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {ABROAD_COUNTRIES.map((c) => (
+              <Chip
+                key={c.value}
+                label={c.label}
+                active={abroadCountry === c.value}
+                onClick={() => {
+                  setAbroadCountry(prev => prev === c.value ? null : c.value);
+                  setError(null);
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Shared filters ── */}
       <div className="px-5 py-4 border-b border-[#EFEFEF] space-y-4">
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-[700] uppercase tracking-[0.12em] text-muted">
@@ -208,21 +252,6 @@ export function LocationSearch({
               Clear all
             </button>
           )}
-        </div>
-
-        {/* Country */}
-        <div>
-          <p className="text-[10px] font-[600] text-muted mb-2">Country</p>
-          <div className="flex flex-wrap gap-1.5">
-            {COUNTRIES.map((c) => (
-              <Chip
-                key={c.value}
-                label={c.label}
-                active={filters.countries.includes(c.value)}
-                onClick={() => toggleCountry(c.value)}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Age bracket */}
@@ -278,7 +307,11 @@ export function LocationSearch({
           disabled={isLoading}
           className="w-full h-11 rounded-full bg-lime text-[#1A3A25] text-sm font-bold hover:bg-lime-dark transition-colors disabled:opacity-60"
         >
-          {isLoading ? "Searching…" : "Find clinics"}
+          {isLoading
+            ? "Searching…"
+            : mode === "nearby"
+            ? "Find clinics"
+            : "Browse clinics"}
         </button>
         {error && (
           <motion.p

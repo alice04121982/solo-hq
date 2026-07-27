@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { ArrowRight, BookOpen, Calculator, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import { FAMILY_TYPES } from "@/lib/family-types";
 
 export const metadata: Metadata = {
   title: "Resources | CairnFertility",
-  description: "Guides, tools, checklists, and templates for solo mums by choice. Everything you need to navigate your journey with confidence.",
+  description: "Guides, tools, checklists, and templates for every kind of family navigating fertility treatment.",
 };
 
 const CATEGORIES = [
@@ -14,7 +15,7 @@ const CATEGORIES = [
     icon: <Calculator className="h-5 w-5" />,
     title: "Finance & Costs",
     resources: [
-      { title: "The complete solo IVF cost breakdown (2025)", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
+      { title: "The complete IVF cost breakdown (2025)", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
       { title: "Fertility finance options: loans, grants & employer schemes", type: "Guide", slug: "fertility-finance-options" },
       { title: "Budget spreadsheet template", type: "Template", slug: "ivf-budget-template" },
       { title: "How to ask your employer about fertility benefits", type: "Script", slug: "employer-fertility-benefits" },
@@ -34,10 +35,10 @@ const CATEGORIES = [
     icon: <Heart className="h-5 w-5" />,
     title: "Emotional Wellbeing",
     resources: [
-      { title: "Managing the two-week wait alone", type: "Guide", slug: "two-week-wait" },
+      { title: "Managing the two-week wait", type: "Guide", slug: "two-week-wait" },
       { title: "When treatment doesn't work: what next?", type: "Guide", slug: "when-treatment-fails" },
       { title: "Finding a fertility-aware therapist", type: "Directory", slug: "finding-fertility-therapist" },
-      { title: "Telling friends and family you're going solo", type: "Guide", slug: "telling-friends-family" },
+      { title: "Telling friends and family about your journey", type: "Guide", slug: "telling-friends-family" },
     ],
   },
   {
@@ -47,25 +48,25 @@ const CATEGORIES = [
       { title: "Donor conception and legal parenthood explained", type: "Explainer", slug: "donor-conception-legal-parenthood" },
       { title: "What the HFEA register means for your child", type: "Guide", slug: "hfea-register" },
       { title: "Known donors: legal agreements you need", type: "Guide", slug: "known-donor-legal-agreements" },
-      { title: "Maternity leave as a self-employed solo mum", type: "Guide", slug: "self-employed-maternity-leave" },
+      { title: "Maternity leave as a self-employed parent", type: "Guide", slug: "self-employed-maternity-leave" },
     ],
   },
   {
     icon: <Baby className="h-5 w-5" />,
     title: "Pregnancy & Beyond",
     resources: [
-      { title: "Solo pregnancy: building your support team", type: "Guide", slug: "solo-pregnancy-support-team" },
-      { title: "Birth partner options when you're going solo", type: "Guide", slug: "birth-partner-options" },
+      { title: "Pregnancy: building your support team", type: "Guide", slug: "solo-pregnancy-support-team" },
+      { title: "Birth partner options", type: "Guide", slug: "birth-partner-options" },
       { title: "Talking to your child about donor conception", type: "Guide", slug: "talking-to-child-donor-conception" },
-      { title: "Childcare planning: a solo parent's guide", type: "Guide", slug: "childcare-planning" },
+      { title: "Childcare planning: a parent's guide", type: "Guide", slug: "childcare-planning" },
     ],
   },
   {
     icon: <BookOpen className="h-5 w-5" />,
     title: "Community & Stories",
     resources: [
-      { title: "Real stories: solo mums share their journeys", type: "Stories", slug: "real-stories" },
-      { title: "Books every solo mum by choice should read", type: "Reading list", slug: "recommended-books" },
+      { title: "Real stories: families share their journeys", type: "Stories", slug: "real-stories" },
+      { title: "Recommended books for every family type", type: "Reading list", slug: "recommended-books" },
       { title: "Online communities worth joining", type: "Directory", slug: "online-communities" },
       { title: "UK support groups: in-person and online", type: "Directory", slug: "uk-support-groups" },
     ],
@@ -84,32 +85,82 @@ export default function ResourcesPage() {
 
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
         {/* Header */}
-        <div className="mb-16">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Everything you need</p>
-          <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
+        <div className="mb-14">
+          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+            Everything you need
+          </p>
+          <h1
+            className="font-sans font-bold text-[#1A3A25] mb-4"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          >
             Resources
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-            Guides, checklists, templates, and explainers — built by solo mums who&apos;ve done this.
+            Guides, checklists, templates, and explainers for every kind of family navigating fertility treatment.
           </p>
         </div>
 
-        {/* Category grid — flat, border-top separated */}
+        {/* DCN featured link */}
+        <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
+          <div className="flex-1">
+            <p className="text-[10px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
+              Essential external resource · All family types
+            </p>
+            <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
+              Donor Conception Network
+            </p>
+            <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception — relevant to solo parents, same-sex couples, and heterosexual couples alike.
+            </p>
+          </div>
+          <a
+            href="https://dcnetwork.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 shrink-0 rounded-full border border-[#1A3A25]/20 text-[#1A3A25] px-5 py-2.5 text-sm font-sans font-medium hover:bg-[#1A3A25] hover:text-white transition-colors"
+          >
+            Visit dcnetwork.org
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
+        {/* Browse by family type */}
+        <div className="mb-14">
+          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
+            Browse by family type
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {FAMILY_TYPES.map((f) => (
+              <Link
+                key={f.slug}
+                href={`/families/${f.slug}#resources`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-sans text-[#1A3A25] hover:bg-[#1A3A25] hover:text-white hover:border-[#1A3A25] transition-colors"
+              >
+                {f.label}
+                <ArrowRight className="h-3 w-3" />
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Category grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
           {CATEGORIES.map((cat) => (
             <div key={cat.title} className="py-10 border-t border-border">
               <div className="text-accent mb-4">{cat.icon}</div>
-              <h2 className="font-sans font-bold text-foreground text-xl mb-5">{cat.title}</h2>
+              <h2 className="font-sans font-bold text-[#1A3A25] text-xl mb-5">{cat.title}</h2>
               <ul className="space-y-3">
                 {cat.resources.map((r) => (
                   <li key={r.title}>
                     <Link href={`/resources/${r.slug}`} className="flex items-start gap-3 group">
                       <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
                       <div>
-                        <p className="text-sm font-sans text-foreground/70 leading-snug group-hover:text-foreground transition-colors duration-150">
+                        <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
                           {r.title}
                         </p>
-                        <span className="text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">{r.type}</span>
+                        <span className="text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+                          {r.type}
+                        </span>
                       </div>
                     </Link>
                   </li>
