@@ -26,7 +26,7 @@ export function CTASection() {
           >
             You&rsquo;re not doing this alone.
             <br />
-            <span style={{ color: "#C5E600" }}>
+            <span style={{ color: "#3D0D1B" }}>
               Even if you&rsquo;re doing it solo.
             </span>
           </h2>

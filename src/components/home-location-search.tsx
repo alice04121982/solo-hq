@@ -104,7 +104,7 @@ export function HomeLocationSearch({ onDark = false }: HomeLocationSearchProps) 
           {/* Submit */}
           <button
             type="submit"
-            className="h-14 px-7 bg-accent text-foreground text-sm font-sans font-medium hover:bg-accent-dark transition-colors shrink-0"
+            className="h-14 px-7 bg-accent text-[#1A3A25] text-sm font-sans font-medium hover:bg-accent-dark transition-colors shrink-0"
           >
             Find Clinics
           </button>

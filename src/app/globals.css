@@ -96,9 +96,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Utility: bold card backgrounds ── */
-.card-lime   { background: var(--accent); color: var(--foreground); }
-.card-pink   { background: var(--lavender); color: #fff; }
-.card-maroon { background: var(--navy); color: #fff; }
+.card-lime   { background: var(--accent); color: #1A3A25; }
+.card-pink   { background: var(--lavender); color: #3D0D1B; }
+.card-maroon { background: var(--navy); color: #f9c6da; }
 .card-cream  { background: var(--background); color: var(--foreground); }
 
 /* ── Scrollbar ── */
