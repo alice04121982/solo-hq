@@ -7,6 +7,7 @@ import { Logo } from "./logo";
 
 const NAV_LINKS = [
   { label: "Family Types", href: "/families" },
+  { label: "How IVF Works", href: "/how-ivf-works" },
   { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Stories", href: "/stories" },
   { label: "Resources", href: "/resources" },
