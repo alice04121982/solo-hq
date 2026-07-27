@@ -62,8 +62,8 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-            className="grid grid-cols-2 gap-px rounded-xl overflow-hidden"
-            style={{ background: "rgba(249,198,218,0.2)" }}
+            className="grid grid-cols-2 rounded-xl overflow-hidden"
+            style={{ background: "#3D0D1B" }}
           >
             {[
               { value: "400+", label: "HFEA-licensed clinics compared" },
@@ -73,8 +73,8 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             ].map((s) => (
               <div key={s.label} className="p-6" style={{ background: "#3D0D1B" }}>
                 <p
-                  className="font-sans font-bold mb-1"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", color: "#f9c6da" }}
+                  className="font-sans font-bold mb-1.5"
+                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.15, color: "#f9c6da" }}
                 >
                   {s.value}
                 </p>

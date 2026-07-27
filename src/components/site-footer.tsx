@@ -136,8 +136,8 @@ export function SiteFooter() {
                       </svg>
                     </span>
                     <span
-                      className="rounded-full px-5 py-2 text-sm font-sans font-[600] transition-opacity duration-150 group-hover:opacity-85"
-                      style={{ background: PINK, color: BURGUNDY, minWidth: "104px" }}
+                      className="rounded-full px-5 py-2 text-sm font-sans font-[600] text-center transition-opacity duration-150 group-hover:opacity-85"
+                      style={{ background: PINK, color: BURGUNDY, width: "124px" }}
                     >
                       {s.label}
                     </span>
