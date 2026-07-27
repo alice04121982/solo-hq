@@ -2,7 +2,7 @@ import { SiteNav } from "@/components/site-nav";
 import { ClinicMatcher } from "@/components/clinic-matcher";
 
 export const metadata = {
-  title: "Find Your Clinic — Flying Solo",
+  title: "Find Your Clinic — CairnFertility",
   description: "Tell us about your situation and we'll match you with the clinics most suited to your age, family type, and budget.",
 };
 

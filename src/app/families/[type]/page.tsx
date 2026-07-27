@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const family = getFamilyType(type);
   if (!family) return {};
   return {
-    title: `${family.label} | Flying Solo — IVF & Fertility Guidance`,
+    title: `${family.label} | CairnFertility — IVF & Fertility Guidance`,
     description: family.heroCopy.slice(0, 160),
   };
 }

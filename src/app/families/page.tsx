@@ -5,7 +5,7 @@ import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 export const metadata: Metadata = {
-  title: "Family Types | Flying Solo — IVF & Fertility Guidance",
+  title: "Family Types | CairnFertility — IVF & Fertility Guidance",
   description:
     "Fertility treatment guidance for every family — solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };

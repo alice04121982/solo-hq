@@ -4,7 +4,7 @@ import { SiteNav } from "@/components/site-nav";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
-  title: "Compare IVF Clinics | Flying Solo",
+  title: "Compare IVF Clinics | CairnFertility",
   description: "Compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
 };
 

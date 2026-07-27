@@ -7,7 +7,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const testimonials = [
   {
     quote:
-      "I'd spent two years on the fence, terrified of doing it alone. Flying Solo gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
+      "I'd spent two years on the fence, terrified of doing it alone. CairnFertility gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
     name: "Gemma, 38",
     location: "Bristol",
     stage: "Mum to Arlo, conceived via donor IUI",
@@ -42,7 +42,7 @@ const journeyStories = [
     age: 37,
     tag: "Founder's story",
     title: "From 'someday' to mum of one in 22 months",
-    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Flying Solo because I wished something like it had existed when I was starting out.",
+    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built CairnFertility because I wished something like it had existed when I was starting out.",
   },
   {
     name: "Natalie",
@@ -56,7 +56,7 @@ const journeyStories = [
     age: 34,
     tag: "First IVF cycle",
     title: "The bit nobody talks about: the two-week wait, alone",
-    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the Flying Solo community during my wait.",
+    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the CairnFertility community during my wait.",
   },
 ];
 

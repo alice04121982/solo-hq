@@ -14,7 +14,7 @@ const generalSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Flying Solo — IVF & Fertility Guidance for Every Family",
+  title: "CairnFertility — IVF & Fertility Guidance for Every Family",
   description:
     "Compare IVF clinics, understand your options, and build your family with confidence. Clear, honest guidance for solo mums, same-sex couples, and all family types.",
 };

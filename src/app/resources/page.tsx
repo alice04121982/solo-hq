@@ -5,7 +5,7 @@ import { CTASection } from "@/components/cta-section";
 import { ArrowRight, BookOpen, Calculator, Map, FileText, Heart, Baby } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Resources | Flying Solo",
+  title: "Resources | CairnFertility",
   description: "Guides, tools, checklists, and templates for solo mums by choice. Everything you need to navigate your journey with confidence.",
 };
 
