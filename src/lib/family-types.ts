@@ -30,6 +30,7 @@ export interface FamilyType {
   cardSummary: string;
   image: string;
   imageAlt: string;
+  hideHeroImage?: boolean;
   treatmentHighlight: string;
   steps: ProcessStep[];
   stories: Story[];
@@ -49,6 +50,7 @@ export const FAMILY_TYPES: FamilyType[] = [
     image:
       "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=900&q=80",
     imageAlt: "Woman smiling warmly, holding her baby",
+    hideHeroImage: true,
     treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm",
     steps: [
       {

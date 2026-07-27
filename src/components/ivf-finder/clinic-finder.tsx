@@ -99,12 +99,6 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Derive available countries from current results
-  const availableCountries = useMemo(
-    () => [...new Set(clinics.map((c) => c.country ?? "United Kingdom"))],
-    [clinics]
-  );
-
   // Apply filters
   const filteredClinics = useMemo(() => {
     return clinics.filter((c) => {
@@ -174,7 +168,6 @@ export function ClinicFinder({ initialLocation, initialRadius = 25 }: ClinicFind
         <ClinicFilters
           filters={filters}
           onChange={setFilters}
-          availableCountries={availableCountries}
         />
       )}
 

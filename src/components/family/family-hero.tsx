@@ -12,12 +12,13 @@ export function FamilyHero({ family }: { family: FamilyType }) {
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-20 md:py-28">
+        <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-20 md:py-28`}>
           {/* Left — copy */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
+            className={family.hideHeroImage ? "max-w-3xl" : ""}
           >
             <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-6 font-sans">
               {family.subHeadline}
@@ -72,21 +73,23 @@ export function FamilyHero({ family }: { family: FamilyType }) {
           </motion.div>
 
           {/* Right — image */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
-            className="relative h-[440px] lg:h-[560px] rounded-2xl overflow-hidden"
-          >
-            <Image
-              src={family.image}
-              alt={family.imageAlt}
-              fill
-              className="object-cover"
-              style={{ filter: "saturate(0.9) sepia(0.05)" }}
-              priority
-            />
-          </motion.div>
+          {!family.hideHeroImage && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
+              className="relative h-[440px] lg:h-[560px] rounded-2xl overflow-hidden"
+            >
+              <Image
+                src={family.image}
+                alt={family.imageAlt}
+                fill
+                className="object-cover"
+                style={{ filter: "saturate(0.9) sepia(0.05)" }}
+                priority
+              />
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
