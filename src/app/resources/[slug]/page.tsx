@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Tag } from "lucide-react";
+import { ArrowLeft, Clock, Download, Tag } from "lucide-react";
+import { CopyButton } from "@/components/copy-button";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { getGuideBySlug, GUIDES } from "@/lib/guides";
@@ -125,10 +126,30 @@ export default async function GuidePage({ params }: PageProps) {
               )}
 
               {section.callout && (
-                <div className="mt-4 rounded-2xl bg-background-alt border border-border p-5">
-                  <p className="text-[15px] font-sans text-foreground leading-relaxed font-[500]">
+                <div className="mt-4 rounded-2xl bg-[#F0F8E8] border border-[#1A3A25]/15 p-5">
+                  {section.calloutCopy && (
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <p className="text-[10px] font-[600] uppercase tracking-[0.12em] font-sans text-[#1A3A25]/50">
+                        Sample email
+                      </p>
+                      <CopyButton text={section.callout} />
+                    </div>
+                  )}
+                  <p className="text-[15px] font-sans text-[#1A3A25] leading-relaxed font-[500]">
                     {section.callout}
                   </p>
+                  {section.calloutDownload && (
+                    <div className="mt-4 pt-4 border-t border-[#1A3A25]/10">
+                      <a
+                        href={section.calloutDownload}
+                        download
+                        className="inline-flex items-center gap-2 rounded-full bg-[#1A3A25] text-white px-5 py-2.5 text-sm font-sans font-medium hover:bg-[#142e1e] transition-colors"
+                      >
+                        <Download className="h-3.5 w-3.5" />
+                        Download template
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

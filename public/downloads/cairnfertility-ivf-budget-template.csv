@@ -1,0 +1,70 @@
+CairnFertility — IVF Budget Template (2025),,,,
+Solo patient using donor sperm · UK clinics,,,,
+,,,,
+"Update the 'Your estimate (£)' column with figures from your clinic quotes.",,,,
+"Review 'Actual spent (£)' monthly as you go through treatment.",,,,
+,,,,
+SECTION 1 — ONE-TIME SET-UP COSTS,Your estimate (£),Actual spent (£),Difference (£),Notes
+Initial consultation,350,,=C9-B9,
+Baseline blood tests (AMH / FSH / LH / TSH / AFC scan),400,,=C10-B10,
+Infectious disease screening (required before donor sperm use),200,,=C11-B11,
+Sperm bank registration / import admin fee,250,,=C12-B12,
+Donor sperm vials (buy 3–4 upfront for sibling potential),2500,,=C13-B13,"e.g. 4 × £625 avg"
+Sperm storage — year 1,350,,=C14-B14,
+Counselling (mandatory before treatment + personal sessions),500,,=C15-B15,
+Legal advice (if using known donor — optional otherwise),300,,=C16-B16,
+,,,,
+ONE-TIME TOTAL,=SUM(B9:B16),=SUM(C9:C16),=SUM(D9:D16),
+,,,,
+SECTION 2 — PER CYCLE COSTS (complete for each cycle),Cycle 1 (£),Cycle 2 (£),Cycle 3 (£),Notes
+Basic IVF cycle fee,5000,5000,5000,Adjust to your clinic's quote
+ICSI (if not included),1200,1200,1200,Required for frozen donor sperm
+Stimulation drugs,1800,1800,1800,Varies by protocol
+Monitoring scans (if not included),600,600,600,
+Trigger injection,150,150,150,
+Embryo freezing (if banking embryos),1000,1000,1000,
+Sperm thaw / ICSI prep fee,400,400,400,
+Anaesthesia (egg collection),250,250,250,Often included — check quote
+,,,,
+PER CYCLE TOTAL,=SUM(B24:B31),=SUM(C24:C31),=SUM(D24:D31),
+,,,,
+SECTION 3 — FROZEN EMBRYO TRANSFER (FET) COSTS,FET 1 (£),FET 2 (£),FET 3 (£),Notes
+FET cycle fee,1800,1800,1800,
+Endometrial preparation drugs,400,400,400,Progesterone + oestrogen
+Monitoring scans,300,300,300,
+Embryo storage (annual — pro-rate per transfer),350,350,350,
+,,,,
+FET TOTAL,=SUM(B38:B41),=SUM(C38:C41),=SUM(D38:D41),
+,,,,
+SECTION 4 — CONTINGENCY (15–20% of total),,,,
+Total before contingency,=B19+SUM(B33:D33)+SUM(B43:D43),,,"=Section 1 + all cycles + all FETs"
+15% contingency,=B47*0.15,,,
+20% contingency,=B47*0.20,,,Recommended if budget allows
+,,,,
+GRAND TOTAL (with 15% contingency),=B47+B48,,,"Your planning number"
+GRAND TOTAL (with 20% contingency),=B47+B49,,,"Your conservative ceiling"
+,,,,
+SECTION 5 — MONTH-BY-MONTH CASH FLOW,,,,"Plan when money leaves your account"
+Month,Description,Amount out (£),Running balance (£),
+Month 1,Initial consultation + bloods + screening,=B9+B10+B11,,
+Month 2,Sperm vials + storage + counselling,=B13+B14+B15,,
+Month 3,Cycle 1 drugs + monitoring,=B27+B29,,
+Month 4,Cycle 1 egg collection + ICSI + embryo freeze,=B24+B25+B26+B28+B30+B31,,
+Month 5,No major costs — recovery + planning,0,,
+Month 6,FET 1 drugs + monitoring,=C39+C40,,
+Month 7,FET 1 transfer fee,=C38,,
+Month 8,Buffer month,0,,
+Month 9,Review / Cycle 2 if needed,=C33,,
+,,,,
+"Note: Update dates and descriptions to match your actual treatment plan.",,,,
+"Your clinic will give you a payment schedule — add those dates directly into this section.",,,,
+,,,,
+USEFUL FORMULAS,,,,
+Working budget formula,"= ONE-TIME + (per cycle × planned cycles) + (FET cost × expected transfers) + 20%",,,,
+Per-cycle true cost check,"= clinic fee + ICSI + drugs + scans + trigger + freeze + sperm prep + anaesthesia",,,,
+,,,,
+SOURCES & NOTES,,,,
+Clinic fees,"Always get an itemised written quote — verbal estimates are unreliable",,,,
+Sperm vials,"Prices vary by bank and donor. Cryos / European Sperm Bank / London Sperm Bank all differ",,,,
+Drugs,"Highly variable. Ask your clinic for an indicative drugs budget based on your AMH",,,,
+HFEA data,"UK clinic success rates by age at hfea.gov.uk/choose-a-clinic/hfea-star-ratings",,,,
