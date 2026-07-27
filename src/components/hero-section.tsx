@@ -67,7 +67,7 @@ export function HeroSection() {
                 className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
                 style={{ background: "#C5E600", color: "#1A3A25" }}
               >
-                Find clinics matched to you
+                Get started
                 <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </div>
