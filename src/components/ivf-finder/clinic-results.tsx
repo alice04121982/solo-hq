@@ -53,7 +53,11 @@ export function ClinicResults({
         <div className="flex items-center gap-2 mb-4">
           <div className="h-2 w-2 rounded-full bg-muted animate-pulse" />
           <p className="text-sm text-muted">
-            Searching for clinics near <strong className="text-navy">{location}</strong>…
+            {location ? (
+              <>Searching for clinics near <strong className="text-navy">{location}</strong>…</>
+            ) : (
+              "Loading clinics…"
+            )}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -61,6 +65,15 @@ export function ClinicResults({
             <SkeletonCard key={i} />
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (clinics.length === 0 && totalCount === 0) {
+    return (
+      <div className="rounded-[32px] bg-white border border-border p-12 text-center">
+        <p className="text-navy font-semibold mb-1">No clinics found</p>
+        <p className="text-sm text-muted">Try a different location or search radius.</p>
       </div>
     );
   }
@@ -75,6 +88,8 @@ export function ClinicResults({
   }
 
   const isFiltered = clinics.length < totalCount;
+  const isCountry = !location.toLowerCase().includes("united kingdom") &&
+    ["Spain", "Greece", "Czech Republic"].includes(location);
 
   return (
     <div>
@@ -88,7 +103,7 @@ export function ClinicResults({
           ) : (
             <strong className="text-navy">{clinics.length} clinics</strong>
           )}{" "}
-          near <strong className="text-navy">{location}</strong>
+          {isCountry ? "in" : "near"} <strong className="text-navy">{location}</strong>
         </p>
         {source === "seed" && (
           <span className="text-[10px] bg-[#E8E8E8] text-muted px-2.5 py-1 rounded-full font-medium">
