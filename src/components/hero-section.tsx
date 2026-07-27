@@ -26,13 +26,6 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
           >
-            <span
-              className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
-              style={{ background: "#C5E600", color: "#1A3A25" }}
-            >
-              IVF clinic comparison &nbsp;·&nbsp; All family types &nbsp;·&nbsp; UK &amp; worldwide
-            </span>
-
             <h1
               className="font-sans font-medium mb-6"
               style={{
