@@ -60,14 +60,14 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               </a>
               <a
                 href="/families"
-                className="inline-flex items-center gap-2 rounded-full border border-foreground/20 text-foreground px-8 py-3.5 text-sm font-sans font-medium hover:bg-foreground hover:text-background transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full border border-[#1A3A25]/20 text-[#1A3A25] px-8 py-3.5 text-sm font-sans font-medium hover:bg-[#1A3A25] hover:text-white transition-colors duration-200"
               >
                 All family types
               </a>
             </div>
 
             <p className="text-xs font-sans text-muted mt-8 pb-0 border-t border-border pt-6">
-              <span className="font-[500] text-foreground">{family.treatmentHighlight}</span>
+              <span className="font-[500] text-[#1A3A25]">{family.treatmentHighlight}</span>
               {" "}— treatment routes covered in this guide
             </p>
           </motion.div>
