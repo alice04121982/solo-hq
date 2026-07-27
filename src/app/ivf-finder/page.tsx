@@ -4,8 +4,8 @@ import { SiteNav } from "@/components/site-nav";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
-  title: "Find IVF Clinics Near You | Flying Solo",
-  description: "Search and compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
+  title: "Compare IVF Clinics | Flying Solo",
+  description: "Compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
 };
 
 interface PageProps {
@@ -43,9 +43,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
             className="font-sans font-bold mb-4"
             style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: "#1A3A25" }}
           >
-            Find IVF Clinics
-            <br />
-            Near You
+            Compare IVF Clinics
           </h1>
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
             Real pricing. Verified success rates. Side-by-side comparisons.
