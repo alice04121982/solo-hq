@@ -101,22 +101,28 @@
   --text-display-2xl--line-height: 1;
 }
 
-/* ── Base ── */
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
+/* ── Base ──
+   These MUST stay inside @layer base. Unlayered rules beat any rule in a
+   cascade layer regardless of specificity, so leaving them unlayered lets
+   the element selectors below silently override Tailwind utilities — e.g.
+   `font-semibold` on an <h3> would lose to font-weight: 700 here. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
 }
 
 /* ── Utility: bold card backgrounds ── */

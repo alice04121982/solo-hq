@@ -211,44 +211,58 @@ export default function Home() {
               </span>
             </article>
 
-            {/* Card 2: teal bg, lime badge, cream heading */}
+            {/* Card 2: teal card wrapping a cream panel, lime badge notched into its corner */}
             <article
-              className="rounded-2xl overflow-hidden relative flex flex-col px-4 py-[21px]"
+              className="rounded-2xl relative"
               style={{ background: "var(--teal)", height: "420px" }}
             >
-              <div className="flex flex-col gap-1 items-start">
-                <span
-                  className="rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
-                  style={{ background: "var(--accent)", color: "var(--teal)" }}
-                >
-                  {FEATURED_STORIES[1].tag}
-                </span>
+              {/* Cream panel — inset 16px left/right, sitting below the badge */}
+              <div
+                className="absolute left-4 right-4 top-[33px] bottom-[19px] rounded-2xl flex flex-col px-4 pt-12 pb-4"
+                style={{ background: "var(--cream)" }}
+              >
                 <h3
                   className="font-sans font-semibold"
-                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--cream)" }}
+                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--teal)" }}
                 >
                   &ldquo;{FEATURED_STORIES[1].title}&rdquo;
                 </h3>
                 <p
-                  className="text-xs font-sans leading-[18px] uppercase mt-2"
-                  style={{ color: "var(--cream)" }}
+                  className="text-xs font-sans leading-[18px] uppercase mt-1.5"
+                  style={{ color: "var(--teal)" }}
                 >
                   {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
                 </p>
+                <span
+                  className="mt-auto rounded-full w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                  style={{ background: "var(--teal)", color: "var(--accent)" }}
+                >
+                  →
+                </span>
               </div>
 
+              {/* Badge straddles the panel's top edge; the teal ring cuts the notch */}
               <span
-                className="mt-auto rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
-                style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                className="absolute left-4 top-[21px] rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                style={{
+                  background: "var(--accent)",
+                  color: "var(--teal)",
+                  boxShadow: "0 0 0 6px var(--teal)",
+                }}
               >
-                →
+                {FEATURED_STORIES[1].tag}
               </span>
             </article>
 
-            {/* Card 3: full-bleed photo, lime diagonal */}
+            {/* Card 3: full-bleed photo with an inset rounded lime block */}
             <article
               className="rounded-2xl overflow-hidden relative border"
-              style={{ height: "420px", borderColor: "rgba(0,0,0,0.08)" }}
+              style={{
+                height: "420px",
+                borderColor: "rgba(0,0,0,0.08)",
+                boxShadow:
+                  "0 10px 13px -3px rgba(10,13,18,0.08), 0 3px 5px -2px rgba(10,13,18,0.03), 0 2px 2px -1px rgba(10,13,18,0.04)",
+              }}
             >
               <Image
                 src={FEATURED_STORIES[2].image}
@@ -256,11 +270,12 @@ export default function Home() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 overflow-hidden">
+              <div className="absolute left-4 right-4 bottom-4 h-[186px] rounded-[20px] overflow-hidden">
                 <div
-                  className="px-6 pt-14 pb-6 flex flex-col gap-2"
-                  style={{ background: "var(--accent)", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
-                >
+                  className="absolute inset-0"
+                  style={{ background: "var(--accent)", clipPath: "polygon(0 15%, 100% 0%, 100% 100%, 0% 100%)" }}
+                />
+                <div className="relative h-full flex flex-col gap-2 px-3 pt-[50px] pb-3">
                   <span
                     className="self-start rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
                     style={{ background: "var(--teal)", color: "var(--cream)" }}
@@ -270,7 +285,7 @@ export default function Home() {
                   <h3 className="font-sans font-bold text-lg leading-[1.375]" style={{ color: "#1A3A25" }}>
                     {FEATURED_STORIES[2].title}
                   </h3>
-                  <div className="flex items-center gap-5">
+                  <div className="flex items-center gap-5 mt-auto">
                     <p
                       className="flex-1 text-[11px] font-sans font-[600] uppercase leading-[1.45]"
                       style={{ color: "#1A3A25", letterSpacing: "1.1px" }}
