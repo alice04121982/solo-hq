@@ -94,14 +94,16 @@ export function HeroSection() {
               xl the copy column is too narrow for the overlap to clear the
               text, so the photo drops beneath it instead.
               Exported from Figma with its mask already baked in, so the
-              notched silhouette needs no clip-path here. */}
+              notched silhouette needs no clip-path here — the alpha channel
+              carries it, which is why this stays WebP rather than JPEG. */}
           <div className="mt-12 w-full max-w-[520px] ml-auto xl:mt-0 xl:max-w-none xl:ml-0 xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
             <Image
-              src="/photos/hero-family.png"
+              src="/photos/hero-family.webp"
               alt="A mother playing guitar with her toddler"
-              width={580}
-              height={619}
+              width={1205}
+              height={1282}
               priority
+              sizes="(min-width: 1280px) 580px, (min-width: 768px) 520px, 100vw"
               className="w-full h-auto object-contain"
             />
           </div>
