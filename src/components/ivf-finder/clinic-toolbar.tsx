@@ -120,7 +120,7 @@ export function ClinicToolbar({
           {activeFilterCount > 0 && (
             <span
               className="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold"
-              style={{ background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ background: "var(--teal)", color: "#f9c6da" }}
             >
               {activeFilterCount}
             </span>
@@ -134,7 +134,7 @@ export function ClinicToolbar({
           {locationMode === "international" && selectedCountry && (
             <span
               className={chipClass}
-              style={{ borderColor: "#3D0D1B", background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ borderColor: "var(--teal)", background: "var(--teal)", color: "#f9c6da" }}
             >
               {selectedCountry}
               <button
@@ -150,7 +150,7 @@ export function ClinicToolbar({
           {locationMode === "uk" && radius !== 25 && (
             <span
               className={chipClass}
-              style={{ borderColor: "#3D0D1B", background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ borderColor: "var(--teal)", background: "var(--teal)", color: "#f9c6da" }}
             >
               Within {radius} mi
               <button
@@ -166,7 +166,7 @@ export function ClinicToolbar({
           {filters.ageBracket !== "any" && (
             <span
               className={chipClass}
-              style={{ borderColor: "#3D0D1B", background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ borderColor: "var(--teal)", background: "var(--teal)", color: "#f9c6da" }}
             >
               Age: {ageBracketLabel}
               <button
@@ -182,7 +182,7 @@ export function ClinicToolbar({
           {filters.minSuccessRate !== null && (
             <span
               className={chipClass}
-              style={{ borderColor: "#3D0D1B", background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ borderColor: "var(--teal)", background: "var(--teal)", color: "#f9c6da" }}
             >
               Success: {filters.minSuccessRate}%+
               <button
@@ -198,7 +198,7 @@ export function ClinicToolbar({
           {filters.maxPrice !== null && (
             <span
               className={chipClass}
-              style={{ borderColor: "#3D0D1B", background: "#3D0D1B", color: "#f9c6da" }}
+              style={{ borderColor: "var(--teal)", background: "var(--teal)", color: "#f9c6da" }}
             >
               {PRICE_LABELS[filters.maxPrice] ?? `Under £${filters.maxPrice}`}
               <button

@@ -39,9 +39,9 @@ function Chip({
       onClick={onClick}
       className="rounded-full px-3.5 py-1.5 text-xs font-medium border transition-all duration-150"
       style={{
-        background: active ? "#3D0D1B" : "white",
-        color: active ? "#f9c6da" : "#3D0D1B",
-        borderColor: active ? "#3D0D1B" : "rgba(61,13,27,0.2)",
+        background: active ? "var(--teal)" : "white",
+        color: active ? "#f9c6da" : "var(--teal)",
+        borderColor: active ? "var(--teal)" : "rgba(0, 83, 83, 0.2)",
       }}
     >
       {label}
@@ -146,7 +146,7 @@ export function FilterPanel({
                 {activeCount > 0 && (
                   <span
                     className="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold"
-                    style={{ background: "#3D0D1B", color: "#f9c6da" }}
+                    style={{ background: "var(--teal)", color: "#f9c6da" }}
                   >
                     {activeCount}
                   </span>
@@ -155,7 +155,7 @@ export function FilterPanel({
               <button
                 onClick={onClose}
                 className="p-1 rounded-full transition-colors hover:bg-[#f9f4f6]"
-                style={{ color: "#3D0D1B" }}
+                style={{ color: "var(--teal)" }}
               >
                 <X className="h-5 w-5" />
               </button>
@@ -168,7 +168,7 @@ export function FilterPanel({
               <section>
                 <p
                   className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3"
-                  style={{ color: "rgba(61,13,27,0.5)" }}
+                  style={{ color: "rgba(0, 83, 83, 0.5)" }}
                 >
                   Where to search
                 </p>
@@ -186,8 +186,8 @@ export function FilterPanel({
                       }}
                       className="flex-1 rounded-full py-2 text-xs font-semibold transition-all duration-150"
                       style={{
-                        background: localMode === m ? "#3D0D1B" : "transparent",
-                        color: localMode === m ? "#f9c6da" : "#3D0D1B",
+                        background: localMode === m ? "var(--teal)" : "transparent",
+                        color: localMode === m ? "#f9c6da" : "var(--teal)",
                       }}
                     >
                       {m === "uk" ? "UK clinics" : "Abroad"}
@@ -199,7 +199,7 @@ export function FilterPanel({
                   <div>
                     <p
                       className="text-[11px] font-[600] mb-2"
-                      style={{ color: "#3D0D1B" }}
+                      style={{ color: "var(--teal)" }}
                     >
                       Search radius
                     </p>
@@ -218,7 +218,7 @@ export function FilterPanel({
                   <div>
                     <p
                       className="text-[11px] font-[600] mb-2"
-                      style={{ color: "#3D0D1B" }}
+                      style={{ color: "var(--teal)" }}
                     >
                       Country
                     </p>
@@ -242,7 +242,7 @@ export function FilterPanel({
               <section>
                 <p
                   className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3"
-                  style={{ color: "rgba(61,13,27,0.5)" }}
+                  style={{ color: "rgba(0, 83, 83, 0.5)" }}
                 >
                   Your age
                 </p>
@@ -264,7 +264,7 @@ export function FilterPanel({
               <section>
                 <p
                   className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3"
-                  style={{ color: "rgba(61,13,27,0.5)" }}
+                  style={{ color: "rgba(0, 83, 83, 0.5)" }}
                 >
                   Minimum success rate
                 </p>
@@ -286,7 +286,7 @@ export function FilterPanel({
               <section>
                 <p
                   className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3"
-                  style={{ color: "rgba(61,13,27,0.5)" }}
+                  style={{ color: "rgba(0, 83, 83, 0.5)" }}
                 >
                   Maximum price
                 </p>
@@ -314,7 +314,7 @@ export function FilterPanel({
                 type="button"
                 onClick={handleClear}
                 className="flex-1 py-2.5 text-sm font-medium rounded-full border transition-colors hover:bg-[#f9f4f6]"
-                style={{ borderColor: "rgba(61,13,27,0.2)", color: "#3D0D1B" }}
+                style={{ borderColor: "rgba(0, 83, 83, 0.2)", color: "var(--teal)" }}
               >
                 Clear all
               </button>

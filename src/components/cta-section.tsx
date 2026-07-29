@@ -16,22 +16,22 @@ export function CTASection() {
           transition={{ duration: 0.7, ease: EASE }}
           className="max-w-2xl"
         >
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] font-sans mb-6" style={{ color: "#3D0D1B" }}>
+          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] font-sans mb-6" style={{ color: "var(--teal)" }}>
             Join the community
           </p>
 
           <h2
             className="font-sans font-bold mb-6"
-            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
+            style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.1, color: "var(--teal)" }}
           >
             You&rsquo;re not doing this alone.
             <br />
-            <span style={{ color: "#3D0D1B" }}>
+            <span style={{ color: "var(--teal)" }}>
               Even if you&rsquo;re doing it solo.
             </span>
           </h2>
 
-          <p className="text-[17px] font-sans leading-relaxed mb-10" style={{ maxWidth: "50ch", color: "#3D0D1B" }}>
+          <p className="text-[17px] font-sans leading-relaxed mb-10" style={{ maxWidth: "50ch", color: "var(--teal)" }}>
             Whatever your path — solo, same-sex, or as a couple — join thousands
             of people navigating IVF with honest information, real-world costs,
             and a community that actually gets it.
@@ -47,13 +47,13 @@ export function CTASection() {
             </button>
             <button
               className="inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-black/10"
-              style={{ borderColor: "rgba(61,13,27,0.35)", color: "#3D0D1B" }}
+              style={{ borderColor: "rgba(0, 83, 83, 0.35)", color: "var(--teal)" }}
             >
               Follow Our Journey
             </button>
           </div>
 
-          <p className="text-xs font-sans mt-6" style={{ color: "rgba(61,13,27,0.5)" }}>
+          <p className="text-xs font-sans mt-6" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
             No spam. No toxic positivity. Just the real stuff.
           </p>
         </motion.div>

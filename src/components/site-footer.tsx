@@ -1,6 +1,6 @@
 import { Logo } from "./logo";
 
-const BURGUNDY = "#3D0D1B";
+const TEAL = "var(--teal)";
 const PINK = "#f9c6da";
 const PINK_MUTED = "#c4a0ae";
 const PINK_HOT = "#F0A8C4";
@@ -86,7 +86,7 @@ function LinkColumn({
 
 export function SiteFooter() {
   return (
-    <footer style={{ background: BURGUNDY }}>
+    <footer style={{ background: TEAL }}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
@@ -129,7 +129,7 @@ export function SiteFooter() {
                       <svg
                         viewBox="0 0 24 24"
                         className="h-[18px] w-[18px]"
-                        fill={BURGUNDY}
+                        fill={TEAL}
                         aria-hidden="true"
                       >
                         <path d={s.path} />
@@ -137,7 +137,7 @@ export function SiteFooter() {
                     </span>
                     <span
                       className="rounded-full px-5 py-2 text-sm font-sans font-[600] text-center transition-opacity duration-150 group-hover:opacity-85"
-                      style={{ background: PINK, color: BURGUNDY, width: "124px" }}
+                      style={{ background: PINK, color: TEAL, width: "124px" }}
                     >
                       {s.label}
                     </span>

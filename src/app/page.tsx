@@ -5,27 +5,32 @@ import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 
-const CARD_THEME = { bg: "#FAFAFA", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" };
+const CARD_THEME = { bg: "#FFFFFF", text: "var(--teal)", muted: "rgba(0, 83, 83, 0.6)" };
 
 const RACING_GREEN = "#1A3A25";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* 1 — Hero: deep burgundy */}
+      {/* 1 — Hero: deep teal */}
       <HeroSection />
 
-      {/* 2 — Families carousel: fluorescent lime */}
-      <section style={{ background: "#FDE8F2" }} id="families">
+      {/* 2 — Family types: warm cream, white cards */}
+      <section style={{ background: "var(--cream)" }} id="families">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#3D0D1B" }}>
+            <div className="flex flex-col gap-3">
+              <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "var(--teal)" }}>
                 Every family
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.8px",
+                  color: "var(--teal)",
+                }}
               >
                 Find your guide.
               </h2>
@@ -33,7 +38,7 @@ export default function Home() {
             <a
               href="/families"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
-              style={{ color: "#3D0D1B" }}
+              style={{ color: "var(--teal)" }}
             >
               All family types <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -50,16 +55,16 @@ export default function Home() {
                 <a
                   key={family.slug}
                   href={`/families/${family.slug}`}
-                  className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
+                  className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 md:min-h-[229px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                   style={{ background: theme.bg, color: theme.text }}
                 >
-                  <h3 className="font-sans font-bold text-lg leading-snug" style={{ color: theme.text }}>
+                  <h3 className="font-sans font-semibold text-lg leading-7" style={{ color: theme.text }}>
                     {family.label}
                   </h3>
-                  <p className="text-sm font-sans leading-relaxed flex-1" style={{ color: theme.muted, maxWidth: "28ch" }}>
+                  <p className="text-sm font-sans leading-5 flex-1" style={{ color: theme.text }}>
                     {family.cardSummary}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.muted }}>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.text }}>
                     Read the guide <ArrowRight className="h-3 w-3" />
                   </span>
                 </a>
@@ -70,15 +75,15 @@ export default function Home() {
           <a
             href="/families"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#3D0D1B" }}
+            style={{ color: "var(--teal)" }}
           >
             All family types <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </section>
 
-      {/* 3 — Clinic comparison teaser: burgundy full section */}
-      <section style={{ background: "#3D0D1B" }} id="compare">
+      {/* 3 — Clinic comparison teaser: teal full section */}
+      <section style={{ background: "var(--teal)" }} id="compare">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
@@ -140,12 +145,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
             <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "rgba(61,13,27,0.5)" }}>
+              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
                 Real journeys
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
+                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "var(--teal)" }}
               >
                 In their own words.
               </h2>
@@ -153,7 +158,7 @@ export default function Home() {
             <a
               href="/stories"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
-              style={{ borderColor: "rgba(61,13,27,0.3)", color: "#3D0D1B" }}
+              style={{ borderColor: "rgba(0, 83, 83, 0.3)", color: "var(--teal)" }}
             >
               See all stories <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -161,15 +166,15 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: burgundy bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#3D0D1B" }}>
+            {/* Card 1: teal bg, heading + badge top, photo below */}
+            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "var(--teal)" }}>
               <div className="p-5 flex items-start justify-between gap-3">
                 <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#f9c6da" }}>
                   {FEATURED_STORIES[0].title}
                 </h3>
                 <span
                   className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
-                  style={{ background: "#FDE8F2", color: "#3D0D1B" }}
+                  style={{ background: "#FDE8F2", color: "var(--teal)" }}
                 >
                   {FEATURED_STORIES[0].familyLabel}
                 </span>
@@ -183,10 +188,10 @@ export default function Home() {
                 />
                 <div className="absolute bottom-3 right-3">
                   <div className="rounded-xl px-3 py-2 text-right" style={{ background: "#F0A8C4" }}>
-                    <p className="text-xs font-sans font-[600]" style={{ color: "#3D0D1B" }}>
+                    <p className="text-xs font-sans font-[600]" style={{ color: "var(--teal)" }}>
                       {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
                     </p>
-                    <p className="text-[11px] font-sans" style={{ color: "rgba(61,13,27,0.6)" }}>
+                    <p className="text-[11px] font-sans" style={{ color: "rgba(0, 83, 83, 0.6)" }}>
                       {FEATURED_STORIES[0].location}
                     </p>
                   </div>
@@ -225,7 +230,7 @@ export default function Home() {
             {/* Card 3: light pink bg, angled photo */}
             <article className="rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", height: "420px" }}>
               <div className="p-6 relative z-10 max-w-[65%]">
-                <h3 className="font-sans font-bold text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
+                <h3 className="font-sans font-bold text-2xl leading-tight" style={{ color: "var(--teal)" }}>
                   {FEATURED_STORIES[2].title}
                 </h3>
               </div>
@@ -255,7 +260,7 @@ export default function Home() {
           <a
             href="/stories"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#3D0D1B" }}
+            style={{ color: "var(--teal)" }}
           >
             See all stories <ArrowRight className="h-3.5 w-3.5" />
           </a>

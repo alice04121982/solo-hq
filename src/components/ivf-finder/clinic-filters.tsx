@@ -66,8 +66,8 @@ function Chip({
       className="rounded-full px-3 py-1 text-xs font-sans font-[500] transition-all duration-150"
       style={{
         background: active ? "#1A3A25" : disabled ? "transparent" : "white",
-        color: active ? "#f9c6da" : disabled ? "rgba(61,13,27,0.25)" : "#3D0D1B",
-        border: `1px solid ${active ? "#1A3A25" : disabled ? "rgba(61,13,27,0.1)" : "rgba(61,13,27,0.2)"}`,
+        color: active ? "#f9c6da" : disabled ? "rgba(0, 83, 83, 0.25)" : "var(--teal)",
+        border: `1px solid ${active ? "#1A3A25" : disabled ? "rgba(0, 83, 83, 0.1)" : "rgba(0, 83, 83, 0.2)"}`,
         cursor: disabled ? "not-allowed" : "pointer",
       }}
     >
@@ -104,7 +104,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
       <div className="flex items-center justify-between mb-4">
         <p
           className="text-[10px] font-[600] uppercase tracking-[0.15em] font-sans"
-          style={{ color: "rgba(61,13,27,0.5)" }}
+          style={{ color: "rgba(0, 83, 83, 0.5)" }}
         >
           Filter results
         </p>
@@ -112,7 +112,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
           <button
             onClick={() => onChange(DEFAULT_FILTERS)}
             className="inline-flex items-center gap-1 text-xs font-sans hover:opacity-70 transition-opacity"
-            style={{ color: "#3D0D1B" }}
+            style={{ color: "var(--teal)" }}
           >
             <X className="h-3 w-3" />
             Clear all
@@ -123,7 +123,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Country */}
         <div>
-          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "#3D0D1B" }}>
+          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "var(--teal)" }}>
             Country
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -140,7 +140,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
 
         {/* Age bracket */}
         <div>
-          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "#3D0D1B" }}>
+          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "var(--teal)" }}>
             Age bracket
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -157,7 +157,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
 
         {/* Min success rate */}
         <div>
-          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "#3D0D1B" }}>
+          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "var(--teal)" }}>
             Min. success rate
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -174,7 +174,7 @@ export function ClinicFilters({ filters, onChange }: ClinicFiltersProps) {
 
         {/* Max price */}
         <div>
-          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "#3D0D1B" }}>
+          <p className="text-[11px] font-[600] font-sans mb-2" style={{ color: "var(--teal)" }}>
             Max. price
           </p>
           <div className="flex flex-wrap gap-1.5">

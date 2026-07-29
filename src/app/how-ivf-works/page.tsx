@@ -20,17 +20,17 @@ function StimulationIllustration() {
         <radialGradient id="s1eg" cx="35%" cy="30%" r="65%"><stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" /><stop offset="100%" stopColor="#f9c6da" /></radialGradient>
       </defs>
       <circle cx="90" cy="90" r="86" fill="url(#s1bg)" />
-      <ellipse cx="90" cy="96" rx="60" ry="44" fill="url(#s1ov)" stroke="#3D0D1B" strokeWidth="1.5" />
-      <circle cx="90" cy="77" r="21" fill="url(#s1fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <ellipse cx="90" cy="96" rx="60" ry="44" fill="url(#s1ov)" stroke="var(--teal)" strokeWidth="1.5" />
+      <circle cx="90" cy="77" r="21" fill="url(#s1fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="90" cy="77" r="9" fill="url(#s1eg)" />
       <circle cx="84" cy="72" r="3" fill="white" fillOpacity="0.7" />
-      <circle cx="62" cy="92" r="15" fill="url(#s1fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <circle cx="62" cy="92" r="15" fill="url(#s1fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="62" cy="92" r="6" fill="url(#s1eg)" />
-      <circle cx="118" cy="92" r="15" fill="url(#s1fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <circle cx="118" cy="92" r="15" fill="url(#s1fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="118" cy="92" r="6" fill="url(#s1eg)" />
-      <circle cx="74" cy="112" r="11" fill="url(#s1fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <circle cx="74" cy="112" r="11" fill="url(#s1fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="74" cy="112" r="4.5" fill="url(#s1eg)" />
-      <circle cx="106" cy="112" r="11" fill="url(#s1fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <circle cx="106" cy="112" r="11" fill="url(#s1fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="106" cy="112" r="4.5" fill="url(#s1eg)" />
       <ellipse cx="64" cy="76" rx="16" ry="10" fill="white" fillOpacity="0.2" transform="rotate(-20 64 76)" />
     </svg>
@@ -46,14 +46,14 @@ function EggRetrievalIllustration() {
         <radialGradient id="s2fl" cx="30%" cy="28%" r="70%"><stop offset="0%" stopColor="#ffffff" /><stop offset="100%" stopColor="#FDE8F2" /></radialGradient>
       </defs>
       <circle cx="90" cy="90" r="86" fill="url(#s2bg)" />
-      <ellipse cx="90" cy="102" rx="58" ry="42" fill="url(#s2ov)" stroke="#3D0D1B" strokeWidth="1.5" />
-      <circle cx="90" cy="84" r="26" fill="url(#s2fl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <ellipse cx="90" cy="102" rx="58" ry="42" fill="url(#s2ov)" stroke="var(--teal)" strokeWidth="1.5" />
+      <circle cx="90" cy="84" r="26" fill="url(#s2fl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="90" cy="84" r="11" fill="#f9c6da" />
       <circle cx="85" cy="79" r="3.5" fill="white" fillOpacity="0.7" />
-      <circle cx="60" cy="110" r="10" fill="url(#s2fl)" stroke="#3D0D1B" strokeWidth="1.5" opacity="0.55" />
-      <circle cx="120" cy="114" r="9" fill="url(#s2fl)" stroke="#3D0D1B" strokeWidth="1.5" opacity="0.55" />
-      <line x1="90" y1="10" x2="90" y2="60" stroke="#3D0D1B" strokeWidth="3" strokeLinecap="round" />
-      <path d="M 86 60 L 90 66 L 94 60" fill="#3D0D1B" />
+      <circle cx="60" cy="110" r="10" fill="url(#s2fl)" stroke="var(--teal)" strokeWidth="1.5" opacity="0.55" />
+      <circle cx="120" cy="114" r="9" fill="url(#s2fl)" stroke="var(--teal)" strokeWidth="1.5" opacity="0.55" />
+      <line x1="90" y1="10" x2="90" y2="60" stroke="var(--teal)" strokeWidth="3" strokeLinecap="round" />
+      <path d="M 86 60 L 90 66 L 94 60" fill="var(--teal)" />
       <ellipse cx="66" cy="82" rx="13" ry="8" fill="white" fillOpacity="0.2" transform="rotate(-20 66 82)" />
     </svg>
   );
@@ -71,10 +71,10 @@ function ICSIIllustration() {
       <circle cx="90" cy="90" r="46" fill="url(#s3eg)" />
       <circle cx="85" cy="86" r="14" fill="#FDE8F2" fillOpacity="0.75" stroke="#F0A8C4" strokeWidth="1.5" />
       <circle cx="85" cy="86" r="6" fill="#F0A8C4" fillOpacity="0.55" />
-      <rect x="8" y="81" width="46" height="18" rx="9" fill="#3D0D1B" fillOpacity="0.1" stroke="#3D0D1B" strokeWidth="1.5" />
-      <path d="M 54 81 Q 50 90 54 99" stroke="#3D0D1B" strokeWidth="1.5" fill="none" />
-      <rect x="126" y="84" width="46" height="12" rx="6" fill="#3D0D1B" fillOpacity="0.1" stroke="#3D0D1B" strokeWidth="1.5" />
-      <line x1="172" y1="90" x2="100" y2="90" stroke="#3D0D1B" strokeWidth="2" strokeLinecap="round" />
+      <rect x="8" y="81" width="46" height="18" rx="9" fill="var(--teal)" fillOpacity="0.1" stroke="var(--teal)" strokeWidth="1.5" />
+      <path d="M 54 81 Q 50 90 54 99" stroke="var(--teal)" strokeWidth="1.5" fill="none" />
+      <rect x="126" y="84" width="46" height="12" rx="6" fill="var(--teal)" fillOpacity="0.1" stroke="var(--teal)" strokeWidth="1.5" />
+      <line x1="172" y1="90" x2="100" y2="90" stroke="var(--teal)" strokeWidth="2" strokeLinecap="round" />
       <ellipse cx="118" cy="90" rx="7" ry="3" fill="#1A3A25" />
       <path d="M 125 90 Q 132 86 136 90 Q 140 94 146 90" stroke="#1A3A25" strokeWidth="1.5" fill="none" strokeLinecap="round" />
       <circle cx="70" cy="68" r="10" fill="white" fillOpacity="0.35" />
@@ -94,8 +94,8 @@ function FertilisationIllustration() {
       <circle cx="90" cy="90" r="86" fill="url(#s4bg)" />
       <circle cx="90" cy="90" r="60" fill="none" stroke="#F0A8C4" strokeWidth="6" strokeOpacity="0.45" />
       <circle cx="90" cy="90" r="52" fill="url(#s4zy)" />
-      <circle cx="73" cy="92" r="19" fill="url(#s4pna)" stroke="#3D0D1B" strokeWidth="1.5" />
-      <circle cx="73" cy="92" r="8" fill="#3D0D1B" fillOpacity="0.12" />
+      <circle cx="73" cy="92" r="19" fill="url(#s4pna)" stroke="var(--teal)" strokeWidth="1.5" />
+      <circle cx="73" cy="92" r="8" fill="var(--teal)" fillOpacity="0.12" />
       <circle cx="67" cy="87" r="3" fill="white" fillOpacity="0.75" />
       <circle cx="108" cy="88" r="19" fill="url(#s4pnb)" stroke="#1A3A25" strokeWidth="1.5" />
       <circle cx="108" cy="88" r="8" fill="#1A3A25" fillOpacity="0.15" />
@@ -120,7 +120,7 @@ function CleavageIllustration() {
       <circle cx="90" cy="90" r="60" fill="none" stroke="#F0A8C4" strokeWidth="5" strokeOpacity="0.55" />
       {cells.map((pos, i) => (
         <g key={i}>
-          <circle cx={pos.cx} cy={pos.cy} r="18" fill="url(#s5cell)" stroke="#3D0D1B" strokeWidth="1.5" />
+          <circle cx={pos.cx} cy={pos.cy} r="18" fill="url(#s5cell)" stroke="var(--teal)" strokeWidth="1.5" />
           <circle cx={pos.cx} cy={pos.cy} r="5" fill="#F0A8C4" fillOpacity="0.6" />
         </g>
       ))}
@@ -144,13 +144,13 @@ function BlastocystIllustration() {
         const rad = (angle * Math.PI) / 180;
         return (
           <circle key={i} cx={90 + 50 * Math.cos(rad)} cy={90 + 50 * Math.sin(rad)}
-            r="9" fill="#f9c6da" stroke="#3D0D1B" strokeWidth="1.2" />
+            r="9" fill="#f9c6da" stroke="var(--teal)" strokeWidth="1.2" />
         );
       })}
       <circle cx="71" cy="70" r="26" fill="url(#s6icm)" />
-      <circle cx="63" cy="66" r="11" fill="#F0A8C4" fillOpacity="0.75" stroke="#3D0D1B" strokeWidth="1" />
-      <circle cx="79" cy="68" r="10" fill="#F0A8C4" fillOpacity="0.75" stroke="#3D0D1B" strokeWidth="1" />
-      <circle cx="68" cy="80" r="10" fill="#F0A8C4" fillOpacity="0.75" stroke="#3D0D1B" strokeWidth="1" />
+      <circle cx="63" cy="66" r="11" fill="#F0A8C4" fillOpacity="0.75" stroke="var(--teal)" strokeWidth="1" />
+      <circle cx="79" cy="68" r="10" fill="#F0A8C4" fillOpacity="0.75" stroke="var(--teal)" strokeWidth="1" />
+      <circle cx="68" cy="80" r="10" fill="#F0A8C4" fillOpacity="0.75" stroke="var(--teal)" strokeWidth="1" />
       <circle cx="66" cy="56" r="8" fill="white" fillOpacity="0.38" />
     </svg>
   );
@@ -165,13 +165,13 @@ function TransferIllustration() {
       </defs>
       <circle cx="90" cy="90" r="86" fill="url(#s7bg)" />
       <path d="M 44 128 Q 36 68 90 38 Q 144 68 136 128 Q 118 148 90 154 Q 62 148 44 128 Z"
-        fill="url(#s7ut)" stroke="#3D0D1B" strokeWidth="1.5" />
+        fill="url(#s7ut)" stroke="var(--teal)" strokeWidth="1.5" />
       <path d="M 44 84 Q 28 68 22 52" stroke="#F0A8C4" strokeWidth="3" fill="none" strokeLinecap="round" />
       <path d="M 136 84 Q 152 68 158 52" stroke="#F0A8C4" strokeWidth="3" fill="none" strokeLinecap="round" />
       <path d="M 70 118 Q 62 76 90 52 Q 118 76 110 118 Q 102 134 90 138 Q 78 134 70 118 Z"
         fill="#FDE8F2" fillOpacity="0.65" />
-      <line x1="90" y1="170" x2="90" y2="98" stroke="#3D0D1B" strokeWidth="2.5" strokeLinecap="round" />
-      <circle cx="90" cy="93" r="10" fill="#FDE8F2" stroke="#3D0D1B" strokeWidth="1.5" />
+      <line x1="90" y1="170" x2="90" y2="98" stroke="var(--teal)" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="90" cy="93" r="10" fill="#FDE8F2" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="90" cy="93" r="6.5" fill="#f9c6da" />
       <circle cx="86" cy="89" r="3" fill="#F0A8C4" fillOpacity="0.8" />
       <ellipse cx="62" cy="72" rx="13" ry="8" fill="white" fillOpacity="0.2" transform="rotate(-18 62 72)" />
@@ -196,12 +196,12 @@ function ImplantationIllustration() {
         fill="#C5E600" fillOpacity="0.2" />
       <path d="M 10 102 Q 46 86 70 94 Q 82 98 90 95 Q 108 89 134 98 Q 154 104 170 92"
         stroke="#1A3A25" strokeWidth="2" fill="none" strokeLinecap="round" />
-      <circle cx="90" cy="85" r="30" fill="url(#s8bl)" stroke="#3D0D1B" strokeWidth="1.5" />
+      <circle cx="90" cy="85" r="30" fill="url(#s8bl)" stroke="var(--teal)" strokeWidth="1.5" />
       <circle cx="90" cy="85" r="23" fill="#FDE8F2" />
       <circle cx="80" cy="76" r="14" fill="url(#s8em)" />
-      <circle cx="78" cy="112" r="7" fill="#F0A8C4" fillOpacity="0.85" stroke="#3D0D1B" strokeWidth="1" />
-      <circle cx="90" cy="115" r="6.5" fill="#F0A8C4" fillOpacity="0.85" stroke="#3D0D1B" strokeWidth="1" />
-      <circle cx="102" cy="112" r="7" fill="#F0A8C4" fillOpacity="0.85" stroke="#3D0D1B" strokeWidth="1" />
+      <circle cx="78" cy="112" r="7" fill="#F0A8C4" fillOpacity="0.85" stroke="var(--teal)" strokeWidth="1" />
+      <circle cx="90" cy="115" r="6.5" fill="#F0A8C4" fillOpacity="0.85" stroke="var(--teal)" strokeWidth="1" />
+      <circle cx="102" cy="112" r="7" fill="#F0A8C4" fillOpacity="0.85" stroke="var(--teal)" strokeWidth="1" />
       <circle cx="150" cy="40" r="16" fill="#C5E600" />
       <path d="M 143 40 L 148 45 L 157 36" stroke="#1A3A25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="74" cy="64" r="9" fill="white" fillOpacity="0.38" />
