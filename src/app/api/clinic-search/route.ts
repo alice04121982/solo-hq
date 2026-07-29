@@ -53,7 +53,7 @@ For each clinic found, provide current data in this exact format and return ONLY
     "distanceMiles": null,
     "prices": {
       "basicIvf": number in GBP equivalent or null,
-      "ivfIcsi": number in GBP equivalent or null,
+      "icsiPerCycle": the ICSI ADD-ON cost per cycle in GBP equivalent, or null. This is the extra charged on top of a cycle price, NOT a bundled "IVF + ICSI" total. If the clinic only advertises a combined figure, subtract the basic IVF price to get the add-on,
       "donorSpermIvf": number in GBP equivalent or null,
       "donorEggIvf": number in GBP equivalent or null,
       "embryoStorage": number per year in GBP equivalent or null,
@@ -92,7 +92,7 @@ For each clinic found, provide current data in this exact format and return ONLY
     "distanceMiles": estimated miles from ${location},
     "prices": {
       "basicIvf": number in GBP or null,
-      "ivfIcsi": number in GBP or null,
+      "icsiPerCycle": the ICSI ADD-ON cost per cycle in GBP, or null. This is the extra charged on top of a cycle price, NOT a bundled "IVF + ICSI" total. If the clinic only advertises a combined figure, subtract the basic IVF price to get the add-on,
       "donorSpermIvf": number in GBP or null,
       "donorEggIvf": number in GBP or null,
       "embryoStorage": number per year in GBP or null,

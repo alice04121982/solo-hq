@@ -183,7 +183,6 @@ export function ClinicCard({
                   <div className="space-y-1.5">
                     {[
                       { label: "Basic IVF", val: clinic.prices.basicIvf },
-                      { label: "IVF + ICSI", val: clinic.prices.ivfIcsi },
                       { label: "Donor Sperm IVF", val: clinic.prices.donorSpermIvf },
                       { label: "Donor Egg IVF", val: clinic.prices.donorEggIvf },
                       { label: "Embryo Storage/yr", val: clinic.prices.embryoStorage },
@@ -196,6 +195,26 @@ export function ClinicCard({
                       </div>
                     ))}
                   </div>
+
+                  {/* ICSI is an add-on, not a treatment tier: it is charged on
+                      top of whichever cycle price applies, once per cycle. */}
+                  {clinic.prices.icsiPerCycle != null && (
+                    <div className="mt-3">
+                      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
+                        Add-ons
+                      </p>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-muted">ICSI (per cycle)</span>
+                        <span className="font-medium text-navy">
+                          +{fmt(clinic.prices.icsiPerCycle)}
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-muted leading-relaxed mt-1.5">
+                        Charged for every cycle, including each cycle of a
+                        multi-cycle package.
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
@@ -268,6 +287,30 @@ export function ClinicCard({
                             {pkg.description}
                           </p>
                         )}
+
+                        {/* A package price covers cycles, not add-ons. Where
+                            ICSI is not included it is billed per cycle, so the
+                            real outlay is the package plus ICSI × cycles. */}
+                        {clinic.prices.icsiPerCycle != null &&
+                          (pkg.includesIcsi ? (
+                            <p className="text-[11px] leading-relaxed mt-1.5 font-medium text-lime-dark">
+                              ICSI included in every cycle
+                            </p>
+                          ) : (
+                            <p className="text-[11px] leading-relaxed mt-1.5 text-navy">
+                              <span className="font-medium">
+                                + ICSI £
+                                {clinic.prices.icsiPerCycle.toLocaleString()}
+                                {(pkg.cycles ?? 1) > 1 && ` × ${pkg.cycles} cycles`}
+                              </span>{" "}
+                              = £
+                              {(
+                                pkg.price +
+                                clinic.prices.icsiPerCycle * (pkg.cycles ?? 1)
+                              ).toLocaleString()}{" "}
+                              if ICSI is needed
+                            </p>
+                          ))}
                       </div>
                     ))}
                   </div>
