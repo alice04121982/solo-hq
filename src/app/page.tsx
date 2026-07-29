@@ -46,7 +46,7 @@ export default function Home() {
 
           {/* Scroll-snap on mobile, grid on desktop */}
           <div
-            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:pb-0"
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 xl:grid-cols-5 md:overflow-visible md:pb-0"
             style={{ scrollbarWidth: "none" }}
           >
             {FAMILY_TYPES.map((family) => {
@@ -197,7 +197,7 @@ export default function Home() {
                 </span>
                 <h3
                   className="font-sans font-semibold"
-                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--teal)" }}
+                  style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.25rem)", lineHeight: 1.22, letterSpacing: "-0.72px", color: "var(--teal)" }}
                 >
                   {FEATURED_STORIES[0].title}
                 </h3>
@@ -223,7 +223,7 @@ export default function Home() {
               >
                 <h3
                   className="font-sans font-semibold"
-                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--teal)" }}
+                  style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.25rem)", lineHeight: 1.22, letterSpacing: "-0.72px", color: "var(--teal)" }}
                 >
                   &ldquo;{FEATURED_STORIES[1].title}&rdquo;
                 </h3>

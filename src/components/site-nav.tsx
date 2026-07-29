@@ -31,7 +31,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
   return (
     <nav
-      className={`relative flex items-center justify-between py-6 transition-all duration-300 ${
+      className={`relative flex items-center justify-between gap-8 py-6 transition-all duration-300 ${
         scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
       }`}
     >
@@ -40,7 +40,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
       </a>
 
       {/* Desktop links */}
-      <div className="hidden md:flex items-center gap-10">
+      <div className="hidden md:flex items-center gap-6 xl:gap-10">
         {NAV_LINKS.map((l) => (
           <a
             key={l.href}

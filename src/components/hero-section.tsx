@@ -21,20 +21,6 @@ export function HeroSection() {
         <SiteNav theme="dark" />
 
         <div className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:pt-32 lg:pb-32">
-          {/* Photo — sits to the right of, and overlapping, the copy on lg+.
-              Exported from Figma with its mask already baked in, so the notched
-              silhouette needs no clip-path here. */}
-          <div className="lg:absolute lg:right-[-42px] lg:top-32 lg:w-[580px] lg:h-[619px] mb-12 lg:mb-0 pointer-events-none">
-            <Image
-              src="/photos/hero-family.png"
-              alt="A mother playing guitar with her toddler"
-              width={580}
-              height={619}
-              priority
-              className="w-full h-auto object-contain"
-            />
-          </div>
-
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -100,6 +86,24 @@ export function HeroSection() {
               ))}
             </div>
           </motion.div>
+
+          {/* Photo. From xl up it is absolutely placed to the right of — and
+              overlapping — the copy, as designed; the container caps at 1280px
+              so 580px is the designed width at every width above that. Below
+              xl the copy column is too narrow for the overlap to clear the
+              text, so the photo drops beneath it instead.
+              Exported from Figma with its mask already baked in, so the
+              notched silhouette needs no clip-path here. */}
+          <div className="mt-12 w-full max-w-[520px] ml-auto xl:mt-0 xl:max-w-none xl:ml-0 xl:absolute xl:right-[-42px] xl:top-32 xl:w-[580px] pointer-events-none">
+            <Image
+              src="/photos/hero-family.png"
+              alt="A mother playing guitar with her toddler"
+              width={580}
+              height={619}
+              priority
+              className="w-full h-auto object-contain"
+            />
+          </div>
         </div>
       </div>
     </section>
