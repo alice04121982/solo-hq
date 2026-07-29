@@ -11,7 +11,7 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
       style={{
         fontSize: "1.25rem",
         letterSpacing: "-0.02em",
-        color: onDark ? "#f9c6da" : "#1A0810",
+        color: onDark ? "#f9c6da" : "var(--foreground)",
       }}
       aria-label="CairnFertility"
     >

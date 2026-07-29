@@ -139,7 +139,7 @@ export function FilterPanel({
               <div className="flex items-center gap-3">
                 <h2
                   className="font-sans font-bold text-base"
-                  style={{ color: "#1A0810" }}
+                  style={{ color: "var(--foreground)" }}
                 >
                   Filters
                 </h2>
@@ -154,7 +154,7 @@ export function FilterPanel({
               </div>
               <button
                 onClick={onClose}
-                className="p-1 rounded-full transition-colors hover:bg-[#f9f4f6]"
+                className="p-1 rounded-full transition-colors hover:bg-surface-hover"
                 style={{ color: "var(--teal)" }}
               >
                 <X className="h-5 w-5" />
@@ -174,7 +174,7 @@ export function FilterPanel({
                 </p>
                 <div
                   className="flex rounded-full p-0.5 mb-4"
-                  style={{ background: "#F0EEF0" }}
+                  style={{ background: "var(--surface-sunken)" }}
                 >
                   {(["uk", "international"] as const).map((m) => (
                     <button
@@ -313,7 +313,7 @@ export function FilterPanel({
               <button
                 type="button"
                 onClick={handleClear}
-                className="flex-1 py-2.5 text-sm font-medium rounded-full border transition-colors hover:bg-[#f9f4f6]"
+                className="flex-1 py-2.5 text-sm font-medium rounded-full border transition-colors hover:bg-surface-hover"
                 style={{ borderColor: "rgba(0, 83, 83, 0.2)", color: "var(--teal)" }}
               >
                 Clear all

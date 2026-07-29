@@ -67,11 +67,11 @@ export function ClinicToolbar({
           className="flex flex-1 items-center gap-3 rounded-full border bg-white px-5 py-3 min-w-0"
           style={{ borderColor: "#E8E8E8" }}
         >
-          <Search className="h-4 w-4 shrink-0" style={{ color: "#5C4050" }} />
+          <Search className="h-4 w-4 shrink-0" style={{ color: "var(--muted)" }} />
 
           {locationMode === "international" && selectedCountry ? (
             <div className="flex flex-1 items-center gap-2 min-w-0">
-              <span className="text-sm font-medium" style={{ color: "#1A0810" }}>
+              <span className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
                 {selectedCountry}
               </span>
               <button
@@ -89,7 +89,7 @@ export function ClinicToolbar({
               onChange={(e) => onLocationChange(e.target.value)}
               placeholder="Postcode or town — e.g. London, SW1, Cambridge"
               className="flex-1 bg-transparent text-sm focus:outline-none min-w-0"
-              style={{ color: "#1A0810" }}
+              style={{ color: "var(--foreground)" }}
             />
           )}
 
@@ -99,7 +99,7 @@ export function ClinicToolbar({
             disabled={geoLoading}
             title="Use my location"
             className="shrink-0 flex items-center gap-1.5 text-xs font-medium transition-colors disabled:opacity-50"
-            style={{ color: "#5C4050" }}
+            style={{ color: "var(--muted)" }}
           >
             <LocateFixed
               className={`h-3.5 w-3.5 ${geoLoading ? "animate-spin" : ""}`}
@@ -112,8 +112,8 @@ export function ClinicToolbar({
         <button
           type="button"
           onClick={onOpenFilters}
-          className="shrink-0 flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-medium transition-colors hover:bg-[#f9f4f6]"
-          style={{ borderColor: "#E8E8E8", color: "#1A0810" }}
+          className="shrink-0 flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-medium transition-colors hover:bg-surface-hover"
+          style={{ borderColor: "#E8E8E8", color: "var(--foreground)" }}
         >
           <SlidersHorizontal className="h-4 w-4" />
           <span className="hidden sm:inline">Filters</span>
@@ -218,7 +218,7 @@ export function ClinicToolbar({
               onClearCountry();
             }}
             className="text-xs font-medium underline underline-offset-2 transition-opacity hover:opacity-70"
-            style={{ color: "#5C4050" }}
+            style={{ color: "var(--muted)" }}
           >
             Clear all
           </button>

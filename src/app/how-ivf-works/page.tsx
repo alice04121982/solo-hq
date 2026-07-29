@@ -356,7 +356,7 @@ export default function HowIVFWorksPage() {
         >
           What actually happens.
         </h1>
-        <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "#5C4050" }}>
+        <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
           From the first injection to implantation — what is happening inside your body, and inside the laboratory, at every step. In plain English.
         </p>
 
@@ -415,7 +415,7 @@ export default function HowIVFWorksPage() {
                     {stage.title}
                   </h2>
                   {stage.body.map((para, j) => (
-                    <p key={j} className="text-sm font-sans leading-relaxed mb-4" style={{ color: "#5C4050", maxWidth: "52ch" }}>
+                    <p key={j} className="text-sm font-sans leading-relaxed mb-4" style={{ color: "var(--muted)", maxWidth: "52ch" }}>
                       {para}
                     </p>
                   ))}

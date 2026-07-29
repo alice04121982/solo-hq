@@ -2,18 +2,22 @@
 
 :root {
   /* ── Palette ── */
+  /* Neutrals are tinted toward the teal, never the old maroon, so body
+     copy sits in the same family as the brand rather than reading burgundy. */
   --background:      #FFFFFF;
   --background-alt:  #F4F4F4;
-  --foreground:      #1A0810;
-  --muted:           #5C4050;
+  --foreground:      #0C2626;
+  --muted:           #3B5350;
+  --surface-hover:   #F1F6F6;
+  --surface-sunken:  #EEF3F3;
   --accent:          #C5E600;   /* lime */
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
   --border:          #E8E8E8;
 
   /* ── Brand: deep teal ──
-     Replaces the former deep maroon (#3D0D1B). Doubles as the dark
-     surface (hero, footer) and as the dark ink on light surfaces. */
+     Doubles as the dark surface (hero, footer) and as the dark ink on
+     light surfaces. */
   --teal:            #005353;
   --teal-ink:        #005353;
   --teal-10:         rgba(0, 83, 83, 0.10);
@@ -34,8 +38,8 @@
   --lavender-dark:   #C47098;
   --lime:            #C5E600;
   --lime-dark:       #9BBB00;
-  --charcoal:        #1A0810;
-  --navy:            var(--teal);   /* was #3D0D1B; kept so bg-navy/text-navy still resolve */
+  --charcoal:        var(--foreground);
+  --navy:            var(--teal);   /* kept so bg-navy/text-navy still resolve */
   --warm-white:      #F5F1E6;
   --card-bg:         #FDE8F2;
   --card-border:     #f5c6dd;
@@ -45,6 +49,8 @@
   /* ── Semantic colours ── */
   --color-background:      var(--background);
   --color-background-alt:  var(--background-alt);
+  --color-surface-hover:   var(--surface-hover);
+  --color-surface-sunken:  var(--surface-sunken);
   --color-foreground:      var(--foreground);
   --color-muted:           var(--muted);
   --color-accent:          var(--accent);
