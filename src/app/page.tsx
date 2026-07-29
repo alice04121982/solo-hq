@@ -140,17 +140,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 — Personal stories: light pink */}
-      <section style={{ background: "#FDE8F2" }} id="stories">
+      {/* 4 — Personal stories: white */}
+      <section style={{ background: "#FFFFFF" }} id="stories">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
+            <div className="flex flex-col gap-3">
+              <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
                 Real journeys
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "var(--teal)" }}
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.8px",
+                  color: "var(--teal)",
+                }}
               >
                 In their own words.
               </h2>
@@ -166,92 +171,120 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: teal bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "var(--teal)" }}>
-              <div className="p-5 flex items-start justify-between gap-3">
-                <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#f9c6da" }}>
-                  {FEATURED_STORIES[0].title}
-                </h3>
-                <span
-                  className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
-                  style={{ background: "#FDE8F2", color: "var(--teal)" }}
-                >
-                  {FEATURED_STORIES[0].familyLabel}
-                </span>
-              </div>
-              <div className="relative overflow-hidden flex-1" style={{ minHeight: "280px" }}>
+            {/* Card 1: pink bg, teal badge + heading, angled photo bottom-right */}
+            <article
+              className="rounded-2xl overflow-hidden relative flex flex-col px-4 py-[21px]"
+              style={{ background: "#feb3d1", height: "420px" }}
+            >
+              <div
+                className="absolute bottom-0 right-0 overflow-hidden"
+                style={{ width: "72%", height: "69%", clipPath: "polygon(26% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+              >
                 <Image
-                  src="/photos/story-hero.jpeg"
-                  alt="Solo mum story"
+                  src={FEATURED_STORIES[0].image}
+                  alt={FEATURED_STORIES[0].imageAlt}
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute bottom-3 right-3">
-                  <div className="rounded-xl px-3 py-2 text-right" style={{ background: "#F0A8C4" }}>
-                    <p className="text-xs font-sans font-[600]" style={{ color: "var(--teal)" }}>
-                      {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
-                    </p>
-                    <p className="text-[11px] font-sans" style={{ color: "rgba(0, 83, 83, 0.6)" }}>
-                      {FEATURED_STORIES[0].location}
-                    </p>
-                  </div>
-                </div>
               </div>
+
+              <div className="relative z-10 flex flex-col gap-1 items-start">
+                <span
+                  className="rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                  style={{ background: "var(--teal)", color: "var(--cream)" }}
+                >
+                  {FEATURED_STORIES[0].tag}
+                </span>
+                <h3
+                  className="font-sans font-semibold"
+                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--teal)" }}
+                >
+                  {FEATURED_STORIES[0].title}
+                </h3>
+              </div>
+
+              <span
+                className="relative z-10 mt-auto rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                style={{ borderColor: "var(--teal)", color: "var(--teal)" }}
+              >
+                →
+              </span>
             </article>
 
-            {/* Card 2: full-bleed photo, lime diagonal */}
-            <article className="rounded-2xl overflow-hidden relative" style={{ height: "420px" }}>
+            {/* Card 2: teal bg, lime badge, cream heading */}
+            <article
+              className="rounded-2xl overflow-hidden relative flex flex-col px-4 py-[21px]"
+              style={{ background: "var(--teal)", height: "420px" }}
+            >
+              <div className="flex flex-col gap-1 items-start">
+                <span
+                  className="rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                  style={{ background: "var(--accent)", color: "var(--teal)" }}
+                >
+                  {FEATURED_STORIES[1].tag}
+                </span>
+                <h3
+                  className="font-sans font-semibold"
+                  style={{ fontSize: "36px", lineHeight: "44px", letterSpacing: "-0.72px", color: "var(--cream)" }}
+                >
+                  &ldquo;{FEATURED_STORIES[1].title}&rdquo;
+                </h3>
+                <p
+                  className="text-xs font-sans leading-[18px] uppercase mt-2"
+                  style={{ color: "var(--cream)" }}
+                >
+                  {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
+                </p>
+              </div>
+
+              <span
+                className="mt-auto rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+              >
+                →
+              </span>
+            </article>
+
+            {/* Card 3: full-bleed photo, lime diagonal */}
+            <article
+              className="rounded-2xl overflow-hidden relative border"
+              style={{ height: "420px", borderColor: "rgba(0,0,0,0.08)" }}
+            >
               <Image
-                src={FEATURED_STORIES[1].image}
-                alt={FEATURED_STORIES[1].imageAlt}
+                src={FEATURED_STORIES[2].image}
+                alt={FEATURED_STORIES[2].imageAlt}
                 fill
                 className="object-cover"
               />
               <div className="absolute inset-x-0 bottom-0 overflow-hidden">
                 <div
-                  className="px-6 pt-14 pb-6"
-                  style={{ background: "#C5E600", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
+                  className="px-6 pt-14 pb-6 flex flex-col gap-2"
+                  style={{ background: "var(--accent)", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
                 >
-                  <h3 className="font-sans font-bold text-lg leading-snug mb-3" style={{ color: "#1A3A25" }}>
-                    {FEATURED_STORIES[1].title}
+                  <span
+                    className="self-start rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                    style={{ background: "var(--teal)", color: "var(--cream)" }}
+                  >
+                    {FEATURED_STORIES[2].tag}
+                  </span>
+                  <h3 className="font-sans font-bold text-lg leading-[1.375]" style={{ color: "#1A3A25" }}>
+                    {FEATURED_STORIES[2].title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em]" style={{ color: "#1A3A25" }}>
-                      {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
+                  <div className="flex items-center gap-5">
+                    <p
+                      className="flex-1 text-[11px] font-sans font-[600] uppercase leading-[1.45]"
+                      style={{ color: "#1A3A25", letterSpacing: "1.1px" }}
+                    >
+                      {FEATURED_STORIES[2].name} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
                     </p>
-                    <span className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600]" style={{ borderColor: "#1A3A25", color: "#1A3A25" }}>
+                    <span
+                      className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                      style={{ borderColor: "var(--teal)", color: "var(--teal)" }}
+                    >
                       →
                     </span>
                   </div>
                 </div>
-              </div>
-            </article>
-
-            {/* Card 3: light pink bg, angled photo */}
-            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", height: "420px" }}>
-              <div className="p-6 relative z-10 max-w-[65%]">
-                <h3 className="font-sans font-bold text-2xl leading-tight" style={{ color: "var(--teal)" }}>
-                  {FEATURED_STORIES[2].title}
-                </h3>
-              </div>
-              <div
-                className="absolute bottom-0 right-0 overflow-hidden"
-                style={{ width: "68%", height: "72%", clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
-              >
-                <Image
-                  src={FEATURED_STORIES[2].image}
-                  alt={FEATURED_STORIES[2].imageAlt}
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-              <div className="absolute bottom-5 left-5 z-10">
-                <span
-                  className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5"
-                  style={{ background: "#C5E600", color: "#1A3A25" }}
-                >
-                  {FEATURED_STORIES[2].name}, {FEATURED_STORIES[2].age} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
-                </span>
               </div>
             </article>
 
