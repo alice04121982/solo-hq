@@ -4,6 +4,34 @@ import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
+import { roundedPolygon } from "@/lib/rounded-path";
+
+/**
+ * Story card shapes (Figma card set 18949:512634). Both coloured assets have
+ * rounded corners in the masters — including where a diagonal meets a straight
+ * edge — which polygon clip-paths cannot express, so they are drawn as paths.
+ */
+// Card 1's photo, anchored bottom-right with a diagonal top-left edge.
+// Normalised units so the clip scales with the element it is applied to.
+const STORY_PHOTO_CLIP = roundedPolygon(
+  [
+    [0.49, 0],
+    [1, 0],
+    [1, 1],
+    [0.054, 1],
+  ],
+  0.07,
+);
+// Card 3's lime block: 328x186, top edge rising left-to-right.
+const STORY_LIME_SHAPE = roundedPolygon(
+  [
+    [0, 25],
+    [328, 0],
+    [328, 186],
+    [0, 186],
+  ],
+  18,
+);
 
 const CARD_THEME = { bg: "#FFFFFF", text: "var(--teal)", muted: "rgba(0, 83, 83, 0.6)" };
 
@@ -176,9 +204,20 @@ export default function Home() {
               className="rounded-2xl overflow-hidden relative flex flex-col px-4 py-[21px]"
               style={{ background: "#feb3d1", height: "420px" }}
             >
+              <svg width="0" height="0" aria-hidden className="absolute">
+                <defs>
+                  <clipPath id="story-photo-clip" clipPathUnits="objectBoundingBox">
+                    <path d={STORY_PHOTO_CLIP} />
+                  </clipPath>
+                </defs>
+              </svg>
               <div
                 className="absolute bottom-0 right-0 overflow-hidden"
-                style={{ width: "72%", height: "69%", clipPath: "polygon(26% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
+                style={{
+                  width: "72%",
+                  height: "69%",
+                  clipPath: "url(#story-photo-clip)",
+                }}
               >
                 <Image
                   src={FEATURED_STORIES[0].image}
@@ -270,11 +309,15 @@ export default function Home() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute left-4 right-4 bottom-4 h-[186px] rounded-[20px] overflow-hidden">
-                <div
-                  className="absolute inset-0"
-                  style={{ background: "var(--accent)", clipPath: "polygon(0 15%, 100% 0%, 100% 100%, 0% 100%)" }}
-                />
+              <div className="absolute left-4 right-4 bottom-4 h-[186px]">
+                <svg
+                  viewBox="0 0 328 186"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full"
+                >
+                  <path d={STORY_LIME_SHAPE} fill="var(--accent)" />
+                </svg>
                 <div className="relative h-full flex flex-col gap-2 px-3 pt-[50px] pb-3">
                   <span
                     className="self-start rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
