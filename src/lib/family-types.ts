@@ -48,9 +48,8 @@ export const FAMILY_TYPES: FamilyType[] = [
       "Choosing to become a mother on your own terms is one of the most courageous decisions a person can make. Whether you're just starting to research or already mid-treatment, this guide gives you a clear, honest map through every stage — from choosing a donor to your child's first birthday.",
     cardSummary:
       "For women choosing motherhood independently, using donor sperm and IUI or IVF.",
-    image:
-      "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "Woman smiling warmly, holding her baby",
+    image: "/photos/story-solo-mum.webp",
+    imageAlt: "A mother holding her young child, looking out at the sky",
     hideHeroImage: true,
     treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm",
     steps: [
@@ -144,9 +143,8 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners — this guide walks you through every stage with clarity.",
     cardSummary:
       "For female same-sex couples using donor sperm, including the reciprocal IVF option.",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "Two women laughing together warmly",
+    image: "/photos/story-two-mums.webp",
+    imageAlt: "Two women sitting together, one kissing the other on the cheek",
     treatmentHighlight: "IUI · IVF · Reciprocal IVF · Donor Sperm",
     steps: [
       {
@@ -239,9 +237,8 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two men wanting to become fathers, the path involves surrogacy — a process that's legal, increasingly common, and genuinely achievable in the UK. It's also more complex than other routes. This guide explains every step honestly, from finding a surrogate to the parental order that makes you your child's legal parents.",
     cardSummary:
       "For male same-sex couples pursuing parenthood via surrogacy and donor eggs.",
-    image:
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "Two men with a young child, smiling",
+    image: "/photos/story-two-dads.webp",
+    imageAlt: "Two men embracing and smiling at each other",
     treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
     steps: [
       {
@@ -334,9 +331,8 @@ export const FAMILY_TYPES: FamilyType[] = [
       "More men than ever are choosing to become solo fathers. The path — surrogacy with a donor egg — is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
     cardSummary:
       "For solo dads pursuing fatherhood independently via surrogacy and donor eggs.",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "Man smiling warmly, portrait",
+    image: "/photos/cta-family.webp",
+    imageAlt: "A father holding and kissing his young son",
     treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
     steps: [
       {
@@ -429,9 +425,8 @@ export const FAMILY_TYPES: FamilyType[] = [
       "Fertility treatment for heterosexual couples covers an enormous range of situations — from unexplained infertility to specific diagnoses like low sperm count, PCOS, or poor egg reserve. Whatever brought you here, this guide helps you navigate your options with clarity: from initial investigations to embryo transfer, and everything in between.",
     cardSummary:
       "For couples navigating fertility challenges together — unexplained infertility, MFI, PCOS, and more.",
-    image:
-      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=900&q=80",
-    imageAlt: "Couple embracing warmly",
+    image: "/photos/newborn.webp",
+    imageAlt: "A couple holding their newborn baby by a window",
     treatmentHighlight: "IVF · ICSI · IUI · Donor Egg · Donor Sperm",
     steps: [
       {
