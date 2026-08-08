@@ -74,8 +74,8 @@ export const ALL_STORIES: Story[] = [
     excerpt: "A UK surrogacy journey that took 18 months, built a profound friendship, and ended with their son Elliot — who now calls their surrogate his auntie.",
     body: "We'd been matched through a surrogacy organisation for six months when we met Jo at an introductory event. By the end of the night we knew she was right. Three months later, treatment started. Our son Elliot was born in 2023. Jo is his auntie. It's messier and more beautiful than we expected.",
     treatment: "IVF, UK surrogate",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Two men with a young child, smiling",
+    image: "/photos/story-two-dads.webp",
+    imageAlt: "Two men embracing and smiling at each other",
   },
   {
     id: "emma-david-isla",
