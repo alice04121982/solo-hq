@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { ArrowRight, BookOpen, Calculator, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
+
+interface CategoryResource {
+  title: string;
+  type: string;
+  /** Slug of a guide under /resources. Omit when `href` points elsewhere. */
+  slug?: string;
+  /** An absolute path, for entries that live outside the guide library. */
+  href?: string;
+}
 
 export const metadata: Metadata = {
   title: "Resources | CairnFertility",
   description: "Guides, tools, checklists, and templates for every kind of family navigating fertility treatment.",
 };
 
-const CATEGORIES = [
+const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryResource[] }[] = [
   {
     icon: <Calculator className="h-5 w-5" />,
     title: "Finance & Costs",
@@ -59,6 +68,16 @@ const CATEGORIES = [
       { title: "Birth partner options", type: "Guide", slug: "birth-partner-options" },
       { title: "Talking to your child about donor conception", type: "Guide", slug: "talking-to-child-donor-conception" },
       { title: "Childcare planning: a parent's guide", type: "Guide", slug: "childcare-planning" },
+    ],
+  },
+  {
+    icon: <Compass className="h-5 w-5" />,
+    title: "Faith, Culture & Belief",
+    resources: [
+      { title: "Where the major traditions stand on IVF", type: "Explainer", href: "/faith#traditions" },
+      { title: "Handling conversations that are anti-IVF", type: "Scripts", href: "/faith#conversations" },
+      { title: "Keeping your practice through a treatment cycle", type: "Guide", href: "/faith#observance" },
+      { title: "Faith-aware counselling and support", type: "Directory", href: "/faith#support" },
     ],
   },
   {
@@ -152,7 +171,7 @@ export default function ResourcesPage() {
               <ul className="space-y-3">
                 {cat.resources.map((r) => (
                   <li key={r.title}>
-                    <Link href={`/resources/${r.slug}`} className="flex items-start gap-3 group">
+                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
                       <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
                       <div>
                         <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">

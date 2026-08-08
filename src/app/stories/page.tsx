@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
+import { StoryImage } from "@/components/story-image";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
 
-type Filter = "all" | FamilyTypeSlug;
+/** "faith" is a theme rather than a family type, so it filters on its own axis. */
+type Filter = "all" | "faith" | FamilyTypeSlug;
 
 export default function StoriesPage() {
   const [filter, setFilter] = useState<Filter>("all");
@@ -16,7 +17,9 @@ export default function StoriesPage() {
   const visible =
     filter === "all"
       ? ALL_STORIES
-      : ALL_STORIES.filter((s) => s.familyType === filter);
+      : filter === "faith"
+        ? ALL_STORIES.filter((s) => s.theme === "faith")
+        : ALL_STORIES.filter((s) => s.familyType === filter);
 
   return (
     <main className="min-h-screen bg-background">
@@ -69,7 +72,28 @@ export default function StoriesPage() {
               {f.label}
             </button>
           ))}
+          <button
+            onClick={() => setFilter("faith")}
+            className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
+              filter === "faith"
+                ? "border-foreground bg-foreground text-background"
+                : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+            }`}
+          >
+            Faith &amp; belief
+          </button>
         </div>
+
+        {filter === "faith" && (
+          <p className="text-sm font-sans text-muted mt-5" style={{ maxWidth: "58ch" }}>
+            More on religion, culture and belief — including where the major traditions
+            stand and how to handle conversations that turn against you — is in{" "}
+            <Link href="/faith" className="underline underline-offset-2 text-foreground">
+              Faith &amp; Culture
+            </Link>
+            .
+          </p>
+        )}
       </section>
 
       {/* Story grid */}
@@ -88,23 +112,29 @@ export default function StoriesPage() {
             >
               {/* Image */}
               <div className="relative h-56 rounded-xl overflow-hidden bg-background-alt">
-                <Image
+                <StoryImage
                   src={story.image}
                   alt={story.imageAlt}
-                  fill
-                  className="object-cover"
-                  style={{ filter: "saturate(0.85) sepia(0.06)" }}
+                  label={story.tradition ?? story.familyLabel}
+                  sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"
+                  className="[filter:saturate(0.85)_sepia(0.06)]"
                 />
               </div>
 
               {/* Content */}
               <div className="flex flex-col gap-3 flex-1">
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-accent font-sans">
                     {story.familyLabel}
                   </span>
                   <span className="text-[10px] text-muted font-sans">·</span>
                   <span className="text-[10px] font-sans text-muted">{story.treatment}</span>
+                  {story.tradition && (
+                    <>
+                      <span className="text-[10px] text-muted font-sans">·</span>
+                      <span className="text-[10px] font-sans text-muted">{story.tradition}</span>
+                    </>
+                  )}
                 </div>
 
                 <h2 className="font-sans font-bold text-foreground text-xl leading-snug">
