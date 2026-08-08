@@ -17,26 +17,58 @@ const TRUST_SIGNALS = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--teal)" }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      {/* Below xl the photo runs to the very top of the section, behind the
+          nav, and dissolves into the teal rather than ending on a hard edge —
+          so the page opens on the image with the wordmark sitting over it. */}
+      <div className="absolute inset-x-0 top-0 h-[56vh] xl:hidden pointer-events-none">
+        <Image
+          src="/photos/hero-placeholder.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+        {/* Top scrim: the wordmark and burger sit over the photograph, and the
+            image cannot be relied on to be dark behind them. */}
+        <div
+          className="absolute inset-x-0 top-0 h-32"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, rgba(0,55,55,0.6) 0%, rgba(0,55,55,0.28) 55%, rgba(0,55,55,0) 100%)",
+          }}
+        />
+        {/* Bottom fade into the section colour, so the photo has no hard edge */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-2/3"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, rgba(0,83,83,0) 0%, rgba(0,83,83,0.72) 58%, var(--teal) 100%)",
+          }}
+        />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav theme="dark" />
 
-        <div className="relative pt-6 pb-20 md:pt-10 md:pb-28 xl:pt-32 xl:pb-32">
-          {/* Photo. Below xl it leads the hero: full-bleed, directly under the
-              nav, with the copy beneath — so the page opens on the image on a
-              phone. From xl up it is absolutely placed to the right of, and
-              overlapping, the copy as designed; the container caps at 1280px
-              so 580px is the designed width at every width above that.
-              Exported from Figma with its mask already baked in, so the
-              notched silhouette needs no clip-path here — the alpha channel
-              carries it, which is why this stays WebP rather than JPEG. */}
-          <div className="-mx-6 mb-10 md:-mx-12 lg:-mx-20 xl:mx-0 xl:mb-0 xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
+        <div className="relative pb-20 md:pb-28 xl:pt-32 xl:pb-32">
+          {/* Holds open the space the bleeding image occupies below the nav.
+              The image itself is out of flow, so without this the copy would
+              start under the wordmark. */}
+          <div className="h-[calc(56vh-140px)] xl:hidden" aria-hidden />
+
+          {/* From xl the photo is a fixed 580px placed to the right of — and
+              overlapping — the copy, as designed; the container caps at 1280px
+              so that is the designed width at every width above it. The mask is
+              baked into the export, so the notched silhouette needs no
+              clip-path — the alpha channel carries it. */}
+          <div className="hidden xl:block xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
             <Image
               src="/photos/hero-placeholder.webp"
               alt=""
               width={1205}
               height={1282}
-              priority
-              sizes="(min-width: 1280px) 580px, 100vw"
+              sizes="580px"
               className="w-full h-auto object-contain"
             />
           </div>
