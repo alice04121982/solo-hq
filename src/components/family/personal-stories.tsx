@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Story } from "@/lib/family-types";
 
@@ -40,9 +41,23 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-16 border-l-2 pl-8 md:pl-12"
-          style={{ borderColor: GREEN }}
+          className="mb-16 flex flex-col md:flex-row md:items-start gap-8 md:gap-12"
         >
+          {featured.image && (
+            <div className="relative w-full md:w-[340px] shrink-0 aspect-[4/3] rounded-2xl overflow-hidden">
+              <Image
+                src={featured.image}
+                alt={featured.imageAlt ?? ""}
+                fill
+                sizes="(min-width: 768px) 340px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
+
+          {/* The rule stays with the text, so a story without a photograph
+              still reads as the featured one. */}
+          <div className="border-l-2 pl-8 md:pl-12" style={{ borderColor: GREEN }}>
           <p
             className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
             style={{ color: GREEN_SOFT }}
@@ -67,6 +82,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           >
             {featured.name}, {featured.age} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.treatment}
           </p>
+          </div>
         </motion.div>
 
         {/* Secondary stories */}
@@ -80,6 +96,17 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               transition={{ duration: 0.6, delay: i * 0.06, ease: EASE }}
               className="py-8 border-t border-border"
             >
+              {story.image && (
+                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-5">
+                  <Image
+                    src={story.image}
+                    alt={story.imageAlt ?? ""}
+                    fill
+                    sizes="(min-width: 768px) 480px, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <p
                 className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
                 style={{ color: GREEN_SOFT }}

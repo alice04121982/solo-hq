@@ -19,6 +19,13 @@ export interface Story {
   title: string;
   body: string;
   treatment: string;
+  /**
+   * Optional so a story can ship before its photograph exists. Where it is
+   * absent the story renders as text alone; do not reuse the family type's
+   * own image here, since the guide hero on the same page already shows it.
+   */
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface FamilyType {
@@ -96,6 +103,8 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     stories: [
       {
+        image: "/photos/hands.webp",
+        imageAlt: "An adult hand holding a small child's hand",
         name: "Alice",
         age: 37,
         location: "Bristol",
@@ -472,6 +481,8 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     stories: [
       {
+        image: "/photos/story-mirror-family.webp",
+        imageAlt: "A couple with their newborn, seen through a mirror",
         name: "Emma & David",
         age: 34,
         location: "London",
