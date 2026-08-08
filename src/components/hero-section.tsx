@@ -31,8 +31,8 @@ export function HeroSection() {
               carries it, which is why this stays WebP rather than JPEG. */}
           <div className="-mx-6 mb-10 md:-mx-12 lg:-mx-20 xl:mx-0 xl:mb-0 xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
             <Image
-              src="/photos/hero-family.webp"
-              alt="A mother playing guitar with her toddler"
+              src="/photos/hero-placeholder.webp"
+              alt=""
               width={1205}
               height={1282}
               priority
