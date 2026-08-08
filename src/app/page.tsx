@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
@@ -33,13 +34,13 @@ export default function Home() {
                 Find your guide.
               </h2>
             </div>
-            <a
+            <Link
               href="/families"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
               style={{ color: "var(--teal)" }}
             >
               All family types <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </Link>
           </div>
 
           {/* Scroll-snap on mobile, grid on desktop */}
@@ -50,7 +51,7 @@ export default function Home() {
             {FAMILY_TYPES.map((family) => {
               const theme = CARD_THEME;
               return (
-                <a
+                <Link
                   key={family.slug}
                   href={`/families/${family.slug}`}
                   className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 md:min-h-[229px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
@@ -65,18 +66,18 @@ export default function Home() {
                   <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.text }}>
                     Read the guide <ArrowRight className="h-3 w-3" />
                   </span>
-                </a>
+                </Link>
               );
             })}
           </div>
 
-          <a
+          <Link
             href="/families"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
             style={{ color: "var(--teal)" }}
           >
             All family types <ArrowRight className="h-3.5 w-3.5" />
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -105,14 +106,14 @@ export default function Home() {
               <p className="text-sm font-sans leading-relaxed mb-8" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
                 Success rates by age bracket, solo- and LGBTQ+-friendliness, HFEA-verified data flags, and all six treatment types: IVF, ICSI, IUI, donor egg, donor sperm, and double donor.
               </p>
-              <a
+              <Link
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
                 style={{ background: "#C5E600", color: "#1A3A25" }}
               >
                 Open comparison tool
                 <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+              </Link>
             </div>
 
             {/* Stats grid */}
@@ -158,18 +159,18 @@ export default function Home() {
                 In their own words.
               </h2>
             </div>
-            <a
+            <Link
               href="/stories"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
               style={{ borderColor: "rgba(0, 83, 83, 0.3)", color: "var(--teal)" }}
             >
               See all stories <ArrowRight className="h-3.5 w-3.5" />
-            </a>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
             {FEATURED_STORIES.map((story) => (
-              <a
+              <Link
                 key={story.id}
                 href={`/stories/${story.id}`}
                 className="group flex flex-col rounded-2xl overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
@@ -211,17 +212,17 @@ export default function Home() {
                     </span>
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 
-          <a
+          <Link
             href="/stories"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
             style={{ color: "var(--teal)" }}
           >
             See all stories <ArrowRight className="h-3.5 w-3.5" />
-          </a>
+          </Link>
         </div>
       </section>
 

@@ -1,7 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Check, Link2, Mail, Share2 } from "lucide-react";
+
+/**
+ * The canonical URL and the presence of navigator.share are browser-only
+ * facts, and neither is known when this renders on the server.
+ * useSyncExternalStore reads them with an explicit server snapshot, which
+ * avoids both a hydration mismatch and a setState inside an effect.
+ */
+const noSubscribe = () => () => {};
+const getUrl = () => window.location.href;
+const getServerUrl = () => "";
+const getCanShare = () => typeof navigator !== "undefined" && !!navigator.share;
+const getServerCanShare = () => false;
 
 /**
  * lucide-react no longer ships brand marks, so these are inlined — the same
@@ -27,16 +39,9 @@ const BRANDS = [
 ];
 
 export function ShareButtons({ title }: { title: string }) {
-  const [url, setUrl] = useState("");
+  const url = useSyncExternalStore(noSubscribe, getUrl, getServerUrl);
+  const canNativeShare = useSyncExternalStore(noSubscribe, getCanShare, getServerCanShare);
   const [copied, setCopied] = useState(false);
-  const [canNativeShare, setCanNativeShare] = useState(false);
-
-  // Read on the client: the canonical URL is not known at build time, and
-  // navigator.share only exists in some browsers.
-  useEffect(() => {
-    setUrl(window.location.href);
-    setCanNativeShare(typeof navigator !== "undefined" && !!navigator.share);
-  }, []);
 
   useEffect(() => {
     if (!copied) return;
