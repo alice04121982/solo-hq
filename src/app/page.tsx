@@ -171,7 +171,7 @@ export default function Home() {
             {FEATURED_STORIES.map((story) => (
               <a
                 key={story.id}
-                href="/stories"
+                href={`/stories/${story.id}`}
                 className="group flex flex-col rounded-2xl overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
                 style={{ borderColor: "var(--border)", background: "#FFFFFF" }}
               >

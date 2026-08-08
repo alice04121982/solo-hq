@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
@@ -80,7 +81,11 @@ export default function StoriesPage() {
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
           {visible.map((story) => (
-            <article key={story.id} className="flex flex-col gap-4">
+            <Link
+              key={story.id}
+              href={`/stories/${story.id}`}
+              className="group flex flex-col gap-4 transition-transform duration-200 hover:-translate-y-1"
+            >
               {/* Image */}
               <div className="relative h-56 rounded-xl overflow-hidden bg-background-alt">
                 <Image
@@ -114,7 +119,7 @@ export default function StoriesPage() {
                   {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
