@@ -29,8 +29,8 @@ export const ALL_STORIES: Story[] = [
     excerpt: "Two IUI rounds, one IVF cycle, and one very determined woman. Alice's story about trusting herself to make the biggest decision of her life — alone.",
     body: "I started researching solo IVF after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting — it was trusting myself to make this decision without anyone to share it with.",
     treatment: "IUI × 2, IVF × 1",
-    image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Woman smiling warmly holding her baby",
+    image: "/photos/story-solo-mum.webp",
+    imageAlt: "A mother holding her young child, looking out at the sky",
   },
   {
     id: "sarah-priya-maya",
@@ -44,8 +44,8 @@ export const ALL_STORIES: Story[] = [
     excerpt: "Reciprocal IVF meant one of them provided the eggs and the other carried the pregnancy. Their daughter Maya has both of them in her completely.",
     body: "We agonised over who would carry. Then our consultant mentioned reciprocal IVF and something clicked. Priya provided the eggs, they were fertilised with our chosen donor's sperm, and I carried the embryo. Our daughter Maya was born in 2024. She has Priya's eyes. She has both of us completely.",
     treatment: "Reciprocal IVF",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Two women laughing together",
+    image: "/photos/story-two-mums.webp",
+    imageAlt: "Two women sitting together, one kissing the other on the cheek",
   },
   {
     id: "natalie-twins",
@@ -59,8 +59,8 @@ export const ALL_STORIES: Story[] = [
     excerpt: "After three failed cycles with her own eggs, Natalie chose donor eggs. Her twins Evi and Rosa are two and a half — and she tells them their story regularly.",
     body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then — after reading a dozen stories from women who'd been exactly here — at peace with it. My twins Evi and Rosa are two and a half. I tell them their origin story regularly, and they think it's completely normal. Because it is.",
     treatment: "Donor egg IVF",
-    image: "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Woman smiling in warm light",
+    image: "/photos/hands.webp",
+    imageAlt: "An adult hand holding a small child's hand",
   },
   {
     id: "tom-marcus-elliot",
@@ -89,7 +89,7 @@ export const ALL_STORIES: Story[] = [
     excerpt: "Everything came back 'normal'. Unexplained infertility is its own kind of maddening. First IVF cycle, first transfer — their daughter Isla is 18 months.",
     body: "We tried naturally for two years before getting investigated. Everything came back 'normal'. Unexplained infertility is its own kind of maddening — there's nothing to fix, nothing to point at. Our consultant recommended IVF. First cycle, first transfer. Our daughter Isla is 18 months.",
     treatment: "IVF × 1",
-    image: "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=800&q=80",
+    image: "/photos/story-mirror-family.webp",
     imageAlt: "Couple embracing warmly",
   },
   {
