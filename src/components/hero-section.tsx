@@ -20,7 +20,27 @@ export function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav theme="dark" />
 
-        <div className="relative pt-16 pb-20 md:pt-24 md:pb-28 lg:pt-32 lg:pb-32">
+        <div className="relative pt-6 pb-20 md:pt-10 md:pb-28 xl:pt-32 xl:pb-32">
+          {/* Photo. Below xl it leads the hero: full-bleed, directly under the
+              nav, with the copy beneath — so the page opens on the image on a
+              phone. From xl up it is absolutely placed to the right of, and
+              overlapping, the copy as designed; the container caps at 1280px
+              so 580px is the designed width at every width above that.
+              Exported from Figma with its mask already baked in, so the
+              notched silhouette needs no clip-path here — the alpha channel
+              carries it, which is why this stays WebP rather than JPEG. */}
+          <div className="-mx-6 mb-10 md:-mx-12 lg:-mx-20 xl:mx-0 xl:mb-0 xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
+            <Image
+              src="/photos/hero-family.webp"
+              alt="A mother playing guitar with her toddler"
+              width={1205}
+              height={1282}
+              priority
+              sizes="(min-width: 1280px) 580px, 100vw"
+              className="w-full h-auto object-contain"
+            />
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,26 +107,6 @@ export function HeroSection() {
               </a>
             </div>
           </motion.div>
-
-          {/* Photo. From xl up it is absolutely placed to the right of — and
-              overlapping — the copy, as designed; the container caps at 1280px
-              so 580px is the designed width at every width above that. Below
-              xl the copy column is too narrow for the overlap to clear the
-              text, so the photo drops beneath it instead.
-              Exported from Figma with its mask already baked in, so the
-              notched silhouette needs no clip-path here — the alpha channel
-              carries it, which is why this stays WebP rather than JPEG. */}
-          <div className="mt-12 w-full max-w-[520px] ml-auto xl:mt-0 xl:max-w-none xl:ml-0 xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
-            <Image
-              src="/photos/hero-family.webp"
-              alt="A mother playing guitar with her toddler"
-              width={1205}
-              height={1282}
-              priority
-              sizes="(min-width: 1280px) 580px, (min-width: 768px) 520px, 100vw"
-              className="w-full h-auto object-contain"
-            />
-          </div>
         </div>
       </div>
     </section>
