@@ -90,24 +90,15 @@ export function HeroSection() {
               IVF made clearer, for every kind of family.
             </h1>
 
+            {/* Kept under 30 words — the trust signals below carry the detail
+                this used to spell out. */}
             <p
               className="text-[18px] leading-[28px] mb-7 font-sans max-w-[560px]"
               style={{ color: "var(--on-teal-muted)" }}
             >
-              IVF is expensive, every penny counts. That&apos;s why many people look abroad to
-              undertake treatment. Our tool shows the{" "}
-              <span style={{ color: "var(--on-teal)" }}>true cost</span> side by side with UK
-              clinics, so you can decide with open eyes whether it is worth going overseas or if
-              staying local is better for your care.
-            </p>
-
-            <p
-              className="text-[18px] leading-[28px] mb-7 font-sans max-w-[471px]"
-              style={{ color: "var(--on-teal-muted)" }}
-            >
-              We&apos;re also honest about success rates: they can be presented selectively.
-              The HFEA regulates UK data, but even that has limits. We flag what&apos;s verified
-              and what to question.
+              Clinics abroad often look cheaper — until you add flights and hotels. We show the{" "}
+              <span style={{ color: "var(--on-teal)" }}>true cost</span> beside UK clinics, and
+              flag which success rates are verified.
             </p>
 
             {/* Trust signals — a vertical list, sitting above the CTA */}
