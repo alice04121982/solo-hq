@@ -1,8 +1,22 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, MapPin, Globe, Check } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowLeft,
+  MapPin,
+  Globe,
+  Check,
+  Venus,
+  Mars,
+  VenusAndMars,
+  Search,
+  Handshake,
+  Hospital,
+  Compass,
+  Plane,
+} from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -293,10 +307,12 @@ function scoreClinic(clinic: Clinic, s: WizardState): ScoredClinic | null {
 
 // ─── Shared UI ────────────────────────────────────────────────────────────────
 
+// Icons sit in a fixed-width slot so every option's text starts on the same
+// left edge, whether its glyph is a single symbol or a pair.
 function OptionCard({
   selected, onClick, title, subtitle, icon,
 }: {
-  selected: boolean; onClick: () => void; title: string; subtitle?: string; icon?: string;
+  selected: boolean; onClick: () => void; title: string; subtitle?: string; icon?: ReactNode;
 }) {
   return (
     <button
@@ -307,7 +323,15 @@ function OptionCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          {icon && <span className="text-xl shrink-0 mt-0.5">{icon}</span>}
+          {icon && (
+            <span
+              className={`shrink-0 mt-0.5 flex w-6 justify-center transition-colors ${
+                selected ? "text-foreground" : "text-muted"
+              }`}
+            >
+              {icon}
+            </span>
+          )}
           <div>
             <p className={`text-sm font-sans font-medium leading-snug ${selected ? "text-foreground" : "text-foreground/80"}`}>
               {title}
@@ -344,13 +368,51 @@ function ConditionChip({ selected, onClick, label }: { selected: boolean; onClic
 
 // ─── Steps ────────────────────────────────────────────────────────────────────
 
+// One glyph per parent, so the icon carries the same information as the label.
+// Paired glyphs are a size down and overlapped to keep the pair's footprint
+// close to a single symbol's.
+function ParentPair({ symbol }: { symbol: "venus" | "mars" }) {
+  const Symbol = symbol === "venus" ? Venus : Mars;
+  return (
+    <span className="flex items-center">
+      <Symbol className="h-4 w-4" strokeWidth={1.75} />
+      <Symbol className="h-4 w-4 -ml-1" strokeWidth={1.75} />
+    </span>
+  );
+}
+
 function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }) {
-  const options: { value: FamilyType; title: string; subtitle: string; icon: string }[] = [
-    { value: "solo-mum", title: "Solo mum by choice", subtitle: "Single woman using donor sperm", icon: "🌟" },
-    { value: "female-couple", title: "Two mums", subtitle: "Female same-sex couple — donor sperm needed", icon: "🌈" },
-    { value: "male-couple", title: "Two dads", subtitle: "Male same-sex couple — surrogacy and donor egg pathway", icon: "🏳️‍🌈" },
-    { value: "straight-couple", title: "Mum and dad", subtitle: "Heterosexual couple — IVF, ICSI, or donor options", icon: "💛" },
-    { value: "solo-dad", title: "Solo dad by choice", subtitle: "Solo dad by choice — surrogacy with donor egg", icon: "⭐" },
+  const options: { value: FamilyType; title: string; subtitle: string; icon: ReactNode }[] = [
+    {
+      value: "solo-mum",
+      title: "Solo mum by choice",
+      subtitle: "Single woman using donor sperm",
+      icon: <Venus className="h-5 w-5" strokeWidth={1.75} />,
+    },
+    {
+      value: "female-couple",
+      title: "Two mums",
+      subtitle: "Female same-sex couple — donor sperm needed",
+      icon: <ParentPair symbol="venus" />,
+    },
+    {
+      value: "male-couple",
+      title: "Two dads",
+      subtitle: "Male same-sex couple — surrogacy and donor egg pathway",
+      icon: <ParentPair symbol="mars" />,
+    },
+    {
+      value: "straight-couple",
+      title: "Mum and dad",
+      subtitle: "Heterosexual couple — IVF, ICSI, or donor options",
+      icon: <VenusAndMars className="h-5 w-5" strokeWidth={1.75} />,
+    },
+    {
+      value: "solo-dad",
+      title: "Solo dad by choice",
+      subtitle: "Solo dad by choice — surrogacy with donor egg",
+      icon: <Mars className="h-5 w-5" strokeWidth={1.75} />,
+    },
   ];
   return (
     <div className="space-y-3">
@@ -474,30 +536,30 @@ function StepConditionsSurrogacy({
 }: {
   s: WizardState; set: (stage: SurrogacyStage) => void;
 }) {
-  const options: { value: SurrogacyStage; title: string; subtitle: string; icon: string }[] = [
+  const options: { value: SurrogacyStage; title: string; subtitle: string; icon: ReactNode }[] = [
     {
       value: "exploring",
       title: "Just starting to explore",
-      subtitle: "I&apos;m at the research stage — understanding my options before committing",
-      icon: "🔍",
+      subtitle: "I'm at the research stage — understanding my options before committing",
+      icon: <Search className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "matching",
       title: "In the surrogate matching process",
-      subtitle: "I&apos;m working with a surrogacy organisation (e.g. Brilliant Beginnings, COTS) to find a match",
-      icon: "🤝",
+      subtitle: "I'm working with a surrogacy organisation (e.g. Brilliant Beginnings, COTS) to find a match",
+      icon: <Handshake className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "have-surrogate",
       title: "I have a surrogate — need an IVF clinic",
       subtitle: "The match is made; now I need a clinic experienced in surrogacy arrangements",
-      icon: "🏥",
+      icon: <Hospital className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "open",
       title: "Open to exploring all routes",
-      subtitle: "I haven&apos;t decided yet — show me the full picture",
-      icon: "🌍",
+      subtitle: "I haven't decided yet — show me the full picture",
+      icon: <Compass className="h-5 w-5" strokeWidth={1.75} />,
     },
   ];
   return (
@@ -523,26 +585,27 @@ function StepConditionsSurrogacy({
 }
 
 function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWillingness) => void; isSurrogacy: boolean }) {
-  const options: { value: TravelWillingness; title: string; subtitle: string; icon: string }[] = [
+  // Pin/globe match how UK and overseas clinics are marked on the results screen.
+  const options: { value: TravelWillingness; title: string; subtitle: string; icon: ReactNode }[] = [
     {
       value: "uk-only",
       title: "UK clinics only",
       subtitle: isSurrogacy
         ? "UK surrogacy is well-regulated — most intended fathers start here"
         : "I want HFEA regulation and no travel logistics",
-      icon: "🇬🇧",
+      icon: <MapPin className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "europe",
       title: "Open to Europe",
       subtitle: "Happy to travel to Spain, Greece, Czech Republic etc.",
-      icon: "✈️",
+      icon: <Plane className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "anywhere",
       title: "Anywhere in the world",
       subtitle: "I'll go wherever gives me the best chance",
-      icon: "🌍",
+      icon: <Globe className="h-5 w-5" strokeWidth={1.75} />,
     },
   ];
   return (
@@ -740,8 +803,9 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 ))}
               </div>
               {r.travelNote && (
-                <p className="text-[11px] font-sans text-muted leading-relaxed border-t border-border pt-3">
-                  ✈️ {r.travelNote}
+                <p className="flex items-start gap-1.5 text-[11px] font-sans text-muted leading-relaxed border-t border-border pt-3">
+                  <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
+                  <span>{r.travelNote}</span>
                 </p>
               )}
             </div>
