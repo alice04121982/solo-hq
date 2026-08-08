@@ -17,122 +17,49 @@ function getOrdered(): FamilyType[] {
   return DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);
 }
 
-// ── Card lockup 1: cream bg, heading + badge top, photo below, attribution in photo corner ──
-function CardCream({ family }: { family: FamilyType }) {
+// One card, used for every family type — matching the homepage cards.
+function FamilyCard({ family }: { family: FamilyType }) {
   return (
-    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden flex flex-col" style={{ background: "#FDE8F2" }}>
-      <div className="p-5">
-        <h2 className="font-sans font-bold text-2xl leading-tight group-hover:opacity-80 transition-opacity" style={{ color: "var(--teal)" }}>
-          {family.label}
-        </h2>
-      </div>
-      <p className="px-5 pb-4 text-sm font-sans leading-relaxed" style={{ maxWidth: "38ch", color: "rgba(0, 83, 83, 0.65)" }}>
-        {family.cardSummary}
-      </p>
-      <div className="relative overflow-hidden flex-1" style={{ minHeight: "240px" }}>
+    <a
+      href={`/families/${family.slug}`}
+      className="group flex flex-col rounded-2xl overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
+      style={{ borderColor: "var(--border)", background: "#FFFFFF" }}
+    >
+      <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
           src={family.image}
           alt={family.imageAlt}
           fill
-          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          sizes="(min-width: 768px) 360px, 100vw"
+          className="object-cover"
         />
-        <div className="absolute bottom-3 right-3 text-right">
-          <span
-            className="text-[11px] font-sans font-[600] rounded-full px-3 py-1.5 inline-block"
-            style={{ background: "#C5E600", color: "#1A3A25" }}
-          >
-            Read the guide →
-          </span>
-        </div>
       </div>
-    </a>
-  );
-}
 
-// ── Card lockup 2: full-bleed photo, lime diagonal block at bottom ──
-function CardFullBleed({ family }: { family: FamilyType }) {
-  return (
-    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden relative" style={{ minHeight: "400px" }}>
-      <Image
-        src={family.image}
-        alt={family.imageAlt}
-        fill
-        className="object-cover group-hover:scale-105 transition-transform duration-500"
-      />
-      {/* Lime diagonal overlay */}
-      <div className="absolute inset-x-0 bottom-0 overflow-hidden">
-        <div
-          className="px-6 pt-14 pb-6"
-          style={{
-            background: "#C5E600",
-            clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)",
-          }}
+      <div className="flex flex-col flex-1 gap-2 p-5">
+        <h2
+          className="font-sans font-semibold text-lg leading-7"
+          style={{ color: "var(--teal)" }}
         >
-          <h2 className="font-sans font-bold text-2xl leading-snug mb-3" style={{ color: "#1A3A25" }}>
-            {family.label}
-          </h2>
-          <div className="flex items-center justify-between gap-3">
-            <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em] leading-tight" style={{ maxWidth: "28ch", color: "#1A3A25" }}>
-              {family.cardSummary}
-            </p>
-            <span className="shrink-0 rounded-full border w-9 h-9 flex items-center justify-center text-base font-[600]" style={{ borderColor: "#1A3A25", color: "#1A3A25" }}>
-              →
-            </span>
-          </div>
-        </div>
-      </div>
-    </a>
-  );
-}
-
-// ── Card lockup 3: pink bg, teal heading top-left, angled photo bottom-right ──
-function CardPink({ family }: { family: FamilyType }) {
-  return (
-    <a href={`/families/${family.slug}`} className="block group rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", minHeight: "400px" }}>
-      {/* Heading top left */}
-      <div className="p-6 relative z-10 max-w-[60%]">
-        <h2 className="font-sans font-bold text-[var(--teal)] text-3xl leading-tight group-hover:opacity-80 transition-opacity">
           {family.label}
         </h2>
-        <p className="text-sm font-sans mt-2 leading-relaxed" style={{ maxWidth: "28ch", color: "rgba(0, 83, 83, 0.7)" }}>
+        <p className="text-sm font-sans leading-5" style={{ color: "var(--muted)" }}>
           {family.cardSummary}
         </p>
-      </div>
-      {/* Angled photo bottom right */}
-      <div
-        className="absolute bottom-0 right-0 overflow-hidden"
-        style={{
-          width: "68%",
-          height: "68%",
-          clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        }}
-      >
-        <Image
-          src={family.image}
-          alt={family.imageAlt}
-          fill
-          className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-        />
-      </div>
-      {/* Arrow pill bottom left */}
-      <div className="absolute bottom-5 left-5 z-10">
         <span
-          className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 inline-block"
-          style={{ background: "#C5E600", color: "#1A3A25" }}
+          className="mt-auto pt-3 self-start text-xs font-sans font-medium leading-[18px]"
+          style={{ color: "var(--teal)" }}
         >
-          Read the guide →
+          <span className="rounded-full px-3 py-1" style={{ background: "var(--cream)" }}>
+            Read the guide →
+          </span>
         </span>
       </div>
     </a>
   );
 }
 
-const CARD_COMPONENTS = [CardCream, CardFullBleed, CardPink];
-
 export default function FamiliesPage() {
   const families = getOrdered();
-  const topRow = families.slice(0, 3);
-  const bottomRow = families.slice(3);
 
   return (
     <main className="min-h-screen bg-background">
@@ -161,22 +88,12 @@ export default function FamiliesPage() {
         </p>
       </section>
 
-      {/* Card grid */}
+      {/* Card grid — one uniform card per family type */}
       <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
-        {/* Top row — 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
-          {topRow.map((family, i) => {
-            const CardComponent = CARD_COMPONENTS[i % 3];
-            return <CardComponent key={family.slug} family={family} />;
-          })}
-        </div>
-
-        {/* Bottom row — 2 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {bottomRow.map((family, i) => {
-            const CardComponent = CARD_COMPONENTS[(topRow.length + i) % 3];
-            return <CardComponent key={family.slug} family={family} />;
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
+          {families.map((family) => (
+            <FamilyCard key={family.slug} family={family} />
+          ))}
         </div>
       </section>
 
