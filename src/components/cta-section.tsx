@@ -70,8 +70,8 @@ export function CTASection() {
           {/* Photo — fills the remaining column and matches the copy block's height on lg+ */}
           <div className="relative w-full lg:flex-1 lg:self-stretch min-h-[280px] rounded-2xl overflow-hidden">
             <Image
-              src="/photos/cta-family.jpg"
-              alt="A mother and her daughter reading a book together"
+              src="/photos/cta-family.webp"
+              alt="A father holding and kissing his young son"
               fill
               className="object-cover"
             />
