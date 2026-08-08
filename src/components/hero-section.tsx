@@ -20,14 +20,14 @@ export function HeroSection() {
       {/* Below xl the photo runs to the very top of the section, behind the
           nav, and dissolves into the teal rather than ending on a hard edge —
           so the page opens on the image with the wordmark sitting over it. */}
-      <div className="absolute inset-x-0 top-0 h-[56vh] xl:hidden pointer-events-none">
+      <div className="absolute inset-x-0 top-0 aspect-[4/3] xl:hidden pointer-events-none">
         <Image
-          src="/photos/hero-placeholder.webp"
-          alt=""
+          src="/photos/hero-mobile.webp"
+          alt="A family together at home with their newborn"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-top"
+          className="object-cover object-center"
         />
         {/* Top scrim: the wordmark and burger sit over the photograph, and the
             image cannot be relied on to be dark behind them. */}
@@ -55,7 +55,7 @@ export function HeroSection() {
           {/* Holds open the space the bleeding image occupies below the nav.
               The image itself is out of flow, so without this the copy would
               start under the wordmark. */}
-          <div className="h-[calc(56vh-140px)] xl:hidden" aria-hidden />
+          <div className="h-[calc(75vw-120px)] xl:hidden" aria-hidden />
 
           {/* From xl the photo is a fixed 580px placed to the right of — and
               overlapping — the copy, as designed; the container caps at 1280px
@@ -64,8 +64,8 @@ export function HeroSection() {
               clip-path — the alpha channel carries it. */}
           <div className="hidden xl:block xl:absolute xl:right-[-52px] xl:top-[162px] xl:w-[580px] pointer-events-none">
             <Image
-              src="/photos/hero-placeholder.webp"
-              alt=""
+              src="/photos/hero-desktop.webp"
+              alt="A family together at home with their newborn"
               width={1205}
               height={1282}
               sizes="580px"
