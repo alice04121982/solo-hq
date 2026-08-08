@@ -24,7 +24,8 @@ function findMax(clinics: ClinicData[], getter: (c: ClinicData) => number | unde
 
 const PRICE_ROWS = [
   { label: "Basic IVF", getter: (c: ClinicData) => c.prices.basicIvf },
-  { label: "IVF + ICSI", getter: (c: ClinicData) => c.prices.ivfIcsi },
+  // Add-on, billed once per cycle on top of the cycle price above.
+  { label: "ICSI (per cycle)", getter: (c: ClinicData) => c.prices.icsiPerCycle },
   { label: "Donor Sperm IVF", getter: (c: ClinicData) => c.prices.donorSpermIvf },
   { label: "Donor Egg IVF", getter: (c: ClinicData) => c.prices.donorEggIvf },
   { label: "Embryo storage / yr", getter: (c: ClinicData) => c.prices.embryoStorage },

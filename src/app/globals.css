@@ -2,14 +2,35 @@
 
 :root {
   /* ── Palette ── */
+  /* Neutrals are tinted toward the teal, never the old maroon, so body
+     copy sits in the same family as the brand rather than reading burgundy. */
   --background:      #FFFFFF;
   --background-alt:  #F4F4F4;
-  --foreground:      #1A0810;
-  --muted:           #5C4050;
+  --foreground:      #0C2626;
+  --muted:           #3B5350;
+  --surface-hover:   #F1F6F6;
+  --surface-sunken:  #EEF3F3;
   --accent:          #C5E600;   /* lime */
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
   --border:          #E8E8E8;
+
+  /* ── Brand: deep teal ──
+     Doubles as the dark surface (hero, footer) and as the dark ink on
+     light surfaces. */
+  --teal:            #005353;
+  --teal-ink:        #005353;
+  --teal-10:         rgba(0, 83, 83, 0.10);
+  --teal-20:         rgba(0, 83, 83, 0.20);
+  --teal-25:         rgba(0, 83, 83, 0.25);
+  --teal-35:         rgba(0, 83, 83, 0.35);
+
+  /* Pinks that sit on the teal surface */
+  --on-teal:         #f9c6da;   /* headings / high-contrast */
+  --on-teal-muted:   #c4a0ae;   /* body copy */
+
+  /* Warm cream section surface */
+  --cream:           #FBF2EB;
 
   /* ── Legacy aliases ── */
   --lavender:        #F0A8C4;   /* bubblegum pink */
@@ -17,8 +38,8 @@
   --lavender-dark:   #C47098;
   --lime:            #C5E600;
   --lime-dark:       #9BBB00;
-  --charcoal:        #1A0810;
-  --navy:            #3D0D1B;   /* deep maroon */
+  --charcoal:        var(--foreground);
+  --navy:            var(--teal);   /* kept so bg-navy/text-navy still resolve */
   --warm-white:      #F5F1E6;
   --card-bg:         #FDE8F2;
   --card-border:     #f5c6dd;
@@ -28,11 +49,20 @@
   /* ── Semantic colours ── */
   --color-background:      var(--background);
   --color-background-alt:  var(--background-alt);
+  --color-surface-hover:   var(--surface-hover);
+  --color-surface-sunken:  var(--surface-sunken);
   --color-foreground:      var(--foreground);
   --color-muted:           var(--muted);
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
   --color-border:          var(--border);
+
+  /* ── Brand: deep teal ── */
+  --color-teal:            var(--teal);
+  --color-teal-ink:        var(--teal-ink);
+  --color-on-teal:         var(--on-teal);
+  --color-on-teal-muted:   var(--on-teal-muted);
+  --color-cream:           var(--cream);
 
   /* ── Legacy aliases ── */
   --color-lavender:        var(--lavender);
@@ -77,28 +107,35 @@
   --text-display-2xl--line-height: 1;
 }
 
-/* ── Base ── */
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-}
+/* ── Base ──
+   These MUST stay inside @layer base. Unlayered rules beat any rule in a
+   cascade layer regardless of specificity, so leaving them unlayered lets
+   the element selectors below silently override Tailwind utilities — e.g.
+   `font-semibold` on an <h3> would lose to font-weight: 700 here. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
 }
 
 /* ── Utility: bold card backgrounds ── */
 .card-lime   { background: var(--accent); color: #1A3A25; }
-.card-pink   { background: var(--lavender); color: #3D0D1B; }
-.card-maroon { background: var(--navy); color: #f9c6da; }
+.card-pink   { background: var(--lavender); color: var(--teal-ink); }
+.card-teal   { background: var(--teal); color: var(--on-teal); }
+.card-maroon { background: var(--teal); color: var(--on-teal); }  /* legacy alias of .card-teal */
 .card-cream  { background: var(--background); color: var(--foreground); }
 
 /* ── Scrollbar ── */

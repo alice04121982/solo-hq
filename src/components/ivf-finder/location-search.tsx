@@ -45,7 +45,7 @@ function Chip({
       className="rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150 whitespace-nowrap"
       style={{
         background: active ? "#1A3A25" : "#F0F0F0",
-        color: active ? "#e8f5d8" : "#3D0D1B",
+        color: active ? "#e8f5d8" : "var(--teal)",
       }}
     >
       {label}
@@ -162,7 +162,7 @@ export function LocationSearch({
             className="flex-1 py-3.5 text-xs font-semibold font-sans transition-colors duration-150"
             style={{
               background: mode === m ? "#1A3A25" : "transparent",
-              color: mode === m ? "#e8f5d8" : "#3D0D1B",
+              color: mode === m ? "#e8f5d8" : "var(--teal)",
             }}
           >
             {m === "nearby" ? "Search nearby" : "Browse abroad"}

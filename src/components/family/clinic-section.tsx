@@ -63,7 +63,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
             className="grid grid-cols-2 rounded-xl overflow-hidden"
-            style={{ background: "#3D0D1B" }}
+            style={{ background: "var(--teal)" }}
           >
             {[
               { value: "400+", label: "HFEA-licensed clinics compared" },
@@ -71,7 +71,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               { value: "5 age brackets", label: "success rates from under 35 to 43+" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },
             ].map((s) => (
-              <div key={s.label} className="p-6" style={{ background: "#3D0D1B" }}>
+              <div key={s.label} className="p-6" style={{ background: "var(--teal)" }}>
                 <p
                   className="font-sans font-bold mb-1.5"
                   style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.15, color: "#f9c6da" }}

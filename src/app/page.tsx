@@ -4,28 +4,61 @@ import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
+import { roundedPolygon } from "@/lib/rounded-path";
 
-const CARD_THEME = { bg: "#FAFAFA", text: "#3D0D1B", muted: "rgba(61,13,27,0.6)" };
+/**
+ * Story card shapes (Figma card set 18949:512634). Both coloured assets have
+ * rounded corners in the masters — including where a diagonal meets a straight
+ * edge — which polygon clip-paths cannot express, so they are drawn as paths.
+ */
+// Card 1's photo, anchored bottom-right with a diagonal top-left edge.
+// Normalised units so the clip scales with the element it is applied to.
+const STORY_PHOTO_CLIP = roundedPolygon(
+  [
+    [0.49, 0],
+    [1, 0],
+    [1, 1],
+    [0.054, 1],
+  ],
+  0.07,
+);
+// Card 3's lime block: 328x186, top edge rising left-to-right.
+const STORY_LIME_SHAPE = roundedPolygon(
+  [
+    [0, 25],
+    [328, 0],
+    [328, 186],
+    [0, 186],
+  ],
+  18,
+);
+
+const CARD_THEME = { bg: "#FFFFFF", text: "var(--teal)", muted: "rgba(0, 83, 83, 0.6)" };
 
 const RACING_GREEN = "#1A3A25";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* 1 — Hero: deep burgundy */}
+      {/* 1 — Hero: deep teal */}
       <HeroSection />
 
-      {/* 2 — Families carousel: fluorescent lime */}
-      <section style={{ background: "#FDE8F2" }} id="families">
+      {/* 2 — Family types: warm cream, white cards */}
+      <section style={{ background: "var(--cream)" }} id="families">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "#3D0D1B" }}>
+            <div className="flex flex-col gap-3">
+              <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "var(--teal)" }}>
                 Every family
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.8px",
+                  color: "var(--teal)",
+                }}
               >
                 Find your guide.
               </h2>
@@ -33,7 +66,7 @@ export default function Home() {
             <a
               href="/families"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 shrink-0"
-              style={{ color: "#3D0D1B" }}
+              style={{ color: "var(--teal)" }}
             >
               All family types <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -41,7 +74,7 @@ export default function Home() {
 
           {/* Scroll-snap on mobile, grid on desktop */}
           <div
-            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible md:pb-0"
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 xl:grid-cols-5 md:overflow-visible md:pb-0"
             style={{ scrollbarWidth: "none" }}
           >
             {FAMILY_TYPES.map((family) => {
@@ -50,16 +83,16 @@ export default function Home() {
                 <a
                   key={family.slug}
                   href={`/families/${family.slug}`}
-                  className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
+                  className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 md:min-h-[229px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                   style={{ background: theme.bg, color: theme.text }}
                 >
-                  <h3 className="font-sans font-bold text-lg leading-snug" style={{ color: theme.text }}>
+                  <h3 className="font-sans font-semibold text-lg leading-7" style={{ color: theme.text }}>
                     {family.label}
                   </h3>
-                  <p className="text-sm font-sans leading-relaxed flex-1" style={{ color: theme.muted, maxWidth: "28ch" }}>
+                  <p className="text-sm font-sans leading-5 flex-1" style={{ color: theme.text }}>
                     {family.cardSummary}
                   </p>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.muted }}>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.text }}>
                     Read the guide <ArrowRight className="h-3 w-3" />
                   </span>
                 </a>
@@ -70,15 +103,15 @@ export default function Home() {
           <a
             href="/families"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#3D0D1B" }}
+            style={{ color: "var(--teal)" }}
           >
             All family types <ArrowRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </section>
 
-      {/* 3 — Clinic comparison teaser: burgundy full section */}
-      <section style={{ background: "#3D0D1B" }} id="compare">
+      {/* 3 — Clinic comparison teaser: teal full section */}
+      <section style={{ background: "var(--teal)" }} id="compare">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
@@ -135,17 +168,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 — Personal stories: light pink */}
-      <section style={{ background: "#FDE8F2" }} id="stories">
+      {/* 4 — Personal stories: white */}
+      <section style={{ background: "#FFFFFF" }} id="stories">
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
           <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[11px] font-[600] uppercase tracking-[0.18em] font-sans mb-3" style={{ color: "rgba(61,13,27,0.5)" }}>
+            <div className="flex flex-col gap-3">
+              <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
                 Real journeys
               </p>
               <h2
                 className="font-sans font-bold"
-                style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#3D0D1B" }}
+                style={{
+                  fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.8px",
+                  color: "var(--teal)",
+                }}
               >
                 In their own words.
               </h2>
@@ -153,7 +191,7 @@ export default function Home() {
             <a
               href="/stories"
               className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
-              style={{ borderColor: "rgba(61,13,27,0.3)", color: "#3D0D1B" }}
+              style={{ borderColor: "rgba(0, 83, 83, 0.3)", color: "var(--teal)" }}
             >
               See all stories <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -161,92 +199,150 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
 
-            {/* Card 1: burgundy bg, heading + badge top, photo below */}
-            <article className="rounded-2xl overflow-hidden flex flex-col" style={{ background: "#3D0D1B" }}>
-              <div className="p-5 flex items-start justify-between gap-3">
-                <h3 className="font-sans font-bold text-xl leading-tight" style={{ color: "#f9c6da" }}>
-                  {FEATURED_STORIES[0].title}
-                </h3>
-                <span
-                  className="shrink-0 rounded-full text-[10px] font-[600] font-sans px-3 py-1.5 whitespace-nowrap"
-                  style={{ background: "#FDE8F2", color: "#3D0D1B" }}
-                >
-                  {FEATURED_STORIES[0].familyLabel}
-                </span>
-              </div>
-              <div className="relative overflow-hidden flex-1" style={{ minHeight: "280px" }}>
+            {/* Card 1: pink bg, teal badge + heading, angled photo bottom-right */}
+            <article
+              className="rounded-2xl overflow-hidden relative flex flex-col px-4 py-[21px]"
+              style={{ background: "#feb3d1", height: "420px" }}
+            >
+              <svg width="0" height="0" aria-hidden className="absolute">
+                <defs>
+                  <clipPath id="story-photo-clip" clipPathUnits="objectBoundingBox">
+                    <path d={STORY_PHOTO_CLIP} />
+                  </clipPath>
+                </defs>
+              </svg>
+              <div
+                className="absolute bottom-0 right-0 overflow-hidden"
+                style={{
+                  width: "72%",
+                  height: "69%",
+                  clipPath: "url(#story-photo-clip)",
+                }}
+              >
                 <Image
-                  src="/photos/story-hero.jpeg"
-                  alt="Solo mum story"
+                  src={FEATURED_STORIES[0].image}
+                  alt={FEATURED_STORIES[0].imageAlt}
                   fill
                   className="object-cover object-top"
                 />
-                <div className="absolute bottom-3 right-3">
-                  <div className="rounded-xl px-3 py-2 text-right" style={{ background: "#F0A8C4" }}>
-                    <p className="text-xs font-sans font-[600]" style={{ color: "#3D0D1B" }}>
-                      {FEATURED_STORIES[0].name}, {FEATURED_STORIES[0].age}
-                    </p>
-                    <p className="text-[11px] font-sans" style={{ color: "rgba(61,13,27,0.6)" }}>
-                      {FEATURED_STORIES[0].location}
-                    </p>
-                  </div>
-                </div>
               </div>
+
+              <div className="relative z-10 flex flex-col gap-1 items-start">
+                <span
+                  className="rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                  style={{ background: "var(--teal)", color: "var(--cream)" }}
+                >
+                  {FEATURED_STORIES[0].tag}
+                </span>
+                <h3
+                  className="font-sans font-semibold"
+                  style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.25rem)", lineHeight: 1.22, letterSpacing: "-0.72px", color: "var(--teal)" }}
+                >
+                  {FEATURED_STORIES[0].title}
+                </h3>
+              </div>
+
+              <span
+                className="relative z-10 mt-auto rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                style={{ borderColor: "var(--teal)", color: "var(--teal)" }}
+              >
+                →
+              </span>
             </article>
 
-            {/* Card 2: full-bleed photo, lime diagonal */}
-            <article className="rounded-2xl overflow-hidden relative" style={{ height: "420px" }}>
+            {/* Card 2: teal card wrapping a cream panel, lime badge notched into its corner */}
+            <article
+              className="rounded-2xl relative"
+              style={{ background: "var(--teal)", height: "420px" }}
+            >
+              {/* Cream panel — inset 16px left/right, sitting below the badge */}
+              <div
+                className="absolute left-4 right-4 top-[33px] bottom-[19px] rounded-2xl flex flex-col px-4 pt-12 pb-4"
+                style={{ background: "var(--cream)" }}
+              >
+                <h3
+                  className="font-sans font-semibold"
+                  style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.25rem)", lineHeight: 1.22, letterSpacing: "-0.72px", color: "var(--teal)" }}
+                >
+                  &ldquo;{FEATURED_STORIES[1].title}&rdquo;
+                </h3>
+                <p
+                  className="text-xs font-sans leading-[18px] uppercase mt-1.5"
+                  style={{ color: "var(--teal)" }}
+                >
+                  {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
+                </p>
+                <span
+                  className="mt-auto rounded-full w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                  style={{ background: "var(--teal)", color: "var(--accent)" }}
+                >
+                  →
+                </span>
+              </div>
+
+              {/* Badge straddles the panel's top edge; the teal ring cuts the notch */}
+              <span
+                className="absolute left-4 top-[21px] rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                style={{
+                  background: "var(--accent)",
+                  color: "var(--teal)",
+                  boxShadow: "0 0 0 6px var(--teal)",
+                }}
+              >
+                {FEATURED_STORIES[1].tag}
+              </span>
+            </article>
+
+            {/* Card 3: full-bleed photo with an inset rounded lime block */}
+            <article
+              className="rounded-2xl overflow-hidden relative border"
+              style={{
+                height: "420px",
+                borderColor: "rgba(0,0,0,0.08)",
+                boxShadow:
+                  "0 10px 13px -3px rgba(10,13,18,0.08), 0 3px 5px -2px rgba(10,13,18,0.03), 0 2px 2px -1px rgba(10,13,18,0.04)",
+              }}
+            >
               <Image
-                src={FEATURED_STORIES[1].image}
-                alt={FEATURED_STORIES[1].imageAlt}
+                src={FEATURED_STORIES[2].image}
+                alt={FEATURED_STORIES[2].imageAlt}
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-x-0 bottom-0 overflow-hidden">
-                <div
-                  className="px-6 pt-14 pb-6"
-                  style={{ background: "#C5E600", clipPath: "polygon(0 28%, 100% 0%, 100% 100%, 0% 100%)" }}
+              <div className="absolute left-4 right-4 bottom-4 h-[186px]">
+                <svg
+                  viewBox="0 0 328 186"
+                  preserveAspectRatio="none"
+                  aria-hidden
+                  className="absolute inset-0 w-full h-full"
                 >
-                  <h3 className="font-sans font-bold text-lg leading-snug mb-3" style={{ color: "#1A3A25" }}>
-                    {FEATURED_STORIES[1].title}
+                  <path d={STORY_LIME_SHAPE} fill="var(--accent)" />
+                </svg>
+                <div className="relative h-full flex flex-col gap-2 px-3 pt-[50px] pb-3">
+                  <span
+                    className="self-start rounded-full text-xs font-sans font-medium leading-[18px] px-4 py-1"
+                    style={{ background: "var(--teal)", color: "var(--cream)" }}
+                  >
+                    {FEATURED_STORIES[2].tag}
+                  </span>
+                  <h3 className="font-sans font-bold text-lg leading-[1.375]" style={{ color: "#1A3A25" }}>
+                    {FEATURED_STORIES[2].title}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-[11px] font-sans font-[600] uppercase tracking-[0.1em]" style={{ color: "#1A3A25" }}>
-                      {FEATURED_STORIES[1].name} &nbsp;·&nbsp; {FEATURED_STORIES[1].location}
+                  <div className="flex items-center gap-5 mt-auto">
+                    <p
+                      className="flex-1 text-[11px] font-sans font-[600] uppercase leading-[1.45]"
+                      style={{ color: "#1A3A25", letterSpacing: "1.1px" }}
+                    >
+                      {FEATURED_STORIES[2].name} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
                     </p>
-                    <span className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600]" style={{ borderColor: "#1A3A25", color: "#1A3A25" }}>
+                    <span
+                      className="rounded-full border w-8 h-8 flex items-center justify-center text-sm font-[600] shrink-0"
+                      style={{ borderColor: "var(--teal)", color: "var(--teal)" }}
+                    >
                       →
                     </span>
                   </div>
                 </div>
-              </div>
-            </article>
-
-            {/* Card 3: light pink bg, angled photo */}
-            <article className="rounded-2xl overflow-hidden relative" style={{ background: "#FDE8F2", height: "420px" }}>
-              <div className="p-6 relative z-10 max-w-[65%]">
-                <h3 className="font-sans font-bold text-2xl leading-tight" style={{ color: "#3D0D1B" }}>
-                  {FEATURED_STORIES[2].title}
-                </h3>
-              </div>
-              <div
-                className="absolute bottom-0 right-0 overflow-hidden"
-                style={{ width: "68%", height: "72%", clipPath: "polygon(22% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
-              >
-                <Image
-                  src={FEATURED_STORIES[2].image}
-                  alt={FEATURED_STORIES[2].imageAlt}
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-              <div className="absolute bottom-5 left-5 z-10">
-                <span
-                  className="rounded-full text-[10px] font-[600] font-sans px-3 py-1.5"
-                  style={{ background: "#C5E600", color: "#1A3A25" }}
-                >
-                  {FEATURED_STORIES[2].name}, {FEATURED_STORIES[2].age} &nbsp;·&nbsp; {FEATURED_STORIES[2].location}
-                </span>
               </div>
             </article>
 
@@ -255,7 +351,7 @@ export default function Home() {
           <a
             href="/stories"
             className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-            style={{ color: "#3D0D1B" }}
+            style={{ color: "var(--teal)" }}
           >
             See all stories <ArrowRight className="h-3.5 w-3.5" />
           </a>

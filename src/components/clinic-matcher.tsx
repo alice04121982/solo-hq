@@ -851,11 +851,15 @@ export function ClinicMatcher() {
   ];
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      {/* Progress */}
+    // Width and alignment are the page's to decide — the wizard fills whatever
+    // column it is given, so it can share the page header's left edge.
+    <div className="w-full">
+      {/* Progress — one segment per question. The results screen is the last
+          entry in STEPS but is not a step the user answers, so it is excluded
+          here to match the "of N" count below. */}
       <div className="mb-8">
         <div className="flex gap-1 mb-4">
-          {STEPS.map((_, i) => (
+          {STEPS.slice(0, -1).map((_, i) => (
             <div
               key={i}
               className="flex-1 h-0.5 rounded-full transition-colors duration-300"

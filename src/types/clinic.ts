@@ -13,7 +13,12 @@ export interface ClinicData {
   distanceMiles?: number;
   prices: {
     basicIvf?: number;
-    ivfIcsi?: number;
+    /**
+     * ICSI is an add-on charged per cycle, not an alternative to IVF — a
+     * multi-cycle package is billed this again for every cycle it covers.
+     * Stored as the add-on cost alone, never bundled into a cycle price.
+     */
+    icsiPerCycle?: number;
     donorSpermIvf?: number;
     donorEggIvf?: number;
     embryoStorage?: number;
@@ -32,6 +37,10 @@ export interface ClinicData {
     price: number;
     saves?: number;
     description?: string;
+    /** Cycles the package covers. Drives the ICSI add-on multiplier. */
+    cycles?: number;
+    /** True only when the clinic states ICSI is covered for every cycle. */
+    includesIcsi?: boolean;
   }>;
   waitingTimeWeeks?: number;
   nhsReferrals?: boolean;
