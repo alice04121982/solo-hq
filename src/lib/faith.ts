@@ -631,20 +631,6 @@ export const CONVERSATION_SCENARIOS: ConversationScenario[] = [
   },
 ];
 
-/** Short, reusable lines. Rendered with a copy button so they can be kept on a phone. */
-export const BOUNDARY_LINES: string[] = [
-  "I'm not discussing this today, but thank you for caring.",
-  "We've thought about it a lot, and we've made our decision.",
-  "That's between me and my doctor.",
-  "I'd rather not talk about it here.",
-  "You can disagree with me and still be kind to me.",
-  "Please don't bring this up in front of other people.",
-  "I'll share news when there's news.",
-  "I know you mean well. It's still not something I want to discuss.",
-  "That's a question for my rabbi/imam/priest, not for me to argue at dinner.",
-  "I need you to be on my side right now, even if you don't understand it.",
-];
-
 /**
  * Verifiable points a reader can reach for when a conversation is running on
  * misinformation. Everything here must be checkable via the linked source —

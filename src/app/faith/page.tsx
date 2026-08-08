@@ -3,12 +3,10 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { CopyButton } from "@/components/copy-button";
 import { StoryImage } from "@/components/story-image";
 import { TraditionExplorer } from "@/components/faith/tradition-explorer";
 import { ConversationToolkit } from "@/components/faith/conversation-toolkit";
 import {
-  BOUNDARY_LINES,
   CONVERSATION_SCENARIOS,
   FAITH_QUESTIONS,
   FAITH_SUPPORT,
@@ -379,40 +377,6 @@ export default function FaithPage() {
           <ConversationToolkit scenarios={CONVERSATION_SCENARIOS} />
 
           {/* Reusable lines */}
-          <div className="mt-20 pt-14 border-t" style={{ borderColor: "var(--border)" }}>
-            <h3
-              className="font-sans font-bold mb-3"
-              style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", lineHeight: 1.2, color: TEAL }}
-            >
-              Ten lines to keep on your phone.
-            </h3>
-            <p
-              className="text-[16px] font-sans leading-relaxed text-muted mb-8"
-              style={{ maxWidth: "58ch" }}
-            >
-              Short, polite, and complete on their own. The point of a rehearsed line is
-              that you don&rsquo;t have to think of one while your hands are shaking.
-            </p>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {BOUNDARY_LINES.map((line) => (
-                <li
-                  key={line}
-                  className="rounded-2xl p-4 flex items-start justify-between gap-4 bg-background"
-                >
-                  <p
-                    className="text-[15px] font-sans leading-relaxed font-[500]"
-                    style={{ color: TEAL }}
-                  >
-                    &ldquo;{line}&rdquo;
-                  </p>
-                  <span className="shrink-0 pt-0.5">
-                    <CopyButton text={line} />
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Grounding facts */}
           <div className="mt-20 pt-14 border-t" style={{ borderColor: "var(--border)" }}>
             <h3
