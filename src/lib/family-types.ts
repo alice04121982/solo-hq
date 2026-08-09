@@ -203,7 +203,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Pregnancy, birth, and building your family",
-        body: "Pregnancy as a same-sex couple is medically identical to any other pregnancy, but the social and emotional landscape has its own flavours — people's assumptions, family reactions, and the deep joy of two parents who chose this together. Our community includes hundreds of two-mum families at every stage.",
+        body: "Pregnancy as a same-sex couple is medically identical to any other pregnancy, but the social and emotional landscape has its own flavours — people's assumptions, family reactions, and the deep joy of two parents who chose this together. You will not be the first: two-mum families are well represented in UK communities like the Donor Conception Network.",
       },
     ],
     stories: [
@@ -391,7 +391,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Solo fatherhood: building your village",
-        body: "Solo parenting requires a village — and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. The Cairn community includes single dads by choice who are open about the real experience: hard in places, extraordinary overall.",
+        body: "Solo parenting requires a village — and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. Surrogacy organisations like COTS and the wider solo parent networks include solo dads by choice who are open about the real experience: hard in places, extraordinary overall.",
       },
     ],
     stories: [

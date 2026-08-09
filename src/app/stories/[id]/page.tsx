@@ -51,6 +51,15 @@ export default async function StoryPage({ params }: PageProps) {
       backHref="/stories"
       backLabel="All stories"
     >
+      <p
+        className="text-xs font-sans leading-relaxed mb-8 rounded-xl px-4 py-3"
+        style={{ background: "var(--cream)", color: "var(--muted)" }}
+      >
+        This is an illustrative story, written to show what real accounts will look
+        like here. It does not describe a real person. To share your own story,
+        write to stories@cairnfertility.co.uk.
+      </p>
+
       <div className="space-y-6">
         {story.body.split("\n\n").map((para, i) => (
           <p

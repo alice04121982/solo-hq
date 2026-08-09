@@ -17,6 +17,10 @@ export interface Quote {
  * Community voices. Short enough to read as speech rather than prose — these
  * are rendered as speech-bubble cards, so anything longer than about forty
  * words will unbalance a row of them.
+ *
+ * ILLUSTRATIVE CONTENT: these quotes do not come from real people and are
+ * labelled as illustrative where they render. Replace with real, consented
+ * quotes before removing those labels.
  */
 export const COMMUNITY_QUOTES: Quote[] = [
   {

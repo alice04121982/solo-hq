@@ -130,7 +130,7 @@ export default function Home() {
               rotation the family cards use. */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { value: "400+", label: "Clinics compared UK & worldwide" },
+              { value: "HFEA data", label: "UK success rates from the public register" },
               { value: "True cost", label: "Travel & stays factored in, not just clinic fees" },
               { value: "5 brackets", label: "Success rates from under 35 to 43+" },
               { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
@@ -161,7 +161,7 @@ export default function Home() {
           <div className="flex flex-col gap-3">
             <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
               <ShapeMark name="spark" size={14} className="shape-spin" style={{ color: "var(--lavender)" }} />
-              Real journeys
+              Stories
             </p>
             <h2
               className="font-sans font-bold"
@@ -239,6 +239,11 @@ export default function Home() {
         >
           See all stories <ArrowRight className="h-3.5 w-3.5" />
         </Link>
+
+        <p className="text-xs font-sans mt-8" style={{ color: "var(--muted)" }}>
+          Illustrative stories while we collect real, consented accounts. Share yours:
+          stories@cairnfertility.co.uk
+        </p>
       </Section>
 
       {/* 5 — Community voices: warm cream, speech-bubble quotes */}
@@ -257,8 +262,11 @@ export default function Home() {
               color: "var(--teal)",
             }}
           >
-            What people tell us.
+            Voices from the journey.
           </h2>
+          <p className="text-xs font-sans" style={{ color: "var(--muted)", maxWidth: "60ch" }}>
+            Illustrative quotes while we collect real, consented accounts.
+          </p>
         </div>
 
         {/* The middle card takes the teal so the row has a centre of gravity. */}

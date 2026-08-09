@@ -21,7 +21,16 @@ and hard to compare from the outside.
 - **How IVF works** (`/how-ivf-works`), **stories** (`/stories`), a **cost calculator**
   and a **journey map** on the homepage.
 
-Surrogacy is not covered yet but is planned.
+Surrogacy is not covered yet but is planned. A community space is also planned:
+somewhere to find people at your stage, hear from people who have been through
+it and are willing to mentor, and set up local meetups. Until it exists the
+site stays waitlist-honest about it and signposts existing communities such as
+the Donor Conception Network.
+
+The stories and quotes across the site are currently illustrative examples,
+labelled as such where they render (see `src/lib/stories.ts` and
+`src/lib/quotes.ts`). They must be replaced with real, consented accounts
+before the labels come off.
 
 ## Stack
 

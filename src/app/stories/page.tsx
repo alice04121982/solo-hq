@@ -31,7 +31,7 @@ export default function StoriesPage() {
       {/* Header */}
       <Section band={0} padding="pt-16 pb-14">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Real journeys
+          Stories
         </p>
         <h1
           className="font-sans font-bold text-foreground mb-6"
@@ -40,7 +40,12 @@ export default function StoriesPage() {
           Personal stories
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Honest accounts from people who&apos;ve been through it — the real version, not the brochure.
+          What the journey looks like at every stage, told the way people tell it.
+        </p>
+        <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
+          These are illustrative stories while we collect real, consented accounts to
+          replace them. If you would like to share yours, write to
+          stories@cairnfertility.co.uk.
         </p>
       </Section>
 

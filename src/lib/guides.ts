@@ -1381,7 +1381,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "community-stories",
     readTime: "10 min read",
     intro:
-      "Nothing helps more than reading about someone who has been exactly where you are. These are real accounts from solo mums by choice who navigated the decision, the treatment, the pregnancy, and early parenthood — shared in their own words.",
+      "Nothing helps more than reading about someone who has been exactly where you are. The accounts below show what the journey looks like at different stages. They are illustrative examples while we collect real, consented stories; if you would like to share yours, the contact details are at the end.",
     sections: [
       {
         heading: "Sarah, 38 — Two rounds of IUI, one round of IVF",
