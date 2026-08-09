@@ -105,7 +105,7 @@ function OptionRow({
       </div>
       <div className="flex items-center gap-2 shrink-0 pt-0.5">
         {tag && (
-          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-accent font-sans">{tag}</span>
+          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-teal font-sans">{tag}</span>
         )}
         {badge && (
           <span className="text-xs font-sans text-muted">{badge}</span>

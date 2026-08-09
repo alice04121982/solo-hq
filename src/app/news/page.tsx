@@ -81,7 +81,7 @@ export default function NewsPage() {
       {/* Featured — left-border pull style */}
       <Section band={1}>
         <div className="border-l-2 border-accent pl-8 md:pl-12">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
+          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal mb-4 font-sans">
             {featured.tag} &nbsp;·&nbsp; {featured.date} &nbsp;·&nbsp; {featured.readTime}
           </p>
           <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
@@ -90,7 +90,7 @@ export default function NewsPage() {
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "60ch" }}>
             {featured.excerpt}
           </p>
-          <button className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-accent hover:text-accent transition-colors duration-150">
+          <button className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150">
             Read article <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -104,10 +104,10 @@ export default function NewsPage() {
               key={a.title}
               className="py-8 border-t border-border cursor-pointer group"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
+              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
                 {a.tag}
               </p>
-              <h3 className="font-sans font-bold text-foreground text-lg leading-snug mb-3 group-hover:text-accent transition-colors duration-150" style={{ maxWidth: "26ch" }}>
+              <h3 className="font-sans font-bold text-foreground text-lg leading-snug mb-3 group-hover:text-teal transition-colors duration-150" style={{ maxWidth: "26ch" }}>
                 {a.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-4">{a.excerpt}</p>
