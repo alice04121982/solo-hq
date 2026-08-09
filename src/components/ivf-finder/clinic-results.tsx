@@ -1,133 +1,64 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ClinicCard } from "./clinic-card";
-import type { ClinicData, AgeBracket } from "@/types/clinic";
+import type { AgeBracket, Clinic } from "@/types/clinic";
 
 interface ClinicResultsProps {
-  clinics: ClinicData[];
+  clinics: Clinic[];
   totalCount: number;
-  location: string;
-  selectedIds: string[];
-  onToggleCompare: (clinic: ClinicData) => void;
-  isLoading: boolean;
-  source?: "live" | "seed";
+  ageBracketLabel: string;
   ageBracket: AgeBracket;
-}
-
-function SkeletonCard() {
-  return (
-    <div className="rounded-[32px] bg-white border border-border p-5 animate-pulse">
-      <div className="flex gap-2 mb-3">
-        <div className="h-5 w-24 rounded-full bg-[#E8E8E8]" />
-        <div className="h-5 w-20 rounded-full bg-[#E8E8E8]" />
-      </div>
-      <div className="h-5 w-3/4 rounded-lg bg-[#E8E8E8] mb-2" />
-      <div className="h-3 w-1/2 rounded-lg bg-[#E8E8E8] mb-4" />
-      <div className="grid grid-cols-3 gap-2 mb-4">
-        {[0, 1, 2].map((i) => (
-          <div key={i} className="h-14 rounded-xl bg-[#E8E8E8]" />
-        ))}
-      </div>
-      <div className="flex gap-2">
-        <div className="h-9 flex-1 rounded-full bg-[#E8E8E8]" />
-        <div className="h-9 w-20 rounded-full bg-[#E8E8E8]" />
-      </div>
-    </div>
-  );
+  selectedSlugs: string[];
+  onToggleCompare: (clinic: Clinic) => void;
 }
 
 export function ClinicResults({
   clinics,
   totalCount,
-  location,
-  selectedIds,
-  onToggleCompare,
-  isLoading,
-  source,
+  ageBracketLabel,
   ageBracket,
+  selectedSlugs,
+  onToggleCompare,
 }: ClinicResultsProps) {
-  if (isLoading) {
-    return (
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <div className="h-2 w-2 rounded-full bg-muted animate-pulse" />
-          <p className="text-sm text-muted">
-            {location ? (
-              <>Searching for clinics near <strong className="text-navy">{location}</strong>…</>
-            ) : (
-              "Loading clinics…"
-            )}
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  if (clinics.length === 0 && totalCount === 0) {
-    return (
-      <div className="rounded-[32px] bg-white border border-border p-12 text-center">
-        <p className="text-navy font-semibold mb-1">No clinics found</p>
-        <p className="text-sm text-muted">Try a different location or search radius.</p>
-      </div>
-    );
-  }
-
   if (clinics.length === 0) {
     return (
-      <div className="rounded-[32px] bg-white border border-border p-12 text-center">
-        <p className="text-navy font-semibold mb-1">No clinics match your filters</p>
-        <p className="text-sm text-muted">Try relaxing a filter or clearing all filters to see all results.</p>
+      <div className="rounded-[24px] bg-background border border-border p-12 text-center">
+        <p className="text-teal-ink font-semibold mb-1">No clinics match your filters</p>
+        <p className="text-sm text-muted">
+          Relax a filter or clear all filters to see every clinic again.
+        </p>
       </div>
     );
   }
 
   const isFiltered = clinics.length < totalCount;
-  const isCountry = !location.toLowerCase().includes("united kingdom") &&
-    ["Spain", "Greece", "Czech Republic"].includes(location);
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-muted">
-          {isFiltered ? (
-            <>
-              <strong className="text-navy">{clinics.length}</strong>
-              <span className="text-muted"> of {totalCount} clinics</span>
-            </>
-          ) : (
-            <strong className="text-navy">{clinics.length} clinics</strong>
-          )}{" "}
-          {isCountry ? "in" : "near"} <strong className="text-navy">{location}</strong>
-        </p>
-        {source === "seed" && (
-          <span className="text-[10px] bg-[#E8E8E8] text-muted px-2.5 py-1 rounded-full font-medium">
-            Indicative data — live results loading
-          </span>
-        )}
-        {source === "live" && (
-          <span className="text-[10px] bg-lime/20 text-charcoal px-2.5 py-1 rounded-full font-medium">
-            Live data
-          </span>
-        )}
-      </div>
-      <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+      <p className="text-sm text-muted mb-4">
+        {isFiltered ? (
+          <>
+            <strong className="text-teal-ink">{clinics.length}</strong> of {totalCount} clinics,
+          </>
+        ) : (
+          <>
+            <strong className="text-teal-ink">{clinics.length} clinics</strong>,
+          </>
+        )}{" "}
+        ranked by live birth rate for {ageBracketLabel.toLowerCase()}
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {clinics.map((clinic) => (
           <ClinicCard
-            key={clinic.id}
+            key={clinic.slug}
             clinic={clinic}
-            isSelected={selectedIds.includes(clinic.id)}
-            onToggleCompare={onToggleCompare}
-            compareDisabled={selectedIds.length >= 4 && !selectedIds.includes(clinic.id)}
             ageBracket={ageBracket}
+            isSelected={selectedSlugs.includes(clinic.slug)}
+            compareDisabled={selectedSlugs.length >= 4}
+            onToggleCompare={onToggleCompare}
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

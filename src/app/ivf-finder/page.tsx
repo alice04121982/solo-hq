@@ -1,30 +1,41 @@
 import type { Metadata } from "next";
-import { ShieldCheck, Heart, PoundSterling, Clock } from "lucide-react";
+import { Suspense } from "react";
+import { ShieldCheck, Scale, PoundSterling, Video } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
+import { CLINICS } from "@/lib/clinics";
 
 export const metadata: Metadata = {
-  title: "Compare IVF Clinics | CairnFertility",
-  description: "Compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
+  title: "Compare IVF Clinics, UK and Abroad | Cairn Fertility",
+  description:
+    "Compare IVF clinics in the UK and abroad in one search, ranked by success rate for your age group, with every figure labelled by source and year.",
 };
 
-interface PageProps {
-  searchParams: Promise<{ location?: string; radius?: string }>;
-}
-
 const WHAT_TO_LOOK_FOR = [
-  { icon: <ShieldCheck className="h-4 w-4" />, title: "HFEA Licence", desc: "Every UK fertility clinic must be licensed by the HFEA. Always verify before booking — it's your legal protection." },
-  { icon: <Heart className="h-4 w-4" />, title: "Inclusive Policy", desc: "Ask clinics directly about their policies for your family type. Some clinics excel here; others add unnecessary friction. Trust your gut in the consultation." },
-  { icon: <PoundSterling className="h-4 w-4" />, title: "All-In Pricing", desc: "Always ask for a written quote covering donor sperm, ICSI, counselling, and storage — not just the headline IVF price." },
-  { icon: <Clock className="h-4 w-4" />, title: "Waiting Times", desc: "Donor sperm availability and clinic waiting lists vary enormously. Factor this into your timeline, especially if your AMH is time-sensitive." },
+  {
+    icon: <ShieldCheck className="h-4 w-4" />,
+    title: "Regulation",
+    desc: "Every UK fertility clinic must be licensed by the HFEA. Overseas clinics answer to their own national regulator, so ask which body inspects them and when it last did.",
+  },
+  {
+    icon: <Scale className="h-4 w-4" />,
+    title: "Comparable numbers",
+    desc: "Ask every clinic for live births per embryo transfer for your age group, and for the year it covers. If two clinics quote different measures, the higher number is not the better clinic.",
+  },
+  {
+    icon: <PoundSterling className="h-4 w-4" />,
+    title: "All-in pricing",
+    desc: "Ask for a written quote covering drugs, ICSI, donor material, counselling, storage and, for treatment abroad, travel and accommodation. Headline cycle prices rarely include them.",
+  },
+  {
+    icon: <Video className="h-4 w-4" />,
+    title: "Distance and logistics",
+    desc: "Treatment abroad usually means at least one trip of a week or more. Check what can happen remotely, what must happen in person, and who handles aftercare once you are home.",
+  },
 ];
 
-export default async function IvfFinderPage({ searchParams }: PageProps) {
-  const params = await searchParams;
-  const initialLocation = params.location?.trim() || undefined;
-  const initialRadius = params.radius ? parseInt(params.radius, 10) : 25;
-
+export default function IvfFinderPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
@@ -34,26 +45,28 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
         </div>
       </section>
 
-      {/* Hero + integrated search */}
+      {/* Hero + finder */}
       <Section band={0} padding="pt-16 md:pt-20 pb-16 md:pb-20">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          HFEA-licensed clinics only
+          UK and international clinics
         </p>
         <h1
-          className="font-sans font-bold mb-4"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: "#1A3A25" }}
+          className="font-sans font-bold mb-4 text-teal-ink"
+          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
         >
           Compare IVF Clinics
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-          Real pricing. Verified success rates. Side-by-side comparisons.
+          Every clinic in one list, ranked by success rate for your age group. Each figure is
+          labelled with its source, its year and what it was measured against.
         </p>
 
-        {/* Search + results — sits inside the hero, expands downward */}
-        <ClinicFinder initialLocation={initialLocation} initialRadius={initialRadius} />
+        <Suspense>
+          <ClinicFinder clinics={CLINICS} />
+        </Suspense>
       </Section>
 
-      {/* What to look for — contextual guidance below */}
+      {/* What to look for */}
       <Section band={1}>
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
           What every patient should look for

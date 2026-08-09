@@ -1,350 +1,95 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ShieldCheck,
-  Heart,
-  MapPin,
-  Phone,
-  Globe,
-  ChevronDown,
-  Check,
-  Plus,
-  Clock,
-  Stethoscope,
-} from "lucide-react";
-import type { ClinicData, AgeBracket } from "@/types/clinic";
-
-const BRACKET_META: Record<AgeBracket, { key: keyof ClinicData["successRates"]; label: string }> = {
-  any:        { key: "under35",    label: "Success <35"   },
-  under35:    { key: "under35",    label: "Success <35"   },
-  age35to37:  { key: "age35to37", label: "Success 35–37" },
-  age38to39:  { key: "age38to39", label: "Success 38–39" },
-  age40to42:  { key: "age40to42", label: "Success 40–42" },
-  age43plus:  { key: "age43plus", label: "Success 43+"   },
-};
+import Link from "next/link";
+import { MapPin, Check, Plus } from "lucide-react";
+import type { AgeBracket, Clinic } from "@/types/clinic";
+import { RateFigure, VerificationBadge } from "./rate-display";
 
 interface ClinicCardProps {
-  clinic: ClinicData;
-  isSelected: boolean;
-  onToggleCompare: (clinic: ClinicData) => void;
-  compareDisabled: boolean;
+  clinic: Clinic;
   ageBracket: AgeBracket;
+  isSelected: boolean;
+  compareDisabled: boolean;
+  onToggleCompare: (clinic: Clinic) => void;
 }
 
-function fmt(n?: number): string {
-  if (n == null) return "—";
-  return `£${n.toLocaleString()}`;
-}
-
+/**
+ * A result card in the Cairn clinic finder.
+ *
+ * Elevation comes from surfaces and borders, never shadows: the card is a
+ * bg-background surface on the cream page canvas with a 1px border, hover
+ * swaps the fill, and selection draws a 2px brand outline. The outline is
+ * inset over the resting border (outline-offset -2px), so selecting a card
+ * never shifts its contents by a pixel.
+ */
 export function ClinicCard({
   clinic,
-  isSelected,
-  onToggleCompare,
-  compareDisabled,
   ageBracket,
+  isSelected,
+  compareDisabled,
+  onToggleCompare,
 }: ClinicCardProps) {
-  const { key: rateKey, label: rateLabel } = BRACKET_META[ageBracket];
-  const [expanded, setExpanded] = useState(false);
-
-  const lowestPrice = Math.min(
-    ...[clinic.prices.basicIvf, clinic.prices.donorSpermIvf].filter(
-      (p): p is number => p != null
-    )
-  );
-
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      // Borderless at rest — the transparent 1px reserves the space so
-      // selecting a card doesn't nudge its contents.
-      className={`rounded-[32px] bg-white border transition-all duration-200 overflow-hidden ${
-        isSelected ? "border-lime-dark shadow-md" : "border-transparent shadow-sm"
+    <div
+      className={`rounded-[24px] bg-background border border-border transition-colors duration-150 hover:bg-surface-hover p-5 flex flex-col ${
+        isSelected ? "outline-solid outline-2 -outline-offset-2 outline-teal" : ""
       }`}
     >
-      {/* Main card content */}
-      <div className="p-5">
-        {/* Header row */}
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-1">
-              {clinic.hfeaLicensed && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-lime/20 px-2 py-0.5 text-[10px] font-semibold text-charcoal">
-                  <ShieldCheck className="h-3 w-3" />
-                  HFEA Licensed
-                </span>
-              )}
-              {clinic.soloFriendly && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8E8E8] px-2 py-0.5 text-[10px] font-semibold text-navy">
-                  <Heart className="h-3 w-3" />
-                  Solo-friendly
-                </span>
-              )}
-            </div>
-            <h3 className="text-base font-bold text-navy leading-tight">
-              {clinic.name}
-            </h3>
-            <div className="flex items-center gap-1 mt-1">
-              <MapPin className="h-3 w-3 text-muted shrink-0" />
-              <p className="text-xs text-muted truncate">{clinic.address}</p>
-            </div>
-          </div>
-          {clinic.distanceMiles != null && (
-            <div className="text-right shrink-0">
-              <p className="text-lg font-bold text-muted">
-                {clinic.distanceMiles}
-              </p>
-              <p className="text-[10px] text-muted">miles</p>
-            </div>
-          )}
-        </div>
+      <div className="flex flex-wrap items-center gap-2 mb-2">
+        <VerificationBadge verification={clinic.successRates.verification} />
+      </div>
 
-        {/* Key metrics */}
-        <div className="grid grid-cols-3 gap-2 mb-4">
-          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
-            <p className="text-xs text-muted leading-none mb-1">IVF from</p>
-            <p className="text-sm font-bold text-navy">
-              {lowestPrice === Infinity ? "—" : `£${lowestPrice.toLocaleString()}`}
-            </p>
-          </div>
-          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
-            <p className="text-xs text-muted leading-none mb-1">{rateLabel}</p>
-            <p className="text-sm font-bold text-navy">
-              {clinic.successRates[rateKey] != null
-                ? `${clinic.successRates[rateKey]}%`
-                : "—"}
-            </p>
-          </div>
-          <div className="rounded-xl bg-[#F5F5F5] p-2.5 text-center">
-            <p className="text-xs text-muted leading-none mb-1">Wait</p>
-            <p className="text-sm font-bold text-navy">
-              {clinic.waitingTimeWeeks != null
-                ? `${clinic.waitingTimeWeeks}wk`
-                : "—"}
-            </p>
-          </div>
-        </div>
+      <h3 className="text-base font-bold text-teal-ink leading-tight">{clinic.name}</h3>
+      <div className="flex items-center gap-1 mt-1 mb-4">
+        <MapPin className="h-3 w-3 text-muted shrink-0" aria-hidden />
+        <p className="text-xs text-muted truncate">
+          {clinic.city}, {clinic.country}
+        </p>
+      </div>
 
-        {/* Action buttons */}
-        <div className="flex gap-2">
-          <button
-            onClick={() => onToggleCompare(clinic)}
-            disabled={compareDisabled && !isSelected}
-            className={`flex-1 flex items-center justify-center gap-1.5 h-9 rounded-full text-xs font-semibold transition-colors ${
-              isSelected
-                ? "bg-lime text-charcoal hover:bg-lime-dark"
-                : compareDisabled
-                  ? "bg-white text-muted cursor-not-allowed border border-border"
-                  : "bg-white text-navy hover:bg-[#F0F0F0] border border-border"
-            }`}
-          >
-            {isSelected ? (
-              <>
-                <Check className="h-3.5 w-3.5" />
-                Added to Compare
-              </>
-            ) : (
-              <>
-                <Plus className="h-3.5 w-3.5" />
-                Add to Compare
-              </>
-            )}
-          </button>
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="flex items-center gap-1 h-9 px-3 rounded-full border border-border text-xs font-medium text-navy hover:bg-[#F0F0F0] transition-colors"
-          >
-            Details
-            <ChevronDown
-              className={`h-3.5 w-3.5 transition-transform ${expanded ? "rotate-180" : ""}`}
-            />
-          </button>
+      <div className="flex items-end justify-between gap-3 mb-4">
+        <RateFigure clinic={clinic} bracket={ageBracket} />
+        <div className="text-right">
+          <p className="text-sm font-bold text-teal-ink">
+            {clinic.pricePerCycleGbp != null
+              ? `£${clinic.pricePerCycleGbp.toLocaleString()}`
+              : "Not published"}
+          </p>
+          <p className="text-xs text-muted">per cycle</p>
         </div>
       </div>
 
-      {/* Expanded details */}
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden"
-          >
-            <div className="px-5 pb-5 border-t border-border pt-4">
-              {/* Single-cycle pricing + success rates */}
-              <div className="grid grid-cols-2 gap-3 mb-4">
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
-                    Single-cycle pricing
-                  </p>
-                  <div className="space-y-1.5">
-                    {[
-                      { label: "Basic IVF", val: clinic.prices.basicIvf },
-                      { label: "Donor Sperm IVF", val: clinic.prices.donorSpermIvf },
-                      { label: "Donor Egg IVF", val: clinic.prices.donorEggIvf },
-                      { label: "Embryo Storage/yr", val: clinic.prices.embryoStorage },
-                      { label: "Solo Package", val: clinic.prices.soloPackage },
-                      { label: "Consultation", val: clinic.prices.consultation },
-                    ].map(({ label, val }) => (
-                      <div key={label} className="flex justify-between text-xs">
-                        <span className="text-muted">{label}</span>
-                        <span className="font-medium text-navy">{fmt(val)}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* ICSI is an add-on, not a treatment tier: it is charged on
-                      top of whichever cycle price applies, once per cycle. */}
-                  {clinic.prices.icsiPerCycle != null && (
-                    <div className="mt-3">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
-                        Add-ons
-                      </p>
-                      <div className="flex justify-between text-xs">
-                        <span className="text-muted">ICSI (per cycle)</span>
-                        <span className="font-medium text-navy">
-                          +{fmt(clinic.prices.icsiPerCycle)}
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-muted leading-relaxed mt-1.5">
-                        Charged for every cycle, including each cycle of a
-                        multi-cycle package.
-                      </p>
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
-                    Success Rates
-                  </p>
-                  <div className="space-y-1.5 mb-4">
-                    {[
-                      { label: "Under 35", val: clinic.successRates.under35 },
-                      { label: "35–37", val: clinic.successRates.age35to37 },
-                      { label: "38–39", val: clinic.successRates.age38to39 },
-                      { label: "40–42", val: clinic.successRates.age40to42 },
-                      { label: "43+", val: clinic.successRates.age43plus },
-                    ].map(({ label, val }) => (
-                      <div key={label} className="flex justify-between text-xs">
-                        <span className="text-muted">{label}</span>
-                        <span className="font-medium text-navy">
-                          {val != null ? `${val}%` : "—"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-1.5 text-xs">
-                      <Stethoscope className="h-3 w-3 text-muted" />
-                      <span className="text-muted">NHS referrals:</span>
-                      <span className="font-medium text-navy">
-                        {clinic.nhsReferrals == null ? "—" : clinic.nhsReferrals ? "Yes" : "No"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs">
-                      <Clock className="h-3 w-3 text-muted" />
-                      <span className="text-muted">Payment plans:</span>
-                      <span className="font-medium text-navy">
-                        {clinic.paymentPlans == null ? "—" : clinic.paymentPlans ? "Yes" : "No"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Multi-cycle & special packages */}
-              {clinic.packages && clinic.packages.length > 0 && (
-                <div className="mb-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted mb-2">
-                    Packages &amp; bundles
-                  </p>
-                  <div className="space-y-2">
-                    {clinic.packages.map((pkg) => (
-                      <div
-                        key={pkg.name}
-                        className="rounded-xl bg-[#F5F5F5] p-3"
-                      >
-                        <div className="flex items-start justify-between gap-2 mb-1">
-                          <p className="text-xs font-semibold text-navy leading-snug">
-                            {pkg.name}
-                          </p>
-                          <div className="text-right shrink-0">
-                            <p className="text-sm font-bold text-navy">
-                              {pkg.price === 0 ? "Free" : `£${pkg.price.toLocaleString()}`}
-                            </p>
-                            {pkg.saves != null && pkg.saves > 0 && (
-                              <p className="text-[10px] font-semibold text-lime-dark">
-                                Save £{pkg.saves.toLocaleString()}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                        {pkg.description && (
-                          <p className="text-[11px] text-muted leading-relaxed">
-                            {pkg.description}
-                          </p>
-                        )}
-
-                        {/* A package price covers cycles, not add-ons. Where
-                            ICSI is not included it is billed per cycle, so the
-                            real outlay is the package plus ICSI × cycles. */}
-                        {clinic.prices.icsiPerCycle != null &&
-                          (pkg.includesIcsi ? (
-                            <p className="text-[11px] leading-relaxed mt-1.5 font-medium text-lime-dark">
-                              ICSI included in every cycle
-                            </p>
-                          ) : (
-                            <p className="text-[11px] leading-relaxed mt-1.5 text-navy">
-                              <span className="font-medium">
-                                + ICSI £
-                                {clinic.prices.icsiPerCycle.toLocaleString()}
-                                {(pkg.cycles ?? 1) > 1 && ` × ${pkg.cycles} cycles`}
-                              </span>{" "}
-                              = £
-                              {(
-                                pkg.price +
-                                clinic.prices.icsiPerCycle * (pkg.cycles ?? 1)
-                              ).toLocaleString()}{" "}
-                              if ICSI is needed
-                            </p>
-                          ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="flex flex-wrap gap-2">
-                {clinic.phone && (
-                  <a
-                    href={`tel:${clinic.phone}`}
-                    className="inline-flex items-center gap-1.5 text-xs text-navy hover:text-muted transition-colors"
-                  >
-                    <Phone className="h-3 w-3" />
-                    {clinic.phone}
-                  </a>
-                )}
-                {clinic.website && (
-                  <a
-                    href={clinic.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-navy text-warm-white px-3 py-1.5 text-xs font-medium hover:bg-charcoal transition-colors"
-                  >
-                    <Globe className="h-3 w-3" />
-                    Visit Website
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <div className="flex gap-2 mt-auto">
+        <button
+          onClick={() => onToggleCompare(clinic)}
+          disabled={compareDisabled && !isSelected}
+          className={`flex-1 flex items-center justify-center gap-1.5 h-9 rounded-full text-xs font-semibold border transition-colors ${
+            isSelected
+              ? "bg-teal border-teal text-on-teal hover:opacity-90"
+              : compareDisabled
+                ? "bg-background border-border text-muted cursor-not-allowed"
+                : "bg-background border-teal/20 text-teal hover:bg-surface-hover"
+          }`}
+        >
+          {isSelected ? (
+            <>
+              <Check className="h-3.5 w-3.5" aria-hidden />
+              In comparison
+            </>
+          ) : (
+            <>
+              <Plus className="h-3.5 w-3.5" aria-hidden />
+              Add to compare
+            </>
+          )}
+        </button>
+        <Link
+          href={`/ivf-finder/${clinic.slug}`}
+          className="flex items-center h-9 px-4 rounded-full border border-teal/20 text-xs font-medium text-teal hover:bg-surface-hover transition-colors"
+        >
+          Details
+        </Link>
+      </div>
+    </div>
   );
 }
