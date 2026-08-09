@@ -8,7 +8,7 @@ import { FAMILY_TYPES } from "@/lib/family-types";
 
 export const metadata: Metadata = {
   title: "Resources | Cairn Fertility",
-  description: "Guides, tools, checklists, and templates for every kind of family navigating fertility treatment.",
+  description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
 
 const CATEGORIES = [
@@ -96,7 +96,7 @@ export default function ResourcesPage() {
           Resources
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Guides, checklists, templates, and explainers for every kind of family navigating fertility treatment.
+          Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
         </p>
       </Section>
 

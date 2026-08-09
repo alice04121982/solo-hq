@@ -59,9 +59,9 @@ export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "solo-mum",
     label: "Solo Mums",
-    headline: "Building your family,\nexactly as you envisioned it.",
+    headline: "Having a baby\non your own.",
     heroCopy:
-      "Choosing to become a mother on your own terms is one of the most courageous decisions a person can make. Whether you're just starting to research or already mid-treatment, this guide gives you a clear, honest map through every stage — from choosing a donor to your child's first birthday.",
+      "This guide maps the route to solo motherhood: deciding, choosing a donor, choosing a clinic, treatment, pregnancy, and the first year. Whether you are still researching or already mid-treatment, start at the step you are on.",
     cardSummary:
       "For women choosing motherhood independently, using donor sperm and IUI or IVF.",
     image: "/photos/story-solo-mum.webp",
@@ -156,7 +156,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "same-sex-female",
     label: "Two Mums",
-    headline: "Two mums.\nOne family. Endless love.",
+    headline: "Two mums:\nwho carries, and how.",
     heroCopy:
       "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners — this guide walks you through every stage with clarity.",
     cardSummary:
@@ -250,7 +250,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "same-sex-male",
     label: "Two Dads",
-    headline: "Two dads.\nA family built with intention.",
+    headline: "Two dads:\nsurrogacy, step by step.",
     heroCopy:
       "For two men wanting to become fathers, the path involves surrogacy — a process that's legal, increasingly common, and genuinely achievable in the UK. It's also more complex than other routes. This guide explains every step honestly, from finding a surrogate to the parental order that makes you your child's legal parents.",
     cardSummary:
@@ -344,7 +344,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "single-dad",
     label: "Solo Dads",
-    headline: "Fatherhood,\non your terms.",
+    headline: "Solo fatherhood\nvia surrogacy.",
     heroCopy:
       "More men than ever are choosing to become solo fathers. The path — surrogacy with a donor egg — is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
     cardSummary:
@@ -438,7 +438,7 @@ export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "heterosexual-couple",
     label: "Mum and Dad",
-    headline: "When love\nneeds a little science.",
+    headline: "When getting pregnant\nneeds help.",
     heroCopy:
       "Fertility treatment for heterosexual couples covers an enormous range of situations — from unexplained infertility to specific diagnoses like low sperm count, PCOS, or poor egg reserve. Whatever brought you here, this guide helps you navigate your options with clarity: from initial investigations to embryo transfer, and everything in between.",
     cardSummary:
