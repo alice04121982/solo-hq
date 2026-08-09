@@ -4,6 +4,12 @@ interface LogoProps {
   onDark?: boolean;
 }
 
+/**
+ * The wordmark is a single ink colour rather than a two-tone lockup. The old
+ * lime "Fertility" cleared only ~1.6:1 against white and the pink on the teal
+ * only ~6:1, so neither half of the name was dependably legible. Off-black on
+ * light surfaces (~15.9:1) and white on the teal (~8.9:1) both clear WCAG AAA.
+ */
 export function Logo({ className = "", onDark = false }: LogoProps) {
   return (
     <span
@@ -11,11 +17,11 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
       style={{
         fontSize: "1.25rem",
         letterSpacing: "-0.02em",
-        color: onDark ? "#f9c6da" : "var(--foreground)",
+        color: onDark ? "#FFFFFF" : "var(--foreground)",
       }}
       aria-label="CairnFertility"
     >
-      Cairn<span style={{ color: onDark ? "#F0A8C4" : "#C5E600" }}>Fertility</span>
+      CairnFertility
     </span>
   );
 }
