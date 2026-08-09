@@ -1,306 +1,197 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
-import { useRouter } from "next/navigation";
-import { ClinicToolbar } from "./clinic-toolbar";
-import { FilterPanel } from "./filter-panel";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { SlidersHorizontal } from "lucide-react";
+import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
+import { rankBySuccessRate } from "@/lib/clinics";
+import {
+  ActiveFilterTags,
+  DEFAULT_FINDER_FILTERS,
+  FilterControls,
+  countActiveFilters,
+  matchesFilters,
+  type FinderFilterState,
+} from "./finder-filters";
+import { FilterSheet } from "./filter-sheet";
+import { TopPerformers } from "./top-performers";
 import { ClinicResults } from "./clinic-results";
-import { DEFAULT_FILTERS } from "./clinic-filters";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
 import { DisclaimerBanner } from "./disclaimer-banner";
-import type { ClinicData, ClinicSearchResponse } from "@/types/clinic";
-import type { FilterState } from "./clinic-filters";
 
-const LS_KEY = "cairn-compare";
-const DEFAULT_LOCATION = "London";
-const DEFAULT_RADIUS = 25;
+const COMPARE_PARAM = "compare";
+const COMPARE_CAP = 4;
 
 interface ClinicFinderProps {
-  initialLocation?: string;
-  initialRadius?: number;
+  clinics: Clinic[];
 }
 
-export function ClinicFinder({ initialLocation, initialRadius = DEFAULT_RADIUS }: ClinicFinderProps) {
+/**
+ * The Cairn clinic finder: one search across every clinic in the database, UK
+ * and international together. Geography is a filter like any other, never a
+ * gate ahead of results.
+ *
+ * The comparison selection lives in the URL (?compare=slug-a,slug-b), so it
+ * survives refreshes, can be shared, and persists untouched while filters
+ * change around it.
+ */
+export function ClinicFinder({ clinics }: ClinicFinderProps) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const tableRef = useRef<HTMLDivElement>(null);
 
-  // Search state
-  const [clinics, setClinics] = useState<ClinicData[]>([]);
-  const [source, setSource] = useState<"live" | "seed" | undefined>();
-  const [fetchedAt, setFetchedAt] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [filters, setFilters] = useState<FinderFilterState>(DEFAULT_FINDER_FILTERS);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
-  // Location state
-  const [toolbarLocation, setToolbarLocation] = useState(initialLocation ?? "");
-  const [activeLocation, setActiveLocation] = useState(initialLocation ?? DEFAULT_LOCATION);
-  const [locationMode, setLocationMode] = useState<"uk" | "international">("uk");
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
-  const [radius, setRadius] = useState(initialRadius);
+  const knownSlugs = useMemo(() => new Set(clinics.map((c) => c.slug)), [clinics]);
+  const selectedSlugs = useMemo(() => {
+    const raw = searchParams.get(COMPARE_PARAM);
+    if (!raw) return [];
+    return [...new Set(raw.split(","))].filter((s) => knownSlugs.has(s)).slice(0, COMPARE_CAP);
+  }, [searchParams, knownSlugs]);
 
-  // Filter state
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
-  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
-
-  // Comparison state
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [selectedClinics, setSelectedClinics] = useState<ClinicData[]>([]);
-
-  // Geolocation
-  const [geoLoading, setGeoLoading] = useState(false);
-
-  // Restore comparison from localStorage on mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(LS_KEY);
-      if (stored) {
-        const ids = JSON.parse(stored) as string[];
-        if (Array.isArray(ids)) setSelectedIds(ids);
-      }
-    } catch {
-      // ignore
-    }
-  }, []);
-
-  // Keep selectedClinics in sync
-  useEffect(() => {
-    setSelectedClinics((prev) => {
-      const fromCurrent = clinics.filter((c) => selectedIds.includes(c.id));
-      const fromPrev = prev.filter(
-        (c) => selectedIds.includes(c.id) && !fromCurrent.find((fc) => fc.id === c.id)
-      );
-      return [...fromPrev, ...fromCurrent];
-    });
-  }, [selectedIds, clinics]);
-
-  // Persist comparison to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem(LS_KEY, JSON.stringify(selectedIds));
-    } catch {
-      // ignore
-    }
-  }, [selectedIds]);
-
-  const fetchClinics = useCallback(async (location: string, searchRadius: number) => {
-    setIsLoading(true);
-    setActiveLocation(location);
-
-    const params = new URLSearchParams({ location, radius: String(searchRadius) });
-    router.replace(`/ivf-finder?${params.toString()}`, { scroll: false });
-
-    try {
-      const res = await fetch(
-        `/api/clinic-search?location=${encodeURIComponent(location)}&radius=${searchRadius}`
-      );
-      if (!res.ok) throw new Error("Fetch failed");
-      const data = (await res.json()) as ClinicSearchResponse;
-      setClinics(data.clinics);
-      setSource(data.source);
-      setFetchedAt(data.fetchedAt);
-    } catch {
-      setClinics([]);
-      setSource(undefined);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [router]);
-
-  // Auto-load on mount
-  useEffect(() => {
-    const loc = initialLocation ?? DEFAULT_LOCATION;
-    const r = initialLocation ? initialRadius : 100;
-    fetchClinics(loc, r);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Apply filters
-  const filteredClinics = useMemo(() => {
-    return clinics.filter((c) => {
-      // Country filter
-      if (filters.countries.length > 0) {
-        const country = c.country ?? "United Kingdom";
-        if (!filters.countries.includes(country)) return false;
-      }
-
-      // Max price
-      if (filters.maxPrice !== null) {
-        const low = Math.min(
-          c.prices.basicIvf ?? Infinity,
-          c.prices.donorSpermIvf ?? Infinity
-        );
-        if (low === Infinity || low > filters.maxPrice) return false;
-      }
-
-      // Min success rate
-      if (filters.minSuccessRate !== null) {
-        const bracketKey =
-          filters.ageBracket === "any" ? "under35" : filters.ageBracket;
-        const rate = c.successRates[bracketKey];
-        if (rate == null || rate < filters.minSuccessRate) return false;
-      }
-
-      return true;
-    });
-  }, [clinics, filters]);
-
-  // Active filter count (excludes location — that's shown via chips already)
-  const activeFilterCount =
-    (locationMode === "international" && selectedCountry ? 1 : 0) +
-    (locationMode === "uk" && radius !== DEFAULT_RADIUS ? 1 : 0) +
-    (filters.ageBracket !== "any" ? 1 : 0) +
-    (filters.minSuccessRate !== null ? 1 : 0) +
-    (filters.maxPrice !== null ? 1 : 0);
-
-  const handleToolbarSearch = useCallback(() => {
-    if (toolbarLocation.trim().length >= 2) {
-      fetchClinics(toolbarLocation.trim(), radius);
-    }
-  }, [toolbarLocation, radius, fetchClinics]);
-
-  const handleGeolocate = useCallback(() => {
-    if (!navigator.geolocation) return;
-    setGeoLoading(true);
-    navigator.geolocation.getCurrentPosition(
-      async (pos) => {
-        try {
-          const res = await fetch(
-            `https://api.postcodes.io/postcodes?lon=${pos.coords.longitude}&lat=${pos.coords.latitude}&limit=1`
-          );
-          const data = await res.json();
-          if (data.result?.[0]?.postcode) {
-            const pc = data.result[0].postcode as string;
-            setToolbarLocation(pc);
-            setLocationMode("uk");
-            setSelectedCountry(null);
-            fetchClinics(pc, radius);
-          }
-        } catch {
-          // ignore
-        } finally {
-          setGeoLoading(false);
-        }
-      },
-      () => setGeoLoading(false)
-    );
-  }, [radius, fetchClinics]);
-
-  const handleFilterApply = useCallback(
-    (
-      newFilters: FilterState,
-      newRadius: number,
-      newMode: "uk" | "international",
-      newCountry: string | null
-    ) => {
-      setFilters(newFilters);
-      setRadius(newRadius);
-      setLocationMode(newMode);
-      setSelectedCountry(newCountry);
-
-      if (newMode === "international" && newCountry) {
-        // Search by country
-        fetchClinics(newCountry, 0);
-      } else if (newMode === "uk") {
-        // Re-search with updated radius
-        const loc = toolbarLocation.trim() || activeLocation;
-        fetchClinics(loc, newRadius);
-      }
+  const setSelectedSlugs = useCallback(
+    (slugs: string[]) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (slugs.length > 0) params.set(COMPARE_PARAM, slugs.join(","));
+      else params.delete(COMPARE_PARAM);
+      // Slugs are url-safe, so keep the commas literal and the URL shareable.
+      const query = params.toString().replace(/%2C/g, ",");
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
     },
-    [toolbarLocation, activeLocation, fetchClinics]
+    [router, pathname, searchParams]
   );
 
-  const handleClearCountry = useCallback(() => {
-    setSelectedCountry(null);
-    setLocationMode("uk");
-    const loc = toolbarLocation.trim() || DEFAULT_LOCATION;
-    fetchClinics(loc, radius);
-  }, [toolbarLocation, radius, fetchClinics]);
+  const handleToggleCompare = useCallback(
+    (clinic: Clinic) => {
+      if (selectedSlugs.includes(clinic.slug)) {
+        setSelectedSlugs(selectedSlugs.filter((s) => s !== clinic.slug));
+      } else if (selectedSlugs.length < COMPARE_CAP) {
+        setSelectedSlugs([...selectedSlugs, clinic.slug]);
+      }
+    },
+    [selectedSlugs, setSelectedSlugs]
+  );
 
-  const handleToggleCompare = useCallback((clinic: ClinicData) => {
-    setSelectedIds((prev) => {
-      if (prev.includes(clinic.id)) return prev.filter((id) => id !== clinic.id);
-      if (prev.length >= 4) return prev;
-      return [...prev, clinic.id];
-    });
-  }, []);
+  const handleRemove = useCallback(
+    (slug: string) => setSelectedSlugs(selectedSlugs.filter((s) => s !== slug)),
+    [selectedSlugs, setSelectedSlugs]
+  );
 
-  const handleRemoveFromCompare = useCallback((id: string) => {
-    setSelectedIds((prev) => prev.filter((i) => i !== id));
-  }, []);
-
-  const handleClearCompare = useCallback(() => setSelectedIds([]), []);
+  const handleClear = useCallback(() => setSelectedSlugs([]), [setSelectedSlugs]);
 
   const handleCompareNow = useCallback(() => {
     tableRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
+  // The selection is resolved against the full database, not the filtered
+  // list, so a compared clinic stays compared when a filter hides it.
+  const selectedClinics = useMemo(
+    () =>
+      selectedSlugs
+        .map((slug) => clinics.find((c) => c.slug === slug))
+        .filter((c): c is Clinic => c != null),
+    [selectedSlugs, clinics]
+  );
+
+  const filteredClinics = useMemo(
+    () => clinics.filter((c) => matchesFilters(c, filters)),
+    [clinics, filters]
+  );
+
+  const rankedClinics = useMemo(
+    () => rankBySuccessRate(filteredClinics, filters.ageBracket),
+    [filteredClinics, filters.ageBracket]
+  );
+
+  const bracketLabel =
+    AGE_BRACKETS.find((b) => b.value === filters.ageBracket)?.label ?? "";
+  const activeFilterCount = countActiveFilters(filters);
+
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
-      {/* ── Toolbar ── */}
+      {/* ── Filters: inline on desktop, a sheet on mobile ── */}
+      <div className="hidden md:block rounded-[24px] bg-background border border-border p-6 mb-4">
+        <FilterControls filters={filters} onChange={setFilters} />
+      </div>
+      <div className="md:hidden mb-4">
+        <button
+          type="button"
+          onClick={() => setSheetOpen(true)}
+          className="flex items-center gap-2 rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-hover"
+        >
+          <SlidersHorizontal className="h-4 w-4" aria-hidden />
+          Filters
+          {activeFilterCount > 0 && (
+            <span className="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold bg-teal text-on-teal">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+      </div>
+
       <div className="mb-6">
-        <ClinicToolbar
-          location={toolbarLocation}
-          onLocationChange={(v) => {
-            setToolbarLocation(v);
-            if (locationMode === "international") setLocationMode("uk");
-          }}
-          onSearch={handleToolbarSearch}
-          onGeolocate={handleGeolocate}
-          geoLoading={geoLoading}
-          onOpenFilters={() => setFilterPanelOpen(true)}
-          activeFilterCount={activeFilterCount}
-          filters={filters}
-          onFiltersChange={setFilters}
-          locationMode={locationMode}
-          selectedCountry={selectedCountry}
-          radius={radius}
-          onClearCountry={handleClearCountry}
+        <ActiveFilterTags filters={filters} onChange={setFilters} />
+      </div>
+
+      {/* Standing context: the one line that must sit above every result. */}
+      <p className="text-xs text-muted mb-6">
+        UK success rates come from the HFEA register and are independently verified. Overseas
+        figures are self-reported by clinics and are not directly comparable.
+      </p>
+
+      {/* ── Top performers ── */}
+      <div className="mb-8">
+        <TopPerformers
+          clinics={filteredClinics}
+          ageBracket={filters.ageBracket}
+          selectedSlugs={selectedSlugs}
+          compareDisabled={selectedSlugs.length >= COMPARE_CAP}
+          onToggleCompare={handleToggleCompare}
         />
       </div>
 
       {/* ── Results ── */}
       <div className="mb-6">
         <ClinicResults
-          clinics={filteredClinics}
+          clinics={rankedClinics}
           totalCount={clinics.length}
-          location={locationMode === "international" && selectedCountry ? selectedCountry : activeLocation}
-          selectedIds={selectedIds}
-          onToggleCompare={handleToggleCompare}
-          isLoading={isLoading}
-          source={source}
+          ageBracketLabel={bracketLabel}
           ageBracket={filters.ageBracket}
+          selectedSlugs={selectedSlugs}
+          onToggleCompare={handleToggleCompare}
         />
       </div>
 
-      {/* ── Comparison Table ── */}
+      {/* ── Comparison table ── */}
       {selectedClinics.length >= 2 && (
         <div ref={tableRef} className="mb-6">
-          <ComparisonTable clinics={selectedClinics} />
+          <ComparisonTable
+            clinics={selectedClinics}
+            ageBracket={filters.ageBracket}
+            ageBracketLabel={bracketLabel}
+            onRemove={handleRemove}
+          />
         </div>
       )}
 
-      {/* ── Disclaimer ── */}
-      {!isLoading && clinics.length > 0 && (
-        <DisclaimerBanner fetchedAt={fetchedAt} />
-      )}
+      <DisclaimerBanner />
 
-      {/* ── Floating comparison bar ── */}
       <ComparisonBar
         selected={selectedClinics}
-        onRemove={handleRemoveFromCompare}
+        onRemove={handleRemove}
         onCompare={handleCompareNow}
-        onClear={handleClearCompare}
+        onClear={handleClear}
       />
 
-      {/* ── Filter panel ── */}
-      <FilterPanel
-        isOpen={filterPanelOpen}
-        onClose={() => setFilterPanelOpen(false)}
+      <FilterSheet
+        isOpen={sheetOpen}
+        onClose={() => setSheetOpen(false)}
         filters={filters}
-        radius={radius}
-        locationMode={locationMode}
-        selectedCountry={selectedCountry}
-        onApply={handleFilterApply}
+        onChange={setFilters}
+        resultCount={rankedClinics.length}
       />
     </div>
   );
