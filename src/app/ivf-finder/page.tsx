@@ -5,7 +5,7 @@ import { Section } from "@/components/section";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
-  title: "Compare IVF Clinics | CairnFertility",
+  title: "Compare IVF Clinics | Cairn Fertility",
   description: "Compare HFEA-licensed IVF clinics near you. Real pricing, verified success rates, and side-by-side comparison for every family type.",
 };
 
@@ -14,9 +14,9 @@ interface PageProps {
 }
 
 const WHAT_TO_LOOK_FOR = [
-  { icon: <ShieldCheck className="h-4 w-4" />, title: "HFEA Licence", desc: "Every UK fertility clinic must be licensed by the HFEA. Always verify before booking — it's your legal protection." },
+  { icon: <ShieldCheck className="h-4 w-4" />, title: "HFEA Licence", desc: "Every UK fertility clinic must be licensed by the HFEA. Always verify before booking. It's your legal protection." },
   { icon: <Heart className="h-4 w-4" />, title: "Inclusive Policy", desc: "Ask clinics directly about their policies for your family type. Some clinics excel here; others add unnecessary friction. Trust your gut in the consultation." },
-  { icon: <PoundSterling className="h-4 w-4" />, title: "All-In Pricing", desc: "Always ask for a written quote covering donor sperm, ICSI, counselling, and storage — not just the headline IVF price." },
+  { icon: <PoundSterling className="h-4 w-4" />, title: "All-In Pricing", desc: "Always ask for a written quote covering donor sperm, ICSI, counselling, and storage, not just the headline IVF price." },
   { icon: <Clock className="h-4 w-4" />, title: "Waiting Times", desc: "Donor sperm availability and clinic waiting lists vary enormously. Factor this into your timeline, especially if your AMH is time-sensitive." },
 ];
 

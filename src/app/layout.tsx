@@ -13,10 +13,24 @@ const generalSans = localFont({
   display: "swap",
 });
 
+const siteDescription =
+  "Cairn compares IVF clinics on cost, success rates and eligibility, for solo mums, solo dads, two mums, two dads, and couples.";
+
 export const metadata: Metadata = {
-  title: "CairnFertility — IVF & Fertility Guidance for Every Family",
-  description:
-    "Compare IVF clinics, understand your options, and build your family with confidence. Clear, honest guidance for solo mums, same-sex couples, and all family types.",
+  metadataBase: new URL("https://cairnfertility.vercel.app"),
+  title: "Cairn Fertility | Compare IVF Clinics",
+  description: siteDescription,
+  openGraph: {
+    title: "Cairn Fertility | Compare IVF Clinics",
+    description: siteDescription,
+    siteName: "Cairn Fertility",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cairn Fertility | Compare IVF Clinics",
+    description: siteDescription,
+  },
 };
 
 export default function RootLayout({

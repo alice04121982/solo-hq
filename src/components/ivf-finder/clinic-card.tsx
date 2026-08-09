@@ -80,7 +80,7 @@ export function ClinicCard({
               {clinic.soloFriendly && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-[#E8E8E8] px-2 py-0.5 text-[10px] font-semibold text-navy">
                   <Heart className="h-3 w-3" />
-                  Solo-friendly
+                  Welcomes solo patients
                 </span>
               )}
             </div>

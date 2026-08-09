@@ -87,7 +87,7 @@ export function ClinicToolbar({
               type="text"
               value={location}
               onChange={(e) => onLocationChange(e.target.value)}
-              placeholder="Postcode or town — e.g. London, SW1, Cambridge"
+              placeholder="Postcode or town, e.g. London, SW1, Cambridge"
               className="flex-1 bg-transparent text-sm focus:outline-none min-w-0"
               style={{ color: "var(--foreground)" }}
             />

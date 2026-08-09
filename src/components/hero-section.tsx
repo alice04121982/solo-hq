@@ -48,7 +48,7 @@ export function HeroSection() {
               className="text-[18px] leading-[28px] mb-7 font-sans max-w-[560px]"
               style={{ color: "var(--on-teal-muted)" }}
             >
-              Clinics abroad often look cheaper — until you add flights and hotels. We show the{" "}
+              Clinics abroad often look cheaper until you add flights and hotels. We show the{" "}
               <span style={{ color: "var(--on-teal)" }}>true cost</span> beside UK clinics, and
               flag which success rates are verified.
             </p>

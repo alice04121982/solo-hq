@@ -66,7 +66,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             style={{ background: "var(--teal)" }}
           >
             {[
-              { value: "400+", label: "HFEA-licensed clinics compared" },
+              { value: "HFEA data", label: "success rates from the public register" },
               { value: "UK & abroad", label: "including Spain, Czech Republic & Greece" },
               { value: "5 age brackets", label: "success rates from under 35 to 43+" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },

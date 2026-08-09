@@ -17,11 +17,15 @@ export interface Quote {
  * Community voices. Short enough to read as speech rather than prose — these
  * are rendered as speech-bubble cards, so anything longer than about forty
  * words will unbalance a row of them.
+ *
+ * ILLUSTRATIVE CONTENT: these quotes do not come from real people and are
+ * labelled as illustrative where they render. Replace with real, consented
+ * quotes before removing those labels.
  */
 export const COMMUNITY_QUOTES: Quote[] = [
   {
     quote:
-      "I'd spent two years on the fence, terrified of doing it alone. CairnFertility gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
+      "I'd spent two years on the fence, terrified of doing it alone. Cairn gave me the real numbers, the real timelines, and the community that told me: you can do this. My son Arlo is 14 months old.",
     name: "Gemma, 38",
     location: "Bristol",
     stage: "Mum to Arlo, conceived via donor IUI",
@@ -46,7 +50,7 @@ export const COMMUNITY_QUOTES: Quote[] = [
       "I'm 42 and people kept telling me I'd left it too late. This community showed me women who'd had their babies at 43, 44, using donor eggs.",
     name: "Claire, 42",
     location: "Edinburgh",
-    stage: "Pregnant — due in August",
+    stage: "Pregnant, due in August",
   },
 ];
 

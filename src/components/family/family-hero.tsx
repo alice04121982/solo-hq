@@ -71,7 +71,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
 
             <p className="text-xs font-sans text-muted mt-8 pb-0 border-t border-border pt-6">
               <span className="font-[500] text-[#1A3A25]">{family.treatmentHighlight}</span>
-              {" "}— treatment routes covered in this guide
+              : treatment routes covered in this guide
             </p>
           </motion.div>
 

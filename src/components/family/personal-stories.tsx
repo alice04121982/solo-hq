@@ -33,6 +33,10 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           >
             In their own words.
           </h2>
+          <p className="text-xs font-sans leading-relaxed mt-3" style={{ color: GREEN_SOFT, maxWidth: "60ch" }}>
+            Illustrative stories while we collect real, consented accounts. To share
+            yours, write to stories@cairnfertility.co.uk.
+          </p>
         </motion.div>
 
         {/* Featured story */}

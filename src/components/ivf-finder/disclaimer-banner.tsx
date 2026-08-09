@@ -20,8 +20,8 @@ export function DisclaimerBanner({ fetchedAt }: DisclaimerBannerProps) {
         <strong className="text-navy">Important:</strong> Prices and success rates shown are
         indicative and subject to change. Always contact clinics directly for current quotes and
         up-to-date availability. IVF success rates vary by age, diagnosis, and treatment
-        protocol. Solo-friendliness ratings reflect published policies and are not guarantees of
-        experience. Data sourced {dateStr}.
+        protocol. Notes on who a clinic welcomes reflect published policies and are not
+        guarantees of experience. Data sourced {dateStr}.
       </p>
     </div>
   );

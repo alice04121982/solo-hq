@@ -12,7 +12,7 @@ import { DisclaimerBanner } from "./disclaimer-banner";
 import type { ClinicData, ClinicSearchResponse } from "@/types/clinic";
 import type { FilterState } from "./clinic-filters";
 
-const LS_KEY = "solo-hq-compare";
+const LS_KEY = "cairn-compare";
 const DEFAULT_LOCATION = "London";
 const DEFAULT_RADIUS = 25;
 

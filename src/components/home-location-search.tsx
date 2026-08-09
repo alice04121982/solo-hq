@@ -85,7 +85,7 @@ export function HomeLocationSearch({ onDark = false }: HomeLocationSearchProps) 
                 setLocation(e.target.value);
                 setError(null);
               }}
-              placeholder="Postcode or town — e.g. London, CB1, M1"
+              placeholder="Postcode or town, e.g. London, CB1, M1"
               className="w-full h-14 pl-12 pr-4 bg-transparent text-foreground text-sm placeholder:text-muted focus:outline-none font-sans"
             />
           </div>

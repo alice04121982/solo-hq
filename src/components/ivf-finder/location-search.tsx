@@ -182,7 +182,7 @@ export function LocationSearch({
                 setLocation(e.target.value);
                 setError(null);
               }}
-              placeholder="Postcode or town — e.g. Cambridge, SW1"
+              placeholder="Postcode or town, e.g. Cambridge, SW1"
               className="flex-1 bg-transparent text-sm text-navy placeholder:text-muted focus:outline-none"
             />
             <button
