@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { SiteNav } from "./site-nav";
-import { HeroShapes } from "./hero-shapes";
+import { HeroShapeGrid } from "./hero-shape-grid";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -20,26 +20,21 @@ export function HeroSection() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         <SiteNav theme="dark" />
 
-        <div className="relative pb-20 md:pb-28 xl:pt-32 xl:pb-32">
-          {/* The hero used to lead with a family photograph, but a photo can
-              only ever show one kind of family and the site is for all of
-              them — so it leads with the shape language instead. Below xl the
-              composition sits above the copy; from xl it takes the photo's
-              old spot to the right, bleeding slightly off the container. */}
-          <HeroShapes className="mx-auto mt-6 mb-10 w-[72vw] max-w-[400px] xl:hidden" />
-
-          <HeroShapes className="hidden xl:block xl:absolute xl:right-[-52px] xl:top-[130px] xl:w-[560px] pointer-events-none" />
-
+        {/* Copy leads in the DOM so the page reads copy-first, but the grid
+            is ordered above it below xl and beside it from xl — the two
+            columns sit side by side rather than overlapping, so the grid
+            can carry photographs without crowding the headline. */}
+        <div className="flex flex-col xl:flex-row xl:items-center xl:gap-16 pt-4 pb-20 md:pb-28 xl:pt-20 xl:pb-28">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="relative"
+            className="order-2 xl:order-1 xl:flex-1 xl:max-w-[620px]"
           >
             <h1
-              className="font-sans font-bold mb-7 max-w-[768px]"
+              className="font-sans font-bold mb-7"
               style={{
-                fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)",
+                fontSize: "clamp(2.8rem, 5.5vw, 4.6rem)",
                 lineHeight: 1.04,
                 color: "var(--on-teal)",
               }}
@@ -59,7 +54,7 @@ export function HeroSection() {
             </p>
 
             {/* Trust signals — a vertical list, sitting above the CTA */}
-            <div className="flex flex-col gap-2 mb-7 max-w-[768px]">
+            <div className="flex flex-col gap-2 mb-7">
               {TRUST_SIGNALS.map((s) => (
                 <span
                   key={s}
@@ -87,6 +82,8 @@ export function HeroSection() {
               </a>
             </div>
           </motion.div>
+
+          <HeroShapeGrid className="order-1 xl:order-2 w-full max-w-[420px] mx-auto mb-12 xl:mb-0 xl:mx-0 xl:w-[480px] xl:max-w-none xl:shrink-0" />
         </div>
       </div>
     </section>
