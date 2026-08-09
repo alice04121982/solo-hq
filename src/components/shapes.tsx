@@ -3,16 +3,18 @@ import type { CSSProperties } from "react";
 /**
  * The shape bank.
  *
- * Four marks, each borrowed from the fertility journey itself, so the
- * decoration carries meaning the photography never could:
+ * Marks borrowed from the fertility journey itself, so the decoration
+ * carries meaning the photography never could:
  *
- *  - Bloom  — a scalloped circle: the egg cell, a flower, a family in the
- *             round. Leads the hero in place of a photo, since no photograph
- *             can show "every kind of family" at once.
- *  - Egg    — a ring with a nucleus: the egg itself, cycles, waiting.
- *  - Cross  — the × you mark on a calendar: tracking days, injections done,
- *             appointments kept.
- *  - Spark  — the four-point star: the day it works.
+ *  - Bloom    — a scalloped circle: the egg cell, a flower, a family in the
+ *               round. Leads the hero in place of a photo, since no photograph
+ *               can show "every kind of family" at once.
+ *  - Egg      — a ring with a nucleus: the egg itself, cycles, waiting.
+ *  - Cross    — the × you mark on a calendar: tracking days, injections done,
+ *               appointments kept.
+ *  - Spark    — the four-point star: the day it works.
+ *  - Asterisk — eight flat-ended spokes.
+ *  - Pause    — two square bars: the wait between cycles, plans put on hold.
  *
  * All shapes draw in `currentColor` on a 100×100 viewBox, so colour comes
  * from CSS `color` and size from the `size` prop (or width/height classes).
@@ -107,6 +109,19 @@ export function Spark(props: ShapeProps) {
   );
 }
 
+/**
+ * Pause button — two vertical bars. Deliberately square-cornered: no `rx`,
+ * so the edges stay hard against the rounded marks around it.
+ */
+export function Pause(props: ShapeProps) {
+  return (
+    <svg {...svgProps(props)}>
+      <rect x="14" y="8" width="28" height="84" />
+      <rect x="58" y="8" width="28" height="84" />
+    </svg>
+  );
+}
+
 /** Eight-spoke asterisk, flat-ended and chunky — the Solo Dads mark. */
 export function Asterisk(props: ShapeProps) {
   return (
@@ -131,7 +146,7 @@ export function Dot(props: ShapeProps) {
   );
 }
 
-export type ShapeName = "bloom" | "egg" | "cross" | "spark" | "asterisk";
+export type ShapeName = "bloom" | "egg" | "cross" | "spark" | "asterisk" | "pause";
 
 const SHAPES: Record<ShapeName, (props: ShapeProps) => React.JSX.Element> = {
   bloom: Bloom,
@@ -139,6 +154,7 @@ const SHAPES: Record<ShapeName, (props: ShapeProps) => React.JSX.Element> = {
   cross: Cross,
   spark: Spark,
   asterisk: Asterisk,
+  pause: Pause,
 };
 
 /** Render a shape by name — for data-driven placements like card lists. */
@@ -163,5 +179,5 @@ export const FAMILY_SHAPES: Record<string, ShapeName> = {
   "same-sex-female": "spark",
   "same-sex-male": "egg",
   "single-dad": "asterisk",
-  "heterosexual-couple": "cross",
+  "heterosexual-couple": "pause",
 };
