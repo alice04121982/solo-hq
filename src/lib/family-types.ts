@@ -63,11 +63,11 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "This guide maps the route to solo motherhood: deciding, choosing a donor, choosing a clinic, treatment, pregnancy, and the first year. Whether you are still researching or already mid-treatment, start at the step you are on.",
     cardSummary:
-      "For women choosing motherhood independently, using donor sperm and IUI or IVF.",
+      "For women choosing motherhood independently — via IUI or IVF, with donor sperm from a bank or a known donor, donor eggs, or both.",
     image: "/photos/story-solo-mum.webp",
     imageAlt: "A mother holding her young child, looking out at the sky",
     hideHeroImage: true,
-    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs",
     steps: [
       {
         number: 1,
