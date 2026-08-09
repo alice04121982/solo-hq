@@ -10,7 +10,8 @@ import {
   type Region,
   type Treatment,
 } from "@/types/clinic";
-import { countriesByRegion, priceBounds } from "@/lib/clinics";
+import { priceBounds } from "@/lib/clinics";
+import { CountrySelect, COUNTRY_FLAGS } from "./country-select";
 
 /**
  * Filter state for the Cairn clinic finder.
@@ -195,20 +196,11 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
             />
           ))}
         </div>
-        <div className="mt-3 space-y-2">
-          {countriesByRegion().map(({ region, countries }) => (
-            <div key={region} className="flex flex-wrap items-center gap-2">
-              <span className="text-xs text-muted w-24 shrink-0">{region}</span>
-              {countries.map((c) => (
-                <FilterTag
-                  key={c}
-                  label={c}
-                  active={filters.countries.includes(c)}
-                  onToggle={() => onChange({ ...filters, countries: toggleIn(filters.countries, c) })}
-                />
-              ))}
-            </div>
-          ))}
+        <div className="mt-3">
+          <CountrySelect
+            selected={filters.countries}
+            onChange={(countries) => onChange({ ...filters, countries })}
+          />
         </div>
       </div>
 
@@ -331,7 +323,7 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
       {filters.countries.map((c) => (
         <FilterTag
           key={c}
-          label={c}
+          label={`${COUNTRY_FLAGS[c] ?? ""} ${c}`.trim()}
           active
           onToggle={() => remove({ countries: filters.countries.filter((x) => x !== c) })}
         />
