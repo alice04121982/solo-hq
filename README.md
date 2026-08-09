@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cairn Fertility
 
-## Getting Started
+Cairn compares IVF clinics on cost, success rates and eligibility, and explains how
+treatment works, for everyone going through IVF: solo mums, solo dads, two mums, two
+dads, and couples.
 
-First, run the development server:
+A cairn is a stack of stones marking a route where the path is not obvious. That is the
+job of the site: practical, quiet guidance through a process that is expensive, medical
+and hard to compare from the outside.
+
+## What the site does today
+
+- **Clinic finder** (`/ivf-finder`): search and compare UK clinics, with seed data for
+  the Cambridge area and a live search backed by the Claude API. Compare up to four
+  clinics side by side on pricing, packages and HFEA success rates by age band.
+- **Family pathways** (`/families`): dedicated pages for each route into IVF, with a
+  clinic matcher that filters by what your pathway actually needs (donor sperm, donor
+  eggs, reciprocal IVF, and so on).
+- **Guides** (`/resources`): long-form guides on costs, treatment, emotional wellbeing,
+  legal and admin, pregnancy and community.
+- **How IVF works** (`/how-ivf-works`), **stories** (`/stories`), a **cost calculator**
+  and a **journey map** on the homepage.
+
+Surrogacy is not covered yet but is planned.
+
+## Stack
+
+- [Next.js](https://nextjs.org) 16, App Router
+- React 19, TypeScript
+- Tailwind CSS v4 (theme tokens in `src/app/globals.css`)
+- framer-motion, lucide-react
+- Deployed on [Vercel](https://vercel.com)
+
+## Local setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # dev server on http://localhost:3000
+npm run preview    # production build + start
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Required | Purpose |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | For live clinic search only | Powers `/api/clinic-search`, which uses the Claude API with web search to fetch current clinic data. Without it the finder still works from the bundled seed data. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` with the variable above for local development.
 
-## Learn More
+## Project conventions
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See `AGENTS.md` and the notes at the top of `src/app/globals.css`. Colours come from
+the semantic tokens defined there; components use the existing library under
+`src/components`.
