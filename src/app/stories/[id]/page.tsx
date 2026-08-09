@@ -107,10 +107,11 @@ export default async function StoryPage({ params }: PageProps) {
                 <QuoteCard
                   quote={r.quote}
                   name={r.name}
-                  meta={[r.familyLabel]}
+                  eyebrow={r.familyLabel}
+                  meta={[r.location]}
                   avatar={r.image}
                   tone="pink"
-                  action="Read the story →"
+                  action="Read →"
                 />
               </Link>
             ))}

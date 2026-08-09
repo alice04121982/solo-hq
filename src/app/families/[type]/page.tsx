@@ -60,7 +60,8 @@ export default async function FamilyTypePage({ params }: PageProps) {
             <QuoteCard
               quote={voice.quote}
               name={voice.name}
-              meta={[`${voice.age}`, voice.location, voice.treatment]}
+              eyebrow={voice.tag}
+              meta={[`${voice.age}`, voice.location]}
               avatar={voice.image}
               tone="pink"
             />

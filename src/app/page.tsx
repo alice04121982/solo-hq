@@ -249,7 +249,8 @@ export default function Home() {
               key={q.name}
               quote={q.quote}
               name={q.name}
-              meta={[q.location, q.stage]}
+              eyebrow={q.stage}
+              meta={[q.location]}
               avatar={q.avatar}
               tone={i === 1 ? "teal" : "pink"}
             />
