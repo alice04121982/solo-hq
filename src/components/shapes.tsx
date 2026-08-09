@@ -107,6 +107,21 @@ export function Spark(props: ShapeProps) {
   );
 }
 
+/** Eight-spoke asterisk, flat-ended and chunky — the Solo Dads mark. */
+export function Asterisk(props: ShapeProps) {
+  return (
+    <svg {...svgProps(props)}>
+      <path
+        d="M50 8v84M8 50h84M20.3 20.3l59.4 59.4M79.7 20.3 20.3 79.7"
+        stroke="currentColor"
+        strokeWidth="16"
+        strokeLinecap="butt"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
 /** Plain circle — a compositional primitive, used under the marks above. */
 export function Dot(props: ShapeProps) {
   return (
@@ -116,13 +131,14 @@ export function Dot(props: ShapeProps) {
   );
 }
 
-export type ShapeName = "bloom" | "egg" | "cross" | "spark";
+export type ShapeName = "bloom" | "egg" | "cross" | "spark" | "asterisk";
 
 const SHAPES: Record<ShapeName, (props: ShapeProps) => React.JSX.Element> = {
   bloom: Bloom,
   egg: Egg,
   cross: Cross,
   spark: Spark,
+  asterisk: Asterisk,
 };
 
 /** Render a shape by name — for data-driven placements like card lists. */
@@ -132,7 +148,20 @@ export function ShapeMark({ name, ...props }: ShapeProps & { name: ShapeName }) 
 }
 
 /**
- * The rotation used wherever a list of items each takes a mark (family
- * cards, stat cards) — indexed with `SHAPE_CYCLE[i % SHAPE_CYCLE.length]`.
+ * The rotation used where a list of items each takes a mark without the
+ * mark meaning anything (stat cards) — indexed with
+ * `SHAPE_CYCLE[i % SHAPE_CYCLE.length]`.
  */
 export const SHAPE_CYCLE: ShapeName[] = ["bloom", "spark", "egg", "cross"];
+
+/**
+ * The fixed mark for each family type — shape-coded identity, one distinct
+ * mark per family, used wherever a family is represented by a shape.
+ */
+export const FAMILY_SHAPES: Record<string, ShapeName> = {
+  "solo-mum": "bloom",
+  "same-sex-female": "spark",
+  "same-sex-male": "egg",
+  "single-dad": "asterisk",
+  "heterosexual-couple": "cross",
+};
