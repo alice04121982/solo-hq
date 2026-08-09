@@ -24,12 +24,12 @@ export function HeroSection() {
             is ordered above it below xl and beside it from xl — the two
             columns sit side by side rather than overlapping, so the grid
             can carry photographs without crowding the headline. */}
-        <div className="flex flex-col xl:flex-row xl:items-center xl:gap-16 pt-4 pb-20 md:pb-28 xl:pt-20 xl:pb-28">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:gap-12 pt-4 pb-20 md:pb-28 xl:pt-20 xl:pb-28">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="order-2 xl:order-1 xl:flex-1 xl:max-w-[620px]"
+            className="order-2 xl:order-1 xl:flex-1"
           >
             <h1
               className="font-sans font-bold mb-7"
@@ -83,7 +83,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          <HeroShapeGrid className="order-1 xl:order-2 w-full max-w-[420px] mx-auto mb-12 xl:mb-0 xl:mx-0 xl:w-[480px] xl:max-w-none xl:shrink-0" />
+          <HeroShapeGrid className="order-1 xl:order-2 w-full max-w-[480px] mx-auto mb-12 xl:mb-0 xl:mx-0 xl:w-[560px] xl:max-w-none xl:shrink-0" />
         </div>
       </div>
     </section>

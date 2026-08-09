@@ -33,26 +33,39 @@ type Cell =
   | { kind: "photo"; src: string; alt: string; mask: Mask; position?: string };
 
 /**
- * Reading order matters: marks and photos alternate so neither clusters,
- * and no two photos sit edge to edge in a row.
+ * Photos take the four corners and the centre, marks take the four edges.
+ *
+ * All five of the site's family types appear, one photo each, using the same
+ * photograph each type carries on its own guide — so the hero states the
+ * "every kind of family" promise literally rather than by implication. That
+ * is the reason for five photos rather than four: a grid that showed only
+ * some of the types would quietly rank them.
  */
 const CELLS: Cell[] = [
+  {
+    kind: "photo",
+    src: "/photos/story-solo-mum.webp",
+    alt: "A solo mum holding her child",
+    mask: "circle",
+    position: "object-[50%_40%]",
+  },
+  { kind: "mark", name: "spark", color: "var(--accent)" },
+  {
+    kind: "photo",
+    src: "/photos/story-two-mums.webp",
+    alt: "Two mums together",
+    mask: "arch",
+  },
+
   { kind: "mark", name: "bloom", color: "var(--on-teal)" },
   {
     kind: "photo",
     src: "/photos/family-beach.webp",
-    alt: "A family building a sandcastle together on a beach",
+    alt: "A mum and dad building a sandcastle with their child",
     mask: "circle",
   },
-  { kind: "mark", name: "egg", color: "var(--accent)" },
+  { kind: "mark", name: "halves", color: "var(--lavender)" },
 
-  {
-    kind: "photo",
-    src: "/photos/family-sunset.webp",
-    alt: "A family together at golden hour, one adult carrying a toddler",
-    mask: "arch",
-  },
-  { kind: "mark", name: "asterisk", color: "var(--lavender)" },
   {
     kind: "photo",
     src: "/photos/story-two-dads.webp",
@@ -60,15 +73,14 @@ const CELLS: Cell[] = [
     mask: "quarter",
     position: "object-[50%_30%]",
   },
-
-  { kind: "mark", name: "spark", color: "var(--accent)" },
+  { kind: "mark", name: "pause", color: "var(--accent)" },
   {
     kind: "photo",
-    src: "/photos/family-coast.webp",
-    alt: "Two adults and a child sitting on a clifftop, looking out to sea",
+    src: "/photos/cta-family.webp",
+    alt: "A solo dad holding his young son",
     mask: "leaf",
+    position: "object-[45%_40%]",
   },
-  { kind: "mark", name: "pause", color: "var(--on-teal)" },
 ];
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -78,7 +90,7 @@ export function HeroShapeGrid({ className }: { className?: string }) {
 
   return (
     <div className={className}>
-      <div className="grid grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-3 gap-1.5 md:gap-2">
         {CELLS.map((cell, i) => (
           <motion.div
             key={i}
