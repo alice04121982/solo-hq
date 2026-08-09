@@ -3,12 +3,21 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Cross, Spark } from "./shapes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function CTASection() {
   return (
-    <section style={{ background: "#F0A8C4" }}>
+    <section className="relative overflow-hidden" style={{ background: "#F0A8C4" }}>
+      {/* Calendar crosses in the band's corner — days marked off. Solid
+          tone-on-tone, not an opacity fade. */}
+      <div aria-hidden className="absolute top-10 right-8 hidden md:flex gap-4" style={{ color: "var(--lavender-dark)" }}>
+        <Cross size={26} />
+        <Cross size={26} />
+        <Cross size={26} />
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
         <div className="flex flex-col lg:flex-row items-start gap-10 lg:gap-0">
           <motion.div
@@ -68,12 +77,20 @@ export function CTASection() {
           </motion.div>
 
           {/* Photo — fills the remaining column and matches the copy block's height on lg+ */}
-          <div className="relative w-full lg:flex-1 lg:self-stretch min-h-[280px] rounded-2xl overflow-hidden">
-            <Image
-              src="/photos/cta-family.webp"
-              alt="A father holding and kissing his young son"
-              fill
-              className="object-cover"
+          <div className="relative w-full lg:flex-1 lg:self-stretch min-h-[280px]">
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <Image
+                src="/photos/cta-family.webp"
+                alt="A father holding and kissing his young son"
+                fill
+                className="object-cover"
+              />
+            </div>
+            {/* A spark pinned over the photo's corner, turning slowly. */}
+            <Spark
+              size={76}
+              className="shape-spin absolute -top-6 -left-6"
+              style={{ color: "var(--accent)" }}
             />
           </div>
         </div>

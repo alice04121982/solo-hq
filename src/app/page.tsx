@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { QuoteCard } from "@/components/quote-card";
+import { ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 import { HOMEPAGE_QUOTES } from "@/lib/quotes";
@@ -21,7 +22,8 @@ export default function Home() {
       <Section tone="cream" id="families">
         <div className="flex items-end justify-between mb-10">
           <div className="flex flex-col gap-3">
-            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "var(--teal)" }}>
+            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
+              <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
               Every family
             </p>
             <h2
@@ -50,7 +52,7 @@ export default function Home() {
           className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 xl:grid-cols-5 md:overflow-visible md:pb-0"
           style={{ scrollbarWidth: "none" }}
         >
-          {FAMILY_TYPES.map((family) => {
+          {FAMILY_TYPES.map((family, i) => {
             const theme = CARD_THEME;
             return (
               <Link
@@ -59,6 +61,14 @@ export default function Home() {
                 className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 md:min-h-[229px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: theme.bg, color: theme.text }}
               >
+                {/* Every family gets a shape, no family gets a stock photo —
+                    the marks rotate so no card's shape claims a meaning. */}
+                <ShapeMark
+                  name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
+                  size={32}
+                  className="transition-transform duration-300 group-hover:rotate-12"
+                  style={{ color: "var(--lavender)" }}
+                />
                 <h3 className="font-sans font-semibold text-lg leading-7" style={{ color: theme.text }}>
                   {family.label}
                 </h3>
@@ -83,7 +93,7 @@ export default function Home() {
       </Section>
 
       {/* 3 — Clinic comparison teaser: teal full section */}
-      <Section tone="teal" id="compare">
+      <Section tone="teal" id="compare" backdrop={{ shape: "dots" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <span
@@ -116,15 +126,22 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Stats grid */}
+          {/* Stats grid — one shape from the bank per card, in the same
+              rotation the family cards use. */}
           <div className="grid grid-cols-2 gap-3">
             {[
               { value: "400+", label: "Clinics compared UK & worldwide" },
               { value: "True cost", label: "Travel & stays factored in, not just clinic fees" },
               { value: "5 brackets", label: "Success rates from under 35 to 43+" },
               { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
-            ].map((s) => (
+            ].map((s, i) => (
               <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                <ShapeMark
+                  name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
+                  size={20}
+                  className="mb-3"
+                  style={{ color: "var(--accent)" }}
+                />
                 <p
                   className="font-sans font-medium mb-1"
                   style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#f9c6da" }}
@@ -142,7 +159,8 @@ export default function Home() {
       <Section tone="white" id="stories">
         <div className="flex items-end justify-between mb-10">
           <div className="flex flex-col gap-3">
-            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
+            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
+              <ShapeMark name="spark" size={14} className="shape-spin" style={{ color: "var(--lavender)" }} />
               Real journeys
             </p>
             <h2
@@ -224,9 +242,10 @@ export default function Home() {
       </Section>
 
       {/* 5 — Community voices: warm cream, speech-bubble quotes */}
-      <Section tone="cream" id="voices">
+      <Section tone="cream" id="voices" backdrop={{ shape: "dots", side: "left", color: "var(--lavender)" }}>
         <div className="flex flex-col gap-3 mb-10">
-          <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "var(--teal)" }}>
+          <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
+            <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
             Community voices
           </p>
           <h2

@@ -138,6 +138,21 @@
 .card-maroon { background: var(--teal); color: var(--on-teal); }  /* legacy alias of .card-teal */
 .card-cream  { background: var(--background); color: var(--foreground); }
 
+/* ── Shape animations ──
+   For shape marks placed in server components, where framer-motion isn't
+   available. Slow and gentle by design — nothing on a fertility site should
+   feel frantic. */
+@keyframes shape-spin { to { transform: rotate(360deg); } }
+@keyframes shape-breathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+.shape-spin    { animation: shape-spin 28s linear infinite; }
+.shape-breathe { animation: shape-breathe 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .shape-spin, .shape-breathe { animation: none; }
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--background-alt); }
