@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
+import { Section } from "@/components/section";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
@@ -28,7 +29,7 @@ export default function StoriesPage() {
       </section>
 
       {/* Header */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-10">
+      <Section band={0} padding="pt-16 pb-14">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Real journeys
         </p>
@@ -41,11 +42,11 @@ export default function StoriesPage() {
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
           Honest accounts from people who&apos;ve been through it — the real version, not the brochure.
         </p>
-      </section>
+      </Section>
 
-      {/* Filter pills */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-10">
-        <div className="flex flex-wrap gap-2">
+      {/* Filters and the grid they drive share a band — they're one control */}
+      <Section band={1} padding="py-14 md:py-16">
+        <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setFilter("all")}
             className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
@@ -70,10 +71,7 @@ export default function StoriesPage() {
             </button>
           ))}
         </div>
-      </section>
 
-      {/* Story grid */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-20">
         {visible.length === 0 && (
           <p className="text-sm font-sans text-muted py-12 border-t border-border">
             No stories yet for this family type — check back soon.
@@ -122,7 +120,7 @@ export default function StoriesPage() {
             </Link>
           ))}
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

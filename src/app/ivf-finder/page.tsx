@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ShieldCheck, Heart, PoundSterling, Clock } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
+import { Section } from "@/components/section";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 
 export const metadata: Metadata = {
@@ -34,28 +35,26 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
       </section>
 
       {/* Hero + integrated search */}
-      <section className="bg-background-alt border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20 pb-0">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-            HFEA-licensed clinics only
-          </p>
-          <h1
-            className="font-sans font-bold mb-4"
-            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: "#1A3A25" }}
-          >
-            Compare IVF Clinics
-          </h1>
-          <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-            Real pricing. Verified success rates. Side-by-side comparisons.
-          </p>
+      <Section band={0} padding="pt-16 md:pt-20 pb-16 md:pb-20">
+        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          HFEA-licensed clinics only
+        </p>
+        <h1
+          className="font-sans font-bold mb-4"
+          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: "#1A3A25" }}
+        >
+          Compare IVF Clinics
+        </h1>
+        <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
+          Real pricing. Verified success rates. Side-by-side comparisons.
+        </p>
 
-          {/* Search + results — sits inside the hero, expands downward */}
-          <ClinicFinder initialLocation={initialLocation} initialRadius={initialRadius} />
-        </div>
-      </section>
+        {/* Search + results — sits inside the hero, expands downward */}
+        <ClinicFinder initialLocation={initialLocation} initialRadius={initialRadius} />
+      </Section>
 
       {/* What to look for — contextual guidance below */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <Section band={1}>
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
           What every patient should look for
         </p>
@@ -68,7 +67,7 @@ export default async function IvfFinderPage({ searchParams }: PageProps) {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
     </main>
   );
 }
