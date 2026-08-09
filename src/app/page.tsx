@@ -5,7 +5,7 @@ import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { QuoteCard } from "@/components/quote-card";
-import { ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
+import { FAMILY_SHAPES, ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
 import { HOMEPAGE_QUOTES } from "@/lib/quotes";
@@ -52,7 +52,7 @@ export default function Home() {
           className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 xl:grid-cols-5 md:overflow-visible md:pb-0"
           style={{ scrollbarWidth: "none" }}
         >
-          {FAMILY_TYPES.map((family, i) => {
+          {FAMILY_TYPES.map((family) => {
             const theme = CARD_THEME;
             return (
               <Link
@@ -61,10 +61,10 @@ export default function Home() {
                 className="group flex-none w-[80vw] sm:w-[56vw] md:w-auto snap-start flex flex-col gap-4 rounded-2xl p-6 md:min-h-[229px] transition-transform duration-200 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: theme.bg, color: theme.text }}
               >
-                {/* Every family gets a shape, no family gets a stock photo —
-                    the marks rotate so no card's shape claims a meaning. */}
+                {/* Every family gets its own mark, no family gets a stock
+                    photo — shape-coded identity from FAMILY_SHAPES. */}
                 <ShapeMark
-                  name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
+                  name={FAMILY_SHAPES[family.slug]}
                   size={32}
                   className="transition-transform duration-300 group-hover:rotate-12"
                   style={{ color: "var(--lavender)" }}
