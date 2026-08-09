@@ -3,7 +3,7 @@ import { Section } from "@/components/section";
 import { ClinicMatcher } from "@/components/clinic-matcher";
 
 export const metadata = {
-  title: "Find Your Clinic — CairnFertility",
+  title: "Find Your Clinic | Cairn Fertility",
   description: "Tell us about your situation and we'll match you with the clinics most suited to your age, family type, and budget.",
 };
 
@@ -31,7 +31,7 @@ export default function GetStartedPage() {
             Find clinics that fit your situation.
           </h1>
           <p className="text-[16px] font-sans text-muted leading-[1.65]">
-            Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget — not just headline numbers.
+            Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget, not just headline numbers.
           </p>
         </div>
       </Section>

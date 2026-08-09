@@ -6,9 +6,9 @@ import { Section } from "@/components/section";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 export const metadata: Metadata = {
-  title: "Family Types | CairnFertility — IVF & Fertility Guidance",
+  title: "Family Types | Cairn Fertility",
   description:
-    "Fertility treatment guidance for every family — solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
+    "Fertility treatment guidance for every family: solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };
 
 // Display order: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad
@@ -85,7 +85,7 @@ export default function FamiliesPage() {
           <br />your path starts here.
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "55ch" }}>
-          IVF looks different depending on who you are. Find your family type below for a guide built specifically for you — the right treatment routes, real stories, and a clear step-by-step from first consultation to family.
+          IVF looks different depending on who you are. Find your family type below for a guide built specifically for you: the right treatment routes, real stories, and a clear step-by-step from first consultation to family.
         </p>
       </Section>
 
@@ -111,10 +111,10 @@ export default function FamiliesPage() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
           {[
-            { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood — tailored to your specific treatment route." },
+            { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood, tailored to your specific treatment route." },
             { num: "02", title: "Personal stories", body: "Real accounts from people who've been through it. The emotional truth, not just the clinical facts." },
             { num: "03", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
-            { num: "04", title: "Newsletter", body: "Updates specific to your family type — clinic data changes, new research, community stories." },
+            { num: "04", title: "Newsletter", body: "Updates specific to your family type: clinic data changes, new research, community stories." },
           ].map((item) => (
             <div key={item.num} className="py-6 border-t border-border">
               <p className="font-sans font-medium text-muted/50 mb-3" style={{ fontSize: "1.5rem" }}>

@@ -3,7 +3,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/article-layout";
 import { QuoteCard } from "@/components/quote-card";
+import { ResourcesSection } from "@/components/family/resources-section";
 import { ALL_STORIES } from "@/lib/stories";
+import { getFamilyType } from "@/lib/family-types";
+
+/** Guides shown under a story with no specific family type. */
+const GENERAL_RESOURCES = [
+  "consultation-questions",
+  "two-week-wait",
+  "uk-support-groups",
+];
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -16,10 +25,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const story = ALL_STORIES.find((s) => s.id === id);
-  if (!story) return { title: "Story not found — CairnFertility" };
+  if (!story) return { title: "Story not found | Cairn Fertility" };
 
   return {
-    title: `${story.title} — CairnFertility`,
+    title: `${story.title} | Cairn Fertility`,
     description: story.excerpt,
     openGraph: {
       title: story.title,
@@ -40,9 +49,17 @@ export default async function StoryPage({ params }: PageProps) {
     .sort((a, b) => Number(b.familyType === story.familyType) - Number(a.familyType === story.familyType))
     .slice(0, 2);
 
+  // The same guide list the story's family-type page shows, so the reader
+  // leaves the story with the practical next steps for that pathway.
+  const resources =
+    story.familyType === "all"
+      ? GENERAL_RESOURCES
+      : getFamilyType(story.familyType)?.resources ?? GENERAL_RESOURCES;
+
   return (
-    <ArticleLayout
-      eyebrow={story.tag}
+    <>
+      <ArticleLayout
+        eyebrow={story.tag}
       title={story.title}
       standfirst={story.excerpt}
       meta={[`${story.name}, ${story.age}`, story.location, story.treatment]}
@@ -51,6 +68,15 @@ export default async function StoryPage({ params }: PageProps) {
       backHref="/stories"
       backLabel="All stories"
     >
+      <p
+        className="text-xs font-sans leading-relaxed mb-8 rounded-xl px-4 py-3"
+        style={{ background: "var(--cream)", color: "var(--muted)" }}
+      >
+        This is an illustrative story, written to show what real accounts will look
+        like here. It does not describe a real person. To share your own story,
+        write to stories@cairnfertility.co.uk.
+      </p>
+
       <div className="space-y-6">
         {story.body.split("\n\n").map((para, i) => (
           <p
@@ -118,6 +144,11 @@ export default async function StoryPage({ params }: PageProps) {
           </div>
         </section>
       )}
-    </ArticleLayout>
+      </ArticleLayout>
+
+      {/* The practical follow-on: the same guides this story's pathway page
+          recommends, full-bleed after the article. */}
+      <ResourcesSection resources={resources} />
+    </>
   );
 }

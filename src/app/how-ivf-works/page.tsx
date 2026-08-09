@@ -4,9 +4,9 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 
 export const metadata: Metadata = {
-  title: "What Happens During IVF | CairnFertility",
+  title: "What Happens During IVF | Cairn Fertility",
   description:
-    "From ovarian stimulation to implantation — what is actually happening inside your body and in the laboratory at every step of the IVF process. In plain English.",
+    "From ovarian stimulation to implantation: what is happening inside your body and in the laboratory at every step of the IVF process. In plain English.",
 };
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
@@ -218,13 +218,13 @@ const STAGES = [
     title: "Ovarian Stimulation",
     duration: "Days 1–12 of treatment",
     body: [
-      "In a natural cycle, one follicle matures and releases one egg. Stimulation changes that. Daily hormone injections — usually FSH (follicle-stimulating hormone) — encourage both ovaries to develop multiple follicles at the same time.",
+      "In a natural cycle, one follicle matures and releases one egg. Stimulation changes that. Daily hormone injections, usually FSH (follicle-stimulating hormone), encourage both ovaries to develop multiple follicles at the same time.",
       "During this phase you will attend monitoring scans every 2–3 days and have blood tests to track hormone levels. The aim is usually 8–15 mature follicles, though every ovary is different and fewer is not a failure.",
     ],
     facts: [
       "Stimulation typically lasts 10–14 days",
       "Follicles need to reach roughly 18 mm before retrieval",
-      "Your ovaries may feel heavy or tender — this is expected and normal",
+      "Your ovaries may feel heavy or tender; this is expected and normal",
     ],
     Illustration: StimulationIllustration,
   },
@@ -233,42 +233,42 @@ const STAGES = [
     title: "Egg Retrieval",
     duration: "30–40 minutes, under sedation",
     body: [
-      "Around 36 hours after your trigger injection, egg retrieval takes place. Under sedation, an ultrasound probe with a very fine attached needle is passed transvaginally to reach each follicle. The needle punctures the follicle wall and the fluid inside — including the egg — is gently aspirated.",
+      "Around 36 hours after your trigger injection, egg retrieval takes place. Under sedation, an ultrasound probe with a very fine attached needle is passed transvaginally to reach each follicle. The needle punctures the follicle wall and the fluid inside, including the egg, is gently aspirated.",
       "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You won't feel anything during the procedure and most people go home within a few hours.",
     ],
     facts: [
       "Most people feel bloated or crampy afterwards but recover the same day",
-      "Mature eggs (MII stage) are the ones that can be fertilised — not all retrieved eggs will be mature",
+      "Mature eggs (MII stage) are the ones that can be fertilised; not all retrieved eggs will be mature",
       "A retrieval of 6–15 eggs is considered a good response for most patients",
     ],
     Illustration: EggRetrievalIllustration,
   },
   {
     number: "03",
-    title: "ICSI — Sperm Meets Egg",
+    title: "ICSI: Sperm Meets Egg",
     duration: "Hours 0–4, in the laboratory",
     body: [
-      "For most solo parents and same-sex female couples using frozen donor sperm, fertilisation is done via ICSI (intracytoplasmic sperm injection). The embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle — rather than leaving sperm to find the egg naturally.",
+      "For most solo parents and same-sex female couples using frozen donor sperm, fertilisation is done via ICSI (intracytoplasmic sperm injection). The embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
       "The egg is held in place with a blunt holding pipette on one side while the injection pipette approaches from the other. The sperm is deposited into the cytoplasm in seconds. ICSI is used routinely because the freeze-thaw process reduces sperm motility.",
     ],
     facts: [
       "ICSI requires the egg's surrounding cumulus cells to be removed first",
       "Each mature egg is injected with one carefully selected sperm",
-      "Standard IVF (without ICSI) can be used when sperm quality is high — ask your clinic which they recommend",
+      "Standard IVF (without ICSI) can be used when sperm quality is high; ask your clinic which they recommend",
     ],
     Illustration: ICSIIllustration,
   },
   {
     number: "04",
     title: "Fertilisation Confirmed",
-    duration: "Day 1 — 16–20 hours after ICSI",
+    duration: "Day 1: 16–20 hours after ICSI",
     body: [
-      "The morning after ICSI, the embryologist checks each injected egg under the microscope. A successfully fertilised egg — now called a zygote — shows two small spheres called pronuclei: one carrying your genetic material, one carrying the donor sperm's.",
+      "The morning after ICSI, the embryologist checks each injected egg under the microscope. A successfully fertilised egg, now called a zygote, shows two small spheres called pronuclei: one carrying your genetic material, one carrying the donor sperm's.",
       "Not every injected egg will fertilise. A typical fertilisation rate is 60–80% of mature eggs. Those that don't fertilise are not used further. You will usually receive an update from your clinic on day 1.",
     ],
     facts: [
       "Two pronuclei (2PN) is the sign of normal, successful fertilisation",
-      "Three pronuclei (3PN) means two sperm fertilised the egg — these embryos are not transferred",
+      "Three pronuclei (3PN) means two sperm fertilised the egg; these embryos are not transferred",
       "A fertilisation rate of 70% from mature eggs is considered good",
     ],
     Illustration: FertilisationIllustration,
@@ -279,11 +279,11 @@ const STAGES = [
     duration: "Days 2–4",
     body: [
       "A fertilised egg begins to divide. By day 2 it has 2–4 cells. By day 3, a typical embryo has 6–8 cells, known as blastomeres. The embryologist grades embryos at each check: cell number, whether the cells are even in size, and how much fragmentation is present.",
-      "The cells don't grow — the same cytoplasm from the original egg is simply divided into smaller and smaller units. Each blastomere at this stage is genetically identical to the others.",
+      "The cells don't grow: the same cytoplasm from the original egg is simply divided into smaller and smaller units. Each blastomere at this stage is genetically identical to the others.",
     ],
     facts: [
       "Grading systems vary between clinics but all assess cell number, symmetry, and fragmentation",
-      "Some embryos develop more slowly at day 3 but catch up by day 5 — don't read too much into early grades",
+      "Some embryos develop more slowly at day 3 but catch up by day 5, so don't read too much into early grades",
       "Most clinics culture embryos to day 5 before selecting one for transfer or freezing",
     ],
     Illustration: CleavageIllustration,
@@ -293,8 +293,8 @@ const STAGES = [
     title: "The Blastocyst",
     duration: "Day 5–6",
     body: [
-      "By day 5, a good-quality embryo has transformed into a blastocyst — a fluid-filled sphere with two distinct cell populations. The outer layer (trophectoderm) will become the placenta. The inner cell mass (ICM), a tight cluster on one side, will become the baby.",
-      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation. Grading uses expansion (1–6), ICM quality (A/B/C), and trophectoderm quality (A/B/C) — so a 4AA is top grade.",
+      "By day 5, a good-quality embryo has transformed into a blastocyst: a fluid-filled sphere with two distinct cell populations. The outer layer (trophectoderm) will become the placenta. The inner cell mass (ICM), a tight cluster on one side, will become the baby.",
+      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation. Grading uses expansion (1–6), ICM quality (A/B/C), and trophectoderm quality (A/B/C), so a 4AA is top grade.",
     ],
     facts: [
       "On average 40–60% of fertilised eggs reach blastocyst stage",
@@ -313,7 +313,7 @@ const STAGES = [
     ],
     facts: [
       "Most clinics now transfer a single embryo to minimise the risk of twins",
-      "Bed rest after transfer is not recommended — normal gentle activity is fine",
+      "Bed rest after transfer is not recommended; normal gentle activity is fine",
       "Remaining good-quality embryos are vitrified and stored for future frozen embryo transfer (FET) cycles",
     ],
     Illustration: TransferIllustration,
@@ -323,13 +323,13 @@ const STAGES = [
     title: "Implantation",
     duration: "Days 1–10 after transfer",
     body: [
-      "After transfer, the blastocyst floats free in the uterus for a day or two before making contact with the endometrium — the uterine lining. The trophectoderm cells begin to burrow into the lining in a process called implantation. Blood vessels start to form between embryo and uterus.",
-      "As the embryo embeds, it starts producing hCG (human chorionic gonadotropin) — the hormone detected by pregnancy tests. A blood test 9–14 days after transfer measures hCG to confirm whether implantation has occurred.",
+      "After transfer, the blastocyst floats free in the uterus for a day or two before making contact with the endometrium, the uterine lining. The trophectoderm cells begin to burrow into the lining in a process called implantation. Blood vessels start to form between embryo and uterus.",
+      "As the embryo embeds, it starts producing hCG (human chorionic gonadotropin), the hormone detected by pregnancy tests. A blood test 9–14 days after transfer measures hCG to confirm whether implantation has occurred.",
     ],
     facts: [
       "Implantation typically occurs 6–10 days after fertilisation",
       "A beta-hCG blood test is more sensitive and accurate than a home pregnancy test",
-      "Even a perfectly graded blastocyst doesn't always implant — chromosomal abnormalities in the embryo are the most common reason for failure",
+      "Even a perfectly graded blastocyst doesn't always implant; chromosomal abnormalities in the embryo are the most common reason for failure",
     ],
     Illustration: ImplantationIllustration,
   },
@@ -358,7 +358,7 @@ export default function HowIVFWorksPage() {
           What actually happens.
         </h1>
         <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
-          From the first injection to implantation — what is happening inside your body, and inside the laboratory, at every step. In plain English.
+          From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English.
         </p>
 
         {/* Steps overview strip */}

@@ -216,7 +216,7 @@ export function ClinicComparison() {
           Clinic comparison engine
         </p>
         <h2 className="font-sans font-bold text-foreground text-2xl leading-tight">
-          UK clinics vs abroad — side by side
+          UK clinics vs abroad, side by side
         </h2>
         <p className="text-sm font-sans text-muted mt-1">
           HFEA data · community-reported costs · success rates by age bracket
@@ -412,7 +412,7 @@ export function ClinicComparison() {
       </div>
 
       <p className="text-[11px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-5" style={{ maxWidth: "72ch" }}>
-        UK success rates from HFEA published data (2022/23). Abroad clinic data from clinic-reported figures and community verification. Real prices are community-reported estimates including typical add-ons. All data indicative — verify directly with clinics before booking.
+        UK success rates from HFEA published data (2022/23). Abroad clinic data from clinic-reported figures and community verification. Real prices are community-reported estimates including typical add-ons. All data indicative; verify directly with clinics before booking.
       </p>
     </div>
   );

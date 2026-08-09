@@ -13,21 +13,21 @@ const journeyStories = [
     age: 37,
     tag: "Founder's story",
     title: "From 'someday' to mum of one in 22 months",
-    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built CairnFertility because I wished something like it had existed when I was starting out.",
+    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find, most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Cairn because I wished something like it had existed when I was starting out.",
   },
   {
     name: "Natalie",
     age: 40,
     tag: "Donor egg journey",
     title: "I used donor eggs and I'm not ashamed of it",
-    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then — after reading a dozen stories from women who'd been exactly here — at peace with it. My twins Evi and Rosa are two and a half.",
+    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. My twins Evi and Rosa are two and a half.",
   },
   {
     name: "Jo",
     age: 34,
     tag: "First IVF cycle",
     title: "The bit nobody talks about: the two-week wait, alone",
-    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the CairnFertility community during my wait.",
+    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the Cairn community during my wait.",
   },
 ];
 
@@ -47,7 +47,7 @@ export function TestimonialsSection() {
           className="mb-20"
         >
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-            Real women. Real journeys.
+            Real people. Real journeys.
           </p>
           <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.

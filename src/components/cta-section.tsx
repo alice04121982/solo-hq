@@ -50,9 +50,10 @@ export function CTASection() {
               className="text-[17px] font-sans leading-[1.65] mb-10 max-w-[560px]"
               style={{ color: "var(--teal)" }}
             >
-              Whatever your path — solo, same-sex, or as a couple — join thousands
-              of people navigating IVF with honest information, real-world costs,
-              and a community that actually gets it.
+              Whatever your path, IVF is easier alongside people who get it.
+              We are building a place to find others at your stage, hear from
+              people who have been through it, and set up local meetups. Join
+              the waitlist and you will be first to know when it opens.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
