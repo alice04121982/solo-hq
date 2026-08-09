@@ -59,8 +59,10 @@ export function ClinicCard({
       layout
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`rounded-[32px] bg-white border-2 transition-all duration-200 overflow-hidden ${
-        isSelected ? "border-lime-dark shadow-md" : "border-border shadow-sm"
+      // Borderless at rest — the transparent 1px reserves the space so
+      // selecting a card doesn't nudge its contents.
+      className={`rounded-[32px] bg-white border transition-all duration-200 overflow-hidden ${
+        isSelected ? "border-lime-dark shadow-md" : "border-transparent shadow-sm"
       }`}
     >
       {/* Main card content */}
