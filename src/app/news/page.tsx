@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { ArrowRight, Clock } from "lucide-react";
+import { Section } from "@/components/section";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "News & Updates | CairnFertility",
@@ -66,20 +67,20 @@ export default function NewsPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        {/* Header */}
-        <div className="mb-16">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
-          <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
-            News &amp; Updates
-          </h1>
-          <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-            Policy changes, science you can actually use, and stories from the community.
-          </p>
-        </div>
+      {/* Header */}
+      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
+        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
+        <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
+          News &amp; Updates
+        </h1>
+        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+          Policy changes, science you can actually use, and stories from the community.
+        </p>
+      </Section>
 
-        {/* Featured — left-border pull style */}
-        <div className="mb-16 border-l-2 border-accent pl-8 md:pl-12">
+      {/* Featured — left-border pull style */}
+      <Section band={1}>
+        <div className="border-l-2 border-accent pl-8 md:pl-12">
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
             {featured.tag} &nbsp;·&nbsp; {featured.date} &nbsp;·&nbsp; {featured.readTime}
           </p>
@@ -93,8 +94,10 @@ export default function NewsPage() {
             Read article <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
+      </Section>
 
-        {/* Article grid */}
+      {/* Article grid */}
+      <Section band={2}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
           {rest.map((a) => (
             <div
@@ -114,7 +117,7 @@ export default function NewsPage() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       <CTASection />
     </main>

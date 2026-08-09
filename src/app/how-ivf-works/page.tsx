@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
+import { Section } from "@/components/section";
 
 export const metadata: Metadata = {
   title: "What Happens During IVF | CairnFertility",
@@ -346,7 +347,7 @@ export default function HowIVFWorksPage() {
       </section>
 
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-24 pb-12 md:pb-16">
+      <Section band={0} padding="pt-16 md:pt-24 pb-12 md:pb-16">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           The science
         </p>
@@ -373,70 +374,63 @@ export default function HowIVFWorksPage() {
             </a>
           ))}
         </div>
-      </section>
+      </Section>
 
-      {/* Stages */}
+      {/* Stages — each picks up the next band after the hero */}
       {STAGES.map((stage, i) => {
         const illustrationLeft = i % 2 === 0;
         return (
-          <section
-            key={stage.number}
-            id={`step-${stage.number}`}
-            className="border-t border-border"
-            style={{ background: i % 2 === 0 ? "white" : "#FAFAFA" }}
-          >
-            <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+          <Section key={stage.number} id={`step-${stage.number}`} band={i + 1}>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
-                {/* Illustration */}
-                <div className={`flex items-center justify-center ${!illustrationLeft ? "lg:order-last" : ""}`}>
-                  <div className="w-full max-w-[300px] mx-auto aspect-square">
-                    <stage.Illustration />
-                  </div>
+              {/* Illustration */}
+              <div className={`flex items-center justify-center ${!illustrationLeft ? "lg:order-last" : ""}`}>
+                <div className="w-full max-w-[300px] mx-auto aspect-square">
+                  <stage.Illustration />
                 </div>
-
-                {/* Text */}
-                <div>
-                  <div className="flex items-center gap-3 mb-5">
-                    <span
-                      className="inline-flex items-center justify-center text-[11px] font-[700] font-sans rounded-full px-3 py-1"
-                      style={{ background: "#C5E600", color: "#1A3A25" }}
-                    >
-                      Step {stage.number}
-                    </span>
-                    <span className="text-xs font-[500] font-sans text-muted">
-                      {stage.duration}
-                    </span>
-                  </div>
-                  <h2
-                    className="font-sans font-bold mb-5"
-                    style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", lineHeight: 1.1, color: "#1A3A25" }}
-                  >
-                    {stage.title}
-                  </h2>
-                  {stage.body.map((para, j) => (
-                    <p key={j} className="text-sm font-sans leading-relaxed mb-4" style={{ color: "var(--muted)", maxWidth: "52ch" }}>
-                      {para}
-                    </p>
-                  ))}
-                  <ul className="mt-6 space-y-2.5">
-                    {stage.facts.map((fact, j) => (
-                      <li key={j} className="flex items-start gap-2.5 text-sm font-sans" style={{ color: "#1A3A25" }}>
-                        <span
-                          className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-[700]"
-                          style={{ background: "#F0F8E8", color: "#1A3A25" }}
-                        >
-                          ✓
-                        </span>
-                        {fact}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
               </div>
+
+              {/* Text */}
+              <div>
+                <div className="flex items-center gap-3 mb-5">
+                  <span
+                    className="inline-flex items-center justify-center text-[11px] font-[700] font-sans rounded-full px-3 py-1"
+                    style={{ background: "#C5E600", color: "#1A3A25" }}
+                  >
+                    Step {stage.number}
+                  </span>
+                  <span className="text-xs font-[500] font-sans text-muted">
+                    {stage.duration}
+                  </span>
+                </div>
+                <h2
+                  className="font-sans font-bold mb-5"
+                  style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", lineHeight: 1.1, color: "#1A3A25" }}
+                >
+                  {stage.title}
+                </h2>
+                {stage.body.map((para, j) => (
+                  <p key={j} className="text-sm font-sans leading-relaxed mb-4" style={{ color: "var(--muted)", maxWidth: "52ch" }}>
+                    {para}
+                  </p>
+                ))}
+                <ul className="mt-6 space-y-2.5">
+                  {stage.facts.map((fact, j) => (
+                    <li key={j} className="flex items-start gap-2.5 text-sm font-sans" style={{ color: "#1A3A25" }}>
+                      <span
+                        className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-[700]"
+                        style={{ background: "#F0F8E8", color: "#1A3A25" }}
+                      >
+                        ✓
+                      </span>
+                      {fact}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
-          </section>
+          </Section>
         );
       })}
 
