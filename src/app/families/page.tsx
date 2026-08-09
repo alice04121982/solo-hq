@@ -69,8 +69,8 @@ export default function FamiliesPage() {
         <SiteNav />
       </div>
 
-      {/* Hero */}
-      <Section band={0} padding="pt-12 pb-14 md:pt-16 md:pb-18">
+      {/* Hero — one oversized spark bleeding off the band edge */}
+      <Section band={0} padding="pt-12 pb-14 md:pt-16 md:pb-18" backdrop={{ shape: "spark" }}>
         <span
           className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
           style={{ background: "#C5E600", color: "#1A3A25" }}

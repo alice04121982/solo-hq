@@ -65,7 +65,7 @@ export default function Home() {
                     the marks rotate so no card's shape claims a meaning. */}
                 <ShapeMark
                   name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
-                  size={28}
+                  size={32}
                   className="transition-transform duration-300 group-hover:rotate-12"
                   style={{ color: "var(--lavender)" }}
                 />
@@ -93,7 +93,7 @@ export default function Home() {
       </Section>
 
       {/* 3 — Clinic comparison teaser: teal full section */}
-      <Section tone="teal" id="compare">
+      <Section tone="teal" id="compare" backdrop={{ shape: "bloom" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <span
@@ -138,7 +138,7 @@ export default function Home() {
               <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
                 <ShapeMark
                   name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
-                  size={18}
+                  size={20}
                   className="mb-3"
                   style={{ color: "var(--accent)" }}
                 />
@@ -242,7 +242,7 @@ export default function Home() {
       </Section>
 
       {/* 5 — Community voices: warm cream, speech-bubble quotes */}
-      <Section tone="cream" id="voices">
+      <Section tone="cream" id="voices" backdrop={{ shape: "egg", side: "left" }}>
         <div className="flex flex-col gap-3 mb-10">
           <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
             <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />

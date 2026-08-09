@@ -62,9 +62,9 @@ export function Egg(props: ShapeProps) {
     <svg {...svgProps(props)}>
       <path
         fillRule="evenodd"
-        d="M50 6a44 44 0 1 0 .01 0ZM50 22a28 28 0 1 1-.01 0Z"
+        d="M50 6a44 44 0 1 0 .01 0ZM50 25a25 25 0 1 1-.01 0Z"
       />
-      <circle cx="50" cy="50" r="14" />
+      <circle cx="50" cy="50" r="16" />
     </svg>
   );
 }
@@ -74,9 +74,9 @@ export function Cross(props: ShapeProps) {
   return (
     <svg {...svgProps(props)}>
       <path
-        d="M26 26 74 74M74 26 26 74"
+        d="M27 27 73 73M73 27 27 73"
         stroke="currentColor"
-        strokeWidth="19"
+        strokeWidth="26"
         strokeLinecap="round"
         fill="none"
       />
@@ -88,7 +88,7 @@ export function Cross(props: ShapeProps) {
 export function Spark(props: ShapeProps) {
   return (
     <svg {...svgProps(props)}>
-      <path d="M50 2C55 34 66 45 98 50 66 55 55 66 50 98 45 66 34 55 2 50 34 45 45 34 50 2Z" />
+      <path d="M50 2C57 31 69 43 98 50 69 57 57 69 50 98 43 69 31 57 2 50 31 43 43 31 50 2Z" />
     </svg>
   );
 }

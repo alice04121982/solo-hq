@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ShapeMark, type ShapeName } from "./shapes";
 
 /**
  * Full-bleed section bands.
@@ -21,6 +22,25 @@ const TONE_BACKGROUND: Record<SectionTone, string> = {
   cream: "var(--cream)",
   teal: "var(--teal)",
 };
+
+/**
+ * Colour for a backdrop shape sitting directly on each band tone — a lighter
+ * or tonal wash of the band itself, so the shape reads as texture in the
+ * background rather than as content.
+ */
+const TONE_BACKDROP_COLOR: Record<SectionTone, string> = {
+  white: "var(--cream)",
+  cream: "rgba(240, 168, 196, 0.30)",
+  teal: "rgba(255, 255, 255, 0.07)",
+};
+
+export interface SectionBackdrop {
+  shape: ShapeName;
+  /** Which edge the shape bleeds off. Default "right". */
+  side?: "left" | "right";
+  /** Override the tone-derived colour. */
+  color?: string;
+}
 
 /**
  * The tone for the nth band on a page, counting the hero as 0.
@@ -47,6 +67,12 @@ interface SectionProps {
   id?: string;
   /** Vertical rhythm, overridable for bands that need to sit tighter. */
   padding?: string;
+  /**
+   * One oversized shape from the bank, sitting on the band colour and
+   * cropped by the section edge — background texture in the reference's
+   * style, not content.
+   */
+  backdrop?: SectionBackdrop;
   /** Extra classes on the full-bleed band. */
   className?: string;
   /** Extra classes on the centred container. */
@@ -59,6 +85,7 @@ export function Section({
   tone,
   id,
   padding = "py-16 md:py-20",
+  backdrop,
   className,
   innerClassName,
   children,
@@ -66,10 +93,27 @@ export function Section({
   const resolved = tone ?? (band === undefined ? "white" : alternatingTone(band));
 
   return (
-    <section id={id} className={className} style={{ background: TONE_BACKGROUND[resolved] }}>
+    <section
+      id={id}
+      className={[backdrop && "relative overflow-hidden", className].filter(Boolean).join(" ")}
+      style={{ background: TONE_BACKGROUND[resolved] }}
+    >
+      {backdrop && (
+        <ShapeMark
+          name={backdrop.shape}
+          className={[
+            "absolute top-1/2 -translate-y-1/2 pointer-events-none",
+            "w-[20rem] md:w-[32rem] lg:w-[40rem] h-auto",
+            backdrop.side === "left"
+              ? "left-0 -translate-x-[45%]"
+              : "right-0 translate-x-[45%]",
+          ].join(" ")}
+          style={{ color: backdrop.color ?? TONE_BACKDROP_COLOR[resolved] }}
+        />
+      )}
       <div
         className={[
-          "max-w-7xl mx-auto px-6 md:px-12 lg:px-20",
+          "relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20",
           padding,
           innerClassName,
         ]

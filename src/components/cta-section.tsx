@@ -12,9 +12,9 @@ export function CTASection() {
     <section className="relative overflow-hidden" style={{ background: "#F0A8C4" }}>
       {/* Faint calendar crosses in the band's corner — days marked off. */}
       <div aria-hidden className="absolute top-10 right-8 hidden md:flex gap-4" style={{ color: "var(--teal)", opacity: 0.15 }}>
-        <Cross size={22} />
-        <Cross size={22} />
-        <Cross size={22} />
+        <Cross size={26} />
+        <Cross size={26} />
+        <Cross size={26} />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
@@ -87,7 +87,7 @@ export function CTASection() {
             </div>
             {/* A spark pinned over the photo's corner, turning slowly. */}
             <Spark
-              size={64}
+              size={76}
               className="shape-spin absolute -top-6 -left-6"
               style={{ color: "var(--accent)" }}
             />
