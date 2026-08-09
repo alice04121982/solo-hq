@@ -15,6 +15,7 @@ import type { CSSProperties } from "react";
  *  - Spark    — the four-point star: the day it works.
  *  - Asterisk — eight flat-ended spokes.
  *  - Pause    — two square bars: the wait between cycles, plans put on hold.
+ *  - Halves   — two arcs that only close into a circle together.
  *
  * All shapes draw in `currentColor` on a 100×100 viewBox, so colour comes
  * from CSS `color` and size from the `size` prop (or width/height classes).
@@ -110,6 +111,25 @@ export function Spark(props: ShapeProps) {
 }
 
 /**
+ * Two halves of a ring, split down the middle with a gap either side —
+ * two separate marks that only read as a circle together.
+ *
+ * Each half is an arc band spanning 160° between radius 22 and 44, so the
+ * 20° gaps at top and bottom stay open at small sizes rather than closing
+ * up into a solid ring.
+ */
+export function Halves(props: ShapeProps) {
+  return (
+    <svg {...svgProps(props)}>
+      {/* right half — outer arc down through 0°, inner arc back up */}
+      <path d="M57.64 6.67A44 44 0 0 1 57.64 93.33L53.82 71.67A22 22 0 0 0 53.82 28.33Z" />
+      {/* left half — outer arc up through 180°, inner arc back down */}
+      <path d="M42.36 93.33A44 44 0 0 1 42.36 6.67L46.18 28.33A22 22 0 0 0 46.18 71.67Z" />
+    </svg>
+  );
+}
+
+/**
  * Pause button — two vertical bars. Deliberately square-cornered: no `rx`,
  * so the edges stay hard against the rounded marks around it.
  */
@@ -146,7 +166,14 @@ export function Dot(props: ShapeProps) {
   );
 }
 
-export type ShapeName = "bloom" | "egg" | "cross" | "spark" | "asterisk" | "pause";
+export type ShapeName =
+  | "bloom"
+  | "egg"
+  | "cross"
+  | "spark"
+  | "asterisk"
+  | "pause"
+  | "halves";
 
 const SHAPES: Record<ShapeName, (props: ShapeProps) => React.JSX.Element> = {
   bloom: Bloom,
@@ -155,6 +182,7 @@ const SHAPES: Record<ShapeName, (props: ShapeProps) => React.JSX.Element> = {
   spark: Spark,
   asterisk: Asterisk,
   pause: Pause,
+  halves: Halves,
 };
 
 /** Render a shape by name — for data-driven placements like card lists. */
@@ -177,7 +205,7 @@ export const SHAPE_CYCLE: ShapeName[] = ["bloom", "spark", "egg", "cross"];
 export const FAMILY_SHAPES: Record<string, ShapeName> = {
   "solo-mum": "bloom",
   "same-sex-female": "spark",
-  "same-sex-male": "egg",
+  "same-sex-male": "halves",
   "single-dad": "asterisk",
   "heterosexual-couple": "pause",
 };
