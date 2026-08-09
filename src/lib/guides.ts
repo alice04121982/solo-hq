@@ -234,7 +234,7 @@ export const GUIDES: Guide[] = [
         ],
         callout:
           "Download the CairnFertility budget template — it includes pre-filled formulas and a month-by-month cash flow projection.",
-        calloutDownload: "/downloads/cairnfertility-ivf-budget-template.csv",
+        calloutDownload: "/downloads/cairn-ivf-budget-template.csv",
       },
     ],
     keyTakeaways: [
