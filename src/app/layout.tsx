@@ -17,7 +17,12 @@ const siteDescription =
   "Cairn compares IVF clinics on cost, success rates and eligibility, for solo mums, solo dads, two mums, two dads, and couples.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cairnfertility.vercel.app"),
+  // The account-scoped production domain; swap for cairnfertility.vercel.app
+  // if that clean domain is ever added to the Vercel project (see the
+  // matching note in next.config.ts).
+  metadataBase: new URL(
+    "https://cairnfertility-alicecharlottesmith-7723s-projects.vercel.app"
+  ),
   title: "Cairn Fertility | Compare IVF Clinics",
   description: siteDescription,
   openGraph: {
