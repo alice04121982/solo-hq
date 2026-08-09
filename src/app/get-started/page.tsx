@@ -3,7 +3,7 @@ import { Section } from "@/components/section";
 import { ClinicMatcher } from "@/components/clinic-matcher";
 
 export const metadata = {
-  title: "Find Your Clinic — CairnFertility",
+  title: "Find Your Clinic | Cairn Fertility",
   description: "Tell us about your situation and we'll match you with the clinics most suited to your age, family type, and budget.",
 };
 

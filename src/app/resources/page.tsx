@@ -7,7 +7,7 @@ import { ArrowRight, BookOpen, Calculator, ExternalLink, Map, FileText, Heart, B
 import { FAMILY_TYPES } from "@/lib/family-types";
 
 export const metadata: Metadata = {
-  title: "Resources | CairnFertility",
+  title: "Resources | Cairn Fertility",
   description: "Guides, tools, checklists, and templates for every kind of family navigating fertility treatment.",
 };
 

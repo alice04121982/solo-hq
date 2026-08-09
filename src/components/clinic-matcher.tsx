@@ -262,7 +262,13 @@ function scoreClinic(clinic: Clinic, s: WizardState): ScoredClinic | null {
     if (clinic.lgbtqFriendliness === 5) matchReasons.push("Highly rated for LGBTQ+ patients");
   } else {
     score += (clinic.soloFriendliness / 5) * 25;
-    if (clinic.soloFriendliness === 5) matchReasons.push("Excellent solo patient support");
+    if (clinic.soloFriendliness === 5) {
+      matchReasons.push(
+        s.family === "straight-couple"
+          ? "Strong patient support ratings"
+          : "Excellent solo patient support"
+      );
+    }
   }
 
   // Price transparency (max 15 pts)
@@ -410,7 +416,7 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
     {
       value: "solo-dad",
       title: "Solo dad by choice",
-      subtitle: "Solo dad by choice — surrogacy with donor egg",
+      subtitle: "Single man using surrogacy with a donor egg",
       icon: <Mars className="h-5 w-5" strokeWidth={1.75} />,
     },
   ];
@@ -780,7 +786,11 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
               </div>
               <div className="bg-background p-3">
                 <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
-                  {s.family === "female-couple" || s.family === "male-couple" ? "LGBTQ+" : "Solo friendly"}
+                  {s.family === "female-couple" || s.family === "male-couple"
+                    ? "LGBTQ+"
+                    : s.family === "straight-couple"
+                      ? "Patient support"
+                      : "Solo patients"}
                 </p>
                 <Dots rating={s.family === "female-couple" || s.family === "male-couple"
                   ? r.clinic.lgbtqFriendliness : r.clinic.soloFriendliness} />

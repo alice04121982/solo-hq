@@ -138,7 +138,7 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
                 {clinic.soloFriendly && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-[#E8E8E8] px-2 py-0.5 text-[9px] font-semibold text-navy">
                     <Heart className="h-2.5 w-2.5" />
-                    Solo-friendly
+                    Welcomes solo patients
                   </span>
                 )}
               </div>
@@ -205,7 +205,7 @@ export function ComparisonTable({ clinics }: ComparisonTableProps) {
             {/* Clinic details */}
             <SectionLabel>Clinic Details</SectionLabel>
             <BoolRow label="HFEA licensed" value={clinic.hfeaLicensed} />
-            <BoolRow label="Solo / single women" value={clinic.soloFriendly} />
+            <BoolRow label="Treats solo patients" value={clinic.soloFriendly} />
             <BoolRow label="NHS referrals" value={clinic.nhsReferrals} />
             <BoolRow label="Payment plans" value={clinic.paymentPlans} />
             <Row

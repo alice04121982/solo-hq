@@ -5,8 +5,8 @@ import { Section } from "@/components/section";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "News & Updates | CairnFertility",
-  description: "The latest news on solo motherhood, IVF policy, donor conception, and community stories from CairnFertility.",
+  title: "News & Updates | Cairn Fertility",
+  description: "The latest news on IVF policy, clinic pricing, donor conception, and community stories from Cairn.",
 };
 
 const ARTICLES = [

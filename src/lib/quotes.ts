@@ -21,7 +21,7 @@ export interface Quote {
 export const COMMUNITY_QUOTES: Quote[] = [
   {
     quote:
-      "I'd spent two years on the fence, terrified of doing it alone. CairnFertility gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
+      "I'd spent two years on the fence, terrified of doing it alone. Cairn gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
     name: "Gemma, 38",
     location: "Bristol",
     stage: "Mum to Arlo, conceived via donor IUI",

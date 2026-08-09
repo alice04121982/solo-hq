@@ -6,7 +6,7 @@ import { Section } from "@/components/section";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 export const metadata: Metadata = {
-  title: "Family Types | CairnFertility — IVF & Fertility Guidance",
+  title: "Family Types | Cairn Fertility",
   description:
     "Fertility treatment guidance for every family — solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };

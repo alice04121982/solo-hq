@@ -9,6 +9,13 @@ export interface ClinicData {
   website?: string;
   hfeaLicensed: boolean;
   hfeaNumber?: string;
+  /**
+   * Whether the clinic explicitly treats patients without a partner.
+   * TODO: fold into a full eligibility dimension covering who each clinic
+   * and country will actually treat (solo patients, same-sex couples,
+   * surrogacy arrangements). Planned follow-up to the Cairn rebrand; until
+   * then this field stays and is surfaced with pathway-scoped labels only.
+   */
   soloFriendly: boolean;
   distanceMiles?: number;
   prices: {

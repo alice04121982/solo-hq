@@ -102,12 +102,12 @@ export const GUIDES: Guide[] = [
     categorySlug: "finance-costs",
     readTime: "6 min read",
     intro:
-      "IVF is expensive and rarely covered by NHS funding for single women in most areas of England. But there are more funding routes than most people realise — from specialist fertility loans to employer benefit schemes and charitable grants. This guide covers every option available in the UK in 2025.",
+      "IVF is expensive, and NHS funding criteria in much of England exclude single women and same-sex couples, and set tight limits for everyone else. But there are more funding routes than most people realise, from specialist fertility loans to employer benefit schemes and charitable grants. This guide covers every option available in the UK in 2025.",
     sections: [
       {
-        heading: "NHS funding: what single women can actually access",
+        heading: "NHS funding: who can actually access it",
         body: [
-          "NHS-funded IVF for single women exists in theory but is extremely patchy in practice. Criteria are set by local Integrated Care Boards (ICBs) and vary enormously. Most ICBs in England require patients to be in a heterosexual relationship. Some Scottish Health Boards are more inclusive.",
+          "NHS-funded IVF is extremely patchy in practice. Criteria are set by local Integrated Care Boards (ICBs) and vary enormously by postcode, age, BMI, and existing children. Many ICBs in England still effectively exclude single women, and same-sex couples are often required to self-fund several IUI cycles first. Some Scottish Health Boards are more inclusive.",
           "Before assuming you are ineligible, check your specific ICB's current policy at icb.nhs.uk or by calling your GP surgery. Criteria change, and some areas have quietly become more inclusive in recent years. It is always worth asking.",
         ],
       },
@@ -165,7 +165,7 @@ export const GUIDES: Guide[] = [
     ],
     keyTakeaways: [
       "Check your employer's benefits portal — fertility funding is more common than most employees realise",
-      "NHS funding for single women exists in some areas — always check your local ICB criteria",
+      "NHS funding criteria vary enormously by area and often exclude single women and same-sex couples, so always check your local ICB criteria",
       "Specialist fertility loans and clinic payment plans can spread the cost with low or zero interest",
       "The Fertility Foundation and Gift of IVF offer grants that do not need to be repaid",
       "Never borrow more than you need for one cycle at a time",
@@ -180,7 +180,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "finance-costs",
     readTime: "3 min read",
     intro:
-      "A complete IVF budget template covering every cost category for solo patients using donor sperm. Use this as your financial planning baseline — adjust the figures to match quotes from your chosen clinic.",
+      "A complete IVF budget template covering every cost category, built around a cycle using donor sperm. Use this as your financial planning baseline — drop the donor sperm lines if they do not apply, and adjust the figures to match quotes from your chosen clinic.",
     sections: [
       {
         heading: "How to use this template",
@@ -233,7 +233,7 @@ export const GUIDES: Guide[] = [
           "Enter the figures in a spreadsheet with three columns: Estimated cost, Actual cost, and Difference. Review it monthly throughout your treatment journey.",
         ],
         callout:
-          "Download the CairnFertility budget template — it includes pre-filled formulas and a month-by-month cash flow projection.",
+          "Download the Cairn budget template — it includes pre-filled formulas and a month-by-month cash flow projection.",
         calloutDownload: "/downloads/cairn-ivf-budget-template.csv",
       },
     ],
@@ -254,7 +254,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "finance-costs",
     readTime: "4 min read",
     intro:
-      "Asking your employer for fertility support is a conversation many solo mums by choice never have — either because they assume the answer is no, or because they do not know how to raise it. This guide gives you a practical script and context to make the conversation as effective as possible.",
+      "Asking your employer for fertility support is a conversation many people never have — either because they assume the answer is no, or because they do not know how to raise it. This guide gives you a practical script and context to make the conversation as effective as possible.",
     sections: [
       {
         heading: "Before you ask: do your research",
@@ -324,7 +324,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "treatment-clinics",
     readTime: "7 min read",
     intro:
-      "The three main routes to solo pregnancy — IUI, IVF with donor sperm, and donor egg IVF — have very different success rates, costs, and physical demands. The right starting point depends on your age, ovarian reserve, and circumstances. This guide cuts through the clinical jargon to help you understand your options clearly.",
+      "The three main treatment routes — IUI, IVF, and donor egg IVF — have very different success rates, costs, and physical demands. The right starting point depends on the age and ovarian reserve of whoever is providing the eggs, and on your circumstances. This guide cuts through the clinical jargon to help you understand your options clearly.",
     sections: [
       {
         heading: "IUI (Intrauterine Insemination)",
@@ -339,7 +339,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "IVF with donor sperm",
         body: [
-          "IVF is the most commonly used treatment for solo patients. Ovaries are stimulated with hormonal injections to produce multiple eggs; those eggs are fertilised with donor sperm in the laboratory; resulting embryos are assessed and one is transferred to the uterus, with any remaining high-quality embryos frozen.",
+          "IVF is the most commonly used treatment for patients using donor sperm. Ovaries are stimulated with hormonal injections to produce multiple eggs; those eggs are fertilised with donor sperm in the laboratory; resulting embryos are assessed and one is transferred to the uterus, with any remaining high-quality embryos frozen.",
           "Success rates (live birth per cycle) for women using their own eggs with donor sperm: approximately 40% for women under 35, 33% for 35–37, 22% for 38–39, 12–15% for 40–42, and around 5% for women over 43. These figures are drawn from HFEA 2022 data.",
           "IVF makes sense as a first-line treatment for women over 35, anyone with a diagnosis that reduces natural conception probability, or those who want to maximise their chances from the outset.",
         ],
@@ -370,7 +370,7 @@ export const GUIDES: Guide[] = [
     ],
     keyTakeaways: [
       "IUI is lowest cost and least invasive but has lower success rates — most suitable under 35 with good ovarian reserve",
-      "IVF with own eggs is the most common route for solo patients and allows embryo freezing",
+      "IVF with own eggs is the most common route for patients using donor sperm and allows embryo freezing",
       "Donor egg IVF has higher success rates for women over 42 and after multiple own-egg IVF failures",
       "Success rates drop significantly with age — especially own-egg IVF over 40",
       "Always ask for success rate numbers specific to your age group and ovarian reserve, not clinic averages",
@@ -402,8 +402,8 @@ export const GUIDES: Guide[] = [
         heading: "About the clinic",
         body: ["These questions help you assess whether this is the right clinic for you:"],
         numbered: [
-          "Do you routinely treat single women and women using donor sperm? What proportion of your patients are solo?",
-          "What are your success rates for my age group using own eggs with donor sperm? (Ask to see the HFEA-reported figures specifically, not internal marketing data.)",
+          "Do you routinely treat families like mine, whether that is solo patients, same-sex couples, or another situation? What proportion of your patients are in the same position?",
+          "What are your success rates for my age group and treatment type? (Ask to see the HFEA-reported figures specifically, not internal marketing data.)",
           "How many consultants work here, and will I see the same person throughout my treatment?",
           "What is your policy on add-ons such as PGT-A, embryo glue, and endometrial scratch? How do you advise patients on these?",
           "How responsive are you between appointments — is there a nurse coordinator I can contact with questions?",
@@ -413,7 +413,7 @@ export const GUIDES: Guide[] = [
         heading: "About costs",
         body: ["Always leave with a written cost breakdown:"],
         numbered: [
-          "Can you provide me with a full itemised quote in writing that covers everything — drugs, ICSI, donor sperm handling, counselling, storage, and any standard add-ons?",
+          "Can you provide me with a full itemised quote in writing that covers everything: drugs, ICSI, donor gamete handling if relevant, counselling, storage, and any standard add-ons?",
           "What is not included in your standard IVF quote?",
           "Do you offer multi-cycle packages, and what do they cost?",
           "What are your cancellation and refund policies if a cycle needs to be stopped?",
@@ -422,7 +422,7 @@ export const GUIDES: Guide[] = [
       },
       {
         heading: "About donor sperm",
-        body: ["As a solo patient, these are particularly important:"],
+        body: ["If you are using donor sperm, these are particularly important:"],
         numbered: [
           "Do you have a preferred list of sperm banks, or can I choose my own and ship to you?",
           "What are your sperm import procedures and timelines? How far in advance do I need to organise this?",
@@ -446,7 +446,7 @@ export const GUIDES: Guide[] = [
     keyTakeaways: [
       "Always ask for a full itemised written quote before you leave — verbal estimates are not reliable",
       "Ask for HFEA-reported success rates for your specific age group, not headline clinic averages",
-      "Confirm the clinic's experience with solo patients specifically",
+      "Confirm the clinic's experience with families like yours, whether solo, same-sex, or couple",
       "Understand the monitoring scan schedule before you commit — this affects your working life significantly",
       "Leave with a clear sense of what happens next and who your named nurse contact is",
     ],
@@ -483,7 +483,7 @@ export const GUIDES: Guide[] = [
           "Volume: clinics with lower patient numbers will have more statistical noise in their rates",
         ],
         callout:
-          "The most useful comparison: ask each clinic for their live birth rate for women in your exact age group using own eggs and donor sperm. This is more precise than their overall headline rate.",
+          "The most useful comparison: ask each clinic for their live birth rate for your exact age group and treatment type, such as own eggs with donor sperm. This is more precise than their overall headline rate.",
       },
       {
         heading: "How to find a clinic's HFEA data",
@@ -533,7 +533,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "treatment-clinics",
     readTime: "8 min read",
     intro:
-      "Choosing a sperm donor is one of the most personal decisions in your solo journey — and one that many women find unexpectedly emotional. This guide covers the practical and legal framework in the UK, what information is available about donors, and how to approach the decision without being paralysed by it.",
+      "Choosing a sperm donor is one of the most personal decisions in donor conception, and one that many people find unexpectedly emotional. This guide covers the practical and legal framework in the UK, what information is available about donors, and how to approach the decision without being paralysed by it.",
     sections: [
       {
         heading: "UK legal framework: what you need to know",
@@ -566,7 +566,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Sperm banks operating in the UK",
         body: [
-          "You can use a UK-registered bank or an overseas bank that ships to the UK. Both options are used widely by solo patients. The main differences are cost, donor pool size, and the depth of profile information available.",
+          "You can use a UK-registered bank or an overseas bank that ships to the UK. Both options are widely used by solo patients and couples alike. The main differences are cost, donor pool size, and the depth of profile information available.",
         ],
         bullets: [
           "Cryos International (cryosinternational.com): the world's largest sperm bank. Very large donor pool, detailed profiles, ships worldwide. HFEA-registered donors available.",
@@ -579,7 +579,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "How to approach the selection",
         body: [
-          "There is no right way to choose. Some women approach it analytically; others find they react intuitively to profiles. Both are valid. A few things that help:",
+          "There is no right way to choose. Some people approach it analytically; others find they react intuitively to profiles. Both are valid. A few things that help:",
         ],
         bullets: [
           "Decide early which attributes matter to you and which do not — this prevents decision paralysis across hundreds of profiles",
@@ -589,7 +589,7 @@ export const GUIDES: Guide[] = [
           "Buy 3–4 vials upfront if you find a donor you feel good about — sibling potential and price stability are both reasons to buy in advance",
         ],
         callout:
-          "Give yourself time, but do not let perfect be the enemy of good. Many women report spending weeks on donor selection and then finding the decision became clear relatively quickly once they actually started reading profiles.",
+          "Give yourself time, but do not let perfect be the enemy of good. Many people report spending weeks on donor selection and then finding the decision became clear relatively quickly once they actually started reading profiles.",
       },
     ],
     keyTakeaways: [
@@ -642,7 +642,7 @@ export const GUIDES: Guide[] = [
         heading: "Preparing for both outcomes",
         body: [
           "Before your test date, give yourself permission to think about both possibilities. Not as catastrophising, but as preparation: if the result is negative, what will you do that day? Who will you call? What is your plan for the next 24 hours?",
-          "Having this thought through in advance means you are not making decisions while in acute distress. Many women find it useful to write a short note to themselves in advance — acknowledging that whatever the result, they have already done something remarkable.",
+          "Having this thought through in advance means you are not making decisions while in acute distress. Many people find it useful to write a short note to themselves in advance — acknowledging that whatever the result, they have already done something remarkable.",
           "If you have a trusted friend or family member who can be with you on the test day, or available to call immediately after, ask them in advance to hold that space for you.",
         ],
         callout:
@@ -666,7 +666,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "emotional-wellbeing",
     readTime: "7 min read",
     intro:
-      "A failed cycle, a miscarriage, or the decision to stop treatment are among the hardest experiences of the solo IVF journey. This guide does not minimise that. Instead, it tries to help you think clearly about what comes next — at a time when clear thinking is difficult.",
+      "A failed cycle, a miscarriage, or the decision to stop treatment are among the hardest experiences of the IVF journey. This guide does not minimise that. Instead, it tries to help you think clearly about what comes next — at a time when clear thinking is difficult.",
     sections: [
       {
         heading: "Giving yourself time to grieve",
@@ -705,9 +705,9 @@ export const GUIDES: Guide[] = [
       {
         heading: "Other paths: donor eggs, adoption, and choosing a child-free life",
         body: [
-          "If own-egg IVF is not working, donor eggs offer a meaningfully different probability profile. It is worth understanding this option clinically and emotionally before you rule it out — some women find that the genetic connection to their child is less important than they initially assumed; others find it is central to their decision.",
+          "If own-egg IVF is not working, donor eggs offer a meaningfully different probability profile. It is worth understanding this option clinically and emotionally before you rule it out — some people find that the genetic connection to their child is less important than they initially assumed; others find it is central to their decision.",
           "Adoption and fostering are separate journeys with their own processes and timelines. Pursuing one does not preclude eventually pursuing the other, though agencies typically require you to have stopped treatment for a period before applying.",
-          "Choosing to live without children after unsuccessful treatment is also a valid outcome, and one that is not talked about enough. Many women who reach this point describe a period of profound grief followed by genuine rebuilding. It is not settling — it is a life.",
+          "Choosing to live without children after unsuccessful treatment is also a valid outcome, and one that is not talked about enough. Many people who reach this point describe a period of profound grief followed by genuine rebuilding. It is not settling — it is a life.",
         ],
         callout:
           "Fertility counselling at this decision point is genuinely useful — not to be told what to do, but to think through your values clearly with someone who understands the landscape.",
@@ -718,7 +718,7 @@ export const GUIDES: Guide[] = [
       "Request a thorough debrief with your consultant after any failed cycle",
       "Continuing treatment should be a genuine choice, not a default — check in with your actual desires",
       "Donor eggs offer a meaningfully different success rate profile if own-egg IVF is not working",
-      "There is support available — from counsellors, from the SMC community, and from Fertility Network UK",
+      "There is support available, from counsellors, from your community, and from Fertility Network UK",
     ],
   },
 
@@ -730,7 +730,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "emotional-wellbeing",
     readTime: "4 min read",
     intro:
-      "The emotional load of solo IVF is significant, and most people carry more of it than they should without professional support. A good therapist — specifically one with experience in fertility and reproductive loss — can make a real difference at any stage of the journey. Here is how to find one.",
+      "The emotional load of IVF is significant, and most people carry more of it than they should without professional support. A good therapist — specifically one with experience in fertility and reproductive loss — can make a real difference at any stage of the journey. Here is how to find one.",
     sections: [
       {
         heading: "Why fertility-specific experience matters",
@@ -773,7 +773,7 @@ export const GUIDES: Guide[] = [
           "'What is your approach when someone is in the middle of a treatment cycle rather than between cycles?'",
         ],
         callout:
-          "You do not need to wait until you are struggling to see a therapist. Many women find it most useful to start sessions before treatment begins — establishing the relationship before the emotional weight arrives.",
+          "You do not need to wait until you are struggling to see a therapist. Many people find it most useful to start sessions before treatment begins, establishing the relationship before the emotional weight arrives.",
       },
     ],
     keyTakeaways: [
@@ -857,9 +857,9 @@ export const GUIDES: Guide[] = [
       {
         heading: "Who is the legal parent?",
         body: [
-          "When you conceive through licensed fertility treatment at an HFEA-licensed clinic using donor sperm, you are the sole legal parent of your child from birth. The sperm donor has no legal parental status and no parental rights or responsibilities — including no obligation to pay child maintenance.",
+          "When you conceive through licensed fertility treatment at an HFEA-licensed clinic using donor sperm, the donor is not a legal parent of your child. The sperm donor has no legal parental status and no parental rights or responsibilities — including no obligation to pay child maintenance.",
           "This is set out in the Human Fertilisation and Embryology Act 2008. It applies to all treatments carried out at HFEA-licensed clinics. It does not apply if you use a donor outside of a licensed clinic (for example, via a home insemination arrangement), in which case the legal position is more complex.",
-          "If you are unmarried and use a licensed clinic, you are the sole legal parent. If you are married or in a civil partnership, your spouse or civil partner may be treated as a second legal parent unless they have explicitly opted out.",
+          "If you are solo and unmarried, you are the sole legal parent from birth. If you are married or in a civil partnership, your spouse or civil partner is normally the second legal parent unless they have explicitly opted out. If you are a couple who are neither married nor in a civil partnership, the non-carrying partner can become the second legal parent by signing the clinic's parenthood consent forms before treatment: ask your clinic about this before you start.",
         ],
         callout:
           "The key protection: treatment at a licensed clinic. If you are using a home insemination kit or a known donor outside of a clinic, get legal advice before proceeding — the donor may have legal rights.",
@@ -891,17 +891,17 @@ export const GUIDES: Guide[] = [
       {
         heading: "Birth registration",
         body: [
-          "You will register the birth as the sole parent. The birth certificate will show your name only — there is no donor entry. This is legally straightforward for solo parents using licensed treatment.",
+          "If you are a solo parent, you will register the birth as the sole parent and the birth certificate will show your name only; there is no donor entry. If there is a second legal parent through marriage, civil partnership, or the clinic's parenthood consent forms, both names go on the birth certificate. Either way this is legally straightforward when treatment happened at a licensed clinic.",
           "You may choose to register your child's donor conception with the HFEA by noting it on the child's medical record. This is recommended by many fertility specialists as a way of ensuring medical staff are aware, and the information is preserved regardless of what you tell your child directly.",
         ],
       },
     ],
     keyTakeaways: [
-      "Treatment at an HFEA-licensed clinic = you are the sole legal parent, full stop",
+      "Treatment at an HFEA-licensed clinic = the donor is not a legal parent, full stop",
       "The sperm donor has no parental rights and no maintenance obligations",
       "Your child can access the donor's identifying information from the HFEA at age 18",
       "Home insemination with a known donor creates a different legal picture — get legal advice first",
-      "Birth registration is straightforward as sole parent",
+      "Birth registration is straightforward, whether as a sole parent or with a second legal parent",
     ],
   },
 
@@ -1024,9 +1024,9 @@ export const GUIDES: Guide[] = [
         ],
         bullets: [
           "What role, if any, does the donor want to play in the child's life?",
-          "How do you plan to describe him to your child — donor, biological father, family friend?",
+          "How do you plan to describe the donor to your child — donor, biological parent, family friend?",
           "What happens if the donor forms a new relationship? What does their partner need to know?",
-          "What medical information will he provide, and how can your child contact him if they want to in adulthood?",
+          "What medical information will the donor provide, and how can your child contact them if they want to in adulthood?",
           "What happens if either of you changes your mind about the arrangement?",
         ],
       },
@@ -1258,7 +1258,7 @@ export const GUIDES: Guide[] = [
         heading: "Language for young children (0–5)",
         body: [
           "At this stage, the story needs to be simple, positive, and woven into normal family conversation. You do not need a specific 'disclosure conversation' — it should just be part of how you talk about your family.",
-          "A starting script for young children:",
+          "A starting script for young children. This example is written for a solo mum using a sperm donor; keep the shape and adapt the details to your own family, whether that means two parents, an egg donor, or a surrogate:",
         ],
         bullets: [
           "'Some families have a mummy and a daddy. Our family has just you and me — and I wanted you so much that I got help from a very kind man called a donor to help make you.'",
@@ -1278,7 +1278,7 @@ export const GUIDES: Guide[] = [
           "It is helpful to explain more about what a donor is and is not at this stage:",
         ],
         bullets: [
-          "The donor is not their 'dad' — he was not involved in their life and does not live with anyone as their dad",
+          "The donor is not a parent — they helped make the family possible but are not involved in the child's life as a mum or dad",
           "They may have half-siblings — other children from the same donor who they might one day meet if both are interested",
           "They can find out more about their donor when they are older if they want to",
           "Their family is complete exactly as it is — different does not mean less",
@@ -1409,7 +1409,7 @@ export const GUIDES: Guide[] = [
           "I am trying to be in it rather than planning it all to death. That is my new daily challenge.",
         ],
         callout:
-          "Want to share your story? We are always looking for honest accounts from every stage of the journey — whether you are at the beginning, in the middle of treatment, pregnant, or already a mum. Contact us at stories@flyingsolo.co.uk.",
+          "Want to share your story? We are always looking for honest accounts from every stage of the journey — whether you are at the beginning, in the middle of treatment, pregnant, or already a mum. Contact us at stories@cairnfertility.co.uk.",
       },
     ],
     keyTakeaways: [
@@ -1546,7 +1546,7 @@ export const GUIDES: Guide[] = [
     categorySlug: "community-stories",
     readTime: "4 min read",
     intro:
-      "Structured support — from organisations, charities, and professional bodies — exists at every stage of the solo motherhood journey. This directory covers the main UK organisations worth knowing about.",
+      "Structured support — from organisations, charities, and professional bodies — exists at every stage of the fertility journey. This directory covers the main UK organisations worth knowing about, including several specifically for solo parents.",
     sections: [
       {
         heading: "Fertility-specific organisations",
