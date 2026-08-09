@@ -40,16 +40,16 @@ const CELLS: Cell[] = [
   { kind: "mark", name: "bloom", color: "var(--on-teal)" },
   {
     kind: "photo",
-    src: "/photos/story-two-mums.webp",
-    alt: "Two mums together",
+    src: "/photos/family-beach.webp",
+    alt: "A family building a sandcastle together on a beach",
     mask: "circle",
   },
   { kind: "mark", name: "egg", color: "var(--accent)" },
 
   {
     kind: "photo",
-    src: "/photos/hands.webp",
-    alt: "Two adults holding a baby's hand",
+    src: "/photos/family-sunset.webp",
+    alt: "A family together at golden hour, one adult carrying a toddler",
     mask: "arch",
   },
   { kind: "mark", name: "asterisk", color: "var(--lavender)" },
@@ -64,8 +64,8 @@ const CELLS: Cell[] = [
   { kind: "mark", name: "spark", color: "var(--accent)" },
   {
     kind: "photo",
-    src: "/photos/story-solo-mum.webp",
-    alt: "A solo mum holding her child",
+    src: "/photos/family-coast.webp",
+    alt: "Two adults and a child sitting on a clifftop, looking out to sea",
     mask: "leaf",
   },
   { kind: "mark", name: "pause", color: "var(--on-teal)" },
