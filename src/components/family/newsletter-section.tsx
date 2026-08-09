@@ -34,7 +34,7 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
               className="text-sm font-sans leading-relaxed"
               style={{ maxWidth: "44ch", color: GREEN }}
             >
-              Get clinic comparison updates, new guides for {familyLabel.toLowerCase()}, and honest stories from people who&apos;ve done this — delivered once a fortnight, no noise.
+              Get clinic comparison updates, new guides for {familyLabel.toLowerCase()}, and honest stories from people who&apos;ve done this, delivered once a fortnight, no noise.
             </p>
           </motion.div>
 

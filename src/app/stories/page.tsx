@@ -79,7 +79,7 @@ export default function StoriesPage() {
 
         {visible.length === 0 && (
           <p className="text-sm font-sans text-muted py-12 border-t border-border">
-            No stories yet for this family type — check back soon.
+            No stories yet for this family type. Check back soon.
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">

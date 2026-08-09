@@ -398,19 +398,19 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
     {
       value: "female-couple",
       title: "Two mums",
-      subtitle: "Female same-sex couple — donor sperm needed",
+      subtitle: "Female same-sex couple, donor sperm needed",
       icon: <ParentPair symbol="venus" />,
     },
     {
       value: "male-couple",
       title: "Two dads",
-      subtitle: "Male same-sex couple — surrogacy and donor egg pathway",
+      subtitle: "Male same-sex couple, surrogacy and donor egg pathway",
       icon: <ParentPair symbol="mars" />,
     },
     {
       value: "straight-couple",
       title: "Mum and dad",
-      subtitle: "Heterosexual couple — IVF, ICSI, or donor options",
+      subtitle: "Heterosexual couple: IVF, ICSI, or donor options",
       icon: <VenusAndMars className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
@@ -433,10 +433,10 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
 // Standard age step — for mums and couples (relates to egg quality)
 function StepAgeStandard({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
   const options: { value: AgeGroup; title: string; subtitle: string }[] = [
-    { value: "under35", title: "Under 35", subtitle: "Higher success rates per cycle — IUI may be worth trying first" },
-    { value: "35to37", title: "35–37", subtitle: "Good outcomes with own eggs — time still on your side" },
-    { value: "38to40", title: "38–40", subtitle: "IVF usually recommended — consider genetic testing of embryos" },
-    { value: "over40", title: "Over 40", subtitle: "Donor eggs often give the best chance — clinics vary on this threshold" },
+    { value: "under35", title: "Under 35", subtitle: "Higher success rates per cycle; IUI may be worth trying first" },
+    { value: "35to37", title: "35–37", subtitle: "Good outcomes with own eggs, and time still on your side" },
+    { value: "38to40", title: "38–40", subtitle: "IVF usually recommended; consider genetic testing of embryos" },
+    { value: "over40", title: "Over 40", subtitle: "Donor eggs often give the best chance, though clinics vary on this threshold" },
   ];
   return (
     <div className="space-y-3">
@@ -455,7 +455,7 @@ function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => vo
       <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
         <p className="text-xs font-sans text-muted leading-relaxed">
           <strong className="text-foreground">For surrogacy, your age doesn&apos;t affect success rates.</strong>{" "}
-          What matters is the egg donor&apos;s age — most donors are under 35, which is why donor-egg success rates
+          What matters is the egg donor&apos;s age. Most donors are under 35, which is why donor-egg success rates
           are often 50–60% per transfer regardless of the intended father&apos;s age.
         </p>
       </div>
@@ -467,7 +467,7 @@ function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => vo
           selected={s.age === "under35"}
           onClick={() => set("under35")}
           title="Standard donor pool (under 35)"
-          subtitle="Most clinics use donors under 35 — this is the most common and highest-success route"
+          subtitle="Most clinics use donors under 35; this is the most common and highest-success route"
         />
         <OptionCard
           selected={s.age === "35to37"}
@@ -479,13 +479,13 @@ function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => vo
           selected={s.age === "38to40"}
           onClick={() => set("38to40")}
           title="Known donor (friend or family member)"
-          subtitle="Using someone you know as an egg donor — clinic requirements will vary; discuss suitability with your chosen clinic"
+          subtitle="Using someone you know as an egg donor. Clinic requirements will vary; discuss suitability with your chosen clinic"
         />
         <OptionCard
           selected={s.age === "over40"}
           onClick={() => set("over40")}
           title="Haven&apos;t decided yet"
-          subtitle="I&apos;m still exploring — just show me what&apos;s available"
+          subtitle="I&apos;m still exploring; just show me what&apos;s available"
         />
       </div>
     </div>
@@ -546,7 +546,7 @@ function StepConditionsSurrogacy({
     {
       value: "exploring",
       title: "Just starting to explore",
-      subtitle: "I'm at the research stage — understanding my options before committing",
+      subtitle: "I'm at the research stage, understanding my options before committing",
       icon: <Search className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
@@ -557,14 +557,14 @@ function StepConditionsSurrogacy({
     },
     {
       value: "have-surrogate",
-      title: "I have a surrogate — need an IVF clinic",
+      title: "I have a surrogate and need an IVF clinic",
       subtitle: "The match is made; now I need a clinic experienced in surrogacy arrangements",
       icon: <Hospital className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
       value: "open",
       title: "Open to exploring all routes",
-      subtitle: "I haven't decided yet — show me the full picture",
+      subtitle: "I haven't decided yet; show me the full picture",
       icon: <Compass className="h-5 w-5" strokeWidth={1.75} />,
     },
   ];
@@ -572,7 +572,7 @@ function StepConditionsSurrogacy({
     <div>
       <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
         <p className="text-xs font-sans text-muted leading-relaxed">
-          Solo fatherhood via surrogacy is genuinely achievable — but it takes longer and costs more than other
+          Solo fatherhood via surrogacy is achievable, but it takes longer and costs more than other
           routes. UK surrogacy is legal and altruistic; you&apos;ll need a parental order after birth to become the
           legal parent. Getting a specialist solicitor on board early is essential.
         </p>
@@ -597,7 +597,7 @@ function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWi
       value: "uk-only",
       title: "UK clinics only",
       subtitle: isSurrogacy
-        ? "UK surrogacy is well-regulated — most intended fathers start here"
+        ? "UK surrogacy is well-regulated; most intended fathers start here"
         : "I want HFEA regulation and no travel logistics",
       icon: <MapPin className="h-5 w-5" strokeWidth={1.75} />,
     },
@@ -618,7 +618,7 @@ function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWi
     <div className="space-y-3">
       {!isSurrogacy && (
         <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
-          Clinics abroad can look cheaper — until you add flights, hotels, and 2–4 trips. We factor this into the real cost.
+          Clinics abroad can look cheaper until you add flights, hotels, and 2–4 trips. We factor this into the real cost.
         </p>
       )}
       {options.map((o) => (
@@ -631,7 +631,7 @@ function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWi
 
 function StepBudget({ s, set, isSurrogacy }: { s: WizardState; set: (b: BudgetRange) => void; isSurrogacy: boolean }) {
   const standardOptions: { value: BudgetRange; title: string; subtitle: string }[] = [
-    { value: "under5k", title: "Under £5,000", subtitle: "One IUI cycle or a very budget IVF — limited options" },
+    { value: "under5k", title: "Under £5,000", subtitle: "One IUI cycle or a very budget IVF; limited options" },
     { value: "5to10k", title: "£5,000 – £10,000", subtitle: "1–2 IVF cycles at a budget or mid-range UK clinic" },
     { value: "10to15k", title: "£10,000 – £15,000", subtitle: "2–3 cycles, or premium UK/abroad" },
     { value: "over15k", title: "Over £15,000", subtitle: "Multiple cycles or premium options anywhere" },
@@ -641,7 +641,7 @@ function StepBudget({ s, set, isSurrogacy }: { s: WizardState; set: (b: BudgetRa
     {
       value: "surrogacy-mid",
       title: "Up to £30,000",
-      subtitle: "Covers IVF costs and some surrogate expenses — you'll likely need additional funds for the full journey",
+      subtitle: "Covers IVF costs and some surrogate expenses; you'll likely need additional funds for the full journey",
     },
     {
       value: "surrogacy-full",
@@ -662,7 +662,7 @@ function StepBudget({ s, set, isSurrogacy }: { s: WizardState; set: (b: BudgetRa
       <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
         {isSurrogacy
           ? "UK surrogacy typically costs £30,000–£50,000 all-in: IVF (£5,000–£12,000), surrogate expenses (£15,000–£25,000), legal fees (~£5,000), and counselling. This is separate from any egg donor costs."
-          : "This is your total budget — not just the headline clinic quote. We include donor costs, medications, and travel where relevant."
+          : "This is your total budget, not just the headline clinic quote. We include donor costs, medications, and travel where relevant."
         }
       </p>
       {options.map((o) => (
@@ -699,8 +699,8 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   const donorNote = surrogacy
     ? "You'll need a surrogate matched separately through a UK organisation (e.g. Brilliant Beginnings or COTS). The clinics below handle the IVF element. Budget £15,000–£25,000 on top for surrogate expenses and legal fees."
     : {
-        sperm: "You'll need donor sperm — budget an extra £1,950–£2,500 for 2 vials + shipping.",
-        egg: "Donor eggs will significantly increase per-cycle cost — expect £8,000–£14,000 total.",
+        sperm: "You'll need donor sperm: budget an extra £1,950–£2,500 for 2 vials + shipping.",
+        egg: "Donor eggs will significantly increase per-cycle cost; expect £8,000–£14,000 total.",
         both: "Double-donor cycles (egg + sperm) are complex. Only a handful of clinics offer this.",
         neither: null,
       }[donorNeed];
@@ -714,7 +714,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         <p className="text-foreground font-sans font-medium mb-2">No exact matches</p>
         <p className="text-sm font-sans text-muted mb-6 leading-relaxed">
           {surrogacy
-            ? "Try widening your travel preference — some of the best-equipped clinics for surrogacy arrangements are in Europe."
+            ? "Try widening your travel preference; some of the best-equipped clinics for surrogacy arrangements are in Europe."
             : "Your current filters (especially budget and travel preference) are quite tight. Try increasing your budget or opening up to European clinics."
           }
         </p>
@@ -736,7 +736,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
       )}
 
       <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-        {results.length} clinic{results.length !== 1 ? "s" : ""} matched — ranked for you
+        {results.length} clinic{results.length !== 1 ? "s" : ""} matched, ranked for you
       </p>
 
       <div className="space-y-4">
@@ -850,20 +850,20 @@ function getSteps(family: FamilyType | null) {
     {
       id: "age",
       title: surrogacy ? "About the egg donor"          : "Your age",
-      sub:   surrogacy ? "Success rates depend on donor age, not yours" : "Success rates vary significantly — this shapes our recommendations",
+      sub:   surrogacy ? "Success rates depend on donor age, not yours" : "Success rates vary significantly; this shapes our recommendations",
     },
     {
       id: "conditions",
       title: surrogacy ? "Where are you in the process?" : "Any known conditions?",
-      sub:   surrogacy ? "So we can tailor the results to where you are" : "Optional — helps us flag relevant specialisms",
+      sub:   surrogacy ? "So we can tailor the results to where you are" : "Optional; helps us flag relevant specialisms",
     },
     { id: "travel",     title: "How far will you travel?", sub: "We factor in flights and hotels in the real cost" },
     {
       id: "budget",
       title: "Your total budget",
-      sub: surrogacy ? "Surrogacy has significant costs beyond IVF alone" : "All-in — not just the clinic's headline quote",
+      sub: surrogacy ? "Surrogacy has significant costs beyond IVF alone" : "All-in, not just the clinic's headline quote",
     },
-    { id: "results",    title: "Your matched clinics",   sub: "Ranked by fit — not just success rate" },
+    { id: "results",    title: "Your matched clinics",   sub: "Ranked by fit, not just success rate" },
   ];
 }
 

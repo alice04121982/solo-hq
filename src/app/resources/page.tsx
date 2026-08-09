@@ -112,7 +112,7 @@ export default function ResourcesPage() {
               Donor Conception Network
             </p>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception — relevant to solo parents, same-sex couples, and heterosexual couples alike.
+              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception. Relevant to solo parents, same-sex couples, and heterosexual couples alike.
             </p>
           </div>
           <a

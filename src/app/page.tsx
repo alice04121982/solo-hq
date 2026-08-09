@@ -106,7 +106,7 @@ export default function Home() {
               className="font-sans font-bold mb-5"
               style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
             >
-              The full picture —
+              The full picture,
               <br />
               not the brochure version.
             </h2>

@@ -20,7 +20,7 @@ const ARTICLES = [
   },
   {
     tag: "Costs",
-    title: "Why UK IVF prices rose 18% in two years — and what it means for you",
+    title: "Why UK IVF prices rose 18% in two years, and what it means for you",
     excerpt: "A combination of post-pandemic lab costs, staffing pressures, and increased demand has driven clinic pricing upward. We break down where the money goes.",
     date: "28 Feb 2025",
     readTime: "6 min read",
@@ -41,7 +41,7 @@ const ARTICLES = [
   },
   {
     tag: "Clinics",
-    title: "Five new HFEA-licensed clinics opened in 2024 — are any worth considering?",
+    title: "Five new HFEA-licensed clinics opened in 2024. Are any worth considering?",
     excerpt: "We looked at success rate data, pricing structures, and solo-patient policies at the UK's newest licensed clinics.",
     date: "20 Jan 2025",
     readTime: "5 min read",
@@ -49,7 +49,7 @@ const ARTICLES = [
   {
     tag: "Finance",
     title: "Fertility finance: loans, grants, and employer schemes explained",
-    excerpt: "From Carrot Fertility and Fertifa to personal loans and NHS funding criteria — every funding route available to solo patients in 2025.",
+    excerpt: "From Carrot Fertility and Fertifa to personal loans and NHS funding criteria: every funding route available to solo patients in 2025.",
     date: "8 Jan 2025",
     readTime: "8 min read",
   },
@@ -74,7 +74,7 @@ export default function NewsPage() {
           News &amp; Updates
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Policy changes, science you can actually use, and stories from the community.
+          Policy changes, science you can use, and stories from the community.
         </p>
       </Section>
 

@@ -31,7 +31,7 @@ export default function GetStartedPage() {
             Find clinics that fit your situation.
           </h1>
           <p className="text-[16px] font-sans text-muted leading-[1.65]">
-            Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget — not just headline numbers.
+            Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget, not just headline numbers.
           </p>
         </div>
       </Section>
