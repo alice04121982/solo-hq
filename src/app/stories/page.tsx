@@ -98,7 +98,7 @@ export default function StoriesPage() {
               {/* Content */}
               <div className="flex flex-col gap-3 flex-1">
                 <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-accent font-sans">
+                  <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-teal font-sans">
                     {story.familyLabel}
                   </span>
                   <span className="text-[10px] text-muted font-sans">·</span>

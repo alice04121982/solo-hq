@@ -120,7 +120,7 @@ export function TestimonialsSection() {
               transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
               className="flex flex-col gap-4"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
+              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal font-sans">
                 {s.tag}
               </p>
               <h3 className="font-sans font-bold text-foreground text-xl leading-snug">
