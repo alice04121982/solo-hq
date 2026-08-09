@@ -93,9 +93,10 @@ export function QuoteCard({
           {quote}
         </blockquote>
 
-        {/* Tail, dropping off the bubble into the card below it. Drawn as a
-            stroked triangle so the tip and shoulders round off the way the
-            bubble's own corners do. */}
+        {/* Tail, dropping off the bubble into the card below it. Filled only —
+            no stroke. A stroked path would need a round linejoin to avoid
+            mitre spikes, and that rounds the tip off; the edges have to run
+            clean into the point. */}
         <svg
           aria-hidden
           width={TAIL.width}
@@ -103,13 +104,7 @@ export function QuoteCard({
           viewBox="0 0 30 20"
           className="absolute left-[58%] top-full -mt-px"
         >
-          <path
-            d="M4 1 L26 1 L10 15 Z"
-            fill={bubble}
-            stroke={bubble}
-            strokeWidth="6"
-            strokeLinejoin="round"
-          />
+          <path d="M0 0 L30 0 L9 20 Z" fill={bubble} />
         </svg>
       </div>
 
