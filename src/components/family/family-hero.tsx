@@ -26,7 +26,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-6 font-sans"
               style={{ color: GREEN_SOFT }}
             >
-              {family.subHeadline}
+              {family.label}
             </p>
 
             <h1
