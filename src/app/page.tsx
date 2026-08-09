@@ -4,8 +4,10 @@ import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { QuoteCard } from "@/components/quote-card";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import { FEATURED_STORIES } from "@/lib/stories";
+import { HOMEPAGE_QUOTES } from "@/lib/quotes";
 
 const CARD_THEME = { bg: "#FFFFFF", text: "var(--teal)", muted: "rgba(0, 83, 83, 0.6)" };
 
@@ -221,7 +223,41 @@ export default function Home() {
         </Link>
       </Section>
 
-      {/* 5 — Newsletter + CTA: hot pink */}
+      {/* 5 — Community voices: warm cream, speech-bubble quotes */}
+      <Section tone="cream" id="voices">
+        <div className="flex flex-col gap-3 mb-10">
+          <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans" style={{ color: "var(--teal)" }}>
+            Community voices
+          </p>
+          <h2
+            className="font-sans font-bold"
+            style={{
+              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+              lineHeight: 1.1,
+              letterSpacing: "-0.8px",
+              color: "var(--teal)",
+            }}
+          >
+            What people tell us.
+          </h2>
+        </div>
+
+        {/* The middle card takes the teal so the row has a centre of gravity. */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+          {HOMEPAGE_QUOTES.map((q, i) => (
+            <QuoteCard
+              key={q.name}
+              quote={q.quote}
+              name={q.name}
+              meta={[q.location, q.stage]}
+              avatar={q.avatar}
+              tone={i === 1 ? "teal" : "pink"}
+            />
+          ))}
+        </div>
+      </Section>
+
+      {/* 6 — Newsletter + CTA: hot pink */}
       <CTASection />
     </main>
   );

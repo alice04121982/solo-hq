@@ -1,40 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const testimonials = [
-  {
-    quote:
-      "I'd spent two years on the fence, terrified of doing it alone. CairnFertility gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
-    name: "Gemma, 38",
-    location: "Bristol",
-    stage: "Mum to Arlo, conceived via donor IUI",
-    featured: true,
-  },
-  {
-    quote:
-      "Nobody tells you how much the admin grinds you down. The clinic comparisons here saved me weeks of research and helped me ask the right questions.",
-    name: "Sarah, 35",
-    location: "Manchester",
-    stage: "Currently in IVF cycle 2",
-  },
-  {
-    quote:
-      "The cost calculator was the first thing that made me feel like this was financially possible, not just a dream.",
-    name: "Priya, 33",
-    location: "London",
-    stage: "Preparing for first IUI",
-  },
-  {
-    quote:
-      "I'm 42 and people kept telling me I'd left it too late. This community showed me women who'd had their babies at 43, 44, using donor eggs.",
-    name: "Claire, 42",
-    location: "Edinburgh",
-    stage: "Pregnant — due in August",
-  },
-];
+const testimonials = COMMUNITY_QUOTES;
 
 const journeyStories = [
   {

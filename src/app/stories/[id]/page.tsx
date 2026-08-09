@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight } from "lucide-react";
 import { ArticleLayout } from "@/components/article-layout";
+import { QuoteCard } from "@/components/quote-card";
 import { ALL_STORIES } from "@/lib/stories";
 
 interface PageProps {
@@ -95,32 +95,23 @@ export default async function StoryPage({ params }: PageProps) {
           >
             More stories
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Each card quotes that story in its own voice, with the
+              contributor's own photograph as the avatar. */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-stretch">
             {related.map((r) => (
               <Link
                 key={r.id}
                 href={`/stories/${r.id}`}
-                className="group flex flex-col gap-2 rounded-2xl border p-5 transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
-                style={{ borderColor: "var(--border)" }}
+                className="group block h-full transition-transform duration-200 hover:-translate-y-1"
               >
-                <p
-                  className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {r.tag}
-                </p>
-                <h3
-                  className="font-sans font-semibold text-base leading-6"
-                  style={{ color: "var(--teal)" }}
-                >
-                  {r.title}
-                </h3>
-                <span
-                  className="inline-flex items-center gap-1.5 text-xs font-sans font-medium mt-1"
-                  style={{ color: "var(--teal)" }}
-                >
-                  Read the story <ArrowRight className="h-3 w-3" />
-                </span>
+                <QuoteCard
+                  quote={r.quote}
+                  name={r.name}
+                  meta={[r.familyLabel]}
+                  avatar={r.image}
+                  tone="pink"
+                  action="Read the story →"
+                />
               </Link>
             ))}
           </div>

@@ -9,6 +9,8 @@ import { ResourcesSection } from "@/components/family/resources-section";
 import { ClinicSection } from "@/components/family/clinic-section";
 import { JourneyMap } from "@/components/journey-map";
 import { BentoCard } from "@/components/bento-card";
+import { Section } from "@/components/section";
+import { QuoteCard } from "@/components/quote-card";
 import { getFamilyType, FAMILY_TYPES, type FamilyTypeSlug } from "@/lib/family-types";
 
 interface PageProps {
@@ -35,6 +37,10 @@ export default async function FamilyTypePage({ params }: PageProps) {
 
   if (!family) notFound();
 
+  // Only the lead story carries a quote. It is pulled up here, a full section
+  // clear of the story it came from further down the page.
+  const voice = family.stories.find((s) => s.quote);
+
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
@@ -46,6 +52,21 @@ export default async function FamilyTypePage({ params }: PageProps) {
 
       {/* Hero */}
       <FamilyHero family={family} />
+
+      {/* A voice from this community, before the practical steps */}
+      {voice?.quote && (
+        <Section tone="white" padding="pb-4 md:pb-8">
+          <div className="max-w-2xl">
+            <QuoteCard
+              quote={voice.quote}
+              name={voice.name}
+              meta={[`${voice.age}`, voice.location, voice.treatment]}
+              avatar={voice.image}
+              tone="pink"
+            />
+          </div>
+        </Section>
+      )}
 
       {/* Step-by-step guide */}
       <ProcessSteps steps={family.steps} />

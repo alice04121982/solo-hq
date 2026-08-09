@@ -18,6 +18,12 @@ export interface Story {
   tag: string;
   title: string;
   body: string;
+  /**
+   * A line lifted verbatim from `body`, pulled out as a speech-bubble quote
+   * near the top of the guide. Optional — only the lead story of each family
+   * type carries one, since that is the only place a quote is rendered.
+   */
+  quote?: string;
   treatment: string;
   /**
    * Optional so a story can ship before its photograph exists. Where it is
@@ -114,6 +120,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         tag: "IVF with donor sperm",
         title: "From 'someday' to mum of one in 22 months",
         body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting — it was trusting myself to make this decision without anyone to share it with. The CairnFertility community gave me that.",
+        quote: "The hardest part wasn't the injections or the waiting — it was trusting myself to make this decision without anyone to share it with.",
         treatment: "IUI × 2, IVF × 1",
       },
       {
@@ -207,6 +214,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         tag: "Reciprocal IVF",
         title: "We both wanted to be part of making her",
         body: "We agonised over who would carry. Then our consultant mentioned reciprocal IVF and something clicked. Priya provided the eggs, they were fertilised with our chosen donor's sperm, and I carried the embryo. Our daughter Maya was born in 2024. She has Priya's eyes. She has both of us in her completely.",
+        quote: "She has Priya's eyes. She has both of us in her completely.",
         treatment: "Reciprocal IVF",
       },
       {
@@ -300,6 +308,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         tag: "UK surrogacy",
         title: "We met our surrogate at a barbecue. She changed our lives.",
         body: "We'd been matched through a surrogacy organisation for six months when we met Jo at an introductory event. By the end of the night we knew she was right. Three months later, treatment started. Our son Elliot was born in 2023. Jo is his auntie. It's messier and more beautiful than we expected.",
+        quote: "Jo is his auntie. It's messier and more beautiful than we expected.",
         treatment: "IVF, UK surrogate",
       },
       {
@@ -393,6 +402,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         tag: "Solo surrogacy journey",
         title: "I decided at 40. My son was born at 43.",
         body: "The decision took me two years to fully commit to. Not because I doubted it — I've always wanted to be a father — but because I needed to understand what I was doing before I began. The matching process, the legal preparation, the IVF cycle, the wait — all of it was manageable because I'd done the groundwork. Oscar is three. He is everything.",
+        quote: "The matching process, the legal preparation, the IVF cycle, the wait — all of it was manageable because I'd done the groundwork. Oscar is three. He is everything.",
         treatment: "IVF with donor eggs, UK surrogate",
       },
       {
@@ -488,6 +498,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         tag: "Unexplained infertility",
         title: "Two years of trying. Three months of IVF. One daughter.",
         body: "We tried naturally for two years before getting investigated. Everything came back 'normal'. Unexplained infertility is its own kind of maddening — there's nothing to fix, nothing to point at. Our consultant recommended IVF. First cycle, first transfer. Our daughter Isla is 18 months. We still don't understand why it works. We stopped needing to.",
+        quote: "We still don't understand why it works. We stopped needing to.",
         treatment: "IVF × 1",
       },
       {
