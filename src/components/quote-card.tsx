@@ -55,9 +55,12 @@ export function QuoteCard({
 }: QuoteCardProps) {
   const { bubble, quote: quoteInk } = TONES[tone];
 
+  // `overflow-hidden` is what lets the bubble run flush to the card's top and
+  // sides — it takes the card's rounded corners on the way past, so there is no
+  // white gutter framing it. White shows only below the tail, under the quote.
   return (
     <figure
-      className="flex flex-col h-full rounded-[28px] border p-3"
+      className="flex flex-col h-full rounded-[28px] border overflow-hidden"
       style={{ background: "var(--background)", borderColor: "var(--border)" }}
     >
       {/* Bubble. `flex-1` makes it absorb the slack in an equal-height row, so
@@ -65,7 +68,7 @@ export function QuoteCard({
           That holds while the attributions are the same height — keep `meta`
           short enough not to wrap, or the longer one steals from its bubble. */}
       <div
-        className="relative flex-1 rounded-[20px] px-6 py-7 md:px-7"
+        className="relative flex-1 px-6 pt-7 pb-8 md:px-7"
         style={{ background: bubble }}
       >
         {eyebrow && (
@@ -111,7 +114,7 @@ export function QuoteCard({
       </div>
 
       {/* Attribution, on the card's white ground under the tail. */}
-      <figcaption className="flex items-end justify-between gap-4 px-4 pt-8 pb-2">
+      <figcaption className="flex items-end justify-between gap-4 px-6 md:px-7 pt-7 pb-6">
         <span className="flex items-center gap-3 min-w-0">
           {avatar && (
             <span className="relative h-9 w-9 shrink-0 rounded-full overflow-hidden">
