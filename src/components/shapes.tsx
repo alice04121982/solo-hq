@@ -39,19 +39,33 @@ function svgProps({ size, className, style }: ShapeProps) {
   };
 }
 
-/** Scalloped circle — egg cell / flower. Eight petals over a core. */
+/** One circle as a path subpath, so unions render seam-free. */
+function circlePath(cx: number, cy: number, r: number): string {
+  return `M${cx + r} ${cy}a${r} ${r} 0 1 0 ${-2 * r} 0a${r} ${r} 0 1 0 ${2 * r} 0Z`;
+}
+
+const BLOOM_PATH = [
+  circlePath(50, 50, 32),
+  circlePath(81, 50, 17),
+  circlePath(71.92, 71.92, 17),
+  circlePath(50, 81, 17),
+  circlePath(28.08, 71.92, 17),
+  circlePath(19, 50, 17),
+  circlePath(28.08, 28.08, 17),
+  circlePath(50, 19, 17),
+  circlePath(71.92, 28.08, 17),
+].join("");
+
+/**
+ * Scalloped circle — egg cell / flower. Eight petals over a core, drawn as
+ * one nonzero-winding path so the union has no internal seams — separate
+ * overlapping <circle>s would show their outlines through each other the
+ * moment the shape is tinted or faded.
+ */
 export function Bloom(props: ShapeProps) {
   return (
     <svg {...svgProps(props)}>
-      <circle cx="50" cy="50" r="32" />
-      <circle cx="81" cy="50" r="17" />
-      <circle cx="71.92" cy="71.92" r="17" />
-      <circle cx="50" cy="81" r="17" />
-      <circle cx="28.08" cy="71.92" r="17" />
-      <circle cx="19" cy="50" r="17" />
-      <circle cx="28.08" cy="28.08" r="17" />
-      <circle cx="50" cy="19" r="17" />
-      <circle cx="71.92" cy="28.08" r="17" />
+      <path d={BLOOM_PATH} />
     </svg>
   );
 }

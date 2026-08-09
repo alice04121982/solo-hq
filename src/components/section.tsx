@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ShapeMark, type ShapeName } from "./shapes";
+import { Dot, ShapeMark, type ShapeName } from "./shapes";
 
 /**
  * Full-bleed section bands.
@@ -24,18 +24,24 @@ const TONE_BACKGROUND: Record<SectionTone, string> = {
 };
 
 /**
- * Colour for a backdrop shape sitting directly on each band tone — a lighter
- * or tonal wash of the band itself, so the shape reads as texture in the
- * background rather than as content.
+ * Colour for a backdrop shape sitting directly on each band tone. Always a
+ * solid, opaque colour — flat shape-on-colour in the reference's style.
+ * Translucent washes are out: overlapping shapes must never show through
+ * each other.
  */
 const TONE_BACKDROP_COLOR: Record<SectionTone, string> = {
   white: "var(--cream)",
-  cream: "rgba(240, 168, 196, 0.30)",
-  teal: "rgba(255, 255, 255, 0.07)",
+  cream: "var(--lavender-light)",
+  teal: "var(--accent)",
 };
 
 export interface SectionBackdrop {
-  shape: ShapeName;
+  /**
+   * A mark from the bank, or "dots" — the treatment for circles: a pair of
+   * solid dots cropped by the band's edges, per the reference, rather than
+   * one oversized circle.
+   */
+  shape: ShapeName | "dots";
   /** Which edge the shape bleeds off. Default "right". */
   side?: "left" | "right";
   /** Override the tone-derived colour. */
@@ -98,19 +104,43 @@ export function Section({
       className={[backdrop && "relative overflow-hidden", className].filter(Boolean).join(" ")}
       style={{ background: TONE_BACKGROUND[resolved] }}
     >
-      {backdrop && (
-        <ShapeMark
-          name={backdrop.shape}
-          className={[
-            "absolute top-1/2 -translate-y-1/2 pointer-events-none",
-            "w-[20rem] md:w-[32rem] lg:w-[40rem] h-auto",
-            backdrop.side === "left"
-              ? "left-0 -translate-x-[45%]"
-              : "right-0 translate-x-[45%]",
-          ].join(" ")}
-          style={{ color: backdrop.color ?? TONE_BACKDROP_COLOR[resolved] }}
-        />
-      )}
+      {backdrop &&
+        (backdrop.shape === "dots" ? (
+          // The circle treatment: two solid dots, one cut by the top edge,
+          // one cut by the bottom corner — never a translucent overlay.
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{ color: backdrop.color ?? TONE_BACKDROP_COLOR[resolved] }}
+          >
+            <Dot
+              className={[
+                "absolute top-0 -translate-y-[55%] w-[10rem] md:w-[16rem] h-auto",
+                backdrop.side === "left" ? "left-[8%]" : "right-[12%]",
+              ].join(" ")}
+            />
+            <Dot
+              className={[
+                "absolute bottom-0 translate-y-[40%] w-[6rem] md:w-[10rem] h-auto",
+                backdrop.side === "left"
+                  ? "left-0 -translate-x-[40%]"
+                  : "right-0 translate-x-[40%]",
+              ].join(" ")}
+            />
+          </div>
+        ) : (
+          <ShapeMark
+            name={backdrop.shape}
+            className={[
+              "absolute top-1/2 -translate-y-1/2 pointer-events-none",
+              "w-[20rem] md:w-[32rem] lg:w-[40rem] h-auto",
+              backdrop.side === "left"
+                ? "left-0 -translate-x-[45%]"
+                : "right-0 translate-x-[45%]",
+            ].join(" ")}
+            style={{ color: backdrop.color ?? TONE_BACKDROP_COLOR[resolved] }}
+          />
+        ))}
       <div
         className={[
           "relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20",

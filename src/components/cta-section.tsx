@@ -10,8 +10,9 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export function CTASection() {
   return (
     <section className="relative overflow-hidden" style={{ background: "#F0A8C4" }}>
-      {/* Faint calendar crosses in the band's corner — days marked off. */}
-      <div aria-hidden className="absolute top-10 right-8 hidden md:flex gap-4" style={{ color: "var(--teal)", opacity: 0.15 }}>
+      {/* Calendar crosses in the band's corner — days marked off. Solid
+          tone-on-tone, not an opacity fade. */}
+      <div aria-hidden className="absolute top-10 right-8 hidden md:flex gap-4" style={{ color: "var(--lavender-dark)" }}>
         <Cross size={26} />
         <Cross size={26} />
         <Cross size={26} />

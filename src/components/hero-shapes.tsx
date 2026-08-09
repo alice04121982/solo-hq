@@ -31,11 +31,12 @@ export function HeroShapes({ className }: { className?: string }) {
   return (
     <div aria-hidden className={className}>
       <div className="relative w-full" style={{ aspectRatio: "1.06" }}>
-        {/* Soft backdrop circle the bloom overlaps — the translucent layering
-            is what makes the merge read, per the reference art direction. */}
+        {/* Backdrop circle the bloom sits on — flat solid colour layering,
+            never a translucent wash: shapes must not show through each
+            other, per the reference art direction. */}
         <motion.div
           className="absolute"
-          style={{ right: "0%", top: "8%", width: "62%", color: "var(--lavender-light)", opacity: 0.34 }}
+          style={{ right: "0%", top: "8%", width: "62%", color: "var(--on-teal)" }}
           animate={still ? undefined : { x: [0, 14, 0] }}
           transition={breathe(11)}
         >
@@ -45,7 +46,7 @@ export function HeroShapes({ className }: { className?: string }) {
         {/* The bloom — the egg cell, breathing. */}
         <motion.div
           className="absolute"
-          style={{ left: "4%", top: "18%", width: "56%", color: "var(--lavender)", opacity: 0.92 }}
+          style={{ left: "4%", top: "18%", width: "56%", color: "var(--lavender)" }}
           animate={still ? undefined : { scale: [1, 1.05, 1] }}
           transition={breathe(7)}
         >
@@ -59,7 +60,7 @@ export function HeroShapes({ className }: { className?: string }) {
           animate={still ? undefined : { x: ["0%", "85%", "0%"], scale: [1, 1.12, 1] }}
           transition={breathe(9, 0.6)}
         >
-          <Dot className="w-full h-auto" style={{ opacity: 0.9 }} />
+          <Dot className="w-full h-auto" />
         </motion.div>
 
         {/* The spark — turning slowly above the merge. */}
@@ -75,23 +76,24 @@ export function HeroShapes({ className }: { className?: string }) {
         {/* The egg ring, resting bottom-right. */}
         <motion.div
           className="absolute"
-          style={{ right: "5%", bottom: "4%", width: "20%", color: "var(--on-teal)", opacity: 0.85 }}
+          style={{ right: "5%", bottom: "4%", width: "20%", color: "var(--on-teal)" }}
           animate={still ? undefined : { y: [0, -10, 0] }}
           transition={breathe(8, 1.2)}
         >
           <Egg className="w-full h-auto" />
         </motion.div>
 
-        {/* Calendar crosses — days marked off, kept faint. */}
+        {/* Calendar crosses — days marked off. Solid, in the muted tone
+            rather than faded via opacity. */}
         <div
           className="absolute"
-          style={{ left: "16%", top: "2%", width: "7%", color: "var(--on-teal)", opacity: 0.45 }}
+          style={{ left: "16%", top: "2%", width: "7%", color: "var(--on-teal-muted)" }}
         >
           <Cross className="w-full h-auto" />
         </div>
         <div
           className="absolute"
-          style={{ left: "38%", bottom: "0%", width: "5%", color: "var(--on-teal)", opacity: 0.35 }}
+          style={{ left: "38%", bottom: "0%", width: "5%", color: "var(--on-teal-muted)" }}
         >
           <Cross className="w-full h-auto" />
         </div>

@@ -93,7 +93,7 @@ export default function Home() {
       </Section>
 
       {/* 3 — Clinic comparison teaser: teal full section */}
-      <Section tone="teal" id="compare" backdrop={{ shape: "bloom" }}>
+      <Section tone="teal" id="compare" backdrop={{ shape: "dots" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <span
@@ -242,7 +242,7 @@ export default function Home() {
       </Section>
 
       {/* 5 — Community voices: warm cream, speech-bubble quotes */}
-      <Section tone="cream" id="voices" backdrop={{ shape: "egg", side: "left" }}>
+      <Section tone="cream" id="voices" backdrop={{ shape: "dots", side: "left", color: "var(--lavender)" }}>
         <div className="flex flex-col gap-3 mb-10">
           <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
             <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
