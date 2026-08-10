@@ -63,7 +63,7 @@ export default async function GuidePage({ params }: PageProps) {
 
           <h1
             className="font-sans font-bold text-foreground mb-5"
-            style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(2.25rem, 4vw, 4rem)", lineHeight: 1.1 }}
           >
             {guide.title}
           </h1>
@@ -79,7 +79,7 @@ export default async function GuidePage({ params }: PageProps) {
         <div className="space-y-10">
           {guide.sections.map((section) => (
             <div key={section.heading}>
-              <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.2 }}>
+              <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.125rem)", lineHeight: 1.2 }}>
                 {section.heading}
               </h2>
 

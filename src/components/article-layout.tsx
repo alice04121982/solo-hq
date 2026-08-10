@@ -75,7 +75,7 @@ export function ArticleLayout({
 
         <h1
           className="font-sans font-bold mb-5"
-          style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.1, color: "var(--teal)" }}
+          style={{ fontSize: "clamp(2.25rem, 4vw, 4rem)", lineHeight: 1.1, color: "var(--teal)" }}
         >
           {title}
         </h1>

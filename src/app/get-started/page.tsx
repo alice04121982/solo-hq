@@ -26,7 +26,7 @@ export default function GetStartedPage() {
           </span>
           <h1
             className="font-sans font-bold text-foreground mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.06 }}
+            style={{ fontSize: "clamp(2.75rem, 5vw, 5rem)", lineHeight: 1.06 }}
           >
             Find clinics that fit your situation.
           </h1>

@@ -959,7 +959,7 @@ export function ClinicMatcher() {
         >
           <h2
             className="font-sans font-bold text-foreground mb-1"
-            style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(1.625rem, 3vw, 2.5rem)", lineHeight: 1.15 }}
           >
             {STEPS[step].title}
           </h2>

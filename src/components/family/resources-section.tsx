@@ -19,7 +19,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
 
   return (
     <section className="border-b border-border" style={{ background: OFF_WHITE }}>
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
         <p
           className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
           style={{ color: GREEN_SOFT }}
@@ -29,7 +29,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
         <div className="flex items-end justify-between mb-10">
           <h2
             className="font-sans font-bold"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: GREEN }}
+            style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1, color: GREEN }}
           >
             Resources for your journey.
           </h2>

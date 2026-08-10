@@ -52,7 +52,7 @@ export default function IvfFinderPage() {
         </p>
         <h1
           className="font-sans font-bold mb-4 text-teal-ink"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           Compare IVF Clinics
         </h1>

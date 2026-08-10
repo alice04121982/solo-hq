@@ -49,7 +49,7 @@ export function TestimonialsSection() {
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Real people. Real journeys.
           </p>
-          <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
+          <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(2.25rem, 4vw, 4rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.
           </h2>
         </motion.div>
@@ -64,7 +64,7 @@ export function TestimonialsSection() {
         >
           <blockquote
             className="font-serif text-foreground mb-6"
-            style={{ fontSize: "clamp(1.375rem, 2.5vw, 2rem)", lineHeight: 1.35 }}
+            style={{ fontSize: "clamp(1.625rem, 2.5vw, 2.5rem)", lineHeight: 1.35 }}
           >
             &ldquo;{featured.quote}&rdquo;
           </blockquote>
@@ -105,7 +105,7 @@ export function TestimonialsSection() {
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Personal stories
           </p>
-          <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}>
+          <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1 }}>
             In their own words.
           </h2>
         </motion.div>

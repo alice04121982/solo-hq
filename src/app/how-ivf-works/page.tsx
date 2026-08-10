@@ -353,7 +353,7 @@ export default function HowIVFWorksPage() {
         </p>
         <h1
           className="font-sans font-bold text-[#1A3A25] mb-5"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           What actually happens.
         </h1>
@@ -405,7 +405,7 @@ export default function HowIVFWorksPage() {
                 </div>
                 <h2
                   className="font-sans font-bold mb-5"
-                  style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", lineHeight: 1.1, color: "#1A3A25" }}
+                  style={{ fontSize: "clamp(1.75rem, 2.5vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
                 >
                   {stage.title}
                 </h2>

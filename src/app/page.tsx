@@ -29,7 +29,7 @@ export default function Home() {
             <h2
               className="font-sans font-bold"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)",
                 lineHeight: 1.1,
                 letterSpacing: "-0.8px",
                 color: "var(--teal)",
@@ -104,7 +104,7 @@ export default function Home() {
             </span>
             <h2
               className="font-sans font-bold mb-5"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
+              style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
             >
               The full picture,
               <br />
@@ -144,7 +144,7 @@ export default function Home() {
                 />
                 <p
                   className="font-sans font-medium mb-1"
-                  style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#f9c6da" }}
+                  style={{ fontSize: "clamp(1.375rem, 1.8vw, 1.875rem)", color: "#f9c6da" }}
                 >
                   {s.value}
                 </p>
@@ -166,7 +166,7 @@ export default function Home() {
             <h2
               className="font-sans font-bold"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)",
                 lineHeight: 1.1,
                 letterSpacing: "-0.8px",
                 color: "var(--teal)",
@@ -256,7 +256,7 @@ export default function Home() {
           <h2
             className="font-sans font-bold"
             style={{
-              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+              fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)",
               lineHeight: 1.1,
               letterSpacing: "-0.8px",
               color: "var(--teal)",

@@ -79,7 +79,7 @@ export default function FamiliesPage() {
         </span>
         <h1
           className="font-sans font-bold text-[#1A3A25] mb-4"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           Whoever you are,
           <br />your path starts here.
@@ -105,7 +105,7 @@ export default function FamiliesPage() {
         </p>
         <h2
           className="font-sans font-bold text-[#1A3A25] mb-12"
-          style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+          style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1 }}
         >
           Every guide includes:
         </h2>

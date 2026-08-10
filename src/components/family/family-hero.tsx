@@ -32,7 +32,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             <h1
               className="font-sans font-bold mb-6"
               style={{
-                fontSize: "clamp(2.5rem, 5.5vw, 4.75rem)",
+                fontSize: "clamp(3rem, 5.5vw, 6rem)",
                 lineHeight: 1.03,
                 fontVariationSettings: "'wght' 800",
                 color: GREEN,

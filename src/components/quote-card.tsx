@@ -85,7 +85,7 @@ export function QuoteCard({
           className="font-sans font-[600]"
           style={{
             color: quoteInk,
-            fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)",
+            fontSize: "clamp(1.25rem, 1.5vw, 1.625rem)",
             lineHeight: 1.25,
             letterSpacing: "-0.01em",
           }}

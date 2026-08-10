@@ -35,7 +35,7 @@ export default function StoriesPage() {
         </p>
         <h1
           className="font-sans font-bold text-foreground mb-6"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           Personal stories
         </h1>

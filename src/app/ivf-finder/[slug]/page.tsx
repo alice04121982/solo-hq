@@ -82,7 +82,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
         </div>
         <h1
           className="font-sans font-bold mb-3 text-teal-ink"
-          style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.5rem)", lineHeight: 1.05 }}
         >
           {clinic.name}
         </h1>

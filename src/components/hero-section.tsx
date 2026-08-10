@@ -34,7 +34,7 @@ export function HeroSection() {
             <h1
               className="font-sans font-bold mb-7"
               style={{
-                fontSize: "clamp(2.8rem, 5.5vw, 4.6rem)",
+                fontSize: "clamp(3rem, 5.5vw, 6rem)",
                 lineHeight: 1.04,
                 color: "var(--on-teal)",
               }}

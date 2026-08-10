@@ -43,7 +43,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
 
   return (
     <section className="bg-background border-y border-border">
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
             </p>
             <h2
               className="font-sans font-bold"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: GREEN }}
+              style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.75rem)", lineHeight: 1.1, color: GREEN }}
             >
               Your complete guide
               <br />

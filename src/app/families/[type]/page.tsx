@@ -75,7 +75,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
       {/* Solo Navigator — solo-mum page only */}
       {family.slug === "solo-mum" && (
         <section className="bg-background border-b border-border">
-          <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+          <div className="mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
             <p
               className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
               style={{ color: "rgba(26,58,37,0.65)" }}
@@ -84,7 +84,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
             </p>
             <h2
               className="font-sans font-bold mb-10"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
+              style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1, color: "#1A3A25" }}
             >
               Where are you on your journey?
             </h2>

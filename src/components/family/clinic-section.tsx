@@ -10,7 +10,7 @@ const GREEN_SOFT = "rgba(26,58,37,0.65)";
 export function ClinicSection({ clinicNote }: { clinicNote: string }) {
   return (
     <section className="bg-background border-b border-border">
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -26,7 +26,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             </p>
             <h2
               className="font-sans font-bold mb-4"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: GREEN }}
+              style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1, color: GREEN }}
             >
               Find the right clinic
               <br />
@@ -74,7 +74,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
               <div key={s.label} className="p-6" style={{ background: "var(--teal)" }}>
                 <p
                   className="font-sans font-bold mb-1.5"
-                  style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.15, color: "#f9c6da" }}
+                  style={{ fontSize: "clamp(1.5rem, 2vw, 2rem)", lineHeight: 1.15, color: "#f9c6da" }}
                 >
                   {s.value}
                 </p>
