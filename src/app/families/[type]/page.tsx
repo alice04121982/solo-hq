@@ -44,8 +44,8 @@ export default async function FamilyTypePage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
@@ -75,7 +75,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
       {/* Solo Navigator — solo-mum page only */}
       {family.slug === "solo-mum" && (
         <section className="bg-background border-b border-border">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+          <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
             <p
               className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
               style={{ color: "rgba(26,58,37,0.65)" }}

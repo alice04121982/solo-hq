@@ -88,7 +88,7 @@ function LinkColumn({
 export function SiteFooter() {
   return (
     <footer style={{ background: TEAL }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">

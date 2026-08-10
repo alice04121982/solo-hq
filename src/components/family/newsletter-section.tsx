@@ -10,7 +10,7 @@ const GREEN_SOFT = "rgba(26,58,37,0.65)";
 export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
   return (
     <section className="border-y border-border" style={{ background: "#FAFAFA" }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, y: 16 }}

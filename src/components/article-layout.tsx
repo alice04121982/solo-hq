@@ -37,7 +37,7 @@ export function ArticleLayout({
 }: ArticleMeta & { children: React.ReactNode }) {
   return (
     <main className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav />
       </div>
 
@@ -54,7 +54,7 @@ export function ArticleLayout({
         </div>
       )}
 
-      <article className="max-w-3xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+      <article className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
         <Link
           href={backHref}
           className="inline-flex items-center gap-1.5 text-xs font-[500] uppercase tracking-[0.12em] transition-colors mb-8 font-sans hover:opacity-70"

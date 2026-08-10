@@ -18,7 +18,7 @@ export function CTASection() {
         <Cross size={26} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
         <div className="flex flex-col lg:flex-row items-start gap-10 lg:gap-0">
           <motion.div
             initial={{ opacity: 0, y: 16 }}

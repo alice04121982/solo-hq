@@ -19,7 +19,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
 
   return (
     <section className="border-b border-border" style={{ background: OFF_WHITE }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <p
           className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
           style={{ color: GREEN_SOFT }}
