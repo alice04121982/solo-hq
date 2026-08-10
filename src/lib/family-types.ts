@@ -67,7 +67,7 @@ export const FAMILY_TYPES: FamilyType[] = [
     image: "/photos/story-solo-mum.webp",
     imageAlt: "A mother holding her young child, looking out at the sky",
     hideHeroImage: true,
-    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
@@ -163,7 +163,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
     image: "/photos/story-two-mums.webp",
     imageAlt: "Two women sitting together, one kissing the other on the cheek",
-    treatmentHighlight: "IUI · IVF · Reciprocal IVF · Donor Sperm",
+    treatmentHighlight: "IUI · IVF · ICSI · Reciprocal IVF · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
@@ -173,7 +173,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Fertility assessments for the carrying partner(s)",
-        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This establishes the best starting point and helps your clinic recommend IUI (simpler) vs IVF (more effective). If both of you have good fertility markers, reciprocal IVF becomes a more viable option.",
+        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This establishes the best starting point and helps your clinic recommend IUI (simpler) vs IVF (more effective). If both of you have good fertility markers, reciprocal IVF becomes a more viable option. And if egg quality turns out to be a challenge, donor eggs and double donation are exactly as open to you as to any other patient.",
       },
       {
         number: 3,
@@ -257,7 +257,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two men building a family: finding a surrogate, treatment, and becoming legal parents.",
     image: "/photos/story-two-dads.webp",
     imageAlt: "Two men embracing and smiling at each other",
-    treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
+    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
         number: 1,
@@ -351,7 +351,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
     image: "/photos/cta-family.webp",
     imageAlt: "A father holding and kissing his young son",
-    treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
+    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
         number: 1,
@@ -445,7 +445,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
     image: "/photos/newborn.webp",
     imageAlt: "A couple holding their newborn baby by a window",
-    treatmentHighlight: "IVF · ICSI · IUI · Donor Egg · Donor Sperm",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
