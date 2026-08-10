@@ -154,13 +154,13 @@ export function SiteFooter() {
           style={{ borderColor: "rgba(249,198,218,0.2)" }}
         >
           <p className="text-xs font-sans" style={{ color: PINK }}>
-            &copy; 2026 Cairn Fertility. Made in the UK.
+            &copy; 2026 CairnFertility. Made in the UK.
           </p>
           <p
             className="text-xs font-sans leading-relaxed"
             style={{ maxWidth: "60ch", color: PINK_MUTED }}
           >
-            Cairn Fertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
           </p>
         </div>
       </div>

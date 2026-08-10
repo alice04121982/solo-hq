@@ -4,7 +4,7 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 
 export const metadata: Metadata = {
-  title: "What Happens During IVF | Cairn Fertility",
+  title: "What Happens During IVF | CairnFertility",
   description:
     "From ovarian stimulation to implantation: what is happening inside your body and in the laboratory at every step of the IVF process. In plain English.",
 };

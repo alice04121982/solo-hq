@@ -25,10 +25,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const story = ALL_STORIES.find((s) => s.id === id);
-  if (!story) return { title: "Story not found | Cairn Fertility" };
+  if (!story) return { title: "Story not found | CairnFertility" };
 
   return {
-    title: `${story.title} | Cairn Fertility`,
+    title: `${story.title} | CairnFertility`,
     description: story.excerpt,
     openGraph: {
       title: story.title,

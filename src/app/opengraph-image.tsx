@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Cairn Fertility. Compare IVF clinics on cost, success rates and eligibility.";
+  "CairnFertility. Compare IVF clinics on cost, success rates and eligibility.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -42,8 +42,10 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 76, fontWeight: 700, color: CREAM }}>
-            Cairn Fertility
+          {/* Two-tone wordmark, matching the site logo lockup */}
+          <div style={{ display: "flex", fontSize: 76, fontWeight: 700 }}>
+            <span style={{ color: CREAM }}>Cairn</span>
+            <span style={{ color: LIME }}>Fertility</span>
           </div>
           <div
             style={{

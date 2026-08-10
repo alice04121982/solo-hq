@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const family = getFamilyType(type);
   if (!family) return {};
   return {
-    title: `${family.label} | Cairn Fertility`,
+    title: `${family.label} | CairnFertility`,
     description: family.heroCopy.slice(0, 160),
   };
 }

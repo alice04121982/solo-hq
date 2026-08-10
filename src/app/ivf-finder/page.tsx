@@ -7,7 +7,7 @@ import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 import { CLINICS } from "@/lib/clinics";
 
 export const metadata: Metadata = {
-  title: "Compare IVF Clinics, UK and Abroad | Cairn Fertility",
+  title: "Compare IVF Clinics, UK and Abroad | CairnFertility",
   description:
     "Compare IVF clinics in the UK and abroad in one search, ranked by success rate for your age group, with every figure labelled by source and year.",
 };

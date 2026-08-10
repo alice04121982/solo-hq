@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const clinic = getClinic((await params).slug);
   if (!clinic) return {};
   return {
-    title: `${clinic.name}, ${clinic.city} | Cairn Fertility`,
+    title: `${clinic.name}, ${clinic.city} | CairnFertility`,
     description: `Success rates, pricing and treatment options for ${clinic.name} in ${clinic.city}, ${clinic.country}, with the source behind every figure.`,
   };
 }
