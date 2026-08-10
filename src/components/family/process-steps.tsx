@@ -112,13 +112,12 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: Math.min(i, 3) * 0.05, ease: EASE }}
-              className="shrink-0 rounded-2xl border flex flex-col p-6"
+              className="shrink-0 rounded-2xl flex flex-col p-6"
               style={{
                 scrollSnapAlign: "start",
                 width: "min(80vw, 340px)",
                 minHeight: "300px",
                 background: "#FDE8F2",
-                borderColor: "rgba(26,58,37,0.12)",
               }}
             >
               <span
