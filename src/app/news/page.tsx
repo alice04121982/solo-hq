@@ -61,8 +61,8 @@ export default function NewsPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>

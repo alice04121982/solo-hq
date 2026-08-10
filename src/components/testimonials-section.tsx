@@ -36,7 +36,7 @@ export function TestimonialsSection() {
 
   return (
     <section className="bg-background-alt">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
 
         {/* Eyebrow + heading */}
         <motion.div

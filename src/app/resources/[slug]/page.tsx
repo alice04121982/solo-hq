@@ -33,15 +33,15 @@ export default async function GuidePage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Header */}
       <section className="bg-background-alt border-b border-border">
-        <div className="max-w-3xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+        <div className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
           <Link
             href="/resources"
             className="inline-flex items-center gap-1.5 text-xs font-[500] uppercase tracking-[0.12em] text-muted hover:text-foreground transition-colors mb-8 font-sans"
@@ -75,7 +75,7 @@ export default async function GuidePage({ params }: PageProps) {
       </section>
 
       {/* Body */}
-      <section className="max-w-3xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+      <section className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
         <div className="space-y-10">
           {guide.sections.map((section) => (
             <div key={section.heading}>

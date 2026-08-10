@@ -12,8 +12,8 @@ import { Dot, ShapeMark, type ShapeName } from "./shapes";
  * continuous piece.
  *
  * The band is what carries the colour, so it must span the viewport — the
- * `max-w-7xl` gutter lives on the container inside it, never on the
- * `<section>` itself.
+ * horizontal gutter (capped at 64px) lives on the container inside it, never
+ * on the `<section>` itself.
  */
 export type SectionTone = "white" | "cream" | "teal";
 
@@ -143,7 +143,7 @@ export function Section({
         ))}
       <div
         className={[
-          "relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20",
+          "relative mx-auto px-6 md:px-12 lg:px-16",
           padding,
           innerClassName,
         ]

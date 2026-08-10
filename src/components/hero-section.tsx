@@ -17,7 +17,7 @@ const TRUST_SIGNALS = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--teal)" }}>
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="relative mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav theme="dark" />
 
         {/* Copy leads in the DOM so the page reads copy-first, but the grid

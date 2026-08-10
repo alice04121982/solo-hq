@@ -13,7 +13,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-20 md:py-28`}>
           {/* Left — copy */}
           <motion.div
