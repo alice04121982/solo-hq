@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
+import { PageHeader } from "@/components/page-header";
+import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
@@ -28,26 +30,14 @@ export default function StoriesPage() {
         </div>
       </section>
 
-      {/* Header */}
-      <Section band={0} padding="pt-16 pb-14">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Stories
-        </p>
-        <h1
-          className="font-sans font-bold text-foreground mb-6"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
-        >
-          Personal stories
-        </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          What the journey looks like at every stage, told the way people tell it.
-        </p>
-        <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
-          These are illustrative stories while we collect real, consented accounts to
-          replace them. If you would like to share yours, write to
-          stories@cairnfertility.co.uk.
-        </p>
-      </Section>
+      {/* Header — the spark: the day it works, in their own words */}
+      <PageHeader
+        mark="spark"
+        eyebrow="Stories"
+        title="Personal stories"
+        lede="What the journey looks like at every stage, told the way people tell it."
+        note="These are illustrative stories while we collect real, consented accounts to replace them. If you would like to share yours, write to stories@cairnfertility.co.uk."
+      />
 
       {/* Filters and the grid they drive share a band — they're one control */}
       <Section band={1} padding="py-14 md:py-16">
@@ -66,12 +56,14 @@ export default function StoriesPage() {
             <button
               key={f.slug}
               onClick={() => setFilter(f.slug)}
-              className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
+              className={`inline-flex items-center gap-2 rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
                 filter === f.slug
                   ? "border-foreground bg-foreground text-background"
                   : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
               }`}
             >
+              {/* Each family filter wears the pathway's mark from FAMILY_SHAPES */}
+              <ShapeMark name={FAMILY_SHAPES[f.slug]} size={12} style={{ color: "var(--lavender)" }} />
               {f.label}
             </button>
           ))}

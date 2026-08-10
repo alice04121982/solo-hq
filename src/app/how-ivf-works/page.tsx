@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { PageHeader } from "@/components/page-header";
 
 export const metadata: Metadata = {
   title: "What Happens During IVF | Cairn Fertility",
@@ -346,35 +347,27 @@ export default function HowIVFWorksPage() {
         </div>
       </section>
 
-      {/* Hero */}
-      <Section band={0} padding="pt-16 md:pt-24 pb-12 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          The science
-        </p>
-        <h1
-          className="font-sans font-bold text-[#1A3A25] mb-5"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
-        >
-          What actually happens.
-        </h1>
-        <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
-          From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English.
-        </p>
-
+      {/* Hero — the egg: where the whole process begins */}
+      <PageHeader
+        mark="egg"
+        eyebrow="The science"
+        title="What actually happens."
+        lede="From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English."
+      >
         {/* Steps overview strip */}
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           {STAGES.map((s) => (
             <a
               key={s.number}
               href={`#step-${s.number}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-[#1A3A25] hover:bg-[#1A3A25] hover:text-white hover:border-[#1A3A25] transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[var(--teal-20)] bg-background px-3.5 py-1.5 text-xs font-sans text-teal hover:bg-teal hover:text-white hover:border-teal transition-colors"
             >
-              <span className="font-[600] text-muted text-[10px]">{s.number}</span>
+              <span className="font-[600] text-[10px] opacity-60">{s.number}</span>
               {s.title}
             </a>
           ))}
         </div>
-      </Section>
+      </PageHeader>
 
       {/* Stages — each picks up the next band after the hero */}
       {STAGES.map((stage, i) => {
