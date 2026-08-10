@@ -1,6 +1,6 @@
 "use client";
 
-import { X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import {
   AGE_BRACKETS,
   REGIONS,
@@ -166,18 +166,24 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
         <label htmlFor="cairn-age-bracket" className="block text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
           Your age
         </label>
-        <select
-          id="cairn-age-bracket"
-          value={filters.ageBracket}
-          onChange={(e) => onChange({ ...filters, ageBracket: e.target.value as AgeBracket })}
-          className="w-full max-w-xs rounded-full border border-teal/20 bg-background px-4 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
-        >
-          {AGE_BRACKETS.map((b) => (
-            <option key={b.value} value={b.value}>
-              {b.label}
-            </option>
-          ))}
-        </select>
+        <div className="relative w-full max-w-xs">
+          <select
+            id="cairn-age-bracket"
+            value={filters.ageBracket}
+            onChange={(e) => onChange({ ...filters, ageBracket: e.target.value as AgeBracket })}
+            className="w-full appearance-none rounded-full border border-teal/20 bg-background pl-4 pr-10 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
+          >
+            {AGE_BRACKETS.map((b) => (
+              <option key={b.value} value={b.value}>
+                {b.label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown
+            className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-teal"
+            aria-hidden
+          />
+        </div>
         <p className="text-xs text-muted mt-1.5">
           Results rank by live birth rate for this age group.
         </p>
@@ -250,23 +256,29 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
           <label htmlFor="cairn-donor-anonymity" className="block text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
             Donor anonymity
           </label>
-          <select
-            id="cairn-donor-anonymity"
-            value={filters.donorAnonymity}
-            onChange={(e) =>
-              onChange({
-                ...filters,
-                donorAnonymity: e.target.value as FinderFilterState["donorAnonymity"],
-              })
-            }
-            className="w-full rounded-full border border-teal/20 bg-background px-4 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
-          >
-            {DONOR_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
+          <div className="relative w-full">
+            <select
+              id="cairn-donor-anonymity"
+              value={filters.donorAnonymity}
+              onChange={(e) =>
+                onChange({
+                  ...filters,
+                  donorAnonymity: e.target.value as FinderFilterState["donorAnonymity"],
+                })
+              }
+              className="w-full appearance-none rounded-full border border-teal/20 bg-background pl-4 pr-10 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
+            >
+              {DONOR_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-teal"
+              aria-hidden
+            />
+          </div>
         </div>
       </div>
 
