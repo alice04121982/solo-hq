@@ -17,6 +17,7 @@ const TOOL_LINKS = [
   { label: "Clinic Comparison Tool", href: "/ivf-finder" },
   { label: "Family Types", href: "/families" },
   { label: "Resources", href: "/resources" },
+  { label: "Community Waitlist", href: "/community" },
   // News is unlisted until there is a real editorial pipeline; the page
   // itself stays in the repo at /news.
 ];

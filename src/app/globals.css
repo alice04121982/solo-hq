@@ -13,6 +13,7 @@
   --accent:          #C5E600;   /* lime */
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
+  --on-accent:       #1A3A25;   /* dark green ink on lime fills */
   --border:          #E8E8E8;
 
   /* ── Brand: deep teal ──
@@ -55,6 +56,7 @@
   --color-muted:           var(--muted);
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
+  --color-on-accent:       var(--on-accent);
   --color-border:          var(--border);
 
   /* ── Brand: deep teal ── */
