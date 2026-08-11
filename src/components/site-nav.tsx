@@ -214,28 +214,10 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           {/* Links fill the space between the header and the footer action.
               Eight of them at this type size can exceed a short phone
               viewport, so the column scrolls rather than clipping the last
-              item. A thin rule separates the core pages from "more" so the
-              grouping the desktop dropdown carries isn't lost on mobile. */}
+              item. The desktop primary/"More" grouping is not carried over
+              here — one even column reads better at this scale. */}
           <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-6 py-4">
-            {PRIMARY_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="font-sans text-center transition-opacity duration-150 hover:opacity-70"
-                style={{
-                  fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
-                  lineHeight: 1.2,
-                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
-                }}
-              >
-                {l.label}
-              </a>
-            ))}
-
-            <div className="w-10 h-px my-1" style={{ background: "rgba(249, 198, 218, 0.2)" }} aria-hidden />
-
-            {MORE_LINKS.map((l) => (
+            {[...PRIMARY_LINKS, ...MORE_LINKS].map((l) => (
               <a
                 key={l.href}
                 href={l.href}
