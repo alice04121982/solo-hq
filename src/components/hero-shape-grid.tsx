@@ -1,0 +1,124 @@
+"use client";
+
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+import { ShapeMark, type ShapeName } from "./shapes";
+
+/**
+ * The hero composition: a tidy grid of shape cells and photo cells.
+ *
+ * A single hero photograph can only ever show one kind of family, and the
+ * site is for all of them. The grid solves that two ways at once — the five
+ * family marks carry the "every kind" promise structurally, and the photo
+ * cells show several different families rather than one stand-in for all.
+ *
+ * Cells are transparent: the shape itself carries the colour and the teal
+ * band shows through the gaps, so the composition reads as flat shape-on-
+ * colour rather than a set of tiles. Photos are cropped by simple geometric
+ * masks (circle, arch, quarter, leaf) — the intricate marks stay solid,
+ * which keeps the grid legible at small sizes.
+ */
+
+type Mask = "circle" | "arch" | "quarter" | "leaf";
+
+const MASK_CLASS: Record<Mask, string> = {
+  circle: "rounded-full",
+  arch: "rounded-t-full",
+  quarter: "rounded-tl-full",
+  leaf: "rounded-tl-full rounded-br-full",
+};
+
+type Cell =
+  | { kind: "mark"; name: ShapeName; color: string }
+  | { kind: "photo"; src: string; alt: string; mask: Mask; position?: string };
+
+/**
+ * Photos take the four corners and the centre, marks take the four edges.
+ *
+ * All five of the site's family types appear, one photo each, using the same
+ * photograph each type carries on its own guide — so the hero states the
+ * "every kind of family" promise literally rather than by implication. That
+ * is the reason for five photos rather than four: a grid that showed only
+ * some of the types would quietly rank them.
+ */
+const CELLS: Cell[] = [
+  {
+    kind: "photo",
+    src: "/photos/story-solo-mum.webp",
+    alt: "A solo mum holding her child",
+    mask: "circle",
+    position: "object-[50%_40%]",
+  },
+  { kind: "mark", name: "spark", color: "var(--accent)" },
+  {
+    kind: "photo",
+    src: "/photos/story-two-mums.webp",
+    alt: "Two mums together",
+    mask: "arch",
+  },
+
+  { kind: "mark", name: "bloom", color: "var(--on-teal)" },
+  {
+    kind: "photo",
+    src: "/photos/family-beach.webp",
+    alt: "A mum and dad building a sandcastle with their child",
+    mask: "circle",
+  },
+  { kind: "mark", name: "halves", color: "var(--lavender)" },
+
+  {
+    kind: "photo",
+    src: "/photos/story-two-dads.webp",
+    alt: "Two dads together",
+    mask: "quarter",
+    position: "object-[50%_30%]",
+  },
+  { kind: "mark", name: "pause", color: "var(--accent)" },
+  {
+    kind: "photo",
+    src: "/photos/cta-family.webp",
+    alt: "A solo dad holding his young son",
+    mask: "leaf",
+    position: "object-[45%_40%]",
+  },
+];
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+export function HeroShapeGrid({ className }: { className?: string }) {
+  const still = useReducedMotion();
+
+  return (
+    <div className={className}>
+      <div className="grid grid-cols-3 gap-1.5 md:gap-2">
+        {CELLS.map((cell, i) => (
+          <motion.div
+            key={i}
+            className="relative aspect-square"
+            initial={still ? false : { opacity: 0, scale: 0.86 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: still ? 0 : i * 0.06, ease: EASE }}
+          >
+            {cell.kind === "mark" ? (
+              <ShapeMark
+                name={cell.name}
+                className="w-full h-full"
+                style={{ color: cell.color }}
+              />
+            ) : (
+              <div className={`absolute inset-0 overflow-hidden ${MASK_CLASS[cell.mask]}`}>
+                <Image
+                  src={cell.src}
+                  alt={cell.alt}
+                  fill
+                  sizes="(min-width: 1280px) 160px, 30vw"
+                  className={`object-cover ${cell.position ?? ""}`}
+                />
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}

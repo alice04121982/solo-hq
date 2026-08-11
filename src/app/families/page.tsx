@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
+import { Section } from "@/components/section";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 export const metadata: Metadata = {
-  title: "Family Types | CairnFertility — IVF & Fertility Guidance",
+  title: "Family Types | Cairn Fertility",
   description:
-    "Fertility treatment guidance for every family — solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
+    "Fertility treatment guidance for every family: solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };
 
 // Display order: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad
@@ -64,12 +65,12 @@ export default function FamiliesPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav />
       </div>
 
-      {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-12 pb-14 md:pt-16 md:pb-18 border-b border-border">
+      {/* Hero — one oversized spark bleeding off the band edge */}
+      <Section band={0} padding="pt-12 pb-14 md:pt-16 md:pb-18" backdrop={{ shape: "spark" }}>
         <span
           className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
           style={{ background: "#C5E600", color: "#1A3A25" }}
@@ -84,49 +85,47 @@ export default function FamiliesPage() {
           <br />your path starts here.
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "55ch" }}>
-          IVF looks different depending on who you are. Find your family type below for a guide built specifically for you — the right treatment routes, real stories, and a clear step-by-step from first consultation to family.
+          IVF looks different depending on who you are. Find your family type below for a guide built specifically for you: the right treatment routes, real stories, and a clear step-by-step from first consultation to family.
         </p>
-      </section>
+      </Section>
 
       {/* Card grid — one uniform card per family type */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+      <Section band={1} padding="py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {families.map((family) => (
             <FamilyCard key={family.slug} family={family} />
           ))}
         </div>
-      </section>
+      </Section>
 
       {/* What each guide includes */}
-      <section className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-            What you&apos;ll find
-          </p>
-          <h2
-            className="font-sans font-bold text-[#1A3A25] mb-12"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
-          >
-            Every guide includes:
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
-            {[
-              { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood — tailored to your specific treatment route." },
-              { num: "02", title: "Personal stories", body: "Real accounts from people who've been through it. The emotional truth, not just the clinical facts." },
-              { num: "03", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
-              { num: "04", title: "Newsletter", body: "Updates specific to your family type — clinic data changes, new research, community stories." },
-            ].map((item) => (
-              <div key={item.num} className="py-6 border-t border-border">
-                <p className="font-sans font-medium text-muted/50 mb-3" style={{ fontSize: "1.5rem" }}>
-                  {item.num}
-                </p>
-                <p className="font-sans font-medium text-[#1A3A25] text-lg mb-2">{item.title}</p>
-                <p className="text-sm font-sans text-muted leading-relaxed">{item.body}</p>
-              </div>
-            ))}
-          </div>
+      <Section band={2}>
+        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          What you&apos;ll find
+        </p>
+        <h2
+          className="font-sans font-bold text-[#1A3A25] mb-12"
+          style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+        >
+          Every guide includes:
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
+          {[
+            { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood, tailored to your specific treatment route." },
+            { num: "02", title: "Personal stories", body: "Real accounts from people who've been through it. The emotional truth, not just the clinical facts." },
+            { num: "03", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
+            { num: "04", title: "Newsletter", body: "Updates specific to your family type: clinic data changes, new research, community stories." },
+          ].map((item) => (
+            <div key={item.num} className="py-6 border-t border-border">
+              <p className="font-sans font-medium text-muted/50 mb-3" style={{ fontSize: "1.5rem" }}>
+                {item.num}
+              </p>
+              <p className="font-sans font-medium text-[#1A3A25] text-lg mb-2">{item.title}</p>
+              <p className="text-sm font-sans text-muted leading-relaxed">{item.body}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </Section>
 
       <CTASection />
     </main>

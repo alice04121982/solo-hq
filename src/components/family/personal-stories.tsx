@@ -13,7 +13,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
 
   return (
     <section className="bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,6 +33,10 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           >
             In their own words.
           </h2>
+          <p className="text-xs font-sans leading-relaxed mt-3" style={{ color: GREEN_SOFT, maxWidth: "60ch" }}>
+            Illustrative stories while we collect real, consented accounts. To share
+            yours, write to stories@cairnfertility.co.uk.
+          </p>
         </motion.div>
 
         {/* Featured story */}

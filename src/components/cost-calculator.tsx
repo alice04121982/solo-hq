@@ -43,7 +43,7 @@ const SOLO_COSTS = {
 const MEDS_COST: Record<TreatmentPath, number> = { iui: 350, ivf: 1200, "donor-egg": 800 };
 
 const ADD_ONS = [
-  { id: "icsi", label: "ICSI", cost: 1250, note: "Direct sperm injection — often recommended with donor sperm" },
+  { id: "icsi", label: "ICSI", cost: 1250, note: "Direct sperm injection, often recommended with donor sperm" },
   { id: "embryoscope", label: "EmbryoScope (Time-Lapse)", cost: 500, note: "Continuous embryo monitoring; evidence of benefit is debated" },
   { id: "pgta", label: "PGT-A Genetic Testing", cost: 2800, note: "Screens embryos for chromosomal abnormalities; more relevant over 37" },
   { id: "freeze", label: "Embryo Freezing", cost: 420, note: "Vitrification of surplus embryos for future cycles" },
@@ -105,7 +105,7 @@ function OptionRow({
       </div>
       <div className="flex items-center gap-2 shrink-0 pt-0.5">
         {tag && (
-          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-accent font-sans">{tag}</span>
+          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-teal font-sans">{tag}</span>
         )}
         {badge && (
           <span className="text-xs font-sans text-muted">{badge}</span>
@@ -221,7 +221,7 @@ function StepResults({ s }: { s: Selections }) {
       <div className="flex gap-2 mb-6 p-4 bg-background rounded-xl border border-border">
         <Info className="h-4 w-4 text-muted shrink-0 mt-0.5" />
         <p className="text-xs font-sans text-muted leading-relaxed">
-          The hidden gap is <strong className="text-foreground">{fmt(gap)}</strong> — costs clinics don&rsquo;t include in their headline price.
+          The hidden gap is <strong className="text-foreground">{fmt(gap)}</strong>: costs clinics don&rsquo;t include in their headline price.
         </p>
       </div>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
+import { Section } from "@/components/section";
 import { ArrowRight, BookOpen, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
@@ -15,8 +16,8 @@ interface CategoryResource {
 }
 
 export const metadata: Metadata = {
-  title: "Resources | CairnFertility",
-  description: "Guides, tools, checklists, and templates for every kind of family navigating fertility treatment.",
+  title: "Resources | Cairn Fertility",
+  description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
 
 const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryResource[] }[] = [
@@ -96,29 +97,30 @@ export default function ResourcesPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        {/* Header */}
-        <div className="mb-14">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-            Everything you need
-          </p>
-          <h1
-            className="font-sans font-bold text-[#1A3A25] mb-4"
-            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
-          >
-            Resources
-          </h1>
-          <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-            Guides, checklists, templates, and explainers for every kind of family navigating fertility treatment.
-          </p>
-        </div>
+      {/* Header */}
+      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
+        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          Everything you need
+        </p>
+        <h1
+          className="font-sans font-bold text-[#1A3A25] mb-4"
+          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+        >
+          Resources
+        </h1>
+        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+          Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
+        </p>
+      </Section>
 
+      {/* Ways in: the essential external resource, then the family-type filters */}
+      <Section band={1}>
         {/* DCN featured link */}
         <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
           <div className="flex-1">
@@ -129,7 +131,7 @@ export default function ResourcesPage() {
               Donor Conception Network
             </p>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception — relevant to solo parents, same-sex couples, and heterosexual couples alike.
+              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception. Relevant to solo parents, same-sex couples, and heterosexual couples alike.
             </p>
           </div>
           <a
@@ -144,7 +146,7 @@ export default function ResourcesPage() {
         </div>
 
         {/* Browse by family type */}
-        <div className="mb-14">
+        <div>
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
             Browse by family type
           </p>
@@ -161,8 +163,10 @@ export default function ResourcesPage() {
             ))}
           </div>
         </div>
+      </Section>
 
-        {/* Category grid */}
+      {/* Category grid */}
+      <Section band={2}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
           {CATEGORIES.map((cat) => (
             <div key={cat.title} className="py-10 border-t border-border">
@@ -188,7 +192,7 @@ export default function ResourcesPage() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       <CTASection />
     </main>

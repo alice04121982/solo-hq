@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { StoryImage } from "@/components/story-image";
+import { Section } from "@/components/section";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
@@ -24,16 +25,16 @@ export default function StoriesPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Header */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 pb-10">
+      <Section band={0} padding="pt-16 pb-14">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Real journeys
+          Stories
         </p>
         <h1
           className="font-sans font-bold text-foreground mb-6"
@@ -42,13 +43,18 @@ export default function StoriesPage() {
           Personal stories
         </h1>
         <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Honest accounts from people who&apos;ve been through it — the real version, not the brochure.
+          What the journey looks like at every stage, told the way people tell it.
         </p>
-      </section>
+        <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
+          These are illustrative stories while we collect real, consented accounts to
+          replace them. If you would like to share yours, write to
+          stories@cairnfertility.co.uk.
+        </p>
+      </Section>
 
-      {/* Filter pills */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-10">
-        <div className="flex flex-wrap gap-2">
+      {/* Filters and the grid they drive share a band — they're one control */}
+      <Section band={1} padding="py-14 md:py-16">
+        <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setFilter("all")}
             className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
@@ -85,7 +91,7 @@ export default function StoriesPage() {
         </div>
 
         {filter === "faith" && (
-          <p className="text-sm font-sans text-muted mt-5" style={{ maxWidth: "58ch" }}>
+          <p className="text-sm font-sans text-muted -mt-5 mb-10" style={{ maxWidth: "58ch" }}>
             More on religion, culture and belief — including where the major traditions
             stand and how to handle conversations that turn against you — is in{" "}
             <Link href="/faith" className="underline underline-offset-2 text-foreground">
@@ -94,13 +100,10 @@ export default function StoriesPage() {
             .
           </p>
         )}
-      </section>
 
-      {/* Story grid */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-20">
         {visible.length === 0 && (
           <p className="text-sm font-sans text-muted py-12 border-t border-border">
-            No stories yet for this family type — check back soon.
+            No stories yet for this family type. Check back soon.
           </p>
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
@@ -124,7 +127,7 @@ export default function StoriesPage() {
               {/* Content */}
               <div className="flex flex-col gap-3 flex-1">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-accent font-sans">
+                  <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-teal font-sans">
                     {story.familyLabel}
                   </span>
                   <span className="text-[10px] text-muted font-sans">·</span>
@@ -152,7 +155,7 @@ export default function StoriesPage() {
             </Link>
           ))}
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

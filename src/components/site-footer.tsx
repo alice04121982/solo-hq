@@ -19,7 +19,8 @@ const TOOL_LINKS = [
   { label: "Faith, Culture & IVF", href: "/faith" },
   { label: "Difficult Conversations", href: "/faith#conversations" },
   { label: "Resources", href: "/resources" },
-  { label: "News & Updates", href: "/news" },
+  // News is unlisted until there is a real editorial pipeline; the page
+  // itself stays in the repo at /news.
 ];
 
 const LEGAL_LINKS = [
@@ -89,7 +90,7 @@ function LinkColumn({
 export function SiteFooter() {
   return (
     <footer style={{ background: TEAL }}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -155,13 +156,13 @@ export function SiteFooter() {
           style={{ borderColor: "rgba(249,198,218,0.2)" }}
         >
           <p className="text-xs font-sans" style={{ color: PINK }}>
-            &copy; 2026 CairnFertility. Made with grit and grace in the UK.
+            &copy; 2026 Cairn Fertility. Made in the UK.
           </p>
           <p
             className="text-xs font-sans leading-relaxed"
             style={{ maxWidth: "60ch", color: PINK_MUTED }}
           >
-            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            Cairn Fertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
           </p>
         </div>
       </div>

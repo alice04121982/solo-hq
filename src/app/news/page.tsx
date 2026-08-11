@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { ArrowRight, Clock } from "lucide-react";
+import { Section } from "@/components/section";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "News & Updates | CairnFertility",
-  description: "The latest news on solo motherhood, IVF policy, donor conception, and community stories from CairnFertility.",
+  title: "News & Updates | Cairn Fertility",
+  description: "The latest news on IVF policy, clinic pricing, donor conception, and community stories from Cairn.",
 };
 
 const ARTICLES = [
@@ -19,7 +20,7 @@ const ARTICLES = [
   },
   {
     tag: "Costs",
-    title: "Why UK IVF prices rose 18% in two years — and what it means for you",
+    title: "Why UK IVF prices rose 18% in two years, and what it means for you",
     excerpt: "A combination of post-pandemic lab costs, staffing pressures, and increased demand has driven clinic pricing upward. We break down where the money goes.",
     date: "28 Feb 2025",
     readTime: "6 min read",
@@ -40,7 +41,7 @@ const ARTICLES = [
   },
   {
     tag: "Clinics",
-    title: "Five new HFEA-licensed clinics opened in 2024 — are any worth considering?",
+    title: "Five new HFEA-licensed clinics opened in 2024. Are any worth considering?",
     excerpt: "We looked at success rate data, pricing structures, and solo-patient policies at the UK's newest licensed clinics.",
     date: "20 Jan 2025",
     readTime: "5 min read",
@@ -48,7 +49,7 @@ const ARTICLES = [
   {
     tag: "Finance",
     title: "Fertility finance: loans, grants, and employer schemes explained",
-    excerpt: "From Carrot Fertility and Fertifa to personal loans and NHS funding criteria — every funding route available to solo patients in 2025.",
+    excerpt: "From Carrot Fertility and Fertifa to personal loans and NHS funding criteria: every funding route available to solo patients in 2025.",
     date: "8 Jan 2025",
     readTime: "8 min read",
   },
@@ -60,27 +61,27 @@ export default function NewsPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        {/* Header */}
-        <div className="mb-16">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
-          <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
-            News &amp; Updates
-          </h1>
-          <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-            Policy changes, science you can actually use, and stories from the community.
-          </p>
-        </div>
+      {/* Header */}
+      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
+        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
+        <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}>
+          News &amp; Updates
+        </h1>
+        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+          Policy changes, science you can use, and stories from the community.
+        </p>
+      </Section>
 
-        {/* Featured — left-border pull style */}
-        <div className="mb-16 border-l-2 border-accent pl-8 md:pl-12">
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-4 font-sans">
+      {/* Featured — left-border pull style */}
+      <Section band={1}>
+        <div className="border-l-2 border-accent pl-8 md:pl-12">
+          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal mb-4 font-sans">
             {featured.tag} &nbsp;·&nbsp; {featured.date} &nbsp;·&nbsp; {featured.readTime}
           </p>
           <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 3vw, 2.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
@@ -89,22 +90,24 @@ export default function NewsPage() {
           <p className="text-[17px] font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "60ch" }}>
             {featured.excerpt}
           </p>
-          <button className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-accent hover:text-accent transition-colors duration-150">
+          <button className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150">
             Read article <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
+      </Section>
 
-        {/* Article grid */}
+      {/* Article grid */}
+      <Section band={2}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
           {rest.map((a) => (
             <div
               key={a.title}
               className="py-8 border-t border-border cursor-pointer group"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent mb-3 font-sans">
+              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
                 {a.tag}
               </p>
-              <h3 className="font-sans font-bold text-foreground text-lg leading-snug mb-3 group-hover:text-accent transition-colors duration-150" style={{ maxWidth: "26ch" }}>
+              <h3 className="font-sans font-bold text-foreground text-lg leading-snug mb-3 group-hover:text-teal transition-colors duration-150" style={{ maxWidth: "26ch" }}>
                 {a.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-4">{a.excerpt}</p>
@@ -114,7 +117,7 @@ export default function NewsPage() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
       <CTASection />
     </main>

@@ -13,7 +13,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-20 md:py-28`}>
           {/* Left — copy */}
           <motion.div
@@ -26,7 +26,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-6 font-sans"
               style={{ color: GREEN_SOFT }}
             >
-              {family.subHeadline}
+              {family.label}
             </p>
 
             <h1
@@ -71,7 +71,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
 
             <p className="text-xs font-sans text-muted mt-8 pb-0 border-t border-border pt-6">
               <span className="font-[500] text-[#1A3A25]">{family.treatmentHighlight}</span>
-              {" "}— treatment routes covered in this guide
+              : treatment routes covered in this guide
             </p>
           </motion.div>
 

@@ -49,14 +49,14 @@ export default function FaithPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-24 pb-12">
+      <section className="mx-auto px-6 md:px-12 lg:px-16 pt-16 md:pt-24 pb-12">
         <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Faith, culture &amp; belief
         </p>
@@ -104,7 +104,7 @@ export default function FaithPage() {
       </section>
 
       {/* How we've written this */}
-      <section className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pb-16 md:pb-20">
+      <section className="mx-auto px-6 md:px-12 lg:px-16 pb-16 md:pb-20">
         <div className="rounded-2xl p-6 md:p-10" style={{ background: "var(--cream)" }}>
           <p
             className="inline-flex items-center gap-2 text-[10px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
@@ -137,7 +137,7 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p
             className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans"
           >
@@ -183,7 +183,7 @@ export default function FaithPage() {
 
       {/* Traditions */}
       <section id="traditions" className="border-t border-border scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Where traditions stand
           </p>
@@ -219,7 +219,7 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             In the clinic
           </p>
@@ -253,7 +253,7 @@ export default function FaithPage() {
 
       {/* Stories */}
       <section id="stories" className="border-t border-border scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             In their own words
           </p>
@@ -347,7 +347,7 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             When the conversation is against you
           </p>
@@ -445,7 +445,7 @@ export default function FaithPage() {
 
       {/* Support */}
       <section id="support" className="border-t border-border scroll-mt-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
           <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Where to go next
           </p>

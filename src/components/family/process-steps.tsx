@@ -43,7 +43,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
 
   return (
     <section className="bg-background border-y border-border">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}

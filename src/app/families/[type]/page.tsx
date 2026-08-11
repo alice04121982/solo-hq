@@ -9,6 +9,8 @@ import { ResourcesSection } from "@/components/family/resources-section";
 import { ClinicSection } from "@/components/family/clinic-section";
 import { JourneyMap } from "@/components/journey-map";
 import { BentoCard } from "@/components/bento-card";
+import { Section } from "@/components/section";
+import { QuoteCard } from "@/components/quote-card";
 import { getFamilyType, FAMILY_TYPES, type FamilyTypeSlug } from "@/lib/family-types";
 
 interface PageProps {
@@ -24,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const family = getFamilyType(type);
   if (!family) return {};
   return {
-    title: `${family.label} | CairnFertility — IVF & Fertility Guidance`,
+    title: `${family.label} | Cairn Fertility`,
     description: family.heroCopy.slice(0, 160),
   };
 }
@@ -35,11 +37,15 @@ export default async function FamilyTypePage({ params }: PageProps) {
 
   if (!family) notFound();
 
+  // Only the lead story carries a quote. It is pulled up here, a full section
+  // clear of the story it came from further down the page.
+  const voice = family.stories.find((s) => s.quote);
+
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
@@ -47,13 +53,29 @@ export default async function FamilyTypePage({ params }: PageProps) {
       {/* Hero */}
       <FamilyHero family={family} />
 
+      {/* A voice from this community, before the practical steps */}
+      {voice?.quote && (
+        <Section tone="white" padding="pb-4 md:pb-8">
+          <div className="max-w-2xl">
+            <QuoteCard
+              quote={voice.quote}
+              name={voice.name}
+              eyebrow={voice.tag}
+              meta={[`${voice.age}`, voice.location]}
+              avatar={voice.image}
+              tone="pink"
+            />
+          </div>
+        </Section>
+      )}
+
       {/* Step-by-step guide */}
       <ProcessSteps steps={family.steps} />
 
       {/* Solo Navigator — solo-mum page only */}
       {family.slug === "solo-mum" && (
         <section className="bg-background border-b border-border">
-          <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+          <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
             <p
               className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
               style={{ color: "rgba(26,58,37,0.65)" }}

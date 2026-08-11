@@ -10,7 +10,7 @@ const GREEN_SOFT = "rgba(26,58,37,0.65)";
 export function ClinicSection({ clinicNote }: { clinicNote: string }) {
   return (
     <section className="bg-background border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -66,7 +66,7 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             style={{ background: "var(--teal)" }}
           >
             {[
-              { value: "400+", label: "HFEA-licensed clinics compared" },
+              { value: "HFEA data", label: "success rates from the public register" },
               { value: "UK & abroad", label: "including Spain, Czech Republic & Greece" },
               { value: "5 age brackets", label: "success rates from under 35 to 43+" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },

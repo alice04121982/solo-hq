@@ -1,40 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const testimonials = [
-  {
-    quote:
-      "I'd spent two years on the fence, terrified of doing it alone. CairnFertility gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
-    name: "Gemma, 38",
-    location: "Bristol",
-    stage: "Mum to Arlo, conceived via donor IUI",
-    featured: true,
-  },
-  {
-    quote:
-      "Nobody tells you how much the admin grinds you down. The clinic comparisons here saved me weeks of research and helped me ask the right questions.",
-    name: "Sarah, 35",
-    location: "Manchester",
-    stage: "Currently in IVF cycle 2",
-  },
-  {
-    quote:
-      "The cost calculator was the first thing that made me feel like this was financially possible, not just a dream.",
-    name: "Priya, 33",
-    location: "London",
-    stage: "Preparing for first IUI",
-  },
-  {
-    quote:
-      "I'm 42 and people kept telling me I'd left it too late. This community showed me women who'd had their babies at 43, 44, using donor eggs.",
-    name: "Claire, 42",
-    location: "Edinburgh",
-    stage: "Pregnant — due in August",
-  },
-];
+const testimonials = COMMUNITY_QUOTES;
 
 const journeyStories = [
   {
@@ -42,21 +13,21 @@ const journeyStories = [
     age: 37,
     tag: "Founder's story",
     title: "From 'someday' to mum of one in 22 months",
-    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built CairnFertility because I wished something like it had existed when I was starting out.",
+    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find, most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Cairn because I wished something like it had existed when I was starting out.",
   },
   {
     name: "Natalie",
     age: 40,
     tag: "Donor egg journey",
     title: "I used donor eggs and I'm not ashamed of it",
-    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then — after reading a dozen stories from women who'd been exactly here — at peace with it. My twins Evi and Rosa are two and a half.",
+    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. My twins Evi and Rosa are two and a half.",
   },
   {
     name: "Jo",
     age: 34,
     tag: "First IVF cycle",
     title: "The bit nobody talks about: the two-week wait, alone",
-    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the CairnFertility community during my wait.",
+    body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you, no one to catastrophise with at 2am. I found my people in the Cairn community during my wait.",
   },
 ];
 
@@ -65,7 +36,7 @@ export function TestimonialsSection() {
 
   return (
     <section className="bg-background-alt">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 md:py-32">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
 
         {/* Eyebrow + heading */}
         <motion.div
@@ -76,7 +47,7 @@ export function TestimonialsSection() {
           className="mb-20"
         >
           <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-            Real women. Real journeys.
+            Real people. Real journeys.
           </p>
           <h2 className="font-sans font-bold text-foreground" style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1, maxWidth: "18ch" }}>
             You&rsquo;re not the first to feel this way.
@@ -149,7 +120,7 @@ export function TestimonialsSection() {
               transition={{ duration: 0.7, delay: i * 0.08, ease: EASE }}
               className="flex flex-col gap-4"
             >
-              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-accent font-sans">
+              <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal font-sans">
                 {s.tag}
               </p>
               <h3 className="font-sans font-bold text-foreground text-xl leading-snug">
