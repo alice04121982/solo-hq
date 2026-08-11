@@ -1,7 +1,10 @@
 "use client";
 
 import { useState, useMemo, type ReactNode } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { getFamilyType, type FamilyTypeSlug } from "@/lib/family-types";
+import { ShapeMark, FAMILY_SHAPES, type ShapeName } from "@/components/shapes";
 import {
   ArrowRight,
   ArrowLeft,
@@ -45,6 +48,17 @@ interface WizardState {
 function isSurrogacyPath(family: FamilyType | null): boolean {
   return family === "solo-dad" || family === "male-couple";
 }
+
+// The wizard's family answers and the guide pages in src/lib/family-types.ts
+// name the same five pathways under different ids; this bridges the two so
+// results can link to the guide for the family type the user stated.
+const FAMILY_GUIDE_SLUG: Record<FamilyType, FamilyTypeSlug> = {
+  "solo-mum": "solo-mum",
+  "female-couple": "same-sex-female",
+  "male-couple": "same-sex-male",
+  "solo-dad": "single-dad",
+  "straight-couple": "heterosexual-couple",
+};
 
 // ─── Clinic data ──────────────────────────────────────────────────────────────
 
@@ -708,9 +722,11 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   const successLabel = surrogacy ? "Donor egg rate" : "Success rate";
   const successSub = surrogacy ? "per transfer" : "your age group";
 
+  const familyGuide = s.family ? getFamilyType(FAMILY_GUIDE_SLUG[s.family]) : undefined;
+
   if (results.length === 0) {
     return (
-      <div className="py-6">
+      <div className="py-6 max-w-2xl mx-auto text-center">
         <p className="text-foreground font-sans font-medium mb-2">No exact matches</p>
         <p className="text-sm font-sans text-muted mb-6 leading-relaxed">
           {surrogacy
@@ -728,25 +744,27 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   return (
     <div>
       {donorNote && (
-        <div className="mb-6 p-4 rounded-xl border border-border bg-background-alt">
+        <div className="mb-6 p-4 rounded-xl border border-border bg-background-alt max-w-2xl mx-auto">
           <p className="text-xs font-sans text-muted leading-relaxed">
             <strong className="text-foreground">Heads up: </strong>{donorNote}
           </p>
         </div>
       )}
 
-      <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans text-center">
         {results.length} clinic{results.length !== 1 ? "s" : ""} matched, ranked for you
       </p>
 
-      <div className="space-y-4">
+      {/* Matches break out of the wizard column into a grid across the page. */}
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {results.map((r, idx) => (
           <motion.div
             key={r.clinic.id}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.06, duration: 0.35, ease: EASE }}
-            className="rounded-xl border border-border overflow-hidden"
+            // Opaque so the band's backdrop shape never washes through the data
+            className="rounded-xl border border-border overflow-hidden flex flex-col bg-background"
           >
             <div className="flex items-start justify-between gap-4 p-4 border-b border-border">
               <div className="flex items-start gap-3">
@@ -770,22 +788,22 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="font-sans font-medium text-foreground text-lg leading-tight">
                   £{r.clinic.realPriceGBP.toLocaleString()}
                 </p>
-                <p className="text-[10px] font-sans text-muted">IVF est. real cost</p>
+                <p className="text-[12px] font-sans text-muted">IVF est. real cost</p>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-px bg-border">
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {successLabel}
                 </p>
                 <p className="font-sans font-medium text-foreground text-lg leading-none">
                   {r.clinic.successRates[ageKey]}%
                 </p>
-                <p className="text-[10px] font-sans text-muted mt-0.5">{successSub}</p>
+                <p className="text-[12px] font-sans text-muted mt-0.5">{successSub}</p>
               </div>
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {s.family === "female-couple" || s.family === "male-couple"
                     ? "LGBTQ+"
                     : s.family === "straight-couple"
@@ -796,7 +814,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                   ? r.clinic.lgbtqFriendliness : r.clinic.soloFriendliness} />
               </div>
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   Pricing
                 </p>
                 <Dots rating={r.clinic.priceTransparency} />
@@ -806,14 +824,14 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
             <div className="p-4">
               <div className="flex flex-wrap gap-2 mb-3">
                 {r.matchReasons.slice(0, 3).map((reason) => (
-                  <span key={reason} className="text-[11px] font-sans px-2.5 py-1 rounded-full"
+                  <span key={reason} className="text-[13px] font-sans px-2.5 py-1 rounded-full"
                     style={{ background: "var(--accent)", color: "var(--foreground)" }}>
                     {reason}
                   </span>
                 ))}
               </div>
               {r.travelNote && (
-                <p className="flex items-start gap-1.5 text-[11px] font-sans text-muted leading-relaxed border-t border-border pt-3">
+                <p className="flex items-start gap-1.5 text-[13px] font-sans text-muted leading-relaxed border-t border-border pt-3">
                   <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
                   <span>{r.travelNote}</span>
                 </p>
@@ -823,13 +841,21 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         ))}
       </div>
 
-      <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <a
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Link
           href="/ivf-finder"
           className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-sans font-medium hover:bg-accent hover:text-foreground transition-colors duration-200"
         >
           See full clinic comparison <ArrowRight className="h-3.5 w-3.5" />
-        </a>
+        </Link>
+        {familyGuide && (
+          <Link
+            href={`/families/${familyGuide.slug}`}
+            className="inline-flex items-center gap-2 rounded-full border border-foreground text-foreground px-6 py-3 text-sm font-sans font-medium hover:bg-foreground hover:text-background transition-colors duration-200"
+          >
+            Read our {familyGuide.label} guide <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        )}
         <button
           onClick={onReset}
           className="text-sm font-sans text-muted hover:text-foreground underline underline-offset-4 transition-colors"
@@ -867,6 +893,36 @@ function getSteps(family: FamilyType | null) {
   ];
 }
 
+// ─── Backdrop shape ───────────────────────────────────────────────────────────
+
+// The band's oversized mark, in the style of Section's `backdrop` but driven
+// by wizard state: a neutral egg until a family is chosen, then that family's
+// own mark from the shape bank. It turns a notch on every step and crossfades
+// when the mark itself changes, so the journey visibly moves with the user.
+// Positional classes stay on the wrapper — framer-motion owns `transform`, so
+// rotate/scale live on the inner element where they can't clobber the offsets.
+function WizardBackdrop({ shape, step }: { shape: ShapeName; step: number }) {
+  return (
+    <div
+      aria-hidden
+      className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-[45%] w-[20rem] md:w-[32rem] lg:w-[40rem] pointer-events-none"
+      style={{ color: "var(--lime)" }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={shape}
+          initial={{ opacity: 0, scale: 0.8, rotate: step * 24 }}
+          animate={{ opacity: 1, scale: 1, rotate: step * 24 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
+          <ShapeMark name={shape} className="w-full h-auto" />
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // ─── Main wizard ──────────────────────────────────────────────────────────────
 
 export function ClinicMatcher() {
@@ -883,6 +939,9 @@ export function ClinicMatcher() {
   const surrogacy = isSurrogacyPath(s.family);
   const STEPS = getSteps(s.family);
   const isResults = step === STEPS.length - 1;
+
+  // Neutral egg mark until step one is answered, then the chosen family's own.
+  const backdropShape: ShapeName = s.family ? FAMILY_SHAPES[FAMILY_GUIDE_SLUG[s.family]] : "egg";
 
   const canAdvance = [
     s.family !== null,
@@ -925,13 +984,18 @@ export function ClinicMatcher() {
   ];
 
   return (
-    // Width and alignment are the page's to decide — the wizard fills whatever
-    // column it is given, so it can share the page header's left edge.
+    // The wizard runs as a centred, full-page journey: question steps live in
+    // a centred column, and only the results step widens to the full container
+    // so the matched clinics can lay out as a grid across the page. The band's
+    // backdrop shape renders first so the relative content wrapper paints over
+    // it; the section that hosts the wizard crops its bleed (overflow-hidden).
     <div className="w-full">
+      <WizardBackdrop shape={backdropShape} step={step} />
+      <div className="relative">
       {/* Progress — one segment per question. The results screen is the last
           entry in STEPS but is not a step the user answers, so it is excluded
           here to match the "of N" count below. */}
-      <div className="mb-8">
+      <div className="mb-8 max-w-2xl mx-auto">
         <div className="flex gap-1 mb-4">
           {STEPS.slice(0, -1).map((_, i) => (
             <div
@@ -942,7 +1006,7 @@ export function ClinicMatcher() {
           ))}
         </div>
         {!isResults && (
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+          <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans text-center">
             Step {step + 1} of {STEPS.length - 1}
           </p>
         )}
@@ -956,14 +1020,15 @@ export function ClinicMatcher() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -12 }}
           transition={{ duration: 0.22, ease: EASE }}
+          className={isResults ? undefined : "max-w-2xl mx-auto"}
         >
           <h2
-            className="font-sans font-bold text-foreground mb-1"
-            style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
+            className="font-sans font-bold text-foreground mb-1 text-center"
+            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.15 }}
           >
             {STEPS[step].title}
           </h2>
-          <p className="text-sm font-sans text-muted mb-6 leading-relaxed">
+          <p className="text-sm font-sans text-muted mb-6 leading-relaxed text-center">
             {STEPS[step].sub}
           </p>
           {stepContent[step]}
@@ -972,7 +1037,7 @@ export function ClinicMatcher() {
 
       {/* Navigation */}
       {!isResults && (
-        <div className="flex items-center justify-between mt-8 pt-4 border-t border-border">
+        <div className="max-w-2xl mx-auto flex items-center justify-between mt-8 pt-4 border-t border-border">
           <button
             onClick={() => setStep((p) => p - 1)}
             disabled={step === 0}
@@ -991,6 +1056,7 @@ export function ClinicMatcher() {
           </button>
         </div>
       )}
+      </div>
     </div>
   );
 }

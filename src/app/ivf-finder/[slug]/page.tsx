@@ -62,13 +62,13 @@ export default async function ClinicDetailPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-background">
-      <section className="bg-background border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-background border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
-      <Section band={0} padding="pt-12 md:pt-16 pb-16 md:pb-20">
+      <Section band={0} padding="pt-12 md:pt-16 pb-20 md:pb-28">
         <Link
           href="/ivf-finder"
           className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-teal transition-colors mb-8"
@@ -82,7 +82,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
         </div>
         <h1
           className="font-sans font-bold mb-3 text-teal-ink"
-          style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.5rem)", lineHeight: 1.05 }}
         >
           {clinic.name}
         </h1>
@@ -164,7 +164,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
                 </div>
               ))}
             </div>
-            <h3 className="text-[10px] font-[700] uppercase tracking-[0.14em] text-muted mb-3">
+            <h3 className="text-[12px] font-[700] uppercase tracking-[0.14em] text-muted mb-3">
               Treatments offered
             </h3>
             <div className="flex flex-wrap gap-1.5">

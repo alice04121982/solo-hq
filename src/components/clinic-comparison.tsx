@@ -212,7 +212,7 @@ export function ClinicComparison() {
     <div className="p-6 md:p-8">
       {/* Header */}
       <div className="mb-8">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
           Clinic comparison engine
         </p>
         <h2 className="font-sans font-bold text-foreground text-2xl leading-tight">
@@ -225,7 +225,7 @@ export function ClinicComparison() {
 
       {/* Treatment filter */}
       <div className="mb-5">
-        <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted mb-3 font-sans">
+        <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted mb-3 font-sans">
           Treatment
         </p>
         <div className="flex flex-wrap gap-2">
@@ -248,7 +248,7 @@ export function ClinicComparison() {
       {/* Age + Region + Sort row */}
       <div className="flex flex-wrap items-end justify-between gap-4 mb-6 pb-5 border-b border-border">
         <div className="flex flex-col gap-2">
-          <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
             Age bracket
           </p>
           <div className="flex flex-wrap gap-4">
@@ -269,7 +269,7 @@ export function ClinicComparison() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
             Location
           </p>
           <div className="flex gap-4">
@@ -290,7 +290,7 @@ export function ClinicComparison() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
+          <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans">
             Sort by
           </p>
           <div className="flex flex-wrap gap-4">
@@ -347,7 +347,7 @@ export function ClinicComparison() {
                     {clinic.treatments.map((t) => (
                       <span
                         key={t}
-                        className="text-[10px] font-sans font-[500] uppercase tracking-wide px-2 py-0.5 rounded-full"
+                        className="text-[12px] font-sans font-[500] uppercase tracking-wide px-2 py-0.5 rounded-full"
                         style={{
                           background: treatment === t ? "var(--accent)" : "var(--background-alt)",
                           color: treatment === t ? "var(--foreground)" : "var(--muted)",
@@ -363,7 +363,7 @@ export function ClinicComparison() {
               {/* Metrics */}
               <div className="flex flex-wrap gap-x-6 gap-y-3 flex-1">
                 <div>
-                  <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
+                  <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-1">
                     Success ({AGE_OPTIONS.find((a) => a.key === ageKey)?.label})
                   </p>
                   <p className="font-serif text-foreground text-xl leading-none">
@@ -371,19 +371,19 @@ export function ClinicComparison() {
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
+                  <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
                     Solo-Friendly
                   </p>
                   <Dots rating={clinic.soloFriendliness} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
+                  <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
                     LGBTQ+
                   </p>
                   <Dots rating={clinic.lgbtqFriendliness} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
+                  <p className="text-[12px] font-[500] uppercase tracking-[0.12em] text-muted font-sans mb-2">
                     Pricing
                   </p>
                   <Dots rating={clinic.priceTransparency} />
@@ -398,7 +398,7 @@ export function ClinicComparison() {
                 <p className="font-serif text-foreground text-xl">
                   £{clinic.realPriceGBP.toLocaleString()}
                 </p>
-                <p className="text-[10px] font-sans text-muted">est. real cost</p>
+                <p className="text-[12px] font-sans text-muted">est. real cost</p>
               </div>
             </motion.div>
           ))}
@@ -411,7 +411,7 @@ export function ClinicComparison() {
         )}
       </div>
 
-      <p className="text-[11px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-5" style={{ maxWidth: "72ch" }}>
+      <p className="text-[13px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-5" style={{ maxWidth: "72ch" }}>
         UK success rates from HFEA published data (2022/23). Abroad clinic data from clinic-reported figures and community verification. Real prices are community-reported estimates including typical add-ons. All data indicative; verify directly with clinics before booking.
       </p>
     </div>

@@ -1,5 +1,12 @@
 import type { FamilyTypeSlug } from "./family-types";
 
+/**
+ * A cross-cutting subject a story also belongs to, independent of family type.
+ * A story can be a solo-mum story *and* a faith story; the family type filter
+ * and the theme filter are deliberately separate axes.
+ */
+export type StoryTheme = "faith";
+
 export interface Story {
   id: string;
   familyType: FamilyTypeSlug | "all";
@@ -18,8 +25,16 @@ export interface Story {
    */
   quote: string;
   treatment: string;
-  image: string;
-  imageAlt: string;
+  /**
+   * Optional so a story can ship before its photograph has been licensed.
+   * Where it is absent the card renders a typographic panel instead — never
+   * substitute a stock photo of someone else's community to fill the gap.
+   */
+  image?: string;
+  imageAlt?: string;
+  theme?: StoryTheme;
+  /** The tradition a faith story is told from. Shown as a chip. */
+  tradition?: string;
 }
 
 /**
@@ -122,9 +137,155 @@ export const ALL_STORIES: Story[] = [
     body: "The decision took me two years to fully commit to. Not because I doubted it (I've always wanted to be a father) but because I needed to understand what I was doing before I began. There's no script for a single man who wants a child. When I told people the plan, the first question was always 'is that even possible?', and for the first six months my honest answer was that I was finding out.\n\nIt is possible. The route for a solo dad in the UK is surrogacy with a donor egg, and the order of operations matters. I started with a specialist solicitor before I'd contacted a single clinic, because the thing that scared me most was the legal side: the surrogate is the legal mother at birth, and as a single father I'd need a parental order, which the law had only recently opened to single applicants. I wanted to know the ground was solid before I asked anyone to stand on it with me.\n\nThe surrogacy organisation was blunt with me at the first meeting: fewer surrogates choose single intended fathers, so expect the matching to take longer. It took fourteen months. I used the time to choose an egg donor through an HFEA-registered bank, do the counselling properly rather than as a box-tick, and build the village every guide tells you to build. My mother, my brother's family, two close friends who signed up for specific jobs rather than vague support. I ran the numbers until I could fund two cycles without touching the emergency fund, because I'd read enough to know first transfers fail often.\n\nWhen the match came, it was Sarah, a mother of two who said she wanted to do one more extraordinary thing before she was done. We spent four months talking before anyone went near a clinic. The IVF itself was almost an anticlimax: one cycle, a good embryo, a transfer that worked.\n\nThe matching process, the legal preparation, the IVF cycle. All of it was manageable because I'd done the groundwork. I needed to understand what I was doing before I began. That sentence was my whole method, and I'd hand it to any man considering this.\n\nOscar was born when I was 43. The parental order took five months. Sarah and her family are part of his life, in the open, the way these things should be.\n\nOscar is three. He is everything. The two years of deciding, the fourteen months of waiting: from here they look like the price of a certainty I've never once questioned since.",
     quote: "I needed to understand what I was doing before I began.",
     treatment: "IVF with donor eggs, UK surrogate",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-    imageAlt: "Man smiling warmly, portrait",
+    image: "/photos/story-solo-dad.webp",
+    imageAlt: "Man in a beanie holding a mug, looking out of a window",
+  },
+
+  // ─── Faith, culture & belief ──────────────────────────────────────────────
+  // PRE-LAUNCH: these are written examples showing the shape and tone the
+  // section needs. They are not yet accounts from named, consenting people.
+  // Replace them with real contributors before this page goes public —
+  // attributing a religious position to a named individual who did not say it
+  // is the one mistake this section cannot afford. See
+  // docs/faith-section-brief.md for the sourcing and photography checklist.
+  {
+    id: "aisha-yusuf",
+    familyType: "heterosexual-couple",
+    familyLabel: "Heterosexual Couple",
+    name: "Aisha & Yusuf",
+    age: 33,
+    location: "Birmingham",
+    tag: "Faith & Culture",
+    tradition: "Islam",
+    theme: "faith",
+    title: "Our imam knew more about IVF than our first consultant did",
+    excerpt:
+      "Four years of being told to be patient, one very direct conversation at the mosque, and a cycle timed carefully around Ramadan.",
+    body: "We spent four years being told to be patient and make du'a, as though seeing a doctor was the opposite of that. When we finally asked our imam directly, he was completely matter-of-fact: treatment using our own gametes is permitted, seeking medicine is not a failure of trust, and would we like him to speak to the clinic. He knew the Al-Azhar position better than our first consultant knew what Ramadan was.\n\nThe donor question was the one that mattered. When my results came back poor, the clinic offered donor eggs at the second appointment, and kept offering after we said no. That got exhausting. We eventually wrote it into our notes in capital letters.\n\nWe timed stimulation to finish before Ramadan, which our consultant sorted in about ten minutes once we asked early enough. Our son was born last spring. My mother still tells people he was a gift from Allah, which he was, and also there were forty-one injections.",
+    quote: "He knew the Al-Azhar position better than our first consultant knew what Ramadan was.",
+    treatment: "IVF × 2, own gametes",
+    image: "/photos/story-faith-beach.webp",
+    imageAlt: "Family playing in the sand together on a beach",
+  },
+  {
+    id: "rivka-daniel",
+    familyType: "heterosexual-couple",
+    familyLabel: "Heterosexual Couple",
+    name: "Rivka & Daniel",
+    age: 29,
+    location: "Manchester",
+    tag: "Faith & Culture",
+    tradition: "Judaism",
+    theme: "faith",
+    title: "A mashgiach in the lab, and a rabbi on speed dial",
+    excerpt:
+      "Halachic supervision sounded complicated until it wasn't. The harder part was being twenty-nine in a community where everyone marries early.",
+    body: "I was twenty-seven when we started, which in our community felt late, because everyone around us had married at twenty-two and had two children by twenty-five. That's the part nobody prepares you for — not the theology, the arithmetic of other people's families.\n\nHalacha was the straightforward bit. Our rav was clear that IVF with our own gametes is not only permitted but a mitzvah, and he arranged supervision in the lab. The clinic had done it before and barely blinked. Our embryologist and our mashgiach got on well, which I did not expect.\n\nWhat I'd tell someone starting: give the clinic your calendar on day one. Shabbat, yom tov, the whole thing. Ours moved a collection by a day without any drama because we asked in week one rather than week four.",
+    quote: "That's the part nobody prepares you for — not the theology, the arithmetic of other people's families.",
+    treatment: "IVF × 3, halachic supervision",
+  },
+  {
+    id: "maria-catholic",
+    familyType: "heterosexual-couple",
+    familyLabel: "Heterosexual Couple",
+    name: "Maria",
+    age: 38,
+    location: "Liverpool",
+    tag: "Faith & Culture",
+    tradition: "Catholicism",
+    theme: "faith",
+    title: "I went ahead knowing the Church disagreed. I didn't stop going to Mass.",
+    excerpt:
+      "The hardest conversation Maria had about IVF was not with her family or her parish. It was the one she kept having with herself.",
+    body: "I read Donum Vitae properly, which I'd recommend to anyone in my position, because the version that gets repeated informally is harsher than the actual document. It is still a no. But it also says, in plain terms, that a child conceived this way is fully a person and that the desire for a child is good. That mattered to me more than I expected.\n\nI went ahead anyway. I want to be honest that I did not resolve it — I decided, which is a different thing. I still go to Mass. I told one priest, who was kind, and didn't tell the other, who I suspect would not have been.\n\nThe guilt and the grief turned out to be two separate things wearing the same coat. It took a counsellor to point that out. Once I could tell them apart, the guilt got much smaller and the grief got easier to carry.",
+    quote: "The guilt and the grief turned out to be two separate things wearing the same coat.",
+    treatment: "IVF × 2",
+  },
+  {
+    id: "preeti-anand",
+    familyType: "heterosexual-couple",
+    familyLabel: "Heterosexual Couple",
+    name: "Preeti & Anand",
+    age: 41,
+    location: "Leicester",
+    tag: "Faith & Culture",
+    tradition: "Hinduism",
+    theme: "faith",
+    title: "Nothing in our religion forbade it. Everything in our family did.",
+    excerpt:
+      "The objection sounded scriptural and turned out to be about lineage, reputation and what the aunties would say.",
+    body: "When we said donor eggs, the reaction from Anand's side of the family was immediate and framed entirely in religious language. It took us months to work out that there was no scriptural objection underneath it at all. It was about gotra, and about what people would say, and about a fear that the child wouldn't count.\n\nOnce we could name that, it got easier to answer, because those are answerable. The pandit we spoke to was completely relaxed about it and slightly puzzled that we'd asked.\n\nWe told the family we were doing it, not asking. Two relatives stopped speaking to us for a year. Both of them now come to birthdays. Our daughter is three and knows the outline of her story already — we decided early that she would never have a day where she found out.",
+    quote: "We told the family we were doing it, not asking.",
+    treatment: "IVF with donor eggs",
+  },
+  {
+    id: "grace-solo",
+    familyType: "solo-mum",
+    familyLabel: "Solo Mum by Choice",
+    name: "Grace",
+    age: 36,
+    location: "Leeds",
+    tag: "Faith & Culture",
+    tradition: "Protestant & Anglican Christianity",
+    theme: "faith",
+    title: "My church didn't have a category for me",
+    excerpt:
+      "Grace's congregation had no objection to IVF and no idea what to do with a single woman using donor sperm.",
+    body: "My church has no problem with IVF in principle — several couples there have been through it and been prayed for openly. A single woman using donor sperm was a different matter. There wasn't a rule against it. There just wasn't a category.\n\nI told my small group before I told my parents, which sounds odd, but I needed to know whether I was going to lose the community before I took on anything else. Some of them were wonderful. Two weren't. The leadership landed somewhere in the middle, which I've made my peace with.\n\nWhat helped was finding one other woman, two churches over, who had done the same thing four years earlier. One conversation with her was worth about six months of reading. If you're the first person in your congregation to do this, go and find someone who was the first in theirs.",
+    quote: "There wasn't a rule against it. There just wasn't a category.",
+    treatment: "IUI × 3, IVF × 1, donor sperm",
+  },
+  {
+    id: "hannah-ruth",
+    familyType: "same-sex-female",
+    familyLabel: "Same-Sex Female Couple",
+    name: "Hannah & Ruth",
+    age: 34,
+    location: "Cardiff",
+    tag: "Faith & Culture",
+    tradition: "Protestant & Anglican Christianity",
+    theme: "faith",
+    title: "We kept the faith and changed the church",
+    excerpt:
+      "Two women, one congregation that couldn't agree about them, and a decision to stop waiting for permission.",
+    body: "We'd both grown up in church and neither of us wanted to give that up to have a family. For a while we tried to hold both by being quiet, which worked until I was visibly pregnant.\n\nThe congregation split about us, fairly politely. Our vicar was supportive; a section of the congregation was not; nobody was rude to our faces. We eventually moved to a church twenty minutes further away where the question simply didn't arise, and I wish we'd done it two years earlier instead of treating it as a defeat.\n\nReciprocal IVF itself was the easy part — Ruth's eggs, my body, our donor. The theology we'd already worked out for ourselves years before. What took longer was accepting that we didn't need a committee to ratify it.",
+    quote: "What took longer was accepting that we didn't need a committee to ratify it.",
+    treatment: "Reciprocal IVF",
+  },
+  {
+    id: "jaspreet-harjit",
+    familyType: "heterosexual-couple",
+    familyLabel: "Heterosexual Couple",
+    name: "Jaspreet & Harjit",
+    age: 35,
+    location: "Wolverhampton",
+    tag: "Faith & Culture",
+    tradition: "Sikhism",
+    theme: "faith",
+    title: "We told the whole gurdwara in the end. It was a relief.",
+    excerpt:
+      "Three years of secrecy, one accidental disclosure, and the discovery that four other couples had been hiding the same thing.",
+    body: "There is nothing in Sikhi that prohibits IVF. We checked properly, twice, because the silence around it in our community made us assume there must be something. There isn't. The secrecy was entirely social.\n\nWe hid it for three years. Fake work trips to cover appointments, that sort of thing. Then Harjit's mother worked it out and told one person, and within a fortnight everyone knew.\n\nIt was a relief. Four other couples came to us privately in the following months, all of whom had been doing exactly what we'd been doing, none of whom had told each other. That's what stigma does — it makes five families each think they're the only one. If we'd said something at the start we'd have had four years of company.",
+    quote: "That's what stigma does — it makes five families each think they're the only one.",
+    treatment: "ICSI × 2",
   },
 ];
 
-export const FEATURED_STORIES = ALL_STORIES.slice(0, 3);
+/**
+ * The homepage carousel: one story per family type, plus a faith story, so
+ * every visitor sees a family that looks like theirs within one swipe.
+ */
+const FEATURED_IDS = [
+  "alice-iris",        // solo mum
+  "sarah-priya-maya",  // two mums
+  "tom-marcus-elliot", // two dads
+  "james-oscar",       // solo dad
+  "emma-david-isla",   // mum and dad
+  "aisha-yusuf",       // faith & belief
+];
+export const FEATURED_STORIES = FEATURED_IDS.map(
+  (id) => ALL_STORIES.find((s) => s.id === id)!,
+);
+
+/** Stories told through the lens of religion, culture or belief. Used by /faith. */
+export const FAITH_STORIES = ALL_STORIES.filter((s) => s.theme === "faith");

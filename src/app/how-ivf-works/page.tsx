@@ -340,24 +340,24 @@ const STAGES = [
 export default function HowIVFWorksPage() {
   return (
     <main className="min-h-screen bg-background">
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Hero */}
-      <Section band={0} padding="pt-16 md:pt-24 pb-12 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-20 md:pt-28 pb-16 md:pb-16">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           The science
         </p>
         <h1
           className="font-sans font-bold text-[#1A3A25] mb-5"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           What actually happens.
         </h1>
-        <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
+        <p className="text-lg font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
           From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English.
         </p>
 
@@ -369,7 +369,7 @@ export default function HowIVFWorksPage() {
               href={`#step-${s.number}`}
               className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-[#1A3A25] hover:bg-[#1A3A25] hover:text-white hover:border-[#1A3A25] transition-colors"
             >
-              <span className="font-[600] text-muted text-[10px]">{s.number}</span>
+              <span className="font-[600] text-muted text-[12px]">{s.number}</span>
               {s.title}
             </a>
           ))}
@@ -394,7 +394,7 @@ export default function HowIVFWorksPage() {
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <span
-                    className="inline-flex items-center justify-center text-[11px] font-[700] font-sans rounded-full px-3 py-1"
+                    className="inline-flex items-center justify-center text-[13px] font-[700] font-sans rounded-full px-3 py-1"
                     style={{ background: "#C5E600", color: "#1A3A25" }}
                   >
                     Step {stage.number}
@@ -405,7 +405,7 @@ export default function HowIVFWorksPage() {
                 </div>
                 <h2
                   className="font-sans font-bold mb-5"
-                  style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", lineHeight: 1.1, color: "#1A3A25" }}
+                  style={{ fontSize: "clamp(2rem, 2.75vw, 3rem)", lineHeight: 1.1, color: "#1A3A25" }}
                 >
                   {stage.title}
                 </h2>
@@ -418,7 +418,7 @@ export default function HowIVFWorksPage() {
                   {stage.facts.map((fact, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm font-sans" style={{ color: "#1A3A25" }}>
                       <span
-                        className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-[700]"
+                        className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[11px] font-[700]"
                         style={{ background: "#F0F8E8", color: "#1A3A25" }}
                       >
                         ✓

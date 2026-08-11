@@ -3,15 +3,24 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
-import { ArrowRight, BookOpen, Calculator, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, BookOpen, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
+
+interface CategoryResource {
+  title: string;
+  type: string;
+  /** Slug of a guide under /resources. Omit when `href` points elsewhere. */
+  slug?: string;
+  /** An absolute path, for entries that live outside the guide library. */
+  href?: string;
+}
 
 export const metadata: Metadata = {
   title: "Resources | CairnFertility",
   description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
 
-const CATEGORIES = [
+const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryResource[] }[] = [
   {
     icon: <Calculator className="h-5 w-5" />,
     title: "Finance & Costs",
@@ -63,6 +72,16 @@ const CATEGORIES = [
     ],
   },
   {
+    icon: <Compass className="h-5 w-5" />,
+    title: "Faith, Culture & Belief",
+    resources: [
+      { title: "Where the major traditions stand on IVF", type: "Explainer", href: "/faith#traditions" },
+      { title: "Handling conversations that are anti-IVF", type: "Scripts", href: "/faith#conversations" },
+      { title: "Keeping your practice through a treatment cycle", type: "Guide", href: "/faith#observance" },
+      { title: "Faith-aware counselling and support", type: "Directory", href: "/faith#support" },
+    ],
+  },
+  {
     icon: <BookOpen className="h-5 w-5" />,
     title: "Community & Stories",
     resources: [
@@ -78,24 +97,24 @@ export default function ResourcesPage() {
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Everything you need
         </p>
         <h1
           className="font-sans font-bold text-[#1A3A25] mb-4"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           Resources
         </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
           Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
         </p>
       </Section>
@@ -105,7 +124,7 @@ export default function ResourcesPage() {
         {/* DCN featured link */}
         <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
           <div className="flex-1">
-            <p className="text-[10px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
+            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
               Essential external resource · All family types
             </p>
             <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
@@ -128,7 +147,7 @@ export default function ResourcesPage() {
 
         {/* Browse by family type */}
         <div>
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
             Browse by family type
           </p>
           <div className="flex flex-wrap gap-2">
@@ -156,13 +175,13 @@ export default function ResourcesPage() {
               <ul className="space-y-3">
                 {cat.resources.map((r) => (
                   <li key={r.title}>
-                    <Link href={`/resources/${r.slug}`} className="flex items-start gap-3 group">
+                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
                       <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
                       <div>
                         <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
                           {r.title}
                         </p>
-                        <span className="text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+                        <span className="text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
                           {r.type}
                         </span>
                       </div>
