@@ -36,8 +36,13 @@ export default function GetStartedPage() {
       </Section>
 
       {/* Wizard — gets the full container width; it keeps question steps in a
-          centred column and lets the results grid span the whole page. */}
-      <Section band={1} padding="py-12 md:py-16">
+          centred column and lets the results grid span the whole page. The
+          wizard renders its own state-driven backdrop mark, so the band only
+          needs to crop the bleed. overflow-clip rather than overflow-hidden:
+          hidden leaves the band programmatically scrollable, so focus/click
+          scroll-into-view could drag the whole band sideways toward the
+          off-screen shape. clip crops without ever becoming scrollable. */}
+      <Section band={1} padding="py-12 md:py-16" className="overflow-clip">
         <ClinicMatcher />
       </Section>
     </main>
