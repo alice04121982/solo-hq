@@ -57,19 +57,21 @@ export function CTASection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
+              <a
+                href="/waitlist"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
                 style={{ background: "var(--accent)", color: "#1A3A25" }}
               >
                 Join the Waitlist
                 <ArrowRight className="h-4 w-4" />
-              </button>
-              <button
+              </a>
+              <a
+                href="/our-story"
                 className="inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-black/10"
                 style={{ borderColor: "rgba(0, 83, 83, 0.35)", color: "var(--teal)" }}
               >
                 Follow Our Journey
-              </button>
+              </a>
             </div>
 
             <p className="text-xs font-sans mt-6" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
