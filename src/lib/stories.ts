@@ -63,7 +63,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "sarah-priya-maya",
     familyType: "same-sex-female",
-    familyLabel: "Same-Sex Female Couple",
+    familyLabel: "Two Mums",
     name: "Sarah & Priya",
     age: 35,
     location: "London",
@@ -95,7 +95,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "tom-marcus-elliot",
     familyType: "same-sex-male",
-    familyLabel: "Same-Sex Male Couple",
+    familyLabel: "Two Dads",
     name: "Tom & Marcus",
     age: 38,
     location: "London",
@@ -111,7 +111,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "emma-david-isla",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Emma & David",
     age: 34,
     location: "London",
@@ -151,7 +151,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "aisha-yusuf",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Aisha & Yusuf",
     age: 33,
     location: "Birmingham",
@@ -170,7 +170,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "rivka-daniel",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Rivka & Daniel",
     age: 29,
     location: "Manchester",
@@ -187,7 +187,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "maria-catholic",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Maria",
     age: 38,
     location: "Liverpool",
@@ -204,7 +204,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "preeti-anand",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Preeti & Anand",
     age: 41,
     location: "Leicester",
@@ -238,7 +238,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "hannah-ruth",
     familyType: "same-sex-female",
-    familyLabel: "Same-Sex Female Couple",
+    familyLabel: "Two Mums",
     name: "Hannah & Ruth",
     age: 34,
     location: "Cardiff",
@@ -255,7 +255,7 @@ export const ALL_STORIES: Story[] = [
   {
     id: "jaspreet-harjit",
     familyType: "heterosexual-couple",
-    familyLabel: "Heterosexual Couple",
+    familyLabel: "Mum and Dad",
     name: "Jaspreet & Harjit",
     age: 35,
     location: "Wolverhampton",

@@ -1,17 +1,17 @@
 import { Logo } from "./logo";
+import { FAMILY_TYPES } from "@/lib/family-types";
 
 const TEAL = "var(--teal)";
 const PINK = "#f9c6da";
 const PINK_MUTED = "#c4a0ae";
 const PINK_HOT = "#F0A8C4";
 
-const FAMILY_LINKS = [
-  { label: "Solo Mums by Choice", href: "/families/solo-mum" },
-  { label: "Same-Sex Female Couples", href: "/families/same-sex-female" },
-  { label: "Same-Sex Male Couples", href: "/families/same-sex-male" },
-  { label: "Solo Dads by Choice", href: "/families/single-dad" },
-  { label: "Heterosexual Couples", href: "/families/heterosexual-couple" },
-];
+// Derived from the canonical family-type data so footer naming can never
+// drift from the labels used on the family pages themselves.
+const FAMILY_LINKS = FAMILY_TYPES.map((f) => ({
+  label: f.label,
+  href: `/families/${f.slug}`,
+}));
 
 const TOOL_LINKS = [
   { label: "Clinic Comparison Tool", href: "/ivf-finder" },
