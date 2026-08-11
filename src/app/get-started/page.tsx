@@ -14,10 +14,9 @@ export default function GetStartedPage() {
         <SiteNav />
       </div>
 
-      {/* Header and wizard sit in separate bands but share one left-aligned
-          column, so the page still reads against a single left edge. */}
+      {/* Header and wizard read as one centred, full-page journey. */}
       <Section band={0} padding="py-12 md:py-16">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
           <span
             className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
             style={{ background: "#C5E600", color: "#1A3A25" }}
@@ -36,11 +35,10 @@ export default function GetStartedPage() {
         </div>
       </Section>
 
-      {/* Wizard */}
+      {/* Wizard — gets the full container width; it keeps question steps in a
+          centred column and lets the results grid span the whole page. */}
       <Section band={1} padding="py-12 md:py-16">
-        <div className="max-w-2xl">
-          <ClinicMatcher />
-        </div>
+        <ClinicMatcher />
       </Section>
     </main>
   );
