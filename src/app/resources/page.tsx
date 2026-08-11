@@ -3,8 +3,38 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
-import { ArrowRight, BookOpen, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  BookUser,
+  Calculator,
+  Compass,
+  ExternalLink,
+  Map,
+  FileText,
+  Heart,
+  Baby,
+  LayoutTemplate,
+  Library,
+  Lightbulb,
+  ListChecks,
+  ScrollText,
+  Quote,
+} from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
+
+/** Flat 2D icon per resource format, shown next to the type label. */
+const TYPE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Guide: BookOpen,
+  Template: LayoutTemplate,
+  Script: ScrollText,
+  Scripts: ScrollText,
+  Checklist: ListChecks,
+  Explainer: Lightbulb,
+  Directory: BookUser,
+  Stories: Quote,
+  "Reading list": Library,
+};
 
 interface CategoryResource {
   title: string;
@@ -173,21 +203,25 @@ export default function ResourcesPage() {
               <div className="text-accent mb-4">{cat.icon}</div>
               <h2 className="font-sans font-bold text-[#1A3A25] text-xl mb-5">{cat.title}</h2>
               <ul className="space-y-3">
-                {cat.resources.map((r) => (
-                  <li key={r.title}>
-                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
-                      <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
-                      <div>
-                        <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
-                          {r.title}
-                        </p>
-                        <span className="text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
-                          {r.type}
-                        </span>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
+                {cat.resources.map((r) => {
+                  const TypeIcon = TYPE_ICONS[r.type] ?? FileText;
+                  return (
+                    <li key={r.title}>
+                      <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
+                        <ArrowRight className="h-3.5 w-3.5 text-[#1A3A25]/60 shrink-0 mt-0.5 group-hover:text-[#1A3A25] transition-colors duration-150" />
+                        <div>
+                          <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
+                            {r.title}
+                          </p>
+                          <span className="inline-flex items-center gap-1.5 text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+                            <TypeIcon className="h-3 w-3 shrink-0" />
+                            {r.type}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
