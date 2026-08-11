@@ -86,7 +86,7 @@ export function TraditionExplorer({ traditions }: { traditions: FaithTradition[]
                 {t.practicalNotes && t.practicalNotes.length > 0 && (
                   <div
                     className="mt-8 rounded-2xl p-5 md:p-6"
-                    style={{ background: "var(--cream)" }}
+                    style={{ background: "var(--lime)" }}
                   >
                     <p
                       className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"

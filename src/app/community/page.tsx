@@ -4,8 +4,7 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { QuoteCard } from "@/components/quote-card";
 import { BentoCard } from "@/components/bento-card";
-import { WaitlistForm } from "@/components/waitlist-form";
-import { FollowJourney } from "@/components/follow-journey";
+import { CommunityWaitlistForm } from "@/components/community-waitlist-form";
 import { COMMUNITY_FEATURES } from "@/lib/community";
 import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
@@ -106,7 +105,7 @@ export default function CommunityPage() {
           </div>
 
           <BentoCard white className="lg:sticky lg:top-8">
-            <WaitlistForm />
+            <CommunityWaitlistForm />
           </BentoCard>
         </div>
       </Section>
@@ -163,16 +162,24 @@ export default function CommunityPage() {
               className="text-sm font-sans leading-relaxed"
               style={{ color: "var(--on-teal-muted)", maxWidth: "48ch" }}
             >
-              A fortnightly letter on what we&rsquo;re building and what
-              we&rsquo;re learning about IVF along the way — clinic pricing,
-              policy changes, and stories from the community as it forms. No
-              name required, no commitment, unsubscribe any time.
+              We&rsquo;re building this in the open. Our Story is the running
+              log of what we&rsquo;re making and what we&rsquo;re learning
+              about IVF along the way — clinic pricing, policy changes, and
+              the community as it forms. No signup, no commitment.
             </p>
           </div>
-          <div className="lg:pt-16">
-            <FollowJourney />
-            <p className="text-xs font-sans mt-5" style={{ color: "var(--on-teal-muted)" }}>
-              No spam. No toxic positivity. Just the real stuff, fortnightly.
+          <div className="lg:pt-16 flex flex-col items-start gap-5">
+            <a
+              href="/our-story"
+              className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+            >
+              Read Our Story
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <p className="text-xs font-sans" style={{ color: "var(--on-teal-muted)" }}>
+              Or find us on the socials in the footer below — same honesty,
+              shorter form.
             </p>
           </div>
         </div>

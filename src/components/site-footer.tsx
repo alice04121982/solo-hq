@@ -157,7 +157,7 @@ export function SiteFooter() {
           style={{ borderColor: "rgba(249,198,218,0.2)" }}
         >
           <p className="text-xs font-sans" style={{ color: PINK }}>
-            &copy; 2026 Cairn Fertility. Made in the UK.
+            &copy; 2026 CairnFertility. Made in the UK.
           </p>
           <p
             className="text-xs font-sans leading-relaxed"

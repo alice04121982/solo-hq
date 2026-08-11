@@ -1,17 +1,24 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { Logo } from "./logo";
 
-const NAV_LINKS = [
+// Core links stay flat on the bar. Lighter-weight pages live behind "More" so
+// a 7th/8th item never has to fight the logo and CTA for room at lg.
+const PRIMARY_LINKS = [
   { label: "Family Types", href: "/families" },
   { label: "How IVF Works", href: "/how-ivf-works" },
   { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Stories", href: "/stories" },
+];
+
+const MORE_LINKS = [
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
+  { label: "About", href: "/about" },
+  { label: "Our Story", href: "/our-story" },
 ];
 
 interface SiteNavProps {
@@ -41,7 +48,10 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
   const isDark = theme === "dark";
+  const moreActive = MORE_LINKS.some((l) => l.href === pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -65,6 +75,24 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
     };
   }, [open]);
 
+  // "More" is a lightweight dropdown, not a modal — closes on outside click or
+  // Escape, but never touches body scroll the way the mobile overlay does.
+  useEffect(() => {
+    if (!moreOpen) return;
+    const onClick = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) setMoreOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMoreOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [moreOpen]);
+
   return (
     <nav
       className={`relative flex items-center justify-between gap-8 py-6 transition-all duration-300 ${
@@ -75,22 +103,67 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <Logo height={44} onDark={isDark} />
       </a>
 
-      {/* Desktop links — six items no longer fit beside the logo and CTA at the
-          md breakpoint, so the burger now carries the nav until lg. */}
+      {/* Desktop links — eight items across primary + "More" no longer fit
+          beside the logo and CTA at the md breakpoint, so the burger still
+          carries the full list until lg. The inactive-link tint on dark is
+          #deb8c8 rather than the standard --on-teal-muted body-copy token
+          (#c4a0ae only clears ~3.8:1 on --teal, short of the 4.5:1 text
+          needs at nav size); #deb8c8 clears ~5:1 while staying in the same
+          mauve-pink family as the active state. */}
       <div className="hidden lg:flex items-center gap-5 xl:gap-8">
-        {NAV_LINKS.map((l) => (
+        {PRIMARY_LINKS.map((l) => (
           <a
             key={l.href}
             href={l.href}
             className={`text-sm font-sans transition-colors duration-150 ${
               isDark
-                ? pathname === l.href ? "text-[#f9c6da]" : "text-[#c4a0ae] hover:text-[#f9c6da]"
+                ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
                 : pathname === l.href ? "text-foreground" : "text-muted hover:text-foreground"
             }`}
           >
             {l.label}
           </a>
         ))}
+
+        {/* "More" — a small dropdown for lighter-weight pages, so the bar
+            stays short without dropping them from desktop nav entirely. */}
+        <div className="relative" ref={moreRef}>
+          <button
+            type="button"
+            onClick={() => setMoreOpen((v) => !v)}
+            aria-haspopup="menu"
+            aria-expanded={moreOpen}
+            className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
+              isDark
+                ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
+                : moreActive ? "text-foreground" : "text-muted hover:text-foreground"
+            }`}
+          >
+            More
+            <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-150 ${moreOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {moreOpen && (
+            <div
+              role="menu"
+              className="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-border bg-white p-2 shadow-xl z-50"
+            >
+              {MORE_LINKS.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  role="menuitem"
+                  onClick={() => setMoreOpen(false)}
+                  className={`block rounded-lg px-3 py-2.5 text-sm font-sans transition-colors duration-150 ${
+                    pathname === l.href ? "text-foreground bg-surface-hover" : "text-muted hover:text-foreground hover:bg-surface-hover"
+                  }`}
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* CTA */}
@@ -139,10 +212,30 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           </div>
 
           {/* Links fill the space between the header and the footer action.
-              Six of them at this type size can exceed a short phone viewport,
-              so the column scrolls rather than clipping the last item. */}
+              Eight of them at this type size can exceed a short phone
+              viewport, so the column scrolls rather than clipping the last
+              item. A thin rule separates the core pages from "more" so the
+              grouping the desktop dropdown carries isn't lost on mobile. */}
           <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-6 py-4">
-            {NAV_LINKS.map((l) => (
+            {PRIMARY_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="font-sans text-center transition-opacity duration-150 hover:opacity-70"
+                style={{
+                  fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
+                  lineHeight: 1.2,
+                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
+
+            <div className="w-10 h-px my-1" style={{ background: "rgba(249, 198, 218, 0.2)" }} aria-hidden />
+
+            {MORE_LINKS.map((l) => (
               <a
                 key={l.href}
                 href={l.href}

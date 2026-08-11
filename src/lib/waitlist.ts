@@ -8,13 +8,14 @@ import type {
 } from "./community";
 
 /**
- * Client-side persistence for the community waitlist and the journey letter.
+ * Client-side state for the community waitlist journey.
  *
- * There is no backend yet — signups live in localStorage so the journey can
- * be walked end-to-end (including returning to the page already signed up)
- * while the product is pre-launch. `submitWaitlist` / `submitFollow` are the
- * seams a real API slots into: swap their bodies for a fetch and every
- * component stays untouched.
+ * The email is the part that must survive — it goes to POST /api/waitlist
+ * (the Supabase-backed table behind the /waitlist page as well, so both
+ * forms feed one list). The richer answers — pathway, stage, interests —
+ * have no server home yet; they live in localStorage so the journey can
+ * remember a returning visitor, and they move server-side when the table
+ * grows columns for them.
  */
 
 export interface WaitlistSignup {
@@ -23,11 +24,6 @@ export interface WaitlistSignup {
   pathway: CommunityPathway;
   stage: CommunityStage;
   interests: CommunityInterest[];
-  joinedAt: string;
-}
-
-export interface FollowSignup {
-  email: string;
   joinedAt: string;
 }
 
@@ -83,7 +79,6 @@ function createSignupStore<T>(key: string) {
 }
 
 const waitlistStore = createSignupStore<WaitlistSignup>("cairn-waitlist-signup");
-const followStore = createSignupStore<FollowSignup>("cairn-follow-signup");
 
 export function useWaitlistSignup(): WaitlistSignup | null {
   return useSyncExternalStore(
@@ -93,28 +88,37 @@ export function useWaitlistSignup(): WaitlistSignup | null {
   );
 }
 
-export function useFollowSignup(): FollowSignup | null {
-  return useSyncExternalStore(
-    followStore.subscribe,
-    followStore.getSnapshot,
-    followStore.getServerSnapshot
-  );
-}
-
+/**
+ * Joins the waitlist for real, then remembers the journey locally.
+ * "already-joined" from the API counts as success — being on the list twice
+ * is not a failure from the signer-upper's point of view.
+ *
+ * @throws Error with a user-facing message when the API rejects the signup
+ *   or the network fails; nothing is remembered locally in that case.
+ */
 export async function submitWaitlist(
   signup: Omit<WaitlistSignup, "joinedAt">
 ): Promise<void> {
-  await new Promise((r) => setTimeout(r, 600));
+  let res: Response;
+  let data: { error?: string };
+  try {
+    res = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: signup.email }),
+    });
+    data = await res.json();
+  } catch {
+    throw new Error("Something went wrong. Please check your connection and try again.");
+  }
+  if (!res.ok) {
+    throw new Error(data.error ?? "Something went wrong. Please try again.");
+  }
   waitlistStore.set({ ...signup, joinedAt: new Date().toISOString() });
 }
 
 export function clearWaitlistSignup(): void {
   waitlistStore.set(null);
-}
-
-export async function submitFollow(email: string): Promise<void> {
-  await new Promise((r) => setTimeout(r, 600));
-  followStore.set({ email, joinedAt: new Date().toISOString() });
 }
 
 export function isValidEmail(email: string): boolean {
