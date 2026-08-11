@@ -330,9 +330,9 @@ export default function FaithPage() {
               </p>
             </div>
             <Link
-              href="/get-started"
+              href="/stories/share"
               className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Share your story
               <ArrowRight className="h-3.5 w-3.5" />
