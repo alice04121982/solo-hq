@@ -162,15 +162,16 @@ export default function CommunityPage() {
               className="text-sm font-sans leading-relaxed"
               style={{ color: "var(--on-teal-muted)", maxWidth: "48ch" }}
             >
-              We&rsquo;re building this in the open. Our Story is the running
-              log of what we&rsquo;re making and what we&rsquo;re learning
-              about IVF along the way — clinic pricing, policy changes, and
-              the community as it forms. No signup, no commitment.
+              We&rsquo;re building this in the open. Our story, on the About
+              page, is the running log of what we&rsquo;re making and what
+              we&rsquo;re learning about IVF along the way — clinic pricing,
+              policy changes, and the community as it forms. No signup, no
+              commitment.
             </p>
           </div>
           <div className="lg:pt-16 flex flex-col items-start gap-5">
             <a
-              href="/our-story"
+              href="/about#story"
               className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >

@@ -66,7 +66,7 @@ export function CTASection() {
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
-                href="/our-story"
+                href="/about#story"
                 className="inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-black/10"
                 style={{ borderColor: "var(--teal-35)", color: "var(--teal)" }}
               >
