@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
-import { ArrowRight, BookOpen, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
 interface CategoryResource {
@@ -30,6 +30,16 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
       { title: "Fertility finance options: loans, grants & employer schemes", type: "Guide", slug: "fertility-finance-options" },
       { title: "Budget spreadsheet template", type: "Template", slug: "ivf-budget-template" },
       { title: "How to ask your employer about fertility benefits", type: "Script", slug: "employer-fertility-benefits" },
+    ],
+  },
+  {
+    icon: <Briefcase className="h-5 w-5" />,
+    title: "Work & Employment",
+    resources: [
+      { title: "Your rights at work during fertility treatment", type: "Explainer", href: "/work#rights" },
+      { title: "What employers offer, and how to find out what yours does", type: "Guide", href: "/work#find-out" },
+      { title: "What to say at work without disclosing more than you want", type: "Scripts", href: "/work#asking" },
+      { title: "Weighing fertility benefits when you take a job", type: "Checklist", href: "/work#job-offers" },
     ],
   },
   {
