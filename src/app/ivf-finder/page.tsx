@@ -45,8 +45,10 @@ export default function IvfFinderPage() {
         </div>
       </section>
 
-      {/* Hero + finder */}
-      <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28">
+      {/* Hero + finder. The band is tall (it holds the whole finder), so the
+          backdrop is the dots treatment — cropped at the band's edges — rather
+          than a mid-height mark that would sit behind the results list. */}
+      <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28" backdrop={{ shape: "dots" }}>
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           UK and international clinics
         </p>

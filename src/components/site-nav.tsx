@@ -20,7 +20,6 @@ const MORE_LINKS = [
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
-  { label: "Our Story", href: "/our-story" },
 ];
 
 interface SiteNavProps {
