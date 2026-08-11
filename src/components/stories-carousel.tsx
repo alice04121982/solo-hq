@@ -67,7 +67,7 @@ export function StoriesCarousel({ stories }: { stories: Story[] }) {
               <StoryImage
                 src={story.image}
                 alt={story.imageAlt}
-                label={story.tradition ?? story.familyLabel}
+                label={story.theme === "faith" ? "Faith & Culture" : story.familyLabel}
                 sizes="(min-width: 1024px) 560px, (min-width: 640px) 440px, 85vw"
               />
             </div>
