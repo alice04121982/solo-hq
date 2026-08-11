@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
+import { StoryImage } from "@/components/story-image";
 import { Section } from "@/components/section";
 import { QuoteCard } from "@/components/quote-card";
 import { FAMILY_SHAPES, ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
@@ -193,12 +193,11 @@ export default function Home() {
               style={{ borderColor: "var(--border)", background: "#FFFFFF" }}
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
+                <StoryImage
                   src={story.image}
                   alt={story.imageAlt}
-                  fill
+                  label={story.tradition ?? story.familyLabel}
                   sizes="(min-width: 768px) 360px, 100vw"
-                  className="object-cover"
                 />
               </div>
 
