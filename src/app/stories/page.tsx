@@ -118,7 +118,7 @@ export default function StoriesPage() {
                 <StoryImage
                   src={story.image}
                   alt={story.imageAlt}
-                  label={story.tradition ?? story.familyLabel}
+                  label={story.theme === "faith" ? "Faith & Culture" : story.familyLabel}
                   sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"
                   className="[filter:saturate(0.85)_sepia(0.06)]"
                 />
@@ -132,10 +132,10 @@ export default function StoriesPage() {
                   </span>
                   <span className="text-[12px] text-muted font-sans">·</span>
                   <span className="text-[12px] font-sans text-muted">{story.treatment}</span>
-                  {story.tradition && (
+                  {story.theme === "faith" && (
                     <>
                       <span className="text-[12px] text-muted font-sans">·</span>
-                      <span className="text-[12px] font-sans text-muted">{story.tradition}</span>
+                      <span className="text-[12px] font-sans text-muted">Faith &amp; Culture</span>
                     </>
                   )}
                 </div>
