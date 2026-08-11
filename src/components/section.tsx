@@ -30,7 +30,7 @@ const TONE_BACKGROUND: Record<SectionTone, string> = {
  * each other.
  */
 const TONE_BACKDROP_COLOR: Record<SectionTone, string> = {
-  white: "var(--cream)",
+  white: "var(--lime)",
   cream: "var(--lavender-light)",
   teal: "var(--accent)",
 };

@@ -50,7 +50,7 @@ function FamilyCard({ family }: { family: FamilyType }) {
           className="mt-auto pt-3 self-start text-xs font-sans font-medium leading-[18px]"
           style={{ color: "var(--teal)" }}
         >
-          <span className="rounded-full px-3 py-1" style={{ background: "var(--cream)" }}>
+          <span className="rounded-full px-3 py-1" style={{ background: "var(--lime)" }}>
             Read the guide →
           </span>
         </span>

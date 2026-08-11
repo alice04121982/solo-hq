@@ -21,7 +21,7 @@ export type QuoteTone = "pink" | "cream" | "teal";
  */
 const TONES: Record<QuoteTone, { bubble: string; quote: string }> = {
   pink: { bubble: "var(--lavender)", quote: "var(--teal)" },
-  cream: { bubble: "var(--cream)", quote: "var(--teal)" },
+  cream: { bubble: "var(--lime)", quote: "var(--teal)" },
   teal: { bubble: "var(--teal)", quote: "var(--on-teal)" },
 };
 

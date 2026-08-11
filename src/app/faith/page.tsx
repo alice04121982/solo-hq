@@ -105,7 +105,7 @@ export default function FaithPage() {
 
       {/* How we've written this */}
       <section className="mx-auto px-6 md:px-12 lg:px-16 pb-20 md:pb-28">
-        <div className="rounded-2xl p-6 md:p-10" style={{ background: "var(--cream)" }}>
+        <div className="rounded-2xl p-6 md:p-10" style={{ background: "var(--lime)" }}>
           <p
             className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
             style={{ color: TEAL_SOFT }}
