@@ -18,9 +18,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
-  if (!guide) return { title: "Not found | Cairn Fertility" };
+  if (!guide) return { title: "Not found | CairnFertility" };
   return {
-    title: `${guide.title} | Cairn Fertility`,
+    title: `${guide.title} | CairnFertility`,
     description: guide.intro.slice(0, 155),
   };
 }

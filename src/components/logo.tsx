@@ -19,9 +19,9 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
         letterSpacing: "-0.02em",
         color: onDark ? "#FFFFFF" : "var(--foreground)",
       }}
-      aria-label="Cairn Fertility"
+      aria-label="CairnFertility"
     >
-      Cairn Fertility
+      CairnFertility
     </span>
   );
 }

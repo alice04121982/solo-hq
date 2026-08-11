@@ -9,9 +9,15 @@
  * relevant sections here in the same pull request.
  *
  * Current facts these pages are written against (verify before editing):
- * - No user accounts, no payments, no database, no API routes.
+ * - No user accounts, no payments.
  * - No cookies, no analytics, no advertising or tracking of any kind.
- * - The newsletter and waitlist forms are not wired up: nothing is captured.
+ * - The waitlist form (/waitlist) is wired up: submitting it sends your
+ *   email address to a single Supabase table via one API route
+ *   (POST /api/waitlist), solely so we can email you when the community
+ *   feature opens. The table has row-level security enabled and no
+ *   read policy, so the list cannot be queried back out over the public
+ *   API — only inserted into. See src/app/api/waitlist/route.ts and
+ *   src/lib/supabase-server.ts.
  * - The location search sends browser geolocation coordinates to
  *   api.postcodes.io (Ideal Postcodes, UK) to resolve a postcode; we never
  *   see or store the coordinates ourselves.
@@ -78,7 +84,7 @@ const PRIVACY: LegalPage = {
       ],
       bullets: [
         "We set no cookies and run no analytics, advertising, or tracking of any kind.",
-        "We have no user accounts, no databases of visitors, and we take no payments.",
+        "We have no user accounts and we take no payments. The one thing we do store is your email address, and only if you choose to join our waitlist.",
         "Your answers in our clinic matching tool — including anything about your health — are processed entirely within your own browser. They are never sent to us or to anyone else.",
         "If you use the location search, your coordinates go to one UK postcode-lookup service, with your permission, and are not stored by us.",
         "We never sell personal data, and we never share it for advertising. There are no exceptions to this.",
@@ -106,6 +112,11 @@ const PRIVACY: LegalPage = {
             "If you email us, we receive your address and whatever you choose to write. We use it only to reply and to keep a record of the correspondence. Please don't include medical details in an email — we are not a medical service and don't need them.",
         },
         {
+          term: "Joining the waitlist",
+          description:
+            "If you submit your email on our waitlist page, it is stored, together with the date you joined, in a database hosted by Supabase (in the EU) so we can email you once when the community feature opens. We don't add you to any other list, and this database cannot be browsed or searched back out over the public website — only new emails can be added to it. See 'Who we share data with' below for Supabase's role.",
+        },
+        {
           term: "Location search (optional)",
           description:
             "If you choose to use \"find clinics near me\", your browser asks your permission first. With it, your device's coordinates are sent to Postcodes.io, a UK postcode-lookup service operated by Ideal Postcodes, purely to convert them into your nearest postcode. The postcode then appears in the page address so results can be shared or bookmarked. We do not store your coordinates, and we cannot see your location history.",
@@ -122,7 +133,7 @@ const PRIVACY: LegalPage = {
         },
       ],
       postBody: [
-        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, no marketing lists. The newsletter and waitlist prompts on the site are not yet active — until they are, submitting an email address there does nothing and nothing is captured. If we switch them on, we will update this policy first and say plainly what signing up involves.",
+        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, and no marketing lists beyond the single waitlist described above. We don't currently have a general newsletter; if we add one, we will update this policy first and say plainly what signing up involves.",
       ],
     },
     {
@@ -142,7 +153,7 @@ const PRIVACY: LegalPage = {
         {
           term: "Consent",
           description:
-            "The location search runs only after you grant your browser's permission prompt, and you can refuse or revoke it at any time in your browser settings without losing access to anything else on the site.",
+            "The location search runs only after you grant your browser's permission prompt, and you can refuse or revoke it at any time in your browser settings without losing access to anything else on the site. Joining the waitlist is the same: you choose to type your email and submit it, and you can withdraw that consent at any time by asking us to delete it.",
         },
         {
           term: "Legitimate interests",
@@ -154,16 +165,17 @@ const PRIVACY: LegalPage = {
     {
       heading: "How long we keep things",
       body: [
-        "We keep email correspondence for as long as it is genuinely needed to deal with your enquiry and for a reasonable period afterwards, then delete it. We hold no other stores of personal data: there is no visitor database to retain. Hosting logs are kept by Vercel on infrastructure timescales (typically days, not months) under their own retention policies.",
+        "We keep email correspondence for as long as it is genuinely needed to deal with your enquiry and for a reasonable period afterwards, then delete it. Waitlist emails are kept until we either email you about the community feature opening or you ask us to remove you, whichever comes first — we don't hold them indefinitely once that purpose is served. Hosting logs are kept by Vercel on infrastructure timescales (typically days, not months) under their own retention policies.",
       ],
     },
     {
       heading: "Who we share data with",
       body: [
-        "We use two service providers, and this list is exhaustive:",
+        "We use three service providers, and this list is exhaustive:",
       ],
       bullets: [
         "Vercel Inc. — hosts and serves the website. Vercel is a US company; where visitor data such as IP addresses is processed outside the UK, that transfer is covered by recognised safeguards including the UK Extension to the EU–US Data Privacy Framework and standard contractual clauses.",
+        "Supabase Inc. — stores waitlist email addresses in a database hosted in the EU. Supabase is a US company operating EU infrastructure for this data; where any transfer outside the UK/EU occurs, it is covered by standard contractual clauses.",
         "Ideal Postcodes (Postcodes.io) — a UK service that converts coordinates to postcodes, used only when you choose the location search and grant permission.",
       ],
       postBody: [
@@ -180,7 +192,7 @@ const PRIVACY: LegalPage = {
     {
       heading: "Your rights",
       body: [
-        "You have rights over personal data we hold about you — in practice, that means email correspondence, since it is the only personal data we keep:",
+        "You have rights over personal data we hold about you — in practice, that means email correspondence and, if you've joined it, your waitlist entry, since those are the only personal data we keep:",
       ],
       bullets: [
         "Access: ask for a copy of what we hold about you.",
