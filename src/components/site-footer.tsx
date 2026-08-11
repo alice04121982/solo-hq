@@ -19,6 +19,7 @@ const TOOL_LINKS = [
   { label: "Faith, Culture & IVF", href: "/faith" },
   { label: "Difficult Conversations", href: "/faith#conversations" },
   { label: "Resources", href: "/resources" },
+  { label: "Community Waitlist", href: "/community" },
   // News is unlisted until there is a real editorial pipeline; the page
   // itself stays in the repo at /news.
 ];
