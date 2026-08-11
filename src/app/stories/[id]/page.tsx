@@ -70,7 +70,7 @@ export default async function StoryPage({ params }: PageProps) {
     >
       <p
         className="text-xs font-sans leading-relaxed mb-8 rounded-xl px-4 py-3"
-        style={{ background: "var(--cream)", color: "var(--muted)" }}
+        style={{ background: "var(--lime)", color: "var(--muted)" }}
       >
         This is an illustrative story, written to show what real accounts will look
         like here. It does not describe a real person. To share your own story,
@@ -92,7 +92,7 @@ export default async function StoryPage({ params }: PageProps) {
       {/* Treatment summary */}
       <dl
         className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-4 rounded-2xl p-6"
-        style={{ background: "var(--cream)" }}
+        style={{ background: "var(--lime)" }}
       >
         {[
           { k: "Family type", v: story.familyLabel },

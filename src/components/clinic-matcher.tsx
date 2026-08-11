@@ -906,7 +906,7 @@ function WizardBackdrop({ shape, step }: { shape: ShapeName; step: number }) {
     <div
       aria-hidden
       className="absolute top-1/2 -translate-y-1/2 right-0 translate-x-[45%] w-[20rem] md:w-[32rem] lg:w-[40rem] pointer-events-none"
-      style={{ color: "var(--cream)" }}
+      style={{ color: "var(--lime)" }}
     >
       <AnimatePresence mode="wait">
         <motion.div

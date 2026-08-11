@@ -116,7 +116,7 @@ export function ConversationToolkit({
                 <li
                   key={i}
                   className="rounded-2xl p-4 md:p-5 flex items-start justify-between gap-4"
-                  style={{ background: "var(--cream)" }}
+                  style={{ background: "var(--lime)" }}
                 >
                   <p
                     className="text-[15px] font-sans leading-relaxed font-[500]"
