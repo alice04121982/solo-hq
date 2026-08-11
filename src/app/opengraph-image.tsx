@@ -13,15 +13,18 @@ const LIME = "#C5E600";
 const CREAM = "#FBF2EB";
 const ON_TEAL_MUTED = "#c4a0ae";
 
-function Stone({ width, color = CREAM }: { width: number; color?: string }) {
+/* dx nudges each stone off the stack's axis — the Waypath mark's
+   hand-placed settle — while the lime waypoint dot stays centred. */
+function Stone({ width, dx = 0 }: { width: number; dx?: number }) {
   return (
     <div
       style={{
         width,
-        height: width * 0.42,
+        height: width * 0.4,
         borderRadius: width,
-        background: color,
-        marginTop: 6,
+        background: CREAM,
+        marginTop: 8,
+        marginLeft: dx,
       }}
     />
   );
@@ -67,9 +70,17 @@ export default function OpenGraphImage() {
             alignItems: "center",
           }}
         >
-          <Stone width={70} color={LIME} />
-          <Stone width={120} />
-          <Stone width={170} />
+          <div
+            style={{
+              width: 34,
+              height: 34,
+              borderRadius: 34,
+              background: LIME,
+            }}
+          />
+          <Stone width={90} dx={16} />
+          <Stone width={140} dx={-18} />
+          <Stone width={180} dx={14} />
           <Stone width={220} />
         </div>
       </div>

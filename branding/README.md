@@ -13,11 +13,13 @@ The wordmark is the single word **CairnFertility**, set in General Sans
 
 | Surface | "Cairn" | "Fertility" | Contrast |
 |---|---|---|---|
-| Light | `--foreground` #0C2626 | `--teal` #005353 | ~15.9:1 / ~8.9:1 |
+| Light | `--teal` #005353 | `--accent-dark` #9BBB00 | ~8.9:1 / ~2.2:1 |
 | Teal | white | `--accent` #C5E600 | ~8.9:1 / ~6.2:1 |
 
-Lime (`--accent`) must never be used for the wordmark on white — it only
-clears ~1.6:1 there. The live implementation is `src/components/logo.tsx`.
+Raw lime (`--accent`) must never be used for text on white — it only
+clears ~1.6:1 there; the darker leaf green stands in for it on light
+surfaces (WCAG's logotype exemption applies, but keep it legible). The
+live implementation is `src/components/logo.tsx`.
 
 ## Mark explorations (`marks/`)
 
@@ -25,8 +27,11 @@ clears ~1.6:1 there. The live implementation is `src/components/logo.tsx`.
    the goal the journey builds toward. Echoes the existing OG image.
 2. **02 Seed Stone** — the stack carries a round lime seed/egg: the
    family the journey leads to.
-3. **03 Waypath** — stones settle slightly off-axis, like a real trail
-   cairn; a lime dot ahead marks the next waypoint.
+3. **03 Waypath** — *the chosen mark.* Stones settle slightly off-axis,
+   like a real trail cairn; a lime dot hovers centred above the summit,
+   marking the next waypoint. Lives in the logo lockup
+   (`src/components/logo.tsx`), the favicon (`src/app/icon.svg`), and
+   the OG image (`src/app/opengraph-image.tsx`).
 4. **04 Monoline** — outlined stones, lighter and more editorial; only
    the summit stone is solid.
 5. **05 Embrace** — two stones lean in to cradle the seed: shelter and
