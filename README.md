@@ -1,4 +1,4 @@
-# Cairn Fertility
+# CairnFertility
 
 Cairn compares IVF clinics on cost, success rates and eligibility, and explains how
 treatment works, for everyone going through IVF: solo mums, solo dads, two mums, two

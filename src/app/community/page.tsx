@@ -9,7 +9,7 @@ import { COMMUNITY_FEATURES } from "@/lib/community";
 import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
 export const metadata: Metadata = {
-  title: "Join the Community | Cairn Fertility",
+  title: "Join the Community | CairnFertility",
   description:
     "A community for everyone doing IVF their own way — find others at your stage, hear from people who've been through it, and set up local meetups. Join the waitlist.",
 };

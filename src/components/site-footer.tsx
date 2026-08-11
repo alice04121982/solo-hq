@@ -163,7 +163,7 @@ export function SiteFooter() {
             className="text-xs font-sans leading-relaxed"
             style={{ maxWidth: "60ch", color: PINK_MUTED }}
           >
-            Cairn Fertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
           </p>
         </div>
       </div>
