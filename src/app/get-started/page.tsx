@@ -14,10 +14,9 @@ export default function GetStartedPage() {
         <SiteNav />
       </div>
 
-      {/* Header and wizard sit in separate bands but share one left-aligned
-          column, so the page still reads against a single left edge. */}
+      {/* Header and wizard read as one centred, full-page journey. */}
       <Section band={0} padding="py-12 md:py-16">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-auto text-center">
           <span
             className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
             style={{ background: "#C5E600", color: "#1A3A25" }}
@@ -36,11 +35,15 @@ export default function GetStartedPage() {
         </div>
       </Section>
 
-      {/* Wizard */}
-      <Section band={1} padding="py-12 md:py-16">
-        <div className="max-w-2xl">
-          <ClinicMatcher />
-        </div>
+      {/* Wizard — gets the full container width; it keeps question steps in a
+          centred column and lets the results grid span the whole page. The
+          wizard renders its own state-driven backdrop mark, so the band only
+          needs to crop the bleed. overflow-clip rather than overflow-hidden:
+          hidden leaves the band programmatically scrollable, so focus/click
+          scroll-into-view could drag the whole band sideways toward the
+          off-screen shape. clip crops without ever becoming scrollable. */}
+      <Section band={1} padding="py-12 md:py-16" className="overflow-clip">
+        <ClinicMatcher />
       </Section>
     </main>
   );
