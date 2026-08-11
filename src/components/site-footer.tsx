@@ -5,12 +5,14 @@ const PINK = "#f9c6da";
 const PINK_MUTED = "#c4a0ae";
 const PINK_HOT = "#F0A8C4";
 
+// Same names and display order as the family type labels in
+// `src/lib/family-types.ts` and the /families index.
 const FAMILY_LINKS = [
-  { label: "Solo Mums by Choice", href: "/families/solo-mum" },
-  { label: "Same-Sex Female Couples", href: "/families/same-sex-female" },
-  { label: "Same-Sex Male Couples", href: "/families/same-sex-male" },
-  { label: "Solo Dads by Choice", href: "/families/single-dad" },
-  { label: "Heterosexual Couples", href: "/families/heterosexual-couple" },
+  { label: "Solo Mums", href: "/families/solo-mum" },
+  { label: "Solo Dads", href: "/families/single-dad" },
+  { label: "Two Mums", href: "/families/same-sex-female" },
+  { label: "Two Dads", href: "/families/same-sex-male" },
+  { label: "Mum and Dad", href: "/families/heterosexual-couple" },
 ];
 
 const TOOL_LINKS = [

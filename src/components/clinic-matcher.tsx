@@ -405,7 +405,7 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
   const options: { value: FamilyType; title: string; subtitle: string; icon: ReactNode }[] = [
     {
       value: "solo-mum",
-      title: "Solo mum by choice",
+      title: "Solo mum",
       subtitle: "Single woman using donor sperm",
       icon: <Venus className="h-5 w-5" strokeWidth={1.75} />,
     },
@@ -429,7 +429,7 @@ function StepFamily({ s, set }: { s: WizardState; set: (f: FamilyType) => void }
     },
     {
       value: "solo-dad",
-      title: "Solo dad by choice",
+      title: "Solo dad",
       subtitle: "Single man using surrogacy with a donor egg",
       icon: <Mars className="h-5 w-5" strokeWidth={1.75} />,
     },

@@ -15,7 +15,7 @@ export default function WaitlistPage() {
         <SiteNav />
       </div>
 
-      <Section band={0} padding="py-12 md:py-16">
+      <Section band={0} padding="py-12 md:py-16" backdrop={{ shape: "dots" }}>
         <div className="max-w-2xl">
           <span
             className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"

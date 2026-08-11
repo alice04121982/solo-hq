@@ -32,7 +32,7 @@ export default function StoriesPage() {
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-20 pb-16">
+      <Section band={0} padding="pt-20 pb-16" backdrop={{ shape: "bloom" }}>
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Stories
         </p>

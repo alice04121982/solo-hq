@@ -39,8 +39,8 @@ export interface CommunityOption<T extends string> {
  * first-class answer rather than a fallback.
  */
 export const PATHWAY_OPTIONS: CommunityOption<CommunityPathway>[] = [
-  { value: "solo-mum", label: "Solo mum by choice" },
-  { value: "solo-dad", label: "Solo dad by choice" },
+  { value: "solo-mum", label: "Solo mum" },
+  { value: "solo-dad", label: "Solo dad" },
   { value: "two-mums", label: "Two mums" },
   { value: "two-dads", label: "Two dads" },
   { value: "mum-and-dad", label: "Mum and dad" },
