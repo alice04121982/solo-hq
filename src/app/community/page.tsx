@@ -18,32 +18,32 @@ export const metadata: Metadata = {
 export default function CommunityPage() {
   return (
     <main className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav />
       </div>
 
       {/* Hero */}
-      <Section band={0} padding="py-16 md:py-24" backdrop={{ shape: "dots", side: "right" }}>
-        <div className="max-w-2xl">
+      <Section band={0} padding="py-20 md:py-28" backdrop={{ shape: "dots", side: "right" }}>
+        <div className="max-w-3xl">
           <p
-            className="text-[11px] font-[500] uppercase font-sans mb-6"
+            className="text-[13px] font-[500] uppercase font-sans mb-6"
             style={{ color: "var(--teal)", letterSpacing: "1.65px" }}
           >
             Join the community
           </p>
           <h1
             className="font-sans font-bold text-foreground mb-6"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.06 }}
+            style={{ fontSize: "clamp(2.75rem, 5vw, 5rem)", lineHeight: 1.06 }}
           >
             A community for everyone doing IVF their own way.
           </h1>
-          <p className="text-[16px] font-sans text-muted leading-[1.65] mb-4" style={{ maxWidth: "58ch" }}>
+          <p className="text-lg font-sans text-muted leading-[1.65] mb-4" style={{ maxWidth: "58ch" }}>
             Solo, same-sex, or together — IVF is easier alongside people who
             get it. We are building that place now: somewhere to find others
             at your stage, ask people who have been through it, and meet up
             in real life.
           </p>
-          <p className="text-[16px] font-sans text-muted leading-[1.65] mb-10" style={{ maxWidth: "58ch" }}>
+          <p className="text-lg font-sans text-muted leading-[1.65] mb-10" style={{ maxWidth: "58ch" }}>
             It is not open yet. The waitlist is how you get in first — and
             what you tell us when you join decides what we build first.
           </p>
@@ -68,12 +68,12 @@ export default function CommunityPage() {
       </Section>
 
       {/* Waitlist: what we're building beside the form itself */}
-      <Section band={1} id="waitlist" padding="py-16 md:py-24">
+      <Section band={1} id="waitlist">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div>
             <h2
               className="font-sans font-bold text-foreground mb-4"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1 }}
             >
               What we&rsquo;re building.
             </h2>
@@ -112,11 +112,11 @@ export default function CommunityPage() {
       </Section>
 
       {/* Voices — the people already ahead on the path */}
-      <Section band={2} padding="py-16 md:py-24">
+      <Section band={2}>
         <div className="mb-10">
           <h2
             className="font-sans font-bold text-foreground mb-3"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1 }}
           >
             The people you&rsquo;ll meet.
           </h2>
@@ -140,11 +140,11 @@ export default function CommunityPage() {
       </Section>
 
       {/* Follow along — the lighter commitment */}
-      <Section tone="teal" id="follow" padding="py-16 md:py-24">
+      <Section tone="teal" id="follow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <p
-              className="text-[11px] font-[500] uppercase font-sans mb-6"
+              className="text-[13px] font-[500] uppercase font-sans mb-6"
               style={{ color: "var(--accent)", letterSpacing: "1.65px" }}
             >
               Not ready to join?
@@ -152,7 +152,7 @@ export default function CommunityPage() {
             <h2
               className="font-sans font-bold mb-4"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontSize: "clamp(2.5rem, 4vw, 4.25rem)",
                 lineHeight: 1.1,
                 color: "var(--on-teal)",
               }}
