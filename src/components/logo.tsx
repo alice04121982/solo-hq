@@ -16,7 +16,7 @@ export function Logo({ className = "", onDark = false }: LogoProps) {
   const stone = onDark ? "var(--cream)" : "var(--teal)";
   return (
     <span
-      className={`inline-flex items-center gap-2 font-sans font-semibold tracking-tight ${className}`}
+      className={`inline-flex items-center gap-2 font-sans font-medium tracking-tight ${className}`}
       style={{ fontSize: "1.25rem", letterSpacing: "-0.02em" }}
       aria-label="CairnFertility"
     >
