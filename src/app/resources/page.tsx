@@ -25,6 +25,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     icon: <Calculator className="h-5 w-5" />,
     title: "Finance & Costs",
     resources: [
+      { title: "Funding & payment options: NHS, employers, plans and loans", type: "Hub", href: "/funding" },
       { title: "The complete IVF cost breakdown (2025)", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
       { title: "Fertility finance options: loans, grants & employer schemes", type: "Guide", slug: "fertility-finance-options" },
       { title: "Budget spreadsheet template", type: "Template", slug: "ivf-budget-template" },
@@ -119,8 +120,32 @@ export default function ResourcesPage() {
         </p>
       </Section>
 
-      {/* Ways in: the essential external resource, then the family-type filters */}
+      {/* Ways in: the section people arrive needing most, the essential
+          external resource, then the family-type filters */}
       <Section band={1}>
+        {/* Funding — the question that gates every other decision, so it sits
+            above the guide grid rather than inside it. */}
+        <div className="mb-8 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
+          <div className="flex-1">
+            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
+              Start here if cost is the question
+            </p>
+            <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
+              Funding &amp; payment options
+            </p>
+            <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+              What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest — employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
+            </p>
+          </div>
+          <Link
+            href="/funding"
+            className="inline-flex items-center gap-2 shrink-0 rounded-full bg-[#1A3A25] text-white px-5 py-2.5 text-sm font-sans font-medium hover:bg-[#142e1e] transition-colors"
+          >
+            See funding options
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+
         {/* DCN featured link */}
         <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
           <div className="flex-1">
