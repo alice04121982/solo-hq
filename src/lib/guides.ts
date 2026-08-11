@@ -334,7 +334,7 @@ export const GUIDES: Guide[] = [
           "IUI is a reasonable starting point if you are under 35, have good ovarian reserve, no known tube or egg quality issues, and want to begin treatment with a lower financial and physical commitment. It is not recommended as a first-line treatment for women over 40.",
         ],
         callout:
-          "Cost: approximately £800–£1,500 per cycle including donor sperm. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
+          "Cost: typically £950–£1,500 per cycle for the procedure itself — the HFEA puts IUI at around a quarter of the cost of an IVF cycle — plus donor sperm and any medication, so budget £2,000–£3,000 all-in for a first donor-sperm cycle. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
       },
       {
         heading: "IVF with donor sperm",

@@ -7,8 +7,9 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { CompareButton } from "@/components/ivf-finder/compare-button";
 import { VerificationBadge } from "@/components/ivf-finder/rate-display";
-import { CLINICS, getClinic } from "@/lib/clinics";
+import { CLINICS, DATA_PROVENANCE, getClinic } from "@/lib/clinics";
 import { AGE_BRACKETS } from "@/types/clinic";
+import { RegulatorNotice } from "@/components/regulator-notice";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -47,6 +48,14 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           ? `£${clinic.pricePerCycleGbp.toLocaleString()} (own-egg IVF, headline price)`
           : "Not published",
     },
+    ...(clinic.iuiPricePerCycleGbp != null
+      ? [
+          {
+            label: "IUI per cycle",
+            value: `£${clinic.iuiPricePerCycleGbp.toLocaleString()} (excludes drugs and donor sperm)`,
+          },
+        ]
+      : []),
     {
       label: "Donor anonymity",
       value: clinic.donorAnonymity ? DONOR_LABELS[clinic.donorAnonymity] : "No donor treatment offered",
@@ -181,10 +190,22 @@ export default async function ClinicDetailPage({ params }: PageProps) {
         </div>
 
         <p className="text-xs text-muted mt-8" style={{ maxWidth: "70ch" }}>
-          Figures on this page are indicative and change over time. Confirm current prices and
-          success rates directly with the clinic before making decisions, and ask for live
-          births per embryo transfer for your age group so quotes are comparable.
+          Figures on this page are indicative and change over time. Prices are compiled from{" "}
+          {DATA_PROVENANCE.pricesSourceLabel} and were last verified on{" "}
+          {new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC",
+          })}
+          . Confirm current prices and success rates directly with the clinic before making
+          decisions, and ask for live births per embryo transfer for your age group so quotes
+          are comparable.
         </p>
+
+        <div className="mt-6">
+          <RegulatorNotice />
+        </div>
       </Section>
     </main>
   );

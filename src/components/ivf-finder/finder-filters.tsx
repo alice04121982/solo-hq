@@ -10,7 +10,7 @@ import {
   type Region,
   type Treatment,
 } from "@/types/clinic";
-import { priceBounds } from "@/lib/clinics";
+import { cheapestPublishedPrice, priceBounds } from "@/lib/clinics";
 import { CountrySelect, COUNTRY_FLAGS } from "./country-select";
 
 /**
@@ -59,6 +59,22 @@ export function sliderBounds(): { min: number; max: number } {
   };
 }
 
+/**
+ * The price the ceiling filter compares against, priced per treatment: IUI is
+ * a fraction of an IVF cycle, so a £1,500 budget with IUI selected must look
+ * at the IUI price, not the IVF headline. With no treatment selected, the
+ * clinic's cheapest published price counts — "treatment under £5k" includes
+ * IUI, not just IVF. Undefined means nothing relevant is published, and the
+ * clinic is excluded while a ceiling is set.
+ */
+function priceForCeiling(clinic: Clinic, selected: Treatment[]): number | undefined {
+  if (selected.length === 0) return cheapestPublishedPrice(clinic);
+  const prices = selected
+    .map((t) => (t === "IUI" ? clinic.iuiPricePerCycleGbp : clinic.pricePerCycleGbp))
+    .filter((p): p is number => p != null);
+  return prices.length > 0 ? Math.min(...prices) : undefined;
+}
+
 export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
   // Region and country narrow the same list. Either matching keeps the
   // clinic, so adding a country never silently blanks out a selected region.
@@ -72,7 +88,8 @@ export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
   }
 
   if (f.priceCeiling != null) {
-    if (clinic.pricePerCycleGbp == null || clinic.pricePerCycleGbp > f.priceCeiling) {
+    const price = priceForCeiling(clinic, f.treatments);
+    if (price == null || price > f.priceCeiling) {
       return false;
     }
   }
@@ -242,6 +259,10 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
             {filters.priceCeiling != null
               ? `Up to £${filters.priceCeiling.toLocaleString()} per cycle`
               : "Any price"}
+          </p>
+          <p className="text-xs text-muted mt-1">
+            Compares the cheapest published price for your selected treatments
+            — IUI prices where IUI is selected, all treatments when none are.
           </p>
         </div>
 
