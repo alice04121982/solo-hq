@@ -38,12 +38,12 @@ function FamilyCard({ family }: { family: FamilyType }) {
 
       <div className="flex flex-col flex-1 gap-2 p-5">
         <h2
-          className="font-sans font-semibold text-lg leading-7"
+          className="font-sans font-semibold text-xl"
           style={{ color: "var(--teal)" }}
         >
           {family.label}
         </h2>
-        <p className="text-sm font-sans leading-5" style={{ color: "var(--muted)" }}>
+        <p className="text-base font-sans" style={{ color: "var(--muted)" }}>
           {family.cardSummary}
         </p>
         <span
@@ -72,7 +72,7 @@ export default function FamiliesPage() {
       {/* Hero — one oversized spark bleeding off the band edge */}
       <Section band={0} padding="pt-12 pb-14 md:pt-16 md:pb-18" backdrop={{ shape: "spark" }}>
         <span
-          className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
+          className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
           style={{ background: "#C5E600", color: "#1A3A25" }}
         >
           IVF for every family
@@ -84,7 +84,7 @@ export default function FamiliesPage() {
           Whoever you are,
           <br />your path starts here.
         </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "55ch" }}>
+        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "55ch" }}>
           IVF looks different depending on who you are. Find your family type below for a guide built specifically for you: the right treatment routes, real stories, and a clear step-by-step from first consultation to family.
         </p>
       </Section>
@@ -100,12 +100,12 @@ export default function FamiliesPage() {
 
       {/* What each guide includes */}
       <Section band={2}>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           What you&apos;ll find
         </p>
         <h2
           className="font-sans font-bold text-[#1A3A25] mb-12"
-          style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.5rem)", lineHeight: 1.1 }}
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1 }}
         >
           Every guide includes:
         </h2>

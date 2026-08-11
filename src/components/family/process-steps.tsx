@@ -43,7 +43,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
 
   return (
     <section className="bg-background border-y border-border">
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,14 +53,14 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
         >
           <div>
             <p
-              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+              className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
               style={{ color: GREEN_SOFT }}
             >
               Step by step
             </p>
             <h2
               className="font-sans font-bold"
-              style={{ fontSize: "clamp(2.25rem, 3.5vw, 3.75rem)", lineHeight: 1.1, color: GREEN }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: GREEN }}
             >
               Your complete guide
               <br />
@@ -144,7 +144,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
         </div>
 
         <p
-          className="md:hidden text-[11px] font-sans text-center mt-2"
+          className="md:hidden text-[13px] font-sans text-center mt-2"
           style={{ color: GREEN_SOFT }}
         >
           Swipe to explore all {steps.length} steps →

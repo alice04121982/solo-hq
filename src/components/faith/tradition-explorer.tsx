@@ -11,7 +11,7 @@ function Column({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <p
-        className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+        className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
         style={{ color: TEAL_SOFT }}
       >
         {title}
@@ -89,7 +89,7 @@ export function TraditionExplorer({ traditions }: { traditions: FaithTradition[]
                     style={{ background: "var(--cream)" }}
                   >
                     <p
-                      className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+                      className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
                       style={{ color: TEAL_SOFT }}
                     >
                       Practical notes for treatment

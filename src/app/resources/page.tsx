@@ -104,8 +104,8 @@ export default function ResourcesPage() {
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Everything you need
         </p>
         <h1
@@ -114,7 +114,7 @@ export default function ResourcesPage() {
         >
           Resources
         </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
           Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
         </p>
       </Section>
@@ -124,7 +124,7 @@ export default function ResourcesPage() {
         {/* DCN featured link */}
         <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
           <div className="flex-1">
-            <p className="text-[10px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
+            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
               Essential external resource · All family types
             </p>
             <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
@@ -147,7 +147,7 @@ export default function ResourcesPage() {
 
         {/* Browse by family type */}
         <div>
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
             Browse by family type
           </p>
           <div className="flex flex-wrap gap-2">
@@ -181,7 +181,7 @@ export default function ResourcesPage() {
                         <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
                           {r.title}
                         </p>
-                        <span className="text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+                        <span className="text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
                           {r.type}
                         </span>
                       </div>

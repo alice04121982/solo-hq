@@ -84,25 +84,25 @@
 
   /* ── Text scale ──
      Sized generously: the site reads as big, spacious, editorial. */
-  --text-xs:                      0.75rem;
-  --text-xs--line-height:         1.125rem;
-  --text-sm:                      0.9375rem;
-  --text-sm--line-height:         1.5rem;
-  --text-base:                    1.0625rem;
-  --text-base--line-height:       1.7rem;
-  --text-md:                      1.0625rem;
-  --text-md--line-height:         1.7rem;
-  --text-lg:                      1.25rem;
-  --text-lg--line-height:         1.9rem;
-  --text-xl:                      1.375rem;
-  --text-xl--line-height:         2rem;
-  --text-display-xs:              1.75rem;
+  --text-xs:                      0.8125rem;
+  --text-xs--line-height:         1.25rem;
+  --text-sm:                      1.0625rem;
+  --text-sm--line-height:         1.7rem;
+  --text-base:                    1.1875rem;
+  --text-base--line-height:       1.85rem;
+  --text-md:                      1.1875rem;
+  --text-md--line-height:         1.85rem;
+  --text-lg:                      1.375rem;
+  --text-lg--line-height:         2rem;
+  --text-xl:                      1.5rem;
+  --text-xl--line-height:         2.1rem;
+  --text-display-xs:              2rem;
   --text-display-xs--line-height: 1.15;
-  --text-display-sm:              2.25rem;
+  --text-display-sm:              2.5rem;
   --text-display-sm--line-height: 1.1;
-  --text-display-md:              3rem;
+  --text-display-md:              3.25rem;
   --text-display-md--line-height: 1.05;
-  --text-display-lg:              4.25rem;
+  --text-display-lg:              4.5rem;
   --text-display-lg--line-height: 1.05;
   --text-display-xl:              5.5rem;
   --text-display-xl--line-height: 1.02;
@@ -120,8 +120,8 @@
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
-    /* 17px on phones growing to 19px on desktop */
-    font-size: clamp(17px, 16px + 0.16vw, 19px);
+    /* 17px on phones growing to 21px on desktop */
+    font-size: clamp(17px, 16px + 0.26vw, 21px);
     font-weight: 400;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;

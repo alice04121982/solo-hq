@@ -56,13 +56,13 @@ export default function FaithPage() {
       </section>
 
       {/* Hero */}
-      <section className="mx-auto px-6 md:px-12 lg:px-16 pt-16 md:pt-24 pb-12">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <section className="mx-auto px-6 md:px-12 lg:px-16 pt-20 md:pt-28 pb-16">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Faith, culture &amp; belief
         </p>
         <h1
           className="font-sans font-bold mb-6"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05, color: TEAL }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05, color: TEAL }}
         >
           Faith, culture and IVF.
         </h1>
@@ -104,10 +104,10 @@ export default function FaithPage() {
       </section>
 
       {/* How we've written this */}
-      <section className="mx-auto px-6 md:px-12 lg:px-16 pb-16 md:pb-20">
+      <section className="mx-auto px-6 md:px-12 lg:px-16 pb-20 md:pb-28">
         <div className="rounded-2xl p-6 md:p-10" style={{ background: "var(--cream)" }}>
           <p
-            className="inline-flex items-center gap-2 text-[10px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
+            className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
             style={{ color: TEAL_SOFT }}
           >
             <Info className="h-3.5 w-3.5" />
@@ -137,20 +137,20 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans"
           >
             The reframe
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             &ldquo;Is IVF allowed?&rdquo; is almost never one question.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Traditions rarely answer it as a single yes or no. They answer seven or eight
@@ -163,7 +163,7 @@ export default function FaithPage() {
             {FAITH_QUESTIONS.map((q, i) => (
               <div key={q.question} className="py-7 border-t" style={{ borderColor: "var(--border)" }}>
                 <p
-                  className="text-[10px] font-[700] font-sans mb-3"
+                  className="text-[12px] font-[700] font-sans mb-3"
                   style={{ color: TEAL_SOFT }}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -183,18 +183,18 @@ export default function FaithPage() {
 
       {/* Traditions */}
       <section id="traditions" className="border-t border-border scroll-mt-20">
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Where traditions stand
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             Nine starting points, none of them the last word.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Each entry sets out the mainstream position, the places where serious people
@@ -205,7 +205,7 @@ export default function FaithPage() {
 
           <TraditionExplorer traditions={FAITH_TRADITIONS} />
 
-          <p className="text-[13px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "68ch" }}>
+          <p className="text-[15px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "68ch" }}>
             If your tradition isn&rsquo;t here, that is a gap in this page rather than a
             judgement about your tradition. Tell us and we will research it properly and
             add it.
@@ -219,18 +219,18 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             In the clinic
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             Keeping your practice through a cycle.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Most of what disrupts observant patients isn&rsquo;t doctrinal. It&rsquo;s
@@ -253,18 +253,18 @@ export default function FaithPage() {
 
       {/* Stories */}
       <section id="stories" className="border-t border-border scroll-mt-20">
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             In their own words
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             People who had to hold both.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Faith and treatment, at the same time, in front of families who had views.
@@ -288,7 +288,7 @@ export default function FaithPage() {
                 </div>
 
                 <div className="flex flex-col gap-3 flex-1">
-                  <span className="text-[10px] font-[600] uppercase tracking-[0.12em] text-accent font-sans">
+                  <span className="text-[12px] font-[600] uppercase tracking-[0.12em] text-accent font-sans">
                     {story.tag}
                   </span>
                   <h3
@@ -300,7 +300,7 @@ export default function FaithPage() {
                   <p className="text-sm font-sans text-muted leading-relaxed flex-1">
                     {story.excerpt}
                   </p>
-                  <p className="text-[11px] font-[600] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
+                  <p className="text-[13px] font-[600] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
                     {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
                   </p>
                 </div>
@@ -314,7 +314,7 @@ export default function FaithPage() {
           >
             <div className="flex-1">
               <p
-                className="text-[10px] font-[700] uppercase tracking-[0.12em] mb-2 font-sans"
+                className="text-[12px] font-[700] uppercase tracking-[0.12em] mb-2 font-sans"
                 style={{ color: TEAL_SOFT }}
               >
                 We want more of these
@@ -347,18 +347,18 @@ export default function FaithPage() {
         className="border-t border-border scroll-mt-20"
         style={{ background: "var(--background-alt)" }}
       >
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             When the conversation is against you
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             You do not owe anyone a debate.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-4"
+            className="text-lg font-sans leading-relaxed text-muted mb-4"
             style={{ maxWidth: "62ch" }}
           >
             Opposition to IVF turns up in doctrine, in culture, in family WhatsApp groups
@@ -367,7 +367,7 @@ export default function FaithPage() {
             mid-cycle.
           </p>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Pick the situation you&rsquo;re in. Every script below is written to be said
@@ -381,7 +381,7 @@ export default function FaithPage() {
           <div className="mt-20 pt-14 border-t" style={{ borderColor: "var(--border)" }}>
             <h3
               className="font-sans font-bold mb-3"
-              style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", lineHeight: 1.2, color: TEAL }}
+              style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, color: TEAL }}
             >
               Facts you can reach for.
             </h3>
@@ -422,7 +422,7 @@ export default function FaithPage() {
             style={{ background: "var(--teal)" }}
           >
             <p
-              className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+              className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
               style={{ color: "var(--on-teal-muted)" }}
             >
               When it stops being a disagreement
@@ -445,18 +445,18 @@ export default function FaithPage() {
 
       {/* Support */}
       <section id="support" className="border-t border-border scroll-mt-20">
-        <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
-          <p className="text-[11px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
+          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
             Where to go next
           </p>
           <h2
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.75rem)", lineHeight: 1.1, color: TEAL }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             Faith-aware support.
           </h2>
           <p
-            className="text-[17px] font-sans leading-relaxed text-muted mb-12"
+            className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
             Organisations that will not be surprised by any part of this conversation.
@@ -470,7 +470,7 @@ export default function FaithPage() {
               return (
                 <div key={s.name} className="py-8 border-t" style={{ borderColor: "var(--border)" }}>
                   <p
-                    className="text-[10px] font-[600] uppercase tracking-[0.12em] mb-3 font-sans"
+                    className="text-[12px] font-[600] uppercase tracking-[0.12em] mb-3 font-sans"
                     style={{ color: TEAL_SOFT }}
                   >
                     {s.scope}
@@ -499,7 +499,7 @@ export default function FaithPage() {
           </div>
 
           <p
-            className="text-[13px] font-sans leading-relaxed text-muted mt-10"
+            className="text-[15px] font-sans leading-relaxed text-muted mt-10"
             style={{ maxWidth: "68ch" }}
           >
             CairnFertility is not a religious authority and nothing on this page is

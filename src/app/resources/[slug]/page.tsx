@@ -51,11 +51,11 @@ export default async function GuidePage({ params }: PageProps) {
           </Link>
 
           <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-border px-3 py-1 text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-border px-3 py-1 text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
               <Tag className="h-3 w-3" />
               {guide.type}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+            <span className="inline-flex items-center gap-1.5 text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
               <Clock className="h-3 w-3" />
               {guide.readTime}
             </span>
@@ -63,12 +63,12 @@ export default async function GuidePage({ params }: PageProps) {
 
           <h1
             className="font-sans font-bold text-foreground mb-5"
-            style={{ fontSize: "clamp(2.25rem, 4vw, 4rem)", lineHeight: 1.1 }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.5rem)", lineHeight: 1.1 }}
           >
             {guide.title}
           </h1>
 
-          <p className="text-[17px] font-sans text-muted leading-relaxed">
+          <p className="text-lg font-sans text-muted leading-relaxed">
             {guide.intro}
           </p>
         </div>
@@ -79,7 +79,7 @@ export default async function GuidePage({ params }: PageProps) {
         <div className="space-y-10">
           {guide.sections.map((section) => (
             <div key={section.heading}>
-              <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.5rem, 2.5vw, 2.125rem)", lineHeight: 1.2 }}>
+              <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(1.625rem, 2.5vw, 2.375rem)", lineHeight: 1.2 }}>
                 {section.heading}
               </h2>
 
@@ -129,7 +129,7 @@ export default async function GuidePage({ params }: PageProps) {
                 <div className="mt-4 rounded-2xl bg-[#F0F8E8] border border-[#1A3A25]/15 p-5">
                   {section.calloutCopy && (
                     <div className="flex items-center justify-between gap-3 mb-3">
-                      <p className="text-[10px] font-[600] uppercase tracking-[0.12em] font-sans text-[#1A3A25]/50">
+                      <p className="text-[12px] font-[600] uppercase tracking-[0.12em] font-sans text-[#1A3A25]/50">
                         Sample email
                       </p>
                       <CopyButton text={section.callout} />

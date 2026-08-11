@@ -16,7 +16,7 @@ export default function ContactPage() {
     <LegalPageLayout page={page}>
       {/* Email card — the one channel that exists today. */}
       <div className="mt-12 rounded-2xl bg-surface-sunken border border-border p-6 md:p-8">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
           Email us
         </p>
         <div className="flex flex-wrap items-center gap-3">

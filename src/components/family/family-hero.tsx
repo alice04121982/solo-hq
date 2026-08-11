@@ -14,7 +14,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
   return (
     <section className="relative overflow-hidden bg-background">
       <div className="mx-auto px-6 md:px-12 lg:px-16">
-        <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-20 md:py-28`}>
+        <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-24 md:py-36`}>
           {/* Left — copy */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -23,7 +23,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             className={family.hideHeroImage ? "max-w-3xl" : ""}
           >
             <p
-              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-6 font-sans"
+              className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-6 font-sans"
               style={{ color: GREEN_SOFT }}
             >
               {family.label}
@@ -48,7 +48,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             </h1>
 
             <p
-              className="text-[17px] leading-[1.65] mb-10 font-sans"
+              className="text-lg leading-[1.65] mb-10 font-sans"
               style={{ maxWidth: "52ch", color: GREEN }}
             >
               {family.heroCopy}

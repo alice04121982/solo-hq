@@ -46,8 +46,8 @@ export default function IvfFinderPage() {
       </section>
 
       {/* Hero + finder */}
-      <Section band={0} padding="pt-16 md:pt-20 pb-16 md:pb-20">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           UK and international clinics
         </p>
         <h1
@@ -56,7 +56,7 @@ export default function IvfFinderPage() {
         >
           Compare IVF Clinics
         </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
+        <p className="text-lg font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
           Every clinic in one list, ranked by success rate for your age group. Each figure is
           labelled with its source, its year and what it was measured against.
         </p>
@@ -68,7 +68,7 @@ export default function IvfFinderPage() {
 
       {/* What to look for */}
       <Section band={1}>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
           What every patient should look for
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">

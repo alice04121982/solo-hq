@@ -18,7 +18,7 @@ export function CTASection() {
         <Cross size={26} />
       </div>
 
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-28 md:py-40">
         <div className="flex flex-col lg:flex-row items-start gap-10 lg:gap-0">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -28,7 +28,7 @@ export function CTASection() {
             className="w-full lg:w-[672px] shrink-0"
           >
             <p
-              className="text-[11px] font-[500] uppercase font-sans mb-6"
+              className="text-[13px] font-[500] uppercase font-sans mb-6"
               style={{ color: "var(--teal)", letterSpacing: "1.65px" }}
             >
               Join the community
@@ -47,7 +47,7 @@ export function CTASection() {
             </h2>
 
             <p
-              className="text-[17px] font-sans leading-[1.65] mb-10 max-w-[560px]"
+              className="text-lg font-sans leading-[1.65] mb-10 max-w-[560px]"
               style={{ color: "var(--teal)" }}
             >
               Whatever your path, IVF is easier alongside people who get it.

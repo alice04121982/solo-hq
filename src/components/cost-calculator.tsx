@@ -105,7 +105,7 @@ function OptionRow({
       </div>
       <div className="flex items-center gap-2 shrink-0 pt-0.5">
         {tag && (
-          <span className="text-[10px] font-[500] uppercase tracking-[0.1em] text-teal font-sans">{tag}</span>
+          <span className="text-[12px] font-[500] uppercase tracking-[0.1em] text-teal font-sans">{tag}</span>
         )}
         {badge && (
           <span className="text-xs font-sans text-muted">{badge}</span>
@@ -137,7 +137,7 @@ function StepYou({ s, setAge, setLocation, setCycles }: { s: Selections; setAge:
   return (
     <div className="space-y-8">
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Your age group</p>
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Your age group</p>
         {(["under35", "35to37", "38to40", "over40"] as AgeGroup[]).map((a) => (
           <OptionRow key={a} selected={s.age === a} onClick={() => setAge(a)}
             title={{ under35: "Under 35", "35to37": "35–37", "38to40": "38–40", over40: "Over 40" }[a]}
@@ -147,13 +147,13 @@ function StepYou({ s, setAge, setLocation, setCycles }: { s: Selections; setAge:
         <div className="border-t border-border" />
       </div>
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Location</p>
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Location</p>
         <OptionRow selected={s.location === "uk"} onClick={() => setLocation("uk")} title="Outside London" subtitle="Rest of UK pricing" />
         <OptionRow selected={s.location === "london"} onClick={() => setLocation("london")} title="London" subtitle="+32% average premium" tag="Higher cost" />
         <div className="border-t border-border" />
       </div>
       <div>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Cycles to budget for</p>
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">Cycles to budget for</p>
         {([1, 2, 3] as CycleCount[]).map((c) => (
           <OptionRow key={c} selected={s.cycles === c} onClick={() => setCycles(c)}
             title={c === 1 ? "1 cycle" : c === 2 ? "2 cycles" : "3 cycles"}
@@ -207,11 +207,11 @@ function StepResults({ s }: { s: Selections }) {
       {/* Large number summary */}
       <div className="flex gap-8 mb-8 pt-2">
         <div>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Clinic quote</p>
+          <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Clinic quote</p>
           <p className="font-serif text-foreground/40" style={{ fontSize: "2rem" }}>{fmt(clinicQuote)}</p>
         </div>
         <div>
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Your real total</p>
+          <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-1 font-sans">Your real total</p>
           <motion.p key={total} initial={{ opacity: 0.5 }} animate={{ opacity: 1 }} className="font-serif text-foreground" style={{ fontSize: "2.5rem", fontOpticalSizing: "auto" as never }}>
             {fmt(total)}
           </motion.p>
@@ -243,7 +243,7 @@ function StepResults({ s }: { s: Selections }) {
       </div>
 
       <div className="mt-6 flex items-end justify-between">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
           {s.cycles} {s.cycles === 1 ? "cycle" : "cycles"} &nbsp;·&nbsp; {s.location === "london" ? "London" : "UK"} &nbsp;·&nbsp; {TREATMENT_LABELS[s.path!]}
         </p>
         <p className="font-serif text-foreground" style={{ fontSize: "2rem" }}>{fmt(total)}</p>
@@ -278,7 +278,7 @@ export function CostCalculator() {
     <div className="p-6 md:p-8">
       {/* Header */}
       <div className="mb-6">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-2 font-sans">
           Step {step + 1} of {STEPS.length}
         </p>
         {/* Progress bar */}

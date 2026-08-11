@@ -138,30 +138,30 @@ export function LegalPageLayout({
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Legal
         </p>
         <h1
           className="font-sans font-bold text-foreground mb-4"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           {page.title}
         </h1>
         <p
-          className="text-[17px] font-sans text-muted leading-relaxed mb-5"
+          className="text-lg font-sans text-muted leading-relaxed mb-5"
           style={{ maxWidth: "56ch" }}
         >
           {page.standfirst}
         </p>
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-teal font-sans">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal font-sans">
           Effective {page.effectiveDate}
         </p>
       </Section>
@@ -169,7 +169,7 @@ export function LegalPageLayout({
       {/* Document body — a single light background so it reads as one
           continuous piece, per the Section child-page convention. */}
       <section className="bg-background">
-        <div className="max-w-3xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+        <div className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
           <div className="space-y-10">
             {page.sections.map((s) => (
               <LegalSectionBlock key={s.heading} section={s} />
@@ -180,7 +180,7 @@ export function LegalPageLayout({
 
           {/* Cross-links to the rest of the legal set */}
           <div className="mt-14 pt-8 border-t border-border">
-            <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+            <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
               Related pages
             </p>
             <ul className="flex flex-wrap gap-x-6 gap-y-2">
