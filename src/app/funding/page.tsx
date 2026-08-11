@@ -6,9 +6,11 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { StatCard } from "@/components/stat-card";
 import { FundingRouteExplorer } from "@/components/funding/funding-route-explorer";
+import { InternationalFunding } from "@/components/funding/international-funding";
 import { NHSEligibilityChecker } from "@/components/funding/nhs-eligibility-checker";
 import {
   FUNDING_ROUTES,
+  INTERNATIONAL_FUNDING,
   LAST_REVIEWED,
   NATION_POLICIES,
   NHS_APPLICATION_STEPS,
@@ -33,6 +35,7 @@ const JUMP_LINKS = [
   { label: "What's free on the NHS", href: "#nhs" },
   { label: "Check your eligibility", href: "#check" },
   { label: "Every funding route", href: "#routes" },
+  { label: "Outside the UK", href: "#outside-uk" },
   { label: "Before you sign", href: "#before-you-sign" },
 ];
 
@@ -81,8 +84,9 @@ export default function FundingPage() {
           funds and how to qualify, and every route people use for the rest.
         </p>
         <p className="text-[16px] font-sans leading-relaxed text-muted mt-4" style={{ maxWidth: "58ch" }}>
-          We take no commission from anyone listed here. Companies appear because you need to know
-          they exist, and each one is listed with what to watch out for.
+          The detail here is written for the UK, and there is a section on how the same questions are
+          answered elsewhere. We take no commission from anyone listed: companies appear because you
+          need to know they exist, and each one is listed with what to watch out for.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-2">
@@ -374,8 +378,43 @@ export default function FundingPage() {
         <FundingRouteExplorer routes={FUNDING_ROUTES} />
       </Section>
 
+      {/* Outside the UK */}
+      <Section band={5} id="outside-uk" className="border-t border-border scroll-mt-20">
+        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          Outside the UK
+        </p>
+        <h2
+          className="font-sans font-bold mb-5"
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
+        >
+          The same questions, different answers.
+        </h2>
+        <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
+          Every route above exists in some form in every private fertility market — it is the
+          companies and the public entitlements that change. Israel funds unlimited cycles regardless
+          of relationship status; France reimburses four; the United States has no national
+          entitlement at all and leans on employers instead.
+        </p>
+        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
+          Two things travel with you and matter as much as price. Whether a system admits solo
+          parents and same-sex couples is a separate question from whether it funds treatment, and
+          donor anonymity differs country by country — which is a decision about your child rather
+          than about your budget.
+        </p>
+
+        <InternationalFunding countries={INTERNATIONAL_FUNDING} />
+
+        <p className="text-[15px] font-sans leading-relaxed text-muted mt-10" style={{ maxWidth: "68ch" }}>
+          This is a starting map, not a complete one, and it is deliberately shorter than the UK
+          section above because we hold those countries&rsquo; detail to the same standard: sourced
+          from that country&rsquo;s own health service and regulator, not from clinics selling
+          treatment there. If your country is missing, or an entry here is out of date, tell us and
+          we will research it properly and add it.
+        </p>
+      </Section>
+
       {/* Before you sign */}
-      <Section band={5} id="before-you-sign" className="border-t border-border scroll-mt-20">
+      <Section band={6} id="before-you-sign" className="border-t border-border scroll-mt-20">
         <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Due diligence
         </p>

@@ -158,6 +158,17 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
                     <Column title="Watch out for" items={r.watchOuts} />
                   </div>
 
+                  {/* The route is usually universal; the companies named are
+                      not, so say which market this card is describing. */}
+                  {r.where && (
+                    <p className="text-[13px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "70ch" }}>
+                      <span className="font-[600] uppercase tracking-[0.12em] text-[12px]" style={{ color: TEAL_SOFT }}>
+                        Where this applies ·{" "}
+                      </span>
+                      {r.where}
+                    </p>
+                  )}
+
                   {r.sources && r.sources.length > 0 && (
                     <div className="mt-6 flex flex-wrap gap-2">
                       {r.sources.map((s) => (

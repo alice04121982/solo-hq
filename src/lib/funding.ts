@@ -258,6 +258,12 @@ export interface FundingRoute {
   group: RouteGroup;
   /** One line, shown collapsed. */
   summary: string;
+  /**
+   * Which market the named providers operate in. The routes themselves are
+   * mostly universal; the companies are not, and a reader in Sydney should be
+   * told which is which rather than left to find out.
+   */
+  where?: string;
   /** Ballpark figures, with exclusions attached. */
   typicalCost: string;
   /** Who is out of pocket if the treatment does not work. */
@@ -276,6 +282,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "nhs",
     summary:
       "Free at the point of use where you meet the criteria — which depend on where you live far more than on your diagnosis.",
+    where: "UK. Most countries fund something; see the international section for what.",
     typicalCost:
       "Free, apart from prescription charges in England and any element your policy excludes, commonly donor sperm and storage.",
     riskHolder: "The NHS. A funded cycle that fails costs you nothing but the year.",
@@ -305,6 +312,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "nhs",
     summary:
       "Egg, sperm and embryo freezing funded on medical grounds — a wider group since the 2026 guideline than most people assume.",
+    where: "UK. Medical fertility preservation is publicly funded in most systems that fund anything.",
     typicalCost: "Free where funded, though storage beyond the funded period is usually charged.",
     riskHolder: "The NHS, for the freezing itself. Later treatment using what you stored is a separate funding question.",
     howItWorks: [
@@ -332,6 +340,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "reduce",
     summary:
       "You donate half the eggs from your cycle to another patient, and the clinic funds most or all of your own treatment.",
+    where: "Widely available. The identity-release rule below is UK law; donor anonymity elsewhere changes the decision entirely.",
     typicalCost:
       "Typically free or heavily discounted IVF, sometimes leaving only the HFEA licence fee and drugs. The largest single saving available to anyone who qualifies.",
     riskHolder:
@@ -401,6 +410,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "reduce",
     summary:
       "The HFEA rates treatment add-ons by evidence, and most are rated as not proven to improve the chance of a live birth.",
+    where: "The HFEA ratings are UK, but the evidence they summarise is international and worth using anywhere.",
     typicalCost: "Add-ons commonly run £150–£3,000 each; declining them is the cheapest decision on this page.",
     riskHolder: "You — this is money spent, not risk transferred.",
     howItWorks: [
@@ -444,7 +454,8 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Employer fertility benefits",
     group: "third-party",
     summary:
-      "The most under-claimed money in UK fertility, and the only route on this page where the treatment can be genuinely free to you.",
+      "The most under-claimed money in fertility, and the only route on this page where treatment can be genuinely free to you.",
+    where: "International. Carrot, Maven and Progyny operate globally; Fertifa, Peppy and Apryl are UK and European.",
     typicalCost:
       "Anything from a £500 contribution to funds covering multiple cycles; the largest UK schemes run to tens of thousands.",
     riskHolder: "Your employer, up to the limit of the benefit.",
@@ -469,7 +480,8 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Private medical insurance",
     group: "third-party",
     summary:
-      "The honest answer: individual policies almost never pay for IVF, and buying one for that purpose does not work.",
+      "The honest answer in the UK: individual policies almost never pay for IVF, and buying one for that purpose does not work.",
+    where: "UK. This is one of the routes that differs most by country — in the US, insurance is often the main route.",
     typicalCost: "Nothing for treatment. Some policies cover investigations where infertility follows an acute condition.",
     riskHolder: "You. This route mostly does not exist in the UK.",
     howItWorks: [
@@ -488,6 +500,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Grants and charitable funds",
     group: "third-party",
     summary: "Money that does not have to be repaid, in small amounts, awarded competitively.",
+    where: "UK grant-makers named. The US has a much larger grant sector, including several funds open to solo applicants.",
     typicalCost: "UK grants are typically up to around £3,000 and are usually paid direct to the clinic.",
     riskHolder: "The charity, for the amount awarded.",
     howItWorks: [
@@ -510,12 +523,14 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "share",
     summary:
       "A fixed fee for two or three cycles, with part or all of it refunded if you do not have a baby.",
+    where: "UK providers named; equivalents exist in most private fertility markets.",
     typicalCost:
       "A discount of roughly a third against paying cycle by cycle, in exchange for paying up front. Refund levels are commonly 50%, 70% or 100% of the programme fee depending on age and plan.",
     riskHolder:
       "Shared, and priced accordingly. The provider carries the risk of failure; you carry the risk of succeeding first time and having pre-paid for cycles you never needed.",
     howItWorks: [
-      "Access Fertility is the main UK provider, sold through a large number of clinics; several clinics also run their own packages.",
+      "Access Fertility is the largest UK provider, sold through around 70 clinics across the UK, Ireland and Spain. Assured Fertility is a newer entrant offering a single fixed cost with a refund if there is no baby, and a partial refund if you succeed early.",
+      "Several clinics and groups run their own refund or multi-cycle packages directly — Bourn Hall and the larger clinic groups among them — so compare the clinic's own scheme against the third-party one.",
       "Programmes typically bundle two or three fresh cycles with unlimited frozen embryo transfers from those cycles.",
       "Medical eligibility applies — these are underwritten products and not everyone is accepted.",
     ],
@@ -529,20 +544,25 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "Check what happens if you stop early, if a cycle is cancelled before collection, or if you are withdrawn on medical grounds.",
       "Understand that paying first time and succeeding first time means you have paid more than you needed to. That is the trade.",
     ],
-    sources: [{ label: "Access Fertility — refund programmes", href: "https://www.accessfertility.com/" }],
+    sources: [
+      { label: "Access Fertility — refund programmes", href: "https://www.accessfertility.com/" },
+      { label: "Assured Fertility", href: "https://www.assuredfertility.co.uk/" },
+    ],
   },
   {
     slug: "insurance-backed-plans",
-    name: "Insurance-backed IVF plans",
+    name: "Insurance-backed and outcome-linked plans",
     group: "share",
     summary:
-      "You pay a monthly premium; the plan pays for the treatment, and you only repay the cost if you have a child.",
+      "You pay a premium or protection fee; the plan carries the treatment cost, and you repay it only if you have a child.",
+    where: "Gaia in the UK; Future Family, Sunfish and BUNDL are the equivalents in the US market.",
     typicalCost:
       "A premium priced on your own predicted odds, with the treatment cost repaid over a period of years if you have a baby.",
     riskHolder: "The insurer, which is the entire point of the product — and it prices that risk from your clinical data.",
     howItWorks: [
-      "Gaia is the established UK provider. It assesses your data, prices a plan, and covers the cost of treatment if it does not result in a child.",
+      "Gaia is the established UK product and the only one here that is genuinely insurance: it assesses your data, prices a plan, and writes off the treatment cost if you do not have a child after the covered rounds. Stopping early is generally treated as a discount rather than a write-off, so check that clause specifically.",
       "If you do have a child, you repay the treatment cost in instalments over a period of years, on top of the premiums already paid.",
+      "In the US the same idea is sold in several shapes: Future Family's monthly plans and loans, Sunfish's bundled packages with a partial money-back guarantee, and BUNDL's multi-cycle bundles with full or partial refunds. They are financing products with an outcome guarantee attached rather than regulated insurance, which changes what protection you have if the company fails.",
     ],
     suits: [
       "People with reasonable predicted odds who cannot fund several cycles up front",
@@ -552,8 +572,14 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "Eligibility is underwritten and not everyone can be offered a plan; the odds that make a plan cheap are the odds that make it hardest to get.",
       "Work out the total you pay in the success case, not just the monthly figure, and compare it against paying the clinic directly.",
       "Check exactly what is inside the covered cost — drugs and donor gametes especially — and what happens if you stop treatment.",
+      "Establish whether what you are buying is regulated insurance or a refund promise from a private company, and who stands behind it either way.",
     ],
-    sources: [{ label: "Gaia — IVF plans", href: "https://gaiafamily.com/en-gb" }],
+    sources: [
+      { label: "Gaia — IVF plans", href: "https://gaiafamily.com/en-gb" },
+      { label: "Future Family", href: "https://www.futurefamily.com/" },
+      { label: "Sunfish", href: "https://www.joinsunfish.com/" },
+      { label: "BUNDL Fertility", href: "https://bundlfertility.com/" },
+    ],
   },
 
   /* ── Spread the cost ── */
@@ -563,6 +589,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "spread",
     summary:
       "Interest-free credit arranged at the clinic, usually over 10–12 months, through a regulated healthcare lender.",
+    where: "UK lenders named; almost every private fertility market has an equivalent at the point of sale.",
     typicalCost: "No interest over the promotional term; watch for arrangement fees and monthly account charges.",
     riskHolder: "You. Credit does not reduce the cost or the risk, it only moves when you pay.",
     howItWorks: [
@@ -592,6 +619,159 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "Borrowing for the full projected cost of three cycles at the outset is the most common financial mistake in fertility. Borrow per cycle.",
       "Any lender must be FCA-authorised; check the register before signing anything.",
       "If treatment ends without a baby, the repayments continue. Budget for that version of events, not only the hopeful one.",
+    ],
+  },
+];
+
+/* ── Outside the UK ──────────────────────────────────────────────────────── */
+
+export interface CountryFunding {
+  slug: string;
+  name: string;
+  /** One line, shown collapsed: the shape of the system. */
+  summary: string;
+  /** What the state pays for. */
+  publicFunding: string[];
+  /** Who can actually get it — the part most guides leave out. */
+  access: string;
+  /** The private market and the products that finance it. */
+  privateRoutes: string[];
+  sources: SourceLink[];
+}
+
+/**
+ * A starting map rather than a complete one. Everything above this point is
+ * UK detail we can stand behind; this section exists because the questions
+ * people bring to it are the same everywhere and the answers are not.
+ *
+ * Each entry is deliberately short: the shape of the system, who it admits,
+ * and what finances the rest. Anything more specific belongs in a page of its
+ * own, written the way the UK section was — from that country's own sources.
+ */
+export const INTERNATIONAL_FUNDING: CountryFunding[] = [
+  {
+    slug: "ireland",
+    name: "Ireland",
+    summary: "One publicly funded cycle through a national scheme introduced in 2023, accessed via regional fertility hubs.",
+    publicFunding: [
+      "One publicly funded IVF or ICSI cycle for those who meet the criteria, introduced from September 2023 and phased in since.",
+      "The route in is a GP referral to a regional fertility hub, which assesses eligibility before referral to a participating private clinic.",
+    ],
+    access:
+      "Criteria include age and BMI limits and no existing child from the relationship, so they read much like the UK's. Check the current HSE criteria rather than any secondary summary — this scheme has changed more than once since it launched.",
+    privateRoutes: [
+      "A well-developed private market, with Access Fertility's refund and multi-cycle programmes available through Irish clinics.",
+      "Tax relief on medical expenses, including fertility treatment, is claimable through Revenue.",
+    ],
+    sources: [{ label: "HSE — free fertility treatment", href: "https://www2.hse.ie/services/fertility-treatment/" }],
+  },
+  {
+    slug: "france",
+    name: "France",
+    summary: "One of the most generous systems in Europe, and open to single women and female couples since 2021.",
+    publicFunding: [
+      "Up to four IVF attempts and six IUI cycles reimbursed by Assurance Maladie for women under 43, typically at 100% of the regulated tariff.",
+      "Reimbursement covers the treatment and, in the usual case, the drugs.",
+    ],
+    access:
+      "The 2021 bioethics law extended assisted reproduction to single women and female same-sex couples, with the same reimbursement as everyone else. Waiting times for donor sperm became the binding constraint rather than money.",
+    privateRoutes: [
+      "Because the public route is broad, private financing products barely exist by comparison with the UK or US.",
+    ],
+    sources: [{ label: "Ameli — assistance médicale à la procréation", href: "https://www.ameli.fr/assure/sante/themes/pma" }],
+  },
+  {
+    slug: "belgium-netherlands-denmark",
+    name: "Belgium, the Netherlands and Denmark",
+    summary: "Among the most generous reimbursement systems in Europe, and all three admit single women.",
+    publicFunding: [
+      "Belgium reimburses up to six IVF or ICSI cycles for women under 43.",
+      "The Netherlands covers IVF cycles under basic health insurance, commonly three, subject to the usual policy excess.",
+      "Denmark funds up to three fresh transfers towards a first child, with limits counted in started cycles as well as transfers.",
+    ],
+    access:
+      "All three treat single women and female same-sex couples within the public system, which is why Denmark in particular became a destination for solo patients from countries that did not.",
+    privateRoutes: [
+      "Private clinics exist alongside the public route, largely for people outside the funded criteria — second children in Denmark, or over the age limits.",
+    ],
+    sources: [{ label: "ESHRE — ART reimbursement across Europe", href: "https://www.eshre.eu/" }],
+  },
+  {
+    slug: "spain",
+    name: "Spain",
+    summary: "Public treatment to 40 with long waits, alongside Europe's largest and most open private sector.",
+    publicFunding: [
+      "The public system provides assisted reproduction up to age 40 for women, with waiting lists that are frequently measured in years.",
+    ],
+    access:
+      "Spanish law permits treatment regardless of marital status or sexual orientation, so single women and female couples are eligible in principle — though regional practice and waiting times vary.",
+    privateRoutes: [
+      "A very large private market at roughly €5,000–€6,000 a cycle, and the main destination for UK and European patients needing donor eggs.",
+      "Donation in Spain is anonymous, which is the opposite of UK law and the single most important thing to weigh before treating there.",
+    ],
+    sources: [{ label: "Ministerio de Sanidad", href: "https://www.sanidad.gob.es/" }],
+  },
+  {
+    slug: "israel",
+    name: "Israel",
+    summary: "The most generous public funding in the world, and the least restrictive on family status.",
+    publicFunding: [
+      "Funded treatment for women aged 18 to 45, with no cap on the number of cycles, up to the birth of two live children with a current partner.",
+    ],
+    access:
+      "Entitlement does not depend on marital status or sexual orientation, which makes it the outlier internationally: solo motherhood by choice is funded on the same terms as anyone else's treatment.",
+    privateRoutes: ["A private sector exists mainly for treatment outside the funded criteria, such as a third child."],
+    sources: [{ label: "Israel Ministry of Health", href: "https://www.gov.il/en/departments/ministry_of_health" }],
+  },
+  {
+    slug: "australia-new-zealand",
+    name: "Australia and New Zealand",
+    summary: "Not free, but heavily rebated: Medicare pays a substantial share of every cycle, with no cycle cap.",
+    publicFunding: [
+      "In Australia, Medicare rebates a large portion of IVF costs for people with a medical indication, leaving an out-of-pocket gap of several thousand dollars a cycle. There is no limit on the number of rebated cycles.",
+      "New Zealand funds a limited number of cycles through the public system against a clinical scoring threshold, with a substantial private market alongside.",
+    ],
+    access:
+      "Australian eligibility for the Medicare rebate no longer turns on relationship status, sexual orientation or gender identity, which brought solo and LGBTQ+ patients properly into the system.",
+    privateRoutes: [
+      "Bulk-billing and low-cost clinic chains compete openly on the size of the out-of-pocket gap, which is unusual and worth using.",
+    ],
+    sources: [{ label: "Services Australia — Medicare and IVF", href: "https://www.servicesaustralia.gov.au/medicare" }],
+  },
+  {
+    slug: "canada",
+    name: "Canada",
+    summary: "Province by province, and changing quickly — three provinces now fund a cycle, and tax credits do the rest.",
+    publicFunding: [
+      "Ontario funds one IVF cycle per person per lifetime, and offers a fertility tax credit refunding 25% of eligible costs up to $5,000 a year.",
+      "Quebec funds one cycle, including medication.",
+      "British Columbia launched a programme in July 2025 funding up to $19,000 towards one cycle, for applicants aged 41 or under at application.",
+    ],
+    access:
+      "The funded programmes are generally open regardless of relationship status or sexual orientation, but donor sperm, storage and medication are frequently outside what is funded.",
+    privateRoutes: [
+      "Cycle costs of roughly CA$10,000–$20,000 before medication, financed largely through clinic plans and personal credit.",
+    ],
+    sources: [{ label: "BC — publicly funded IVF programme", href: "https://www2.gov.bc.ca/gov/content/health/accessing-health-care/publicly-funded-ivf-program" }],
+  },
+  {
+    slug: "united-states",
+    name: "United States",
+    summary: "No national coverage. Whether you pay $0 or $25,000 depends on your state, your employer and your plan type.",
+    publicFunding: [
+      "There is no federal entitlement. Around 25 states and DC have fertility insurance coverage laws, of which roughly 15 plus DC specifically require IVF coverage — and only for fully insured plans.",
+      "Self-funded employer plans, which cover most people with employer insurance, are exempt from state mandates entirely.",
+      "A federal rule proposed in May 2026 would create fertility benefits as a new category of 'excepted benefits', giving employers a lighter-touch way to offer cover from plan years starting in 2027. It is a proposal, not law.",
+    ],
+    access:
+      "Employer benefits are the dominant route: Progyny, Carrot and Maven administer lifetime funds commonly in the $20,000–$50,000 range. Coverage definitions of infertility have historically excluded solo and same-sex patients by requiring a period of unprotected heterosexual intercourse; many plans have dropped that, but it is the first thing to check in the plan document.",
+    privateRoutes: [
+      "A large specialist financing sector: Future Family, Sunfish, BUNDL and CapexMD, several of which attach a partial or full refund to a multi-cycle package.",
+      "Clinic-run refund programmes are long established and heavily marketed; the same questions apply to them as to the UK ones.",
+    ],
+    sources: [
+      { label: "RESOLVE — insurance coverage by state", href: "https://resolve.org/learn/financial-resources/insurance-coverage/" },
+      { label: "Federal Register — proposed excepted fertility benefits", href: "https://www.federalregister.gov/documents/2026/05/13/2026-09479/excepted-fertility-benefits" },
     ],
   },
 ];
