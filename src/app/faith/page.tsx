@@ -5,7 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { StoryImage } from "@/components/story-image";
 import { TraditionExplorer } from "@/components/faith/tradition-explorer";
-import { ConversationToolkit } from "@/components/faith/conversation-toolkit";
+import { ConversationToolkit } from "@/components/conversation-toolkit";
 import {
   CONVERSATION_SCENARIOS,
   FAITH_QUESTIONS,
