@@ -73,7 +73,7 @@ export function QuoteCard({
       >
         {eyebrow && (
           <p
-            className="text-[10px] font-[700] uppercase tracking-[0.16em] font-sans mb-4"
+            className="text-[12px] font-[700] uppercase tracking-[0.16em] font-sans mb-4"
             style={{ color: quoteInk }}
           >
             {eyebrow}
@@ -85,7 +85,7 @@ export function QuoteCard({
           className="font-sans font-[600]"
           style={{
             color: quoteInk,
-            fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)",
+            fontSize: "clamp(1.375rem, 1.6vw, 1.75rem)",
             lineHeight: 1.25,
             letterSpacing: "-0.01em",
           }}
@@ -94,9 +94,8 @@ export function QuoteCard({
         </blockquote>
 
         {/* Tail, dropping off the bubble into the card below it. Filled only —
-            no stroke. A stroked path would need a round linejoin to avoid
-            mitre spikes, and that rounds the tip off; the edges have to run
-            clean into the point. */}
+            no stroke. The tip is softened with a small curve rather than
+            running the edges into a sharp point. */}
         <svg
           aria-hidden
           width={TAIL.width}
@@ -104,7 +103,7 @@ export function QuoteCard({
           viewBox="0 0 30 20"
           className="absolute left-[58%] top-full -mt-px"
         >
-          <path d="M0 0 L30 0 L9 20 Z" fill={bubble} />
+          <path d="M0 0 L30 0 L11.2 17.9 Q9 20 7.8 17.3 Z" fill={bubble} />
         </svg>
       </div>
 
@@ -118,7 +117,7 @@ export function QuoteCard({
           )}
           <span className="flex flex-col gap-0.5 min-w-0">
             <span
-              className="text-[13px] font-sans font-[600] leading-tight"
+              className="text-[15px] font-sans font-[600] leading-tight"
               style={{ color: "var(--teal)" }}
             >
               {name}

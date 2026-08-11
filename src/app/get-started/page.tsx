@@ -19,14 +19,14 @@ export default function GetStartedPage() {
       <Section band={0} padding="py-12 md:py-16">
         <div className="max-w-2xl">
           <span
-            className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
+            className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
             style={{ background: "#C5E600", color: "#1A3A25" }}
           >
             Personalised matching
           </span>
           <h1
             className="font-sans font-bold text-foreground mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.06 }}
+            style={{ fontSize: "clamp(2.75rem, 5vw, 5rem)", lineHeight: 1.06 }}
           >
             Find clinics that fit your situation.
           </h1>

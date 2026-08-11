@@ -53,7 +53,7 @@ export function StoryImage({ src, alt, label, sizes, className = "" }: StoryImag
         <circle cx="60" cy="60" r="10" fill="var(--teal)" fillOpacity="0.16" />
       </svg>
       <p
-        className="text-[11px] font-[600] uppercase tracking-[0.14em] font-sans"
+        className="text-[13px] font-[600] uppercase tracking-[0.14em] font-sans"
         style={{ color: "rgba(0, 83, 83, 0.55)" }}
       >
         {label}

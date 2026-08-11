@@ -32,17 +32,17 @@ export default function StoriesPage() {
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-16 pb-14">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section band={0} padding="pt-20 pb-16">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Stories
         </p>
         <h1
           className="font-sans font-bold text-foreground mb-6"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
+          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           Personal stories
         </h1>
-        <p className="text-[17px] font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
           What the journey looks like at every stage, told the way people tell it.
         </p>
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
@@ -53,7 +53,7 @@ export default function StoriesPage() {
       </Section>
 
       {/* Filters and the grid they drive share a band — they're one control */}
-      <Section band={1} padding="py-14 md:py-16">
+      <Section band={1} padding="py-16 md:py-24">
         <div className="flex flex-wrap gap-2 mb-10">
           <button
             onClick={() => setFilter("all")}
@@ -127,15 +127,15 @@ export default function StoriesPage() {
               {/* Content */}
               <div className="flex flex-col gap-3 flex-1">
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="text-[10px] font-[500] uppercase tracking-[0.12em] text-teal font-sans">
+                  <span className="text-[12px] font-[500] uppercase tracking-[0.12em] text-teal font-sans">
                     {story.familyLabel}
                   </span>
-                  <span className="text-[10px] text-muted font-sans">·</span>
-                  <span className="text-[10px] font-sans text-muted">{story.treatment}</span>
+                  <span className="text-[12px] text-muted font-sans">·</span>
+                  <span className="text-[12px] font-sans text-muted">{story.treatment}</span>
                   {story.tradition && (
                     <>
-                      <span className="text-[10px] text-muted font-sans">·</span>
-                      <span className="text-[10px] font-sans text-muted">{story.tradition}</span>
+                      <span className="text-[12px] text-muted font-sans">·</span>
+                      <span className="text-[12px] font-sans text-muted">{story.tradition}</span>
                     </>
                   )}
                 </div>
@@ -148,7 +148,7 @@ export default function StoriesPage() {
                   {story.excerpt}
                 </p>
 
-                <p className="text-[11px] font-[500] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
+                <p className="text-[13px] font-[500] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
                   {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
                 </p>
               </div>

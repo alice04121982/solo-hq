@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
-import { StoryImage } from "@/components/story-image";
+import { StoriesCarousel } from "@/components/stories-carousel";
 import { Section } from "@/components/section";
 import { QuoteCard } from "@/components/quote-card";
 import { FAMILY_SHAPES, ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
@@ -22,14 +22,14 @@ export default function Home() {
       <Section tone="cream" id="families">
         <div className="flex items-end justify-between mb-10">
           <div className="flex flex-col gap-3">
-            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
+            <p className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
               <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
               Every family
             </p>
             <h2
               className="font-sans font-bold"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontSize: "clamp(2.5rem, 4vw, 4.25rem)",
                 lineHeight: 1.1,
                 letterSpacing: "-0.8px",
                 color: "var(--teal)",
@@ -69,13 +69,13 @@ export default function Home() {
                   className="transition-transform duration-300 group-hover:rotate-12"
                   style={{ color: "var(--lavender)" }}
                 />
-                <h3 className="font-sans font-semibold text-lg leading-7" style={{ color: theme.text }}>
+                <h3 className="font-sans font-semibold text-xl" style={{ color: theme.text }}>
                   {family.label}
                 </h3>
-                <p className="text-sm font-sans leading-5 flex-1" style={{ color: theme.text }}>
+                <p className="text-base font-sans flex-1" style={{ color: theme.text }}>
                   {family.cardSummary}
                 </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-[600] font-sans mt-auto" style={{ color: theme.text }}>
+                <span className="inline-flex items-center gap-1.5 text-sm font-[600] font-sans mt-auto" style={{ color: theme.text }}>
                   Read the guide <ArrowRight className="h-3 w-3" />
                 </span>
               </Link>
@@ -97,28 +97,28 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <span
-              className="inline-block text-[9px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
+              className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-6"
               style={{ background: "#C5E600", color: "#1A3A25" }}
             >
               The comparison tool
             </span>
             <h2
               className="font-sans font-bold mb-5"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: "#f9c6da" }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: "#f9c6da" }}
             >
               The full picture,
               <br />
               not the brochure version.
             </h2>
-            <p className="text-sm font-sans leading-relaxed mb-4" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
+            <p className="text-lg font-sans leading-relaxed mb-5" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
               Greece might look £4,000 cheaper. Add three return flights and two hotel stays and suddenly it isn&apos;t. We factor in travel and accommodation so the comparison is honest.
             </p>
-            <p className="text-sm font-sans leading-relaxed mb-8" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
+            <p className="text-lg font-sans leading-relaxed mb-10" style={{ maxWidth: "46ch", color: "#c4a0ae" }}>
               Success rates by age bracket, solo- and LGBTQ+-friendliness, HFEA-verified data flags, and all six treatment types: IVF, ICSI, IUI, donor egg, donor sperm, and double donor.
             </p>
             <Link
               href="/ivf-finder"
-              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
+              className="inline-flex items-center gap-2 rounded-full px-9 py-4 text-base font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
               style={{ background: "#C5E600", color: "#1A3A25" }}
             >
               Open comparison tool
@@ -128,14 +128,14 @@ export default function Home() {
 
           {/* Stats grid — one shape from the bank per card, in the same
               rotation the family cards use. */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {[
               { value: "HFEA data", label: "UK success rates from the public register" },
               { value: "True cost", label: "Travel & stays factored in, not just clinic fees" },
               { value: "5 brackets", label: "Success rates from under 35 to 43+" },
               { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
             ].map((s, i) => (
-              <div key={s.label} className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.07)" }}>
+              <div key={s.label} className="rounded-2xl p-6 md:p-7" style={{ background: "rgba(255,255,255,0.07)" }}>
                 <ShapeMark
                   name={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
                   size={20}
@@ -144,11 +144,11 @@ export default function Home() {
                 />
                 <p
                   className="font-sans font-medium mb-1"
-                  style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.6rem)", color: "#f9c6da" }}
+                  style={{ fontSize: "clamp(1.5rem, 2vw, 2.25rem)", color: "#f9c6da" }}
                 >
                   {s.value}
                 </p>
-                <p className="text-xs font-sans leading-snug" style={{ color: "#c4a0ae" }}>{s.label}</p>
+                <p className="text-sm font-sans leading-snug" style={{ color: "#c4a0ae" }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -159,14 +159,14 @@ export default function Home() {
       <Section tone="white" id="stories">
         <div className="flex items-end justify-between mb-10">
           <div className="flex flex-col gap-3">
-            <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
+            <p className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
               <ShapeMark name="spark" size={14} className="shape-spin" style={{ color: "var(--lavender)" }} />
               Stories
             </p>
             <h2
               className="font-sans font-bold"
               style={{
-                fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+                fontSize: "clamp(2.5rem, 4vw, 4.25rem)",
                 lineHeight: 1.1,
                 letterSpacing: "-0.8px",
                 color: "var(--teal)",
@@ -184,52 +184,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
-          {FEATURED_STORIES.map((story) => (
-            <Link
-              key={story.id}
-              href={`/stories/${story.id}`}
-              className="group flex flex-col rounded-2xl overflow-hidden border transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
-              style={{ borderColor: "var(--border)", background: "#FFFFFF" }}
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <StoryImage
-                  src={story.image}
-                  alt={story.imageAlt}
-                  label={story.tradition ?? story.familyLabel}
-                  sizes="(min-width: 768px) 360px, 100vw"
-                />
-              </div>
-
-              <div className="flex flex-col flex-1 gap-2 p-5">
-                <h3
-                  className="font-sans font-semibold text-lg leading-7"
-                  style={{ color: "var(--teal)" }}
-                >
-                  {story.title}
-                </h3>
-                <p
-                  className="text-sm font-sans leading-5"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {story.excerpt}
-                </p>
-
-                <span
-                  className="mt-auto pt-3 self-start text-xs font-sans font-medium leading-[18px]"
-                  style={{ color: "var(--teal)" }}
-                >
-                  <span
-                    className="rounded-full px-3 py-1"
-                    style={{ background: "var(--cream)" }}
-                  >
-                    {story.tag}
-                  </span>
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <StoriesCarousel stories={FEATURED_STORIES} />
 
         <Link
           href="/stories"
@@ -248,14 +203,14 @@ export default function Home() {
       {/* 5 — Community voices: warm cream, speech-bubble quotes */}
       <Section tone="cream" id="voices" backdrop={{ shape: "dots", side: "left", color: "var(--lavender)" }}>
         <div className="flex flex-col gap-3 mb-10">
-          <p className="text-[11px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
+          <p className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2" style={{ color: "var(--teal)" }}>
             <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
             Community voices
           </p>
           <h2
             className="font-sans font-bold"
             style={{
-              fontSize: "clamp(1.75rem, 3vw, 2.5rem)",
+              fontSize: "clamp(2.5rem, 4vw, 4.25rem)",
               lineHeight: 1.1,
               letterSpacing: "-0.8px",
               color: "var(--teal)",

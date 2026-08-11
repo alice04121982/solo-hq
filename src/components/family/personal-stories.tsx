@@ -13,7 +13,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
 
   return (
     <section className="bg-background">
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,14 +22,14 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           className="mb-14"
         >
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
             style={{ color: GREEN_SOFT }}
           >
             Personal stories
           </p>
           <h2
             className="font-sans font-bold"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: GREEN }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: GREEN }}
           >
             In their own words.
           </h2>
@@ -63,25 +63,25 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               still reads as the featured one. */}
           <div className="border-l-2 pl-8 md:pl-12" style={{ borderColor: GREEN }}>
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
             style={{ color: GREEN_SOFT }}
           >
             {featured.tag}
           </p>
           <h3
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.25rem, 2vw, 1.75rem)", lineHeight: 1.2, maxWidth: "32ch", color: GREEN }}
+            style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, maxWidth: "32ch", color: GREEN }}
           >
             {featured.title}
           </h3>
           <p
-            className="text-[17px] font-sans leading-relaxed mb-6"
+            className="text-lg font-sans leading-relaxed mb-6"
             style={{ maxWidth: "62ch", color: GREEN }}
           >
             {featured.body}
           </p>
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans"
             style={{ color: GREEN_SOFT }}
           >
             {featured.name}, {featured.age} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.treatment}
@@ -112,7 +112,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
                 </div>
               )}
               <p
-                className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
+                className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
                 style={{ color: GREEN_SOFT }}
               >
                 {story.tag}
@@ -127,7 +127,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
                 {story.body}
               </p>
               <p
-                className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans"
+                className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans"
                 style={{ color: GREEN_SOFT }}
               >
                 {story.name}, {story.age} &nbsp;·&nbsp; {story.location}

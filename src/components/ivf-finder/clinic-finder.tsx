@@ -125,7 +125,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           <SlidersHorizontal className="h-4 w-4" aria-hidden />
           Filters
           {activeFilterCount > 0 && (
-            <span className="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold bg-teal text-on-teal">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full text-[13px] font-bold bg-teal text-on-teal">
               {activeFilterCount}
             </span>
           )}

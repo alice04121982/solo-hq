@@ -65,7 +65,7 @@ function LinkColumn({
   return (
     <div>
       <p
-        className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-5 font-sans"
+        className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-5 font-sans"
         style={{ color: PINK_MUTED }}
       >
         {title}
@@ -90,7 +90,7 @@ function LinkColumn({
 export function SiteFooter() {
   return (
     <footer style={{ background: TEAL }}>
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
@@ -110,7 +110,7 @@ export function SiteFooter() {
           {/* Socials */}
           <div>
             <p
-              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-5 font-sans"
+              className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-5 font-sans"
               style={{ color: PINK_MUTED }}
             >
               Follow our socials

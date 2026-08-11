@@ -19,9 +19,9 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
 
   return (
     <section className="border-b border-border" style={{ background: OFF_WHITE }}>
-      <div className="mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <p
-          className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
+          className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
           style={{ color: GREEN_SOFT }}
         >
           Guides &amp; tools
@@ -29,7 +29,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
         <div className="flex items-end justify-between mb-10">
           <h2
             className="font-sans font-bold"
-            style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)", lineHeight: 1.1, color: GREEN }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: GREEN }}
           >
             Resources for your journey.
           </h2>
@@ -50,7 +50,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
               className="group flex flex-col gap-2 p-6 bg-white hover:bg-[#FDE8F2] transition-colors duration-150"
             >
               <span
-                className="inline-block text-[10px] font-[600] uppercase tracking-[0.1em] font-sans rounded-full px-2.5 py-1 w-fit"
+                className="inline-block text-[12px] font-[600] uppercase tracking-[0.1em] font-sans rounded-full px-2.5 py-1 w-fit"
                 style={{ background: "#FDE8F2", color: GREEN }}
               >
                 {guide.type}

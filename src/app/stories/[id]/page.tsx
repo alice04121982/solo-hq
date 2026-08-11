@@ -81,7 +81,7 @@ export default async function StoryPage({ params }: PageProps) {
         {story.body.split("\n\n").map((para, i) => (
           <p
             key={i}
-            className="text-[17px] font-sans leading-[1.75]"
+            className="text-lg font-sans leading-[1.75]"
             style={{ color: "var(--foreground)" }}
           >
             {para}
@@ -101,7 +101,7 @@ export default async function StoryPage({ params }: PageProps) {
         ].map(({ k, v }) => (
           <div key={k}>
             <dt
-              className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans mb-1"
+              className="text-[13px] font-[600] uppercase tracking-[0.12em] font-sans mb-1"
               style={{ color: "rgba(0, 83, 83, 0.6)" }}
             >
               {k}
@@ -116,7 +116,7 @@ export default async function StoryPage({ params }: PageProps) {
       {related.length > 0 && (
         <section className="mt-14">
           <h2
-            className="font-sans font-semibold text-lg leading-7 mb-5"
+            className="font-sans font-semibold text-xl mb-5"
             style={{ color: "var(--teal)" }}
           >
             More stories

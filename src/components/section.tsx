@@ -90,7 +90,7 @@ export function Section({
   band,
   tone,
   id,
-  padding = "py-16 md:py-20",
+  padding = "py-24 md:py-36",
   backdrop,
   className,
   innerClassName,

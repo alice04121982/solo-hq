@@ -79,7 +79,7 @@ export function JourneyMap() {
   return (
     <div className="p-6 md:p-8">
       <div className="mb-6">
-        <p className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans" style={{ color: GREEN_SOFT }}>
+        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans" style={{ color: GREEN_SOFT }}>
           Full lifecycle
         </p>
         <h2
@@ -157,7 +157,7 @@ export function JourneyMap() {
       </div>
 
       {/* Scroll indicator */}
-      <p className="text-[10px] font-sans text-center mt-1" style={{ color: GREEN_SOFT }}>
+      <p className="text-[12px] font-sans text-center mt-1" style={{ color: GREEN_SOFT }}>
         Swipe to explore all 9 steps →
       </p>
     </div>

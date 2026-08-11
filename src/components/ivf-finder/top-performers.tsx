@@ -67,7 +67,7 @@ export function TopPerformers({
 
   return (
     <div>
-      <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3">
+      <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-3">
         Top performers for this search
       </p>
       {/* Horizontal scroll on mobile, a row of equal cards from md up. */}
@@ -81,7 +81,7 @@ export function TopPerformers({
                 isSelected ? "outline-solid outline-2 -outline-offset-2 outline-teal" : ""
               }`}
             >
-              <p className="text-[10px] font-[700] uppercase tracking-[0.12em] text-teal mb-2">
+              <p className="text-[12px] font-[700] uppercase tracking-[0.12em] text-teal mb-2">
                 {labels.join(" · ")}
               </p>
               <div className="mb-2">

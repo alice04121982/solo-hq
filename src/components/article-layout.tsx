@@ -66,7 +66,7 @@ export function ArticleLayout({
 
         {eyebrow && (
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans mb-4"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans mb-4"
             style={{ color: "var(--muted)" }}
           >
             {eyebrow}
@@ -75,7 +75,7 @@ export function ArticleLayout({
 
         <h1
           className="font-sans font-bold mb-5"
-          style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.1, color: "var(--teal)" }}
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.5rem)", lineHeight: 1.1, color: "var(--teal)" }}
         >
           {title}
         </h1>
@@ -91,7 +91,7 @@ export function ArticleLayout({
 
         {meta && meta.length > 0 && (
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans mb-8"
+            className="text-[13px] font-[600] uppercase tracking-[0.12em] font-sans mb-8"
             style={{ color: "var(--muted)" }}
           >
             {meta.join("  ·  ")}

@@ -53,7 +53,7 @@ export function ConversationToolkit({
       >
         <p
           className="font-sans font-bold mb-8"
-          style={{ fontSize: "clamp(1.25rem, 2.2vw, 1.75rem)", lineHeight: 1.2, color: TEAL, maxWidth: "34ch" }}
+          style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, color: TEAL, maxWidth: "34ch" }}
         >
           {scenario.situation}
         </p>
@@ -62,7 +62,7 @@ export function ConversationToolkit({
           {/* What's going on */}
           <div>
             <p
-              className="text-[10px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+              className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
               style={{ color: TEAL_SOFT }}
             >
               What&rsquo;s usually going on
@@ -82,7 +82,7 @@ export function ConversationToolkit({
               style={{ borderColor: "var(--border)" }}
             >
               <p
-                className="inline-flex items-center gap-2 text-[10px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+                className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
                 style={{ color: TEAL_SOFT }}
               >
                 <ShieldOff className="h-3.5 w-3.5" />
@@ -105,7 +105,7 @@ export function ConversationToolkit({
           {/* Scripts */}
           <div>
             <p
-              className="inline-flex items-center gap-2 text-[10px] font-[700] uppercase tracking-[0.14em] mb-4 font-sans"
+              className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-4 font-sans"
               style={{ color: TEAL_SOFT }}
             >
               <MessageSquareQuote className="h-3.5 w-3.5" />
@@ -136,7 +136,7 @@ export function ConversationToolkit({
               style={{ background: "var(--teal)" }}
             >
               <p
-                className="inline-flex items-center gap-2 text-[10px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
+                className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
                 style={{ color: "var(--on-teal-muted)" }}
               >
                 <DoorOpen className="h-3.5 w-3.5" />

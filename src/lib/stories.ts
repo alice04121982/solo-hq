@@ -269,7 +269,21 @@ export const ALL_STORIES: Story[] = [
   },
 ];
 
-export const FEATURED_STORIES = ALL_STORIES.slice(0, 3);
+/**
+ * The homepage carousel: one story per family type, plus a faith story, so
+ * every visitor sees a family that looks like theirs within one swipe.
+ */
+const FEATURED_IDS = [
+  "alice-iris",        // solo mum
+  "sarah-priya-maya",  // two mums
+  "tom-marcus-elliot", // two dads
+  "james-oscar",       // solo dad
+  "emma-david-isla",   // mum and dad
+  "aisha-yusuf",       // faith & belief
+];
+export const FEATURED_STORIES = FEATURED_IDS.map(
+  (id) => ALL_STORIES.find((s) => s.id === id)!,
+);
 
 /** Stories told through the lens of religion, culture or belief. Used by /faith. */
 export const FAITH_STORIES = ALL_STORIES.filter((s) => s.theme === "faith");
