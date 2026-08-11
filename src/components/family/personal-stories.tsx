@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Story } from "@/lib/family-types";
 
@@ -35,7 +36,11 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           </h2>
           <p className="text-xs font-sans leading-relaxed mt-3" style={{ color: GREEN_SOFT, maxWidth: "60ch" }}>
             Illustrative stories while we collect real, consented accounts. To share
-            yours, write to stories@cairnfertility.co.uk.
+            yours,{" "}
+            <Link href="/stories/share" className="underline underline-offset-2" style={{ color: GREEN }}>
+              use our story form
+            </Link>{" "}
+            or write to stories@cairnfertility.co.uk.
           </p>
         </motion.div>
 

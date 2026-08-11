@@ -47,8 +47,11 @@ export default function StoriesPage() {
         </p>
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
           These are illustrative stories while we collect real, consented accounts to
-          replace them. If you would like to share yours, write to
-          stories@cairnfertility.co.uk.
+          replace them. If you would like to share yours,{" "}
+          <Link href="/stories/share" className="underline underline-offset-2 text-foreground">
+            share your story here
+          </Link>{" "}
+          or write to stories@cairnfertility.co.uk.
         </p>
       </Section>
 
