@@ -42,8 +42,8 @@ export interface FundingStep {
  */
 export const ORDER_OF_OPERATIONS: FundingStep[] = [
   {
-    title: "Check what the NHS owes you first",
-    body: "Even where funding is unlikely, NHS investigations, diagnosis and referral are usually free, and a diagnosis changes which private route is sensible. Checking costs a GP appointment and can be worth five figures.",
+    title: "See what you can access on the NHS first",
+    body: "Even where funded treatment is unlikely, a lot is often available for free: blood tests, an AMH level, scans, semen analysis where relevant, and a referral to a specialist. Those results also change which private route makes sense, so starting with a GP appointment can save you paying for the same tests at a clinic.",
   },
   {
     title: "Check whether someone else already pays",
@@ -224,7 +224,7 @@ export const NHS_PITFALLS: { title: string; body: string }[] = [
   },
   {
     title: "Previous private cycles can count against you",
-    body: "Some policies reduce or remove entitlement if you have already self-funded IVF. Check before paying for a private cycle, because the order in which you do things can be worth a funded cycle.",
+    body: "Some policies reduce or withdraw funding if you have already self-funded IVF. Check before paying for a private cycle, because the order in which you do things can be worth a funded cycle.",
   },
   {
     title: "BMI and smoking are checked at treatment",

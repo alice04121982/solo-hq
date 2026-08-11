@@ -189,8 +189,11 @@ export default function FundingPage() {
           Wales and Northern Ireland there is one set of national criteria each.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Investigations and diagnosis are usually free even where treatment is not, so a GP
-          appointment is worth making regardless of what you have been told about your chances.
+          It is also worth separating funded treatment from everything else the NHS can do for you.
+          Investigations and diagnosis — blood tests, an AMH level, scans, semen analysis where
+          relevant, and a referral to a specialist — are usually free even in areas that fund no
+          treatment at all, and those results shape which private route makes sense. A GP appointment
+          is worth making regardless of what you have been told about your chances.
         </p>
 
         {/* What NICE says */}
