@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt =
   "CairnFertility. Compare IVF clinics on cost, success rates and eligibility.";
@@ -30,7 +32,13 @@ function Stone({ width, dx = 0 }: { width: number; dx?: number }) {
   );
 }
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  /* satori reads neither woff2 nor variable fonts, so the brand face is
+     shipped as static TTF instances cut from the variable file. */
+  const [regular, semibold] = await Promise.all([
+    readFile(join(process.cwd(), "src/app/fonts/GeneralSans-Regular.ttf")),
+    readFile(join(process.cwd(), "src/app/fonts/GeneralSans-Semibold.ttf")),
+  ]);
   return new ImageResponse(
     (
       <div
@@ -42,11 +50,19 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           background: TEAL,
           padding: 80,
+          fontFamily: '"General Sans"',
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           {/* Two-tone wordmark, matching the site logo lockup */}
-          <div style={{ display: "flex", fontSize: 76, fontWeight: 700 }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 76,
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
+            }}
+          >
             <span style={{ color: CREAM }}>Cairn</span>
             <span style={{ color: LIME }}>Fertility</span>
           </div>
@@ -85,6 +101,12 @@ export default function OpenGraphImage() {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        { name: "General Sans", data: regular, style: "normal", weight: 400 },
+        { name: "General Sans", data: semibold, style: "normal", weight: 600 },
+      ],
+    }
   );
 }
