@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: "How IVF Works", href: "/how-ivf-works" },
   { label: "Compare Clinics", href: "/ivf-finder" },
   { label: "Stories", href: "/stories" },
+  { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
 ];
 
@@ -74,8 +75,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <Logo height={44} onDark={isDark} />
       </a>
 
-      {/* Desktop links */}
-      <div className="hidden md:flex items-center gap-6 xl:gap-10">
+      {/* Desktop links — six items no longer fit beside the logo and CTA at the
+          md breakpoint, so the burger now carries the nav until lg. */}
+      <div className="hidden lg:flex items-center gap-5 xl:gap-8">
         {NAV_LINKS.map((l) => (
           <a
             key={l.href}
@@ -92,7 +94,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
       </div>
 
       {/* CTA */}
-      <div className="hidden md:flex items-center">
+      <div className="hidden lg:flex items-center">
         <a
           href="/get-started"
           className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
@@ -105,7 +107,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
       {/* Mobile burger */}
       <button
-        className={`md:hidden p-1 ${isDark ? "text-[#f9c6da]" : "text-foreground"}`}
+        className={`lg:hidden p-1 ${isDark ? "text-[#f9c6da]" : "text-foreground"}`}
         onClick={() => setOpen(true)}
         aria-label="Open menu"
         aria-expanded={open}
@@ -116,7 +118,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
       {/* Full-screen menu */}
       {open && (
         <div
-          className="fixed inset-0 z-[100] flex flex-col md:hidden"
+          className="fixed inset-0 z-[100] flex flex-col lg:hidden"
           style={{ background: "var(--teal)" }}
           role="dialog"
           aria-modal="true"
@@ -136,8 +138,10 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             </button>
           </div>
 
-          {/* Links fill the space between the header and the footer action */}
-          <div className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
+          {/* Links fill the space between the header and the footer action.
+              Six of them at this type size can exceed a short phone viewport,
+              so the column scrolls rather than clipping the last item. */}
+          <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-6 py-4">
             {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
