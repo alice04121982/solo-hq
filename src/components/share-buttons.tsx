@@ -64,7 +64,7 @@ export function ShareButtons({ title }: { title: string }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <span
-        className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans mr-1"
+        className="text-[13px] font-[600] uppercase tracking-[0.12em] font-sans mr-1"
         style={{ color: "var(--muted)" }}
       >
         Share

@@ -75,7 +75,7 @@ export function CountrySelect({ selected, onChange }: CountrySelectProps) {
       >
         Country
         {selected.length > 0 && (
-          <span className="flex items-center justify-center min-w-5 h-5 px-1 rounded-full text-[11px] font-bold bg-teal text-on-teal">
+          <span className="flex items-center justify-center min-w-5 h-5 px-1 rounded-full text-[13px] font-bold bg-teal text-on-teal">
             {selected.length}
           </span>
         )}

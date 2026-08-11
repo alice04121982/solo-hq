@@ -21,7 +21,7 @@ const DONOR_LABELS: Record<NonNullable<Clinic["donorAnonymity"]>, string> = {
 
 function BestBadge() {
   return (
-    <span className="ml-1.5 inline-block bg-accent/20 text-teal-ink text-[9px] font-bold px-1 py-0.5 rounded align-middle">
+    <span className="ml-1.5 inline-block bg-accent/20 text-teal-ink text-[11px] font-bold px-1 py-0.5 rounded align-middle">
       best
     </span>
   );
@@ -42,7 +42,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
   const bestPrice = prices.length > 0 ? Math.min(...prices) : null;
 
   const headerCell =
-    "px-4 py-3 text-left text-[10px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
+    "px-4 py-3 text-left text-[12px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
   const bodyCell = "px-4 py-3 text-sm text-foreground align-top whitespace-nowrap";
 
   return (

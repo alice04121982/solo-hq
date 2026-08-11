@@ -136,7 +136,7 @@ function FilterTag({
 
 function GroupLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
+    <p className="text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
       {children}
     </p>
   );
@@ -163,7 +163,7 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
       {/* Age bracket: a Select, because it holds a form value. It drives the
           ranking, so it is required and has no empty option. */}
       <div>
-        <label htmlFor="cairn-age-bracket" className="block text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
+        <label htmlFor="cairn-age-bracket" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
           Your age
         </label>
         <select
@@ -222,7 +222,7 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Price ceiling */}
         <div>
-          <label htmlFor="cairn-price-ceiling" className="block text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
+          <label htmlFor="cairn-price-ceiling" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
             Price per cycle
           </label>
           <input
@@ -247,7 +247,7 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
 
         {/* Donor anonymity */}
         <div>
-          <label htmlFor="cairn-donor-anonymity" className="block text-[10px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
+          <label htmlFor="cairn-donor-anonymity" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
             Donor anonymity
           </label>
           <select

@@ -735,7 +735,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         </div>
       )}
 
-      <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
         {results.length} clinic{results.length !== 1 ? "s" : ""} matched, ranked for you
       </p>
 
@@ -770,22 +770,22 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="font-sans font-medium text-foreground text-lg leading-tight">
                   £{r.clinic.realPriceGBP.toLocaleString()}
                 </p>
-                <p className="text-[10px] font-sans text-muted">IVF est. real cost</p>
+                <p className="text-[12px] font-sans text-muted">IVF est. real cost</p>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-px bg-border">
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {successLabel}
                 </p>
                 <p className="font-sans font-medium text-foreground text-lg leading-none">
                   {r.clinic.successRates[ageKey]}%
                 </p>
-                <p className="text-[10px] font-sans text-muted mt-0.5">{successSub}</p>
+                <p className="text-[12px] font-sans text-muted mt-0.5">{successSub}</p>
               </div>
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {s.family === "female-couple" || s.family === "male-couple"
                     ? "LGBTQ+"
                     : s.family === "straight-couple"
@@ -796,7 +796,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                   ? r.clinic.lgbtqFriendliness : r.clinic.soloFriendliness} />
               </div>
               <div className="bg-background p-3">
-                <p className="text-[10px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
+                <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   Pricing
                 </p>
                 <Dots rating={r.clinic.priceTransparency} />
@@ -806,14 +806,14 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
             <div className="p-4">
               <div className="flex flex-wrap gap-2 mb-3">
                 {r.matchReasons.slice(0, 3).map((reason) => (
-                  <span key={reason} className="text-[11px] font-sans px-2.5 py-1 rounded-full"
+                  <span key={reason} className="text-[13px] font-sans px-2.5 py-1 rounded-full"
                     style={{ background: "var(--accent)", color: "var(--foreground)" }}>
                     {reason}
                   </span>
                 ))}
               </div>
               {r.travelNote && (
-                <p className="flex items-start gap-1.5 text-[11px] font-sans text-muted leading-relaxed border-t border-border pt-3">
+                <p className="flex items-start gap-1.5 text-[13px] font-sans text-muted leading-relaxed border-t border-border pt-3">
                   <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
                   <span>{r.travelNote}</span>
                 </p>
@@ -942,7 +942,7 @@ export function ClinicMatcher() {
           ))}
         </div>
         {!isResults && (
-          <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+          <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
             Step {step + 1} of {STEPS.length - 1}
           </p>
         )}
@@ -959,7 +959,7 @@ export function ClinicMatcher() {
         >
           <h2
             className="font-sans font-bold text-foreground mb-1"
-            style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
+            style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.15 }}
           >
             {STEPS[step].title}
           </h2>
