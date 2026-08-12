@@ -279,7 +279,8 @@ function StepResults({ s }: { s: Selections }) {
         >
           NHS
         </a>
-        . Always confirm against a written quote from your clinic.
+        . Always confirm against a written quote from your clinic. Your answers stay in
+        your browser: nothing you enter in this calculator is sent to us or stored.
       </p>
     </div>
   );
