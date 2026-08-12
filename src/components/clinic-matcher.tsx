@@ -5,6 +5,14 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { getFamilyType, type FamilyTypeSlug } from "@/lib/family-types";
 import { CLINICS as DB_CLINICS, DATA_PROVENANCE } from "@/lib/clinics";
+import {
+  travelEstimateForCity,
+  googleFlightsUrl,
+  staySearchUrl,
+  formatRangeGbp,
+  TRAVEL_ASSUMPTIONS,
+  type TravelEstimate,
+} from "@/lib/travel";
 import type { AgeBracket, Treatment } from "@/types/clinic";
 import { RegulatorNotice } from "@/components/regulator-notice";
 import { ShapeMark, FAMILY_SHAPES, type ShapeName } from "@/components/shapes";
@@ -116,6 +124,7 @@ const IUI_EXTRAS_GBP = 650;
 interface MatchClinic {
   slug: string;
   name: string;
+  city: string;
   location: string;
   region: "uk" | "abroad";
   hfeaLicensed: boolean;
@@ -138,6 +147,7 @@ const CLINICS: MatchClinic[] = DB_CLINICS.map((c) => {
   return {
     slug: c.slug,
     name: c.name,
+    city: c.city,
     location: `${c.city}, ${c.country}`,
     region,
     hfeaLicensed: c.hfeaLicensed,
@@ -204,6 +214,7 @@ interface ScoredClinic {
   score: number;
   matchReasons: string[];
   travelNote: string | null;
+  travel: TravelEstimate | null;
 }
 
 function scoreClinic(clinic: MatchClinic, s: WizardState): ScoredClinic | null {
@@ -220,14 +231,16 @@ function scoreClinic(clinic: MatchClinic, s: WizardState): ScoredClinic | null {
   if (donorNeed === "egg" && !clinic.treatments.includes("Donor eggs")) return null;
   if (donorNeed === "sperm" && !clinic.treatments.includes("Donor sperm")) return null;
 
-  // Budget: price IVF at its real (all-in) cost first — including a rough
-  // travel cost for abroad — and when that breaks the budget, fall back to
-  // IUI where it is clinically and practically sensible: own eggs, and a UK
-  // clinic, because IUI's cycle-timing visits make travelling impractical.
-  // This is what makes "Under £5,000" return the IUI options it promises
-  // instead of nothing. Surrogacy paths keep the old behaviour: the wider
-  // journey budget is not a ceiling on the IVF element alone.
-  const travelEstimate = clinic.region === "abroad" ? 1500 : 0;
+  // Budget: price IVF at its real (all-in) cost first — including the
+  // destination's flights + stays estimate for abroad — and when that breaks
+  // the budget, fall back to IUI where it is clinically and practically
+  // sensible: own eggs, and a UK clinic, because IUI's cycle-timing visits
+  // make travelling impractical. This is what makes "Under £5,000" return
+  // the IUI options it promises instead of nothing. Surrogacy paths keep the
+  // old behaviour: the wider journey budget is not a ceiling on the IVF
+  // element alone.
+  const travel = clinic.region === "abroad" ? travelEstimateForCity(clinic.city) : null;
+  const travelEstimate = travel?.mid ?? 0;
   const matchReasons: string[] = [];
   const ivfReal = clinic.ivfRealGBP != null ? clinic.ivfRealGBP + travelEstimate : null;
 
@@ -311,8 +324,11 @@ function scoreClinic(clinic: MatchClinic, s: WizardState): ScoredClinic | null {
 
   // Travel note
   let travelNote: string | null = null;
-  if (clinic.region === "abroad") {
-    travelNote = `Add ~£1,500 for flights + hotel (est. real total: £${effectiveCost.toLocaleString("en-GB")})`;
+  if (travel) {
+    travelNote =
+      `Add ${formatRangeGbp(travel)} for flights + stays over ` +
+      `${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips ` +
+      `(est. real total: £${effectiveCost.toLocaleString("en-GB")})`;
   }
 
   // Success rate reason. IUI matches get the national range, never the
@@ -328,7 +344,7 @@ function scoreClinic(clinic: MatchClinic, s: WizardState): ScoredClinic | null {
     );
   }
 
-  return { clinic, treatment, baseGBP, realGBP, score, matchReasons, travelNote };
+  return { clinic, treatment, baseGBP, realGBP, score, matchReasons, travelNote, travel };
 }
 
 // ─── Shared UI ────────────────────────────────────────────────────────────────
@@ -638,7 +654,7 @@ function StepTravel({ s, set, isSurrogacy }: { s: WizardState; set: (t: TravelWi
     <div className="space-y-3">
       {!isSurrogacy && (
         <p className="text-sm font-sans text-muted mb-2 leading-relaxed">
-          Clinics abroad can look cheaper until you add flights, hotels, and 2–4 trips. We factor this into the real cost.
+          Clinics abroad can look cheaper until you add flights, stays, and 2–3 trips. We factor this into the real cost, per destination.
         </p>
       )}
       {options.map((o) => (
@@ -855,10 +871,37 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 ))}
               </div>
               {r.travelNote && (
-                <p className="flex items-start gap-1.5 text-[13px] font-sans text-muted leading-relaxed border-t border-border pt-3">
-                  <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
-                  <span>{r.travelNote}</span>
-                </p>
+                <div className="border-t border-border pt-3">
+                  <p className="flex items-start gap-1.5 text-[13px] font-sans text-muted leading-relaxed">
+                    <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
+                    <span>{r.travelNote}</span>
+                  </p>
+                  {r.travel?.destination.note && (
+                    <p className="text-[13px] font-sans text-muted leading-relaxed mt-1.5 pl-5">
+                      {r.travel.destination.note}
+                    </p>
+                  )}
+                  {r.travel && (
+                    <p className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5 pl-5">
+                      <a
+                        href={googleFlightsUrl(r.travel.destination)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[13px] font-sans font-medium text-muted hover:text-foreground underline underline-offset-4 transition-colors"
+                      >
+                        Check live flight prices
+                      </a>
+                      <a
+                        href={staySearchUrl(r.travel.destination)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[13px] font-sans font-medium text-muted hover:text-foreground underline underline-offset-4 transition-colors"
+                      >
+                        Check places to stay
+                      </a>
+                    </p>
+                  )}
+                </div>
               )}
               <Link
                 href={`/ivf-finder/${r.clinic.slug}`}
@@ -881,7 +924,10 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
           timeZone: "UTC",
         })}
         . &ldquo;Real cost&rdquo; adds our estimate of medications, consultations and fees to
-        the clinic&apos;s headline quote. Solo, LGBTQ+ and pricing scores are Cairn&apos;s own
+        the clinic&apos;s headline quote; for clinics abroad it also adds
+        destination-specific flights and stays across{" "}
+        {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips.
+        Solo, LGBTQ+ and pricing scores are Cairn&apos;s own
         editorial assessments of published clinic information — not patient reviews or
         independently verified ratings.
       </p>

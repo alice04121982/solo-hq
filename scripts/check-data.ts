@@ -16,6 +16,7 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
+import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
 
 const STALE_DAYS = Number(process.env.STALE_DAYS ?? 120);
 
@@ -23,23 +24,37 @@ const errors: string[] = [];
 const warnings: string[] = [];
 
 // ── Provenance freshness ──
-const verifiedOn = new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`);
-if (Number.isNaN(verifiedOn.getTime())) {
-  errors.push(`DATA_PROVENANCE.pricesVerifiedOn is not a valid ISO date: "${DATA_PROVENANCE.pricesVerifiedOn}"`);
-} else {
-  const ageDays = Math.floor((Date.now() - verifiedOn.getTime()) / 86_400_000);
+function checkFreshness(label: string, isoDate: string, fixHint: string) {
+  const date = new Date(`${isoDate}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) {
+    errors.push(`${label} is not a valid ISO date: "${isoDate}"`);
+    return;
+  }
+  const ageDays = Math.floor((Date.now() - date.getTime()) / 86_400_000);
   if (ageDays < 0) {
-    errors.push(`DATA_PROVENANCE.pricesVerifiedOn is in the future (${DATA_PROVENANCE.pricesVerifiedOn}).`);
+    errors.push(`${label} is in the future (${isoDate}).`);
   } else if (ageDays > STALE_DAYS) {
     errors.push(
-      `Price data is stale: last verified ${ageDays} days ago (${DATA_PROVENANCE.pricesVerifiedOn}), ` +
-        `limit is ${STALE_DAYS} days. Re-verify prices against each clinic's published price list ` +
-        `and the HFEA/NHS benchmarks (see the treatment-data-check skill), then update pricesVerifiedOn.`
+      `${label} data is stale: last verified ${ageDays} days ago (${isoDate}), ` +
+        `limit is ${STALE_DAYS} days. ${fixHint}`
     );
   } else if (ageDays > STALE_DAYS * 0.75) {
-    warnings.push(`Price data was last verified ${ageDays} days ago; it goes stale at ${STALE_DAYS}.`);
+    warnings.push(`${label} was last verified ${ageDays} days ago; it goes stale at ${STALE_DAYS}.`);
   }
 }
+
+checkFreshness(
+  "DATA_PROVENANCE.pricesVerifiedOn",
+  DATA_PROVENANCE.pricesVerifiedOn,
+  "Re-verify prices against each clinic's published price list and the HFEA/NHS benchmarks " +
+    "(see the treatment-data-check skill), then update pricesVerifiedOn."
+);
+checkFreshness(
+  "TRAVEL_PROVENANCE.verifiedOn",
+  TRAVEL_PROVENANCE.verifiedOn,
+  "Re-check each destination's flight and stay ranges against booking sites, then update " +
+    "TRAVEL_PROVENANCE.verifiedOn in src/lib/travel.ts."
+);
 
 // ── Per-clinic invariants ──
 const slugs = new Set<string>();
@@ -94,6 +109,36 @@ for (const c of CLINICS) {
 }
 
 if (CLINICS.length === 0) errors.push("Clinic database is empty.");
+
+// ── Travel estimates ──
+//
+// The true-cost figures across the finder, wizard and calculator depend on
+// every overseas clinic city having a travel entry: a missing entry silently
+// reverts that clinic to headline-price-only comparison.
+const travelCities = new Set(DESTINATIONS.map((d) => d.city));
+const overseasCities = new Set(
+  CLINICS.filter((c) => c.region !== "UK").map((c) => c.city)
+);
+for (const city of overseasCities) {
+  if (!travelCities.has(city))
+    errors.push(
+      `Overseas clinic city "${city}" has no travel entry in src/lib/travel.ts — ` +
+        `its true cost falls back to the headline price.`
+    );
+}
+for (const d of DESTINATIONS) {
+  if (!overseasCities.has(d.city))
+    warnings.push(`Travel entry "${d.city}" matches no overseas clinic city; remove it or fix the name.`);
+  for (const [label, range, min, max] of [
+    ["returnFlightGbp", d.returnFlightGbp, 30, 2500],
+    ["nightlyStayGbp", d.nightlyStayGbp, 20, 500],
+  ] as const) {
+    if (range.low >= range.high)
+      errors.push(`${d.city}: ${label} low (£${range.low}) is not below high (£${range.high}).`);
+    if (range.low < min || range.high > max)
+      errors.push(`${d.city}: ${label} £${range.low}–£${range.high} is outside the plausible range.`);
+  }
+}
 
 // ── Prescription-medicine brand names ──
 //
