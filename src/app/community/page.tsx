@@ -179,8 +179,8 @@ export default function CommunityPage() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <p className="text-xs font-sans" style={{ color: "var(--on-teal-muted)" }}>
-              Or find us on the socials in the footer below — same honesty,
-              shorter form.
+              Or join the waitlist above and we&rsquo;ll email you when the
+              community opens — same honesty, shorter form.
             </p>
           </div>
         </div>

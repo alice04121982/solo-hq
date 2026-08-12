@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -100,9 +101,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
       }`}
     >
-      <a href="/" className="flex items-center">
+      <Link href="/" className="flex items-center">
         <Logo height={44} onDark={isDark} />
-      </a>
+      </Link>
 
       {/* Desktop links — eight items across primary + "More" no longer fit
           beside the logo and CTA at the md breakpoint, so the burger still
@@ -199,9 +200,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           aria-label="Menu"
         >
           <div className="flex items-center justify-between gap-8 px-6 py-6">
-            <a href="/" onClick={() => setOpen(false)} className="flex items-center">
+            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
               <Logo height={44} onDark />
-            </a>
+            </Link>
             <button
               className="p-1"
               style={{ color: "var(--on-teal)" }}

@@ -270,6 +270,9 @@ export default function FaithPage() {
             Faith and treatment, at the same time, in front of families who had views.
             None of these people resolved it neatly. That is rather the point.
           </p>
+          <p className="text-xs font-sans mb-12 -mt-8" style={{ color: "var(--muted)" }}>
+            Illustrative stories while we collect real, consented accounts.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {FAITH_STORIES.map((story) => (
@@ -329,14 +332,14 @@ export default function FaithPage() {
                 prefer.
               </p>
             </div>
-            <Link
-              href="/get-started"
+            <a
+              href="mailto:stories@cairnfertility.co.uk"
               className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
               style={{ background: "var(--accent)", color: "#1A3A25" }}
             >
               Share your story
               <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
