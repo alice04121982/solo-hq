@@ -55,7 +55,12 @@ export function ClinicCard({
               ? `£${clinic.pricePerCycleGbp.toLocaleString()}`
               : "Not published"}
           </p>
-          <p className="text-xs text-muted">per cycle</p>
+          <p className="text-xs text-muted">per IVF cycle</p>
+          {clinic.iuiPricePerCycleGbp != null && (
+            <p className="text-xs text-muted mt-0.5">
+              IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()}
+            </p>
+          )}
         </div>
       </div>
 

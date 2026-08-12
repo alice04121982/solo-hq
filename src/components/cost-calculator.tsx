@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft, Info } from "lucide-react";
+import { DATA_PROVENANCE } from "@/lib/clinics";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -25,8 +26,11 @@ interface Selections {
 
 // ─── Cost data ────────────────────────────────────────────────────────────────
 
+// Kept in step with the clinic database (src/lib/clinics.ts) and its cited
+// benchmarks: the HFEA puts an IVF cycle at £5,000 on average and IUI at
+// around a quarter of that. Update DATA_PROVENANCE when these change.
 const BASE_COSTS: Record<TreatmentPath, Record<ClinicTier, number>> = {
-  iui: { budget: 1200, mid: 1700, premium: 2400 },
+  iui: { budget: 1000, mid: 1250, premium: 1600 },
   ivf: { budget: 5500, mid: 8500, premium: 12000 },
   "donor-egg": { budget: 8500, mid: 12000, premium: 16500 },
 };
@@ -248,6 +252,35 @@ function StepResults({ s }: { s: Selections }) {
         </p>
         <p className="font-serif text-foreground" style={{ fontSize: "2rem" }}>{fmt(total)}</p>
       </div>
+
+      <p className="text-xs font-sans text-muted mt-6 leading-relaxed">
+        Estimates use typical published UK clinic prices, last verified on{" "}
+        {new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
+        })}
+        , sanity-checked against the{" "}
+        <a
+          href={DATA_PROVENANCE.benchmarks[0].url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium underline underline-offset-2 hover:text-foreground transition-colors"
+        >
+          HFEA&apos;s treatment cost guidance
+        </a>{" "}
+        and the{" "}
+        <a
+          href={DATA_PROVENANCE.benchmarks[2].url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium underline underline-offset-2 hover:text-foreground transition-colors"
+        >
+          NHS
+        </a>
+        . Always confirm against a written quote from your clinic.
+      </p>
     </div>
   );
 }

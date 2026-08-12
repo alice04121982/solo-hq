@@ -4,7 +4,17 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SlidersHorizontal } from "lucide-react";
 import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
-import { rankBySuccessRate } from "@/lib/clinics";
+import { DATA_PROVENANCE, rankBySuccessRate } from "@/lib/clinics";
+import { RegulatorNotice } from "@/components/regulator-notice";
+
+function formatVerifiedDate(iso: string): string {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
 import {
   ActiveFilterTags,
   DEFAULT_FINDER_FILTERS,
@@ -139,7 +149,9 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
       {/* Standing context: the one line that must sit above every result. */}
       <p className="text-xs text-muted mb-6">
         UK success rates come from the HFEA register and are independently verified. Overseas
-        figures are self-reported by clinics and are not directly comparable.
+        figures are self-reported by clinics and are not directly comparable. Prices are
+        indicative, compiled from {DATA_PROVENANCE.pricesSourceLabel}, and were last verified
+        on {formatVerifiedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
       </p>
 
       {/* ── Top performers ── */}
@@ -177,7 +189,10 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         </div>
       )}
 
-      <DisclaimerBanner />
+      <div className="space-y-4">
+        <RegulatorNotice />
+        <DisclaimerBanner />
+      </div>
 
       <ComparisonBar
         selected={selectedClinics}
