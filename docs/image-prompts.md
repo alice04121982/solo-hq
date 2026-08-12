@@ -9,6 +9,35 @@ identifiable person, so nothing about the image implies a real individual had
 fertility treatment. It also matches the three original images we kept, so the
 set stays coherent.
 
+## The chosen set
+
+Faces are a design choice here, not a legal constraint: these images are
+generated, so no real person is depicted and no model release is in question.
+The two full sets further down (all-obscured, all-still-life) are kept as
+alternates, but this mix is the one to generate.
+
+Five slots take faces, because their job is to show that families like the
+reader's exist — a turned back cannot do that. Three take still life, where the
+moment is contemplative or where a grid of neighbouring images needs texture
+between the people.
+
+| Slot | Treatment | Why |
+| --- | --- | --- |
+| `newborn.webp` | Faces | The outcome, on the "Mum and Dad" guide |
+| `cta-family.webp` | Faces | Emotional close of the homepage |
+| `story-two-mums.webp` | Faces | Representation is the point |
+| `story-two-dads.webp` | Faces | Representation is the point |
+| `story-faith-beach.webp` | Faces | Ditto — footprints would erase it |
+| `story-solo-dad.webp` | Still life | The story is about deciding and waiting |
+| `family-beach.webp` | Still life | Breaks up the hero grid's run of faces |
+| `story-mirror-family.webp` | Still life | The mirror already carries the idea |
+
+Craft notes that apply to every face prompt: no eye contact with the camera,
+expressions unguarded rather than beaming, subjects absorbed in each other.
+That is the line between editorial and stock. Generated hands and teeth are
+where these models fail, so keep hands occupied or partly out of frame and
+prefer half-smiles to broad grins.
+
 ## How to use these
 
 1. Generate, then **crop to the exact pixel dimensions listed** — the layouts
@@ -167,6 +196,69 @@ Three things to know before editing:
 | `story-mirror-family.webp` | A round wall mirror reflecting a soft, out-of-focus view of a sunlit kitchen through a doorway. |
 
 Prompts for the still-life set are below.
+
+## Natural-photography prompts (faces visible)
+
+For the five slots where a face does work the obscured version cannot. Every
+one avoids the stock-photo tells: nobody looks at the camera, expressions are
+unguarded rather than beaming, and the subjects are absorbed in each other.
+
+### 1. `newborn.webp` — 1400 × 2099 (2:3 portrait)
+
+> A documentary-style photograph of two parents standing together beside a
+> large window, both looking down at the swaddled newborn one of them is
+> holding. Both faces visible in three-quarter view, absorbed in the baby and
+> not the camera — soft, tired, unguarded expressions rather than broad smiles.
+> Bright diffused window light from the left. Muted, warm, slightly desaturated
+> palette; soft low contrast; shallow depth of field with a real lived-in room
+> falling away behind them. Unposed, caught mid-moment. Vertical portrait
+> orientation. Editorial reportage, not commercial stock. No eye contact with
+> the camera.
+
+### 2. `cta-family.webp` — 1600 × 1185 (4:3 landscape)
+
+> A documentary-style photograph of an adult holding a toddler on their hip
+> against a plain exterior wall painted deep teal, the two of them laughing at
+> something out of frame. Both faces visible in three-quarter view, turned
+> toward each other rather than the camera. Overcast natural daylight, soft and
+> directionless. Muted warm palette, slightly desaturated, low contrast, the
+> warm yellow of the child's knitted cardigan against the cool teal wall.
+> Shallow depth of field. Horizontal landscape orientation with open wall to
+> the right of the figures. Unposed, editorial reportage. No eye contact with
+> the camera.
+
+### 3. `story-two-mums.webp` — 1200 × 854 (3:2 landscape)
+
+> A documentary-style photograph of two women sitting close together on the
+> edge of a bed in a stone-walled room, mid-conversation, one turned toward the
+> other and half-laughing at something she has said. Both faces visible in
+> profile, engaged with each other and not the camera. Warm late-afternoon
+> light from a window to the right, soft and golden. Muted, warm, slightly
+> desaturated palette; gentle contrast; shallow depth of field. Horizontal
+> landscape orientation. Tender and unposed, editorial reportage rather than
+> commercial stock. No eye contact with the camera.
+
+### 4. `story-two-dads.webp` — 1200 × 1800 (2:3 portrait)
+
+> A documentary-style photograph of two men standing close together on a sunlit
+> city street, one saying something to the other, both caught mid-laugh. Faces
+> visible in three-quarter view, turned toward one another. Behind them a view
+> of pale buildings and terracotta rooftops falls well out of focus. Soft hazy
+> afternoon light, jacket textures in brown leather and tan canvas. Muted warm
+> palette, slightly desaturated, low contrast, shallow depth of field. Vertical
+> portrait orientation. Unposed, editorial. No eye contact with the camera.
+
+### 5. `story-faith-beach.webp` — 1600 × 1067 (3:2 landscape)
+
+> A documentary-style photograph of a family walking together along a wide
+> beach at low tide — a woman in a soft dusty-pink hijab and a long white
+> shirt, a man beside her, and a small child between them holding both their
+> hands. All three are looking down at the child rather than at the camera,
+> faces visible, calm and unforced. Pale overcast sky, flat silver sea, wet sand
+> reflecting the light. Cool muted palette with warm skin and fabric tones, low
+> contrast. Horizontal landscape orientation, the family off-centre with open
+> beach to one side. Quiet, unposed, editorial reportage. No eye contact with
+> the camera.
 
 ## Still-life prompts
 
