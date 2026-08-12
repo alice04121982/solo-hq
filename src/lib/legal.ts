@@ -274,6 +274,7 @@ const TERMS: LegalPage = {
         "Success rates are population statistics. They vary substantially with age, diagnosis, and protocol, and no published rate is a prediction for any individual.",
       ],
       postBody: [
+        "We have adopted the Competition and Markets Authority's [consumer law guidance for fertility clinics](https://www.gov.uk/cma-cases/self-funded-ivf-consumer-law-guidance) (June 2021) as our editorial standard for how prices and success rates are presented, and our [methodology](/about#methodology) explains how we apply it.",
         "Personal stories and quotes on this site are illustrative composites reflecting common experiences in the community. They are not accounts of real, identifiable patients unless expressly stated otherwise.",
       ],
     },

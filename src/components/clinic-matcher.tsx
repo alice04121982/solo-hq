@@ -273,14 +273,14 @@ function scoreClinic(clinic: MatchClinic, s: WizardState): ScoredClinic | null {
   const isLgbtq = s.family === "female-couple" || s.family === "male-couple";
   if (isLgbtq) {
     score += (clinic.lgbtqFriendliness / 5) * 25;
-    if (clinic.lgbtqFriendliness === 5) matchReasons.push("Highly rated for LGBTQ+ patients");
+    if (clinic.lgbtqFriendliness === 5) matchReasons.push("Strong LGBTQ+ patient support");
   } else {
     score += (clinic.soloFriendliness / 5) * 25;
     if (clinic.soloFriendliness === 5) {
       matchReasons.push(
         s.family === "straight-couple"
-          ? "Strong patient support ratings"
-          : "Excellent solo patient support"
+          ? "Strong patient support"
+          : "Strong solo patient support"
       );
     }
   }
@@ -881,7 +881,9 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
           timeZone: "UTC",
         })}
         . &ldquo;Real cost&rdquo; adds our estimate of medications, consultations and fees to
-        the clinic&apos;s headline quote.
+        the clinic&apos;s headline quote. Solo, LGBTQ+ and pricing scores are Cairn&apos;s own
+        editorial assessments of published clinic information — not patient reviews or
+        independently verified ratings.
       </p>
 
       <div className="mt-4 max-w-2xl mx-auto">
