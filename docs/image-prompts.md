@@ -166,8 +166,99 @@ Three things to know before editing:
 | `family-beach.webp` | A small blue toy spade resting beside a sandcastle on a wet beach. |
 | `story-mirror-family.webp` | A round wall mirror reflecting a soft, out-of-focus view of a sunlit kitchen through a doorway. |
 
-The still-life set needs its own prompts; the scenes are described well enough
-above to write them when the choice is made.
+Prompts for the still-life set are below.
+
+## Still-life prompts
+
+Why these exist: the obscured-people set below was written when the images were
+going to be real photographs, where a visible face implicates a real person.
+Generated images contain no real person, so that constraint no longer applies —
+and a whole site of people shot from behind reads as concealment rather than
+intimacy. These say the same things through objects instead, which is warmer
+than a turned back and more distinctive than stock.
+
+Same house style throughout: natural available light, muted and slightly
+desaturated, low contrast, shallow depth of field, real domestic surfaces with
+their wear showing. Editorial still life, not catalogue product photography —
+nothing should look styled for sale.
+
+### 1. `newborn.webp` — 1400 × 2099 (2:3 portrait)
+
+> A still-life photograph of a folded white cellular cotton swaddle blanket
+> resting on an unmade bed, soft creases in the linen around it. Low morning
+> light from a window out of frame to the left, falling across the fabric and
+> falling away into shadow at the right. Muted warm palette, very low contrast,
+> shallow depth of field with the far side of the bed soft. Real bedroom,
+> slightly lived-in, nothing styled. Vertical portrait orientation. Quiet and
+> observational, editorial still life. No people.
+
+### 2. `cta-family.webp` — 1600 × 1185 (4:3 landscape)
+
+> A still-life photograph of a small child's mustard-yellow knitted cardigan
+> hanging from a wooden peg on a wall painted deep teal. The wool texture is
+> soft and slightly pilled; one sleeve hangs lower than the other. Flat overcast
+> daylight, soft and directionless. Muted palette, the warm yellow against the
+> cool teal, low contrast. Shallow depth of field, the wall texture falling
+> soft toward the edges. Horizontal landscape orientation with the cardigan
+> off-centre to the left. Editorial still life. No people.
+
+### 3. `story-solo-dad.webp` — 1200 × 2132 (tall 9:16 portrait)
+
+> A still-life photograph of a single stoneware mug resting on a worn wooden
+> window sill, faint steam rising, in front of a window with exposed red
+> brickwork visible to one side. Soft grey daylight through the glass, strongly
+> backlit so the mug reads almost as a silhouette against the bright window.
+> Muted palette mixing warm brick and cool daylight, low contrast, shallow
+> depth of field. Tall vertical portrait orientation. Contemplative, quiet,
+> editorial still life. No people.
+
+### 4. `story-two-mums.webp` — 1200 × 854 (3:2 landscape)
+
+> A still-life photograph of two ceramic tea cups resting close together on a
+> wooden bedside table, one with a little tea left in it, beside a folded pair
+> of reading glasses. Warm late-afternoon light from a window to the right,
+> soft and golden, throwing long low shadows across the wood. Muted, warm,
+> slightly desaturated palette, gentle contrast, shallow depth of field with
+> the room behind falling soft. Horizontal landscape orientation. Tender and
+> unstyled, editorial still life. No people.
+
+### 5. `story-two-dads.webp` — 1200 × 1800 (2:3 portrait)
+
+> A still-life photograph of two pairs of sunglasses resting on an outdoor
+> wooden café table beside two small espresso cups. Behind and far out of
+> focus, a sunlit street of pale buildings with terracotta rooftops. Soft hazy
+> afternoon light, warm and slightly flared. Muted warm palette, slightly
+> desaturated, low contrast, very shallow depth of field. Vertical portrait
+> orientation. Unstyled, editorial still life. No people.
+
+### 6. `story-faith-beach.webp` — 1600 × 1067 (3:2 landscape)
+
+> A photograph of three sets of footprints in wet sand — two adult, one small
+> child — leading away from the camera toward a flat silver sea at low tide.
+> The prints are filling slowly with water and catching the light. Pale
+> overcast sky meeting the water at a soft horizon. Cool muted palette of
+> silver, grey and pale sand, low contrast, soft focus falloff toward the
+> horizon. Horizontal landscape orientation. Quiet, observational, editorial.
+> No people.
+
+### 7. `family-beach.webp` — 1200 × 1200 (1:1 square)
+
+> A still-life photograph, square composition, of a small blue plastic toy
+> spade lying beside a half-finished sandcastle on wet sand, a scatter of
+> shells nearby. Sea and a rocky headland soft and far out of focus behind.
+> Pale overcast daylight, cool blue-grey tones against warm sand, low contrast,
+> shallow depth of field. Editorial, unstyled, caught rather than arranged. No
+> people.
+
+### 8. `story-mirror-family.webp` — 1200 × 1800 (2:3 portrait) — optional
+
+> A photograph of a round black-framed mirror on a pale plaster wall,
+> reflecting a soft, out-of-focus view through a doorway into a small sunlit
+> kitchen. Nobody is in the reflection — only light on a worktop, the edge of a
+> cupboard, a rug on the floor. The foreground wall fills most of the frame,
+> with the edge of a wooden shelf at the bottom. Natural daylight, muted
+> warm-grey palette, low contrast, fine film-like grain. Vertical portrait
+> orientation. Quiet, observational, editorial. No people.
 
 ## If you want to go further
 
