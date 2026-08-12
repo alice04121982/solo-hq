@@ -16,6 +16,9 @@
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
+import { GUIDES } from "../src/lib/guides.ts";
+import { FAMILY_TYPES } from "../src/lib/family-types.ts";
+import { ALL_STORIES, FEATURED_STORIES } from "../src/lib/stories.ts";
 import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
 
 const STALE_DAYS = Number(process.env.STALE_DAYS ?? 120);
@@ -110,6 +113,28 @@ for (const c of CLINICS) {
 
 if (CLINICS.length === 0) errors.push("Clinic database is empty.");
 
+// ── Cross-file references ──
+// The dynamic routes resolve slugs against these files; a dangling reference
+// means a link somewhere on the site 404s.
+const guideSlugs = new Set(GUIDES.map((g) => g.slug));
+if (guideSlugs.size !== GUIDES.length) errors.push("Duplicate guide slug in guides.ts.");
+
+const storyIds = new Set(ALL_STORIES.map((s) => s.id));
+if (storyIds.size !== ALL_STORIES.length) errors.push("Duplicate story id in stories.ts.");
+for (const s of FEATURED_STORIES) {
+  if (!s) errors.push("FEATURED_IDS in stories.ts references a story id that does not exist.");
+}
+
+const familySlugs = new Set<string>();
+for (const f of FAMILY_TYPES) {
+  if (familySlugs.has(f.slug)) errors.push(`family-types.ts: duplicate slug "${f.slug}".`);
+  familySlugs.add(f.slug);
+  for (const r of f.resources) {
+    if (!guideSlugs.has(r))
+      errors.push(`family-types.ts (${f.slug}): resources references missing guide slug "${r}".`);
+  }
+}
+
 // ── Travel estimates ──
 //
 // The true-cost figures across the finder, wizard and calculator depend on
@@ -185,7 +210,8 @@ for (const file of sourceFiles(srcRoot)) {
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
 console.log(
-  `\nChecked ${CLINICS.length} clinics: ${errors.length} error(s), ${warnings.length} warning(s). ` +
+  `\nChecked ${CLINICS.length} clinics, ${GUIDES.length} guides, ${FAMILY_TYPES.length} family types, ` +
+    `${ALL_STORIES.length} stories: ${errors.length} error(s), ${warnings.length} warning(s). ` +
     `Prices last verified ${DATA_PROVENANCE.pricesVerifiedOn}.`
 );
 process.exit(errors.length > 0 ? 1 : 0);

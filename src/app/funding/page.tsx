@@ -9,6 +9,7 @@ import { FundingRouteExplorer } from "@/components/funding/funding-route-explore
 import { InternationalFunding } from "@/components/funding/international-funding";
 import { NHSEligibilityChecker } from "@/components/funding/nhs-eligibility-checker";
 import {
+  COST_ANCHORS,
   FUNDING_ROUTES,
   INTERNATIONAL_FUNDING,
   LAST_REVIEWED,
@@ -39,13 +40,6 @@ const JUMP_LINKS = [
   { label: "Before you sign", href: "#before-you-sign" },
 ];
 
-/** Money anchors, so the routes below have something to be measured against. */
-const COST_ANCHORS = [
-  { value: "£5,000–£7,000", label: "Advertised price of a private IVF cycle, before drugs, ICSI, freezing and storage" },
-  { value: "£1,000–£2,500", label: "Drugs for a stimulated cycle — almost always charged on top of the headline price" },
-  { value: "£8,000–£14,000", label: "Realistic all-in cost of one cycle using donor sperm, once everything is counted" },
-  { value: "25%", label: "Share of IVF cycles in England that were NHS-funded in 2024, down from 32% in 2019" },
-];
 
 /** Things that should stop a decision, not merely inform it. */
 const RED_FLAGS = [
@@ -145,7 +139,8 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Every funding route below is a way of paying one of these bills. The headline price a clinic
           advertises is not one of them: drugs, ICSI, freezing and storage are charged separately, and
-          donor sperm adds roughly £800–£1,800 a vial plus import and handling. That gap between the
+          donor sperm adds roughly £650–£1,150 a vial at the main banks (premium donors run to about
+          £1,700) plus import and handling. That gap between the
           quoted figure and the settled one is what catches most people out.
         </p>
 
@@ -189,7 +184,7 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
           Almost every confusing thing about NHS fertility funding follows from one split: NICE writes
           the clinical recommendation, and the body that holds the budget where you live decides what
-          to commission. In England that is 42 Integrated Care Boards with 42 policies. In Scotland,
+          to commission. In England that is 36 Integrated Care Boards with 36 policies (42 until they were merged in April 2026, with further mergers planned for 2027). In Scotland,
           Wales and Northern Ireland there is one set of national criteria each.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>

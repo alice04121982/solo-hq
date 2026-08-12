@@ -102,7 +102,6 @@ const DEFAULT_PROFILE: MatcherProfile = {
 const PROFILES: Record<string, MatcherProfile> = {
   "london-womens-clinic": { priceTransparency: 4, soloFriendliness: 5, lgbtqFriendliness: 5, ivfExtrasGBP: 2700 },
   "create-fertility": { priceTransparency: 5, soloFriendliness: 5, lgbtqFriendliness: 5 },
-  "care-cambridge": { priceTransparency: 3, soloFriendliness: 4, lgbtqFriendliness: 4, ivfExtrasGBP: 3900 },
   "bourn-hall": { priceTransparency: 4, soloFriendliness: 5, lgbtqFriendliness: 4 },
   "herts-essex": { priceTransparency: 4, soloFriendliness: 4, lgbtqFriendliness: 4 },
   "lister-fertility": { priceTransparency: 2, soloFriendliness: 4, lgbtqFriendliness: 4 },
@@ -166,14 +165,15 @@ const CLINICS: MatchClinic[] = DB_CLINICS.map((c) => {
 /**
  * Indicative IUI live birth rates per cycle by age, national ranges rather
  * than per-clinic figures: clinics rarely publish IUI rates by bracket, and
- * we never invent per-clinic numbers. The HFEA puts IUI success at roughly a
- * third of IVF's; ranges match the treatment guide in src/lib/guides.ts.
+ * we never invent per-clinic numbers. Bands bracket HFEA-derived national
+ * figures (~15.8% under 35, ~11% at 35–39, ~4.7% at 40–42) and match the
+ * treatment guide in src/lib/guides.ts.
  */
 const IUI_SUCCESS_BAND: Partial<Record<AgeKey, string>> = {
-  under35: "10–18%",
-  age35to37: "8–14%",
-  age38to39: "5–10%",
-  age40to42: "3–8%",
+  under35: "14–17%",
+  age35to37: "10–13%",
+  age38to39: "8–11%",
+  age40to42: "3–6%",
 };
 
 // ─── Matching logic ───────────────────────────────────────────────────────────
@@ -1050,7 +1050,11 @@ export function ClinicMatcher() {
   const toggleCondition = (c: Condition) => {
     setS((prev) => {
       const next = new Set(prev.conditions);
-      next.has(c) ? next.delete(c) : next.add(c);
+      if (next.has(c)) {
+        next.delete(c);
+      } else {
+        next.add(c);
+      }
       return { ...prev, conditions: next };
     });
   };
