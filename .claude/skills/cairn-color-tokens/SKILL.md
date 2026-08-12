@@ -44,6 +44,16 @@ canonical names in new code.
 
 ## Pairing rules
 
+- **Content boxes are always white.** Cards, notices, callouts, panels,
+  form containers, and pills that sit on a section band use `--background`
+  (white) with a `--border` edge — never `--surface-sunken` or
+  `--background-alt`. Grey fills on the cream band (`--cream`) are
+  near-invisible and are banned outright; because shared components move
+  between bands and band numbering shifts, the grey-box pattern is banned
+  on white bands too. `--background-alt` is reserved for full-bleed
+  recessed section bands and the scrollbar track; `--surface-sunken` for
+  control internals on white surfaces (switch tracks, segmented-control
+  tracks) and `--surface-hover` for hover states only.
 - On `--teal` surfaces: headings `--on-teal`, body `--on-teal-muted`,
   accents `--accent`. Never `--foreground` or `--muted` on teal.
 - On light surfaces: headings `--foreground`, body/captions `--muted`,

@@ -488,7 +488,7 @@ function StepAgeStandard({ s, set }: { s: WizardState; set: (a: AgeGroup) => voi
 function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
   return (
     <div>
-      <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
+      <div className="mb-5 p-4 rounded-xl border border-border bg-background">
         <p className="text-xs font-sans text-muted leading-relaxed">
           <strong className="text-foreground">For surrogacy, your age doesn&apos;t affect success rates.</strong>{" "}
           What matters is the egg donor&apos;s age. Most donors are under 35, which is why donor-egg success rates
@@ -606,7 +606,7 @@ function StepConditionsSurrogacy({
   ];
   return (
     <div>
-      <div className="mb-5 p-4 rounded-xl border border-border bg-background-alt">
+      <div className="mb-5 p-4 rounded-xl border border-border bg-background">
         <p className="text-xs font-sans text-muted leading-relaxed">
           Solo fatherhood via surrogacy is achievable, but it takes longer and costs more than other
           routes. UK surrogacy is legal and altruistic; you&apos;ll need a parental order after birth to become the
@@ -766,7 +766,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   return (
     <div>
       {donorNote && (
-        <div className="mb-6 p-4 rounded-xl border border-border bg-background-alt max-w-2xl mx-auto">
+        <div className="mb-6 p-4 rounded-xl border border-border bg-background max-w-2xl mx-auto">
           <p className="text-xs font-sans text-muted leading-relaxed">
             <strong className="text-foreground">Heads up: </strong>{donorNote}
           </p>

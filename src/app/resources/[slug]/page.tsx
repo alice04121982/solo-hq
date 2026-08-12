@@ -158,7 +158,7 @@ export default async function GuidePage({ params }: PageProps) {
 
         {/* Key takeaways */}
         {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-          <div className="mt-12 rounded-2xl bg-background-alt border border-border p-6 md:p-8">
+          <div className="mt-12 rounded-2xl bg-background border border-border p-6 md:p-8">
             <h2 className="font-sans font-bold text-foreground text-xl mb-5">Key takeaways</h2>
             <ul className="space-y-3">
               {guide.keyTakeaways.map((item, i) => (

@@ -88,7 +88,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
             >
               Where are you on your journey?
             </h2>
-            <BentoCard delay={0.05} white>
+            <BentoCard delay={0.05}>
               <JourneyMap />
             </BentoCard>
           </div>

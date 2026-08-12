@@ -40,7 +40,7 @@ export function WaitlistForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl bg-surface-sunken border border-border p-6 md:p-8 flex items-start gap-4">
+      <div className="rounded-2xl bg-background border border-border p-6 md:p-8 flex items-start gap-4">
         <span
           className="flex items-center justify-center h-9 w-9 rounded-full shrink-0"
           style={{ background: "var(--accent)", color: "#1A3A25" }}
@@ -60,7 +60,7 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-surface-sunken border border-border p-6 md:p-8">
+    <form onSubmit={handleSubmit} className="rounded-2xl bg-background border border-border p-6 md:p-8">
       <label htmlFor="waitlist-email" className="block text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
         Your email
       </label>
