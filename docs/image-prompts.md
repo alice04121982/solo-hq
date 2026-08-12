@@ -204,44 +204,56 @@ model-handsome faces, styled clothing — and the couples read as friends rather
 than partners. Both are fixable in the prompt, and these are the versions to
 use.
 
-**Turning the polish down.** Image models default to attractive people in
-flattering light unless told not to. The phrases that actually work: *ordinary-
-looking rather than model-like*, *average build*, *slightly tired*, *unstyled
-worn clothing*, *flat ordinary daylight, no golden hour*, *real clutter*, and
-*the look of a photograph taken by a friend rather than on a shoot*. Asking for
-"documentary" alone is not enough — it will still give you a beautiful person.
+**Real is not the same as scruffy.** A first attempt at this dialled the polish
+down by making the homes messy and the people unkempt, which was the wrong
+variable and carries its own lazy assumption. What made the earlier images look
+like stock was *model faces in golden hour performing an emotion* — not
+tidiness. A well-kept home and well-dressed people are entirely compatible with
+documentary. Aim for the register of an "at home with" magazine feature rather
+than a catalogue: considered interiors, good plain clothes, natural light, and
+a moment nobody is performing.
 
-**Making couples read as couples.** Two people laughing on a street are
-friends. What says partnership is domesticity and casual touch: sharing a small
-kitchen, a hand resting on a back, one wearing the other's jumper, a shared
-task nobody is performing. Move them indoors and the ambiguity goes.
+**Turning the polish down without going scruffy.** The phrases that work:
+*ordinary faces rather than model looks*, *no golden hour*, *nothing staged*,
+*unhurried*, *an "at home with" feature, not a stock shoot*. Asking for
+"documentary" alone is not enough — it will still return a beautiful person in
+beautiful light.
+
+**Making couples read as couples.** This is the harder problem, and laughter
+does not solve it: two people laughing together read as friends. Partnership
+shows in quiet physical closeness — a hand resting on a waist, standing nearer
+than friends stand, a chin near a shoulder — plus the domestic evidence that
+both people live there. Prefer stillness to laughter, and name the relationship
+in the prompt rather than hoping it will be inferred.
 
 ### `story-two-dads.webp` — 1200 × 1800 (2:3 portrait)
 
-> A candid documentary photograph of two men in their late thirties in a small,
-> ordinary British kitchen on a weekday morning. One leans against the worktop
-> holding a mug of tea; the other stands close beside him with a hand resting on
-> his back, both looking down at something on the counter. Plain worn clothes —
-> a faded t-shirt, a washed-out jumper, tracksuit bottoms — unshaven, a little
-> tired, ordinary-looking rather than model-like, average builds. Flat ordinary
-> daylight through a small window, no golden hour and no styling. Real kitchen
-> clutter: a crowded draining board, a wall calendar, a tea towel over the oven
-> handle. Muted, slightly desaturated palette, low contrast, natural grain.
-> Vertical portrait orientation. Neither looks at the camera. The look of a
-> photograph taken by a friend, not a shoot.
+> A candid documentary photograph of a couple — two men in their late thirties —
+> in the kitchen of a well-kept, characterful flat. One stands at the counter
+> chopping herbs; his husband stands close behind him, one hand resting on his
+> waist, chin near his shoulder, both looking down at the board. Quiet and
+> unhurried rather than laughing. Both neatly dressed in good plain clothes — a
+> well-fitting knit, rolled shirtsleeves — groomed and put-together, but with
+> ordinary faces rather than model looks. Matching wedding bands. A house-proud
+> home: plants along the windowsill, good ceramics, painted cabinets, warm wood,
+> a tidy worktop. Soft natural daylight from a side window, no golden hour,
+> nothing staged. Muted, slightly desaturated palette, low contrast, fine grain.
+> Vertical portrait orientation. Neither looks at the camera. The register of an
+> "at home with" magazine feature, not a stock shoot.
 
 ### `story-two-mums.webp` — 1200 × 854 (3:2 landscape)
 
-> A candid documentary photograph of two women in their mid-thirties sitting on
-> the floor of an ordinary British living room with their backs against the
-> sofa, mugs on the carpet beside them, mid-conversation. One is turned toward
-> the other, legs crossed; the other is laughing at something she has said.
-> Comfortable unstyled clothes — leggings, a baggy cardigan, thick socks — hair
-> unbrushed, faces ordinary rather than model-like, average builds. Flat grey
-> daylight from a window, no golden hour. A lived-in room: a radiator, a pile of
-> post, a throw half off the sofa. Muted desaturated palette, low contrast,
-> natural grain. Horizontal landscape orientation. Neither looks at the camera.
-> Taken by a friend, not on a shoot.
+> A candid documentary photograph of a couple — two women in their mid-thirties
+> — on the sofa of a warm, well-kept living room, sitting close with their legs
+> overlapping, one leaning back against the other's shoulder while they look at
+> something together on a phone. Quiet and companionable rather than laughing.
+> Comfortable good clothes — a soft knit, well-worn jeans, thick socks —
+> unfussed but put-together, with ordinary faces rather than model looks.
+> Wedding bands. A home someone cares about: books, plants, a good throw, a
+> lamp on in the corner. Soft grey daylight from a window, no golden hour,
+> nothing staged. Muted, slightly desaturated palette, low contrast, fine
+> grain. Horizontal landscape orientation. Neither looks at the camera. The
+> register of an "at home with" magazine feature, not a stock shoot.
 
 ### `cta-family.webp` — 1600 × 1185 (4:3 landscape)
 
