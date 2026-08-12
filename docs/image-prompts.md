@@ -197,6 +197,76 @@ Three things to know before editing:
 
 Prompts for the still-life set are below.
 
+## Domestic prompts (faces visible, ordinary life)
+
+The first pass at the people shots came back too polished — golden hour,
+model-handsome faces, styled clothing — and the couples read as friends rather
+than partners. Both are fixable in the prompt, and these are the versions to
+use.
+
+**Turning the polish down.** Image models default to attractive people in
+flattering light unless told not to. The phrases that actually work: *ordinary-
+looking rather than model-like*, *average build*, *slightly tired*, *unstyled
+worn clothing*, *flat ordinary daylight, no golden hour*, *real clutter*, and
+*the look of a photograph taken by a friend rather than on a shoot*. Asking for
+"documentary" alone is not enough — it will still give you a beautiful person.
+
+**Making couples read as couples.** Two people laughing on a street are
+friends. What says partnership is domesticity and casual touch: sharing a small
+kitchen, a hand resting on a back, one wearing the other's jumper, a shared
+task nobody is performing. Move them indoors and the ambiguity goes.
+
+### `story-two-dads.webp` — 1200 × 1800 (2:3 portrait)
+
+> A candid documentary photograph of two men in their late thirties in a small,
+> ordinary British kitchen on a weekday morning. One leans against the worktop
+> holding a mug of tea; the other stands close beside him with a hand resting on
+> his back, both looking down at something on the counter. Plain worn clothes —
+> a faded t-shirt, a washed-out jumper, tracksuit bottoms — unshaven, a little
+> tired, ordinary-looking rather than model-like, average builds. Flat ordinary
+> daylight through a small window, no golden hour and no styling. Real kitchen
+> clutter: a crowded draining board, a wall calendar, a tea towel over the oven
+> handle. Muted, slightly desaturated palette, low contrast, natural grain.
+> Vertical portrait orientation. Neither looks at the camera. The look of a
+> photograph taken by a friend, not a shoot.
+
+### `story-two-mums.webp` — 1200 × 854 (3:2 landscape)
+
+> A candid documentary photograph of two women in their mid-thirties sitting on
+> the floor of an ordinary British living room with their backs against the
+> sofa, mugs on the carpet beside them, mid-conversation. One is turned toward
+> the other, legs crossed; the other is laughing at something she has said.
+> Comfortable unstyled clothes — leggings, a baggy cardigan, thick socks — hair
+> unbrushed, faces ordinary rather than model-like, average builds. Flat grey
+> daylight from a window, no golden hour. A lived-in room: a radiator, a pile of
+> post, a throw half off the sofa. Muted desaturated palette, low contrast,
+> natural grain. Horizontal landscape orientation. Neither looks at the camera.
+> Taken by a friend, not on a shoot.
+
+### `cta-family.webp` — 1600 × 1185 (4:3 landscape)
+
+> A candid documentary photograph of a parent in an ordinary British kitchen
+> holding a toddler on one hip while filling the kettle at the sink, the child
+> leaning against their shoulder and reaching for the tap. Plain worn clothes,
+> hair pushed back, tired and unremarkable-looking rather than model-like. Flat
+> daylight through a kitchen window, no golden hour. Real clutter on the
+> worktop: cereal boxes, a bottle drying rack, a child's drawing stuck to a
+> cupboard. Muted, slightly desaturated palette, low contrast, natural grain.
+> Horizontal landscape orientation with space to one side. Neither looks at the
+> camera. The look of a photograph taken by a friend, not a shoot.
+
+### `newborn.webp` — 1400 × 2099 (2:3 portrait)
+
+> A candid documentary photograph of two parents sitting on the end of an
+> unmade bed in an ordinary British bedroom, one holding a newborn against their
+> shoulder, the other leaning in to look. Both are in old t-shirts and pyjama
+> bottoms, hair unbrushed, visibly tired, entirely ordinary-looking rather than
+> model-like. Flat morning daylight through a window, no golden hour and nothing
+> styled. A real room: a muslin over the radiator, a glass of water on the
+> floor, washing on a clothes horse in the corner. Muted, desaturated palette,
+> low contrast, natural grain. Vertical portrait orientation. Neither looks at
+> the camera. Taken by a friend, not on a shoot.
+
 ## Natural-photography prompts (faces visible)
 
 For the five slots where a face does work the obscured version cannot. Every
