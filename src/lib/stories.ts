@@ -122,7 +122,7 @@ export const ALL_STORIES: Story[] = [
     quote: "Unexplained infertility is its own kind of maddening: there's nothing to fix, nothing to point at.",
     treatment: "IVF × 1",
     image: "/photos/story-mirror-family.webp",
-    imageAlt: "Couple embracing warmly",
+    imageAlt: "A round wall mirror reflecting two parents holding their newborn in a bright kitchen",
   },
   {
     id: "james-oscar",

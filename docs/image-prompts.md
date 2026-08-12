@@ -120,6 +120,55 @@ borderline rather than high risk, so replace only if you are doing the set.
 > contrast, fine film-like grain. Vertical portrait orientation. Quiet,
 > observational, editorial. No faces visible.
 
+## Alt text to apply with the new images
+
+Alt text describes what is *in* the picture, so it has to change in the same
+commit as the picture. Do not apply these before the images land — they would
+describe photographs the site is not yet serving.
+
+Three things to know before editing:
+
+- **Several images carry alt text in more than one file**, and today those
+  copies disagree with each other. `cta-family.webp` has three different
+  descriptions, one of which calls the adult a solo dad while the other two
+  call him a father. Update every location listed, not just the first hit.
+- **`story-mirror-family.webp` in `stories.ts` currently reads "Couple
+  embracing warmly"**, which does not describe the photograph at all — it is a
+  family with a newborn seen at distance in a round wall mirror. That is a live
+  accessibility defect independent of any image swap.
+- The `hero-shape-grid.tsx` entries ("Two mums together", "Two dads together")
+  are accurate but thin; the replacements below give a screen reader something
+  to actually picture.
+
+### If you use the obscured-people images
+
+| Image | Alt text | Locations to update |
+| --- | --- | --- |
+| `newborn.webp` | Two parents seen from behind, standing by a bright window while holding a swaddled newborn baby between them. | `family-types.ts` |
+| `cta-family.webp` | An adult seen from behind lifting a toddler up to their shoulder against a deep teal wall. | `hero-shape-grid.tsx`, `cta-section.tsx`, `family-types.ts` |
+| `story-solo-dad.webp` | Silhouette of a man sitting on a window seat in an exposed brick flat, holding a mug and looking out of the window. | `stories.ts` |
+| `story-two-mums.webp` | Two women seen from behind sitting close together on the edge of a bed in soft afternoon light. | `hero-shape-grid.tsx`, `stories.ts`, `family-types.ts` |
+| `story-two-dads.webp` | Two men embracing on a city street, seen from behind with sunlit rooftops blurred in the background. | `hero-shape-grid.tsx`, `stories.ts`, `family-types.ts` |
+| `story-faith-beach.webp` | A family walking away from the camera along a wet, wide beach toward the water at low tide. | `stories.ts` |
+| `family-beach.webp` | Two adults and a small child crouched together on wet sand building a sandcastle, seen from behind. | `hero-shape-grid.tsx` |
+| `story-mirror-family.webp` | A round wall mirror reflecting a distant, soft view of two parents holding a newborn in a bright kitchen. | `stories.ts`, `family-types.ts` |
+
+### If you use the abstract / still-life images
+
+| Image | Alt text |
+| --- | --- |
+| `newborn.webp` | A folded cellular cotton swaddle blanket resting on an unmade bed in soft window light. |
+| `cta-family.webp` | A small toddler's knitted cardigan hanging on a wooden wall hook against a deep teal background. |
+| `story-solo-dad.webp` | A single ceramic mug resting on a wooden window sill in front of exposed brickwork. |
+| `story-two-mums.webp` | Two ceramic tea cups resting close together on a bedside table in golden afternoon light. |
+| `story-two-dads.webp` | Two pairs of sunglasses resting on an outdoor wooden café table with city buildings in the background. |
+| `story-faith-beach.webp` | Three sets of footprints — two adult and one child — leading across wet sand toward the sea. |
+| `family-beach.webp` | A small blue toy spade resting beside a sandcastle on a wet beach. |
+| `story-mirror-family.webp` | A round wall mirror reflecting a soft, out-of-focus view of a sunlit kitchen through a doorway. |
+
+The still-life set needs its own prompts; the scenes are described well enough
+above to write them when the choice is made.
+
 ## If you want to go further
 
 Every prompt above still depicts people, just unidentifiably. If you would
