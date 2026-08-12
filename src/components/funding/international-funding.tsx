@@ -68,7 +68,7 @@ export function InternationalFunding({ countries }: { countries: CountryFunding[
 
             {isOpen && (
               <div id={`country-${c.slug}`} className="pb-10">
-                <div className="rounded-2xl p-5 mb-8" style={{ background: "var(--background-alt)" }}>
+                <div className="rounded-2xl p-5 mb-8 bg-background border border-border">
                   <p
                     className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
                     style={{ color: TEAL_SOFT }}

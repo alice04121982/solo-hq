@@ -104,7 +104,7 @@ export default function CommunityPage() {
             </ol>
           </div>
 
-          <BentoCard white className="lg:sticky lg:top-8">
+          <BentoCard className="lg:sticky lg:top-8">
             <CommunityWaitlistForm />
           </BentoCard>
         </div>

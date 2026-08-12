@@ -113,7 +113,7 @@ function LegalSectionBlock({ section }: { section: LegalSection }) {
       {section.postBody && <Paragraphs items={section.postBody} />}
 
       {section.callout && (
-        <div className="mt-5 rounded-2xl bg-surface-sunken border border-border p-4 flex items-start gap-3">
+        <div className="mt-5 rounded-2xl bg-background border border-border p-4 flex items-start gap-3">
           <AlertTriangle className="h-4 w-4 text-muted shrink-0 mt-0.5" aria-hidden />
           <p className="text-xs text-muted leading-relaxed">
             <strong className="text-teal-ink">Note:</strong>{" "}
