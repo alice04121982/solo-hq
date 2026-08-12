@@ -9,7 +9,12 @@
  * STALE_DAYS. Re-verifying (the treatment-data-check skill walks through it)
  * and bumping that date is the fix — never bump the date without actually
  * re-checking the figures.
+ *
+ * Also scans site content for prescription-medicine brand names, which must
+ * never appear on the public site (see the check at the bottom of this file).
  */
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join, relative } from "node:path";
 import { CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
 import { GUIDES } from "../src/lib/guides.ts";
 import { FAMILY_TYPES } from "../src/lib/family-types.ts";
@@ -113,6 +118,47 @@ for (const f of FAMILY_TYPES) {
     if (!guideSlugs.has(r))
       errors.push(`family-types.ts (${f.slug}): resources references missing guide slug "${r}".`);
   }
+}
+
+// ── Prescription-medicine brand names ──
+//
+// Advertising prescription-only medicines to the public is a criminal offence
+// under the Human Medicines Regulations 2012 (regulations 280 and 284), so
+// site content discusses fertility medication by category and cost range
+// only, never by brand (see the methodology on /about). This check keeps a
+// named brand from slipping back in through any content edit.
+const POM_BRAND_NAMES = [
+  "Gonal-F", "Gonal F", "Menopur", "Bemfola", "Ovaleap", "Fostimon",
+  "Meriofert", "Pergoveris", "Luveris", "Elonva", "Rekovelle", "Cetrotide",
+  "Orgalutran", "Fyremadel", "Suprecur", "Synarel", "Prostap", "Zoladex",
+  "Ovitrelle", "Pregnyl", "Gonasi", "Cyclogest", "Utrogestan", "Lubion",
+  "Crinone", "Progynova", "Clomid",
+];
+const POM_PATTERN = new RegExp(
+  `\\b(${POM_BRAND_NAMES.map((n) => n.replace(/[-\s]/g, "[-\\s]")).join("|")})\\b`,
+  "i"
+);
+
+function* sourceFiles(dir: string): Generator<string> {
+  for (const entry of readdirSync(dir)) {
+    const path = join(dir, entry);
+    if (statSync(path).isDirectory()) yield* sourceFiles(path);
+    else if (/\.(ts|tsx|md)$/.test(entry)) yield path;
+  }
+}
+
+const srcRoot = new URL("../src", import.meta.url).pathname;
+for (const file of sourceFiles(srcRoot)) {
+  const lines = readFileSync(file, "utf8").split("\n");
+  lines.forEach((line, i) => {
+    const match = line.match(POM_PATTERN);
+    if (match)
+      errors.push(
+        `${relative(srcRoot, file)}:${i + 1}: names the prescription medicine brand ` +
+          `"${match[1]}" — describe medication by category and cost range instead ` +
+          `(Human Medicines Regulations 2012, regs 280/284).`
+      );
+  });
 }
 
 // ── Report ──

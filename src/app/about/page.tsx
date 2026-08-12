@@ -1,9 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { ShapeMark, Spark } from "@/components/shapes";
+import { DATA_PROVENANCE } from "@/lib/clinics";
+import { HFEA } from "@/lib/regulators";
+
+/**
+ * The CMA's June 2021 consumer-law guidance for fertility clinics — adopted
+ * here as Cairn's editorial standard for presenting prices and success rates.
+ */
+const CMA_FERTILITY_GUIDANCE_URL =
+  "https://www.gov.uk/cma-cases/self-funded-ivf-consumer-law-guidance";
 
 export const metadata: Metadata = {
   title: "About | CairnFertility",
@@ -162,10 +172,57 @@ export default function AboutPage() {
         </div>
       </Section>
 
+      {/* Methodology — the editorial standard the numbers are held to, and
+          where every figure comes from. This is the public statement behind
+          the provenance notes shown beside the finder, matcher and guides. */}
+      <Section band={3} id="methodology">
+        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Methodology</p>
+        <h2
+          className="font-sans font-bold text-foreground mb-5"
+          style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)", lineHeight: 1.1 }}
+        >
+          How we check our numbers.
+        </h2>
+        <p className="text-lg font-sans text-muted leading-relaxed mb-4" style={{ maxWidth: "58ch" }}>
+          Our editorial standard for presenting prices and success rates is the{" "}
+          <a
+            href={CMA_FERTILITY_GUIDANCE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-teal hover:underline underline-offset-2"
+          >
+            Competition and Markets Authority&rsquo;s consumer law guidance for fertility
+            clinics
+            <ExternalLink className="inline h-3.5 w-3.5 ml-1 align-baseline" aria-hidden />
+          </a>{" "}
+          (June 2021). It was written for clinics, but it is the definitive UK statement of
+          what fair price and success-rate information looks like, and we hold our own pages
+          to it: all-in costs rather than headline prices, and success rates that always say
+          what they measure, which year they cover, and where they come from.
+        </p>
+        <p className="text-[15px] font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "58ch" }}>
+          In practice, that means:
+        </p>
+        <ul className="space-y-3 max-w-3xl">
+          {[
+            `UK success rates come from the ${HFEA.shortName}'s public Choose a Clinic register, the independently verified source, and are labelled with their year and denominator (live births per embryo transfer). Overseas figures are self-reported by each clinic and labelled as not independently verified.`,
+            "A success-rate bracket a clinic has not published is shown as \"not published\" — never guessed, estimated, or filled with a zero.",
+            `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost — medications, consultations, donor material, travel where relevant — beside the headline quote, never instead of it.`,
+            `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
+            "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
+            "Spotted a figure that looks wrong or out of date? Email stories@cairnfertility.co.uk — corrections go to the top of the list.",
+          ].map((item) => (
+            <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </Section>
+
       {/* Our story — the running build-in-the-open log, merged in from the
           old /our-story page (which now redirects here). Sits last so the
           "building now" milestone hands straight off to the waitlist CTA. */}
-      <Section band={3} id="story">
+      <Section band={4} id="story">
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Our story</p>
         <h2
           className="font-sans font-bold text-foreground mb-5"
