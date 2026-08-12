@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { MapPin, Check, Plus } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
+import { travelEstimateForCity } from "@/lib/travel";
 import { RateFigure, VerificationBadge } from "./rate-display";
 
 interface ClinicCardProps {
@@ -29,6 +30,7 @@ export function ClinicCard({
   compareDisabled,
   onToggleCompare,
 }: ClinicCardProps) {
+  const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
   return (
     <div
       className={`rounded-[24px] bg-background border border-border transition-colors duration-150 hover:bg-surface-hover p-5 flex flex-col ${
@@ -56,6 +58,14 @@ export function ClinicCard({
               : "Not published"}
           </p>
           <p className="text-xs text-muted">per IVF cycle</p>
+          {travel && clinic.pricePerCycleGbp != null && (
+            <>
+              <p className="text-xs font-semibold text-teal-ink mt-0.5">
+                ≈ £{(clinic.pricePerCycleGbp + travel.mid).toLocaleString()} with travel
+              </p>
+              <p className="text-xs text-muted">est. flights + stays</p>
+            </>
+          )}
           {clinic.iuiPricePerCycleGbp != null && (
             <p className="text-xs text-muted mt-0.5">
               IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()}
