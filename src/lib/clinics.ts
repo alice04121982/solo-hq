@@ -1,4 +1,4 @@
-import type { AgeBracket, Clinic, Region } from "@/types/clinic";
+import type { AgeBracket, Clinic, Region, Treatment } from "@/types/clinic";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -604,6 +604,34 @@ export function cheapestPublishedPrice(clinic: Clinic): number | undefined {
     (p): p is number => p != null
   );
   return prices.length > 0 ? Math.min(...prices) : undefined;
+}
+
+/**
+ * Which treatment the finder prices on, given the selected treatment filters.
+ * IUI is the only treatment carrying its own price, and it runs a fraction of
+ * an IVF cycle, so an IUI-only search prices on IUI and every other
+ * combination prices on the IVF headline. Undefined means no treatment filter
+ * is set, and no single treatment is implied.
+ */
+export function pricedTreatment(selected: Treatment[]): Treatment | undefined {
+  if (selected.length === 0) return undefined;
+  return selected.every((t) => t === "IUI") ? "IUI" : "IVF";
+}
+
+/** The clinic's published price for one priced treatment. */
+export function priceForTreatment(clinic: Clinic, treatment: Treatment): number | undefined {
+  return treatment === "IUI" ? clinic.iuiPricePerCycleGbp : clinic.pricePerCycleGbp;
+}
+
+/**
+ * The price a ceiling filter compares against: the selected treatment's own
+ * price, or the cheapest thing the clinic publishes when no treatment is
+ * selected, so "under £5k" surfaces clinics whose IUI fits. Undefined means
+ * nothing relevant is published.
+ */
+export function priceForSelection(clinic: Clinic, selected: Treatment[]): number | undefined {
+  const treatment = pricedTreatment(selected);
+  return treatment ? priceForTreatment(clinic, treatment) : cheapestPublishedPrice(clinic);
 }
 
 /** Bounds for the price ceiling slider, from every published cycle price. */

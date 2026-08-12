@@ -2,12 +2,19 @@
 
 import Link from "next/link";
 import { MapPin, Check, Plus } from "lucide-react";
-import type { AgeBracket, Clinic } from "@/types/clinic";
+import type { AgeBracket, Clinic, Treatment } from "@/types/clinic";
+import { pricedTreatment } from "@/lib/clinics";
 import { RateFigure, VerificationBadge } from "./rate-display";
 
 interface ClinicCardProps {
   clinic: Clinic;
   ageBracket: AgeBracket;
+  /**
+   * The treatments currently filtered on, so the card shows the price the
+   * search was priced on: an IUI-only search shows the IUI price, not an IVF
+   * cycle price the patient did not ask about.
+   */
+  selectedTreatments: Treatment[];
   isSelected: boolean;
   compareDisabled: boolean;
   onToggleCompare: (clinic: Clinic) => void;
@@ -25,10 +32,17 @@ interface ClinicCardProps {
 export function ClinicCard({
   clinic,
   ageBracket,
+  selectedTreatments,
   isSelected,
   compareDisabled,
   onToggleCompare,
 }: ClinicCardProps) {
+  // IUI leads only when it is the whole search. Otherwise the IVF cycle price
+  // leads and any IUI price sits beneath it, so both are visible when the
+  // search spans treatments.
+  const iuiLeads = pricedTreatment(selectedTreatments) === "IUI";
+  const headlinePrice = iuiLeads ? clinic.iuiPricePerCycleGbp : clinic.pricePerCycleGbp;
+
   return (
     <div
       className={`rounded-[24px] bg-background border border-border transition-colors duration-150 hover:bg-surface-hover p-5 flex flex-col ${
@@ -51,12 +65,10 @@ export function ClinicCard({
         <RateFigure clinic={clinic} bracket={ageBracket} />
         <div className="text-right">
           <p className="text-sm font-bold text-teal-ink">
-            {clinic.pricePerCycleGbp != null
-              ? `£${clinic.pricePerCycleGbp.toLocaleString()}`
-              : "Not published"}
+            {headlinePrice != null ? `£${headlinePrice.toLocaleString()}` : "Not published"}
           </p>
-          <p className="text-xs text-muted">per IVF cycle</p>
-          {clinic.iuiPricePerCycleGbp != null && (
+          <p className="text-xs text-muted">per {iuiLeads ? "IUI" : "IVF"} cycle</p>
+          {!iuiLeads && clinic.iuiPricePerCycleGbp != null && (
             <p className="text-xs text-muted mt-0.5">
               IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()}
             </p>

@@ -1,13 +1,15 @@
 "use client";
 
 import { ClinicCard } from "./clinic-card";
-import type { AgeBracket, Clinic } from "@/types/clinic";
+import type { AgeBracket, Clinic, Treatment } from "@/types/clinic";
 
 interface ClinicResultsProps {
   clinics: Clinic[];
   totalCount: number;
   ageBracketLabel: string;
   ageBracket: AgeBracket;
+  /** Passed to the cards so each shows the price the search was priced on. */
+  selectedTreatments: Treatment[];
   selectedSlugs: string[];
   onToggleCompare: (clinic: Clinic) => void;
 }
@@ -17,6 +19,7 @@ export function ClinicResults({
   totalCount,
   ageBracketLabel,
   ageBracket,
+  selectedTreatments,
   selectedSlugs,
   onToggleCompare,
 }: ClinicResultsProps) {
@@ -53,6 +56,7 @@ export function ClinicResults({
             key={clinic.slug}
             clinic={clinic}
             ageBracket={ageBracket}
+            selectedTreatments={selectedTreatments}
             isSelected={selectedSlugs.includes(clinic.slug)}
             compareDisabled={selectedSlugs.length >= 4}
             onToggleCompare={onToggleCompare}

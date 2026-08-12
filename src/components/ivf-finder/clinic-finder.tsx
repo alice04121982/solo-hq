@@ -172,6 +172,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           totalCount={clinics.length}
           ageBracketLabel={bracketLabel}
           ageBracket={filters.ageBracket}
+          selectedTreatments={filters.treatments}
           selectedSlugs={selectedSlugs}
           onToggleCompare={handleToggleCompare}
         />
@@ -184,6 +185,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
             clinics={selectedClinics}
             ageBracket={filters.ageBracket}
             ageBracketLabel={bracketLabel}
+            selectedTreatments={filters.treatments}
             onRemove={handleRemove}
           />
         </div>

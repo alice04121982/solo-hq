@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { Check, X } from "lucide-react";
-import type { AgeBracket, Clinic } from "@/types/clinic";
-import { rateFor } from "@/lib/clinics";
+import type { AgeBracket, Clinic, Treatment } from "@/types/clinic";
+import { priceForTreatment, pricedTreatment, rateFor } from "@/lib/clinics";
 import { VerificationBadge } from "./rate-display";
 
 interface ComparisonTableProps {
   clinics: Clinic[];
   ageBracket: AgeBracket;
   ageBracketLabel: string;
+  /** Prices the table on the same treatment as the result cards. */
+  selectedTreatments: Treatment[];
   onRemove: (slug: string) => void;
 }
 
@@ -33,12 +35,23 @@ function BestBadge() {
  * its identity mid-scroll. Cells sit flat on the card surface: separation is
  * borders only, no shadows.
  */
-export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove }: ComparisonTableProps) {
+export function ComparisonTable({
+  clinics,
+  ageBracket,
+  ageBracketLabel,
+  selectedTreatments,
+  onRemove,
+}: ComparisonTableProps) {
   if (clinics.length < 2) return null;
 
   const rates = clinics.map((c) => rateFor(c, ageBracket));
   const bestRate = Math.max(...rates.filter((r): r is number => r != null));
-  const prices = clinics.map((c) => c.pricePerCycleGbp).filter((p): p is number => p != null);
+
+  // An IUI-only search compares IUI prices; anything else compares IVF cycle
+  // prices, so the column and its "best" badge match the result cards.
+  const pricedOn = pricedTreatment(selectedTreatments) === "IUI" ? "IUI" : "IVF";
+  const priceOf = (c: Clinic) => priceForTreatment(c, pricedOn);
+  const prices = clinics.map(priceOf).filter((p): p is number => p != null);
   const bestPrice = prices.length > 0 ? Math.min(...prices) : null;
 
   const headerCell =
@@ -63,7 +76,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
               </th>
               <th className={headerCell}>Success rate, {ageBracketLabel.toLowerCase()}</th>
               <th className={headerCell}>Source</th>
-              <th className={headerCell}>Price per cycle</th>
+              <th className={headerCell}>Price per {pricedOn} cycle</th>
               <th className={headerCell}>Location</th>
               <th className={headerCell}>Donor anonymity</th>
               <th className={headerCell}>Remote consultation</th>
@@ -77,8 +90,8 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
             {clinics.map((clinic, i) => {
               const rate = rateFor(clinic, ageBracket);
               const isBestRate = rate != null && rate === bestRate;
-              const isBestPrice =
-                bestPrice != null && clinic.pricePerCycleGbp === bestPrice;
+              const price = priceOf(clinic);
+              const isBestPrice = bestPrice != null && price === bestPrice;
               return (
                 <tr
                   key={clinic.slug}
@@ -112,11 +125,9 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                     <VerificationBadge verification={clinic.successRates.verification} />
                   </td>
                   <td className={bodyCell}>
-                    {clinic.pricePerCycleGbp != null ? (
+                    {price != null ? (
                       <>
-                        <span className="font-semibold">
-                          £{clinic.pricePerCycleGbp.toLocaleString()}
-                        </span>
+                        <span className="font-semibold">£{price.toLocaleString()}</span>
                         {isBestPrice && <BestBadge />}
                       </>
                     ) : (
