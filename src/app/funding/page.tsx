@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, Info } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
@@ -107,10 +107,9 @@ export default function FundingPage() {
       <Section band={0} padding="pb-20 md:pb-28">
         <div className="rounded-2xl p-6 md:p-10" style={{ background: "var(--lime)" }}>
           <p
-            className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
+            className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-6 font-sans"
             style={{ color: TEAL_SOFT }}
           >
-            <Info className="h-3.5 w-3.5" />
             The order matters more than the options
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-7">
