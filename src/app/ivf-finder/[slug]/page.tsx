@@ -8,6 +8,13 @@ import { Section } from "@/components/section";
 import { CompareButton } from "@/components/ivf-finder/compare-button";
 import { VerificationBadge } from "@/components/ivf-finder/rate-display";
 import { CLINICS, DATA_PROVENANCE, getClinic } from "@/lib/clinics";
+import {
+  formatRangeGbp,
+  googleFlightsUrl,
+  staySearchUrl,
+  travelEstimateForCity,
+  TRAVEL_ASSUMPTIONS,
+} from "@/lib/travel";
 import { AGE_BRACKETS } from "@/types/clinic";
 import { RegulatorNotice } from "@/components/regulator-notice";
 
@@ -39,6 +46,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
   if (!clinic) notFound();
 
   const report = clinic.successRates;
+  const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
 
   const facts: { label: string; value: string }[] = [
     {
@@ -53,6 +61,14 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           {
             label: "IUI per cycle",
             value: `£${clinic.iuiPricePerCycleGbp.toLocaleString()} (excludes drugs and donor sperm)`,
+          },
+        ]
+      : []),
+    ...(travel != null
+      ? [
+          {
+            label: "Travel estimate",
+            value: `${formatRangeGbp(travel)} flights + stays over ${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`,
           },
         ]
       : []),
@@ -173,6 +189,33 @@ export default async function ClinicDetailPage({ params }: PageProps) {
                 </div>
               ))}
             </div>
+            {travel != null && (
+              <div className="mb-6 -mt-2">
+                {travel.destination.note && (
+                  <p className="text-xs text-muted mb-2">{travel.destination.note}</p>
+                )}
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  <a
+                    href={googleFlightsUrl(travel.destination)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    Check live flight prices
+                    <ExternalLink className="h-3 w-3" aria-hidden />
+                  </a>
+                  <a
+                    href={staySearchUrl(travel.destination)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    Check places to stay
+                    <ExternalLink className="h-3 w-3" aria-hidden />
+                  </a>
+                </div>
+              </div>
+            )}
             <h3 className="text-[12px] font-[700] uppercase tracking-[0.14em] text-muted mb-3">
               Treatments offered
             </h3>

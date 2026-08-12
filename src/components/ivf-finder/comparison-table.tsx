@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Check, X } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { rateFor } from "@/lib/clinics";
+import { travelEstimateForCity, TRAVEL_ASSUMPTIONS } from "@/lib/travel";
 import { VerificationBadge } from "./rate-display";
 
 interface ComparisonTableProps {
@@ -38,8 +39,17 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
 
   const rates = clinics.map((c) => rateFor(c, ageBracket));
   const bestRate = Math.max(...rates.filter((r): r is number => r != null));
-  const prices = clinics.map((c) => c.pricePerCycleGbp).filter((p): p is number => p != null);
-  const bestPrice = prices.length > 0 ? Math.min(...prices) : null;
+
+  // "Best" is judged on the travel-inclusive true cost, never the headline
+  // price: comparing a Brno quote with a London one without the flights is
+  // exactly the distortion this table exists to remove.
+  const trueCostFor = (c: Clinic): number | null => {
+    if (c.pricePerCycleGbp == null) return null;
+    const travel = c.region !== "UK" ? travelEstimateForCity(c.city) : null;
+    return c.pricePerCycleGbp + (travel?.mid ?? 0);
+  };
+  const trueCosts = clinics.map(trueCostFor).filter((p): p is number => p != null);
+  const bestTrueCost = trueCosts.length > 0 ? Math.min(...trueCosts) : null;
 
   const headerCell =
     "px-4 py-3 text-left text-[12px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
@@ -55,7 +65,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
       </div>
 
       <div className="rounded-[24px] border border-border bg-background overflow-x-auto">
-        <table className="w-full border-collapse min-w-[900px]">
+        <table className="w-full border-collapse min-w-[1020px]">
           <thead>
             <tr className="border-b border-border">
               <th className={`${headerCell} sticky left-0 z-10 bg-background border-r border-border`}>
@@ -64,6 +74,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
               <th className={headerCell}>Success rate, {ageBracketLabel.toLowerCase()}</th>
               <th className={headerCell}>Source</th>
               <th className={headerCell}>Price per cycle</th>
+              <th className={headerCell}>True cost with travel</th>
               <th className={headerCell}>Location</th>
               <th className={headerCell}>Donor anonymity</th>
               <th className={headerCell}>Remote consultation</th>
@@ -77,8 +88,9 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
             {clinics.map((clinic, i) => {
               const rate = rateFor(clinic, ageBracket);
               const isBestRate = rate != null && rate === bestRate;
-              const isBestPrice =
-                bestPrice != null && clinic.pricePerCycleGbp === bestPrice;
+              const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
+              const trueCost = trueCostFor(clinic);
+              const isBestTrueCost = bestTrueCost != null && trueCost === bestTrueCost;
               return (
                 <tr
                   key={clinic.slug}
@@ -113,11 +125,23 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                   </td>
                   <td className={bodyCell}>
                     {clinic.pricePerCycleGbp != null ? (
+                      <span className="font-semibold">
+                        £{clinic.pricePerCycleGbp.toLocaleString()}
+                      </span>
+                    ) : (
+                      <span className="text-muted">Not published</span>
+                    )}
+                  </td>
+                  <td className={bodyCell}>
+                    {trueCost != null ? (
                       <>
-                        <span className="font-semibold">
-                          £{clinic.pricePerCycleGbp.toLocaleString()}
-                        </span>
-                        {isBestPrice && <BestBadge />}
+                        <span className="font-semibold">≈ £{trueCost.toLocaleString()}</span>
+                        {isBestTrueCost && <BestBadge />}
+                        <p className="text-xs text-muted mt-0.5">
+                          {travel != null
+                            ? `incl. ~£${travel.mid.toLocaleString()} flights + stays`
+                            : "no travel needed"}
+                        </p>
                       </>
                     ) : (
                       <span className="text-muted">Not published</span>
@@ -163,7 +187,10 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
 
       <p className="text-xs text-muted mt-3">
         Figures marked Clinic reported are self-published, use different denominators, and are
-        not directly comparable with HFEA verified UK figures.
+        not directly comparable with HFEA verified UK figures. True cost adds our
+        destination-specific estimate of flights and stays across{" "}
+        {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips to
+        the headline price; check live prices for your own dates before budgeting.
       </p>
     </div>
   );
