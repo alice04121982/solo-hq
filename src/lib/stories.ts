@@ -41,7 +41,7 @@ export interface Story {
  * ILLUSTRATIVE CONTENT: none of these stories describe real people. They
  * exist to establish the shape and tone of the section and are labelled as
  * illustrative wherever they render. Replace with real, consented accounts
- * (via stories@cairnfertility.co.uk) before removing those labels.
+ * (via stories@cairnfertility.com) before removing those labels.
  */
 export const ALL_STORIES: Story[] = [
   {

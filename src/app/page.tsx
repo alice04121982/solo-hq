@@ -196,7 +196,7 @@ export default function Home() {
 
         <p className="text-xs font-sans mt-8" style={{ color: "var(--muted)" }}>
           Illustrative stories while we collect real, consented accounts. Share yours:
-          stories@cairnfertility.co.uk
+          stories@cairnfertility.com
         </p>
       </Section>
 

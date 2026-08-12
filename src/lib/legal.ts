@@ -68,20 +68,24 @@ export interface LegalPage {
 /**
  * Public inboxes, by purpose.
  *
- * All three are aliases on the same domain forwarding to one mailbox; the
- * split exists so a reader can see where a data request goes as against a
- * story submission, and so they can be routed separately later without
- * rewriting the legal pages. Keep every address here in step with the
- * forwarding rules actually configured on the domain — a published address
- * that bounces is worse than no address at all.
+ * All three are aliases forwarding to one mailbox; the split exists so a
+ * reader can see where a data request goes as against a story submission,
+ * and so they can be routed separately later without rewriting the legal
+ * pages. Keep every address here in step with the forwarding rules actually
+ * configured on the domain — a published address that bounces is worse than
+ * no address at all.
+ *
+ * cairnfertility.co.uk is held as a defensive registration and redirects
+ * here, so addresses on it should forward to the same mailbox rather than
+ * being published anywhere.
  */
 export const CONTACT_EMAILS = {
   /** General enquiries, corrections, accessibility reports, complaints. */
-  general: "hello@cairnfertility.co.uk",
+  general: "hello@cairnfertility.com",
   /** Data protection requests and anything about the privacy policy. */
-  privacy: "privacy@cairnfertility.co.uk",
+  privacy: "privacy@cairnfertility.com",
   /** Story and quote submissions from the community. */
-  stories: "stories@cairnfertility.co.uk",
+  stories: "stories@cairnfertility.com",
 } as const;
 
 /** The address shown as the site's primary point of contact. */
@@ -122,7 +126,7 @@ const PRIVACY: LegalPage = {
       heading: "Who we are",
       body: [
         "CairnFertility is a UK-based information service that helps people compare IVF clinics and understand fertility treatment. It is published by an independent individual rather than a registered company, and that person is the \"controller\" of the small amount of personal data described in this policy — meaning they decide how and why it is used. If CairnFertility is ever incorporated, we will publish the company's registered details on our [contact page](/contact) and update this policy first.",
-        "For anything about this policy or your personal data, email [privacy@cairnfertility.co.uk](mailto:privacy@cairnfertility.co.uk). For anything else, [hello@cairnfertility.co.uk](mailto:hello@cairnfertility.co.uk) reaches us.",
+        "For anything about this policy or your personal data, email [privacy@cairnfertility.com](mailto:privacy@cairnfertility.com). For anything else, [hello@cairnfertility.com](mailto:hello@cairnfertility.com) reaches us.",
       ],
     },
     {
@@ -228,7 +232,7 @@ const PRIVACY: LegalPage = {
         "Withdraw consent: for the location search, simply change your browser's permission at any time.",
       ],
       postBody: [
-        "To exercise any of these, email [privacy@cairnfertility.co.uk](mailto:privacy@cairnfertility.co.uk). We will respond within one month, as the law requires, and we will never charge for a reasonable request.",
+        "To exercise any of these, email [privacy@cairnfertility.com](mailto:privacy@cairnfertility.com). We will respond within one month, as the law requires, and we will never charge for a reasonable request.",
         "If you are unhappy with how we have handled your data, you can complain to the UK Information Commissioner's Office at [ico.org.uk](https://ico.org.uk) or on 0303 123 1113. If you are in the EU, you may also complain to your national data protection authority.",
       ],
     },
@@ -272,7 +276,7 @@ const TERMS: LegalPage = {
     {
       heading: "Who we are and what this is",
       body: [
-        "CairnFertility (\"we\", \"us\") publishes this website to help people — solo parents by choice, LGBTQ+ families, and couples — understand fertility treatment and compare IVF clinics. It is run by an independent individual in the UK, not a registered company. Contact us at [hello@cairnfertility.co.uk](mailto:hello@cairnfertility.co.uk).",
+        "CairnFertility (\"we\", \"us\") publishes this website to help people — solo parents by choice, LGBTQ+ families, and couples — understand fertility treatment and compare IVF clinics. It is run by an independent individual in the UK, not a registered company. Contact us at [hello@cairnfertility.com](mailto:hello@cairnfertility.com).",
         "By using the site you accept these terms. If you do not accept them, please do not use the site. Nothing in these terms affects rights you have as a consumer that the law does not allow to be limited or excluded.",
       ],
     },
@@ -410,7 +414,7 @@ const COOKIES: LegalPage = {
         "You can also control or delete cookies for any site through your browser's settings — see your browser's help pages, or the ICO's guidance at [ico.org.uk](https://ico.org.uk/for-the-public/online/cookies/).",
       ],
       callout:
-        "If you ever find a cookie set by this site while this policy still says there are none, please tell us at privacy@cairnfertility.co.uk — that would be a bug in the site or in this policy, and either way we will fix it.",
+        "If you ever find a cookie set by this site while this policy still says there are none, please tell us at privacy@cairnfertility.com — that would be a bug in the site or in this policy, and either way we will fix it.",
     },
   ],
 };
@@ -522,7 +526,7 @@ const ACCESSIBILITY: LegalPage = {
     {
       heading: "Tell us when something doesn't work",
       body: [
-        "If any part of this site is difficult or impossible for you to use, that is a problem we want to hear about. Email [hello@cairnfertility.co.uk](mailto:hello@cairnfertility.co.uk) and tell us what happened, on which page, and the browser and assistive technology you were using. We aim to respond within five working days, and accessibility reports go to the top of the fix list.",
+        "If any part of this site is difficult or impossible for you to use, that is a problem we want to hear about. Email [hello@cairnfertility.com](mailto:hello@cairnfertility.com) and tell us what happened, on which page, and the browser and assistive technology you were using. We aim to respond within five working days, and accessibility reports go to the top of the fix list.",
         "If you need any information from this site in a different format, ask and we will do our best to provide it.",
       ],
     },
@@ -557,17 +561,17 @@ const CONTACT: LegalPage = {
       ],
       definitions: [
         {
-          term: "hello@cairnfertility.co.uk",
+          term: "hello@cairnfertility.com",
           description:
             "General questions about the site, our guides, or how our comparisons are put together. Corrections too — if a price, policy, or success rate we publish looks out of date, we genuinely want to know. Accessibility problems (see our [accessibility statement](/accessibility)) and complaints about anything we have published or done also belong here.",
         },
         {
-          term: "privacy@cairnfertility.co.uk",
+          term: "privacy@cairnfertility.com",
           description:
             "Data protection requests and anything about how we handle personal information, as described in our [privacy policy](/privacy). These are answered within the one-month statutory deadline, and usually much faster.",
         },
         {
-          term: "stories@cairnfertility.co.uk",
+          term: "stories@cairnfertility.com",
           description:
             "Sharing your own story or experience with the community. We would love to hear it, and nothing is ever published without your explicit agreement to what appears and how you are named.",
         },

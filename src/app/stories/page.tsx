@@ -48,7 +48,7 @@ export default function StoriesPage() {
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
           These are illustrative stories while we collect real, consented accounts to
           replace them. If you would like to share yours, write to
-          stories@cairnfertility.co.uk.
+          stories@cairnfertility.com.
         </p>
       </Section>
 
