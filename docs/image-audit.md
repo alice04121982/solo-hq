@@ -3,6 +3,14 @@
 Every image in `public/photos/` reviewed for model-rights risk, and the
 replacement plan.
 
+Four images were deleted outright during this audit, leaving 11. They were
+referenced by nothing in `src/` — the homepage hero moved to the shape system,
+and the others were left behind by earlier edits. Anything in `public/` is
+served at its URL whether or not a page links to it, so an unused photograph
+of an identifiable person is still published; deleting is the fix, not
+ignoring. Removed: `hero-desktop.webp`, `hero-mobile.webp`,
+`family-sunset.webp`, `story-hero.jpeg`.
+
 ## Why this audit exists
 
 All 15 photos came from Unsplash under the standard Unsplash License. That
@@ -41,25 +49,21 @@ Both sit alongside health under Article 9.
 
 These carry no model-rights exposure and are good images. Keep them.
 
-### Borderline — low identifiability (2)
+### Borderline — low identifiability (1)
 
 | File | What it shows |
 | --- | --- |
-| `family-sunset.webp` | Heavily backlit and hazy; one face partly in profile, eyes closed |
 | `story-mirror-family.webp` | Family reflected in a mirror at distance, faces angled down |
 
 Defensible to keep, but replace if replacing anyway — the cost is low and the
 argument disappears entirely.
 
-### Replace — clearly identifiable faces (10)
+### Replace — clearly identifiable faces (7)
 
 | File | What it shows | Note |
 | --- | --- | --- |
-| `hero-desktop.webp` | Couple with newborn, both faces clear | Homepage hero |
-| `hero-mobile.webp` | Same family plus a child, four faces clear | Homepage hero |
 | `newborn.webp` | Couple holding newborn, faces close and clear | |
 | `cta-family.webp` | Man kissing toddler, both faces very close | |
-| `story-hero.jpeg` | Young woman, face clear | See provenance note below |
 | `story-solo-dad.webp` | Man at window, face clear | |
 | `story-two-mums.webp` | Two women, faces clear | Also implies sexual orientation |
 | `story-two-dads.webp` | Two men, faces clear | Also implies sexual orientation |
@@ -68,10 +72,10 @@ argument disappears entirely.
 
 ### Provenance note
 
-`story-hero.jpeg` is the only JPEG in an otherwise all-WebP set, and carries
-what looks like a UI overlay artifact at its right edge — consistent with a
-screen capture rather than a download. Worth confirming it came from Unsplash
-at all before assuming the licence applies to it.
+`story-hero.jpeg`, now deleted, was the only JPEG in an otherwise all-WebP set
+and carried what looked like a UI overlay artifact at its right edge —
+consistent with a screen capture rather than a download. If any copy of it
+survives elsewhere, confirm it came from Unsplash at all before reusing it.
 
 ## Replacement approach
 
