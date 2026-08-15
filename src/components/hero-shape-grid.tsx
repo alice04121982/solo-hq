@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ShapeMark, type ShapeName } from "./shapes";
+import { ImagePlaceholder } from "./image-placeholder";
 
 /**
  * The hero composition: a tidy grid of shape cells and photo cells.
@@ -30,7 +31,9 @@ const MASK_CLASS: Record<Mask, string> = {
 
 type Cell =
   | { kind: "mark"; name: ShapeName; color: string }
-  | { kind: "photo"; src: string; alt: string; mask: Mask; position?: string };
+  /** `src` absent = photograph withdrawn pending licensing; the mask still
+   *  renders, filled with the placeholder panel, so the grid keeps its shape. */
+  | { kind: "photo"; src?: string; alt?: string; mask: Mask; position?: string };
 
 /**
  * Photos take the four corners and the centre, marks take the four edges.
@@ -52,34 +55,24 @@ const CELLS: Cell[] = [
   { kind: "mark", name: "spark", color: "var(--accent)" },
   {
     kind: "photo",
-    src: "/photos/story-two-mums.webp",
-    alt: "Two mums together",
     mask: "arch",
   },
 
   { kind: "mark", name: "bloom", color: "var(--on-teal)" },
   {
     kind: "photo",
-    src: "/photos/family-beach.webp",
-    alt: "A mum and dad building a sandcastle with their child",
     mask: "circle",
   },
   { kind: "mark", name: "halves", color: "var(--lavender)" },
 
   {
     kind: "photo",
-    src: "/photos/story-two-dads.webp",
-    alt: "Two dads together",
     mask: "quarter",
-    position: "object-[50%_30%]",
   },
   { kind: "mark", name: "pause", color: "var(--accent)" },
   {
     kind: "photo",
-    src: "/photos/cta-family.webp",
-    alt: "A solo dad holding his young son",
     mask: "leaf",
-    position: "object-[45%_40%]",
   },
 ];
 
@@ -107,13 +100,17 @@ export function HeroShapeGrid({ className }: { className?: string }) {
               />
             ) : (
               <div className={`absolute inset-0 overflow-hidden ${MASK_CLASS[cell.mask]}`}>
-                <Image
-                  src={cell.src}
-                  alt={cell.alt}
-                  fill
-                  sizes="(min-width: 1280px) 160px, 30vw"
-                  className={`object-cover ${cell.position ?? ""}`}
-                />
+                {cell.src ? (
+                  <Image
+                    src={cell.src}
+                    alt={cell.alt ?? ""}
+                    fill
+                    sizes="(min-width: 1280px) 160px, 30vw"
+                    className={`object-cover ${cell.position ?? ""}`}
+                  />
+                ) : (
+                  <ImagePlaceholder />
+                )}
               </div>
             )}
           </motion.div>

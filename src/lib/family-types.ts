@@ -45,8 +45,13 @@ export interface FamilyType {
   headline: string;
   heroCopy: string;
   cardSummary: string;
-  image: string;
-  imageAlt: string;
+  /**
+   * Optional so a guide can ship before its photograph has been licensed.
+   * Where it is absent the hero renders a designed panel instead — never
+   * substitute a stock photo of someone else's family to fill the gap.
+   */
+  image?: string;
+  imageAlt?: string;
   hideHeroImage?: boolean;
   treatmentHighlight: string;
   steps: ProcessStep[];
@@ -161,8 +166,6 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners, this guide walks you through every stage with clarity.",
     cardSummary:
       "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
-    image: "/photos/story-two-mums.webp",
-    imageAlt: "Two women sitting together, one kissing the other on the cheek",
     treatmentHighlight: "IUI · IVF · ICSI · Reciprocal IVF · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
@@ -255,8 +258,6 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two men wanting to become fathers, the path involves surrogacy: a process that's legal, increasingly common, and achievable in the UK. It's also more complex than other routes. This guide explains every step honestly, from finding a surrogate to the parental order that makes you your child's legal parents.",
     cardSummary:
       "For two men building a family: finding a surrogate, treatment, and becoming legal parents.",
-    image: "/photos/story-two-dads.webp",
-    imageAlt: "Two men embracing and smiling at each other",
     treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
@@ -349,8 +350,6 @@ export const FAMILY_TYPES: FamilyType[] = [
       "More men than ever are choosing to become solo fathers. The path (surrogacy with a donor egg) is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
     cardSummary:
       "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
-    image: "/photos/cta-family.webp",
-    imageAlt: "A father holding and kissing his young son",
     treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
@@ -443,8 +442,6 @@ export const FAMILY_TYPES: FamilyType[] = [
       "Fertility treatment for heterosexual couples covers an enormous range of situations, from unexplained infertility to specific diagnoses like low sperm count, PCOS, or poor egg reserve. Whatever brought you here, this guide helps you navigate your options with clarity: from initial investigations to embryo transfer, and everything in between.",
     cardSummary:
       "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
-    image: "/photos/newborn.webp",
-    imageAlt: "A couple holding their newborn baby by a window",
     treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
@@ -490,8 +487,6 @@ export const FAMILY_TYPES: FamilyType[] = [
     ],
     stories: [
       {
-        image: "/photos/story-mirror-family.webp",
-        imageAlt: "A couple with their newborn, seen through a mirror",
         name: "Emma & David",
         age: 34,
         location: "London",

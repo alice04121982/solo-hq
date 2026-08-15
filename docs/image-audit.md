@@ -37,6 +37,28 @@ Four images compound this by implying a **second** special category:
 
 Both sit alongside health under Article 9.
 
+## Current state: photography withdrawn
+
+The eight images below have been **removed from the repository**, not merely
+unreferenced, because anything in `public/` is served at its URL whether or not
+a page links to it. Three remain in use; see "Safe to keep".
+
+Where a photograph used to render, the site now shows `ImagePlaceholder` — a
+designed panel in the cream-to-lavender gradient with a quiet concentric mark,
+matching the fallback the story cards already used. It reads as a considered
+absence rather than a broken image.
+
+To restore any of them: drop a licensed file into `public/photos/` and set
+`image` back on the story in `src/lib/stories.ts`, the family type in
+`src/lib/family-types.ts`, or the grid cell in `hero-shape-grid.tsx`. The
+`cta-section.tsx` placeholder is swapped back by restoring its `<Image>`.
+Matching alt text for both candidate replacement sets is in
+`image-prompts.md`.
+
+Note that the hero grid's per-image focal points (`object-[45%_40%]` and
+similar) were tuned to the withdrawn photographs and have been dropped with
+them. New images will want their own.
+
 ## Findings
 
 ### Safe to keep — no identifiable face (3)
