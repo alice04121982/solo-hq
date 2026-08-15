@@ -74,7 +74,7 @@ export default async function StoryPage({ params }: PageProps) {
       >
         This is an illustrative story, written to show what real accounts will look
         like here. It does not describe a real person. To share your own story,
-        write to stories@cairnfertility.co.uk.
+        write to stories@cairnfertility.com.
       </p>
 
       <div className="space-y-6">

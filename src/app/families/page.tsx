@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { ImagePlaceholder } from "@/components/image-placeholder";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 export const metadata: Metadata = {
@@ -27,13 +28,17 @@ function FamilyCard({ family }: { family: FamilyType }) {
       style={{ borderColor: "var(--border)", background: "#FFFFFF" }}
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
-        <Image
-          src={family.image}
-          alt={family.imageAlt}
-          fill
-          sizes="(min-width: 768px) 360px, 100vw"
-          className="object-cover"
-        />
+        {family.image ? (
+          <Image
+            src={family.image}
+            alt={family.imageAlt ?? ""}
+            fill
+            sizes="(min-width: 768px) 360px, 100vw"
+            className="object-cover"
+          />
+        ) : (
+          <ImagePlaceholder label={family.label} />
+        )}
       </div>
 
       <div className="flex flex-col flex-1 gap-2 p-5">

@@ -1410,7 +1410,7 @@ export const GUIDES: Guide[] = [
           "I am trying to be in it rather than planning it all to death. That is my new daily challenge.",
         ],
         callout:
-          "Want to share your story? We are always looking for honest accounts from every stage of the journey, whether you are at the beginning, in the middle of treatment, pregnant, or already a mum. Contact us at stories@cairnfertility.co.uk.",
+          "Want to share your story? We are always looking for honest accounts from every stage of the journey, whether you are at the beginning, in the middle of treatment, pregnant, or already a mum. Contact us at stories@cairnfertility.com.",
       },
     ],
     keyTakeaways: [

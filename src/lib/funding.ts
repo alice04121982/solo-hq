@@ -473,7 +473,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "Check whether treatment must be at a partner clinic, and whether drugs and donor gametes are included.",
       "Ask how the benefit is treated for tax and what happens if you leave, and get the answer in writing.",
       "There is no statutory right in Great Britain to paid time off for fertility appointments. Whether you get it depends on your contract and your employer's policy.",
-      "Our IVF & Work section covers this route in full: your rights, the audit, and what to say — cairnfertility.co.uk/work.",
+      "Our IVF & Work section covers this route in full: your rights, the audit, and what to say — cairnfertility.com/work.",
     ],
   },
   {

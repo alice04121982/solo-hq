@@ -6,6 +6,7 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { ShapeMark, Spark } from "@/components/shapes";
 import { DATA_PROVENANCE } from "@/lib/clinics";
+import { CONTACT_EMAILS } from "@/lib/legal";
 import { HFEA } from "@/lib/regulators";
 
 /**
@@ -210,7 +211,7 @@ export default function AboutPage() {
             `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost — medications, consultations, donor material, travel where relevant — beside the headline quote, never instead of it.`,
             `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
             "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
-            "Spotted a figure that looks wrong or out of date? Email stories@cairnfertility.co.uk — corrections go to the top of the list.",
+            `Spotted a figure that looks wrong or out of date? Email ${CONTACT_EMAILS.general} — corrections go to the top of the list.`,
           ].map((item) => (
             <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
               {item}

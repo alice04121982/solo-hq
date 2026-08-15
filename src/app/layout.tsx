@@ -17,9 +17,15 @@ const siteDescription =
   "Cairn compares IVF clinics on cost, success rates and eligibility, for solo mums, solo dads, two mums, two dads, and couples.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cairnfertility.vercel.app"),
+  // Canonical origin for absolute metadata URLs (Open Graph images, etc.).
+  // cairnfertility.co.uk is held defensively and redirects here.
+  metadataBase: new URL("https://cairnfertility.com"),
   title: "CairnFertility | Compare IVF Clinics",
   description: siteDescription,
+  // Pre-launch: keep the site out of search results while photography rights
+  // and contact routing are still being settled. Remove this alongside
+  // src/app/robots.ts when launching — see that file's note.
+  robots: { index: false, follow: false },
   openGraph: {
     title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,
