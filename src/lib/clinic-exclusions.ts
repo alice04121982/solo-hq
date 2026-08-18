@@ -1,3 +1,5 @@
+import type { Region } from "@/types/clinic";
+
 /**
  * Clinics Cairn will not list.
  *
@@ -23,6 +25,10 @@
  *   investigation is a holding position, and holding positions are supposed
  *   to be revisited, not left to calcify.
  * - Individuals are never named here. The unit of the decision is the clinic.
+ * - An exclusion is shown, not hidden. The finder renders these entries under
+ *   its results, and `country`/`region` put them in reach of the same geography
+ *   filters as a listed clinic — so someone searching where a clinic operates
+ *   is told it was removed and why, instead of being handed an empty list.
  */
 
 export interface ClinicExclusion {
@@ -39,8 +45,13 @@ export interface ClinicExclusion {
    * an unrelated jurisdiction is not caught by it.
    */
   countries: string[];
-  /** The jurisdiction the exclusion is about, as displayed. */
-  location: string;
+  /**
+   * The country as the finder displays and filters it, in the same vocabulary
+   * as `Clinic.country`. Selectable in the country filter, so the exclusion
+   * surfaces where someone would look for the clinic.
+   */
+  country: string;
+  region: Region;
   /** What was reported, by whom, and why that means we are not listing it. */
   reason: string;
   /** Any denial or response on the record, in the clinic's own terms. */
@@ -57,7 +68,8 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     name: "Dogus IVF Centre",
     names: ["dogus ivf", "dogus hospital", "dogus fertility"],
     countries: ["cyprus"],
-    location: "Northern Cyprus",
+    country: "Northern Cyprus",
+    region: "Europe",
     reason:
       "BBC News reported in August 2026 that at least 30 children, most of them British, are " +
       "feared to have been conceived in northern Cyprus using sperm or egg donors other than " +
@@ -95,7 +107,8 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     name: "Miracle IVF",
     names: ["miracle ivf"],
     countries: ["cyprus"],
-    location: "Northern Cyprus",
+    country: "Northern Cyprus",
+    region: "Europe",
     reason:
       "Named in the same BBC News reporting, which linked further cases of the same kind to " +
       "the clinic. Cryos International told the BBC it has suspended supplying the clinic " +
@@ -151,4 +164,26 @@ export function exclusionFor(clinic: { name: string; country: string }): ClinicE
       x.names.some((n) => name.includes(normalise(n))) &&
       x.countries.some((c) => country.includes(normalise(c)))
   );
+}
+
+
+/**
+ * Exclusions whose geography matches the finder's region and country filters,
+ * using the same either-matches rule listed clinics get. With no geography
+ * selected every exclusion matches, because the unfiltered list is the whole
+ * database and these are part of what the database has to say about it.
+ */
+export function exclusionsMatchingGeography(
+  regions: readonly Region[],
+  countries: readonly string[]
+): ClinicExclusion[] {
+  if (regions.length === 0 && countries.length === 0) return CLINIC_EXCLUSIONS;
+  return CLINIC_EXCLUSIONS.filter(
+    (x) => regions.includes(x.region) || countries.includes(x.country)
+  );
+}
+
+/** Countries an exclusion covers, so the country filter can offer them. */
+export function excludedCountriesByRegion(region: Region): string[] {
+  return [...new Set(CLINIC_EXCLUSIONS.filter((x) => x.region === region).map((x) => x.country))];
 }

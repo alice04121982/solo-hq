@@ -236,7 +236,7 @@ export default function AboutPage() {
             {CLINIC_EXCLUSIONS.map((x) => (
               <li key={x.name} className="pl-5 border-l-2 border-border">
                 <p className="font-sans font-semibold text-foreground text-[15px] mb-1">
-                  {x.name} &mdash; {x.location}
+                  {x.name} &mdash; {x.country}
                 </p>
                 <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>
                 {x.response && (

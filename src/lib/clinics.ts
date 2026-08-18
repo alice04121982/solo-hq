@@ -1,5 +1,5 @@
 import type { AgeBracket, Clinic, Region } from "@/types/clinic";
-import { exclusionFor } from "./clinic-exclusions.ts";
+import { excludedCountriesByRegion, exclusionFor } from "./clinic-exclusions.ts";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -607,12 +607,24 @@ export function rankBySuccessRate(clinics: Clinic[], bracket: AgeBracket): Clini
   });
 }
 
-/** Countries present in the database, grouped by region in display order. */
+/**
+ * Countries present in the database, grouped by region in display order.
+ *
+ * Includes countries that have only excluded clinics. Someone filtering to
+ * where a clinic operates should be told it was removed and why, which is
+ * what the finder shows for those countries — an option that leads to an
+ * explanation beats a country that is silently missing from the list.
+ */
 export function countriesByRegion(): { region: Region; countries: string[] }[] {
   const regions: Region[] = ["UK", "Europe", "Rest of world"];
   return regions.map((region) => ({
     region,
-    countries: [...new Set(CLINICS.filter((c) => c.region === region).map((c) => c.country))].sort(),
+    countries: [
+      ...new Set([
+        ...CLINICS.filter((c) => c.region === region).map((c) => c.country),
+        ...excludedCountriesByRegion(region),
+      ]),
+    ].sort(),
   }));
 }
 
