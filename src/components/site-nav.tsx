@@ -16,6 +16,7 @@ const PRIMARY_LINKS = [
 
 const MORE_LINKS = [
   { label: "Funding", href: "/funding" },
+  { label: "In the Media", href: "/news" },
   { label: "IVF & Work", href: "/work" },
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },

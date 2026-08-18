@@ -1,4 +1,5 @@
 import type { AgeBracket, Clinic, Region } from "@/types/clinic";
+import { exclusionFor } from "./clinic-exclusions.ts";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -17,7 +18,12 @@ import type { AgeBracket, Clinic, Region } from "@/types/clinic";
  * - A clinic gets "IUI" in treatments only together with iuiPricePerCycleGbp,
  *   so the budget filter can price the treatment it is offering.
  * - Any price change must update DATA_PROVENANCE.pricesVerifiedOn.
- *   `npm run check:data` enforces these invariants and flags stale data.
+ * - A clinic covered by `src/lib/clinic-exclusions.ts` does not belong in
+ *   this file at all. `CLINIC_RECORDS` is filtered through that policy on the
+ *   way to `CLINICS` so an excluded clinic can never reach a page, and
+ *   `npm run check:data` fails if one is added here anyway.
+ *
+ * `npm run check:data` enforces these invariants and flags stale data.
  */
 
 const HFEA_SOURCE = {
@@ -70,7 +76,12 @@ export const DATA_PROVENANCE = {
   },
 } as const;
 
-export const CLINICS: Clinic[] = [
+/**
+ * Every clinic record in the file, excluded ones included. Nothing renders
+ * from this: it exists so `npm run check:data` can see what was written here
+ * before the exclusion policy is applied. Pages import `CLINICS`.
+ */
+export const CLINIC_RECORDS: Clinic[] = [
   // ── UK ──
   {
     slug: "bourn-hall",
@@ -558,6 +569,17 @@ export const CLINICS: Clinic[] = [
     },
   },
 ];
+
+/**
+ * The clinic database as every page sees it: the records above, minus any
+ * clinic Cairn has decided not to list (see `src/lib/clinic-exclusions.ts`).
+ *
+ * The filter is the guarantee, not the process. An excluded clinic is meant
+ * to be absent from `CLINIC_RECORDS` in the first place, and the data check
+ * fails if one is present — this is what keeps it off the site in the window
+ * between the mistake and the check.
+ */
+export const CLINICS: Clinic[] = CLINIC_RECORDS.filter((c) => exclusionFor(c) === undefined);
 
 export function getClinic(slug: string): Clinic | undefined {
   return CLINICS.find((c) => c.slug === slug);

@@ -10,13 +10,17 @@
  * and bumping that date is the fix — never bump the date without actually
  * re-checking the figures.
  *
- * Also scans site content for prescription-medicine brand names, which must
- * never appear on the public site (see the check at the bottom of this file).
+ * Also enforces the clinic exclusion policy (src/lib/clinic-exclusions.ts),
+ * checks the shape of the media roundup (src/lib/news.ts), and scans site
+ * content for prescription-medicine brand names, which must never appear on
+ * the public site (see the checks at the bottom of this file).
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
-import { CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
+import { CLINIC_RECORDS, CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
+import { CLINIC_EXCLUSIONS, exclusionFor } from "../src/lib/clinic-exclusions.ts";
 import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
+import { NEWS_ITEMS, NEWS_PROVENANCE } from "../src/lib/news.ts";
 
 const STALE_DAYS = Number(process.env.STALE_DAYS ?? 120);
 
@@ -140,6 +144,104 @@ for (const d of DESTINATIONS) {
   }
 }
 
+// ── Clinic exclusions ──
+//
+// `CLINICS` is filtered through the exclusion policy, so an excluded clinic
+// cannot render. That filter is the safety net, not the plan: a clinic we
+// have decided not to list should not be sitting in the database at all,
+// where a future edit could rename it out of the policy's reach.
+for (const c of CLINIC_RECORDS) {
+  const excluded = exclusionFor(c);
+  if (excluded)
+    errors.push(
+      `${c.slug || c.name}: matches the exclusion for "${excluded.name}" in ` +
+        `src/lib/clinic-exclusions.ts — remove the clinic from src/lib/clinics.ts, or ` +
+        `retire the exclusion there if the reason no longer holds.`
+    );
+}
+
+for (const x of CLINIC_EXCLUSIONS) {
+  const id = x.name || "<unnamed exclusion>";
+  if (x.names.length === 0 || x.countries.length === 0)
+    errors.push(`${id}: an exclusion needs at least one name and one country to match on.`);
+  if (!x.names.some((n) => n.toLowerCase().includes(x.name.split(" ")[0].toLowerCase())))
+    warnings.push(`${id}: none of its match names look like its display name — check for a typo.`);
+  if (x.reason.length < 80)
+    errors.push(`${id}: the reason is too short to be a record of anything. Say what was reported and by whom.`);
+  if (x.sources.length === 0)
+    errors.push(`${id}: an exclusion must cite at least one published source.`);
+  for (const src of x.sources) {
+    if (!src.url.startsWith("https://")) errors.push(`${id}: source "${src.label}" is not an https link.`);
+  }
+  // An exclusion is not price data: growing old is not a failure, so this
+  // reports on reviewOn rather than running it through checkFreshness and
+  // failing the build for an entry that is simply still standing.
+  const excludedOn = new Date(`${x.excludedOn}T00:00:00Z`);
+  if (Number.isNaN(excludedOn.getTime())) errors.push(`${id}: excludedOn is not a valid ISO date.`);
+  else if (excludedOn.getTime() > Date.now() + 86_400_000)
+    errors.push(`${id}: excludedOn (${x.excludedOn}) is in the future.`);
+
+  const review = new Date(`${x.reviewOn}T00:00:00Z`);
+  if (Number.isNaN(review.getTime())) errors.push(`${id}: reviewOn is not a valid ISO date.`);
+  else if (review.getTime() < Date.now())
+    warnings.push(`${id}: passed its review date (${x.reviewOn}) — re-check it against its sources.`);
+}
+
+// ── Media roundup ──
+//
+// The page links out to other people's journalism, so a dead or invented link
+// is the failure mode that matters. This cannot open the pages; it checks that
+// what is written down could be a real, dated, absolute link to somewhere
+// other than here.
+const newsIds = new Set<string>();
+for (const item of NEWS_ITEMS) {
+  const id = item.id || item.title || "<untitled news item>";
+  if (newsIds.has(item.id)) errors.push(`News "${id}": duplicate id.`);
+  newsIds.add(item.id);
+
+  if (!item.title || !item.outlet || !item.note)
+    errors.push(`News "${id}": missing title, outlet or note.`);
+  if (!/^https:\/\//.test(item.url))
+    errors.push(`News "${id}": url must be an absolute https link to the original publisher.`);
+  if (/cairnfertility/i.test(item.url))
+    errors.push(`News "${id}": this list is for other people's reporting, not our own pages.`);
+
+  for (const [label, value, required] of [
+    ["addedOn", item.addedOn, true],
+    ["published", item.published, false],
+  ] as const) {
+    if (value == null) {
+      if (required) errors.push(`News "${id}": ${label} is required.`);
+      continue;
+    }
+    const date = new Date(`${value}T00:00:00Z`);
+    if (Number.isNaN(date.getTime())) errors.push(`News "${id}": ${label} is not a valid ISO date.`);
+    else if (date.getTime() > Date.now() + 86_400_000)
+      errors.push(`News "${id}": ${label} (${value}) is in the future.`);
+  }
+  if (item.related && !item.related.href.startsWith("/"))
+    errors.push(`News "${id}": related.href should be a path on this site.`);
+}
+
+if (NEWS_ITEMS.filter((i) => i.featured).length > 1)
+  errors.push("Media roundup: more than one item is marked featured; only one can lead the page.");
+
+// A quiet news list is an editorial matter, not a broken build: this warns
+// rather than failing the way the price and travel provenance dates do.
+const roundupAgeDays = Math.floor(
+  (Date.now() - new Date(`${NEWS_PROVENANCE.listUpdatedOn}T00:00:00Z`).getTime()) / 86_400_000
+);
+if (Number.isNaN(roundupAgeDays))
+  errors.push(`NEWS_PROVENANCE.listUpdatedOn is not a valid ISO date: "${NEWS_PROVENANCE.listUpdatedOn}"`);
+else if (roundupAgeDays < 0)
+  errors.push(`NEWS_PROVENANCE.listUpdatedOn is in the future (${NEWS_PROVENANCE.listUpdatedOn}).`);
+else if (roundupAgeDays > 90)
+  warnings.push(
+    `The media roundup was last swept ${roundupAgeDays} days ago, and the page says so. ` +
+      `Check the links in src/lib/news.ts still resolve, add what has happened since, then ` +
+      `update listUpdatedOn.`
+  );
+
 // ── Prescription-medicine brand names ──
 //
 // Advertising prescription-only medicines to the public is a criminal offence
@@ -185,7 +287,8 @@ for (const file of sourceFiles(srcRoot)) {
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
 console.log(
-  `\nChecked ${CLINICS.length} clinics: ${errors.length} error(s), ${warnings.length} warning(s). ` +
+  `\nChecked ${CLINICS.length} listed clinics (${CLINIC_EXCLUSIONS.length} exclusion(s) in force) ` +
+    `and ${NEWS_ITEMS.length} media items: ${errors.length} error(s), ${warnings.length} warning(s). ` +
     `Prices last verified ${DATA_PROVENANCE.pricesVerifiedOn}.`
 );
 process.exit(errors.length > 0 ? 1 : 0);
