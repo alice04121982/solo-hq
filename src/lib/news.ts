@@ -72,24 +72,41 @@ export interface NewsItem {
 
 export const NEWS_ITEMS: NewsItem[] = [
   {
+    id: "bbc-ivf-staff-misleading-parents-northern-cyprus",
+    title:
+      "IVF staff accused of misleading UK parents about sperm and egg donors in northern Cyprus",
+    url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
+    outlet: "BBC News",
+    kind: "Investigation",
+    topic: "Donor conception",
+    published: "2026-08-18",
+    addedOn: "2026-08-18",
+    featured: true,
+    note:
+      "At least 30 children, most of them British, are feared to have been conceived in " +
+      "northern Cyprus using sperm or egg donors other than the ones their parents chose. " +
+      "Eleven have taken commercial DNA tests showing ancestry from Turkey or nearby, rather " +
+      "than the Western European donors their parents selected. Half the cases trace to one " +
+      "clinic, and the sperm bank it advertised as its supplier told the BBC it has no record " +
+      "of ever delivering to it. Northern Cyprus sits outside both EU law and the HFEA's " +
+      "remit, which is exactly why donor provenance there is so hard for a patient to check " +
+      "afterwards. Two clinics named in this reporting are excluded from our finder while the " +
+      "Ministry of Health investigation is open.",
+    related: { label: "How we decide which clinics to list", href: "/about#methodology" },
+  },
+  {
     id: "bbc-sunshine-and-secrets-northern-cyprus",
     title: "Sunshine & Secrets: The Hidden Side of IVF",
     url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
     outlet: "BBC News",
-    kind: "Investigation",
+    kind: "Documentary",
     topic: "Donor conception",
     addedOn: "2026-08-18",
-    featured: true,
     note:
-      "The BBC's File on 4 investigation into fertility clinics in northern Cyprus, where " +
-      "British parents who chose a donor on medical history, appearance and identity-release " +
-      "status found, sometimes years later, that a different donor appears to have been used. " +
-      "Reporting since has put the number of children affected at 30 or more, and the " +
-      "territory's Ministry of Health has opened an investigation. Northern Cyprus sits " +
-      "outside both EU law and the HFEA's remit, which is exactly why donor provenance there " +
-      "is so hard for a patient to check afterwards. Two clinics named in this reporting are " +
-      "excluded from our finder while the investigation is open.",
-    related: { label: "How we decide which clinics to list", href: "/about#methodology" },
+      "The File on 4 documentary the reporting above grew out of: the families themselves, " +
+      "the forensic genetics, and what it is like to be told years later that the donor you " +
+      "chose on medical history, appearance and identity-release status may not have been " +
+      "the one used. Worth the hour if you are weighing treatment abroad.",
   },
   {
     id: "cyprus-mail-north-probe-ivf-clinic",

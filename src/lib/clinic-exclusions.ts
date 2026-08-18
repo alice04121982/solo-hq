@@ -70,7 +70,13 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
       "front of anyone as an option.",
     sources: [
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 investigation)",
+        label:
+          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "in northern Cyprus",
+        url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
+      },
+      {
+        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
@@ -101,7 +107,13 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
       "The BBC reported it was unable to confirm that clearance with the Ministry of Health.",
     sources: [
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 investigation)",
+        label:
+          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "in northern Cyprus",
+        url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
+      },
+      {
+        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
