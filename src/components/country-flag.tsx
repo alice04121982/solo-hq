@@ -99,6 +99,22 @@ const FLAGS: Record<string, React.ReactNode> = {
       <path d="M0 0 L7 7 L0 14 Z" fill="#11457E" />
     </>
   ),
+  "Northern Cyprus": (
+    <>
+      <rect width="20" height="14" fill="#FFFFFF" />
+      {/* Two red bands, and the crescent and star set between them. */}
+      <g fill="#E30A17">
+        <rect y="1.7" width="20" height="1.3" />
+        <rect y="11" width="20" height="1.3" />
+      </g>
+      <circle cx="8.5" cy="7" r="2.4" fill="#E30A17" />
+      <circle cx="9.4" cy="7" r="1.9" fill="#FFFFFF" />
+      <path
+        d="M12.30 5.50 L12.66 6.50 L13.73 6.54 L12.89 7.19 L13.18 8.21 L12.30 7.62 L11.42 8.21 L11.71 7.19 L10.87 6.54 L11.94 6.50 Z"
+        fill="#E30A17"
+      />
+    </>
+  ),
   "South Africa": (
     <>
       <rect width="20" height="14" fill="#E03C31" />

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { X } from "lucide-react";
 import {
   AGE_BRACKETS,
@@ -11,7 +12,14 @@ import {
   type Treatment,
 } from "@/types/clinic";
 import { cheapestPublishedPrice, priceBounds } from "@/lib/clinics";
-import { CountrySelect, COUNTRY_FLAGS } from "./country-select";
+import {
+  FilterTogglePill,
+  MultiSelectDropdown,
+  SingleSelectDropdown,
+  type FilterOption,
+} from "./filter-dropdown";
+import { CountrySelect } from "./country-select";
+import { CountryFlag } from "@/components/country-flag";
 
 /**
  * Filter state for the Cairn clinic finder.
@@ -42,21 +50,30 @@ export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   remoteConsultation: false,
 };
 
-const DONOR_OPTIONS: { value: FinderFilterState["donorAnonymity"]; label: string }[] = [
+const DONOR_OPTIONS: FilterOption<FinderFilterState["donorAnonymity"]>[] = [
   { value: "any", label: "Any" },
-  { value: "identifiable", label: "Identifiable donors only" },
-  { value: "anonymous", label: "Anonymous available" },
+  { value: "identifiable", label: "Identifiable donors only", shortLabel: "identifiable only" },
+  { value: "anonymous", label: "Anonymous available", shortLabel: "anonymous available" },
 ];
 
-const PRICE_STEP = 250;
+/**
+ * Budget ceilings offered in the price filter. A ladder of round numbers reads
+ * faster than a slider and states exactly what it will do; the ones outside
+ * the published price range are dropped, so no option returns everything or
+ * nothing.
+ */
+const PRICE_CEILINGS = [1500, 2500, 3500, 4500, 5500, 7500, 10000];
 
-/** Slider bounds, rounded outward so every clinic price fits inside them. */
-export function sliderBounds(): { min: number; max: number } {
+export function priceCeilingOptions(): FilterOption<string>[] {
   const { min, max } = priceBounds();
-  return {
-    min: Math.floor(min / PRICE_STEP) * PRICE_STEP,
-    max: Math.ceil(max / PRICE_STEP) * PRICE_STEP,
-  };
+  return [
+    { value: "any", label: "Any price" },
+    ...PRICE_CEILINGS.filter((c) => c > min && c < max).map((c) => ({
+      value: String(c),
+      label: `Up to £${c.toLocaleString()}`,
+      shortLabel: `up to £${c.toLocaleString()}`,
+    })),
+  ];
 }
 
 /**
@@ -130,7 +147,7 @@ function FilterTag({
   active,
   onToggle,
 }: {
-  label: string;
+  label: ReactNode;
   active: boolean;
   onToggle: () => void;
 }) {
@@ -151,171 +168,88 @@ function FilterTag({
   );
 }
 
-function GroupLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
-      {children}
-    </p>
-  );
-}
-
 interface FilterControlsProps {
   filters: FinderFilterState;
   onChange: (f: FinderFilterState) => void;
 }
 
 /**
- * The finder's filter controls. Rendered inline on desktop and inside the
- * filter sheet on mobile, so both share one source of truth.
+ * The finder's filter controls: one horizontal row of dropdowns, wrapping on
+ * narrow screens. Every filter is the same pill-and-panel shape, so the row
+ * scans in one pass and the explanatory copy lives inside the panel it
+ * belongs to instead of padding out the page.
+ *
+ * Rendered inline on desktop and inside the filter sheet on mobile, so both
+ * share one source of truth.
  */
 export function FilterControls({ filters, onChange }: FilterControlsProps) {
-  const bounds = sliderBounds();
-  const sliderValue = filters.priceCeiling ?? bounds.max;
-
-  const toggleIn = <T,>(list: T[], value: T): T[] =>
-    list.includes(value) ? list.filter((v) => v !== value) : [...list, value];
+  const ageOptions: FilterOption<AgeBracket>[] = AGE_BRACKETS.map((b) => ({
+    value: b.value,
+    label: b.label,
+  }));
+  const regionOptions: FilterOption<Region>[] = REGIONS.map((r) => ({ value: r, label: r }));
+  const treatmentOptions: FilterOption<Treatment>[] = TREATMENTS.map((t) => ({
+    value: t,
+    label: t,
+  }));
+  const priceOptions = priceCeilingOptions();
 
   return (
-    <div className="space-y-6">
-      {/* Age bracket: a Select, because it holds a form value. It drives the
-          ranking, so it is required and has no empty option. */}
-      <div>
-        <label htmlFor="cairn-age-bracket" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
-          Your age
-        </label>
-        <select
-          id="cairn-age-bracket"
-          value={filters.ageBracket}
-          onChange={(e) => onChange({ ...filters, ageBracket: e.target.value as AgeBracket })}
-          className="w-full max-w-xs rounded-full border border-teal/20 bg-background px-4 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
-        >
-          {AGE_BRACKETS.map((b) => (
-            <option key={b.value} value={b.value}>
-              {b.label}
-            </option>
-          ))}
-        </select>
-        <p className="text-xs text-muted mt-1.5">
-          Results rank by live birth rate for this age group.
-        </p>
-      </div>
+    <div className="flex flex-wrap items-center gap-2">
+      {/* Age drives the ranking, so it is required and always shows its value. */}
+      <SingleSelectDropdown
+        label="Age"
+        options={ageOptions}
+        value={filters.ageBracket}
+        defaultValue={DEFAULT_FINDER_FILTERS.ageBracket}
+        alwaysShowValue
+        onChange={(ageBracket) => onChange({ ...filters, ageBracket })}
+        note="Results rank by live birth rate for this age group."
+      />
 
-      {/* Region, with countries nested beneath. Filters the list, never gates it. */}
-      <div>
-        <GroupLabel>Region</GroupLabel>
-        <div className="flex flex-wrap gap-2">
-          {REGIONS.map((r) => (
-            <FilterTag
-              key={r}
-              label={r}
-              active={filters.regions.includes(r)}
-              onToggle={() => onChange({ ...filters, regions: toggleIn(filters.regions, r) })}
-            />
-          ))}
-        </div>
-        <div className="mt-3">
-          <CountrySelect
-            selected={filters.countries}
-            onChange={(countries) => onChange({ ...filters, countries })}
-          />
-        </div>
-      </div>
+      {/* Region and country narrow the same list; neither gates it. */}
+      <MultiSelectDropdown
+        label="Region"
+        options={regionOptions}
+        selected={filters.regions}
+        onChange={(regions) => onChange({ ...filters, regions })}
+      />
+      <CountrySelect
+        selected={filters.countries}
+        onChange={(countries) => onChange({ ...filters, countries })}
+      />
 
-      {/* Treatments */}
-      <div>
-        <GroupLabel>Treatment</GroupLabel>
-        <div className="flex flex-wrap gap-2">
-          {TREATMENTS.map((t) => (
-            <FilterTag
-              key={t}
-              label={t}
-              active={filters.treatments.includes(t)}
-              onToggle={() => onChange({ ...filters, treatments: toggleIn(filters.treatments, t) })}
-            />
-          ))}
-        </div>
-      </div>
+      <MultiSelectDropdown
+        label="Treatment"
+        options={treatmentOptions}
+        selected={filters.treatments}
+        onChange={(treatments) => onChange({ ...filters, treatments })}
+      />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* Price ceiling */}
-        <div>
-          <label htmlFor="cairn-price-ceiling" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
-            Price per cycle
-          </label>
-          <input
-            id="cairn-price-ceiling"
-            type="range"
-            min={bounds.min}
-            max={bounds.max}
-            step={PRICE_STEP}
-            value={sliderValue}
-            onChange={(e) => {
-              const v = parseInt(e.target.value, 10);
-              onChange({ ...filters, priceCeiling: v >= bounds.max ? null : v });
-            }}
-            className="w-full accent-(--teal)"
-          />
-          <p className="text-xs text-muted mt-1">
-            {filters.priceCeiling != null
-              ? `Up to £${filters.priceCeiling.toLocaleString()} per cycle`
-              : "Any price"}
-          </p>
-          <p className="text-xs text-muted mt-1">
-            Compares the cheapest published price for your selected treatments
-            — IUI prices where IUI is selected, all treatments when none are.
-          </p>
-        </div>
+      <SingleSelectDropdown
+        label="Price"
+        options={priceOptions}
+        value={filters.priceCeiling == null ? "any" : String(filters.priceCeiling)}
+        defaultValue="any"
+        onChange={(value) =>
+          onChange({ ...filters, priceCeiling: value === "any" ? null : Number(value) })
+        }
+        note="Compares the cheapest published price for your selected treatments — IUI prices where IUI is selected, all treatments when none are."
+      />
 
-        {/* Donor anonymity */}
-        <div>
-          <label htmlFor="cairn-donor-anonymity" className="block text-[12px] font-[700] uppercase tracking-[0.14em] text-teal/50 mb-2.5">
-            Donor anonymity
-          </label>
-          <select
-            id="cairn-donor-anonymity"
-            value={filters.donorAnonymity}
-            onChange={(e) =>
-              onChange({
-                ...filters,
-                donorAnonymity: e.target.value as FinderFilterState["donorAnonymity"],
-              })
-            }
-            className="w-full rounded-full border border-teal/20 bg-background px-4 py-2 text-sm text-foreground focus:outline-solid focus:outline-2 focus:outline-teal"
-          >
-            {DONOR_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      <SingleSelectDropdown
+        label="Donor anonymity"
+        options={DONOR_OPTIONS}
+        value={filters.donorAnonymity}
+        defaultValue="any"
+        onChange={(donorAnonymity) => onChange({ ...filters, donorAnonymity })}
+      />
 
-      {/* Remote consultation toggle */}
-      <div className="flex items-center justify-between gap-4">
-        <span id="cairn-remote-label" className="text-sm text-foreground">
-          Offers remote consultations
-        </span>
-        <button
-          type="button"
-          role="switch"
-          aria-checked={filters.remoteConsultation}
-          aria-labelledby="cairn-remote-label"
-          onClick={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
-          className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${
-            filters.remoteConsultation
-              ? "bg-teal border-teal"
-              : "bg-surface-warm border-border-warm"
-          }`}
-        >
-          <span
-            aria-hidden
-            className={`absolute top-0.5 h-[18px] w-[18px] rounded-full bg-background border border-border-warm transition-all ${
-              filters.remoteConsultation ? "left-[22px]" : "left-0.5"
-            }`}
-          />
-        </button>
-      </div>
+      <FilterTogglePill
+        label="Remote consultations"
+        active={filters.remoteConsultation}
+        onToggle={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
+      />
     </div>
   );
 }
@@ -344,7 +278,12 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
       {filters.countries.map((c) => (
         <FilterTag
           key={c}
-          label={`${COUNTRY_FLAGS[c] ?? ""} ${c}`.trim()}
+          label={
+            <>
+              <CountryFlag country={c} />
+              {c}
+            </>
+          }
           active
           onToggle={() => remove({ countries: filters.countries.filter((x) => x !== c) })}
         />
