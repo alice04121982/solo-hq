@@ -305,12 +305,12 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
           className={`relative h-6 w-11 shrink-0 rounded-full border transition-colors ${
             filters.remoteConsultation
               ? "bg-teal border-teal"
-              : "bg-surface-sunken border-border"
+              : "bg-surface-warm border-border-warm"
           }`}
         >
           <span
             aria-hidden
-            className={`absolute top-0.5 h-[18px] w-[18px] rounded-full bg-background border border-border transition-all ${
+            className={`absolute top-0.5 h-[18px] w-[18px] rounded-full bg-background border border-border-warm transition-all ${
               filters.remoteConsultation ? "left-[22px]" : "left-0.5"
             }`}
           />

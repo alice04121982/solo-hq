@@ -86,7 +86,7 @@ export function CountrySelect({ selected, onChange }: CountrySelectProps) {
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full mt-2 z-30 w-64 rounded-2xl bg-background border border-border p-2">
+        <div className="absolute left-0 top-full mt-2 z-30 w-64 rounded-2xl bg-background border border-border-warm p-2">
           <div className="max-h-72 overflow-y-auto">
             {countriesByRegion().flatMap(({ countries }) =>
               countries.map((country) => (
@@ -106,7 +106,7 @@ export function CountrySelect({ selected, onChange }: CountrySelectProps) {
               ))
             )}
           </div>
-          <div className="border-t border-border mt-1 pt-2 px-3 pb-1">
+          <div className="border-t border-border-warm mt-1 pt-2 px-3 pb-1">
             <button
               type="button"
               onClick={() => onChange([])}

@@ -25,7 +25,11 @@ replace it with the token it duplicates (table below).
 | `--muted` | #3B5350 | secondary text, captions, metadata |
 | `--surface-hover` | #F1F6F6 | hovered rows and buttons on light surfaces |
 | `--surface-sunken` | #EEF3F3 | inset wells, segmented-control tracks |
-| `--border` | #E8E8E8 | card edges, dividers, input outlines |
+| `--border` | #E8E8E8 | card edges, dividers, input outlines — **white bands only** |
+| `--border-warm` | #EFE1D5 | the same edges on a cream band |
+| `--surface-warm` | #F6EBE1 | recessed fill on a cream band (control tracks) |
+| `--accent-pale` | #F3FACC | pale citrus: the HFEA badge yellow as a solid card fill |
+| `--accent-pale-edge` | #E7F4A8 | edge for a pale citrus fill |
 | `--accent` | #C5E600 | lime: primary CTA fills, highlight marks |
 | `--accent-soft` | #DCF04A | lighter lime accents |
 | `--accent-dark` | #9BBB00 | lime hover states, "save" text on white |
@@ -44,16 +48,25 @@ canonical names in new code.
 
 ## Pairing rules
 
+- **No grey on cream. Ever.** This is the hard rule, and it covers edges as
+  well as fills: `--border`, `--background-alt`, `--surface-sunken` and
+  `--surface-hover` are all neutral greys, and laid over the warm salmon of
+  `--cream` they go muddy — a #E8E8E8 hairline on #FBF2EB reads as dirt
+  rather than as an edge. On a cream band, an edge is `--border-warm`, a
+  recessed fill is `--surface-warm`, and a brand-tinted edge is
+  `--teal-10`/`--teal-20`. Because shared components move between bands and
+  band numbering shifts, prefer the warm and brand-tinted tokens by default
+  and reach for `--border` only where the component can never leave a white
+  band.
 - **Content boxes are always white.** Cards, notices, callouts, panels,
   form containers, and pills that sit on a section band use `--background`
-  (white) with a `--border` edge — never `--surface-sunken` or
-  `--background-alt`. Grey fills on the cream band (`--cream`) are
-  near-invisible and are banned outright; because shared components move
-  between bands and band numbering shifts, the grey-box pattern is banned
-  on white bands too. `--background-alt` is reserved for full-bleed
+  (white) — never `--surface-sunken` or `--background-alt`. The exception is
+  a deliberate accent fill: `--accent-pale` (the HFEA badge yellow) or a
+  transparent card that lets the band show through, both of which the finder
+  cards use as variants. `--background-alt` is reserved for full-bleed
   recessed section bands and the scrollbar track; `--surface-sunken` for
   control internals on white surfaces (switch tracks, segmented-control
-  tracks) and `--surface-hover` for hover states only.
+  tracks) and `--surface-hover` for hover states on white only.
 - On `--teal` surfaces: headings `--on-teal`, body `--on-teal-muted`,
   accents `--accent`. Never `--foreground` or `--muted` on teal.
 - On light surfaces: headings `--foreground`, body/captions `--muted`,
@@ -63,8 +76,13 @@ canonical names in new code.
   `--on-accent` rather than inlining the hex again.
 - CTA buttons: `--accent` fill with dark ink; secondary buttons are
   outlined with `--teal-20`/`--teal-35` borders and `--teal` text.
-- Dividers and card edges: `--border` on light, `rgba(249,198,218,0.2)`
-  pink-tinted on teal (footer pattern).
+- Dividers and card edges: `--border` on white, `--border-warm` on cream,
+  `rgba(249,198,218,0.2)` pink-tinted on teal (footer pattern).
+- Card hover on a light band: fill with `--teal` and invert the contents to
+  the on-teal set (`--on-teal`, `--on-teal-muted`, `--accent` for badges).
+  The finder cards do this from custom properties set on `.clinic-card` in
+  globals.css, so one rule re-tints the whole card; copy that pattern rather
+  than hanging `group-hover:` on every child.
 
 ## Section bands
 
@@ -76,6 +94,8 @@ existing sections. Follow the homepage as the reference rhythm.
 ## Self-check before finalising a colour
 
 1. Is it a token (Tailwind class or `var(--token)`), not a hex literal?
+1. Is it grey, and could it ever sit on a cream band? If so, swap it for the
+   warm or brand-tinted equivalent.
 2. Does the text/icon colour match the surface it sits on (on-teal set for
    teal, foreground/muted for light)?
 3. Interactive elements: hover state uses `--surface-hover`,

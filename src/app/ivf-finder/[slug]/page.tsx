@@ -141,7 +141,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12">
           {/* ── Success rates ── */}
-          <div className="rounded-[24px] bg-background border border-border p-6">
+          <div className="rounded-[24px] bg-background border border-border-warm p-6">
             <h2 className="text-base font-bold text-teal-ink mb-1">Live birth rates</h2>
             <p className="text-xs text-muted mb-5">
               Measured {report.denominator}, covering {report.year}.{" "}
@@ -155,7 +155,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
                 return (
                   <div
                     key={b.value}
-                    className="flex items-center justify-between gap-2 py-2.5 border-t border-border"
+                    className="flex items-center justify-between gap-2 py-2.5 border-t border-border-warm"
                   >
                     <span className="text-sm text-muted">{b.label}</span>
                     {rate != null ? (
@@ -179,11 +179,11 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           </div>
 
           {/* ── Key facts ── */}
-          <div className="rounded-[24px] bg-background border border-border p-6">
+          <div className="rounded-[24px] bg-background border border-border-warm p-6">
             <h2 className="text-base font-bold text-teal-ink mb-5">Key facts</h2>
             <div className="mb-6">
               {facts.map((f) => (
-                <div key={f.label} className="flex items-start justify-between gap-4 py-2.5 border-t border-border">
+                <div key={f.label} className="flex items-start justify-between gap-4 py-2.5 border-t border-border-warm">
                   <span className="text-sm text-muted shrink-0">{f.label}</span>
                   <span className="text-sm font-medium text-foreground text-right">{f.value}</span>
                 </div>
@@ -223,7 +223,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
               {clinic.treatments.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full bg-background border border-border px-2.5 py-1 text-xs font-medium text-foreground"
+                  className="rounded-full bg-background border border-border-warm px-2.5 py-1 text-xs font-medium text-foreground"
                 >
                   {t}
                 </span>

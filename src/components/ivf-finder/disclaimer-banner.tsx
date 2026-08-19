@@ -4,7 +4,7 @@ import { HFEA } from "@/lib/regulators";
 
 export function DisclaimerBanner() {
   return (
-    <div className="rounded-2xl bg-background border border-border p-4 flex items-start gap-3">
+    <div className="rounded-2xl bg-background border border-border-warm p-4 flex items-start gap-3">
       <AlertTriangle className="h-4 w-4 text-muted shrink-0 mt-0.5" aria-hidden />
       <p className="text-xs text-muted leading-relaxed">
         <strong className="text-teal-ink">Important:</strong>{" "}
