@@ -24,7 +24,8 @@ const TOOL_LINKS = [
   { label: "NHS Eligibility Check", href: "/funding#check" },
   { label: "IVF & Work", href: "/work" },
   { label: "Resources", href: "/resources" },
-  { label: "Community Waitlist", href: "/community" },
+  { label: "Community", href: "/community" },
+  { label: "Community Rules", href: "/community/guidelines" },
   // News is unlisted until there is a real editorial pipeline; the page
   // itself stays in the repo at /news.
 ];

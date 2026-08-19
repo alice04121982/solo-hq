@@ -3,14 +3,14 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 
-type Status = "idle" | "loading" | "joined" | "already-joined" | "error";
+type Status = "idle" | "loading" | "joined" | "error";
 
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const done = status === "joined" || status === "already-joined";
+  const done = status === "joined";
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -31,7 +31,9 @@ export function WaitlistForm() {
         return;
       }
 
-      setStatus(data.status === "already-joined" ? "already-joined" : "joined");
+      // The API answers the same way whether this address was new or already
+      // on the list — see the note in src/app/api/waitlist/route.ts.
+      setStatus("joined");
     } catch {
       setStatus("error");
       setErrorMessage("Something went wrong. Please check your connection and try again.");
@@ -49,10 +51,11 @@ export function WaitlistForm() {
         </span>
         <div>
           <p className="font-sans font-semibold text-foreground mb-1">
-            {status === "joined" ? "You're on the list." : "You're already on the list."}
+            You&apos;re on the list.
           </p>
           <p className="text-sm font-sans text-muted leading-relaxed">
-            We&apos;ll email you the moment the community opens. No spam, no toxic positivity — just the real stuff.
+            We&apos;ll email you when there is something worth telling you. The community itself is open now and takes applications —{" "}
+            <a href="/community" className="underline decoration-muted/40 hover:decoration-teal">apply to join</a>.
           </p>
         </div>
       </div>

@@ -4,8 +4,8 @@ import { Section } from "@/components/section";
 import { WaitlistForm } from "@/components/waitlist-form";
 
 export const metadata: Metadata = {
-  title: "Join the Waitlist | CairnFertility",
-  description: "Be first to know when the CairnFertility community opens: find others at your stage, hear from people who've been through it, and local meetups.",
+  title: "Keep in Touch | CairnFertility",
+  description: "Get an email when there's something worth telling you about CairnFertility. To join the community itself, apply on the community page — every member is approved by a person.",
 };
 
 export default function WaitlistPage() {
@@ -21,16 +21,16 @@ export default function WaitlistPage() {
             className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
             style={{ background: "#C5E600", color: "#1A3A25" }}
           >
-            Community waitlist
+            Keep in touch
           </span>
           <h1
             className="font-sans font-bold text-foreground mb-4"
             style={{ fontSize: "clamp(2.75rem, 5vw, 5rem)", lineHeight: 1.06 }}
           >
-            You&rsquo;re not doing this alone.
+            Hear from us now and then.
           </h1>
           <p className="text-[16px] font-sans text-muted leading-[1.65]">
-            We&apos;re building a place to find others at your stage, hear from people who have been through it, and set up local meetups. Leave your email and you&apos;ll be first to know when it opens.
+            One list, rarely used: new guides, changes to clinic pricing, and anything about IVF funding or the law that we think you&apos;d want to know. Leave your email and that is all it does.
           </p>
         </div>
       </Section>

@@ -51,18 +51,19 @@ export function CTASection() {
               style={{ color: "var(--teal)" }}
             >
               Whatever your path, IVF is easier alongside people who get it.
-              We are building a place to find others at your stage, hear from
-              people who have been through it, and set up local meetups. Join
-              the waitlist and you will be first to know when it opens.
+              Our community is a small, private group — not a forum — where you
+              can find others at your stage, ask people who have been through
+              it, and meet up in real life. Every member is approved by a
+              person before they get in.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="/community#waitlist"
+                href="/community#apply"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
                 style={{ background: "var(--accent)", color: "var(--on-accent)" }}
               >
-                Join the Waitlist
+                Apply to Join
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
@@ -75,7 +76,7 @@ export function CTASection() {
             </div>
 
             <p className="text-xs font-sans mt-6" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
-              No spam. No toxic positivity. Just the real stuff.
+              No spam. No toxic positivity. Nothing said in the group ever leaves it.
             </p>
           </motion.div>
 
