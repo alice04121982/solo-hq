@@ -211,7 +211,7 @@ export default function AboutPage() {
             out is only honest if the list is visible and sourced — the same
             standard we hold the numbers to. */}
         <div className="mt-12 rounded-[24px] border border-border bg-background p-6 md:p-8" style={{ maxWidth: "72ch" }}>
-          <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
+          <h3 className="font-sans font-semibold text-teal text-lg mb-2">
             Clinics we do not list
           </h3>
           <p className="text-[15px] font-sans text-muted leading-relaxed mb-6">
@@ -222,7 +222,7 @@ export default function AboutPage() {
           <ul className="space-y-6">
             {CLINIC_EXCLUSIONS.map((x) => (
               <li key={x.name} className="pl-5 border-l-2 border-border">
-                <p className="font-sans font-semibold text-foreground text-[15px] mb-1">
+                <p className="font-sans font-semibold text-teal text-[15px] mb-1">
                   {x.name} &mdash; {x.country}
                 </p>
                 <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>

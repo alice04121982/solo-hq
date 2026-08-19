@@ -48,7 +48,7 @@ export function WaitlistForm() {
           <Check className="h-4.5 w-4.5" />
         </span>
         <div>
-          <p className="font-sans font-semibold text-foreground mb-1">
+          <p className="font-sans font-semibold text-teal mb-1">
             {status === "joined" ? "You're on the list." : "You're already on the list."}
           </p>
           <p className="text-sm font-sans text-muted leading-relaxed">

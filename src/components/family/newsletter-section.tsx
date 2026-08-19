@@ -10,7 +10,7 @@ const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
   return (
-    <section className="border-y border-border" style={{ background: "#FAFAFA" }}>
+    <section className="border-y border-border" style={{ background: "var(--cream)" }}>
       <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div

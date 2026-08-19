@@ -794,7 +794,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="font-sans font-medium text-foreground leading-tight">{r.clinic.name}</p>
+                  <p className="font-sans font-medium text-teal leading-tight">{r.clinic.name}</p>
                   <div className="flex items-center gap-1 mt-1">
                     {r.clinic.region === "abroad"
                       ? <Globe className="h-3 w-3 text-muted" />
@@ -813,7 +813,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="text-xs font-sans text-muted line-through">
                   £{r.baseGBP.toLocaleString()} quoted
                 </p>
-                <p className="font-sans font-medium text-foreground text-lg leading-tight">
+                <p className="font-sans font-medium text-teal text-lg leading-tight">
                   £{r.realGBP.toLocaleString()}
                 </p>
                 <p className="text-[12px] font-sans text-muted">
@@ -827,7 +827,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {r.treatment === "iui" ? "IUI success" : successLabel}
                 </p>
-                <p className="font-sans font-medium text-foreground text-lg leading-none">
+                <p className="font-sans font-medium text-teal text-lg leading-none">
                   {r.treatment === "iui"
                     ? IUI_SUCCESS_BAND[ageKey] ?? "—"
                     : r.clinic.successRates[ageKey] != null
