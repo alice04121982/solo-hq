@@ -6,6 +6,7 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { ShapeMark, Spark } from "@/components/shapes";
 import { DATA_PROVENANCE } from "@/lib/clinics";
+import { CLINIC_EXCLUSIONS } from "@/lib/clinic-exclusions";
 import { HFEA } from "@/lib/regulators";
 
 /**
@@ -210,6 +211,7 @@ export default function AboutPage() {
             `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost — medications, consultations, donor material, travel where relevant — beside the headline quote, never instead of it.`,
             `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
             "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
+            "Some clinics are deliberately not listed. Where credible reporting or an open regulatory investigation means we cannot stand behind what a clinic tells patients, we leave it out of the finder rather than list it with a caveat, and we say which clinics and why below.",
             "Spotted a figure that looks wrong or out of date? Email stories@cairnfertility.co.uk — corrections go to the top of the list.",
           ].map((item) => (
             <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
@@ -217,6 +219,60 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+
+        {/* The exclusions themselves, in full. A policy of leaving clinics
+            out is only honest if the list is visible and sourced — the same
+            standard we hold the numbers to. */}
+        <div className="mt-12 rounded-[24px] border border-border bg-background p-6 md:p-8" style={{ maxWidth: "72ch" }}>
+          <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
+            Clinics we do not list
+          </h3>
+          <p className="text-[15px] font-sans text-muted leading-relaxed mb-6">
+            Leaving a clinic out is not a finding against it, and nothing here is an allegation
+            of ours. Each entry records what a named publication has reported, links to it, and
+            notes any response on the record. Each is reviewed on the date shown.
+          </p>
+          <ul className="space-y-6">
+            {CLINIC_EXCLUSIONS.map((x) => (
+              <li key={x.name} className="pl-5 border-l-2 border-border">
+                <p className="font-sans font-semibold text-foreground text-[15px] mb-1">
+                  {x.name} &mdash; {x.country}
+                </p>
+                <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>
+                {x.response && (
+                  <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">
+                    <span className="font-medium text-foreground">Their response:</span> {x.response}
+                  </p>
+                )}
+                <p className="text-[13px] font-sans text-muted leading-relaxed">
+                  Sources:{" "}
+                  {x.sources.map((src, i) => (
+                    <span key={src.url}>
+                      {i > 0 && "; "}
+                      <a
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-teal hover:underline underline-offset-2"
+                      >
+                        {src.label}
+                        <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+                      </a>
+                    </span>
+                  ))}
+                  . Next review{" "}
+                  {new Date(`${x.reviewOn}T00:00:00Z`).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                    timeZone: "UTC",
+                  })}
+                  .
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       {/* Our story — the running build-in-the-open log, merged in from the
