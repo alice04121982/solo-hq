@@ -1,0 +1,111 @@
+# Finds candidate articles for the media roundup on /news and puts them in an
+# issue for a human to triage. It never writes to src/ and never publishes:
+# every item on that page carries a Cairn-written note, and writing that note
+# is the editorial decision this deliberately leaves to a person.
+#
+# The script itself is scripts/find-news.ts (`npm run find:news`).
+name: News candidates
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays 07:00 UTC, an hour after the data check
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/find-news.ts"
+      - ".github/workflows/news-candidates.yml"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  find-news:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The parser is what breaks when a publisher changes their feed, so it
+      # is checked against fixtures before any network call. On a pull request
+      # this is the whole job.
+      - name: Self-test the parser and filters
+        run: npm run find:news -- --self-test
+
+      # Everything a previous run already proposed, so a candidate nobody
+      # wanted is not proposed again every Monday. Comments count: after the
+      # first run the proposals live there, not in the body.
+      - name: Collect what has already been proposed
+        if: github.event_name != 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              labels: 'news-candidates',
+              per_page: 20,
+            });
+            let text = '';
+            for (const issue of issues) {
+              text += `${issue.body ?? ''}\n`;
+              const { data: comments } = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                per_page: 100,
+              });
+              for (const comment of comments) text += `${comment.body ?? ''}\n`;
+            }
+            fs.writeFileSync('prior-proposals.txt', text);
+            core.setOutput('open_issue', String(issues.find((i) => i.state === 'open')?.number ?? ''));
+
+      - name: Sweep the feeds
+        if: github.event_name != 'pull_request'
+        env:
+          NEWS_PRIOR_ISSUE_FILE: prior-proposals.txt
+        run: npm run find:news | tee candidates.md
+
+      - name: Open or update the candidates issue
+        if: github.event_name != 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('candidates.md', 'utf8');
+            // Nothing found and no feed problems: stay quiet rather than
+            // filing "nothing happened" every week.
+            if (body.startsWith('No new candidates this week.') && !body.includes('did not work')) {
+              core.info('Nothing to report.');
+              return;
+            }
+            const title = 'Media roundup: candidates to triage';
+            const stamp = new Date().toISOString().slice(0, 10);
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'news-candidates',
+            });
+            const existing = issues.find((i) => i.title === title);
+            const intro = `Swept ${stamp}. These are proposals only — nothing is published until someone writes the note and commits.`;
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: `${intro}\n\n${body}`,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body: `${intro}\n\n${body}`,
+                labels: ['news-candidates'],
+              });
+            }
