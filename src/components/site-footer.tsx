@@ -25,8 +25,7 @@ const TOOL_LINKS = [
   { label: "IVF & Work", href: "/work" },
   { label: "Resources", href: "/resources" },
   { label: "Community Waitlist", href: "/community" },
-  // News is unlisted until there is a real editorial pipeline; the page
-  // itself stays in the repo at /news.
+  { label: "In the Media", href: "/news" },
 ];
 
 const LEGAL_LINKS = [

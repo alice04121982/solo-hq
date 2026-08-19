@@ -20,6 +20,10 @@ and hard to compare from the outside.
   legal and admin, pregnancy and community.
 - **How IVF works** (`/how-ivf-works`), **stories** (`/stories`), a **cost calculator**
   and a **journey map** on the homepage.
+- **In the media** (`/news`): a curated roundup of other people's reporting on
+  fertility treatment — publisher's headline, our note on why it matters, and a
+  link straight out. Cairn has no newsroom and publishes no journalism of its
+  own here; the list lives in `src/lib/news.ts`.
 
 Surrogacy is not covered yet but is planned. A community space is also planned:
 somewhere to find people at your stage, hear from people who have been through
@@ -69,6 +73,16 @@ must be re-verified before being treated as current.
   re-verification is due.
 - The re-verification procedure lives in
   `.claude/skills/treatment-data-check/SKILL.md`.
+
+### Clinics we don't list
+
+Some clinics are deliberately absent. `src/lib/clinic-exclusions.ts` records
+each one with a sourced reason, any response on the record, and a review date;
+`CLINICS` is filtered through it, and `npm run check:data` fails if an excluded
+clinic is present in `src/lib/clinics.ts` at all. The list renders publicly
+under the methodology on `/about`, because a policy of leaving clinics out is
+only honest if it is visible and sourced. Entries state what a named
+publication has reported and are not findings of our own.
 
 ## Environment variables
 
