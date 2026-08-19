@@ -59,8 +59,8 @@ export default function IvfFinderPage() {
           Compare IVF Clinics
         </h1>
         <p className="text-lg font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-          Every clinic in one list, ranked by success rate for your age group. Each figure is
-          labelled with its source, its year and what it was measured against.
+          UK and international clinics in one list, ranked by success rate for your age group.
+          Each figure is labelled with its source, its year and what it was measured against.
         </p>
 
         <Suspense>
