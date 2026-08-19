@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronDown, X } from "lucide-react";
 
 /**
@@ -25,18 +25,22 @@ function triggerClasses(active: boolean): string {
   }`;
 }
 
+/** Panel width, matching the `w-64` below. Used for edge-collision checks. */
+const PANEL_WIDTH = 256;
+const VIEWPORT_MARGIN = 16;
+
 interface FilterDropdownProps {
   /** Text on the trigger pill. */
   triggerLabel: string;
-  /** Count badge for multi-selects. Omitted or 0 renders no badge. */
-  count?: number;
   /** Highlights the trigger: the filter is narrowing the list. */
   active?: boolean;
   /** Accessible name for the panel, when the trigger text alone is thin. */
   panelLabel: string;
   /** Explanatory line under the options, where a filter needs one. */
   note?: string;
-  children: (close: () => void) => React.ReactNode;
+  /** Dismisses the panel once an option is chosen, for single-value filters. */
+  closeOnSelect?: boolean;
+  children: React.ReactNode;
 }
 
 /**
@@ -45,23 +49,45 @@ interface FilterDropdownProps {
  */
 export function FilterDropdown({
   triggerLabel,
-  count = 0,
   active = false,
   panelLabel,
   note,
+  closeOnSelect = false,
   children,
 }: FilterDropdownProps) {
   const [open, setOpen] = useState(false);
+  // Panels hang left of their trigger until that would run off the viewport,
+  // then flip to the right edge. Decided on open, so the panel never appears
+  // in one place and jumps to another.
+  const [alignRight, setAlignRight] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const panelId = useId();
+
+  /** Closing by keyboard or by choosing an option hands focus back. */
+  const close = useCallback((returnFocus: boolean) => {
+    setOpen(false);
+    if (returnFocus) triggerRef.current?.focus();
+  }, []);
+
+  const closeAndFocus = useCallback(() => close(true), [close]);
+
+  const toggle = () => {
+    if (!open && triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      const overflowsRight = rect.left + PANEL_WIDTH > window.innerWidth - VIEWPORT_MARGIN;
+      setAlignRight(overflowsRight && rect.right - PANEL_WIDTH > VIEWPORT_MARGIN);
+    }
+    setOpen((o) => !o);
+  };
 
   useEffect(() => {
     if (!open) return;
     const onPointerDown = (e: PointerEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) close(false);
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close(true);
     };
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
@@ -69,26 +95,22 @@ export function FilterDropdown({
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [open, close]);
 
   return (
     <div ref={rootRef} className="relative">
       <button
+        ref={triggerRef}
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggle}
         aria-expanded={open}
         aria-haspopup="true"
         aria-controls={open ? panelId : undefined}
         className={triggerClasses(active || open)}
       >
-        {triggerLabel}
-        {count > 0 && (
-          <span className="flex items-center justify-center min-w-5 h-5 px-1 rounded-full text-[13px] font-bold bg-teal text-on-teal">
-            {count}
-          </span>
-        )}
+        <span className="max-w-[15rem] truncate">{triggerLabel}</span>
         <ChevronDown
-          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
           aria-hidden
         />
       </button>
@@ -98,9 +120,18 @@ export function FilterDropdown({
           id={panelId}
           role="group"
           aria-label={panelLabel}
-          className="absolute left-0 top-full mt-2 z-30 w-64 max-w-[calc(100vw-3rem)] rounded-2xl bg-background border border-border p-2"
+          className={`absolute top-full mt-2 z-30 w-64 max-w-[calc(100vw-3rem)] rounded-2xl bg-background border border-border p-2 ${
+            alignRight ? "right-0" : "left-0"
+          }`}
         >
-          <div className="max-h-72 overflow-y-auto">{children(() => setOpen(false))}</div>
+          {/* Change events from the inputs bubble to here, so a single-value
+              filter can dismiss itself the moment it is answered. */}
+          <div
+            className="max-h-72 overflow-y-auto"
+            onChange={closeOnSelect ? closeAndFocus : undefined}
+          >
+            {children}
+          </div>
           {note && (
             <p className="border-t border-border mt-1 pt-2 px-3 pb-1 text-xs text-muted">{note}</p>
           )}
@@ -158,6 +189,9 @@ interface MultiSelectProps<T> {
 /**
  * Multi-select filter: any number of options, none of them gating results.
  * Clearing the selection returns every clinic.
+ *
+ * The pill names what is selected — "Region: Europe +1" — rather than showing
+ * a bare count, so the current narrowing is readable without opening anything.
  */
 export function MultiSelectDropdown<T extends string>({
   label,
@@ -169,43 +203,47 @@ export function MultiSelectDropdown<T extends string>({
   const toggle = (value: T) =>
     onChange(selected.includes(value) ? selected.filter((v) => v !== value) : [...selected, value]);
 
+  // Summarised in the options' own order, so the pill reads the same however
+  // the selection was built up.
+  const chosen = options.filter((o) => selected.includes(o.value));
+  const first = chosen[0]?.shortLabel ?? chosen[0]?.label;
+  const triggerLabel =
+    chosen.length === 0
+      ? label
+      : `${label}: ${first}${chosen.length > 1 ? ` +${chosen.length - 1}` : ""}`;
+
   return (
     <FilterDropdown
-      triggerLabel={label}
-      count={selected.length}
+      triggerLabel={triggerLabel}
       active={selected.length > 0}
       panelLabel={label}
       note={note}
     >
-      {() => (
-        <>
-          {options.map((o) => (
-            <OptionRow
-              key={o.value}
-              type="checkbox"
-              checked={selected.includes(o.value)}
-              onSelect={() => toggle(o.value)}
-            >
-              {o.prefix && (
-                <span aria-hidden className="mr-2">
-                  {o.prefix}
-                </span>
-              )}
-              {o.label}
-            </OptionRow>
-          ))}
-          <div className="border-t border-border mt-1 pt-2 px-3 pb-1">
-            <button
-              type="button"
-              onClick={() => onChange([])}
-              disabled={selected.length === 0}
-              className="text-sm text-muted hover:text-teal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Clear selection
-            </button>
-          </div>
-        </>
-      )}
+      {options.map((o) => (
+        <OptionRow
+          key={o.value}
+          type="checkbox"
+          checked={selected.includes(o.value)}
+          onSelect={() => toggle(o.value)}
+        >
+          {o.prefix && (
+            <span aria-hidden className="mr-2">
+              {o.prefix}
+            </span>
+          )}
+          {o.label}
+        </OptionRow>
+      ))}
+      <div className="border-t border-border mt-1 pt-2 px-3 pb-1">
+        <button
+          type="button"
+          onClick={() => onChange([])}
+          disabled={selected.length === 0}
+          className="text-sm text-muted hover:text-teal transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Clear selection
+        </button>
+      </div>
     </FilterDropdown>
   );
 }
@@ -249,25 +287,19 @@ export function SingleSelectDropdown<T extends string>({
       active={!isDefault}
       panelLabel={label}
       note={note}
+      closeOnSelect
     >
-      {(close) => (
-        <>
-          {options.map((o) => (
-            <OptionRow
-              key={o.value}
-              type="radio"
-              name={name}
-              checked={o.value === value}
-              onSelect={() => {
-                onChange(o.value);
-                close();
-              }}
-            >
-              {o.label}
-            </OptionRow>
-          ))}
-        </>
-      )}
+      {options.map((o) => (
+        <OptionRow
+          key={o.value}
+          type="radio"
+          name={name}
+          checked={o.value === value}
+          onSelect={() => onChange(o.value)}
+        >
+          {o.label}
+        </OptionRow>
+      ))}
     </FilterDropdown>
   );
 }
