@@ -28,7 +28,7 @@ export function ClinicResults({
 }: ClinicResultsProps) {
   if (clinics.length === 0) {
     return (
-      <div className="rounded-[24px] bg-background border border-border-warm p-12 text-center">
+      <div className="rounded-[24px] bg-background p-12 text-center">
         <p className="text-teal-ink font-semibold mb-1">No clinics match your filters</p>
         <p className="text-sm text-muted">
           {removedCount > 0

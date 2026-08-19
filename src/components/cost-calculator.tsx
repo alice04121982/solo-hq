@@ -254,7 +254,7 @@ function StepResults({ s }: { s: Selections }) {
         </div>
       </div>
 
-      <div className="flex gap-2 mb-6 p-4 bg-background rounded-xl border border-border">
+      <div className="flex gap-2 mb-6 p-4 bg-cream rounded-xl">
         <Info className="h-4 w-4 text-muted shrink-0 mt-0.5" />
         <p className="text-xs font-sans text-muted leading-relaxed">
           The hidden gap is <strong className="text-foreground">{fmt(gap)}</strong>: costs clinics don&rsquo;t include in their headline price.

@@ -488,7 +488,7 @@ function StepAgeStandard({ s, set }: { s: WizardState; set: (a: AgeGroup) => voi
 function StepAgeSurrogacy({ s, set }: { s: WizardState; set: (a: AgeGroup) => void }) {
   return (
     <div>
-      <div className="mb-5 p-4 rounded-xl border border-border bg-background">
+      <div className="mb-5 p-4 rounded-xl bg-cream">
         <p className="text-xs font-sans text-muted leading-relaxed">
           <strong className="text-foreground">For surrogacy, your age doesn&apos;t affect success rates.</strong>{" "}
           What matters is the egg donor&apos;s age. Most donors are under 35, which is why donor-egg success rates
@@ -606,7 +606,7 @@ function StepConditionsSurrogacy({
   ];
   return (
     <div>
-      <div className="mb-5 p-4 rounded-xl border border-border bg-background">
+      <div className="mb-5 p-4 rounded-xl bg-cream">
         <p className="text-xs font-sans text-muted leading-relaxed">
           Solo fatherhood via surrogacy is achievable, but it takes longer and costs more than other
           routes. UK surrogacy is legal and altruistic; you&apos;ll need a parental order after birth to become the
@@ -766,7 +766,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   return (
     <div>
       {donorNote && (
-        <div className="mb-6 p-4 rounded-xl border border-border bg-background max-w-2xl mx-auto">
+        <div className="mb-6 p-4 rounded-xl bg-cream max-w-2xl mx-auto">
           <p className="text-xs font-sans text-muted leading-relaxed">
             <strong className="text-foreground">Heads up: </strong>{donorNote}
           </p>
@@ -786,7 +786,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.06, duration: 0.35, ease: EASE }}
             // Opaque so the band's backdrop shape never washes through the data
-            className="rounded-xl border border-border overflow-hidden flex flex-col bg-background"
+            className="rounded-xl overflow-hidden flex flex-col bg-cream"
           >
             <div className="flex items-start justify-between gap-4 p-4 border-b border-border">
               <div className="flex items-start gap-3">

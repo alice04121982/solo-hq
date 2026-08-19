@@ -72,7 +72,7 @@ export default function NewsPage() {
 
       {/* Housekeeping: how the list is kept, and how to get something onto it. */}
       <Section band={3} padding="py-16 md:py-20">
-        <div className="rounded-[24px] border border-border bg-background p-6 md:p-8" style={{ maxWidth: "72ch" }}>
+        <div className="rounded-[24px] bg-cream p-6 md:p-8" style={{ maxWidth: "72ch" }}>
           <h2 className="font-sans font-semibold text-foreground text-lg mb-3">
             How this list is kept
           </h2>

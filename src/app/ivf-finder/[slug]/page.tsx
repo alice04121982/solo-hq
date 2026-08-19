@@ -141,7 +141,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-12">
           {/* ── Success rates ── */}
-          <div className="rounded-[24px] bg-background border border-border-warm p-6">
+          <div className="rounded-[24px] bg-background p-6">
             <h2 className="text-base font-bold text-teal-ink mb-1">Live birth rates</h2>
             <p className="text-xs text-muted mb-5">
               Measured {report.denominator}, covering {report.year}.{" "}
@@ -179,7 +179,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           </div>
 
           {/* ── Key facts ── */}
-          <div className="rounded-[24px] bg-background border border-border-warm p-6">
+          <div className="rounded-[24px] bg-background p-6">
             <h2 className="text-base font-bold text-teal-ink mb-5">Key facts</h2>
             <div className="mb-6">
               {facts.map((f) => (

@@ -216,7 +216,7 @@ export function CommunityWaitlistForm() {
                   onChange={(e) => setFirstName(e.target.value)}
                   placeholder="What should we call you?"
                   autoComplete="given-name"
-                  className="w-full rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
+                  className="w-full rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
                 />
               </div>
               <div>
@@ -227,7 +227,7 @@ export function CommunityWaitlistForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="w-full rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
+                  className="w-full rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
                 />
               </div>
             </div>

@@ -145,7 +145,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
       {/* ── Filters: inline on desktop, a sheet on mobile ── */}
-      <div className="hidden md:block rounded-[24px] bg-background border border-border-warm p-6 mb-4">
+      <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
         <FilterControls filters={filters} onChange={setFilters} />
       </div>
       <div className="md:hidden mb-4">

@@ -64,7 +64,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
         <p className="text-xs text-muted">Success rates shown for {ageBracketLabel.toLowerCase()}</p>
       </div>
 
-      <div className="rounded-[24px] border border-border-warm bg-background overflow-x-auto">
+      <div className="rounded-[24px] bg-background overflow-x-auto">
         <table className="w-full border-collapse min-w-[1020px]">
           <thead>
             <tr className="border-b border-border-warm">

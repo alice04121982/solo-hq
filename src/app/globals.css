@@ -186,7 +186,11 @@
 @layer components {
   .clinic-card {
     --card-surface:            var(--background);
-    --card-edge:               var(--border-warm);
+    /* No resting stroke: a white card on the cream band is defined by its
+       fill, and a hairline there only muddies the edge. The border stays
+       declared at 1px so the teal hover can colour it without the card
+       resizing by two pixels. */
+    --card-edge:               transparent;
     --card-ink:                var(--teal-ink);
     --card-ink-muted:          var(--muted);
     --card-ring:               var(--teal);
@@ -216,7 +220,7 @@
   /* Option "citrus": the HFEA badge yellow promoted to the card fill. */
   .clinic-card--citrus {
     --card-surface:            var(--accent-pale);
-    --card-edge:               var(--accent-pale-edge);
+    --card-edge:               transparent;
     /* The pale pill would vanish into the fill, so verified goes solid lime. */
     --card-badge-verified-bg:  var(--accent);
     --card-badge-verified-ink: var(--on-accent);

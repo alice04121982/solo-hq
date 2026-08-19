@@ -52,7 +52,7 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
   return (
     <div
       className={`rounded-2xl border bg-background p-4 ${
-        shouldOpen ? "border-teal/30" : "border-border-warm"
+        shouldOpen ? "border-teal/30" : "border-transparent"
       }`}
     >
       <button
