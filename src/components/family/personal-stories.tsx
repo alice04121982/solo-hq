@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ShapeMark } from "../shapes";
 import type { Story } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const GREEN = "#1A3A25";
-const GREEN_SOFT = "rgba(26,58,37,0.65)";
+const TEAL = "var(--teal)";
+const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function PersonalStories({ stories }: { stories: Story[] }) {
   const [featured, ...rest] = stories;
@@ -22,18 +23,19 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
           className="mb-14"
         >
           <p
-            className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
-            style={{ color: GREEN_SOFT }}
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-3"
+            style={{ color: TEAL }}
           >
+              <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
             Personal stories
           </p>
           <h2
             className="font-sans font-bold"
-            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: GREEN }}
+            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
           >
             In their own words.
           </h2>
-          <p className="text-xs font-sans leading-relaxed mt-3" style={{ color: GREEN_SOFT, maxWidth: "60ch" }}>
+          <p className="text-xs font-sans leading-relaxed mt-3" style={{ color: TEAL_SOFT, maxWidth: "60ch" }}>
             Illustrative stories while we collect real, consented accounts. To share
             yours, write to stories@cairnfertility.co.uk.
           </p>
@@ -61,28 +63,28 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
 
           {/* The rule stays with the text, so a story without a photograph
               still reads as the featured one. */}
-          <div className="border-l-2 pl-8 md:pl-12" style={{ borderColor: GREEN }}>
+          <div className="border-l-2 pl-8 md:pl-12" style={{ borderColor: TEAL }}>
           <p
             className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-4 font-sans"
-            style={{ color: GREEN_SOFT }}
+            style={{ color: TEAL_SOFT }}
           >
             {featured.tag}
           </p>
           <h3
             className="font-sans font-bold mb-5"
-            style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, maxWidth: "32ch", color: GREEN }}
+            style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, maxWidth: "32ch", color: TEAL }}
           >
             {featured.title}
           </h3>
           <p
             className="text-lg font-sans leading-relaxed mb-6"
-            style={{ maxWidth: "62ch", color: GREEN }}
+            style={{ maxWidth: "62ch", color: TEAL }}
           >
             {featured.body}
           </p>
           <p
             className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans"
-            style={{ color: GREEN_SOFT }}
+            style={{ color: TEAL_SOFT }}
           >
             {featured.name}, {featured.age} &nbsp;·&nbsp; {featured.location} &nbsp;·&nbsp; {featured.treatment}
           </p>
@@ -113,26 +115,26 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
               )}
               <p
                 className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
-                style={{ color: GREEN_SOFT }}
+                style={{ color: TEAL_SOFT }}
               >
                 {story.tag}
               </p>
-              <h3 className="font-sans font-bold text-xl leading-snug mb-4" style={{ color: GREEN }}>
+              <h3 className="font-sans font-bold text-xl leading-snug mb-4" style={{ color: TEAL }}>
                 {story.title}
               </h3>
               <p
                 className="text-sm font-sans leading-relaxed mb-5"
-                style={{ color: GREEN }}
+                style={{ color: TEAL }}
               >
                 {story.body}
               </p>
               <p
                 className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans"
-                style={{ color: GREEN_SOFT }}
+                style={{ color: TEAL_SOFT }}
               >
                 {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
               </p>
-              <p className="text-xs font-sans mt-1" style={{ color: GREEN_SOFT }}>
+              <p className="text-xs font-sans mt-1" style={{ color: TEAL_SOFT }}>
                 {story.treatment}
               </p>
             </motion.article>

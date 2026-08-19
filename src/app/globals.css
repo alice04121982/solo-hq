@@ -30,6 +30,13 @@
   --on-teal:         #f9c6da;   /* headings / high-contrast */
   --on-teal-muted:   #c4a0ae;   /* body copy */
 
+  /* Cards on the teal surface. White at low alpha, so the card reads as a
+     lighter green lifted out of the band rather than a new hue — the
+     homepage comparison band's treatment, which the pink writing sits on. */
+  --teal-card:       rgba(255, 255, 255, 0.07);
+  --teal-card-hover: rgba(255, 255, 255, 0.12);
+  --teal-card-border: rgba(249, 198, 218, 0.2);
+
   /* Warm cream section surface */
   --cream:           #FBF2EB;
 
@@ -64,6 +71,9 @@
   --color-teal-ink:        var(--teal-ink);
   --color-on-teal:         var(--on-teal);
   --color-on-teal-muted:   var(--on-teal-muted);
+  --color-teal-card:       var(--teal-card);
+  --color-teal-card-hover: var(--teal-card-hover);
+  --color-teal-card-border: var(--teal-card-border);
   --color-cream:           var(--cream);
 
   /* ── Legacy aliases ── */
@@ -145,7 +155,7 @@
 }
 
 /* ── Utility: bold card backgrounds ── */
-.card-lime   { background: var(--accent); color: #1A3A25; }
+.card-lime   { background: var(--accent); color: var(--on-accent); }
 .card-pink   { background: var(--lavender); color: var(--teal-ink); }
 .card-teal   { background: var(--teal); color: var(--on-teal); }
 .card-maroon { background: var(--teal); color: var(--on-teal); }  /* legacy alias of .card-teal */

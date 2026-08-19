@@ -138,7 +138,7 @@ function OptionRow({
           <span className="text-xs font-sans text-muted">{badge}</span>
         )}
         <div className={`h-4 w-4 rounded-full border flex items-center justify-center transition-colors ${
-          selected ? "border-foreground bg-foreground" : "border-border"
+          selected ? "border-teal bg-teal" : "border-border"
         }`}>
           {selected && <span className="block h-1.5 w-1.5 rounded-full bg-background" />}
         </div>
@@ -356,7 +356,7 @@ export function CostCalculator() {
             <div key={i} className="flex-1 h-px transition-colors duration-300" style={{ background: i <= step ? "var(--foreground)" : "var(--border)" }} />
           ))}
         </div>
-        <h2 className="font-sans font-bold text-foreground text-2xl">{STEPS[step]}</h2>
+        <h2 className="font-sans font-bold text-teal text-2xl">{STEPS[step]}</h2>
       </div>
 
       {/* Content */}
@@ -386,7 +386,7 @@ export function CostCalculator() {
           <button
             onClick={() => setStep((p) => p + 1)}
             disabled={!canAdvance}
-            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-sans hover:bg-accent disabled:opacity-25 transition-colors duration-200"
+            className="inline-flex items-center gap-2 rounded-full bg-teal text-on-teal px-6 py-2.5 text-sm font-sans hover:bg-accent disabled:opacity-25 transition-colors duration-200"
           >
             {step === STEPS.length - 2 ? "See my estimate" : "Continue"}
             <ArrowRight className="h-3.5 w-3.5" />

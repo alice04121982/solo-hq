@@ -60,7 +60,7 @@ export function FeaturedNews({ item }: { item: NewsItem }) {
         className="group block mt-4"
       >
         <h2
-          className="font-sans font-bold text-foreground group-hover:text-teal transition-colors duration-150"
+          className="font-sans font-bold text-teal group-hover:text-lavender-dark transition-colors duration-150"
           style={{ fontSize: "clamp(2rem, 3vw, 3.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}
         >
           {item.title}
@@ -78,7 +78,7 @@ export function FeaturedNews({ item }: { item: NewsItem }) {
           href={item.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 transition-colors duration-150 hover:border-teal hover:text-teal"
+          className="inline-flex items-center gap-2 text-sm font-sans text-teal border-b border-teal/30 pb-0.5 transition-colors duration-150 hover:border-lavender-dark hover:text-lavender-dark"
         >
           Read on {hostOf(item.url)} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
         </a>
@@ -99,7 +99,7 @@ function NewsCard({ item }: { item: NewsItem }) {
         className="group block mt-3"
       >
         <h3
-          className="font-sans font-bold text-foreground text-lg leading-snug group-hover:text-teal transition-colors duration-150"
+          className="font-sans font-bold text-teal text-lg leading-snug group-hover:text-lavender-dark transition-colors duration-150"
           style={{ maxWidth: "26ch" }}
         >
           {item.title}
@@ -141,7 +141,7 @@ function TopicFilter({
         className={`rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150 ${
           isActive
             ? "border-teal bg-teal text-on-teal"
-            : "border-border bg-background text-muted hover:bg-surface-hover hover:text-foreground"
+            : "border-border bg-background text-muted hover:bg-surface-hover hover:text-teal"
         }`}
       >
         {label}
