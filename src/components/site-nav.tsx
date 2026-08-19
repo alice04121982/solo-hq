@@ -172,7 +172,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <a
           href="/get-started"
           className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
-          style={{ background: "#C5E600", color: "#1A3A25" }}
+          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           Get Started
           <ArrowRight className="h-3.5 w-3.5" />
@@ -266,7 +266,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
               href="/get-started"
               onClick={() => setOpen(false)}
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium shrink-0"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Get Started
               <ArrowRight className="h-3.5 w-3.5" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -69,13 +70,16 @@ export default function NewsPage() {
 
       {/* Header */}
       <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">Latest</p>
-        <h1 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}>
-          News &amp; Updates
-        </h1>
-        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Policy changes, science you can use, and stories from the community.
-        </p>
+        <SectionHeading
+          level={1}
+          eyebrow="Latest"
+          mark="spark"
+          markClassName="shape-spin"
+          title={<>News &amp; Updates</>}
+          intro="Policy changes, science you can use, and stories from the community."
+          introWidth="52ch"
+          className="mb-0"
+        />
       </Section>
 
       {/* Featured — left-border pull style */}
@@ -84,13 +88,13 @@ export default function NewsPage() {
           <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-4 font-sans">
             {featured.tag} &nbsp;·&nbsp; {featured.date} &nbsp;·&nbsp; {featured.readTime}
           </p>
-          <h2 className="font-sans font-bold text-foreground mb-4" style={{ fontSize: "clamp(2rem, 3vw, 3.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
+          <h2 className="font-sans font-bold text-teal mb-4" style={{ fontSize: "clamp(2rem, 3vw, 3.25rem)", lineHeight: 1.15, maxWidth: "28ch" }}>
             {featured.title}
           </h2>
           <p className="text-lg font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "60ch" }}>
             {featured.excerpt}
           </p>
-          <button className="inline-flex items-center gap-2 text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150">
+          <button className="inline-flex items-center gap-2 text-sm font-sans text-teal border-b border-teal/30 pb-0.5 hover:border-lavender-dark hover:text-lavender-dark transition-colors duration-150">
             Read article <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -107,7 +111,7 @@ export default function NewsPage() {
               <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
                 {a.tag}
               </p>
-              <h3 className="font-sans font-bold text-foreground text-lg leading-snug mb-3 group-hover:text-teal transition-colors duration-150" style={{ maxWidth: "26ch" }}>
+              <h3 className="font-sans font-bold text-teal text-lg leading-snug mb-3 group-hover:text-lavender-dark transition-colors duration-150" style={{ maxWidth: "26ch" }}>
                 {a.title}
               </h3>
               <p className="text-sm font-sans text-muted leading-relaxed mb-4">{a.excerpt}</p>

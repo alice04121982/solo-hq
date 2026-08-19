@@ -71,7 +71,7 @@ function LegalSectionBlock({ section }: { section: LegalSection }) {
   return (
     <div>
       <h2
-        className="font-sans font-bold text-foreground mb-4"
+        className="font-sans font-bold text-teal mb-4"
         style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.2 }}
       >
         {section.heading}
@@ -150,7 +150,7 @@ export function LegalPageLayout({
           Legal
         </p>
         <h1
-          className="font-sans font-bold text-foreground mb-4"
+          className="font-sans font-bold text-teal mb-4"
           style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           {page.title}
@@ -188,7 +188,7 @@ export function LegalPageLayout({
                 <li key={slug}>
                   <Link
                     href={`/${slug}`}
-                    className="text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150"
+                    className="text-sm font-sans text-teal border-b border-teal/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150"
                   >
                     {LEGAL_PAGES[slug].label}
                   </Link>

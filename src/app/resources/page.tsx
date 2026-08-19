@@ -3,6 +3,8 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
+import { ShapeMark } from "@/components/shapes";
 import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
@@ -116,18 +118,15 @@ export default function ResourcesPage() {
 
       {/* Header */}
       <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Everything you need
-        </p>
-        <h1
-          className="font-sans font-bold text-[#1A3A25] mb-4"
-          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
-        >
-          Resources
-        </h1>
-        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
-        </p>
+        <SectionHeading
+          level={1}
+          eyebrow="Everything you need"
+          mark="bloom"
+          title="Resources"
+          intro="Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment."
+          introWidth="52ch"
+          className="mb-0"
+        />
       </Section>
 
       {/* Ways in: the section people arrive needing most, the essential
@@ -140,7 +139,7 @@ export default function ResourcesPage() {
             <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
               Start here if cost is the question
             </p>
-            <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
+            <p className="font-sans font-semibold text-teal text-base mb-1">
               Funding &amp; payment options
             </p>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
@@ -149,7 +148,7 @@ export default function ResourcesPage() {
           </div>
           <Link
             href="/funding"
-            className="inline-flex items-center gap-2 shrink-0 rounded-full bg-[#1A3A25] text-white px-5 py-2.5 text-sm font-sans font-medium hover:bg-[#142e1e] transition-colors"
+            className="inline-flex items-center gap-2 shrink-0 rounded-full bg-teal text-on-teal px-5 py-2.5 text-sm font-sans font-medium hover:opacity-90 transition-colors"
           >
             See funding options
             <ArrowRight className="h-3.5 w-3.5" />
@@ -162,7 +161,7 @@ export default function ResourcesPage() {
             <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
               Essential external resource · All family types
             </p>
-            <p className="font-sans font-semibold text-[#1A3A25] text-base mb-1">
+            <p className="font-sans font-semibold text-teal text-base mb-1">
               Donor Conception Network
             </p>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
@@ -173,7 +172,7 @@ export default function ResourcesPage() {
             href="https://dcnetwork.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 shrink-0 rounded-full border border-[#1A3A25]/20 text-[#1A3A25] px-5 py-2.5 text-sm font-sans font-medium hover:bg-[#1A3A25] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 shrink-0 rounded-full border border-teal/20 text-teal px-5 py-2.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors"
           >
             Visit dcnetwork.org
             <ExternalLink className="h-3.5 w-3.5" />
@@ -182,7 +181,11 @@ export default function ResourcesPage() {
 
         {/* Browse by family type */}
         <div>
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-5 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-5"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
             Browse by family type
           </p>
           <div className="flex flex-wrap gap-2">
@@ -190,7 +193,7 @@ export default function ResourcesPage() {
               <Link
                 key={f.slug}
                 href={`/families/${f.slug}#resources`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-sans text-[#1A3A25] hover:bg-[#1A3A25] hover:text-white hover:border-[#1A3A25] transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-sans text-teal hover:bg-teal hover:text-on-teal hover:border-teal transition-colors"
               >
                 {f.label}
                 <ArrowRight className="h-3 w-3" />
@@ -206,14 +209,14 @@ export default function ResourcesPage() {
           {CATEGORIES.map((cat) => (
             <div key={cat.title} className="py-10 border-t border-border">
               <div className="text-accent mb-4">{cat.icon}</div>
-              <h2 className="font-sans font-bold text-[#1A3A25] text-xl mb-5">{cat.title}</h2>
+              <h2 className="font-sans font-bold text-teal text-xl mb-5">{cat.title}</h2>
               <ul className="space-y-3">
                 {cat.resources.map((r) => (
                   <li key={r.title}>
                     <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
                       <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
                       <div>
-                        <p className="text-sm font-sans text-[#1A3A25]/70 leading-snug group-hover:text-[#1A3A25] transition-colors duration-150">
+                        <p className="text-sm font-sans text-teal/70 leading-snug group-hover:text-teal transition-colors duration-150">
                           {r.title}
                         </p>
                         <span className="text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
