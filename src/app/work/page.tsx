@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { HeaderShapes, type HeaderMark } from "@/components/header-shapes";
 import { StatCard } from "@/components/stat-card";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
 import { CopyButton } from "@/components/copy-button";
@@ -32,6 +33,39 @@ export const metadata: Metadata = {
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
+/**
+ * The header composition: one oversized bloom cropped by the right edge, with
+ * two small marks off it. Pinks rather than lime, because the header sits on
+ * the cream band and lime goes muddy against it. The movement is deliberately
+ * near-imperceptible — a minute for one rotation of the bloom — so the band
+ * reads as alive rather than animated.
+ */
+const HERO_MARKS: HeaderMark[] = [
+  {
+    name: "bloom",
+    color: "var(--lavender-light)",
+    className:
+      "right-0 top-1/2 -translate-y-1/2 translate-x-[55%] md:translate-x-[30%] w-[11rem] md:w-[26rem] lg:w-[34rem]",
+    motion: "spin",
+    duration: 60,
+  },
+  {
+    name: "egg",
+    color: "var(--lavender)",
+    className: "hidden md:block right-[25%] top-[10%] w-[4.5rem] lg:w-[6rem]",
+    motion: "drift",
+    duration: 11,
+  },
+  {
+    name: "spark",
+    color: "var(--lavender-dark)",
+    className: "hidden md:block right-[7%] bottom-[16%] w-[3rem] lg:w-[4rem]",
+    motion: "breathe",
+    duration: 7,
+    delay: 1.5,
+  },
+];
+
 const JUMP_LINKS = [
   { label: "Your rights", href: "#rights" },
   { label: "What employers offer", href: "#what-employers-offer" },
@@ -52,7 +86,11 @@ export default function WorkPage() {
       </section>
 
       {/* Hero */}
-      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
+      <Section
+        band={0}
+        padding="pt-20 pb-16 md:pt-28 md:pb-20"
+        decoration={<HeaderShapes marks={HERO_MARKS} />}
+      >
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           IVF &amp; work
         </p>
@@ -121,16 +159,14 @@ export default function WorkPage() {
         >
           Less law than you&rsquo;d expect. More than you&rsquo;re using.
         </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
-          The single most useful fact on this page, and the one employers most often get wrong: in
-          the UK, pregnancy protection begins at <strong className="font-[600]">embryo transfer</strong>,
-          not when a pregnancy is confirmed and not when treatment starts. From that point you have
-          the rights of a pregnant worker — and if the transfer is unsuccessful, protection continues
-          for two weeks after you are told.
+        <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "60ch" }}>
+          The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
+          <strong className="font-[600]">embryo transfer</strong> — not when a pregnancy is
+          confirmed, and not when treatment starts.
         </p>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Each entry below separates what the law actually gives you from what is policy, proposal or
-          goodwill, because almost everything written about this subject blurs the two.
+        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "60ch" }}>
+          Below, what the law actually gives you is kept apart from what is policy, proposal or
+          goodwill. Almost everything written about this subject blurs the two.
         </p>
 
         <RightsExplorer entries={RIGHTS_BY_COUNTRY} />
@@ -341,11 +377,16 @@ export default function WorkPage() {
           ))}
         </ul>
 
-        <div className="mt-10 rounded-2xl p-5 md:p-6" style={{ background: "var(--lime)" }}>
-          <div className="flex items-center justify-between gap-3 mb-3">
+        {/* White card, lime only as the marker: the lime fill sat straight on the
+            cream band and the two warm colours fought each other. */}
+        <div
+          className="mt-10 rounded-2xl border bg-background p-5 md:p-7"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <div className="flex items-center justify-between gap-3 mb-4">
             <p
-              className="text-[12px] font-[700] uppercase tracking-[0.14em] font-sans"
-              style={{ color: TEAL_SOFT }}
+              className="inline-block rounded-full px-3 py-1 text-[11px] font-[700] uppercase tracking-[0.16em] font-sans"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Send this to the recruiter
             </p>
@@ -355,7 +396,7 @@ export default function WorkPage() {
               }
             />
           </div>
-          <p className="text-[15px] font-sans leading-relaxed font-[500]" style={{ color: TEAL }}>
+          <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
             Before I confirm, could you send me the benefits documentation — including anything on
             family forming and fertility? I&rsquo;d like to check whether it&rsquo;s available from
             day one, what the cap is, and whether medication and donor gametes are included.

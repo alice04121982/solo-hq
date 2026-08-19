@@ -47,15 +47,29 @@ export const WORKPLACE_STATS = [
 
 /* ── Rights ──────────────────────────────────────────────────────────────── */
 
+/**
+ * One law/not-law entry, written as a claim you can scan plus the detail
+ * behind it. Split deliberately: readers arrive at this section to find out
+ * where they stand, and a wall of full sentences buries the answer. The
+ * `point` must stand alone as a true statement — the `detail` qualifies it,
+ * it never reverses it.
+ */
+export interface RightsPoint {
+  /** The claim, short enough to read at a glance. */
+  point: string;
+  /** The qualification, source or consequence. */
+  detail?: string;
+}
+
 export interface RightsEntry {
   slug: string;
   name: string;
-  /** Shown collapsed. Must not overstate the position. */
+  /** The one-line position. Must not overstate it. */
   summary: string;
   /** What the law actually gives you. */
-  theLaw: string[];
+  theLaw: RightsPoint[];
   /** What is proposed, voluntary, or down to your employer. */
-  notTheLaw: string[];
+  notTheLaw: RightsPoint[];
   /** What to do with the above. */
   useIt: string[];
   sources: SourceLink[];
@@ -68,16 +82,47 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
     summary:
       "No statutory right to time off for treatment — but real pregnancy protection that begins earlier than most people, and most employers, realise.",
     theLaw: [
-      "Pregnancy protection begins at embryo transfer. From the point of transfer you have the rights of a pregnant worker, including paid time off for antenatal appointments — which is a materially stronger position than the weeks before it.",
-      "If the transfer is unsuccessful, protection against pregnancy discrimination continues for two weeks after you are told. Employers frequently do not know this, and it covers exactly the period in which someone is least able to argue about it.",
-      "Refusing time off for treatment, or treating someone detrimentally because of it, can amount to sex discrimination even before the pregnancy protections start.",
-      "Acas guidance is that fertility appointments, and sickness arising from treatment, should be handled the same way as any other medical appointment or sickness under your employer's own policies.",
+      {
+        point: "Pregnancy protection begins at embryo transfer.",
+        detail:
+          "From the point of transfer you have the rights of a pregnant worker, including paid time off for antenatal appointments — a materially stronger position than the weeks before it.",
+      },
+      {
+        point: "If the transfer fails, protection continues for two weeks.",
+        detail:
+          "Protection against pregnancy discrimination runs for two weeks after you are told. Employers frequently do not know this, and it covers exactly the period in which someone is least able to argue about it.",
+      },
+      {
+        point: "Penalising you for treatment can be sex discrimination.",
+        detail:
+          "Refusing time off for treatment, or treating someone detrimentally because of it, can amount to sex discrimination even before the pregnancy protections start.",
+      },
+      {
+        point: "Acas: treat it like any other medical appointment.",
+        detail:
+          "Acas guidance is that fertility appointments, and sickness arising from treatment, should be handled the same way as any other appointment or sickness under your employer's own policies.",
+      },
     ],
     notTheLaw: [
-      "There is no statutory right in Great Britain to time off, paid or unpaid, to attend fertility treatment. Whether you get it depends on your contract and your employer's policy.",
-      "Fertility appointments before embryo transfer are not classed as antenatal appointments, so the paid-time-off right for antenatal care does not reach them.",
-      "Nothing requires an employer to discount treatment-related absence from sickness triggers. Many good policies do; it is a choice, not a duty, so ask for it explicitly.",
-      "Private Members' Bills proposing a statutory right to time off for fertility treatment have been introduced more than once and have not become law.",
+      {
+        point: "No statutory right to time off for treatment.",
+        detail:
+          "There is no right in Great Britain to time off, paid or unpaid, to attend fertility treatment. Whether you get it depends on your contract and your employer's policy.",
+      },
+      {
+        point: "Appointments before transfer are not antenatal appointments.",
+        detail: "So the paid-time-off right for antenatal care does not reach them.",
+      },
+      {
+        point: "Nothing forces an employer to discount treatment absence.",
+        detail:
+          "Many good policies keep it out of sickness triggers. That is a choice, not a duty, so ask for it explicitly.",
+      },
+      {
+        point: "The statutory right that keeps being proposed is still a proposal.",
+        detail:
+          "Private Members' Bills giving a right to time off for fertility treatment have been introduced more than once and have not become law.",
+      },
     ],
     useIt: [
       "If you are at or past embryo transfer and a request is being refused, say so plainly and in writing — your position changed at that point.",
@@ -96,11 +141,23 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
     summary:
       "No statutory fertility leave yet, a live legislative proposal, and a handful of large employers who did it voluntarily first.",
     theLaw: [
-      "There is currently no dedicated statutory entitlement to leave for fertility treatment; the general employment protections and your employer's own policy do the work.",
+      {
+        point: "No dedicated statutory entitlement to fertility leave.",
+        detail:
+          "The general employment protections and your employer's own policy do all of the work here.",
+      },
     ],
     notTheLaw: [
-      "A Reproductive Health Leave Bill has been proposed that would give up to 10 days' leave for fertility treatment alongside leave for early pregnancy loss. It is a proposal, and the Government's own miscarriage-leave measure has been the faster-moving part of the debate.",
-      "Bank of Ireland and Vodafone Ireland introduced 10 days' fertility leave voluntarily, and other large employers have followed. That is policy, not entitlement — but it is a useful precedent to cite when asking your own employer.",
+      {
+        point: "The Reproductive Health Leave Bill is a proposal, not a right.",
+        detail:
+          "It would give up to 10 days' leave for fertility treatment alongside leave for early pregnancy loss. The Government's own miscarriage-leave measure has been the faster-moving part of the debate.",
+      },
+      {
+        point: "Bank of Ireland and Vodafone chose 10 days; nobody made them.",
+        detail:
+          "Both introduced fertility leave voluntarily and other large employers have followed. That is policy rather than entitlement — but useful precedent when asking your own employer to catch up.",
+      },
     ],
     useIt: [
       "Check whether your sector has a collective agreement or a public-sector policy covering fertility leave; several universities and public bodies have adopted one.",
@@ -114,12 +171,28 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
     summary:
       "A small group of countries give a statutory right to time off for treatment. Most do not, and the detail varies enough that local advice matters.",
     theLaw: [
-      "Italy is generally reported to give employees undergoing fertility treatment a right to paid time off for the necessary procedures, and Greece, Malta, Portugal, France and Ukraine are among the other countries that have legislated some right to time off.",
-      "In Spain, courts have held that employees cannot be dismissed for repeated absences arising from fertility treatment, and provision is increasingly appearing in collective agreements and equality plans rather than in statute.",
+      {
+        point: "A handful of countries legislate a right to time off.",
+        detail:
+          "Italy is generally reported to give employees undergoing fertility treatment a right to paid time off for the necessary procedures, and Greece, Malta, Portugal, France and Ukraine are among the others that have legislated some right to time off.",
+      },
+      {
+        point: "Spanish courts have blocked dismissal for treatment absence.",
+        detail:
+          "Employees cannot be dismissed for repeated absences arising from fertility treatment, and provision is increasingly appearing in collective agreements and equality plans rather than in statute.",
+      },
     ],
     notTheLaw: [
-      "There is no EU-wide right to fertility treatment leave, and the countries above differ in whether the time is paid, capped, or conditional on the type of treatment.",
-      "Treat every entry here as a pointer to check locally rather than a statement of your own position — this is the part of the page that varies most and dates fastest.",
+      {
+        point: "There is no EU-wide right to fertility treatment leave.",
+        detail:
+          "The countries above differ in whether the time is paid, capped, or conditional on the type of treatment.",
+      },
+      {
+        point: "Treat every entry here as a pointer to check locally.",
+        detail:
+          "This is the part of the page that varies most and dates fastest — it is not a statement of your own position.",
+      },
     ],
     useIt: [
       "Ask your employer's HR for the local policy in writing, and if you work for a multinational, ask whether the group fertility policy applies in your country. It often does, and is often better than local law.",
@@ -132,14 +205,40 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
     summary:
       "No fertility-specific leave right, but three federal laws do work in the background — and the benefit itself is where the real money sits.",
     theLaw: [
-      "There is no federal right to leave specifically for fertility treatment.",
-      "The FMLA can cover treatment-related absence as a serious health condition for eligible employees at covered employers — unpaid, and eligibility rules are strict.",
-      "The ADA may require reasonable accommodation where an underlying condition qualifies as a disability, and Title VII has been used successfully where someone was penalised for undergoing IVF, on the basis that the treatment is sex-specific.",
-      "Several states have their own leave laws that may apply, and state fertility insurance mandates sit on top of all of this.",
+      {
+        point: "FMLA can cover treatment-related absence.",
+        detail:
+          "As a serious health condition, for eligible employees at covered employers. It is unpaid, and the eligibility rules are strict.",
+      },
+      {
+        point: "The ADA may require reasonable accommodation.",
+        detail: "Where an underlying condition qualifies as a disability.",
+      },
+      {
+        point: "Title VII has been used successfully over IVF.",
+        detail:
+          "Where someone was penalised for undergoing treatment, on the basis that IVF is sex-specific.",
+      },
+      {
+        point: "State law sits on top of all of it.",
+        detail:
+          "Several states have their own leave laws that may apply, and state fertility insurance mandates sit above those again.",
+      },
     ],
     notTheLaw: [
-      "Paid fertility leave is an employer benefit, not an entitlement, and is concentrated in large employers.",
-      "Whether your treatment is covered at all turns on your health plan document — specifically whether the plan is fully insured or self-funded, and what definition of infertility it uses.",
+      {
+        point: "There is no federal right to leave for fertility treatment.",
+        detail: "The federal laws above reach it only indirectly, and only for some people.",
+      },
+      {
+        point: "Paid fertility leave is a benefit, not an entitlement.",
+        detail: "It is concentrated in the largest employers.",
+      },
+      {
+        point: "Whether treatment is covered turns on your plan document.",
+        detail:
+          "Specifically whether the plan is fully insured or self-funded, and what definition of infertility it uses.",
+      },
     ],
     useIt: [
       "Get the plan's Summary Plan Description and read the infertility definition. If it requires a period of unprotected heterosexual intercourse, that clause is what excludes solo and same-sex patients — and many plans have now dropped it.",
