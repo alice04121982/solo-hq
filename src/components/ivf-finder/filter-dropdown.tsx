@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ChevronDown, X } from "lucide-react";
 
 /**
@@ -98,11 +98,11 @@ export function FilterDropdown({
           id={panelId}
           role="group"
           aria-label={panelLabel}
-          className="absolute left-0 top-full mt-2 z-30 w-64 max-w-[calc(100vw-3rem)] rounded-2xl bg-background border border-border p-2"
+          className="absolute left-0 top-full mt-2 z-30 w-64 max-w-[calc(100vw-3rem)] rounded-2xl bg-background border border-border-warm p-2"
         >
           <div className="max-h-72 overflow-y-auto">{children(() => setOpen(false))}</div>
           {note && (
-            <p className="border-t border-border mt-1 pt-2 px-3 pb-1 text-xs text-muted">{note}</p>
+            <p className="border-t border-border-warm mt-1 pt-2 px-3 pb-1 text-xs text-muted">{note}</p>
           )}
         </div>
       )}
@@ -144,7 +144,7 @@ export interface FilterOption<T> {
   /** Shorter form for the trigger pill, where the full label is a mouthful. */
   shortLabel?: string;
   /** Rendered before the label inside the panel, e.g. a country flag. */
-  prefix?: string;
+  prefix?: ReactNode;
 }
 
 interface MultiSelectProps<T> {
@@ -186,15 +186,17 @@ export function MultiSelectDropdown<T extends string>({
               checked={selected.includes(o.value)}
               onSelect={() => toggle(o.value)}
             >
-              {o.prefix && (
-                <span aria-hidden className="mr-2">
-                  {o.prefix}
-                </span>
-              )}
-              {o.label}
+              <span className="flex items-center gap-2">
+                {o.prefix && (
+                  <span aria-hidden className="flex">
+                    {o.prefix}
+                  </span>
+                )}
+                {o.label}
+              </span>
             </OptionRow>
           ))}
-          <div className="border-t border-border mt-1 pt-2 px-3 pb-1">
+          <div className="border-t border-border-warm mt-1 pt-2 px-3 pb-1">
             <button
               type="button"
               onClick={() => onChange([])}

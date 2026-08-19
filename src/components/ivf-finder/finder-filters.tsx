@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { X } from "lucide-react";
 import {
   AGE_BRACKETS,
@@ -17,7 +18,8 @@ import {
   SingleSelectDropdown,
   type FilterOption,
 } from "./filter-dropdown";
-import { CountrySelect, COUNTRY_FLAGS } from "./country-select";
+import { CountrySelect } from "./country-select";
+import { CountryFlag } from "@/components/country-flag";
 
 /**
  * Filter state for the Cairn clinic finder.
@@ -145,7 +147,7 @@ function FilterTag({
   active,
   onToggle,
 }: {
-  label: string;
+  label: ReactNode;
   active: boolean;
   onToggle: () => void;
 }) {
@@ -276,7 +278,12 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
       {filters.countries.map((c) => (
         <FilterTag
           key={c}
-          label={`${COUNTRY_FLAGS[c] ?? ""} ${c}`.trim()}
+          label={
+            <>
+              <CountryFlag country={c} />
+              {c}
+            </>
+          }
           active
           onToggle={() => remove({ countries: filters.countries.filter((x) => x !== c) })}
         />

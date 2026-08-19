@@ -49,7 +49,7 @@ export function NewsletterSection({ familyLabel }: { familyLabel: string }) {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="flex-1 rounded-full border border-border bg-background px-6 py-3.5 text-sm font-sans text-[#1A3A25] placeholder:text-muted focus:outline-none focus:border-[#1A3A25]/40 transition-colors"
+                className="flex-1 rounded-full border border-on-accent/20 bg-background px-6 py-3.5 text-sm font-sans text-[#1A3A25] placeholder:text-muted focus:outline-none focus:border-[#1A3A25]/40 transition-colors"
               />
               <button className="inline-flex items-center justify-center gap-2 rounded-full bg-accent text-[#1A3A25] px-7 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200 shrink-0">
                 Subscribe
