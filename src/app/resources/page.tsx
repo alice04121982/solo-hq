@@ -4,9 +4,9 @@ import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
-import { ShapeMark } from "@/components/shapes";
+import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
-import { FAMILY_TYPES } from "@/lib/family-types";
+import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
 
 interface CategoryResource {
   title: string;
@@ -106,7 +106,27 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
   },
 ];
 
+const TOTAL_RESOURCES = CATEGORIES.reduce((sum, c) => sum + c.resources.length, 0);
+
+// Same display order as /families: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad.
+const FAMILY_DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
+
+function orderedFamilies(): FamilyType[] {
+  return FAMILY_DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);
+}
+
+/** The teal tile that keeps a category icon legible on any band. */
+function IconTile({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal text-accent">
+      {children}
+    </div>
+  );
+}
+
 export default function ResourcesPage() {
+  const families = orderedFamilies();
+
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
@@ -116,118 +136,147 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Header */}
-      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
+      {/* Header — one oversized egg mark bleeding off the band edge */}
+      <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-18" backdrop={{ shape: "egg" }}>
         <SectionHeading
           level={1}
-          eyebrow="Everything you need"
-          mark="bloom"
+          eyebrow="The library"
+          mark="egg"
           title="Resources"
           intro="Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment."
           introWidth="52ch"
-          className="mb-0"
+          className="mb-6"
         />
+        <p className="text-sm font-sans font-medium text-teal">
+          {TOTAL_RESOURCES} free resources · {CATEGORIES.length} topics · No sign-up needed
+        </p>
       </Section>
 
-      {/* Ways in: the section people arrive needing most, the essential
-          external resource, then the family-type filters */}
-      <Section band={1}>
-        {/* Funding — the question that gates every other decision, so it sits
-            above the guide grid rather than inside it. */}
-        <div className="mb-8 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
-          <div className="flex-1">
-            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
-              Start here if cost is the question
-            </p>
-            <p className="font-sans font-semibold text-teal text-base mb-1">
+      {/* Start here — the two things most people arrive needing */}
+      <Section band={1} padding="py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
+          {/* Funding — the question that gates every other decision */}
+          <div className="flex flex-col rounded-2xl border border-border bg-background p-7 md:p-8">
+            <div className="flex items-center gap-4 mb-5">
+              <IconTile>
+                <Calculator className="h-5 w-5" />
+              </IconTile>
+              <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted font-sans">
+                Start here if cost is the question
+              </p>
+            </div>
+            <h2 className="font-sans font-bold text-teal text-2xl mb-2">
               Funding &amp; payment options
-            </p>
-            <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
+            </h2>
+            <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
               What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest — employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
             </p>
+            <Link
+              href="/funding"
+              className="mt-auto inline-flex items-center gap-2 self-start rounded-full bg-accent text-on-accent px-6 py-3 text-sm font-sans font-[600] hover:bg-accent-dark transition-colors"
+            >
+              See funding options
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </div>
-          <Link
-            href="/funding"
-            className="inline-flex items-center gap-2 shrink-0 rounded-full bg-teal text-on-teal px-5 py-2.5 text-sm font-sans font-medium hover:opacity-90 transition-colors"
-          >
-            See funding options
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </div>
 
-        {/* DCN featured link */}
-        <div className="mb-14 rounded-2xl border border-border p-6 flex flex-col sm:flex-row sm:items-center gap-5">
-          <div className="flex-1">
-            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
-              Essential external resource · All family types
-            </p>
-            <p className="font-sans font-semibold text-teal text-base mb-1">
+          {/* DCN — the essential external resource for every family type */}
+          <div className="flex flex-col rounded-2xl border border-border bg-background p-7 md:p-8">
+            <div className="flex items-center gap-4 mb-5">
+              <IconTile>
+                <Heart className="h-5 w-5" />
+              </IconTile>
+              <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted font-sans">
+                Essential external resource · All family types
+              </p>
+            </div>
+            <h2 className="font-sans font-bold text-teal text-2xl mb-2">
               Donor Conception Network
+            </h2>
+            <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
+              The UK&apos;s leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception. Relevant to solo parents, same-sex couples, and heterosexual couples alike.
             </p>
-            <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-              The UK's leading support charity for donor-conceived families. Books, workshops, peer support, and guidance on talking to children about their conception. Relevant to solo parents, same-sex couples, and heterosexual couples alike.
-            </p>
-          </div>
-          <a
-            href="https://dcnetwork.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 shrink-0 rounded-full border border-teal/20 text-teal px-5 py-2.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors"
-          >
-            Visit dcnetwork.org
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-
-        {/* Browse by family type */}
-        <div>
-          <p
-            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-5"
-            style={{ color: "var(--teal)" }}
-          >
-            <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
-            Browse by family type
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {FAMILY_TYPES.map((f) => (
-              <Link
-                key={f.slug}
-                href={`/families/${f.slug}#resources`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-sans text-teal hover:bg-teal hover:text-on-teal hover:border-teal transition-colors"
-              >
-                {f.label}
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            ))}
+            <a
+              href="https://dcnetwork.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-flex items-center gap-2 self-start rounded-full border px-6 py-3 text-sm font-sans font-[600] text-teal hover:bg-surface-hover transition-colors"
+              style={{ borderColor: "var(--teal-35)" }}
+            >
+              Visit dcnetwork.org
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
           </div>
         </div>
       </Section>
 
-      {/* Category grid */}
-      <Section band={2}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
+      {/* The library — every topic as a white card on the cream band */}
+      <Section band={2} padding="py-16 md:py-24">
+        <SectionHeading eyebrow="Browse by topic" mark="bloom" title="Everything, organised." />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {CATEGORIES.map((cat) => (
-            <div key={cat.title} className="py-10 border-t border-border">
-              <div className="text-accent mb-4">{cat.icon}</div>
-              <h2 className="font-sans font-bold text-teal text-xl mb-5">{cat.title}</h2>
-              <ul className="space-y-3">
+            <div key={cat.title} className="flex flex-col rounded-2xl border border-border bg-background p-6 md:p-7">
+              <div className="flex items-center gap-4 mb-3">
+                <IconTile>{cat.icon}</IconTile>
+                <div>
+                  <h3 className="font-sans font-bold text-teal text-lg leading-snug">{cat.title}</h3>
+                  <p className="text-[13px] font-sans text-muted">
+                    {cat.resources.length} resources
+                  </p>
+                </div>
+              </div>
+              <ul className="divide-y divide-border">
                 {cat.resources.map((r) => (
                   <li key={r.title}>
-                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-start gap-3 group">
-                      <ArrowRight className="h-3.5 w-3.5 text-border shrink-0 mt-0.5 group-hover:text-accent transition-colors duration-150" />
-                      <div>
-                        <p className="text-sm font-sans text-teal/70 leading-snug group-hover:text-teal transition-colors duration-150">
+                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-center gap-3 group py-3">
+                      <div className="flex-1">
+                        <p className="text-sm font-sans text-teal/75 leading-snug group-hover:text-teal transition-colors duration-150">
                           {r.title}
                         </p>
-                        <span className="text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+                        <span className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
                           {r.type}
                         </span>
                       </div>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-teal/40 group-hover:text-teal group-hover:translate-x-0.5 transition-all duration-150" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Browse by family type — shape-coded cards on the teal band */}
+      <Section tone="teal" backdrop={{ shape: "dots", side: "left" }}>
+        <SectionHeading
+          tone="teal"
+          eyebrow="Made for your family"
+          title="Browse by family type."
+          intro="Each family guide ends with a hand-picked reading list for that path — start there if you want only what applies to you."
+          introWidth="52ch"
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
+          {families.map((family) => (
+            <Link
+              key={family.slug}
+              href={`/families/${family.slug}#resources`}
+              className="group flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1"
+              style={{ background: "var(--teal-card)" }}
+            >
+              <ShapeMark
+                name={FAMILY_SHAPES[family.slug]}
+                size={28}
+                className="transition-transform duration-300 group-hover:rotate-12"
+                style={{ color: "var(--accent)" }}
+              />
+              <h3 className="font-sans font-semibold text-lg text-on-teal">{family.label}</h3>
+              <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-[600] font-sans text-on-teal-muted group-hover:text-on-teal transition-colors duration-150">
+                View resources <ArrowRight className="h-3 w-3" />
+              </span>
+            </Link>
           ))}
         </div>
       </Section>
