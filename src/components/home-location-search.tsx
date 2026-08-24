@@ -96,7 +96,7 @@ export function HomeLocationSearch({ onDark = false }: HomeLocationSearchProps) 
             onClick={handleGeolocate}
             disabled={geoLoading}
             title="Use my location"
-            className="h-14 w-14 flex items-center justify-center text-muted hover:text-foreground transition-colors border-l border-foreground/10 shrink-0 disabled:opacity-40"
+            className="h-14 w-14 flex items-center justify-center text-muted hover:text-teal transition-colors border-l border-teal/10 shrink-0 disabled:opacity-40"
           >
             <LocateFixed className={`h-4 w-4 ${geoLoading ? "animate-spin" : ""}`} />
           </button>
@@ -104,7 +104,7 @@ export function HomeLocationSearch({ onDark = false }: HomeLocationSearchProps) 
           {/* Submit */}
           <button
             type="submit"
-            className="h-14 px-7 bg-accent text-[#1A3A25] text-sm font-sans font-medium hover:bg-accent-dark transition-colors shrink-0"
+            className="h-14 px-7 bg-accent text-on-accent text-sm font-sans font-medium hover:bg-accent-dark transition-colors shrink-0"
           >
             Find Clinics
           </button>
