@@ -61,8 +61,8 @@ function Chip({
       aria-pressed={selected}
       className={`rounded-full border px-4 py-2 text-sm font-sans transition-all duration-150 ${
         selected
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+          ? "border-teal bg-teal text-on-teal"
+          : "border-border text-muted hover:border-teal/40 hover:text-teal"
       }`}
     >
       {label}
@@ -95,7 +95,7 @@ function SubmittedPanel({
       </span>
 
       <h3
-        className="font-sans font-bold text-foreground mb-3"
+        className="font-sans font-bold text-teal mb-3"
         style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
       >
         It&rsquo;s with us, {application.firstName}.

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -16,6 +17,7 @@ const PRIMARY_LINKS = [
 
 const MORE_LINKS = [
   { label: "Funding", href: "/funding" },
+  { label: "In the Media", href: "/news" },
   { label: "IVF & Work", href: "/work" },
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
@@ -100,9 +102,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
       }`}
     >
-      <a href="/" className="flex items-center">
+      <Link href="/" className="flex items-center">
         <Logo height={44} onDark={isDark} />
-      </a>
+      </Link>
 
       {/* Desktop links — eight items across primary + "More" no longer fit
           beside the logo and CTA at the md breakpoint, so the burger still
@@ -119,7 +121,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             className={`text-sm font-sans transition-colors duration-150 ${
               isDark
                 ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : pathname === l.href ? "text-foreground" : "text-muted hover:text-foreground"
+                : pathname === l.href ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
             {l.label}
@@ -137,7 +139,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
               isDark
                 ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : moreActive ? "text-foreground" : "text-muted hover:text-foreground"
+                : moreActive ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
             More
@@ -156,7 +158,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
                   role="menuitem"
                   onClick={() => setMoreOpen(false)}
                   className={`block rounded-lg px-3 py-2.5 text-sm font-sans transition-colors duration-150 ${
-                    pathname === l.href ? "text-foreground bg-surface-hover" : "text-muted hover:text-foreground hover:bg-surface-hover"
+                    pathname === l.href ? "text-teal bg-surface-hover" : "text-muted hover:text-teal hover:bg-surface-hover"
                   }`}
                 >
                   {l.label}
@@ -172,7 +174,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <a
           href="/get-started"
           className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
-          style={{ background: "#C5E600", color: "#1A3A25" }}
+          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           Get Started
           <ArrowRight className="h-3.5 w-3.5" />
@@ -181,7 +183,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
       {/* Mobile burger */}
       <button
-        className={`lg:hidden p-1 ${isDark ? "text-[#f9c6da]" : "text-foreground"}`}
+        className={`lg:hidden p-1 ${isDark ? "text-on-teal" : "text-teal"}`}
         onClick={() => setOpen(true)}
         aria-label="Open menu"
         aria-expanded={open}
@@ -199,9 +201,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           aria-label="Menu"
         >
           <div className="flex items-center justify-between gap-8 px-6 py-6">
-            <a href="/" onClick={() => setOpen(false)} className="flex items-center">
+            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
               <Logo height={44} onDark />
-            </a>
+            </Link>
             <button
               className="p-1"
               style={{ color: "var(--on-teal)" }}
@@ -215,28 +217,10 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
           {/* Links fill the space between the header and the footer action.
               Eight of them at this type size can exceed a short phone
               viewport, so the column scrolls rather than clipping the last
-              item. A thin rule separates the core pages from "more" so the
-              grouping the desktop dropdown carries isn't lost on mobile. */}
+              item. The desktop primary/"More" grouping is not carried over
+              here — one even column reads better at this scale. */}
           <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-6 py-4">
-            {PRIMARY_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="font-sans text-center transition-opacity duration-150 hover:opacity-70"
-                style={{
-                  fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
-                  lineHeight: 1.2,
-                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
-                }}
-              >
-                {l.label}
-              </a>
-            ))}
-
-            <div className="w-10 h-px my-1" style={{ background: "rgba(249, 198, 218, 0.2)" }} aria-hidden />
-
-            {MORE_LINKS.map((l) => (
+            {[...PRIMARY_LINKS, ...MORE_LINKS].map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -266,7 +250,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
               href="/get-started"
               onClick={() => setOpen(false)}
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium shrink-0"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Get Started
               <ArrowRight className="h-3.5 w-3.5" />

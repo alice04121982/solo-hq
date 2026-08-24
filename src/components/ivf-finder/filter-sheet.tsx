@@ -44,11 +44,11 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.28, ease: [0.32, 0, 0.16, 1] }}
-            className="fixed top-0 right-0 h-full w-full max-w-[400px] z-50 flex flex-col bg-background border-l border-border"
+            className="fixed top-0 right-0 h-full w-full max-w-[400px] z-50 flex flex-col bg-background border-l border-border-warm"
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border-warm shrink-0">
               <div className="flex items-center gap-3">
-                <h2 className="font-sans font-bold text-base text-foreground">Filters</h2>
+                <h2 className="font-sans font-bold text-base text-teal">Filters</h2>
                 {activeCount > 0 && (
                   <span className="flex items-center justify-center w-5 h-5 rounded-full text-[13px] font-bold bg-teal text-on-teal">
                     {activeCount}
@@ -68,7 +68,7 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
               <FilterControls filters={filters} onChange={onChange} />
             </div>
 
-            <div className="px-6 py-4 border-t border-border flex items-center gap-3 shrink-0">
+            <div className="px-6 py-4 border-t border-border-warm flex items-center gap-3 shrink-0">
               <button
                 type="button"
                 onClick={() =>

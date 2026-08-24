@@ -14,7 +14,24 @@
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
   --on-accent:       #1A3A25;   /* dark green ink on lime fills */
-  --border:          #E8E8E8;
+  --on-accent-muted: rgba(26, 58, 37, 0.85);  /* secondary copy on lime */
+  --on-accent-line:  rgba(26, 58, 37, 0.16);  /* rules and dividers on lime */
+  --border:          #E8E8E8;   /* grey hairline — WHITE BANDS ONLY, never on cream */
+
+  /* ── Warm neutrals ──
+     The cream band is a warm salmon tone, and grey laid over it goes muddy:
+     a #E8E8E8 hairline on #FBF2EB reads as dirt rather than as an edge. So
+     grey is banned on cream outright (see the pairing rules in
+     .claude/skills/cairn-color-tokens). Anything that needs an edge or a
+     recessed fill on a cream band takes these instead. */
+  --border-warm:     #EFE1D5;   /* hairline for cards and dividers on cream */
+  --surface-warm:    #F6EBE1;   /* recessed fill on cream (control tracks) */
+
+  /* ── Pale citrus ──
+     The soft yellow of the HFEA verified badge (lime at 20% over white),
+     promoted to a solid surface so cards can carry it as a fill. */
+  --accent-pale:      #F3FACC;
+  --accent-pale-edge: #E7F4A8;
 
   /* ── Brand: deep teal ──
      Doubles as the dark surface (hero, footer) and as the dark ink on
@@ -29,6 +46,13 @@
   /* Pinks that sit on the teal surface */
   --on-teal:         #f9c6da;   /* headings / high-contrast */
   --on-teal-muted:   #c4a0ae;   /* body copy */
+
+  /* Cards on the teal surface. White at low alpha, so the card reads as a
+     lighter green lifted out of the band rather than a new hue — the
+     homepage comparison band's treatment, which the pink writing sits on. */
+  --teal-card:       rgba(255, 255, 255, 0.07);
+  --teal-card-hover: rgba(255, 255, 255, 0.12);
+  --teal-card-border: rgba(249, 198, 218, 0.2);
 
   /* Warm cream section surface */
   --cream:           #FBF2EB;
@@ -57,13 +81,22 @@
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
   --color-on-accent:       var(--on-accent);
+  --color-on-accent-muted: var(--on-accent-muted);
+  --color-on-accent-line:  var(--on-accent-line);
   --color-border:          var(--border);
+  --color-border-warm:     var(--border-warm);
+  --color-surface-warm:    var(--surface-warm);
+  --color-accent-pale:      var(--accent-pale);
+  --color-accent-pale-edge: var(--accent-pale-edge);
 
   /* ── Brand: deep teal ── */
   --color-teal:            var(--teal);
   --color-teal-ink:        var(--teal-ink);
   --color-on-teal:         var(--on-teal);
   --color-on-teal-muted:   var(--on-teal-muted);
+  --color-teal-card:       var(--teal-card);
+  --color-teal-card-hover: var(--teal-card-hover);
+  --color-teal-card-border: var(--teal-card-border);
   --color-cream:           var(--cream);
 
   /* ── Legacy aliases ── */
@@ -145,11 +178,120 @@
 }
 
 /* ── Utility: bold card backgrounds ── */
-.card-lime   { background: var(--accent); color: #1A3A25; }
+.card-lime   { background: var(--accent); color: var(--on-accent); }
 .card-pink   { background: var(--lavender); color: var(--teal-ink); }
 .card-teal   { background: var(--teal); color: var(--on-teal); }
 .card-maroon { background: var(--teal); color: var(--on-teal); }  /* legacy alias of .card-teal */
 .card-cream  { background: var(--background); color: var(--foreground); }
+
+/* ── Finder cards ──
+   Every colour on a clinic card is a custom property set on the card itself,
+   so one rule re-tints the whole thing — fill, edge, ink, badges, buttons —
+   on hover, and a variant class only has to restate the resting fill. That is
+   what makes the dark-green hover possible without a group-hover class on
+   every child element.
+
+   Grey is deliberately absent. These cards sit on the cream band, where
+   --border reads as dirt over the warm tone, so edges are warm
+   (--border-warm) or brand-tinted (--teal-20).
+
+   These live in @layer components so Tailwind utilities on the same element
+   still win — an unlayered rule here would silently beat them. */
+@layer components {
+  .clinic-card {
+    --card-surface:            var(--background);
+    /* No resting stroke: a white card on the cream band is defined by its
+       fill, and a hairline there only muddies the edge. The border stays
+       declared at 1px so the teal hover can colour it without the card
+       resizing by two pixels. */
+    --card-edge:               transparent;
+    --card-ink:                var(--teal-ink);
+    --card-ink-muted:          var(--muted);
+    --card-ring:               var(--teal);
+    /* HFEA verified: pale citrus pill. Clinic reported: outline only. */
+    --card-badge-verified-bg:  var(--accent-pale);
+    --card-badge-verified-ink: var(--teal-ink);
+    --card-badge-reported-edge: var(--teal-20);
+    --card-badge-reported-ink:  var(--muted);
+    /* Secondary controls (Add to compare, Details) */
+    --card-control-edge:       var(--teal-20);
+    --card-control-ink:        var(--teal);
+    --card-control-wash:       rgba(0, 83, 83, 0.07);
+    /* The same control once the clinic is in the comparison */
+    --card-control-active-bg:  var(--teal);
+    --card-control-active-ink: var(--on-teal);
+
+    background: var(--card-surface);
+    border: 1px solid var(--card-edge);
+    color: var(--card-ink);
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease,
+      outline-color 160ms ease;
+  }
+
+  /* Option "citrus": the HFEA badge yellow promoted to the card fill. */
+  .clinic-card--citrus {
+    --card-surface:            var(--accent-pale);
+    --card-edge:               transparent;
+    /* The pale pill would vanish into the fill, so verified goes solid lime. */
+    --card-badge-verified-bg:  var(--accent);
+    --card-badge-verified-ink: var(--on-accent);
+  }
+
+  /* Option "outline": no fill at all — the cream band shows through. */
+  .clinic-card--outline {
+    --card-surface:            transparent;
+    --card-edge:               var(--teal-20);
+    --card-badge-verified-bg:  var(--accent);
+    --card-badge-verified-ink: var(--on-accent);
+  }
+
+  /* The dark-green hover. Pointer devices only: on touch, :hover sticks
+     after a tap and would leave a card stranded in its inverted state. */
+  @media (hover: hover) {
+    .clinic-card:hover {
+      --card-surface:            var(--teal);
+      --card-edge:               var(--teal);
+      --card-ink:                var(--on-teal);
+      --card-ink-muted:          var(--on-teal-muted);
+      --card-ring:               var(--accent);
+      --card-badge-verified-bg:  var(--accent);
+      --card-badge-verified-ink: var(--on-accent);
+      --card-badge-reported-edge: var(--on-teal-muted);
+      --card-badge-reported-ink:  var(--on-teal-muted);
+      --card-control-edge:       var(--on-teal-muted);
+      --card-control-ink:        var(--on-teal);
+      --card-control-wash:       rgba(249, 198, 218, 0.14);
+      --card-control-active-bg:  var(--accent);
+      --card-control-active-ink: var(--on-accent);
+    }
+  }
+
+  /* Selected sits inset over the resting border (offset -2px) so picking a
+     card never shifts its contents by a pixel. The ring turns lime on the
+     dark hover fill, where teal-on-teal would disappear. */
+  .clinic-card--selected {
+    outline: 2px solid var(--card-ring);
+    outline-offset: -2px;
+  }
+
+  .clinic-card__control {
+    border: 1px solid var(--card-control-edge);
+    color: var(--card-control-ink);
+    background: transparent;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+  }
+  .clinic-card__control:hover:not(:disabled) { background: var(--card-control-wash); }
+  .clinic-card__control:disabled { opacity: 0.45; cursor: not-allowed; }
+  .clinic-card__control--active,
+  .clinic-card__control--active:hover:not(:disabled) {
+    background: var(--card-control-active-bg);
+    border-color: var(--card-control-active-bg);
+    color: var(--card-control-active-ink);
+  }
+}
 
 /* ── Shape animations ──
    For shape marks placed in server components, where framer-motion isn't
@@ -160,10 +302,15 @@
   0%, 100% { transform: scale(1); }
   50%      { transform: scale(1.08); }
 }
+@keyframes shape-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
 .shape-spin    { animation: shape-spin 28s linear infinite; }
 .shape-breathe { animation: shape-breathe 6s ease-in-out infinite; }
+.shape-drift   { animation: shape-drift 9s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .shape-spin, .shape-breathe { animation: none; }
+  .shape-spin, .shape-breathe, .shape-drift { animation: none; }
 }
 
 /* ── Scrollbar ── */

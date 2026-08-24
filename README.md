@@ -27,6 +27,15 @@ and hard to compare from the outside.
   rules are at `/community/guidelines`. Day-to-day operation, including how to
   approve people and what to do when something goes wrong, is in
   [`docs/community-runbook.md`](docs/community-runbook.md).
+- **In the media** (`/news`): a curated roundup of other people's reporting on
+  fertility treatment — publisher's headline, our note on why it matters, and a
+  link straight out. Cairn has no newsroom and publishes no journalism of its
+  own here; the list lives in `src/lib/news.ts`.
+  Candidates are found automatically and published by hand: a weekly action
+  (`.github/workflows/news-candidates.yml`) sweeps publisher feeds via
+  `npm run find:news` and opens an issue of ready-to-paste entries. It never
+  writes to `src/` — the note under each headline is an editorial judgement,
+  so a person writes it and commits.
 
 Surrogacy is not covered yet but is planned.
 
@@ -72,6 +81,16 @@ must be re-verified before being treated as current.
   re-verification is due.
 - The re-verification procedure lives in
   `.claude/skills/treatment-data-check/SKILL.md`.
+
+### Clinics we don't list
+
+Some clinics are deliberately absent. `src/lib/clinic-exclusions.ts` records
+each one with a sourced reason, any response on the record, and a review date;
+`CLINICS` is filtered through it, and `npm run check:data` fails if an excluded
+clinic is present in `src/lib/clinics.ts` at all. The list renders publicly
+under the methodology on `/about`, because a policy of leaving clinics out is
+only honest if it is visible and sourced. Entries state what a named
+publication has reported and are not findings of our own.
 
 ## Environment variables
 

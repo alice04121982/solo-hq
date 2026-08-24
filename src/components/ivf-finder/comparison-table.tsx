@@ -54,6 +54,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
   const headerCell =
     "px-4 py-3 text-left text-[12px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
   const bodyCell = "px-4 py-3 text-sm text-foreground align-top whitespace-nowrap";
+  const bodyCellWrap = "px-4 py-3 text-sm text-foreground align-top max-w-[220px] whitespace-normal";
 
   return (
     <div id="comparison-table">
@@ -64,11 +65,11 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
         <p className="text-xs text-muted">Success rates shown for {ageBracketLabel.toLowerCase()}</p>
       </div>
 
-      <div className="rounded-[24px] border border-border bg-background overflow-x-auto">
+      <div className="rounded-[24px] bg-background overflow-x-auto">
         <table className="w-full border-collapse min-w-[1020px]">
           <thead>
-            <tr className="border-b border-border">
-              <th className={`${headerCell} sticky left-0 z-10 bg-background border-r border-border`}>
+            <tr className="border-b border-border-warm">
+              <th className={`${headerCell} sticky left-0 z-10 bg-background border-r border-border-warm`}>
                 Clinic
               </th>
               <th className={headerCell}>Success rate, {ageBracketLabel.toLowerCase()}</th>
@@ -94,9 +95,9 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
               return (
                 <tr
                   key={clinic.slug}
-                  className={i < clinics.length - 1 ? "border-b border-border" : ""}
+                  className={i < clinics.length - 1 ? "border-b border-border-warm" : ""}
                 >
-                  <td className={`${bodyCell} sticky left-0 z-10 bg-background border-r border-border`}>
+                  <td className={`${bodyCell} sticky left-0 z-10 bg-background border-r border-border-warm`}>
                     <Link
                       href={`/ivf-finder/${clinic.slug}`}
                       className="font-bold text-teal-ink hover:underline underline-offset-2"
@@ -166,7 +167,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                       </span>
                     )}
                   </td>
-                  <td className={`${bodyCell} max-w-[220px] whitespace-normal`}>
+                  <td className={bodyCellWrap}>
                     <span className="text-xs text-muted">{clinic.treatments.join(", ")}</span>
                   </td>
                   <td className={bodyCell}>

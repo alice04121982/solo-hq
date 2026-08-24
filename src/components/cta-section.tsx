@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Cross, Spark } from "./shapes";
+import { ImagePlaceholder } from "./image-placeholder";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -82,13 +82,10 @@ export function CTASection() {
 
           {/* Photo — fills the remaining column and matches the copy block's height on lg+ */}
           <div className="relative w-full lg:flex-1 lg:self-stretch min-h-[280px]">
+            {/* Photography withdrawn pending licensing — see
+                docs/image-audit.md. Restore by putting the <Image> back. */}
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
-              <Image
-                src="/photos/cta-family.webp"
-                alt="A father holding and kissing his young son"
-                fill
-                className="object-cover"
-              />
+              <ImagePlaceholder />
             </div>
             {/* A spark pinned over the photo's corner, turning slowly. */}
             <Spark

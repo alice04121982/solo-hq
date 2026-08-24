@@ -5,6 +5,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SlidersHorizontal } from "lucide-react";
 import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
 import { DATA_PROVENANCE, rankBySuccessRate } from "@/lib/clinics";
+import { exclusionsMatchingGeography } from "@/lib/clinic-exclusions";
+import {
+  CARD_VARIANT_PARAM,
+  DEFAULT_RESULT_VARIANT,
+  DEFAULT_TOP_PERFORMER_VARIANT,
+  parseCardVariant,
+} from "@/lib/card-style";
 import { RegulatorNotice } from "@/components/regulator-notice";
 
 function formatVerifiedDate(iso: string): string {
@@ -29,6 +36,7 @@ import { ClinicResults } from "./clinic-results";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
 import { DisclaimerBanner } from "./disclaimer-banner";
+import { RemovedClinics } from "./removed-clinics";
 
 const COMPARE_PARAM = "compare";
 const COMPARE_CAP = 4;
@@ -116,15 +124,35 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     [filteredClinics, filters.ageBracket]
   );
 
+  // Removals answer the geography filters like a clinic would, so filtering
+  // to somewhere we have removed a clinic from returns the removal rather
+  // than an empty list.
+  const geoFiltered = filters.regions.length > 0 || filters.countries.length > 0;
+  const relevantExclusions = useMemo(
+    () => exclusionsMatchingGeography(filters.regions, filters.countries),
+    [filters.regions, filters.countries]
+  );
+
   const bracketLabel =
     AGE_BRACKETS.find((b) => b.value === filters.ageBracket)?.label ?? "";
   const activeFilterCount = countActiveFilters(filters);
 
+  // ?cards=paper|citrus|outline forces both grids onto one card treatment, so
+  // the options can be compared on the real page with the real data. Absent or
+  // unrecognised, each grid keeps its own default.
+  const cardOverride = parseCardVariant(searchParams.get(CARD_VARIANT_PARAM));
+
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
       {/* ── Filters: inline on desktop, a sheet on mobile ── */}
-      <div className="hidden md:block rounded-[24px] bg-background border border-border p-6 mb-4">
-        <FilterControls filters={filters} onChange={setFilters} />
+      <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
+        <FilterControls
+          filters={filters}
+          onChange={setFilters}
+          onClearAll={() =>
+            setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+          }
+        />
       </div>
       <div className="md:hidden mb-4">
         <button
@@ -142,13 +170,28 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         </button>
       </div>
 
-      <div className="mb-6">
+      {/* The active-filter Tags stand in for the filter row on mobile, where it
+          sits behind the sheet. On desktop the row states its own selections,
+          so repeating them here would be the same list twice. */}
+      <div className="md:hidden mb-6">
         <ActiveFilterTags filters={filters} onChange={setFilters} />
       </div>
 
-      {/* Standing context: the one line that must sit above every result. */}
+      {/* Standing context: the lines that must sit above every result. What
+          this list is comes first — a reader comparing three clinics needs to
+          know it is a checked selection, not a register of everything that
+          exists, before they read anything into a clinic's absence. */}
       <p className="text-xs text-muted mb-6">
-        UK success rates come from the HFEA register and are independently verified. Overseas
+        These are {clinics.length} clinics we have checked by hand, not a complete register of
+        every clinic in the world: a clinic missing from this list has usually not been added
+        yet. Tell us what is missing at{" "}
+        <a
+          href="mailto:stories@cairnfertility.com"
+          className="font-medium text-teal hover:underline underline-offset-2"
+        >
+          stories@cairnfertility.com
+        </a>
+        . UK success rates come from the HFEA register and are independently verified. Overseas
         figures are self-reported by clinics and are not directly comparable. Prices are
         indicative, compiled from {DATA_PROVENANCE.pricesSourceLabel}, and were last verified
         on {formatVerifiedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
@@ -161,6 +204,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
           compareDisabled={selectedSlugs.length >= COMPARE_CAP}
+          variant={cardOverride ?? DEFAULT_TOP_PERFORMER_VARIANT}
           onToggleCompare={handleToggleCompare}
         />
       </div>
@@ -170,10 +214,22 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         <ClinicResults
           clinics={rankedClinics}
           totalCount={clinics.length}
+          removedCount={geoFiltered ? relevantExclusions.length : 0}
           ageBracketLabel={bracketLabel}
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
+          variant={cardOverride ?? DEFAULT_RESULT_VARIANT}
           onToggleCompare={handleToggleCompare}
+        />
+      </div>
+
+      {/* Sits with the results, not with the small print below: what has been
+          taken out of this list is part of the answer to a search. */}
+      <div className="mb-6">
+        <RemovedClinics
+          exclusions={relevantExclusions}
+          targeted={geoFiltered}
+          resultsEmpty={rankedClinics.length === 0}
         />
       </div>
 

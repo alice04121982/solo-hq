@@ -201,7 +201,7 @@ export default function CommunityPage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <p className="font-sans font-medium text-foreground leading-tight mb-1.5">
+                    <p className="font-sans font-medium text-teal leading-tight mb-1.5">
                       {f.title}
                     </p>
                     <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "46ch" }}>

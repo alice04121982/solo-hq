@@ -4,6 +4,8 @@ import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { HeaderShapes, type HeaderMark } from "@/components/header-shapes";
+import { ShapeMark } from "@/components/shapes";
 import { StatCard } from "@/components/stat-card";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
 import { CopyButton } from "@/components/copy-button";
@@ -32,6 +34,39 @@ export const metadata: Metadata = {
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
+/**
+ * The header composition: one oversized bloom cropped by the right edge, with
+ * two small marks off it. Pinks rather than lime, because the header sits on
+ * the cream band and lime goes muddy against it. The movement is deliberately
+ * near-imperceptible — a minute for one rotation of the bloom — so the band
+ * reads as alive rather than animated.
+ */
+const HERO_MARKS: HeaderMark[] = [
+  {
+    name: "bloom",
+    color: "var(--lavender-light)",
+    className:
+      "right-0 top-1/2 -translate-y-1/2 translate-x-[55%] md:translate-x-[30%] w-[11rem] md:w-[26rem] lg:w-[34rem]",
+    motion: "spin",
+    duration: 60,
+  },
+  {
+    name: "egg",
+    color: "var(--lavender)",
+    className: "hidden md:block right-[25%] top-[10%] w-[4.5rem] lg:w-[6rem]",
+    motion: "drift",
+    duration: 11,
+  },
+  {
+    name: "spark",
+    color: "var(--lavender-dark)",
+    className: "hidden md:block right-[7%] bottom-[16%] w-[3rem] lg:w-[4rem]",
+    motion: "breathe",
+    duration: 7,
+    delay: 1.5,
+  },
+];
+
 const JUMP_LINKS = [
   { label: "Your rights", href: "#rights" },
   { label: "What employers offer", href: "#what-employers-offer" },
@@ -52,8 +87,16 @@ export default function WorkPage() {
       </section>
 
       {/* Hero */}
-      <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      <Section
+        band={0}
+        padding="pt-20 pb-16 md:pt-28 md:pb-20"
+        decoration={<HeaderShapes marks={HERO_MARKS} />}
+      >
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           IVF &amp; work
         </p>
         <h1
@@ -77,7 +120,7 @@ export default function WorkPage() {
             <a
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-teal/20 px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
               style={{ color: TEAL }}
             >
               {l.label}
@@ -88,7 +131,11 @@ export default function WorkPage() {
 
       {/* The numbers */}
       <Section band={1} className="border-t border-border">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
           Why this is worth ten minutes
         </p>
         <h2
@@ -112,7 +159,11 @@ export default function WorkPage() {
 
       {/* Rights */}
       <Section band={2} id="rights" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
           Your rights
         </p>
         <h2
@@ -121,16 +172,14 @@ export default function WorkPage() {
         >
           Less law than you&rsquo;d expect. More than you&rsquo;re using.
         </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
-          The single most useful fact on this page, and the one employers most often get wrong: in
-          the UK, pregnancy protection begins at <strong className="font-[600]">embryo transfer</strong>,
-          not when a pregnancy is confirmed and not when treatment starts. From that point you have
-          the rights of a pregnant worker — and if the transfer is unsuccessful, protection continues
-          for two weeks after you are told.
+        <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "60ch" }}>
+          The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
+          <strong className="font-[600]">embryo transfer</strong> — not when a pregnancy is
+          confirmed, and not when treatment starts.
         </p>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Each entry below separates what the law actually gives you from what is policy, proposal or
-          goodwill, because almost everything written about this subject blurs the two.
+        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "60ch" }}>
+          Below, what the law actually gives you is kept apart from what is policy, proposal or
+          goodwill. Almost everything written about this subject blurs the two.
         </p>
 
         <RightsExplorer entries={RIGHTS_BY_COUNTRY} />
@@ -157,7 +206,11 @@ export default function WorkPage() {
 
       {/* What employers offer */}
       <Section band={3} id="what-employers-offer" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="cross" size={14} style={{ color: "var(--lavender)" }} />
           What employers offer
         </p>
         <h2
@@ -259,7 +312,11 @@ export default function WorkPage() {
 
       {/* Find out */}
       <Section band={4} id="find-out" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="asterisk" size={14} style={{ color: "var(--lavender)" }} />
           Find out what yours does
         </p>
         <h2
@@ -279,7 +336,11 @@ export default function WorkPage() {
 
       {/* Scripts */}
       <Section band={5} id="asking" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
           What to say
         </p>
         <h2
@@ -312,7 +373,11 @@ export default function WorkPage() {
 
       {/* Offer stage */}
       <Section band={6} id="job-offers" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="pause" size={14} style={{ color: "var(--lavender)" }} />
           At the offer stage
         </p>
         <h2
@@ -341,11 +406,16 @@ export default function WorkPage() {
           ))}
         </ul>
 
-        <div className="mt-10 rounded-2xl p-5 md:p-6" style={{ background: "var(--lime)" }}>
-          <div className="flex items-center justify-between gap-3 mb-3">
+        {/* White card, lime only as the marker: the lime fill sat straight on the
+            cream band and the two warm colours fought each other. */}
+        <div
+          className="mt-10 rounded-2xl border bg-background p-5 md:p-7"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <div className="flex items-center justify-between gap-3 mb-4">
             <p
-              className="text-[12px] font-[700] uppercase tracking-[0.14em] font-sans"
-              style={{ color: TEAL_SOFT }}
+              className="inline-block rounded-full px-3 py-1 text-[11px] font-[700] uppercase tracking-[0.16em] font-sans"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Send this to the recruiter
             </p>
@@ -355,7 +425,7 @@ export default function WorkPage() {
               }
             />
           </div>
-          <p className="text-[15px] font-sans leading-relaxed font-[500]" style={{ color: TEAL }}>
+          <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
             Before I confirm, could you send me the benefits documentation — including anything on
             family forming and fertility? I&rsquo;d like to check whether it&rsquo;s available from
             day one, what the cap is, and whether medication and donor gametes are included.
@@ -365,7 +435,11 @@ export default function WorkPage() {
 
       {/* Making the case */}
       <Section band={7} id="making-the-case" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           If your employer offers nothing
         </p>
         <h2
@@ -425,7 +499,7 @@ export default function WorkPage() {
           <Link
             href="/funding"
             className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
-            style={{ background: "var(--accent)", color: "#1A3A25" }}
+            style={{ background: "var(--accent)", color: "var(--on-accent)" }}
           >
             See funding options
             <ArrowRight className="h-3.5 w-3.5" />

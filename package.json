@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "check:data": "node --experimental-strip-types scripts/check-data.ts",
-    "community": "node --experimental-strip-types scripts/community-admin.ts"
+    "community": "node --experimental-strip-types scripts/community-admin.ts",
+    "find:news": "node --experimental-strip-types scripts/find-news.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

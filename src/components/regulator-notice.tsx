@@ -9,7 +9,7 @@ import { HFEA } from "@/lib/regulators";
  */
 export function RegulatorNotice() {
   return (
-    <div className="rounded-2xl bg-background border border-border p-4 flex items-start gap-3">
+    <div className="rounded-2xl bg-background p-4 flex items-start gap-3">
       <ShieldCheck className="h-4 w-4 text-teal shrink-0 mt-0.5" aria-hidden />
       <div className="text-xs text-muted leading-relaxed">
         <p>
