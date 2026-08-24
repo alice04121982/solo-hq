@@ -60,8 +60,8 @@ export function QuoteCard({
   // white gutter framing it. White shows only below the tail, under the quote.
   return (
     <figure
-      className="flex flex-col h-full rounded-[28px] border overflow-hidden"
-      style={{ background: "var(--background)", borderColor: "var(--border)" }}
+      className="flex flex-col h-full rounded-[28px] overflow-hidden"
+      style={{ background: "var(--background)" }}
     >
       {/* Bubble. `flex-1` makes it absorb the slack in an equal-height row, so
           cards line up on their attribution however unevenly the quotes run.
