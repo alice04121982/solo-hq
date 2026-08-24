@@ -157,7 +157,7 @@ export default function AboutPage() {
         <SectionHeading eyebrow="Our principles" mark="egg" title="What we build against" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {VALUES.map((v) => (
-            <div key={v.title} className="rounded-2xl bg-background border border-border p-6 md:p-7">
+            <div key={v.title} className="rounded-2xl bg-background p-6 md:p-7">
               <ShapeMark name={v.shape} size={28} className="mb-4" style={{ color: "var(--lavender)" }} />
               <h3 className="font-sans font-semibold text-teal text-lg mb-2">{v.title}</h3>
               <p className="text-sm font-sans text-muted leading-relaxed">{v.body}</p>
@@ -210,8 +210,8 @@ export default function AboutPage() {
         {/* The exclusions themselves, in full. A policy of leaving clinics
             out is only honest if the list is visible and sourced — the same
             standard we hold the numbers to. */}
-        <div className="mt-12 rounded-[24px] border border-border bg-background p-6 md:p-8" style={{ maxWidth: "72ch" }}>
-          <h3 className="font-sans font-semibold text-teal text-lg mb-2">
+        <div className="mt-12 rounded-[24px] bg-cream p-6 md:p-8" style={{ maxWidth: "72ch" }}>
+          <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
             Clinics we do not list
           </h3>
           <p className="text-[15px] font-sans text-muted leading-relaxed mb-6">

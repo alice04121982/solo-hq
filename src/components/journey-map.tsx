@@ -107,7 +107,7 @@ export function JourneyMap() {
         {PHASES.map((phase) => (
           <div
             key={phase.id}
-            className="shrink-0 rounded-2xl border border-border bg-white flex flex-col"
+            className="shrink-0 rounded-2xl bg-white flex flex-col"
             style={{
               scrollSnapAlign: "start",
               width: "calc(85vw - 2rem)",

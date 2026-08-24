@@ -40,7 +40,7 @@ export function WaitlistForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl bg-background border border-border p-6 md:p-8 flex items-start gap-4">
+      <div className="rounded-2xl bg-cream p-6 md:p-8 flex items-start gap-4">
         <span
           className="flex items-center justify-center h-9 w-9 rounded-full shrink-0"
           style={{ background: "var(--accent)", color: "var(--on-accent)" }}
@@ -60,7 +60,7 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-background border border-border p-6 md:p-8">
+    <form onSubmit={handleSubmit} className="rounded-2xl bg-cream p-6 md:p-8">
       <label htmlFor="waitlist-email" className="block text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
         Your email
       </label>
@@ -73,7 +73,7 @@ export function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-teal/40"
+          className="flex-1 rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-teal/40"
         />
         <button
           type="submit"

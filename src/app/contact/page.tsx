@@ -15,7 +15,7 @@ export default function ContactPage() {
   return (
     <LegalPageLayout page={page}>
       {/* Email card — the one channel that exists today. */}
-      <div className="mt-12 rounded-2xl bg-background border border-border p-6 md:p-8">
+      <div className="mt-12 rounded-2xl bg-background p-6 md:p-8">
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
           Email us
         </p>

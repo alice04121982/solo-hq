@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryResource[] }[] = [
   {
-    icon: <Calculator className="h-5 w-5" />,
+    icon: <Calculator className="h-7 w-7" />,
     title: "Finance & Costs",
     resources: [
       { title: "Funding & payment options: NHS, employers, plans and loans", type: "Hub", href: "/funding" },
@@ -35,7 +35,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Briefcase className="h-5 w-5" />,
+    icon: <Briefcase className="h-7 w-7" />,
     title: "Work & Employment",
     resources: [
       { title: "Your rights at work during fertility treatment", type: "Explainer", href: "/work#rights" },
@@ -45,7 +45,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Map className="h-5 w-5" />,
+    icon: <Map className="h-7 w-7" />,
     title: "Treatment & Clinics",
     resources: [
       { title: "IUI vs IVF vs donor eggs: which is right for you?", type: "Guide", slug: "iui-vs-ivf-vs-donor-eggs" },
@@ -55,7 +55,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Heart className="h-5 w-5" />,
+    icon: <Heart className="h-7 w-7" />,
     title: "Emotional Wellbeing",
     resources: [
       { title: "Managing the two-week wait", type: "Guide", slug: "two-week-wait" },
@@ -65,7 +65,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <FileText className="h-5 w-5" />,
+    icon: <FileText className="h-7 w-7" />,
     title: "Legal & Admin",
     resources: [
       { title: "Donor conception and legal parenthood explained", type: "Explainer", slug: "donor-conception-legal-parenthood" },
@@ -75,7 +75,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Baby className="h-5 w-5" />,
+    icon: <Baby className="h-7 w-7" />,
     title: "Pregnancy & Beyond",
     resources: [
       { title: "Pregnancy: building your support team", type: "Guide", slug: "solo-pregnancy-support-team" },
@@ -85,7 +85,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Compass className="h-5 w-5" />,
+    icon: <Compass className="h-7 w-7" />,
     title: "Faith, Culture & Belief",
     resources: [
       { title: "Where the major traditions stand on IVF", type: "Explainer", href: "/faith#traditions" },
@@ -95,7 +95,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <BookOpen className="h-5 w-5" />,
+    icon: <BookOpen className="h-7 w-7" />,
     title: "Community & Stories",
     resources: [
       { title: "Real stories: families share their journeys", type: "Stories", slug: "real-stories" },
@@ -115,13 +115,15 @@ function orderedFamilies(): FamilyType[] {
   return FAMILY_DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);
 }
 
-/** The teal tile that keeps a category icon legible on any band. */
-function IconTile({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-teal text-accent">
-      {children}
-    </div>
-  );
+/**
+ * A category icon, drawn straight onto the band in brand teal.
+ *
+ * No tile behind it: a filled container turns a 20px glyph into a 44px block
+ * of colour, which then competes with the card's own heading for the eye. The
+ * stroke weight carries it on its own at this size.
+ */
+function CategoryIcon({ children }: { children: React.ReactNode }) {
+  return <span className="shrink-0 text-teal">{children}</span>;
 }
 
 export default function ResourcesPage() {
@@ -156,11 +158,11 @@ export default function ResourcesPage() {
       <Section band={1} padding="py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
           {/* Funding — the question that gates every other decision */}
-          <div className="flex flex-col rounded-2xl border border-border bg-background p-7 md:p-8">
+          <div className="flex flex-col rounded-2xl bg-cream p-7 md:p-8">
             <div className="flex items-center gap-4 mb-5">
-              <IconTile>
-                <Calculator className="h-5 w-5" />
-              </IconTile>
+              <CategoryIcon>
+                <Calculator className="h-7 w-7" />
+              </CategoryIcon>
               <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted font-sans">
                 Start here if cost is the question
               </p>
@@ -181,11 +183,11 @@ export default function ResourcesPage() {
           </div>
 
           {/* DCN — the essential external resource for every family type */}
-          <div className="flex flex-col rounded-2xl border border-border bg-background p-7 md:p-8">
+          <div className="flex flex-col rounded-2xl bg-cream p-7 md:p-8">
             <div className="flex items-center gap-4 mb-5">
-              <IconTile>
-                <Heart className="h-5 w-5" />
-              </IconTile>
+              <CategoryIcon>
+                <Heart className="h-7 w-7" />
+              </CategoryIcon>
               <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted font-sans">
                 Essential external resource · All family types
               </p>
@@ -216,9 +218,9 @@ export default function ResourcesPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {CATEGORIES.map((cat) => (
-            <div key={cat.title} className="flex flex-col rounded-2xl border border-border bg-background p-6 md:p-7">
+            <div key={cat.title} className="flex flex-col rounded-2xl bg-background p-6 md:p-7">
               <div className="flex items-center gap-4 mb-3">
-                <IconTile>{cat.icon}</IconTile>
+                <CategoryIcon>{cat.icon}</CategoryIcon>
                 <div>
                   <h3 className="font-sans font-bold text-teal text-lg leading-snug">{cat.title}</h3>
                   <p className="text-[13px] font-sans text-muted">

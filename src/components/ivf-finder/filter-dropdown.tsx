@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { ChevronDown, X } from "lucide-react";
 
 /**
@@ -175,7 +175,7 @@ export interface FilterOption<T> {
   /** Shorter form for the trigger pill, where the full label is a mouthful. */
   shortLabel?: string;
   /** Rendered before the label inside the panel, e.g. a country flag. */
-  prefix?: string;
+  prefix?: ReactNode;
 }
 
 interface MultiSelectProps<T> {

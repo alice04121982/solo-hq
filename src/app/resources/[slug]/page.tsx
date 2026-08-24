@@ -51,7 +51,7 @@ export default async function GuidePage({ params }: PageProps) {
           </Link>
 
           <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-border px-3 py-1 text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-background border border-teal/20 px-3 py-1 text-[13px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
               <Tag className="h-3 w-3" />
               {guide.type}
             </span>
@@ -158,7 +158,7 @@ export default async function GuidePage({ params }: PageProps) {
 
         {/* Key takeaways */}
         {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
-          <div className="mt-12 rounded-2xl bg-background border border-border p-6 md:p-8">
+          <div className="mt-12 rounded-2xl bg-cream p-6 md:p-8">
             <h2 className="font-sans font-bold text-teal text-xl mb-5">Key takeaways</h2>
             <ul className="space-y-3">
               {guide.keyTakeaways.map((item, i) => (
