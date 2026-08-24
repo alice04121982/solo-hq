@@ -25,10 +25,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const story = ALL_STORIES.find((s) => s.id === id);
-  if (!story) return { title: "Story not found | Cairn Fertility" };
+  if (!story) return { title: "Story not found | CairnFertility" };
 
   return {
-    title: `${story.title} | Cairn Fertility`,
+    title: `${story.title} | CairnFertility`,
     description: story.excerpt,
     openGraph: {
       title: story.title,
@@ -70,7 +70,7 @@ export default async function StoryPage({ params }: PageProps) {
     >
       <p
         className="text-xs font-sans leading-relaxed mb-8 rounded-xl px-4 py-3"
-        style={{ background: "var(--cream)", color: "var(--muted)" }}
+        style={{ background: "var(--lime)", color: "var(--muted)" }}
       >
         This is an illustrative story, written to show what real accounts will look
         like here. It does not describe a real person. To share your own story,
@@ -81,7 +81,7 @@ export default async function StoryPage({ params }: PageProps) {
         {story.body.split("\n\n").map((para, i) => (
           <p
             key={i}
-            className="text-[17px] font-sans leading-[1.75]"
+            className="text-lg font-sans leading-[1.75]"
             style={{ color: "var(--foreground)" }}
           >
             {para}
@@ -92,7 +92,7 @@ export default async function StoryPage({ params }: PageProps) {
       {/* Treatment summary */}
       <dl
         className="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-4 rounded-2xl p-6"
-        style={{ background: "var(--cream)" }}
+        style={{ background: "var(--lime)" }}
       >
         {[
           { k: "Family type", v: story.familyLabel },
@@ -101,7 +101,7 @@ export default async function StoryPage({ params }: PageProps) {
         ].map(({ k, v }) => (
           <div key={k}>
             <dt
-              className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans mb-1"
+              className="text-[13px] font-[600] uppercase tracking-[0.12em] font-sans mb-1"
               style={{ color: "rgba(0, 83, 83, 0.6)" }}
             >
               {k}
@@ -116,7 +116,7 @@ export default async function StoryPage({ params }: PageProps) {
       {related.length > 0 && (
         <section className="mt-14">
           <h2
-            className="font-sans font-semibold text-lg leading-7 mb-5"
+            className="font-sans font-semibold text-xl mb-5"
             style={{ color: "var(--teal)" }}
           >
             More stories

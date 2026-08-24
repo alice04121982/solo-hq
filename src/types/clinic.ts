@@ -31,6 +31,7 @@ export const REGIONS: Region[] = ["UK", "Europe", "Rest of world"];
 export type Treatment =
   | "IVF"
   | "ICSI"
+  | "IUI"
   | "Donor eggs"
   | "Donor sperm"
   | "Double donor"
@@ -40,6 +41,7 @@ export type Treatment =
 export const TREATMENTS: Treatment[] = [
   "IVF",
   "ICSI",
+  "IUI",
   "Donor eggs",
   "Donor sperm",
   "Double donor",
@@ -103,6 +105,16 @@ export interface Clinic {
    * a ceiling is set.
    */
   pricePerCycleGbp?: number;
+  /**
+   * Headline IUI cycle price in GBP, excluding drugs and donor sperm. Only
+   * present when the clinic offers IUI and publishes a price. This is what
+   * makes budget filtering honest at the low end: IUI is typically around a
+   * quarter of the price of an IVF cycle (per the HFEA), so a low ceiling
+   * should surface IUI options rather than returning nothing.
+   */
+  iuiPricePerCycleGbp?: number;
+  /** The clinic's own published price list, for re-verification. */
+  priceListUrl?: string;
   /** Donor recruitment rules that apply at this clinic. */
   donorAnonymity?: DonorAnonymity;
   remoteConsultation: boolean;
