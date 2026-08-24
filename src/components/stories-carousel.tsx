@@ -84,7 +84,7 @@ export function StoriesCarousel({ stories }: { stories: Story[] }) {
                 className="mt-auto pt-3 self-start text-sm font-sans font-medium"
                 style={{ color: "var(--teal)" }}
               >
-                <span className="rounded-full px-3.5 py-1.5" style={{ background: "var(--cream)" }}>
+                <span className="rounded-full px-3.5 py-1.5" style={{ background: "var(--lime)" }}>
                   {story.tag}
                 </span>
               </span>

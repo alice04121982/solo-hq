@@ -48,6 +48,12 @@ export interface FamilyType {
   image: string;
   imageAlt: string;
   hideHeroImage?: boolean;
+  /**
+   * Renders the family's shape mark (per `FAMILY_SHAPES`) as an oversized
+   * backdrop cropped by the hero's top edge — the band-backdrop treatment
+   * from `Section`, applied to the guide hero.
+   */
+  heroShapeBackdrop?: boolean;
   treatmentHighlight: string;
   steps: ProcessStep[];
   stories: Story[];
@@ -163,6 +169,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
     image: "/photos/story-two-mums.webp",
     imageAlt: "Two women sitting together, one kissing the other on the cheek",
+    heroShapeBackdrop: true,
     treatmentHighlight: "IUI · IVF · ICSI · Reciprocal IVF · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
