@@ -386,7 +386,7 @@ export default function HowIVFWorksPage() {
         />
 
         {/* Steps overview strip */}
-        <div className="mt-10 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           {STAGES.map((s) => (
             <a
               key={s.number}

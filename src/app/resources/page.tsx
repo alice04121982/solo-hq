@@ -5,108 +5,14 @@ import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
 import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
-import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, Calculator, ExternalLink, Heart } from "lucide-react";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
-
-interface CategoryResource {
-  title: string;
-  type: string;
-  /** Slug of a guide under /resources. Omit when `href` points elsewhere. */
-  slug?: string;
-  /** An absolute path, for entries that live outside the guide library. */
-  href?: string;
-}
+import { ResourceLibrary, RESOURCE_COUNT, TOPIC_COUNT } from "@/components/resource-library";
 
 export const metadata: Metadata = {
   title: "Resources | CairnFertility",
   description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
-
-const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryResource[] }[] = [
-  {
-    icon: <Calculator className="h-7 w-7" />,
-    title: "Finance & Costs",
-    resources: [
-      { title: "Funding & payment options: NHS, employers, plans and loans", type: "Hub", href: "/funding" },
-      { title: "The complete IVF cost breakdown (2025)", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
-      { title: "Fertility finance options: loans, grants & employer schemes", type: "Guide", slug: "fertility-finance-options" },
-      { title: "Budget spreadsheet template", type: "Template", slug: "ivf-budget-template" },
-      { title: "How to ask your employer about fertility benefits", type: "Script", slug: "employer-fertility-benefits" },
-    ],
-  },
-  {
-    icon: <Briefcase className="h-7 w-7" />,
-    title: "Work & Employment",
-    resources: [
-      { title: "Your rights at work during fertility treatment", type: "Explainer", href: "/work#rights" },
-      { title: "What employers offer, and how to find out what yours does", type: "Guide", href: "/work#find-out" },
-      { title: "What to say at work without disclosing more than you want", type: "Scripts", href: "/work#asking" },
-      { title: "Weighing fertility benefits when you take a job", type: "Checklist", href: "/work#job-offers" },
-    ],
-  },
-  {
-    icon: <Map className="h-7 w-7" />,
-    title: "Treatment & Clinics",
-    resources: [
-      { title: "IUI vs IVF vs donor eggs: which is right for you?", type: "Guide", slug: "iui-vs-ivf-vs-donor-eggs" },
-      { title: "Questions to ask at your first consultation", type: "Checklist", slug: "consultation-questions" },
-      { title: "Understanding HFEA success rates", type: "Explainer", slug: "understanding-hfea-success-rates" },
-      { title: "How to choose a sperm donor", type: "Guide", slug: "how-to-choose-a-sperm-donor" },
-    ],
-  },
-  {
-    icon: <Heart className="h-7 w-7" />,
-    title: "Emotional Wellbeing",
-    resources: [
-      { title: "Managing the two-week wait", type: "Guide", slug: "two-week-wait" },
-      { title: "When treatment doesn't work: what next?", type: "Guide", slug: "when-treatment-fails" },
-      { title: "Finding a fertility-aware therapist", type: "Directory", slug: "finding-fertility-therapist" },
-      { title: "Telling friends and family about your journey", type: "Guide", slug: "telling-friends-family" },
-    ],
-  },
-  {
-    icon: <FileText className="h-7 w-7" />,
-    title: "Legal & Admin",
-    resources: [
-      { title: "Donor conception and legal parenthood explained", type: "Explainer", slug: "donor-conception-legal-parenthood" },
-      { title: "What the HFEA register means for your child", type: "Guide", slug: "hfea-register" },
-      { title: "Known donors: legal agreements you need", type: "Guide", slug: "known-donor-legal-agreements" },
-      { title: "Maternity leave as a self-employed parent", type: "Guide", slug: "self-employed-maternity-leave" },
-    ],
-  },
-  {
-    icon: <Baby className="h-7 w-7" />,
-    title: "Pregnancy & Beyond",
-    resources: [
-      { title: "Pregnancy: building your support team", type: "Guide", slug: "solo-pregnancy-support-team" },
-      { title: "Birth partner options", type: "Guide", slug: "birth-partner-options" },
-      { title: "Talking to your child about donor conception", type: "Guide", slug: "talking-to-child-donor-conception" },
-      { title: "Childcare planning: a parent's guide", type: "Guide", slug: "childcare-planning" },
-    ],
-  },
-  {
-    icon: <Compass className="h-7 w-7" />,
-    title: "Faith, Culture & Belief",
-    resources: [
-      { title: "Where the major traditions stand on IVF", type: "Explainer", href: "/faith#traditions" },
-      { title: "Handling conversations that are anti-IVF", type: "Scripts", href: "/faith#conversations" },
-      { title: "Keeping your practice through a treatment cycle", type: "Guide", href: "/faith#observance" },
-      { title: "Faith-aware counselling and support", type: "Directory", href: "/faith#support" },
-    ],
-  },
-  {
-    icon: <BookOpen className="h-7 w-7" />,
-    title: "Community & Stories",
-    resources: [
-      { title: "Real stories: families share their journeys", type: "Stories", slug: "real-stories" },
-      { title: "Recommended books for every family type", type: "Reading list", slug: "recommended-books" },
-      { title: "Online communities worth joining", type: "Directory", slug: "online-communities" },
-      { title: "UK support groups: in-person and online", type: "Directory", slug: "uk-support-groups" },
-    ],
-  },
-];
-
-const TOTAL_RESOURCES = CATEGORIES.reduce((sum, c) => sum + c.resources.length, 0);
 
 // Same display order as /families: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad.
 const FAMILY_DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
@@ -150,7 +56,7 @@ export default function ResourcesPage() {
           className="mb-6"
         />
         <p className="text-sm font-sans font-medium text-teal">
-          {TOTAL_RESOURCES} free resources · {CATEGORIES.length} topics · No sign-up needed
+          {RESOURCE_COUNT} free resources · {TOPIC_COUNT} topics · No sign-up needed
         </p>
       </Section>
 
@@ -216,38 +122,7 @@ export default function ResourcesPage() {
       <Section band={2} padding="py-16 md:py-24">
         <SectionHeading eyebrow="Browse by topic" mark="bloom" title="Everything, organised." />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-          {CATEGORIES.map((cat) => (
-            <div key={cat.title} className="flex flex-col rounded-2xl bg-background p-6 md:p-7">
-              <div className="flex items-center gap-4 mb-3">
-                <CategoryIcon>{cat.icon}</CategoryIcon>
-                <div>
-                  <h3 className="font-sans font-bold text-teal text-lg leading-snug">{cat.title}</h3>
-                  <p className="text-[13px] font-sans text-muted">
-                    {cat.resources.length} resources
-                  </p>
-                </div>
-              </div>
-              <ul className="divide-y divide-border">
-                {cat.resources.map((r) => (
-                  <li key={r.title}>
-                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-center gap-3 group py-3">
-                      <div className="flex-1">
-                        <p className="text-sm font-sans text-teal/75 leading-snug group-hover:text-teal transition-colors duration-150">
-                          {r.title}
-                        </p>
-                        <span className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
-                          {r.type}
-                        </span>
-                      </div>
-                      <ArrowRight className="h-4 w-4 shrink-0 text-teal/40 group-hover:text-teal group-hover:translate-x-0.5 transition-all duration-150" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+        <ResourceLibrary />
       </Section>
 
       {/* Browse by family type — shape-coded cards on the teal band */}

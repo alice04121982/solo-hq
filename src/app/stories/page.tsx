@@ -6,6 +6,7 @@ import { SiteNav } from "@/components/site-nav";
 import { StoryImage } from "@/components/story-image";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
+import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
@@ -71,12 +72,14 @@ export default function StoriesPage() {
             <button
               key={f.slug}
               onClick={() => setFilter(f.slug)}
-              className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
+              className={`inline-flex items-center gap-2 rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
                 filter === f.slug
                   ? "border-teal bg-teal text-on-teal"
                   : "border-border text-muted hover:border-teal/40 hover:text-teal"
               }`}
             >
+              {/* Each family filter wears the pathway's mark from FAMILY_SHAPES */}
+              <ShapeMark name={FAMILY_SHAPES[f.slug]} size={12} style={{ color: "var(--lavender)" }} />
               {f.label}
             </button>
           ))}
