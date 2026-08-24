@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FAMILY_SHAPES, ShapeMark } from "../shapes";
 import Image from "next/image";
+import { ImagePlaceholder } from "@/components/image-placeholder";
 import type { FamilyType } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -96,14 +97,18 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               transition={{ duration: 0.7, delay: 0.08, ease: EASE }}
               className="relative h-[440px] lg:h-[560px] rounded-2xl overflow-hidden"
             >
-              <Image
-                src={family.image}
-                alt={family.imageAlt}
-                fill
-                className="object-cover"
-                style={{ filter: "saturate(0.9) sepia(0.05)" }}
-                priority
-              />
+              {family.image ? (
+                <Image
+                  src={family.image}
+                  alt={family.imageAlt ?? ""}
+                  fill
+                  className="object-cover"
+                  style={{ filter: "saturate(0.9) sepia(0.05)" }}
+                  priority
+                />
+              ) : (
+                <ImagePlaceholder label={family.label} />
+              )}
             </motion.div>
           )}
         </div>

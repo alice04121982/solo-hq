@@ -186,10 +186,10 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         every clinic in the world: a clinic missing from this list has usually not been added
         yet. Tell us what is missing at{" "}
         <a
-          href="mailto:stories@cairnfertility.co.uk"
+          href="mailto:stories@cairnfertility.com"
           className="font-medium text-teal hover:underline underline-offset-2"
         >
-          stories@cairnfertility.co.uk
+          stories@cairnfertility.com
         </a>
         . UK success rates come from the HFEA register and are independently verified. Overseas
         figures are self-reported by clinics and are not directly comparable. Prices are

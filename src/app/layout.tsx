@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "CairnFertility | Compare IVF Clinics",
   description: siteDescription,
+  // Pre-launch: keep the site out of search results while photography rights
+  // and contact routing are still being settled. Remove this alongside
+  // src/app/robots.ts when launching — see that file's note.
+  robots: { index: false, follow: false },
   openGraph: {
     title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,

@@ -51,7 +51,7 @@ export default function StoriesPage() {
           <Link href="/stories/share" className="underline underline-offset-2 text-foreground">
             share your story here
           </Link>{" "}
-          or write to stories@cairnfertility.co.uk.
+          or write to stories@cairnfertility.com.
         </p>
       </Section>
 

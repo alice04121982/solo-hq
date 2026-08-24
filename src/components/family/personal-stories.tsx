@@ -42,7 +42,7 @@ export function PersonalStories({ stories }: { stories: Story[] }) {
             <Link href="/stories/share" className="underline underline-offset-2" style={{ color: TEAL }}>
               use our story form
             </Link>{" "}
-            or write to stories@cairnfertility.co.uk.
+            or write to stories@cairnfertility.com.
           </p>
         </motion.div>
 

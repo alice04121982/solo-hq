@@ -205,7 +205,7 @@ export const NEWS_PROVENANCE = {
   /** ISO date the list was last added to or swept. */
   listUpdatedOn: "2026-08-18",
   /** Where to send something for the list. */
-  submitEmail: "stories@cairnfertility.co.uk",
+  submitEmail: "stories@cairnfertility.com",
 } as const;
 
 /**

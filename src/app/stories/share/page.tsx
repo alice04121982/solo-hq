@@ -56,10 +56,10 @@ export default function ShareStoryPage() {
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "58ch" }}>
           Prefer to skip the form? Just write to us directly at{" "}
           <a
-            href="mailto:stories@cairnfertility.co.uk"
+            href="mailto:stories@cairnfertility.com"
             className="underline underline-offset-2 text-foreground"
           >
-            stories@cairnfertility.co.uk
+            stories@cairnfertility.com
           </a>{" "}
           — it reaches the same inbox.
         </p>
