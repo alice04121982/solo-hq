@@ -7,20 +7,30 @@ const PINK_MUTED = "#c4a0ae";
 const PINK_HOT = "#F0A8C4";
 
 // Derived from the canonical family-type data so footer naming can never
-// drift from the labels used on the family pages themselves.
-const FAMILY_LINKS = FAMILY_TYPES.map((f) => ({
-  label: f.label,
-  href: `/families/${f.slug}`,
-}));
+// drift from the labels used on the family pages themselves, in the same
+// display order as the /families index.
+const FAMILY_ORDER = [
+  "solo-mum",
+  "single-dad",
+  "same-sex-female",
+  "same-sex-male",
+  "heterosexual-couple",
+];
+const FAMILY_LINKS = [...FAMILY_TYPES]
+  .sort((a, b) => FAMILY_ORDER.indexOf(a.slug) - FAMILY_ORDER.indexOf(b.slug))
+  .map((f) => ({ label: f.label, href: `/families/${f.slug}` }));
 
 const TOOL_LINKS = [
   { label: "Clinic Comparison Tool", href: "/ivf-finder" },
   { label: "Family Types", href: "/families" },
   { label: "Faith, Culture & IVF", href: "/faith" },
   { label: "Difficult Conversations", href: "/faith#conversations" },
+  { label: "Funding & Payment Options", href: "/funding" },
+  { label: "NHS Eligibility Check", href: "/funding#check" },
+  { label: "IVF & Work", href: "/work" },
   { label: "Resources", href: "/resources" },
-  // News is unlisted until there is a real editorial pipeline; the page
-  // itself stays in the repo at /news.
+  { label: "Community Waitlist", href: "/community" },
+  { label: "In the Media", href: "/news" },
 ];
 
 const LEGAL_LINKS = [
@@ -162,7 +172,7 @@ export function SiteFooter() {
             className="text-xs font-sans leading-relaxed"
             style={{ maxWidth: "60ch", color: PINK_MUTED }}
           >
-            Cairn Fertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
           </p>
         </div>
       </div>

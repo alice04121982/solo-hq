@@ -1,4 +1,5 @@
 import type { AgeBracket, Clinic, Region } from "@/types/clinic";
+import { excludedCountriesByRegion, exclusionFor } from "./clinic-exclusions.ts";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -14,6 +15,15 @@ import type { AgeBracket, Clinic, Region } from "@/types/clinic";
  *   differ in denominator. Record the denominator the clinic actually uses.
  * - A bracket the clinic has not published is simply absent. Never guess a
  *   value, never write 0 for "unknown".
+ * - A clinic gets "IUI" in treatments only together with iuiPricePerCycleGbp,
+ *   so the budget filter can price the treatment it is offering.
+ * - Any price change must update DATA_PROVENANCE.pricesVerifiedOn.
+ * - A clinic covered by `src/lib/clinic-exclusions.ts` does not belong in
+ *   this file at all. `CLINIC_RECORDS` is filtered through that policy on the
+ *   way to `CLINICS` so an excluded clinic can never reach a page, and
+ *   `npm run check:data` fails if one is added here anyway.
+ *
+ * `npm run check:data` enforces these invariants and flags stale data.
  */
 
 const HFEA_SOURCE = {
@@ -21,7 +31,57 @@ const HFEA_SOURCE = {
   sourceLabel: "HFEA Choose a Clinic register",
 } as const;
 
-export const CLINICS: Clinic[] = [
+/**
+ * Where the numbers on the finder come from, and when they were last checked.
+ * Surfaced in the UI wherever prices render; the freshness check fails once
+ * pricesVerifiedOn is older than its staleness window.
+ */
+export const DATA_PROVENANCE = {
+  /** ISO date this file's prices and treatment lists were last re-verified. */
+  pricesVerifiedOn: "2026-08-11",
+  pricesSourceLabel: "each clinic's published price list",
+  /** National benchmarks the figures are sanity-checked against. */
+  benchmarks: [
+    {
+      label: "HFEA — In vitro fertilisation (IVF)",
+      url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/",
+      note: "One cycle of IVF costs £5,000 on average, though this varies considerably.",
+    },
+    {
+      label: "HFEA — Intrauterine insemination (IUI)",
+      url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intrauterine-insemination-iui/",
+      note: "One cycle of IUI is typically around a quarter of the price of one IVF cycle.",
+    },
+    {
+      label: "NHS — IVF availability and cost",
+      url: "https://www.nhs.uk/conditions/ivf/availability/",
+      note: "One cycle of private IVF can cost up to £5,000 or more.",
+    },
+  ],
+  successRates: {
+    uk: {
+      label: "HFEA Choose a Clinic register (independently verified)",
+      url: HFEA_SOURCE.sourceUrl,
+    },
+    overseas: {
+      label: "Self-reported by each clinic (not independently verified)",
+    },
+    /**
+     * Latest national dataset to re-verify against: "Fertility treatment
+     * 2023: trends and figures", published July 2025, covering treatment
+     * year 2023.
+     */
+    latestNationalReportUrl:
+      "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2023-trends-and-figures/",
+  },
+} as const;
+
+/**
+ * Every clinic record in the file, excluded ones included. Nothing renders
+ * from this: it exists so `npm run check:data` can see what was written here
+ * before the exclusion policy is applied. Pages import `CLINICS`.
+ */
+export const CLINIC_RECORDS: Clinic[] = [
   // ── UK ──
   {
     slug: "bourn-hall",
@@ -34,8 +94,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.bournhall.co.uk",
     hfeaLicensed: true,
     hfeaNumber: "0001",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 4500,
+    iuiPricePerCycleGbp: 1150,
     donorAnonymity: "identifiable",
     remoteConsultation: true,
     successRates: {
@@ -63,8 +124,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.carefertility.com/fertility-clinics/cambridge",
     hfeaLicensed: true,
     hfeaNumber: "0046",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
     pricePerCycleGbp: 4200,
+    iuiPricePerCycleGbp: 1050,
     donorAnonymity: "identifiable",
     remoteConsultation: true,
     successRates: {
@@ -92,8 +154,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.hertsandessexfertility.com",
     hfeaLicensed: true,
     hfeaNumber: "0093",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 3950,
+    iuiPricePerCycleGbp: 1000,
     donorAnonymity: "identifiable",
     remoteConsultation: false,
     successRates: {
@@ -121,8 +184,10 @@ export const CLINICS: Clinic[] = [
     website: "https://www.londonwomensclinic.com",
     hfeaLicensed: true,
     hfeaNumber: "0006",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
     pricePerCycleGbp: 4800,
+    iuiPricePerCycleGbp: 1350,
+    priceListUrl: "https://www.londonwomensclinic.com/about/prices/",
     donorAnonymity: "identifiable",
     remoteConsultation: true,
     successRates: {
@@ -151,8 +216,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.createfertility.co.uk",
     hfeaLicensed: true,
     hfeaNumber: "0152",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 3500,
+    iuiPricePerCycleGbp: 1050,
     donorAnonymity: "identifiable",
     remoteConsultation: true,
     successRates: {
@@ -180,8 +246,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.listerfertility.co.uk",
     hfeaLicensed: true,
     hfeaNumber: "0012",
-    treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "PGT-A", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "PGT-A", "Egg freezing"],
     pricePerCycleGbp: 5200,
+    iuiPricePerCycleGbp: 1500,
     donorAnonymity: "identifiable",
     remoteConsultation: true,
     successRates: {
@@ -210,8 +277,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.kingsfertility.co.uk",
     hfeaLicensed: true,
     hfeaNumber: "0180",
-    treatments: ["IVF", "ICSI", "Donor sperm", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 4100,
+    iuiPricePerCycleGbp: 1050,
     donorAnonymity: "identifiable",
     remoteConsultation: false,
     successRates: {
@@ -239,8 +307,9 @@ export const CLINICS: Clinic[] = [
     website: "https://www.cuh.nhs.uk/our-services/assisted-conception-unit",
     hfeaLicensed: true,
     hfeaNumber: "0042",
-    treatments: ["IVF", "ICSI", "Donor sperm"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor sperm"],
     pricePerCycleGbp: 3800,
+    iuiPricePerCycleGbp: 950,
     donorAnonymity: "identifiable",
     remoteConsultation: false,
     successRates: {
@@ -399,8 +468,9 @@ export const CLINICS: Clinic[] = [
     region: "Europe",
     website: "https://www.copenhagenfertilitycenter.com",
     hfeaLicensed: false,
-    treatments: ["IVF", "ICSI", "Donor sperm", "Egg freezing"],
+    treatments: ["IVF", "ICSI", "IUI", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 4300,
+    iuiPricePerCycleGbp: 1050,
     donorAnonymity: "both",
     remoteConsultation: true,
     successRates: {
@@ -500,6 +570,17 @@ export const CLINICS: Clinic[] = [
   },
 ];
 
+/**
+ * The clinic database as every page sees it: the records above, minus any
+ * clinic Cairn has decided not to list (see `src/lib/clinic-exclusions.ts`).
+ *
+ * The filter is the guarantee, not the process. An excluded clinic is meant
+ * to be absent from `CLINIC_RECORDS` in the first place, and the data check
+ * fails if one is present — this is what keeps it off the site in the window
+ * between the mistake and the check.
+ */
+export const CLINICS: Clinic[] = CLINIC_RECORDS.filter((c) => exclusionFor(c) === undefined);
+
 export function getClinic(slug: string): Clinic | undefined {
   return CLINICS.find((c) => c.slug === slug);
 }
@@ -526,17 +607,43 @@ export function rankBySuccessRate(clinics: Clinic[], bracket: AgeBracket): Clini
   });
 }
 
-/** Countries present in the database, grouped by region in display order. */
+/**
+ * Countries present in the database, grouped by region in display order.
+ *
+ * Includes countries that have only excluded clinics. Someone filtering to
+ * where a clinic operates should be told it was removed and why, which is
+ * what the finder shows for those countries — an option that leads to an
+ * explanation beats a country that is silently missing from the list.
+ */
 export function countriesByRegion(): { region: Region; countries: string[] }[] {
   const regions: Region[] = ["UK", "Europe", "Rest of world"];
   return regions.map((region) => ({
     region,
-    countries: [...new Set(CLINICS.filter((c) => c.region === region).map((c) => c.country))].sort(),
+    countries: [
+      ...new Set([
+        ...CLINICS.filter((c) => c.region === region).map((c) => c.country),
+        ...excludedCountriesByRegion(region),
+      ]),
+    ].sort(),
   }));
 }
 
-/** Bounds for the price ceiling slider, from the published cycle prices. */
+/**
+ * The cheapest price a clinic publishes for any treatment it offers. This is
+ * what a bare price ceiling compares against, so a low budget surfaces the
+ * clinics whose IUI fits it instead of returning nothing.
+ */
+export function cheapestPublishedPrice(clinic: Clinic): number | undefined {
+  const prices = [clinic.pricePerCycleGbp, clinic.iuiPricePerCycleGbp].filter(
+    (p): p is number => p != null
+  );
+  return prices.length > 0 ? Math.min(...prices) : undefined;
+}
+
+/** Bounds for the price ceiling slider, from every published cycle price. */
 export function priceBounds(): { min: number; max: number } {
-  const prices = CLINICS.map((c) => c.pricePerCycleGbp).filter((p): p is number => p != null);
+  const prices = CLINICS.flatMap((c) => [c.pricePerCycleGbp, c.iuiPricePerCycleGbp]).filter(
+    (p): p is number => p != null
+  );
   return { min: Math.min(...prices), max: Math.max(...prices) };
 }

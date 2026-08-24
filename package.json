@@ -7,7 +7,9 @@
     "preview": "next build && next start",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:data": "node --experimental-strip-types scripts/check-data.ts",
+    "find:news": "node --experimental-strip-types scripts/find-news.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.3",

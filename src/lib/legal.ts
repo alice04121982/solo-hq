@@ -1,7 +1,7 @@
 /**
  * Legal page content.
  *
- * Every statement in this file is a representation Cairn Fertility can be
+ * Every statement in this file is a representation CairnFertility can be
  * held to (regulators enforce against policies that don't match actual
  * behaviour — see FTC v. Flo Health). So the rule for editing this file is:
  * describe what the codebase actually does, and when the codebase changes
@@ -23,6 +23,9 @@
  *   see or store the coordinates ourselves.
  * - The clinic matcher's answers (family type, age, medical history, budget)
  *   are held in browser memory only and never transmitted or stored.
+ * - The share-your-story form (/stories/share) drafts an email entirely in
+ *   the browser; nothing is transmitted unless the reader sends it from
+ *   their own email app. There is no submission backend.
  * - Hosting is Vercel; their edge network processes IP addresses in
  *   standard server logs.
  *
@@ -62,7 +65,7 @@ export interface LegalPage {
 
 export const LEGAL_CONTACT_EMAIL = "stories@cairnfertility.co.uk";
 
-const EFFECTIVE_DATE = "10 August 2026";
+const EFFECTIVE_DATE = "24 August 2026";
 
 /* ─── Privacy Policy ──────────────────────────────────────────────────────── */
 
@@ -70,9 +73,9 @@ const PRIVACY: LegalPage = {
   slug: "privacy",
   label: "Privacy Policy",
   title: "Privacy Policy",
-  metaTitle: "Privacy Policy | Cairn Fertility",
+  metaTitle: "Privacy Policy | CairnFertility",
   metaDescription:
-    "How Cairn Fertility handles personal data: what little we collect, what never leaves your browser, and the rights you have over your information.",
+    "How CairnFertility handles personal data: what little we collect, what never leaves your browser, and the rights you have over your information.",
   standfirst:
     "Fertility is among the most personal subjects there is, so we built this site to know as little about you as possible. This policy explains exactly what that means in practice.",
   effectiveDate: EFFECTIVE_DATE,
@@ -80,7 +83,7 @@ const PRIVACY: LegalPage = {
     {
       heading: "The short version",
       body: [
-        "Cairn Fertility is an information and comparison site. You do not need an account to use it, and we have deliberately built it without the machinery that usually collects personal data.",
+        "CairnFertility is an information and comparison site. You do not need an account to use it, and we have deliberately built it without the machinery that usually collects personal data.",
       ],
       bullets: [
         "We set no cookies and run no analytics, advertising, or tracking of any kind.",
@@ -96,7 +99,7 @@ const PRIVACY: LegalPage = {
     {
       heading: "Who we are",
       body: [
-        "Cairn Fertility is a UK-based information service that helps people compare IVF clinics and understand fertility treatment. We are the \"controller\" of the small amount of personal data described in this policy, which means we decide how and why it is used.",
+        "CairnFertility is a UK-based information service that helps people compare IVF clinics and understand fertility treatment. We are the \"controller\" of the small amount of personal data described in this policy, which means we decide how and why it is used.",
         "For anything relating to this policy or your personal data, contact us at [stories@cairnfertility.co.uk](mailto:stories@cairnfertility.co.uk). We will publish our registered company details on our [contact page](/contact) as they are finalised.",
       ],
     },
@@ -110,6 +113,11 @@ const PRIVACY: LegalPage = {
           term: "Email you send us",
           description:
             "If you email us, we receive your address and whatever you choose to write. We use it only to reply and to keep a record of the correspondence. Please don't include medical details in an email — we are not a medical service and don't need them.",
+        },
+        {
+          term: "The share-your-story form",
+          description:
+            "Our story form works the same way as writing to us directly: what you type stays in your browser while you draft, and is only sent — by you, from your own email app — when you choose to send it. We have no submission backend, so we cannot see drafts, and an unsent story never reaches us. Stories are published only after we have agreed the final text with you by email, and you can withdraw a story at any time.",
         },
         {
           term: "Joining the waitlist",
@@ -237,17 +245,17 @@ const TERMS: LegalPage = {
   slug: "terms",
   label: "Terms of Service",
   title: "Terms of Service",
-  metaTitle: "Terms of Service | Cairn Fertility",
+  metaTitle: "Terms of Service | CairnFertility",
   metaDescription:
-    "The terms that apply when you use Cairn Fertility: what the service is, what our information can and cannot be relied on for, and where responsibility sits.",
+    "The terms that apply when you use CairnFertility: what the service is, what our information can and cannot be relied on for, and where responsibility sits.",
   standfirst:
-    "These terms are the agreement between you and Cairn Fertility when you use this website. We have kept them as plain as the law allows.",
+    "These terms are the agreement between you and CairnFertility when you use this website. We have kept them as plain as the law allows.",
   effectiveDate: EFFECTIVE_DATE,
   sections: [
     {
       heading: "Who we are and what this is",
       body: [
-        "Cairn Fertility (\"we\", \"us\") publishes this website to help people — solo parents by choice, LGBTQ+ families, and couples — understand fertility treatment and compare IVF clinics. Contact us at [stories@cairnfertility.co.uk](mailto:stories@cairnfertility.co.uk).",
+        "CairnFertility (\"we\", \"us\") publishes this website to help people — solo parents by choice, LGBTQ+ families, and couples — understand fertility treatment and compare IVF clinics. Contact us at [stories@cairnfertility.co.uk](mailto:stories@cairnfertility.co.uk).",
         "By using the site you accept these terms. If you do not accept them, please do not use the site. Nothing in these terms affects rights you have as a consumer that the law does not allow to be limited or excluded.",
       ],
     },
@@ -274,6 +282,7 @@ const TERMS: LegalPage = {
         "Success rates are population statistics. They vary substantially with age, diagnosis, and protocol, and no published rate is a prediction for any individual.",
       ],
       postBody: [
+        "We have adopted the Competition and Markets Authority's [consumer law guidance for fertility clinics](https://www.gov.uk/cma-cases/self-funded-ivf-consumer-law-guidance) (June 2021) as our editorial standard for how prices and success rates are presented, and our [methodology](/about#methodology) explains how we apply it.",
         "Personal stories and quotes on this site are illustrative composites reflecting common experiences in the community. They are not accounts of real, identifiable patients unless expressly stated otherwise.",
       ],
     },
@@ -289,7 +298,7 @@ const TERMS: LegalPage = {
     {
       heading: "Intellectual property",
       body: [
-        "The content of this site — text, design, graphics, and the way our comparisons are compiled and presented — belongs to Cairn Fertility or its licensors. Underlying public data, such as HFEA statistics, remains public: our rights are in our expression and compilation, not in facts, which belong to everyone.",
+        "The content of this site — text, design, graphics, and the way our comparisons are compiled and presented — belongs to CairnFertility or its licensors. Underlying public data, such as HFEA statistics, remains public: our rights are in our expression and compilation, not in facts, which belong to everyone.",
       ],
     },
     {
@@ -330,9 +339,9 @@ const COOKIES: LegalPage = {
   slug: "cookies",
   label: "Cookie Policy",
   title: "Cookie Policy",
-  metaTitle: "Cookie Policy | Cairn Fertility",
+  metaTitle: "Cookie Policy | CairnFertility",
   metaDescription:
-    "Cairn Fertility sets no cookies of any kind — no analytics, no advertising, no tracking. This policy explains that in full, and what would have to change first.",
+    "CairnFertility sets no cookies of any kind — no analytics, no advertising, no tracking. This policy explains that in full, and what would have to change first.",
   standfirst:
     "This is an unusual cookie policy, because the honest summary is one sentence long: this site sets no cookies at all.",
   effectiveDate: EFFECTIVE_DATE,
@@ -340,7 +349,7 @@ const COOKIES: LegalPage = {
     {
       heading: "The complete list of cookies we use",
       body: [
-        "As of the effective date above, Cairn Fertility sets no cookies. Not strictly-necessary ones, not analytics, not advertising, not preferences. We also use no comparable technologies: no localStorage or sessionStorage tracking, no pixels, no beacons, no fingerprinting, and no third-party analytics or advertising scripts of any kind.",
+        "As of the effective date above, CairnFertility sets no cookies. Not strictly-necessary ones, not analytics, not advertising, not preferences. We also use no comparable technologies: no localStorage or sessionStorage tracking, no pixels, no beacons, no fingerprinting, and no third-party analytics or advertising scripts of any kind.",
         "That is why you see no cookie banner here. Consent banners exist to authorise non-essential cookies; a site that sets none has nothing to ask permission for.",
       ],
     },
@@ -395,9 +404,9 @@ const DISCLAIMER: LegalPage = {
   slug: "disclaimer",
   label: "Medical Disclaimer",
   title: "Medical Disclaimer",
-  metaTitle: "Medical Disclaimer | Cairn Fertility",
+  metaTitle: "Medical Disclaimer | CairnFertility",
   metaDescription:
-    "Cairn Fertility is an information service, not a medical provider. What our content can be used for, what it must never replace, and where to get real medical help.",
+    "CairnFertility is an information service, not a medical provider. What our content can be used for, what it must never replace, and where to get real medical help.",
   standfirst:
     "We publish information to make fertility treatment easier to navigate. It is not medical advice, and this page draws that line as clearly as we can.",
   effectiveDate: EFFECTIVE_DATE,
@@ -405,7 +414,7 @@ const DISCLAIMER: LegalPage = {
     {
       heading: "We are not a medical provider",
       body: [
-        "Cairn Fertility is an editorial information and comparison service. We are not a clinic, hospital, or healthcare provider; we are not licensed by the HFEA or any medical regulator; and no doctors review your personal situation through this site. Reading our content, or using our tools, does not create a doctor–patient or any other clinical relationship.",
+        "CairnFertility is an editorial information and comparison service. We are not a clinic, hospital, or healthcare provider; we are not licensed by the HFEA or any medical regulator; and no doctors review your personal situation through this site. Reading our content, or using our tools, does not create a doctor–patient or any other clinical relationship.",
         "Everything on this site — guides, comparisons, statistics, stories, and tool results — is general information for educational purposes. It is not medical advice, diagnosis, or treatment, and it is not tailored to your medical circumstances, however specific it may seem.",
       ],
     },
@@ -462,9 +471,9 @@ const ACCESSIBILITY: LegalPage = {
   slug: "accessibility",
   label: "Accessibility",
   title: "Accessibility Statement",
-  metaTitle: "Accessibility | Cairn Fertility",
+  metaTitle: "Accessibility | CairnFertility",
   metaDescription:
-    "Cairn Fertility's accessibility commitment: our WCAG 2.2 AA target, what we've built so far, known limitations, and how to tell us when something doesn't work.",
+    "CairnFertility's accessibility commitment: our WCAG 2.2 AA target, what we've built so far, known limitations, and how to tell us when something doesn't work.",
   standfirst:
     "Fertility treatment is navigated by people of every ability, often at a stressful time. This site should work for all of them. Here is where we are, honestly.",
   effectiveDate: EFFECTIVE_DATE,
@@ -517,9 +526,9 @@ const CONTACT: LegalPage = {
   slug: "contact",
   label: "Contact",
   title: "Contact Us",
-  metaTitle: "Contact | Cairn Fertility",
+  metaTitle: "Contact | CairnFertility",
   metaDescription:
-    "How to reach Cairn Fertility: questions, corrections, story submissions, privacy requests, accessibility problems, and complaints.",
+    "How to reach CairnFertility: questions, corrections, story submissions, privacy requests, accessibility problems, and complaints.",
   standfirst:
     "We are a small UK team, and email is the best way to reach us. Here is where to send what, and what to expect back.",
   effectiveDate: EFFECTIVE_DATE,
@@ -548,7 +557,7 @@ const CONTACT: LegalPage = {
     {
       heading: "Who you are writing to",
       body: [
-        "Cairn Fertility is a UK-based, independent information service. We are not owned by, or affiliated with, any clinic, and no clinic pays to appear on this site. Our registered business details will be published here as they are finalised; in the meantime, the inbox below reaches the people who make this site.",
+        "CairnFertility is a UK-based, independent information service. We are not owned by, or affiliated with, any clinic, and no clinic pays to appear on this site. Our registered business details will be published here as they are finalised; in the meantime, the inbox below reaches the people who make this site.",
       ],
       callout:
         "If your message is a formal legal or data protection notice, sending it to the email address on this page counts as sending it to us.",

@@ -4,8 +4,9 @@ import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { StoryImage } from "@/components/story-image";
+import { ShapeMark } from "@/components/shapes";
 import { TraditionExplorer } from "@/components/faith/tradition-explorer";
-import { ConversationToolkit } from "@/components/faith/conversation-toolkit";
+import { ConversationToolkit } from "@/components/conversation-toolkit";
 import {
   CONVERSATION_SCENARIOS,
   FAITH_QUESTIONS,
@@ -57,7 +58,11 @@ export default function FaithPage() {
 
       {/* Hero */}
       <section className="mx-auto px-6 md:px-12 lg:px-16 pt-20 md:pt-28 pb-16">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           Faith, culture &amp; belief
         </p>
         <h1
@@ -139,8 +144,10 @@ export default function FaithPage() {
       >
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
           <p
-            className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans"
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
           >
+            <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
             The reframe
           </p>
           <h2
@@ -184,7 +191,11 @@ export default function FaithPage() {
       {/* Traditions */}
       <section id="traditions" className="border-t border-border scroll-mt-20">
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
             Where traditions stand
           </p>
           <h2
@@ -220,7 +231,11 @@ export default function FaithPage() {
         style={{ background: "var(--background-alt)" }}
       >
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
             In the clinic
           </p>
           <h2
@@ -254,7 +269,11 @@ export default function FaithPage() {
       {/* Stories */}
       <section id="stories" className="border-t border-border scroll-mt-20">
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="cross" size={14} style={{ color: "var(--lavender)" }} />
             In their own words
           </p>
           <h2
@@ -330,9 +349,9 @@ export default function FaithPage() {
               </p>
             </div>
             <Link
-              href="/get-started"
+              href="/stories/share"
               className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Share your story
               <ArrowRight className="h-3.5 w-3.5" />
@@ -348,7 +367,11 @@ export default function FaithPage() {
         style={{ background: "var(--background-alt)" }}
       >
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="asterisk" size={14} style={{ color: "var(--lavender)" }} />
             When the conversation is against you
           </p>
           <h2
@@ -446,7 +469,11 @@ export default function FaithPage() {
       {/* Support */}
       <section id="support" className="border-t border-border scroll-mt-20">
         <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
-          <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+            style={{ color: "var(--teal)" }}
+          >
+            <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
             Where to go next
           </p>
           <h2

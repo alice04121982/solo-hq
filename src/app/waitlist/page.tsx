@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
+import { ShapeMark } from "@/components/shapes";
 import { WaitlistForm } from "@/components/waitlist-form";
 
 export const metadata: Metadata = {
@@ -15,16 +16,17 @@ export default function WaitlistPage() {
         <SiteNav />
       </div>
 
-      <Section band={0} padding="py-12 md:py-16">
+      <Section band={0} padding="py-12 md:py-16" backdrop={{ shape: "dots" }}>
         <div className="max-w-2xl">
-          <span
-            className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5"
-            style={{ background: "#C5E600", color: "#1A3A25" }}
+          <p
+            className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-5"
+            style={{ color: "var(--teal)" }}
           >
+            <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
             Community waitlist
-          </span>
+          </p>
           <h1
-            className="font-sans font-bold text-foreground mb-4"
+            className="font-sans font-bold text-teal mb-4"
             style={{ fontSize: "clamp(2.75rem, 5vw, 5rem)", lineHeight: 1.06 }}
           >
             You&rsquo;re not doing this alone.

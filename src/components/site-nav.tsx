@@ -15,10 +15,12 @@ const PRIMARY_LINKS = [
 ];
 
 const MORE_LINKS = [
+  { label: "Funding", href: "/funding" },
+  { label: "In the Media", href: "/news" },
+  { label: "IVF & Work", href: "/work" },
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },
-  { label: "Our Story", href: "/our-story" },
 ];
 
 interface SiteNavProps {
@@ -118,7 +120,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             className={`text-sm font-sans transition-colors duration-150 ${
               isDark
                 ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : pathname === l.href ? "text-foreground" : "text-muted hover:text-foreground"
+                : pathname === l.href ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
             {l.label}
@@ -136,7 +138,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
               isDark
                 ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : moreActive ? "text-foreground" : "text-muted hover:text-foreground"
+                : moreActive ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
             More
@@ -155,7 +157,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
                   role="menuitem"
                   onClick={() => setMoreOpen(false)}
                   className={`block rounded-lg px-3 py-2.5 text-sm font-sans transition-colors duration-150 ${
-                    pathname === l.href ? "text-foreground bg-surface-hover" : "text-muted hover:text-foreground hover:bg-surface-hover"
+                    pathname === l.href ? "text-teal bg-surface-hover" : "text-muted hover:text-teal hover:bg-surface-hover"
                   }`}
                 >
                   {l.label}
@@ -171,7 +173,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
         <a
           href="/get-started"
           className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
-          style={{ background: "#C5E600", color: "#1A3A25" }}
+          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           Get Started
           <ArrowRight className="h-3.5 w-3.5" />
@@ -180,7 +182,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
       {/* Mobile burger */}
       <button
-        className={`lg:hidden p-1 ${isDark ? "text-[#f9c6da]" : "text-foreground"}`}
+        className={`lg:hidden p-1 ${isDark ? "text-on-teal" : "text-teal"}`}
         onClick={() => setOpen(true)}
         aria-label="Open menu"
         aria-expanded={open}
@@ -247,7 +249,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
               href="/get-started"
               onClick={() => setOpen(false)}
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium shrink-0"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Get Started
               <ArrowRight className="h-3.5 w-3.5" />

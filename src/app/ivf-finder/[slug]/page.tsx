@@ -7,8 +7,16 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { CompareButton } from "@/components/ivf-finder/compare-button";
 import { VerificationBadge } from "@/components/ivf-finder/rate-display";
-import { CLINICS, getClinic } from "@/lib/clinics";
+import { CLINICS, DATA_PROVENANCE, getClinic } from "@/lib/clinics";
+import {
+  formatRangeGbp,
+  googleFlightsUrl,
+  staySearchUrl,
+  travelEstimateForCity,
+  TRAVEL_ASSUMPTIONS,
+} from "@/lib/travel";
 import { AGE_BRACKETS } from "@/types/clinic";
+import { RegulatorNotice } from "@/components/regulator-notice";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -38,6 +46,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
   if (!clinic) notFound();
 
   const report = clinic.successRates;
+  const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
 
   const facts: { label: string; value: string }[] = [
     {
@@ -47,6 +56,22 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           ? `£${clinic.pricePerCycleGbp.toLocaleString()} (own-egg IVF, headline price)`
           : "Not published",
     },
+    ...(clinic.iuiPricePerCycleGbp != null
+      ? [
+          {
+            label: "IUI per cycle",
+            value: `£${clinic.iuiPricePerCycleGbp.toLocaleString()} (excludes drugs and donor sperm)`,
+          },
+        ]
+      : []),
+    ...(travel != null
+      ? [
+          {
+            label: "Travel estimate",
+            value: `${formatRangeGbp(travel)} flights + stays over ${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`,
+          },
+        ]
+      : []),
     {
       label: "Donor anonymity",
       value: clinic.donorAnonymity ? DONOR_LABELS[clinic.donorAnonymity] : "No donor treatment offered",
@@ -164,6 +189,33 @@ export default async function ClinicDetailPage({ params }: PageProps) {
                 </div>
               ))}
             </div>
+            {travel != null && (
+              <div className="mb-6 -mt-2">
+                {travel.destination.note && (
+                  <p className="text-xs text-muted mb-2">{travel.destination.note}</p>
+                )}
+                <div className="flex flex-wrap gap-x-4 gap-y-1">
+                  <a
+                    href={googleFlightsUrl(travel.destination)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    Check live flight prices
+                    <ExternalLink className="h-3 w-3" aria-hidden />
+                  </a>
+                  <a
+                    href={staySearchUrl(travel.destination)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    Check places to stay
+                    <ExternalLink className="h-3 w-3" aria-hidden />
+                  </a>
+                </div>
+              </div>
+            )}
             <h3 className="text-[12px] font-[700] uppercase tracking-[0.14em] text-muted mb-3">
               Treatments offered
             </h3>
@@ -171,7 +223,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
               {clinic.treatments.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full bg-surface-sunken px-2.5 py-1 text-xs font-medium text-foreground"
+                  className="rounded-full bg-background border border-border px-2.5 py-1 text-xs font-medium text-foreground"
                 >
                   {t}
                 </span>
@@ -181,10 +233,22 @@ export default async function ClinicDetailPage({ params }: PageProps) {
         </div>
 
         <p className="text-xs text-muted mt-8" style={{ maxWidth: "70ch" }}>
-          Figures on this page are indicative and change over time. Confirm current prices and
-          success rates directly with the clinic before making decisions, and ask for live
-          births per embryo transfer for your age group so quotes are comparable.
+          Figures on this page are indicative and change over time. Prices are compiled from{" "}
+          {DATA_PROVENANCE.pricesSourceLabel} and were last verified on{" "}
+          {new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            timeZone: "UTC",
+          })}
+          . Confirm current prices and success rates directly with the clinic before making
+          decisions, and ask for live births per embryo transfer for your age group so quotes
+          are comparable.
         </p>
+
+        <div className="mt-6">
+          <RegulatorNotice />
+        </div>
       </Section>
     </main>
   );

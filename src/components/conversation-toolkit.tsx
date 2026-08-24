@@ -3,15 +3,40 @@
 import { useState } from "react";
 import { MessageSquareQuote, ShieldOff, DoorOpen } from "lucide-react";
 import { CopyButton } from "@/components/copy-button";
-import type { ConversationScenario } from "@/lib/faith";
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
+/**
+ * The shape both the faith and work scenario sets satisfy structurally, so
+ * neither section's data file has to depend on the other's. Anything with a
+ * situation, some context, lines to say and a way out can use this.
+ */
+export interface ToolkitScenario {
+  slug: string;
+  label: string;
+  situation: string;
+  whatsHappening: string[];
+  notYourJob: string[];
+  tryThis: string[];
+  exitLine: string;
+}
+
+interface ToolkitLabels {
+  /** Accessible name for the scenario tablist. */
+  tablist?: string;
+  context?: string;
+  notYourJob?: string;
+  scripts?: string;
+  exit?: string;
+}
+
 export function ConversationToolkit({
   scenarios,
+  labels,
 }: {
-  scenarios: ConversationScenario[];
+  scenarios: ToolkitScenario[];
+  labels?: ToolkitLabels;
 }) {
   const [active, setActive] = useState(scenarios[0].slug);
   const scenario = scenarios.find((s) => s.slug === active) ?? scenarios[0];
@@ -21,7 +46,7 @@ export function ConversationToolkit({
       {/* Scenario picker */}
       <div
         role="tablist"
-        aria-label="Difficult conversations"
+        aria-label={labels?.tablist ?? "Difficult conversations"}
         className="flex flex-wrap gap-2 mb-10"
       >
         {scenarios.map((s) => {
@@ -36,8 +61,8 @@ export function ConversationToolkit({
               onClick={() => setActive(s.slug)}
               className={`rounded-full border text-xs font-sans px-4 py-2 text-left transition-colors duration-150 ${
                 isActive
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+                  ? "border-teal bg-teal text-on-teal"
+                  : "border-border text-muted hover:border-teal/40 hover:text-teal"
               }`}
             >
               {s.label}
@@ -65,7 +90,7 @@ export function ConversationToolkit({
               className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
               style={{ color: TEAL_SOFT }}
             >
-              What&rsquo;s usually going on
+              {labels?.context ?? "What's usually going on"}
             </p>
             {scenario.whatsHappening.map((para, i) => (
               <p
@@ -86,7 +111,7 @@ export function ConversationToolkit({
                 style={{ color: TEAL_SOFT }}
               >
                 <ShieldOff className="h-3.5 w-3.5" />
-                Not your job
+                {labels?.notYourJob ?? "Not your job"}
               </p>
               <ul className="space-y-2">
                 {scenario.notYourJob.map((item, i) => (
@@ -109,7 +134,7 @@ export function ConversationToolkit({
               style={{ color: TEAL_SOFT }}
             >
               <MessageSquareQuote className="h-3.5 w-3.5" />
-              Things you can actually say
+              {labels?.scripts ?? "Things you can actually say"}
             </p>
             <ul className="space-y-3">
               {scenario.tryThis.map((line, i) => (
@@ -140,7 +165,7 @@ export function ConversationToolkit({
                 style={{ color: "var(--on-teal-muted)" }}
               >
                 <DoorOpen className="h-3.5 w-3.5" />
-                A way out
+                {labels?.exit ?? "A way out"}
               </p>
               <p
                 className="text-[15px] font-sans leading-relaxed font-[500]"
