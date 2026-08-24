@@ -1,3 +1,9 @@
+/**
+ * ILLUSTRATIVE CONTENT: every story in this file is fictional — written to
+ * show what each journey feels like while real, consented accounts are
+ * collected. Any component rendering `stories` must carry an "illustrative"
+ * disclaimer (see `PersonalStories`), and no story may endorse Cairn itself.
+ */
 export type FamilyTypeSlug =
   | "solo-mum"
   | "same-sex-female"
@@ -53,6 +59,12 @@ export interface FamilyType {
   image?: string;
   imageAlt?: string;
   hideHeroImage?: boolean;
+  /**
+   * Renders the family's shape mark (per `FAMILY_SHAPES`) as an oversized
+   * backdrop cropped by the hero's top edge — the band-backdrop treatment
+   * from `Section`, applied to the guide hero.
+   */
+  heroShapeBackdrop?: boolean;
   treatmentHighlight: string;
   steps: ProcessStep[];
   stories: Story[];
@@ -124,7 +136,7 @@ export const FAMILY_TYPES: FamilyType[] = [
         location: "Bristol",
         tag: "IVF with donor sperm",
         title: "From 'someday' to mum of one in 22 months",
-        body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting. It was trusting myself to make this decision without anyone to share it with. The Cairn community gave me that.",
+        body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting. It was trusting myself to make this decision without anyone to share it with. An online community of women on the same path gave me that.",
         quote: "The hardest part wasn't the injections or the waiting. It was trusting myself to make this decision without anyone to share it with.",
         treatment: "IUI × 2, IVF × 1",
       },
@@ -166,6 +178,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners, this guide walks you through every stage with clarity.",
     cardSummary:
       "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
+    heroShapeBackdrop: true,
     treatmentHighlight: "IUI · IVF · ICSI · Reciprocal IVF · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
@@ -201,7 +214,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 7,
         title: "Legal parenthood for both partners",
-        body: "In the UK, the non-carrying partner in a same-sex female couple is not automatically a legal parent, even if the child was conceived at a licensed clinic. You must be married or in a civil partnership at the time of treatment (and both consent) for the non-carrying partner to be on the birth certificate. If you're not, you can adopt after birth. Get legal advice before treatment.",
+        body: "In the UK, if you conceive at an HFEA-licensed clinic, the non-carrying partner can be a legal parent from birth. If you are married or in a civil partnership at the time of treatment, she is the second legal parent automatically (unless she does not consent). If you are not married or civilly partnered, she can still become the second legal parent by signing the clinic's parenthood consent forms with you before treatment starts, under the Human Fertilisation and Embryology Act 2008. Ask your clinic for these forms early, and get legal advice if anything is unclear.",
       },
       {
         number: 8,
@@ -452,7 +465,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Understand your diagnosis",
-        body: "The most common diagnoses are male factor infertility (MFI, affecting 40% of fertility cases), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, ~25% of couples). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
+        body: "The most common diagnoses are male factor infertility (MFI, a factor in roughly a third of cases), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, ~25% of couples). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
       },
       {
         number: 3,

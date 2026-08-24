@@ -24,7 +24,7 @@ export default function ContactPage() {
       {/* Email card — the only channel that exists today. Three addresses,
           one mailbox behind them, each with its purpose beside it so nobody
           has to guess which one their message belongs in. */}
-      <div className="mt-12 rounded-2xl bg-background border border-border p-6 md:p-8">
+      <div className="mt-12 rounded-2xl bg-background p-6 md:p-8">
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-4 font-sans">
           Email us
         </p>

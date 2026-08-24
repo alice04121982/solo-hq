@@ -51,8 +51,8 @@ function Chip({
       aria-pressed={selected}
       className={`rounded-full border px-4 py-2 text-sm font-sans transition-all duration-150 ${
         selected
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+          ? "border-teal bg-teal text-on-teal"
+          : "border-border text-muted hover:border-teal/40 hover:text-teal"
       }`}
     >
       {label}
@@ -83,7 +83,7 @@ function SuccessPanel({
       </span>
 
       <h3
-        className="font-sans font-bold text-foreground mb-3"
+        className="font-sans font-bold text-teal mb-3"
         style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", lineHeight: 1.15 }}
       >
         You&rsquo;re on the list, {signup.firstName}.
@@ -216,7 +216,7 @@ export function CommunityWaitlistForm() {
                   onChange={(e) => setFirstName(e.target.value)}
                   placeholder="What should we call you?"
                   autoComplete="given-name"
-                  className="w-full rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
+                  className="w-full rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
                 />
               </div>
               <div>
@@ -227,7 +227,7 @@ export function CommunityWaitlistForm() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="w-full rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
+                  className="w-full rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:border-teal-35 transition-colors"
                 />
               </div>
             </div>

@@ -40,15 +40,15 @@ export function WaitlistForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl bg-background border border-border p-6 md:p-8 flex items-start gap-4">
+      <div className="rounded-2xl bg-cream p-6 md:p-8 flex items-start gap-4">
         <span
           className="flex items-center justify-center h-9 w-9 rounded-full shrink-0"
-          style={{ background: "var(--accent)", color: "#1A3A25" }}
+          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           <Check className="h-4.5 w-4.5" />
         </span>
         <div>
-          <p className="font-sans font-semibold text-foreground mb-1">
+          <p className="font-sans font-semibold text-teal mb-1">
             {status === "joined" ? "You're on the list." : "You're already on the list."}
           </p>
           <p className="text-sm font-sans text-muted leading-relaxed">
@@ -60,7 +60,7 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-background border border-border p-6 md:p-8">
+    <form onSubmit={handleSubmit} className="rounded-2xl bg-cream p-6 md:p-8">
       <label htmlFor="waitlist-email" className="block text-[13px] font-[500] uppercase tracking-[0.15em] text-teal mb-3 font-sans">
         Your email
       </label>
@@ -73,13 +73,13 @@ export function WaitlistForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="flex-1 rounded-full border border-border bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-teal/40"
+          className="flex-1 rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-sans text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-teal/40"
         />
         <button
           type="submit"
           disabled={status === "loading"}
           className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90 disabled:opacity-60 shrink-0"
-          style={{ background: "var(--accent)", color: "#1A3A25" }}
+          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           {status === "loading" ? "Joining…" : "Join the waitlist"}
           {status !== "loading" && <ArrowRight className="h-3.5 w-3.5" />}

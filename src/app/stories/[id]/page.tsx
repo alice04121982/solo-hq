@@ -73,8 +73,11 @@ export default async function StoryPage({ params }: PageProps) {
         style={{ background: "var(--lime)", color: "var(--muted)" }}
       >
         This is an illustrative story, written to show what real accounts will look
-        like here. It does not describe a real person. To share your own story,
-        write to stories@cairnfertility.com.
+        like here. It does not describe a real person. To share your own story,{" "}
+        <Link href="/stories/share" className="underline underline-offset-2" style={{ color: "var(--foreground)" }}>
+          use our story form
+        </Link>{" "}
+        or write to stories@cairnfertility.com.
       </p>
 
       <div className="space-y-6">

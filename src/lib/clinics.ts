@@ -1,4 +1,5 @@
 import type { AgeBracket, Clinic, Region } from "@/types/clinic";
+import { excludedCountriesByRegion, exclusionFor } from "./clinic-exclusions.ts";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -17,7 +18,12 @@ import type { AgeBracket, Clinic, Region } from "@/types/clinic";
  * - A clinic gets "IUI" in treatments only together with iuiPricePerCycleGbp,
  *   so the budget filter can price the treatment it is offering.
  * - Any price change must update DATA_PROVENANCE.pricesVerifiedOn.
- *   `npm run check:data` enforces these invariants and flags stale data.
+ * - A clinic covered by `src/lib/clinic-exclusions.ts` does not belong in
+ *   this file at all. `CLINIC_RECORDS` is filtered through that policy on the
+ *   way to `CLINICS` so an excluded clinic can never reach a page, and
+ *   `npm run check:data` fails if one is added here anyway.
+ *
+ * `npm run check:data` enforces these invariants and flags stale data.
  */
 
 const HFEA_SOURCE = {
@@ -32,7 +38,7 @@ const HFEA_SOURCE = {
  */
 export const DATA_PROVENANCE = {
   /** ISO date this file's prices and treatment lists were last re-verified. */
-  pricesVerifiedOn: "2026-08-11",
+  pricesVerifiedOn: "2026-08-12",
   pricesSourceLabel: "each clinic's published price list",
   /** National benchmarks the figures are sanity-checked against. */
   benchmarks: [
@@ -62,15 +68,21 @@ export const DATA_PROVENANCE = {
     },
     /**
      * Latest national dataset to re-verify against: "Fertility treatment
-     * 2023: trends and figures", published July 2025, covering treatment
-     * year 2023.
+     * 2024: trends and figures", published June 2026, covering treatment
+     * year 2024. The per-clinic Choose a Clinic dashboard currently shows
+     * 2023 birth-rate data (flagged preliminary by HFEA).
      */
     latestNationalReportUrl:
-      "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2023-trends-and-figures/",
+      "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures/",
   },
 } as const;
 
-export const CLINICS: Clinic[] = [
+/**
+ * Every clinic record in the file, excluded ones included. Nothing renders
+ * from this: it exists so `npm run check:data` can see what was written here
+ * before the exclusion policy is applied. Pages import `CLINICS`.
+ */
+export const CLINIC_RECORDS: Clinic[] = [
   // ── UK ──
   {
     slug: "bourn-hall",
@@ -82,7 +94,7 @@ export const CLINICS: Clinic[] = [
     phone: "01954 717 400",
     website: "https://www.bournhall.co.uk",
     hfeaLicensed: true,
-    hfeaNumber: "0001",
+    hfeaNumber: "0100",
     treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 4500,
     iuiPricePerCycleGbp: 1150,
@@ -93,42 +105,13 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/100/",
       byBracket: {
         under35: 44,
         age35to37: 36,
         age38to39: 25,
         age40to42: 14,
         age43to44: 5,
-      },
-    },
-  },
-  {
-    slug: "care-cambridge",
-    name: "CARE Fertility Cambridge",
-    city: "Cambridge",
-    country: "United Kingdom",
-    region: "UK",
-    address: "Nuffield Road, Cambridge, CB4 1GL",
-    phone: "01223 349 244",
-    website: "https://www.carefertility.com/fertility-clinics/cambridge",
-    hfeaLicensed: true,
-    hfeaNumber: "0046",
-    treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
-    pricePerCycleGbp: 4200,
-    iuiPricePerCycleGbp: 1050,
-    donorAnonymity: "identifiable",
-    remoteConsultation: true,
-    successRates: {
-      verification: "hfea",
-      denominator: "per embryo transfer",
-      year: 2022,
-      ...HFEA_SOURCE,
-      byBracket: {
-        under35: 40,
-        age35to37: 33,
-        age38to39: 22,
-        age40to42: 12,
-        age43to44: 4,
       },
     },
   },
@@ -142,7 +125,7 @@ export const CLINICS: Clinic[] = [
     phone: "01992 78 50 60",
     website: "https://www.hertsandessexfertility.com",
     hfeaLicensed: true,
-    hfeaNumber: "0093",
+    hfeaNumber: "0030",
     treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 3950,
     iuiPricePerCycleGbp: 1000,
@@ -153,6 +136,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/30/",
       byBracket: {
         under35: 38,
         age35to37: 30,
@@ -172,7 +156,7 @@ export const CLINICS: Clinic[] = [
     phone: "020 7563 4309",
     website: "https://www.londonwomensclinic.com",
     hfeaLicensed: true,
-    hfeaNumber: "0006",
+    hfeaNumber: "0105",
     treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
     pricePerCycleGbp: 4800,
     iuiPricePerCycleGbp: 1350,
@@ -184,6 +168,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/105/",
       byBracket: {
         under35: 45,
         age35to37: 37,
@@ -204,9 +189,9 @@ export const CLINICS: Clinic[] = [
     phone: "0333 202 0475",
     website: "https://www.createfertility.co.uk",
     hfeaLicensed: true,
-    hfeaNumber: "0152",
+    hfeaNumber: "9129",
     treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "Egg freezing"],
-    pricePerCycleGbp: 3500,
+    pricePerCycleGbp: 3795,
     iuiPricePerCycleGbp: 1050,
     donorAnonymity: "identifiable",
     remoteConsultation: true,
@@ -215,6 +200,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/9129/",
       byBracket: {
         under35: 36,
         age35to37: 28,
@@ -234,7 +220,7 @@ export const CLINICS: Clinic[] = [
     phone: "020 7881 9001",
     website: "https://www.listerfertility.co.uk",
     hfeaLicensed: true,
-    hfeaNumber: "0012",
+    hfeaNumber: "0006",
     treatments: ["IVF", "ICSI", "IUI", "Donor eggs", "Donor sperm", "PGT-A", "Egg freezing"],
     pricePerCycleGbp: 5200,
     iuiPricePerCycleGbp: 1500,
@@ -245,6 +231,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/6/",
       byBracket: {
         under35: 48,
         age35to37: 40,
@@ -265,7 +252,7 @@ export const CLINICS: Clinic[] = [
     phone: "020 3299 3637",
     website: "https://www.kingsfertility.co.uk",
     hfeaLicensed: true,
-    hfeaNumber: "0180",
+    hfeaNumber: "0109",
     treatments: ["IVF", "ICSI", "IUI", "Donor sperm", "Egg freezing"],
     pricePerCycleGbp: 4100,
     iuiPricePerCycleGbp: 1050,
@@ -276,6 +263,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/109/",
       byBracket: {
         under35: 39,
         age35to37: 31,
@@ -295,7 +283,7 @@ export const CLINICS: Clinic[] = [
     phone: "01223 216 859",
     website: "https://www.cuh.nhs.uk/our-services/assisted-conception-unit",
     hfeaLicensed: true,
-    hfeaNumber: "0042",
+    hfeaNumber: "0051",
     treatments: ["IVF", "ICSI", "IUI", "Donor sperm"],
     pricePerCycleGbp: 3800,
     iuiPricePerCycleGbp: 950,
@@ -306,6 +294,7 @@ export const CLINICS: Clinic[] = [
       denominator: "per embryo transfer",
       year: 2022,
       ...HFEA_SOURCE,
+      sourceUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/results/51/",
       byBracket: {
         under35: 37,
         age35to37: 29,
@@ -559,6 +548,17 @@ export const CLINICS: Clinic[] = [
   },
 ];
 
+/**
+ * The clinic database as every page sees it: the records above, minus any
+ * clinic Cairn has decided not to list (see `src/lib/clinic-exclusions.ts`).
+ *
+ * The filter is the guarantee, not the process. An excluded clinic is meant
+ * to be absent from `CLINIC_RECORDS` in the first place, and the data check
+ * fails if one is present — this is what keeps it off the site in the window
+ * between the mistake and the check.
+ */
+export const CLINICS: Clinic[] = CLINIC_RECORDS.filter((c) => exclusionFor(c) === undefined);
+
 export function getClinic(slug: string): Clinic | undefined {
   return CLINICS.find((c) => c.slug === slug);
 }
@@ -585,12 +585,24 @@ export function rankBySuccessRate(clinics: Clinic[], bracket: AgeBracket): Clini
   });
 }
 
-/** Countries present in the database, grouped by region in display order. */
+/**
+ * Countries present in the database, grouped by region in display order.
+ *
+ * Includes countries that have only excluded clinics. Someone filtering to
+ * where a clinic operates should be told it was removed and why, which is
+ * what the finder shows for those countries — an option that leads to an
+ * explanation beats a country that is silently missing from the list.
+ */
 export function countriesByRegion(): { region: Region; countries: string[] }[] {
   const regions: Region[] = ["UK", "Europe", "Rest of world"];
   return regions.map((region) => ({
     region,
-    countries: [...new Set(CLINICS.filter((c) => c.region === region).map((c) => c.country))].sort(),
+    countries: [
+      ...new Set([
+        ...CLINICS.filter((c) => c.region === region).map((c) => c.country),
+        ...excludedCountriesByRegion(region),
+      ]),
+    ].sort(),
   }));
 }
 

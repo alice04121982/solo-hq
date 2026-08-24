@@ -23,6 +23,9 @@
  *   see or store the coordinates ourselves.
  * - The clinic matcher's answers (family type, age, medical history, budget)
  *   are held in browser memory only and never transmitted or stored.
+ * - The share-your-story form (/stories/share) drafts an email entirely in
+ *   the browser; nothing is transmitted unless the reader sends it from
+ *   their own email app. There is no submission backend.
  * - Hosting is Vercel; their edge network processes IP addresses in
  *   standard server logs.
  *
@@ -91,7 +94,7 @@ export const CONTACT_EMAILS = {
 /** The address shown as the site's primary point of contact. */
 export const LEGAL_CONTACT_EMAIL = CONTACT_EMAILS.general;
 
-const EFFECTIVE_DATE = "12 August 2026";
+const EFFECTIVE_DATE = "24 August 2026";
 
 /* ─── Privacy Policy ──────────────────────────────────────────────────────── */
 
@@ -139,6 +142,11 @@ const PRIVACY: LegalPage = {
           term: "Email you send us",
           description:
             "If you email us, we receive your address and whatever you choose to write. We use it only to reply and to keep a record of the correspondence. Please don't include medical details in an email — we are not a medical service and don't need them.",
+        },
+        {
+          term: "The share-your-story form",
+          description:
+            "Our story form works the same way as writing to us directly: what you type stays in your browser while you draft, and is only sent — by you, from your own email app — when you choose to send it. We have no submission backend, so we cannot see drafts, and an unsent story never reaches us. Stories are published only after we have agreed the final text with you by email, and you can withdraw a story at any time.",
         },
         {
           term: "Joining the waitlist",

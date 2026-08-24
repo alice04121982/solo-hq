@@ -26,7 +26,7 @@ export const GUIDES: Guide[] = [
   // ─── Finance & Costs ────────────────────────────────────────────────────────
   {
     slug: "complete-solo-ivf-cost-breakdown",
-    title: "The complete solo IVF cost breakdown (2025)",
+    title: "The complete solo IVF cost breakdown (2026)",
     type: "Guide",
     category: "Finance & Costs",
     categorySlug: "finance-costs",
@@ -44,7 +44,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "The full cost breakdown",
         body: [
-          "Here is every cost category you should budget for on a single solo IVF cycle in the UK in 2025:",
+          "Here is every cost category you should budget for on a single solo IVF cycle in the UK in 2026:",
         ],
         bullets: [
           "Basic IVF cycle: £3,500–£6,500 depending on clinic and location",
@@ -107,7 +107,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "NHS funding: who can actually access it",
         body: [
-          "NHS-funded IVF is extremely patchy in practice. NICE guideline NG257, which replaced the 2013 guideline in 2026, recommends up to three full cycles under 40 and one at 40 to 41 — but in England the decision belongs to 42 local Integrated Care Boards, most of which fund one cycle rather than three. Only about a quarter of IVF cycles in England are NHS-funded. Scotland funds up to three cycles under national criteria, Wales two, and Northern Ireland one.",
+          "NHS-funded IVF is extremely patchy in practice. NICE guideline NG257, which replaced the 2013 guideline in 2026, recommends up to three full cycles under 40 and one at 40 to 41 — but in England the decision belongs to 36 local Integrated Care Boards (42 before the April 2026 mergers), most of which fund one cycle rather than three. Only about a quarter of IVF cycles in England are NHS-funded. Scotland funds up to three cycles under national criteria, Wales two, and Northern Ireland one.",
           "Criteria vary by postcode, age, BMI, smoking and existing children — including a partner's. Solo parents and two-mum families are rarely excluded by name; what excludes most of them outside Scotland is a requirement to complete six or more self-funded donor insemination cycles at a licensed clinic first.",
           "Before assuming you are ineligible, find your ICB's published assisted conception policy and read it, or ask your GP surgery. Criteria change, and some areas have quietly become more inclusive in recent years. It is always worth asking.",
         ],
@@ -149,9 +149,7 @@ export const GUIDES: Guide[] = [
           "Several charities and foundations offer grants specifically for fertility treatment. Competition is high, but the amounts are meaningful and do not need to be repaid.",
         ],
         bullets: [
-          "The Fertility Foundation (fertilityfoundation.org): provides grants to patients in financial hardship. Single women are eligible.",
-          "Gift of IVF (giftofivf.co.uk): fully funded IVF cycles donated by clinic partners",
-          "Endometriosis UK: signposting to funding support for patients with endometriosis",
+          "The Fertility Foundation (fertilityfoundation.org): the main UK IVF grant charity. Note its published criteria require a cohabiting couple with at least one applicant in full-time employment, so solo applicants are not currently eligible: check the criteria before investing time in an application.",
           "Some clinics run their own hardship or bursary programmes; always ask",
           "Pay It Forward schemes: some patients who complete treatment donate unused medications. Check Fertility Network UK's Facebook groups.",
         ],
@@ -331,7 +329,7 @@ export const GUIDES: Guide[] = [
         heading: "IUI (Intrauterine Insemination)",
         body: [
           "IUI involves placing prepared donor sperm directly into the uterus at the point of ovulation, either in a natural cycle or after mild hormonal stimulation. It is the least invasive and least expensive option.",
-          "Success rates are lower than IVF: typically 10–18% per attempt for women under 35, falling to 5–10% over 38. Most guidelines recommend no more than three to six IUI cycles before moving to IVF, as continuing beyond this is generally not cost-effective.",
+          "Success rates are lower than IVF: HFEA-derived figures put donor insemination at around 15% per cycle for women under 35, around 11% at 35–39, and under 5% at 40–42. Most guidelines recommend no more than three to six IUI cycles before moving to IVF, as continuing beyond this is generally not cost-effective.",
           "IUI is a reasonable starting point if you are under 35, have good ovarian reserve, no known tube or egg quality issues, and want to begin treatment with a lower financial and physical commitment. It is not recommended as a first-line treatment for women over 40.",
         ],
         callout:
@@ -354,9 +352,9 @@ export const GUIDES: Guide[] = [
       {
         heading: "Donor egg IVF",
         body: [
-          "Donor egg IVF uses eggs from a screened, anonymous or identity-release donor rather than your own eggs. It is typically recommended when egg quality or quantity is significantly reduced, usually from around 42–43+ or after multiple failed IVF cycles with your own eggs.",
+          "Donor egg IVF uses eggs from a screened, identity-release donor rather than your own eggs. It is typically recommended when egg quality or quantity is significantly reduced, usually from around 42–43+ or after multiple failed IVF cycles with your own eggs.",
           "Success rates for donor egg IVF are substantially higher than own-egg IVF for older patients (around 35–45% per transfer regardless of the recipient's age) because the outcome depends primarily on the donor's egg quality, not the recipient's ovarian reserve.",
-          "In the UK, egg donors are anonymous until the donor-conceived child turns 18, at which point they have the right to access the donor's identifying information from the HFEA register. This is an important consideration in your decision and in how you plan to talk to your future child about their conception.",
+          "In the UK, egg donation is not anonymous. Donors are identity-release: a donor-conceived person can access non-identifying information about their donor at any age, and identifying information from the HFEA register once they turn 18. This is an important consideration in your decision and in how you plan to talk to your future child about their conception.",
         ],
       },
       {
@@ -1010,8 +1008,8 @@ export const GUIDES: Guide[] = [
           "Specialist fertility law solicitors can be found through:",
         ],
         bullets: [
-          "Natalie Gamble Associates (nataliegambleassociates.co.uk): specialists in donor conception and fertility law",
-          "Brilliant Families (brilliantfamilies.co.uk): fertility family law specialists",
+          "NGA Law (ngalaw.co.uk, formerly Natalie Gamble Associates): specialists in donor conception and fertility law",
+          "Brilliant Beginnings (brilliantbeginnings.co.uk): NGA Law's sister non-profit surrogacy agency — an agency rather than a law firm, but a useful starting point for surrogacy journeys",
           "The Law Society's solicitor finder (solicitors.lawsociety.org.uk) filtered by 'family' and 'surrogacy and fertility'",
         ],
         postBody: [
@@ -1055,24 +1053,24 @@ export const GUIDES: Guide[] = [
         heading: "Maternity Allowance: what you can claim",
         body: [
           "Self-employed women in the UK can claim Maternity Allowance (MA) rather than Statutory Maternity Pay (SMP); SMP is only available through employed positions. MA is paid by the government and is separate from your employer.",
-          "The standard rate of Maternity Allowance in 2025 is £184.03 per week for up to 39 weeks, provided you have paid Class 2 National Insurance contributions for at least 13 of the 66 weeks before your due date.",
-          "If you have not paid Class 2 NI (for example, if your profits were below the small profits threshold), you may qualify for a reduced rate of £27 per week for 14 weeks.",
-          "To claim: submit form MA1 to HMRC, which you can do from 26 weeks pregnant. You will need proof of self-employment (SED) from HMRC and a MATB1 certificate from your midwife.",
+          "The standard rate of Maternity Allowance in 2026/27 is £194.32 per week (or 90% of your average weekly earnings if that is lower) for up to 39 weeks, provided you have been registered self-employed for at least 26 of the 66 weeks before your due date and are treated as having paid Class 2 National Insurance for at least 13 of those weeks.",
+          "If your profits are below the small profits threshold and you have not paid voluntary Class 2 NI, you qualify for a reduced rate of £27 per week for the same 39 weeks — but see the callout: you can usually pay your way up to the full rate.",
+          "To claim: submit form MA1 to the Department for Work and Pensions (Jobcentre Plus), which you can do from 26 weeks pregnant; payments can start 11 weeks before your due date. You will need a MATB1 certificate from your midwife and evidence of your self-employment income.",
         ],
         callout:
-          "Class 2 NI contributions: if you are self-employed and above the small profits threshold (£12,570 in 2024/25), you pay Class 2 NI automatically via your self-assessment tax return. These contributions qualify you for the standard MA rate.",
+          "Class 2 NI: if your profits are at or above the small profits threshold (£7,105 in 2026/27), you are treated as having paid Class 2 automatically and qualify for the standard MA rate. Below the threshold, you can pay voluntary Class 2 (£3.65 per week in 2026/27) to reach the full rate — after you claim, HMRC sends a bill for the missing weeks, and paying it uplifts your award. Given the gap between £27 and £194.32 a week, this is almost always worth it.",
       },
       {
         heading: "Planning: what the numbers look like",
         body: [
-          "At the standard rate, 39 weeks of Maternity Allowance totals approximately £7,177. For most self-employed women, this covers a fraction of their normal income.",
+          "At the 2026/27 standard rate, 39 weeks of Maternity Allowance totals approximately £7,580. For most self-employed women, this covers a fraction of their normal income.",
           "The financial planning questions to address before you get pregnant:",
         ],
         bullets: [
           "What is the minimum monthly income you need to cover essential outgoings?",
           "How much can you save in advance to supplement MA during the months you plan to take off?",
           "Can your work be structured to allow some part-time activity during maternity leave without affecting your MA? (Keeping in Touch days or Shared Parental Leave equivalents do not apply to self-employed, but the rules around what counts as 'working' during MA are less restrictive than for employees)",
-          "Have you registered for the Government's 15–30 hours free childcare offer, and what is the timeline from birth to eligibility?",
+          "Have you registered for the Government's 30-hours free childcare offer (available from 9 months old), and what is the timeline from birth to eligibility?",
           "Do you have professional indemnity or income protection insurance that would pay out for pregnancy-related inability to work?",
         ],
       },
@@ -1092,15 +1090,15 @@ export const GUIDES: Guide[] = [
       {
         heading: "Childcare: planning ahead as a solo self-employed parent",
         body: [
-          "The government's free childcare offer (15–30 hours per week from 9 months of age in England as of 2024) is available to self-employed parents. Your eligibility is based on earning the equivalent of minimum wage for 16 hours per week on average, very achievable for most self-employed people even during part-time return.",
+          "The government's free childcare offer (30 hours per week over 38 weeks a year, from 9 months of age until school age in England, since September 2025) is available to self-employed parents. Your eligibility is based on earning the equivalent of minimum wage for 16 hours per week on average, very achievable for most self-employed people even during part-time return.",
           "Apply via the government's childcare service (childcarechoices.gov.uk) as soon as you are eligible. Places in nurseries and childminder settings are often limited; research local provision before your child is born.",
         ],
       },
     ],
     keyTakeaways: [
-      "Self-employed women claim Maternity Allowance (not SMP): up to £184.03/week for 39 weeks in 2025",
-      "Eligibility requires Class 2 NI contributions for 13 of the 66 weeks before your due date",
-      "Submit form MA1 to HMRC from 26 weeks pregnant",
+      "Self-employed women claim Maternity Allowance (not SMP): up to £194.32/week for 39 weeks in 2026/27",
+      "Eligibility requires Class 2 NI (paid or credited) for 13 of the 66 weeks before your due date — voluntary top-ups count",
+      "Submit form MA1 to the DWP (Jobcentre Plus) from 26 weeks pregnant",
       "Plan to supplement MA with savings; it covers a fraction of typical self-employed income",
       "Free childcare from 9 months is available to self-employed parents; apply early as places are limited",
     ],
@@ -1327,8 +1325,8 @@ export const GUIDES: Guide[] = [
           "The UK government's free childcare offer (as of 2024/25) provides:",
         ],
         bullets: [
-          "15 hours per week free childcare from 9 months of age (working parents with children born after April 2024)",
-          "15 hours per week free for all 3- and 4-year-olds",
+          "30 hours per week free childcare (over 38 weeks a year) from 9 months of age until school age, for working parents, since September 2025",
+          "15 hours per week free for all 3- and 4-year-olds regardless of parents' work status",
           "30 hours per week for working parents of 3- and 4-year-olds (income threshold: you must earn at least the equivalent of 16 hours per week at national minimum wage)",
           "Tax-Free Childcare: the government tops up every £8 you put in with £2 (up to £500 per quarter per child) for working parents earning under £100,000",
         ],
@@ -1448,8 +1446,8 @@ export const GUIDES: Guide[] = [
         body: ["First-person accounts of the journey:"],
         bullets: [
           "I Thought It Was Just Me by Brené Brown: not specifically about solo motherhood, but about shame and vulnerability in a way that illuminates the social pressures of the decision",
-          "The Art of the Ordinary by Chloe Melas: journalist's account of solo motherhood journey",
-          "The Road Not Taken by various authors: anthology of personal essays from SMC members published by Single Mothers by Choice organisation",
+          "Going Solo: My Choice to Become a Single Mother Using a Donor by Genevieve Roberts: UK journalist's first-person account of solo motherhood by donor conception",
+          "Single Mothers by Choice by Jane Mattes: guidebook from the founder of the Single Mothers by Choice organisation, drawing on decades of members' experiences",
         ],
       },
       {
@@ -1457,15 +1455,14 @@ export const GUIDES: Guide[] = [
         body: ["Practical and informative:"],
         bullets: [
           "It Starts with the Egg by Rebecca Fett: the most evidence-based guide to improving egg quality through supplements, diet, and environment. Particularly relevant for women over 35.",
-          "The IVF Companion by Dr Susan Bewley: UK-specific guide to IVF from a senior British reproductive medicine specialist.",
-          "Fertility Fitness by Emma Cannon: integrative approach to fertility combining conventional and Chinese medicine perspectives.",
+          "Fertile by Emma Cannon: integrative approach to fertility combining conventional and Chinese medicine perspectives.",
         ],
       },
       {
         heading: "For talking to your child about donor conception",
         body: ["Age-appropriate books for donor-conceived children:"],
         bullets: [
-          "My Story: Books for children conceived with donor insemination (Donor Conception Network): a series of picture books written specifically for young children in different family configurations",
+          "Our Story (Donor Conception Network): a series of picture books written specifically for young children, with versions for different family configurations and donation types",
           "Telling and Talking (Donor Conception Network): a guide for parents on having these conversations at different ages",
           "The Pea That Was Me by Kimberly Kluger-Bell: picture book for young children explaining egg donation",
           "Before You Were Born: Our Wish for a Baby by Jennifer Davis: gentle picture book for children",
@@ -1510,9 +1507,9 @@ export const GUIDES: Guide[] = [
           "For asynchronous, searchable discussion:",
         ],
         bullets: [
-          "Mumsnet Solo Parents board (mumsnet.com/solo-parents): the largest UK parenting forum has an active solo parent community. Searchable archives make it particularly useful.",
+          "Mumsnet Lone Parents board (mumsnet.com/talk/lone_parents): the largest UK parenting forum has an active lone-parent community. Searchable archives make it particularly useful.",
           "Reddit r/SingleMothersbyChoice: active global community covering all stages. Good for candid, anonymous discussion.",
-          "Fertility Friends (fertilityfriends.co.uk): long-running UK fertility forum with dedicated solo treatment boards. Huge archive of treatment experiences.",
+          "Fertility Friends (fertilityfriends.co.uk): long-running UK fertility forum with a huge searchable archive of treatment experiences, including solo treatment boards.",
           "Fertility Network UK discussion boards: moderated and supportive",
         ],
       },
@@ -1564,7 +1561,8 @@ export const GUIDES: Guide[] = [
         heading: "Solo parent-specific organisations",
         body: ["These groups focus specifically on solo parenting by choice:"],
         bullets: [
-          "Single Mothers by Choice UK (smcuk.co.uk): UK chapter of the international SMC organisation. Local meetups, national events, and an annual conference.",
+          "Single Mothers by Choice (singlemothersbychoice.org): the long-running international SMC organisation, with UK members. Online community, resources, and peer support at every stage.",
+          "The Stork and I (thestorkandi.com): UK community and coaching for solo mums by choice, founded by Mel Johnson.",
           "Gingerbread (gingerbread.org.uk): the UK's leading organisation for single parents. Practical advice on benefits, childcare, and employment. Not specifically for solo mums by choice, but covers the practical landscape of single parenting comprehensively.",
           "One Parent Families Scotland (opfs.org.uk): Scottish equivalent of Gingerbread. Strong on Scottish-specific benefits and legal information.",
         ],

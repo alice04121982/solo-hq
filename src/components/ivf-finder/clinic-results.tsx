@@ -1,31 +1,44 @@
 "use client";
 
 import { ClinicCard } from "./clinic-card";
+import { DEFAULT_RESULT_VARIANT, type ClinicCardVariant } from "@/lib/card-style";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 
 interface ClinicResultsProps {
   clinics: Clinic[];
   totalCount: number;
+  /** Clinics removed from the list that the current filters also reach. */
+  removedCount: number;
   ageBracketLabel: string;
   ageBracket: AgeBracket;
   selectedSlugs: string[];
+  variant?: ClinicCardVariant;
   onToggleCompare: (clinic: Clinic) => void;
 }
 
 export function ClinicResults({
   clinics,
   totalCount,
+  removedCount,
   ageBracketLabel,
   ageBracket,
   selectedSlugs,
+  variant = DEFAULT_RESULT_VARIANT,
   onToggleCompare,
 }: ClinicResultsProps) {
   if (clinics.length === 0) {
     return (
-      <div className="rounded-[24px] bg-background border border-border p-12 text-center">
+      <div className="rounded-[24px] bg-background p-12 text-center">
         <p className="text-teal-ink font-semibold mb-1">No clinics match your filters</p>
         <p className="text-sm text-muted">
-          Relax a filter or clear all filters to see every clinic again.
+          {removedCount > 0
+            ? // Empty because what was there was taken out is a different
+              // answer from empty because nothing fits, and sending someone
+              // off to relax a filter would bury the reason sitting below.
+              `${removedCount === 1 ? "One clinic" : `${removedCount} clinics`} matching your filters ${
+                removedCount === 1 ? "has" : "have"
+              } been removed from this list. The reasons are below.`
+            : "Relax a filter or clear all filters to see every clinic again."}
         </p>
       </div>
     );
@@ -55,6 +68,7 @@ export function ClinicResults({
             ageBracket={ageBracket}
             isSelected={selectedSlugs.includes(clinic.slug)}
             compareDisabled={selectedSlugs.length >= 4}
+            variant={variant}
             onToggleCompare={onToggleCompare}
           />
         ))}

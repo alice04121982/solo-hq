@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteFooter } from "@/components/site-footer";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const generalSans = localFont({
@@ -17,9 +18,7 @@ const siteDescription =
   "Cairn compares IVF clinics on cost, success rates and eligibility, for solo mums, solo dads, two mums, two dads, and couples.";
 
 export const metadata: Metadata = {
-  // Canonical origin for absolute metadata URLs (Open Graph images, etc.).
-  // cairnfertility.co.uk is held defensively and redirects here.
-  metadataBase: new URL("https://cairnfertility.com"),
+  metadataBase: new URL(SITE_URL),
   title: "CairnFertility | Compare IVF Clinics",
   description: siteDescription,
   // Pre-launch: keep the site out of search results while photography rights

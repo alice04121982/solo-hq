@@ -46,6 +46,13 @@ export interface SectionBackdrop {
   side?: "left" | "right";
   /** Override the tone-derived colour. */
   color?: string;
+  /**
+   * Colour for the dot cropped by the band's bottom edge, when it needs to
+   * differ from the one at the top — a pink dot bleeding into the pink CTA
+   * band below reads as one shape crossing the seam, so the homepage's
+   * voices band hands its trailing dot to the lime instead.
+   */
+  endColor?: string;
 }
 
 /**
@@ -79,6 +86,12 @@ interface SectionProps {
    * style, not content.
    */
   backdrop?: SectionBackdrop;
+  /**
+   * A decorative layer of your own, painted on the band behind the content —
+   * for headers that want a composition of marks rather than the single
+   * `backdrop` shape. Absolutely positioned; give it `absolute inset-0`.
+   */
+  decoration?: ReactNode;
   /** Extra classes on the full-bleed band. */
   className?: string;
   /** Extra classes on the centred container. */
@@ -92,6 +105,7 @@ export function Section({
   id,
   padding = "py-24 md:py-36",
   backdrop,
+  decoration,
   className,
   innerClassName,
   children,
@@ -101,7 +115,9 @@ export function Section({
   return (
     <section
       id={id}
-      className={[backdrop && "relative overflow-hidden", className].filter(Boolean).join(" ")}
+      className={[(backdrop || decoration) && "relative overflow-hidden", className]
+        .filter(Boolean)
+        .join(" ")}
       style={{ background: TONE_BACKGROUND[resolved] }}
     >
       {backdrop &&
@@ -126,6 +142,9 @@ export function Section({
                   ? "left-0 -translate-x-[40%]"
                   : "right-0 translate-x-[40%]",
               ].join(" ")}
+              style={
+                backdrop.endColor ? { color: backdrop.endColor } : undefined
+              }
             />
           </div>
         ) : (
@@ -141,6 +160,7 @@ export function Section({
             style={{ color: backdrop.color ?? TONE_BACKDROP_COLOR[resolved] }}
           />
         ))}
+      {decoration}
       <div
         className={[
           "relative mx-auto px-6 md:px-12 lg:px-16",

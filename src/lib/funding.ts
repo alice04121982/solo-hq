@@ -29,6 +29,21 @@ export interface SourceLink {
 /** When the funding facts on the page were last checked against sources. */
 export const LAST_REVIEWED = "August 2026";
 
+/**
+ * Money anchors the funding routes are measured against. Kept here rather
+ * than in page JSX so the periodic data re-verification covers them.
+ * The NHS-funded share is England-specific, from the HFEA's "Fertility
+ * treatment 2024: trends and figures" (published June 2026):
+ * https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures/
+ * (UK-wide the 2024 share was 28%, down from 35% in 2019.)
+ */
+export const COST_ANCHORS: { value: string; label: string }[] = [
+  { value: "£5,000–£7,000", label: "Advertised price of a private IVF cycle, before drugs, ICSI, freezing and storage" },
+  { value: "£1,000–£2,500", label: "Drugs for a stimulated cycle — almost always charged on top of the headline price" },
+  { value: "£8,000–£14,000", label: "Realistic all-in cost of one cycle using donor sperm, once everything is counted" },
+  { value: "25%", label: "Share of IVF cycles in England that were NHS-funded in 2024, down from 32% in 2019 (HFEA)" },
+];
+
 /* ── The order of operations ─────────────────────────────────────────────── */
 
 export interface FundingStep {
@@ -80,7 +95,7 @@ export interface NationPolicy {
 
 /**
  * Four nations, four answers. England is the outlier: it has no national
- * policy at all, only 42 local ones.
+ * policy at all, only 36 local ones (42 before the April 2026 ICB mergers).
  */
 export const NATION_POLICIES: NationPolicy[] = [
   {
@@ -180,7 +195,7 @@ export const NICE_POSITION: { heading: string; body: string }[] = [
   },
   {
     heading: "What the guideline still does not settle",
-    body: "The update was criticised by the HFEA and by patient groups for leaving access and funding for single people and same-sex couples largely unaddressed, despite the sharp rise in treatment among those groups. NICE also has no power to make anyone fund anything: in England, commissioning sits with 42 Integrated Care Boards, which is why the guideline and the offer on the ground can differ so widely.",
+    body: "The update was criticised by the HFEA and by patient groups for leaving access and funding for single people and same-sex couples largely unaddressed, despite the sharp rise in treatment among those groups. NICE also has no power to make anyone fund anything: in England, commissioning sits with the Integrated Care Boards (36 since the April 2026 mergers), which is why the guideline and the offer on the ground can differ so widely.",
   },
 ];
 
