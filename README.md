@@ -24,6 +24,11 @@ and hard to compare from the outside.
   fertility treatment — publisher's headline, our note on why it matters, and a
   link straight out. Cairn has no newsroom and publishes no journalism of its
   own here; the list lives in `src/lib/news.ts`.
+  Candidates are found automatically and published by hand: a weekly action
+  (`.github/workflows/news-candidates.yml`) sweeps publisher feeds via
+  `npm run find:news` and opens an issue of ready-to-paste entries. It never
+  writes to `src/` — the note under each headline is an editorial judgement,
+  so a person writes it and commits.
 
 Surrogacy is not covered yet but is planned. A community space is also planned:
 somewhere to find people at your stage, hear from people who have been through
