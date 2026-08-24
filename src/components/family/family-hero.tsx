@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShapeMark } from "../shapes";
+import { FAMILY_SHAPES, ShapeMark } from "../shapes";
 import Image from "next/image";
 import type { FamilyType } from "@/lib/family-types";
 
@@ -11,10 +11,20 @@ const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function FamilyHero({ family }: { family: FamilyType }) {
   const lines = family.headline.split("\n");
+  const heroShape = family.heroShapeBackdrop ? FAMILY_SHAPES[family.slug] : undefined;
 
   return (
     <section className="relative overflow-hidden bg-background">
-      <div className="mx-auto px-6 md:px-12 lg:px-16">
+      {/* The family's mark as backdrop — solid shape-on-colour cropped by the
+          section edge, same treatment as Section's `backdrop`. */}
+      {heroShape && (
+        <ShapeMark
+          name={heroShape}
+          className="absolute top-0 left-0 -translate-x-[28%] -translate-y-[32%] w-[18rem] md:w-[30rem] lg:w-[38rem] h-auto pointer-events-none"
+          style={{ color: "var(--card-bg)" }}
+        />
+      )}
+      <div className="relative mx-auto px-6 md:px-12 lg:px-16">
         <div className={`grid grid-cols-1 ${!family.hideHeroImage ? "lg:grid-cols-2" : ""} gap-16 items-center py-24 md:py-36`}>
           {/* Left — copy */}
           <motion.div

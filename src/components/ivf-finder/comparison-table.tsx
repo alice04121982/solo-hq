@@ -54,6 +54,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
   const headerCell =
     "px-4 py-3 text-left text-[12px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
   const bodyCell = "px-4 py-3 text-sm text-foreground align-top whitespace-nowrap";
+  const bodyCellWrap = "px-4 py-3 text-sm text-foreground align-top max-w-[220px] whitespace-normal";
 
   return (
     <div id="comparison-table">
@@ -166,7 +167,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                       </span>
                     )}
                   </td>
-                  <td className={`${bodyCell} max-w-[220px] whitespace-normal`}>
+                  <td className={bodyCellWrap}>
                     <span className="text-xs text-muted">{clinic.treatments.join(", ")}</span>
                   </td>
                   <td className={bodyCell}>
