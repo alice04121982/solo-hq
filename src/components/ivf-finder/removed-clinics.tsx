@@ -52,7 +52,7 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
   return (
     <div
       className={`rounded-2xl border bg-background p-4 ${
-        shouldOpen ? "border-teal/30" : "border-border"
+        shouldOpen ? "border-teal/30" : "border-transparent"
       }`}
     >
       <button
@@ -83,7 +83,7 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
       {open && (
         <div className="mt-4 space-y-5 pl-7">
           {exclusions.map((x) => (
-            <div key={x.name} className="border-l-2 border-border pl-4">
+            <div key={x.name} className="border-l-2 border-teal/15 pl-4">
               <p className="text-sm font-semibold text-teal-ink">
                 {x.name} &mdash; {x.country}
               </p>

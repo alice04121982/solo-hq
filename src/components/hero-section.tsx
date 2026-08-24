@@ -75,7 +75,7 @@ export function HeroSection() {
               <a
                 href="/get-started"
                 className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "var(--accent)", color: "#1A3A25" }}
+                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
               >
                 Get started
                 <ArrowRight className="h-3.5 w-3.5" />

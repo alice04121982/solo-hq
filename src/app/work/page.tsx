@@ -5,6 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { HeaderShapes, type HeaderMark } from "@/components/header-shapes";
+import { ShapeMark } from "@/components/shapes";
 import { StatCard } from "@/components/stat-card";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
 import { CopyButton } from "@/components/copy-button";
@@ -91,7 +92,11 @@ export default function WorkPage() {
         padding="pt-20 pb-16 md:pt-28 md:pb-20"
         decoration={<HeaderShapes marks={HERO_MARKS} />}
       >
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           IVF &amp; work
         </p>
         <h1
@@ -115,7 +120,7 @@ export default function WorkPage() {
             <a
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
+              className="inline-flex items-center gap-1.5 rounded-full border border-teal/20 px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
               style={{ color: TEAL }}
             >
               {l.label}
@@ -126,7 +131,11 @@ export default function WorkPage() {
 
       {/* The numbers */}
       <Section band={1} className="border-t border-border">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
           Why this is worth ten minutes
         </p>
         <h2
@@ -150,7 +159,11 @@ export default function WorkPage() {
 
       {/* Rights */}
       <Section band={2} id="rights" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
           Your rights
         </p>
         <h2
@@ -193,7 +206,11 @@ export default function WorkPage() {
 
       {/* What employers offer */}
       <Section band={3} id="what-employers-offer" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="cross" size={14} style={{ color: "var(--lavender)" }} />
           What employers offer
         </p>
         <h2
@@ -295,7 +312,11 @@ export default function WorkPage() {
 
       {/* Find out */}
       <Section band={4} id="find-out" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="asterisk" size={14} style={{ color: "var(--lavender)" }} />
           Find out what yours does
         </p>
         <h2
@@ -315,7 +336,11 @@ export default function WorkPage() {
 
       {/* Scripts */}
       <Section band={5} id="asking" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
           What to say
         </p>
         <h2
@@ -348,7 +373,11 @@ export default function WorkPage() {
 
       {/* Offer stage */}
       <Section band={6} id="job-offers" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="pause" size={14} style={{ color: "var(--lavender)" }} />
           At the offer stage
         </p>
         <h2
@@ -406,7 +435,11 @@ export default function WorkPage() {
 
       {/* Making the case */}
       <Section band={7} id="making-the-case" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           If your employer offers nothing
         </p>
         <h2
@@ -466,7 +499,7 @@ export default function WorkPage() {
           <Link
             href="/funding"
             className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
-            style={{ background: "var(--accent)", color: "#1A3A25" }}
+            style={{ background: "var(--accent)", color: "var(--on-accent)" }}
           >
             See funding options
             <ArrowRight className="h-3.5 w-3.5" />

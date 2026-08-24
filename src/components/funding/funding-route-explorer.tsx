@@ -128,7 +128,7 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
                   {/* The two facts that decide whether a route is right: what it
                       costs, and who is out of pocket when a cycle fails. */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                    <div className="rounded-2xl p-5 bg-background border border-border">
+                    <div className="rounded-2xl p-5 bg-background">
                       <p
                         className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
                         style={{ color: TEAL_SOFT }}
@@ -139,7 +139,7 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
                         {r.typicalCost}
                       </p>
                     </div>
-                    <div className="rounded-2xl p-5 bg-background border border-border">
+                    <div className="rounded-2xl p-5 bg-background">
                       <p
                         className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
                         style={{ color: TEAL_SOFT }}

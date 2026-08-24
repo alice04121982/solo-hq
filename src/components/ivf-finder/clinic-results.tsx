@@ -1,6 +1,7 @@
 "use client";
 
 import { ClinicCard } from "./clinic-card";
+import { DEFAULT_RESULT_VARIANT, type ClinicCardVariant } from "@/lib/card-style";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 
 interface ClinicResultsProps {
@@ -11,6 +12,7 @@ interface ClinicResultsProps {
   ageBracketLabel: string;
   ageBracket: AgeBracket;
   selectedSlugs: string[];
+  variant?: ClinicCardVariant;
   onToggleCompare: (clinic: Clinic) => void;
 }
 
@@ -21,11 +23,12 @@ export function ClinicResults({
   ageBracketLabel,
   ageBracket,
   selectedSlugs,
+  variant = DEFAULT_RESULT_VARIANT,
   onToggleCompare,
 }: ClinicResultsProps) {
   if (clinics.length === 0) {
     return (
-      <div className="rounded-[24px] bg-background border border-border p-12 text-center">
+      <div className="rounded-[24px] bg-background p-12 text-center">
         <p className="text-teal-ink font-semibold mb-1">No clinics match your filters</p>
         <p className="text-sm text-muted">
           {removedCount > 0
@@ -65,6 +68,7 @@ export function ClinicResults({
             ageBracket={ageBracket}
             isSelected={selectedSlugs.includes(clinic.slug)}
             compareDisabled={selectedSlugs.length >= 4}
+            variant={variant}
             onToggleCompare={onToggleCompare}
           />
         ))}

@@ -46,6 +46,13 @@ export interface SectionBackdrop {
   side?: "left" | "right";
   /** Override the tone-derived colour. */
   color?: string;
+  /**
+   * Colour for the dot cropped by the band's bottom edge, when it needs to
+   * differ from the one at the top — a pink dot bleeding into the pink CTA
+   * band below reads as one shape crossing the seam, so the homepage's
+   * voices band hands its trailing dot to the lime instead.
+   */
+  endColor?: string;
 }
 
 /**
@@ -135,6 +142,9 @@ export function Section({
                   ? "left-0 -translate-x-[40%]"
                   : "right-0 translate-x-[40%]",
               ].join(" ")}
+              style={
+                backdrop.endColor ? { color: backdrop.endColor } : undefined
+              }
             />
           </div>
         ) : (

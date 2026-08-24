@@ -6,6 +6,12 @@ import { SlidersHorizontal } from "lucide-react";
 import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
 import { DATA_PROVENANCE, rankBySuccessRate } from "@/lib/clinics";
 import { exclusionsMatchingGeography } from "@/lib/clinic-exclusions";
+import {
+  CARD_VARIANT_PARAM,
+  DEFAULT_RESULT_VARIANT,
+  DEFAULT_TOP_PERFORMER_VARIANT,
+  parseCardVariant,
+} from "@/lib/card-style";
 import { RegulatorNotice } from "@/components/regulator-notice";
 
 function formatVerifiedDate(iso: string): string {
@@ -131,11 +137,22 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     AGE_BRACKETS.find((b) => b.value === filters.ageBracket)?.label ?? "";
   const activeFilterCount = countActiveFilters(filters);
 
+  // ?cards=paper|citrus|outline forces both grids onto one card treatment, so
+  // the options can be compared on the real page with the real data. Absent or
+  // unrecognised, each grid keeps its own default.
+  const cardOverride = parseCardVariant(searchParams.get(CARD_VARIANT_PARAM));
+
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
       {/* ── Filters: inline on desktop, a sheet on mobile ── */}
-      <div className="hidden md:block rounded-[24px] bg-background border border-border p-6 mb-4">
-        <FilterControls filters={filters} onChange={setFilters} />
+      <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
+        <FilterControls
+          filters={filters}
+          onChange={setFilters}
+          onClearAll={() =>
+            setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+          }
+        />
       </div>
       <div className="md:hidden mb-4">
         <button
@@ -153,7 +170,10 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         </button>
       </div>
 
-      <div className="mb-6">
+      {/* The active-filter Tags stand in for the filter row on mobile, where it
+          sits behind the sheet. On desktop the row states its own selections,
+          so repeating them here would be the same list twice. */}
+      <div className="md:hidden mb-6">
         <ActiveFilterTags filters={filters} onChange={setFilters} />
       </div>
 
@@ -184,6 +204,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
           compareDisabled={selectedSlugs.length >= COMPARE_CAP}
+          variant={cardOverride ?? DEFAULT_TOP_PERFORMER_VARIANT}
           onToggleCompare={handleToggleCompare}
         />
       </div>
@@ -197,6 +218,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           ageBracketLabel={bracketLabel}
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
+          variant={cardOverride ?? DEFAULT_RESULT_VARIANT}
           onToggleCompare={handleToggleCompare}
         />
       </div>
