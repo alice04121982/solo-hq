@@ -3,8 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, Map, FileText, Heart, Baby } from "lucide-react";
-import { GuideTypeBadge } from "./guide-type";
-import { ShapeMark, type ShapeName } from "./shapes";
+import { GuideTypeBadge, GuideTypeIcon, GUIDE_TYPE_ICONS } from "./guide-type";
 
 /**
  * The browsable library: every topic as a white card on the cream band, with
@@ -113,14 +112,14 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
 export const RESOURCE_COUNT = CATEGORIES.reduce((sum, c) => sum + c.resources.length, 0);
 export const TOPIC_COUNT = CATEGORIES.length;
 
-/** Format filter groups — the shape bank as a legend over the entry types. */
-const FORMAT_GROUPS: { key: string; label: string; mark: ShapeName; types: string[] }[] = [
-  { key: "guide", label: "Guides", mark: "bloom", types: ["Guide"] },
-  { key: "explainer", label: "Explainers", mark: "egg", types: ["Explainer"] },
-  { key: "checklist", label: "Checklists", mark: "cross", types: ["Checklist"] },
-  { key: "template", label: "Templates & scripts", mark: "pause", types: ["Template", "Script", "Scripts"] },
-  { key: "directory", label: "Directories & lists", mark: "asterisk", types: ["Directory", "Reading list", "Hub"] },
-  { key: "stories", label: "Stories", mark: "spark", types: ["Stories"] },
+/** Format filter groups — each led by its format's flat icon. */
+const FORMAT_GROUPS: { key: string; label: string; types: string[] }[] = [
+  { key: "Guide", label: "Guides", types: ["Guide"] },
+  { key: "Explainer", label: "Explainers", types: ["Explainer"] },
+  { key: "Checklist", label: "Checklists", types: ["Checklist"] },
+  { key: "Template", label: "Templates & scripts", types: ["Template", "Script", "Scripts"] },
+  { key: "Directory", label: "Directories & lists", types: ["Directory", "Reading list", "Hub"] },
+  { key: "Stories", label: "Stories", types: ["Stories"] },
 ];
 
 /** A category icon, drawn straight onto the card in brand teal. */
@@ -167,11 +166,16 @@ export function ResourceLibrary() {
                   : "border-teal/20 text-teal bg-background hover:border-teal/40"
               }`}
             >
-              <ShapeMark
-                name={g.mark}
-                size={12}
-                style={{ color: active ? "var(--accent)" : "var(--lavender)" }}
-              />
+              {(() => {
+                const Icon = GUIDE_TYPE_ICONS[g.key];
+                return (
+                  <Icon
+                    aria-hidden
+                    className="h-3.5 w-3.5"
+                    style={{ color: active ? "var(--accent)" : "var(--lavender-dark)" }}
+                  />
+                );
+              })()}
               {g.label}
               <span className={active ? "opacity-70" : "text-muted"}>{count}</span>
             </button>
@@ -202,7 +206,8 @@ export function ResourceLibrary() {
               <ul className="divide-y divide-border">
                 {visible.map((r) => (
                   <li key={r.title}>
-                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-center gap-3 group py-3">
+                    <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-center gap-4 group py-3">
+                      <GuideTypeIcon type={r.type} className="transition-transform duration-200 group-hover:scale-105" />
                       <div className="flex-1">
                         <p className="text-sm font-sans text-teal/75 leading-snug group-hover:text-teal transition-colors duration-150">
                           {r.title}
