@@ -151,6 +151,16 @@
    the element selectors below silently override Tailwind utilities — e.g.
    `font-semibold` on an <h3> would lose to font-weight: 700 here. */
 @layer base {
+  /* iOS Safari rubber-bands past the end of the document and paints the
+     canvas in the gap it opens, so a flick at the bottom of any page pulled
+     a white slab out from under the teal footer and the page looked like it
+     carried on past it. Stopping the overscroll ends the page at the footer.
+     It also switches off Chrome Android's pull-to-refresh — the accepted
+     cost of the fix, since that gesture is the same overscroll. */
+  html {
+    overscroll-behavior-y: none;
+  }
+
   body {
     background: var(--background);
     color: var(--foreground);
