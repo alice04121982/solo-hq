@@ -20,6 +20,13 @@ and hard to compare from the outside.
   legal and admin, pregnancy and community.
 - **How IVF works** (`/how-ivf-works`), **stories** (`/stories`), a **cost calculator**
   and a **journey map** on the homepage.
+- **Community** (`/community`): a small, vetted private group — not a forum.
+  There is no posting, commenting, or profile anywhere on this site. Applying
+  is a form; a person reads every application; approval mints a single-use,
+  expiring invite that is the only way the group link is ever handed out. The
+  rules are at `/community/guidelines`. Day-to-day operation, including how to
+  approve people and what to do when something goes wrong, is in
+  [`docs/community-runbook.md`](docs/community-runbook.md).
 - **In the media** (`/news`): a curated roundup of other people's reporting on
   fertility treatment — publisher's headline, our note on why it matters, and a
   link straight out. Cairn has no newsroom and publishes no journalism of its
@@ -30,11 +37,7 @@ and hard to compare from the outside.
   writes to `src/` — the note under each headline is an editorial judgement,
   so a person writes it and commits.
 
-Surrogacy is not covered yet but is planned. A community space is also planned:
-somewhere to find people at your stage, hear from people who have been through
-it and are willing to mentor, and set up local meetups. Until it exists the
-site stays waitlist-honest about it and signposts existing communities such as
-the Donor Conception Network.
+Surrogacy is not covered yet but is planned.
 
 The stories and quotes across the site are currently illustrative examples,
 labelled as such where they render (see `src/lib/stories.ts` and
@@ -91,12 +94,49 @@ publication has reported and are not findings of our own.
 
 ## Environment variables
 
-| Variable | Required | Purpose |
+| Variable | Where | Purpose |
 |---|---|---|
-| `SUPABASE_URL` | For the waitlist API only | Supabase project URL for `/api/waitlist`. |
-| `SUPABASE_ANON_KEY` | For the waitlist API only | Anon key, RLS-scoped to insert-only on `waitlist_signups`. |
+| `SUPABASE_URL` | Vercel + local | Supabase project URL. |
+| `SUPABASE_ANON_KEY` | Vercel + local | Anon key. It can execute four functions and **read nothing** — every table has RLS on with no policies (see below). |
+| `COMMUNITY_INVITE_URL` | Vercel + local | The group's join link. Server-only; returned by exactly one code path, a successful invite redemption. Never give it a `NEXT_PUBLIC_` name. |
+| `NEXT_PUBLIC_COMMUNITY_PLATFORM` | optional | Display name for the messaging platform, default `WhatsApp`. A word, not a secret. |
+| `SUPABASE_SERVICE_ROLE_KEY` | **local only** | Full database access, used by `npm run community`. Never set this on Vercel. |
 
-Create `.env.local` with the variables above for local development.
+Create `.env.local` (git-ignored) with the variables above for local development.
+
+## Database
+
+Schema and access rules live in `supabase/migrations/`, applied oldest first.
+They are written to be safe to re-run against the existing project.
+
+The access model is the security design, so it is worth stating: **the anon key
+the website holds has no privileges on any table.** Row-level security is on
+with no policies, plus an explicit `revoke all`. The site can only execute four
+`security definer` functions — submit a signup, submit an application, check an
+invite, redeem an invite. It cannot read the waitlist, read applications,
+approve anyone, or mint an invite; those need the service-role key, which lives
+only on a reviewer's machine. A compromise of the website leaks nothing about
+who is on the list.
+
+Reviewing applications and issuing invites is a local command, deliberately
+rather than an admin page — an admin page needs authentication, and
+authentication is a new attack surface guarding the most sensitive data here:
+
+```bash
+npm run community -- list                       # applications awaiting review
+npm run community -- show    <email>            # read one in full
+npm run community -- approve <email>            # mint a single-use invite
+npm run community -- decline <email> ["note"]
+npm run community -- remove  <email> ["note"]   # revoke invites, mark removed
+npm run community -- purge                      # apply the retention policy
+```
+
+## Security
+
+[`docs/security-review.md`](docs/security-review.md) records the review this
+site was last given: what was fixed, what is accepted and why, and what needs a
+decision. Read it before changing anything under `src/app/api/`,
+`supabase/migrations/`, or the headers in `next.config.ts`.
 
 ## Project conventions
 

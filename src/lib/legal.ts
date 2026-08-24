@@ -13,11 +13,26 @@
  * - No cookies, no analytics, no advertising or tracking of any kind.
  * - The waitlist form (/waitlist) is wired up: submitting it sends your
  *   email address to a single Supabase table via one API route
- *   (POST /api/waitlist), solely so we can email you when the community
- *   feature opens. The table has row-level security enabled and no
- *   read policy, so the list cannot be queried back out over the public
- *   API — only inserted into. See src/app/api/waitlist/route.ts and
- *   src/lib/supabase-server.ts.
+ *   (POST /api/waitlist), solely so we can email you about the site. The
+ *   table has row-level security enabled with no policies at all, so the
+ *   list cannot be queried back out over the public API — the anon key can
+ *   only execute one insert-only function. See src/app/api/waitlist/route.ts
+ *   and supabase/migrations/0001_waitlist_signups.sql.
+ * - The community application form (/community) collects a first name,
+ *   email, pathway, stage, optional interests, an optional sector
+ *   affiliation, and a FREE-TEXT ANSWER about why the person wants to join.
+ *   That free text is special category data under Art. 9 — people describe
+ *   their treatment in it. It is stored in Supabase (EU), read by a human
+ *   reviewer, and cleared by the retention job in scripts/community-admin.ts.
+ *   This is the one place health data leaves the browser, and the policy
+ *   below must keep saying so. See src/app/api/community/apply/route.ts and
+ *   supabase/migrations/0002_community_membership.sql.
+ * - Approval mints a single-use invite token; only its SHA-256 hash is
+ *   stored. Redeeming it reveals the group link and nothing else. No phone
+ *   number is collected anywhere on this site.
+ * - The community itself runs on WhatsApp (Meta). We send no personal data
+ *   to Meta; a member joins with their own account, and from that point
+ *   Meta is their own controller.
  * - The location search sends browser geolocation coordinates to
  *   api.postcodes.io (Ideal Postcodes, UK) to resolve a postcode; we never
  *   see or store the coordinates ourselves.
@@ -116,7 +131,9 @@ const PRIVACY: LegalPage = {
       ],
       bullets: [
         "We set no cookies and run no analytics, advertising, or tracking of any kind.",
-        "We have no user accounts and we take no payments. The one thing we do store is your email address, and only if you choose to join our waitlist.",
+        "We have no user accounts, no passwords, and we take no payments.",
+        "We store your email address if you join our waitlist, and your answers if you apply to join the community — including what you write about your own treatment. Applying is the one place on this site where health information reaches us, it is entirely your choice, and we delete it on a short schedule.",
+        "We never ask for your phone number, anywhere.",
         "Your answers in our clinic matching tool — including anything about your health — are processed entirely within your own browser. They are never sent to us or to anyone else.",
         "If you use the location search, your coordinates go to one UK postcode-lookup service, with your permission, and are not stored by us.",
         "We never sell personal data, and we never share it for advertising. There are no exceptions to this.",
@@ -151,7 +168,17 @@ const PRIVACY: LegalPage = {
         {
           term: "Joining the waitlist",
           description:
-            "If you submit your email on our waitlist page, it is stored, together with the date you joined, in a database hosted by Supabase (in the EU) so we can email you once when the community feature opens. We don't add you to any other list, and this database cannot be browsed or searched back out over the public website — only new emails can be added to it. See 'Who we share data with' below for Supabase's role.",
+            "If you submit your email on our keep-in-touch page, it is stored, together with the date you joined, in a database hosted by Supabase (in the EU) so we can email you occasionally about the site. We don't add you to any other list, and this database cannot be browsed or searched back out over the public website — only new emails can be added to it. See 'Who we share data with' below for Supabase's role.",
+        },
+        {
+          term: "Applying to join the community",
+          description:
+            "This is the most personal thing we collect, so it gets the most detail. The form asks for your first name, your email address, which pathway you're on, what stage you're at, optionally what you're hoping to find, optionally whether you work in the fertility sector, and — in your own words — why you'd like to join. That last answer is the important one: it is what a person actually reads, and it is why the form exists rather than a join button. It is stored in our Supabase database in the EU, it is read by us, and it is not shared with anyone. We ask you to share only what you're comfortable having read, and we delete it on the schedule in 'How long we keep things' below. We never ask for your phone number, your address, your date of birth, or any medical records.",
+        },
+        {
+          term: "Your invite, if we approve you",
+          description:
+            "Approving an application creates a single-use invite link. We store only a cryptographic hash of it, never the link itself, so nobody — including us, and including anyone who obtained a copy of the database — can work out a working invite from what is stored. The link expires after seven days, works once, and only opens for someone who can also enter the email address it was issued to.",
         },
         {
           term: "Location search (optional)",
@@ -170,15 +197,16 @@ const PRIVACY: LegalPage = {
         },
       ],
       postBody: [
-        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, and no marketing lists beyond the single waitlist described above. We don't currently have a general newsletter; if we add one, we will update this policy first and say plainly what signing up involves.",
+        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, no passwords, and no marketing lists beyond the single waitlist described above. There is no forum, no comment box, and no profile anywhere on this site — the community is a separate private group on WhatsApp, and nothing said in it is ever published here.",
       ],
     },
     {
       heading: "Health information gets special treatment",
       body: [
-        "Data about your health, fertility, or sex life is \"special category data\" under UK data protection law, which sets a much higher bar for handling it. Our position is simple: we designed the site so that this data never reaches us at all.",
-        "The clinic matcher necessarily asks health-related questions — that is how it narrows the list of clinics — but the filtering happens on your device, in your browser, and the answers are not sent anywhere. We hold no record that you used the tool, let alone what you answered.",
-        "If we ever build a feature that would require health information to leave your browser — an account that saves your progress, for example — we will ask for your explicit, specific consent before any of it is collected, explain exactly where it goes, and update this policy first. We will never treat your continued use of the site as consent for something like that.",
+        "Data about your health, fertility, or sex life is \"special category data\" under UK data protection law, which sets a much higher bar for handling it. Almost everywhere on this site, we handle that bar by making sure the data never reaches us at all. There is exactly one exception, and we would rather name it plainly than bury it.",
+        "The clinic matcher necessarily asks health-related questions — that is how it narrows the list of clinics — but the filtering happens on your device, in your browser, and the answers are not sent anywhere. We hold no record that you used the tool, let alone what you answered. The same is true of the cost calculator and every filter in the clinic finder.",
+        "The exception is the community application form. When you write why you'd like to join, you will almost certainly say something about your treatment, and that is special category data that reaches our database and is read by a person. We ask for it because it is the only reliable way to tell a real applicant from a bot or from someone who should not be in a room with vulnerable people. You give it under your explicit consent, freely — nothing else on this site is gated behind it — you can withdraw that consent and have it deleted at any time, and we delete it ourselves once it has served its purpose. It is never used for anything except deciding on your application.",
+        "If we ever build another feature that would require health information to leave your browser — an account that saves your progress, for example — we will ask for your explicit, specific consent before any of it is collected, explain exactly where it goes, and update this policy first. We will never treat your continued use of the site as consent for something like that.",
       ],
     },
     {
@@ -193,6 +221,11 @@ const PRIVACY: LegalPage = {
             "The location search runs only after you grant your browser's permission prompt, and you can refuse or revoke it at any time in your browser settings without losing access to anything else on the site. Joining the waitlist is the same: you choose to type your email and submit it, and you can withdraw that consent at any time by asking us to delete it.",
         },
         {
+          term: "Explicit consent (for the community application)",
+          description:
+            "Special category data needs more than ordinary consent — it needs explicit consent under Article 9(2)(a). That is why applying is a deliberate act with a tick-box, why nothing else on this site is locked behind it, and why the form tells you before you write that a person will read it. You can withdraw it at any time by emailing us, and we will delete the application; if you are already in the group, withdrawing consent does not remove you from it, and leaving the group is always yours to do without giving a reason.",
+        },
+        {
           term: "Legitimate interests",
           description:
             "Replying to emails you send us, and the security and operational logging our hosting provider performs to keep the site available and safe. These uses are minimal, expected, and easy to object to — contact details are below.",
@@ -202,7 +235,8 @@ const PRIVACY: LegalPage = {
     {
       heading: "How long we keep things",
       body: [
-        "We keep email correspondence for as long as it is genuinely needed to deal with your enquiry and for a reasonable period afterwards, then delete it. Waitlist emails are kept until we either email you about the community feature opening or you ask us to remove you, whichever comes first — we don't hold them indefinitely once that purpose is served. Hosting logs are kept by Vercel on infrastructure timescales (typically days, not months) under their own retention policies.",
+        "We keep email correspondence for as long as it is genuinely needed to deal with your enquiry and for a reasonable period afterwards, then delete it. Waitlist emails are kept until you ask us to remove you. Hosting logs are kept by Vercel on infrastructure timescales (typically days, not months) under their own retention policies.",
+        "Community applications have their own schedule, and it is deliberately short. If we decline an application, the whole record — including everything you wrote — is deleted within 30 days. If you join, the free-text answer and any sector declaration are deleted within 90 days of applying; what remains is your first name, email, pathway and stage, so we know who is in the group. If you leave or are removed, ask us and the record goes entirely. Invite records are kept only while the invite could still be used.",
       ],
     },
     {
@@ -212,9 +246,11 @@ const PRIVACY: LegalPage = {
       ],
       bullets: [
         "Vercel Inc. — hosts and serves the website. Vercel is a US company; where visitor data such as IP addresses is processed outside the UK, that transfer is covered by recognised safeguards including the UK Extension to the EU–US Data Privacy Framework and standard contractual clauses.",
-        "Supabase Inc. — stores waitlist email addresses in a database hosted in the EU. Supabase is a US company operating EU infrastructure for this data; where any transfer outside the UK/EU occurs, it is covered by standard contractual clauses.",
+        "Supabase Inc. — stores waitlist email addresses and community applications in a database hosted in the EU. Supabase is a US company operating EU infrastructure for this data; where any transfer outside the UK/EU occurs, it is covered by standard contractual clauses.",
         "Ideal Postcodes (Postcodes.io) — a UK service that converts coordinates to postcodes, used only when you choose the location search and grant permission.",
       ],
+      callout:
+        "The community group runs on WhatsApp, and WhatsApp is not on that list because we send it nothing. We do not upload your email, your application, or any contact list to Meta. You join with your own WhatsApp account, under your own agreement with Meta, and from that moment Meta handles your data as your provider rather than ours. One consequence is worth stating plainly rather than leaving you to discover it: in a WhatsApp group, other members can see your phone number. We tell every applicant this before they apply and again before they join, because it is the one thing about the group we cannot design away.",
       postBody: [
         "We do not sell personal data, we do not share it for advertising or marketing, and we do not pass it to data brokers. Links to social platforms in our footer are ordinary links: nothing about your visit is sent to those platforms unless you click through, at which point their own policies apply.",
       ],
@@ -229,7 +265,7 @@ const PRIVACY: LegalPage = {
     {
       heading: "Your rights",
       body: [
-        "You have rights over personal data we hold about you — in practice, that means email correspondence and, if you've joined it, your waitlist entry, since those are the only personal data we keep:",
+        "You have rights over personal data we hold about you — in practice, that means email correspondence, your waitlist entry if you've joined it, and your community application if you've made one, since those are the only personal data we keep:",
       ],
       bullets: [
         "Access: ask for a copy of what we hold about you.",
@@ -321,7 +357,16 @@ const TERMS: LegalPage = {
       bullets: [
         "use the site unlawfully, or in a way that could harm it or other users — including attempting to breach its security, scrape it at scale, or interfere with its operation;",
         "reproduce our content commercially without permission (personal, non-commercial use — printing a comparison to discuss with your clinic, for instance — is fine and encouraged);",
-        "misrepresent this site's content as medical advice, or present it as endorsed by us, a clinic, or a regulator.",
+        "misrepresent this site's content as medical advice, or present it as endorsed by us, a clinic, or a regulator;",
+        "apply to the community under false pretences — for a clinic, a brand, a research study, or a press story — or use it to sell, recruit, or promote anything.",
+      ],
+    },
+    {
+      heading: "The community group",
+      body: [
+        "Our community is a private group on WhatsApp, not part of this website. Applying is free, and approval is at our discretion: we read every application and we decline the ones we are not comfortable with, without being obliged to explain why. That discretion exists to protect the people already in the group and we intend to keep using it.",
+        "Membership is conditional on the [group rules](/community/guidelines), which you accept when you apply and again when you redeem your invite. The rule that matters most is that nothing said in the group is repeated outside it. We may remove any member at any time for breaking the rules, and we will do so without notice where somebody's safety or privacy is at stake.",
+        "Once you are in the group, WhatsApp is provided to you by Meta under its own terms, and other members can see your phone number — we say this on the application page, in the rules, and in our [privacy policy](/privacy), because it is the one thing about the group we cannot control. We are not responsible for what individual members say or do, and we are not a moderation service, a support line, or a substitute for professional care. If something in the group worries you, tell an admin.",
       ],
     },
     {

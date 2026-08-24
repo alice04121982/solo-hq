@@ -1,35 +1,44 @@
 import { NextResponse } from "next/server";
-import { getSupabaseServerClient } from "@/lib/supabase-server";
+import { clientKey, rateLimit } from "@/lib/rate-limit";
+import { isGuardFailure, readJsonBody, readString, withSupabase } from "@/lib/api-guard";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * The email-only waitlist behind /waitlist.
+ *
+ * One response for every outcome that isn't a malformed request. An earlier
+ * version answered "already-joined" for a duplicate, which turned this
+ * endpoint into a way for anyone with an email address to find out whether
+ * that person is waiting to join a fertility community. Being slightly less
+ * chatty is worth more than the confirmation message it cost.
+ */
 export async function POST(request: Request) {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+  const limit = rateLimit(`waitlist:${clientKey(request)}`, 5, 60_000);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { error: "Too many attempts. Please wait a moment and try again." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
+    );
   }
 
-  const email = typeof body === "object" && body !== null && "email" in body
-    ? String((body as { email: unknown }).email).trim().toLowerCase()
-    : "";
+  const parsed = await readJsonBody(request);
+  if (isGuardFailure(parsed)) return parsed.response;
 
+  const email = readString(parsed.body, "email", 254).toLowerCase();
   if (!EMAIL_PATTERN.test(email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   }
 
-  const supabase = getSupabaseServerClient();
-  const { error } = await supabase.from("waitlist_signups").insert({ email });
+  const result = await withSupabase("waitlist signup", (supabase) =>
+    supabase.rpc("submit_waitlist_signup", { p_email: email })
+  );
 
-  if (error) {
-    // 23505 = unique_violation — already on the list, not a failure from the
-    // signer-upper's point of view.
-    if (error.code === "23505") {
-      return NextResponse.json({ status: "already-joined" });
-    }
-    console.error("waitlist insert failed", error);
-    return NextResponse.json({ error: "Something went wrong. Please try again." }, { status: 500 });
+  if (result.error) {
+    return NextResponse.json(
+      { error: "Something went wrong. Please try again." },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ status: "joined" });
