@@ -1,19 +1,24 @@
 import { Logo } from "./logo";
+import { FAMILY_TYPES } from "@/lib/family-types";
 
 const TEAL = "var(--teal)";
 const PINK = "#f9c6da";
 const PINK_MUTED = "#c4a0ae";
 const PINK_HOT = "#F0A8C4";
 
-// Same names and display order as the family type labels in
-// `src/lib/family-types.ts` and the /families index.
-const FAMILY_LINKS = [
-  { label: "Solo Mums", href: "/families/solo-mum" },
-  { label: "Solo Dads", href: "/families/single-dad" },
-  { label: "Two Mums", href: "/families/same-sex-female" },
-  { label: "Two Dads", href: "/families/same-sex-male" },
-  { label: "Mum and Dad", href: "/families/heterosexual-couple" },
+// Derived from the canonical family-type data so footer naming can never
+// drift from the labels used on the family pages themselves, in the same
+// display order as the /families index.
+const FAMILY_ORDER = [
+  "solo-mum",
+  "single-dad",
+  "same-sex-female",
+  "same-sex-male",
+  "heterosexual-couple",
 ];
+const FAMILY_LINKS = [...FAMILY_TYPES]
+  .sort((a, b) => FAMILY_ORDER.indexOf(a.slug) - FAMILY_ORDER.indexOf(b.slug))
+  .map((f) => ({ label: f.label, href: `/families/${f.slug}` }));
 
 const TOOL_LINKS = [
   { label: "Clinic Comparison Tool", href: "/ivf-finder" },
