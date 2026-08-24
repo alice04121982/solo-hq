@@ -14,6 +14,8 @@
   --accent-soft:     #DCF04A;
   --accent-dark:     #9BBB00;
   --on-accent:       #1A3A25;   /* dark green ink on lime fills */
+  --on-accent-muted: rgba(26, 58, 37, 0.85);  /* secondary copy on lime */
+  --on-accent-line:  rgba(26, 58, 37, 0.16);  /* rules and dividers on lime */
   --border:          #E8E8E8;   /* grey hairline — WHITE BANDS ONLY, never on cream */
 
   /* ── Warm neutrals ──
@@ -79,6 +81,8 @@
   --color-accent:          var(--accent);
   --color-accent-soft:     var(--accent-soft);
   --color-on-accent:       var(--on-accent);
+  --color-on-accent-muted: var(--on-accent-muted);
+  --color-on-accent-line:  var(--on-accent-line);
   --color-border:          var(--border);
   --color-border-warm:     var(--border-warm);
   --color-surface-warm:    var(--surface-warm);
@@ -298,10 +302,15 @@
   0%, 100% { transform: scale(1); }
   50%      { transform: scale(1.08); }
 }
+@keyframes shape-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
 .shape-spin    { animation: shape-spin 28s linear infinite; }
 .shape-breathe { animation: shape-breathe 6s ease-in-out infinite; }
+.shape-drift   { animation: shape-drift 9s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .shape-spin, .shape-breathe { animation: none; }
+  .shape-spin, .shape-breathe, .shape-drift { animation: none; }
 }
 
 /* ── Scrollbar ── */
