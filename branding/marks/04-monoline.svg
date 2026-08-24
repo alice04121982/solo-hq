@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- The Monoline: outlined stones, lighter and more editorial; only the summit stone is solid -->
+  <rect x="25" y="10" width="14" height="10" rx="5" fill="#C5E600"/>
+  <rect x="21.25" y="23.25" width="21.5" height="7.5" rx="3.75" stroke="#005353" stroke-width="2.5"/>
+  <rect x="16.25" y="35.25" width="31.5" height="7.5" rx="3.75" stroke="#005353" stroke-width="2.5"/>
+  <rect x="11.25" y="47.25" width="41.5" height="7.5" rx="3.75" stroke="#005353" stroke-width="2.5"/>
+</svg>

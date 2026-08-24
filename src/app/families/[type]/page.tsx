@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const family = getFamilyType(type);
   if (!family) return {};
   return {
-    title: `${family.label} | Cairn Fertility`,
+    title: `${family.label} | CairnFertility`,
     description: family.heroCopy.slice(0, 160),
   };
 }
@@ -84,11 +84,11 @@ export default async function FamilyTypePage({ params }: PageProps) {
             </p>
             <h2
               className="font-sans font-bold mb-10"
-              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: "#1A3A25" }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: "var(--teal)" }}
             >
               Where are you on your journey?
             </h2>
-            <BentoCard delay={0.05} white>
+            <BentoCard delay={0.05}>
               <JourneyMap />
             </BentoCard>
           </div>

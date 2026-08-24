@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- The Classic Stack: a balanced cairn, the lime summit stone marks the goal -->
+  <rect x="25" y="10" width="14" height="10" rx="5" fill="#C5E600"/>
+  <rect x="20" y="22" width="24" height="10" rx="5" fill="#005353"/>
+  <rect x="15" y="34" width="34" height="10" rx="5" fill="#005353"/>
+  <rect x="10" y="46" width="44" height="10" rx="5" fill="#005353"/>
+</svg>

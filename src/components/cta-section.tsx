@@ -9,7 +9,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function CTASection() {
   return (
-    <section className="relative overflow-hidden" style={{ background: "#F0A8C4" }}>
+    <section className="relative overflow-hidden" style={{ background: "var(--lavender)" }}>
       {/* Calendar crosses in the band's corner — days marked off. Solid
           tone-on-tone, not an opacity fade. */}
       <div aria-hidden className="absolute top-10 right-8 hidden md:flex gap-4" style={{ color: "var(--lavender-dark)" }}>
@@ -57,19 +57,21 @@ export function CTASection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
+              <a
+                href="/community#waitlist"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "var(--accent)", color: "#1A3A25" }}
+                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
               >
                 Join the Waitlist
                 <ArrowRight className="h-4 w-4" />
-              </button>
-              <button
+              </a>
+              <a
+                href="/about#story"
                 className="inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-black/10"
-                style={{ borderColor: "rgba(0, 83, 83, 0.35)", color: "var(--teal)" }}
+                style={{ borderColor: "var(--teal-35)", color: "var(--teal)" }}
               >
                 Follow Our Journey
-              </button>
+              </a>
             </div>
 
             <p className="text-xs font-sans mt-6" style={{ color: "rgba(0, 83, 83, 0.5)" }}>

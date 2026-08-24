@@ -3,11 +3,12 @@ import { Suspense } from "react";
 import { ShieldCheck, Scale, PoundSterling, Video } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
+import { ShapeMark } from "@/components/shapes";
 import { ClinicFinder } from "@/components/ivf-finder/clinic-finder";
 import { CLINICS } from "@/lib/clinics";
 
 export const metadata: Metadata = {
-  title: "Compare IVF Clinics, UK and Abroad | Cairn Fertility",
+  title: "Compare IVF Clinics, UK and Abroad | CairnFertility",
   description:
     "Compare IVF clinics in the UK and abroad in one search, ranked by success rate for your age group, with every figure labelled by source and year.",
 };
@@ -45,9 +46,15 @@ export default function IvfFinderPage() {
         </div>
       </section>
 
-      {/* Hero + finder */}
-      <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+      {/* Hero + finder. The band is tall (it holds the whole finder), so the
+          backdrop is the dots treatment — cropped at the band's edges — rather
+          than a mid-height mark that would sit behind the results list. */}
+      <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28" backdrop={{ shape: "dots" }}>
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           UK and international clinics
         </p>
         <h1
@@ -57,8 +64,8 @@ export default function IvfFinderPage() {
           Compare IVF Clinics
         </h1>
         <p className="text-lg font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-          Every clinic in one list, ranked by success rate for your age group. Each figure is
-          labelled with its source, its year and what it was measured against.
+          UK and international clinics in one list, ranked by success rate for your age group.
+          Each figure is labelled with its source, its year and what it was measured against.
         </p>
 
         <Suspense>
@@ -68,14 +75,18 @@ export default function IvfFinderPage() {
 
       {/* What to look for */}
       <Section band={1}>
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-8 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-8"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
           What every patient should look for
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
           {WHAT_TO_LOOK_FOR.map((item) => (
             <div key={item.title} className="py-6 border-t border-border">
               <div className="text-accent mb-3">{item.icon}</div>
-              <p className="font-sans font-medium text-foreground text-base mb-2">{item.title}</p>
+              <p className="font-sans font-medium text-teal text-base mb-2">{item.title}</p>
               <p className="text-sm font-sans text-muted leading-relaxed">{item.desc}</p>
             </div>
           ))}

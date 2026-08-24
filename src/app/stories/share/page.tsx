@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
 import { ShareStoryForm } from "@/components/share-story-form";
 
 export const metadata: Metadata = {
@@ -41,22 +42,17 @@ export default function ShareStoryPage() {
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-20 pb-16">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Share your story
-        </p>
-        <h1
-          className="font-sans font-bold text-foreground mb-6"
-          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
-        >
-          Tell it the way it actually happened.
-        </h1>
-        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "58ch" }}>
-          The stories on this site are illustrative while we collect real,
-          consented accounts to replace them — and the accounts that help most
-          are written by people who lived them. Whatever stage you&rsquo;re at,
-          however it went, we&rsquo;d like to hear it.
-        </p>
+      <Section band={0} padding="pt-20 pb-16" backdrop={{ shape: "bloom" }}>
+        <SectionHeading
+          level={1}
+          eyebrow="Share your story"
+          mark="spark"
+          markClassName="shape-spin"
+          title="Tell it the way it actually happened."
+          intro="The stories on this site are illustrative while we collect real, consented accounts to replace them — and the accounts that help most are written by people who lived them. Whatever stage you're at, however it went, we'd like to hear it."
+          introWidth="58ch"
+          className="mb-0"
+        />
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "58ch" }}>
           Prefer to skip the form? Just write to us directly at{" "}
           <a

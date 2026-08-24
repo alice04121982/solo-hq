@@ -71,7 +71,7 @@ function LegalSectionBlock({ section }: { section: LegalSection }) {
   return (
     <div>
       <h2
-        className="font-sans font-bold text-foreground mb-4"
+        className="font-sans font-bold text-teal mb-4"
         style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)", lineHeight: 1.2 }}
       >
         {section.heading}
@@ -113,7 +113,7 @@ function LegalSectionBlock({ section }: { section: LegalSection }) {
       {section.postBody && <Paragraphs items={section.postBody} />}
 
       {section.callout && (
-        <div className="mt-5 rounded-2xl bg-surface-sunken border border-border p-4 flex items-start gap-3">
+        <div className="mt-5 rounded-2xl bg-background border border-border p-4 flex items-start gap-3">
           <AlertTriangle className="h-4 w-4 text-muted shrink-0 mt-0.5" aria-hidden />
           <p className="text-xs text-muted leading-relaxed">
             <strong className="text-teal-ink">Note:</strong>{" "}
@@ -150,7 +150,7 @@ export function LegalPageLayout({
           Legal
         </p>
         <h1
-          className="font-sans font-bold text-foreground mb-4"
+          className="font-sans font-bold text-teal mb-4"
           style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
         >
           {page.title}
@@ -188,7 +188,7 @@ export function LegalPageLayout({
                 <li key={slug}>
                   <Link
                     href={`/${slug}`}
-                    className="text-sm font-sans text-foreground border-b border-foreground/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150"
+                    className="text-sm font-sans text-teal border-b border-teal/30 pb-0.5 hover:border-teal hover:text-teal transition-colors duration-150"
                   >
                     {LEGAL_PAGES[slug].label}
                   </Link>

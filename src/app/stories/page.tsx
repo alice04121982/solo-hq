@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { StoryImage } from "@/components/story-image";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
 import { ALL_STORIES } from "@/lib/stories";
 import { FAMILY_TYPES } from "@/lib/family-types";
 import type { FamilyTypeSlug } from "@/lib/family-types";
@@ -32,19 +33,17 @@ export default function StoriesPage() {
       </section>
 
       {/* Header */}
-      <Section band={0} padding="pt-20 pb-16">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          Stories
-        </p>
-        <h1
-          className="font-sans font-bold text-foreground mb-6"
-          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
-        >
-          Personal stories
-        </h1>
-        <p className="text-lg font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-          What the journey looks like at every stage, told the way people tell it.
-        </p>
+      <Section band={0} padding="pt-20 pb-16" backdrop={{ shape: "bloom" }}>
+        <SectionHeading
+          level={1}
+          eyebrow="Stories"
+          mark="spark"
+          markClassName="shape-spin"
+          title="Personal stories"
+          intro="What the journey looks like at every stage, told the way people tell it."
+          introWidth="52ch"
+          className="mb-0"
+        />
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "52ch" }}>
           These are illustrative stories while we collect real, consented accounts to
           replace them. If you would like to share yours,{" "}
@@ -62,8 +61,8 @@ export default function StoriesPage() {
             onClick={() => setFilter("all")}
             className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
               filter === "all"
-                ? "border-foreground bg-foreground text-background"
-                : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+                ? "border-teal bg-teal text-on-teal"
+                : "border-border text-muted hover:border-teal/40 hover:text-teal"
             }`}
           >
             All stories
@@ -74,8 +73,8 @@ export default function StoriesPage() {
               onClick={() => setFilter(f.slug)}
               className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
                 filter === f.slug
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+                  ? "border-teal bg-teal text-on-teal"
+                  : "border-border text-muted hover:border-teal/40 hover:text-teal"
               }`}
             >
               {f.label}
@@ -85,8 +84,8 @@ export default function StoriesPage() {
             onClick={() => setFilter("faith")}
             className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
               filter === "faith"
-                ? "border-foreground bg-foreground text-background"
-                : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+                ? "border-teal bg-teal text-on-teal"
+                : "border-border text-muted hover:border-teal/40 hover:text-teal"
             }`}
           >
             Faith &amp; belief
@@ -143,7 +142,7 @@ export default function StoriesPage() {
                   )}
                 </div>
 
-                <h2 className="font-sans font-bold text-foreground text-xl leading-snug">
+                <h2 className="font-sans font-bold text-teal text-xl leading-snug">
                   {story.title}
                 </h2>
 
