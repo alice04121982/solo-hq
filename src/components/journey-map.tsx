@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { Lightbulb, Landmark, Search, Stethoscope, FlaskConical, Heart, Baby, Sunrise, Users } from "lucide-react";
 
-const GREEN = "#1A3A25";
-const GREEN_SOFT = "rgba(26,58,37,0.65)";
+const TEAL = "var(--teal)";
+const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 interface Phase {
   id: string;
@@ -79,16 +79,16 @@ export function JourneyMap() {
   return (
     <div className="p-6 md:p-8">
       <div className="mb-6">
-        <p className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans" style={{ color: GREEN_SOFT }}>
+        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans" style={{ color: TEAL_SOFT }}>
           Full lifecycle
         </p>
         <h2
           className="font-sans font-bold text-2xl leading-tight"
-          style={{ color: "#1A3A25" }}
+          style={{ color: "var(--teal)" }}
         >
           The Solo Navigator
         </h2>
-        <p className="text-sm font-sans mt-1 leading-relaxed" style={{ color: GREEN }}>
+        <p className="text-sm font-sans mt-1 leading-relaxed" style={{ color: TEAL }}>
           From &ldquo;am I really doing this?&rdquo; to thriving as a solo family.
         </p>
       </div>
@@ -107,7 +107,7 @@ export function JourneyMap() {
         {PHASES.map((phase) => (
           <div
             key={phase.id}
-            className="shrink-0 rounded-2xl border border-border bg-white flex flex-col"
+            className="shrink-0 rounded-2xl bg-white flex flex-col"
             style={{
               scrollSnapAlign: "start",
               width: "calc(85vw - 2rem)",
@@ -120,34 +120,34 @@ export function JourneyMap() {
               <div className="flex items-center gap-3 mb-3">
                 <span
                   className="font-serif leading-none"
-                  style={{ fontSize: "1.5rem", color: GREEN_SOFT }}
+                  style={{ fontSize: "1.5rem", color: TEAL_SOFT }}
                 >
                   {String(phase.number).padStart(2, "0")}
                 </span>
                 <span
                   className="flex items-center justify-center h-7 w-7 rounded-full"
-                  style={{ background: "#FDE8F2", color: GREEN }}
+                  style={{ background: "var(--card-bg)", color: TEAL }}
                 >
                   {phase.icon}
                 </span>
               </div>
-              <p className="font-sans font-semibold text-sm leading-tight" style={{ color: "#1A3A25" }}>
+              <p className="font-sans font-semibold text-sm leading-tight" style={{ color: "var(--teal)" }}>
                 {phase.title}
               </p>
-              <p className="text-xs font-sans mt-0.5" style={{ color: GREEN_SOFT }}>{phase.subtitle}</p>
+              <p className="text-xs font-sans mt-0.5" style={{ color: TEAL_SOFT }}>{phase.subtitle}</p>
             </div>
 
             {/* Card body */}
             <div className="p-5 flex flex-col gap-4 flex-1">
-              <p className="text-xs font-sans leading-relaxed" style={{ color: GREEN }}>
+              <p className="text-xs font-sans leading-relaxed" style={{ color: TEAL }}>
                 {phase.description}
               </p>
               <div className="space-y-2">
                 {phase.actions.map((action) => (
                   <div key={action} className="flex items-start gap-2">
                     <span className="h-1.5 w-1.5 rounded-full shrink-0 mt-1.5"
-                      style={{ background: GREEN }} />
-                    <p className="text-xs font-sans leading-relaxed" style={{ color: GREEN }}>{action}</p>
+                      style={{ background: TEAL }} />
+                    <p className="text-xs font-sans leading-relaxed" style={{ color: TEAL }}>{action}</p>
                   </div>
                 ))}
               </div>
@@ -157,7 +157,7 @@ export function JourneyMap() {
       </div>
 
       {/* Scroll indicator */}
-      <p className="text-[10px] font-sans text-center mt-1" style={{ color: GREEN_SOFT }}>
+      <p className="text-[12px] font-sans text-center mt-1" style={{ color: TEAL_SOFT }}>
         Swipe to explore all 9 steps →
       </p>
     </div>

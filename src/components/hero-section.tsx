@@ -17,7 +17,7 @@ const TRUST_SIGNALS = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--teal)" }}>
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="relative mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav theme="dark" />
 
         {/* Copy leads in the DOM so the page reads copy-first, but the grid
@@ -34,7 +34,7 @@ export function HeroSection() {
             <h1
               className="font-sans font-bold mb-7"
               style={{
-                fontSize: "clamp(2.8rem, 5.5vw, 4.6rem)",
+                fontSize: "clamp(3rem, 5.5vw, 6rem)",
                 lineHeight: 1.04,
                 color: "var(--on-teal)",
               }}
@@ -75,7 +75,7 @@ export function HeroSection() {
               <a
                 href="/get-started"
                 className="inline-flex items-center gap-2 rounded-full text-sm font-sans font-medium px-7 py-3.5 transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "var(--accent)", color: "#1A3A25" }}
+                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
               >
                 Get started
                 <ArrowRight className="h-3.5 w-3.5" />

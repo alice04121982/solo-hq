@@ -1,4 +1,4 @@
-# Cairn Fertility
+# CairnFertility
 
 Cairn compares IVF clinics on cost, success rates and eligibility, and explains how
 treatment works, for everyone going through IVF: solo mums, solo dads, two mums, two
@@ -10,9 +10,9 @@ and hard to compare from the outside.
 
 ## What the site does today
 
-- **Clinic finder** (`/ivf-finder`): search and compare UK clinics, with seed data for
-  the Cambridge area and a live search backed by the Claude API. Compare up to four
-  clinics side by side on pricing, packages and HFEA success rates by age band.
+- **Clinic finder** (`/ivf-finder`): search and compare clinics, UK and international,
+  on treatments (IVF, ICSI, IUI, donor routes), pricing, and success rates by age band.
+  Compare up to four clinics side by side. UK success rates cite the HFEA register.
 - **Family pathways** (`/families`): dedicated pages for each route into IVF, with a
   clinic matcher that filters by what your pathway actually needs (donor sperm, donor
   eggs, reciprocal IVF, and so on).
@@ -20,6 +20,15 @@ and hard to compare from the outside.
   legal and admin, pregnancy and community.
 - **How IVF works** (`/how-ivf-works`), **stories** (`/stories`), a **cost calculator**
   and a **journey map** on the homepage.
+- **In the media** (`/news`): a curated roundup of other people's reporting on
+  fertility treatment — publisher's headline, our note on why it matters, and a
+  link straight out. Cairn has no newsroom and publishes no journalism of its
+  own here; the list lives in `src/lib/news.ts`.
+  Candidates are found automatically and published by hand: a weekly action
+  (`.github/workflows/news-candidates.yml`) sweeps publisher feeds via
+  `npm run find:news` and opens an issue of ready-to-paste entries. It never
+  writes to `src/` — the note under each headline is an editorial judgement,
+  so a person writes it and commits.
 
 Surrogacy is not covered yet but is planned. A community space is also planned:
 somewhere to find people at your stage, hear from people who have been through
@@ -49,13 +58,45 @@ npm run preview    # production build + start
 npm run lint
 ```
 
+## Data: where it comes from and how it stays fresh
+
+There is no live clinic-data feed: every price, treatment list and success
+rate ships with the site from **one file, `src/lib/clinics.ts`**, and the
+finder, the Get Started wizard and the cost calculator all read from it.
+It is indicative seed data compiled from each clinic's published price list,
+sanity-checked against the HFEA's and NHS's published cost guidance, and it
+must be re-verified before being treated as current.
+
+- `DATA_PROVENANCE` (in the same file) records the sources and the date the
+  figures were last verified; the UI displays both wherever prices render.
+- UK success rates cite the [HFEA register](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/)
+  (the UK's fertility regulator — which does not endorse this site);
+  overseas rates are self-reported by clinics and labelled as such.
+- `npm run check:data` (Node 22.6+) enforces the data invariants and fails
+  once the verification date is stale. A weekly GitHub Action
+  (`.github/workflows/data-freshness.yml`) runs it and opens an issue when
+  re-verification is due.
+- The re-verification procedure lives in
+  `.claude/skills/treatment-data-check/SKILL.md`.
+
+### Clinics we don't list
+
+Some clinics are deliberately absent. `src/lib/clinic-exclusions.ts` records
+each one with a sourced reason, any response on the record, and a review date;
+`CLINICS` is filtered through it, and `npm run check:data` fails if an excluded
+clinic is present in `src/lib/clinics.ts` at all. The list renders publicly
+under the methodology on `/about`, because a policy of leaving clinics out is
+only honest if it is visible and sourced. Entries state what a named
+publication has reported and are not findings of our own.
+
 ## Environment variables
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | For live clinic search only | Powers `/api/clinic-search`, which uses the Claude API with web search to fetch current clinic data. Without it the finder still works from the bundled seed data. |
+| `SUPABASE_URL` | For the waitlist API only | Supabase project URL for `/api/waitlist`. |
+| `SUPABASE_ANON_KEY` | For the waitlist API only | Anon key, RLS-scoped to insert-only on `waitlist_signups`. |
 
-Create `.env.local` with the variable above for local development.
+Create `.env.local` with the variables above for local development.
 
 ## Project conventions
 

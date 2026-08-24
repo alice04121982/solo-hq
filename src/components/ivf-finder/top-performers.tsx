@@ -4,6 +4,12 @@ import { Check, Plus } from "lucide-react";
 import Link from "next/link";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { rateFor } from "@/lib/clinics";
+import { CountryFlag } from "@/components/country-flag";
+import {
+  clinicCardClasses,
+  DEFAULT_TOP_PERFORMER_VARIANT,
+  type ClinicCardVariant,
+} from "@/lib/card-style";
 import { RateFigure, VerificationBadge } from "./rate-display";
 
 interface TopPerformersProps {
@@ -12,6 +18,7 @@ interface TopPerformersProps {
   ageBracket: AgeBracket;
   selectedSlugs: string[];
   compareDisabled: boolean;
+  variant?: ClinicCardVariant;
   onToggleCompare: (clinic: Clinic) => void;
 }
 
@@ -39,12 +46,16 @@ function bestOf(clinics: Clinic[], bracket: AgeBracket): Clinic | undefined {
  * age bracket. A slot emptied by an active filter is hidden rather than
  * rendered blank, and a clinic topping two slots appears once with both
  * labels.
+ *
+ * The strip is meant to read as picked out of the list below it, so it takes
+ * the pale citrus fill by default while the results grid stays on white.
  */
 export function TopPerformers({
   clinics,
   ageBracket,
   selectedSlugs,
   compareDisabled,
+  variant = DEFAULT_TOP_PERFORMER_VARIANT,
   onToggleCompare,
 }: TopPerformersProps) {
   const slots: Slot[] = [];
@@ -67,7 +78,7 @@ export function TopPerformers({
 
   return (
     <div>
-      <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-3">
+      <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-3">
         Top performers for this search
       </p>
       {/* Horizontal scroll on mobile, a row of equal cards from md up. */}
@@ -77,11 +88,12 @@ export function TopPerformers({
           return (
             <div
               key={clinic.slug}
-              className={`min-w-[260px] md:min-w-0 rounded-[24px] bg-background border border-border transition-colors duration-150 hover:bg-surface-hover p-5 flex flex-col ${
-                isSelected ? "outline-solid outline-2 -outline-offset-2 outline-teal" : ""
-              }`}
+              className={`${clinicCardClasses(variant, isSelected)} min-w-[260px] md:min-w-0`}
             >
-              <p className="text-[10px] font-[700] uppercase tracking-[0.12em] text-teal mb-2">
+              <p
+                className="text-[12px] font-[700] uppercase tracking-[0.12em] mb-2"
+                style={{ color: "var(--card-ink)" }}
+              >
                 {labels.join(" · ")}
               </p>
               <div className="mb-2">
@@ -89,24 +101,24 @@ export function TopPerformers({
               </div>
               <Link
                 href={`/ivf-finder/${clinic.slug}`}
-                className="text-sm font-bold text-teal-ink leading-snug hover:underline underline-offset-2"
+                className="text-sm font-bold leading-snug hover:underline underline-offset-2"
+                style={{ color: "var(--card-ink)" }}
               >
                 {clinic.name}
               </Link>
-              <p className="text-xs text-muted mb-3">
-                {clinic.city}, {clinic.country}
-              </p>
+              <div className="flex items-center gap-1.5 mb-3">
+                <CountryFlag country={clinic.country} />
+                <p className="text-xs truncate" style={{ color: "var(--card-ink-muted)" }}>
+                  {clinic.city}, {clinic.country}
+                </p>
+              </div>
               <RateFigure clinic={clinic} bracket={ageBracket} />
               <button
                 onClick={() => onToggleCompare(clinic)}
                 disabled={compareDisabled && !isSelected}
-                className={`mt-4 flex items-center justify-center gap-1.5 h-9 rounded-full text-xs font-semibold border transition-colors ${
-                  isSelected
-                    ? "bg-teal border-teal text-on-teal hover:opacity-90"
-                    : compareDisabled
-                      ? "bg-background border-border text-muted cursor-not-allowed"
-                      : "bg-background border-teal/20 text-teal hover:bg-surface-hover"
-                }`}
+                className={`clinic-card__control ${
+                  isSelected ? "clinic-card__control--active" : ""
+                } mt-4 flex items-center justify-center gap-1.5 h-9 rounded-full text-xs font-semibold`}
               >
                 {isSelected ? (
                   <>

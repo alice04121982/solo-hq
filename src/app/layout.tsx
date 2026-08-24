@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { SiteFooter } from "@/components/site-footer";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const generalSans = localFont({
@@ -17,18 +18,18 @@ const siteDescription =
   "Cairn compares IVF clinics on cost, success rates and eligibility, for solo mums, solo dads, two mums, two dads, and couples.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cairnfertility.vercel.app"),
-  title: "Cairn Fertility | Compare IVF Clinics",
+  metadataBase: new URL(SITE_URL),
+  title: "CairnFertility | Compare IVF Clinics",
   description: siteDescription,
   openGraph: {
-    title: "Cairn Fertility | Compare IVF Clinics",
+    title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,
-    siteName: "Cairn Fertility",
+    siteName: "CairnFertility",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cairn Fertility | Compare IVF Clinics",
+    title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,
   },
 };

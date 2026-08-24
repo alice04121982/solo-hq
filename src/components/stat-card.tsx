@@ -22,8 +22,8 @@ export function StatCard({ value, label, delay = 0 }: StatCardProps) {
       className="flex flex-col gap-3 py-8 border-t border-border"
     >
       <span
-        className="font-sans font-medium text-foreground leading-none"
-        style={{ fontSize: "clamp(3rem, 5vw, 5.5rem)", fontOpticalSizing: "auto" as never }}
+        className="font-sans font-medium text-teal leading-none"
+        style={{ fontSize: "clamp(3.5rem, 5vw, 6.5rem)", fontOpticalSizing: "auto" as never }}
       >
         {value}
       </span>
