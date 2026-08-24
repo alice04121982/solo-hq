@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { ShapeMark } from "@/components/shapes";
 import { StatCard } from "@/components/stat-card";
 import { FundingRouteExplorer } from "@/components/funding/funding-route-explorer";
 import { InternationalFunding } from "@/components/funding/international-funding";
@@ -69,7 +70,11 @@ export default function FundingPage() {
 
       {/* Hero */}
       <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           Funding &amp; payment options
         </p>
         <h1
@@ -132,7 +137,11 @@ export default function FundingPage() {
 
       {/* What it costs */}
       <Section band={1} id="costs" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
           The numbers to hold on to
         </p>
         <h2
@@ -176,7 +185,11 @@ export default function FundingPage() {
 
       {/* NHS */}
       <Section band={2} id="nhs" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
           What is free on the NHS
         </p>
         <h2
@@ -338,7 +351,11 @@ export default function FundingPage() {
 
       {/* Eligibility checker */}
       <Section band={3} id="check" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="cross" size={14} style={{ color: "var(--lavender)" }} />
           Self-check
         </p>
         <h2
@@ -358,7 +375,11 @@ export default function FundingPage() {
 
       {/* Routes */}
       <Section band={4} id="routes" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="asterisk" size={14} style={{ color: "var(--lavender)" }} />
           Every funding route
         </p>
         <h2
@@ -379,7 +400,11 @@ export default function FundingPage() {
 
       {/* Outside the UK */}
       <Section band={5} id="outside-uk" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
           Outside the UK
         </p>
         <h2
@@ -414,7 +439,11 @@ export default function FundingPage() {
 
       {/* Before you sign */}
       <Section band={6} id="before-you-sign" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="pause" size={14} style={{ color: "var(--lavender)" }} />
           Due diligence
         </p>
         <h2

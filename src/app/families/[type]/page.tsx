@@ -84,7 +84,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
             </p>
             <h2
               className="font-sans font-bold mb-10"
-              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: "#1A3A25" }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: "var(--teal)" }}
             >
               Where are you on your journey?
             </h2>
