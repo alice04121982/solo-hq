@@ -223,7 +223,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
               {clinic.treatments.map((t) => (
                 <span
                   key={t}
-                  className="rounded-full bg-surface-sunken px-2.5 py-1 text-xs font-medium text-foreground"
+                  className="rounded-full bg-background border border-border px-2.5 py-1 text-xs font-medium text-foreground"
                 >
                   {t}
                 </span>
