@@ -37,7 +37,7 @@ export function ArticleLayout({
 }: ArticleMeta & { children: React.ReactNode }) {
   return (
     <main className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="mx-auto px-6 md:px-12 lg:px-16">
         <SiteNav />
       </div>
 
@@ -54,7 +54,7 @@ export function ArticleLayout({
         </div>
       )}
 
-      <article className="max-w-3xl mx-auto px-6 md:px-12 lg:px-20 py-12 md:py-16">
+      <article className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
         <Link
           href={backHref}
           className="inline-flex items-center gap-1.5 text-xs font-[500] uppercase tracking-[0.12em] transition-colors mb-8 font-sans hover:opacity-70"
@@ -66,7 +66,7 @@ export function ArticleLayout({
 
         {eyebrow && (
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.15em] font-sans mb-4"
+            className="text-[13px] font-[600] uppercase tracking-[0.15em] font-sans mb-4"
             style={{ color: "var(--muted)" }}
           >
             {eyebrow}
@@ -75,7 +75,7 @@ export function ArticleLayout({
 
         <h1
           className="font-sans font-bold mb-5"
-          style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.1, color: "var(--teal)" }}
+          style={{ fontSize: "clamp(2.5rem, 4vw, 4.5rem)", lineHeight: 1.1, color: "var(--teal)" }}
         >
           {title}
         </h1>
@@ -91,7 +91,7 @@ export function ArticleLayout({
 
         {meta && meta.length > 0 && (
           <p
-            className="text-[11px] font-[600] uppercase tracking-[0.12em] font-sans mb-8"
+            className="text-[13px] font-[600] uppercase tracking-[0.12em] font-sans mb-8"
             style={{ color: "var(--muted)" }}
           >
             {meta.join("  ·  ")}

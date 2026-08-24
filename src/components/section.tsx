@@ -12,8 +12,8 @@ import { Dot, ShapeMark, type ShapeName } from "./shapes";
  * continuous piece.
  *
  * The band is what carries the colour, so it must span the viewport — the
- * `max-w-7xl` gutter lives on the container inside it, never on the
- * `<section>` itself.
+ * horizontal gutter (capped at 64px) lives on the container inside it, never
+ * on the `<section>` itself.
  */
 export type SectionTone = "white" | "cream" | "teal";
 
@@ -30,7 +30,7 @@ const TONE_BACKGROUND: Record<SectionTone, string> = {
  * each other.
  */
 const TONE_BACKDROP_COLOR: Record<SectionTone, string> = {
-  white: "var(--cream)",
+  white: "var(--lime)",
   cream: "var(--lavender-light)",
   teal: "var(--accent)",
 };
@@ -46,6 +46,13 @@ export interface SectionBackdrop {
   side?: "left" | "right";
   /** Override the tone-derived colour. */
   color?: string;
+  /**
+   * Colour for the dot cropped by the band's bottom edge, when it needs to
+   * differ from the one at the top — a pink dot bleeding into the pink CTA
+   * band below reads as one shape crossing the seam, so the homepage's
+   * voices band hands its trailing dot to the lime instead.
+   */
+  endColor?: string;
 }
 
 /**
@@ -90,7 +97,7 @@ export function Section({
   band,
   tone,
   id,
-  padding = "py-16 md:py-20",
+  padding = "py-24 md:py-36",
   backdrop,
   className,
   innerClassName,
@@ -126,6 +133,9 @@ export function Section({
                   ? "left-0 -translate-x-[40%]"
                   : "right-0 translate-x-[40%]",
               ].join(" ")}
+              style={
+                backdrop.endColor ? { color: backdrop.endColor } : undefined
+              }
             />
           </div>
         ) : (
@@ -143,7 +153,7 @@ export function Section({
         ))}
       <div
         className={[
-          "relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20",
+          "relative mx-auto px-6 md:px-12 lg:px-16",
           padding,
           innerClassName,
         ]

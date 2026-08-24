@@ -48,9 +48,9 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
               <div className="flex items-center gap-3">
-                <h2 className="font-sans font-bold text-base text-foreground">Filters</h2>
+                <h2 className="font-sans font-bold text-base text-teal">Filters</h2>
                 {activeCount > 0 && (
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-bold bg-teal text-on-teal">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full text-[13px] font-bold bg-teal text-on-teal">
                     {activeCount}
                   </span>
                 )}

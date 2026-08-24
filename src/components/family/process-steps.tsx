@@ -2,12 +2,13 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { ShapeMark } from "../shapes";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { ProcessStep } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const GREEN = "#1A3A25";
-const GREEN_SOFT = "rgba(26,58,37,0.65)";
+const TEAL = "var(--teal)";
+const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
 
   return (
     <section className="bg-background border-y border-border">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+      <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,14 +54,15 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
         >
           <div>
             <p
-              className="text-[11px] font-[600] uppercase tracking-[0.15em] mb-3 font-sans"
-              style={{ color: GREEN_SOFT }}
+              className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-3"
+              style={{ color: TEAL }}
             >
+                <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
               Step by step
             </p>
             <h2
               className="font-sans font-bold"
-              style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.1, color: GREEN }}
+              style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
             >
               Your complete guide
               <br />
@@ -76,7 +78,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               disabled={!canScrollLeft}
               aria-label="Previous step"
               className="h-10 w-10 rounded-full border flex items-center justify-center transition-all duration-150 disabled:opacity-30"
-              style={{ borderColor: "rgba(26,58,37,0.25)", color: GREEN }}
+              style={{ borderColor: "var(--teal-25)", color: TEAL }}
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -86,7 +88,7 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               disabled={!canScrollRight}
               aria-label="Next step"
               className="h-10 w-10 rounded-full border flex items-center justify-center transition-all duration-150 disabled:opacity-30"
-              style={{ borderColor: "rgba(26,58,37,0.25)", color: GREEN }}
+              style={{ borderColor: "var(--teal-25)", color: TEAL }}
             >
               <ArrowRight className="h-4 w-4" />
             </button>
@@ -117,24 +119,24 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
                 scrollSnapAlign: "start",
                 width: "min(80vw, 340px)",
                 minHeight: "300px",
-                background: "#FDE8F2",
+                background: "var(--card-bg)",
               }}
             >
               <span
                 className="font-serif leading-none mb-4"
-                style={{ fontSize: "2.25rem", color: GREEN_SOFT }}
+                style={{ fontSize: "2.25rem", color: TEAL_SOFT }}
               >
                 {String(step.number).padStart(2, "0")}
               </span>
               <h3
                 className="font-sans font-bold mb-3"
-                style={{ fontSize: "1.2rem", lineHeight: 1.25, color: GREEN }}
+                style={{ fontSize: "1.2rem", lineHeight: 1.25, color: TEAL }}
               >
                 {step.title}
               </h3>
               <p
                 className="text-sm font-sans leading-relaxed"
-                style={{ color: GREEN }}
+                style={{ color: TEAL }}
               >
                 {step.body}
               </p>
@@ -143,8 +145,8 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
         </div>
 
         <p
-          className="md:hidden text-[11px] font-sans text-center mt-2"
-          style={{ color: GREEN_SOFT }}
+          className="md:hidden text-[13px] font-sans text-center mt-2"
+          style={{ color: TEAL_SOFT }}
         >
           Swipe to explore all {steps.length} steps →
         </p>

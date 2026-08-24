@@ -102,13 +102,14 @@ export const GUIDES: Guide[] = [
     categorySlug: "finance-costs",
     readTime: "6 min read",
     intro:
-      "IVF is expensive, and NHS funding criteria in much of England exclude single women and same-sex couples, and set tight limits for everyone else. But there are more funding routes than most people realise, from specialist fertility loans to employer benefit schemes and charitable grants. This guide covers every option available in the UK in 2025.",
+      "IVF is expensive, and NHS funding criteria in much of England exclude single women and same-sex couples in practice, and set tight limits for everyone else. But there are more funding routes than most people realise, from specialist fertility loans to employer benefit schemes and charitable grants. This guide is the short version; the full picture, including an NHS eligibility self-check and every funding route with its watch-outs, lives at cairnfertility.com/funding.",
     sections: [
       {
         heading: "NHS funding: who can actually access it",
         body: [
-          "NHS-funded IVF is extremely patchy in practice. Criteria are set by local Integrated Care Boards (ICBs) and vary enormously by postcode, age, BMI, and existing children. Many ICBs in England still effectively exclude single women, and same-sex couples are often required to self-fund several IUI cycles first. Some Scottish Health Boards are more inclusive.",
-          "Before assuming you are ineligible, check your specific ICB's current policy at icb.nhs.uk or by calling your GP surgery. Criteria change, and some areas have quietly become more inclusive in recent years. It is always worth asking.",
+          "NHS-funded IVF is extremely patchy in practice. NICE guideline NG257, which replaced the 2013 guideline in 2026, recommends up to three full cycles under 40 and one at 40 to 41 — but in England the decision belongs to 42 local Integrated Care Boards, most of which fund one cycle rather than three. Only about a quarter of IVF cycles in England are NHS-funded. Scotland funds up to three cycles under national criteria, Wales two, and Northern Ireland one.",
+          "Criteria vary by postcode, age, BMI, smoking and existing children — including a partner's. Solo parents and two-mum families are rarely excluded by name; what excludes most of them outside Scotland is a requirement to complete six or more self-funded donor insemination cycles at a licensed clinic first.",
+          "Before assuming you are ineligible, find your ICB's published assisted conception policy and read it, or ask your GP surgery. Criteria change, and some areas have quietly become more inclusive in recent years. It is always worth asking.",
         ],
       },
       {
@@ -334,7 +335,7 @@ export const GUIDES: Guide[] = [
           "IUI is a reasonable starting point if you are under 35, have good ovarian reserve, no known tube or egg quality issues, and want to begin treatment with a lower financial and physical commitment. It is not recommended as a first-line treatment for women over 40.",
         ],
         callout:
-          "Cost: approximately £800–£1,500 per cycle including donor sperm. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
+          "Cost: typically £950–£1,500 per cycle for the procedure itself — the HFEA puts IUI at around a quarter of the cost of an IVF cycle — plus donor sperm and any medication, so budget £2,000–£3,000 all-in for a first donor-sperm cycle. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
       },
       {
         heading: "IVF with donor sperm",

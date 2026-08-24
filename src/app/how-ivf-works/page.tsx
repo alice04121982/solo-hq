@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
 
 export const metadata: Metadata = {
-  title: "What Happens During IVF | Cairn Fertility",
+  title: "What Happens During IVF | CairnFertility",
   description:
     "From ovarian stimulation to implantation: what is happening inside your body and in the laboratory at every step of the IVF process. In plain English.",
 };
@@ -340,26 +341,23 @@ const STAGES = [
 export default function HowIVFWorksPage() {
   return (
     <main className="min-h-screen bg-background">
-      <section className="border-b border-border px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="border-b border-border px-6 md:px-12 lg:px-16">
+        <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
       {/* Hero */}
-      <Section band={0} padding="pt-16 md:pt-24 pb-12 md:pb-16">
-        <p className="text-[11px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
-          The science
-        </p>
-        <h1
-          className="font-sans font-bold text-[#1A3A25] mb-5"
-          style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.05 }}
-        >
-          What actually happens.
-        </h1>
-        <p className="text-[17px] font-sans leading-relaxed" style={{ maxWidth: "56ch", color: "var(--muted)" }}>
-          From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English.
-        </p>
+      <Section band={0} padding="pt-20 md:pt-28 pb-16 md:pb-16">
+        <SectionHeading
+          level={1}
+          eyebrow="The science"
+          mark="egg"
+          title="What actually happens."
+          intro="From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English."
+          introWidth="56ch"
+          className="mb-0"
+        />
 
         {/* Steps overview strip */}
         <div className="mt-10 flex flex-wrap gap-2">
@@ -367,9 +365,9 @@ export default function HowIVFWorksPage() {
             <a
               key={s.number}
               href={`#step-${s.number}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-[#1A3A25] hover:bg-[#1A3A25] hover:text-white hover:border-[#1A3A25] transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-teal hover:bg-teal hover:text-on-teal hover:border-teal transition-colors"
             >
-              <span className="font-[600] text-muted text-[10px]">{s.number}</span>
+              <span className="font-[600] text-muted text-[12px]">{s.number}</span>
               {s.title}
             </a>
           ))}
@@ -394,8 +392,8 @@ export default function HowIVFWorksPage() {
               <div>
                 <div className="flex items-center gap-3 mb-5">
                   <span
-                    className="inline-flex items-center justify-center text-[11px] font-[700] font-sans rounded-full px-3 py-1"
-                    style={{ background: "#C5E600", color: "#1A3A25" }}
+                    className="inline-flex items-center justify-center text-[13px] font-[700] font-sans rounded-full px-3 py-1"
+                    style={{ background: "var(--accent)", color: "var(--on-accent)" }}
                   >
                     Step {stage.number}
                   </span>
@@ -405,7 +403,7 @@ export default function HowIVFWorksPage() {
                 </div>
                 <h2
                   className="font-sans font-bold mb-5"
-                  style={{ fontSize: "clamp(1.5rem, 2.5vw, 2rem)", lineHeight: 1.1, color: "#1A3A25" }}
+                  style={{ fontSize: "clamp(2rem, 2.75vw, 3rem)", lineHeight: 1.1, color: "var(--teal)" }}
                 >
                   {stage.title}
                 </h2>
@@ -416,10 +414,10 @@ export default function HowIVFWorksPage() {
                 ))}
                 <ul className="mt-6 space-y-2.5">
                   {stage.facts.map((fact, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-sm font-sans" style={{ color: "#1A3A25" }}>
+                    <li key={j} className="flex items-start gap-2.5 text-sm font-sans" style={{ color: "var(--teal)" }}>
                       <span
-                        className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-[700]"
-                        style={{ background: "#F0F8E8", color: "#1A3A25" }}
+                        className="mt-0.5 flex-none w-4 h-4 rounded-full flex items-center justify-center text-[11px] font-[700]"
+                        style={{ background: "var(--lavender-light)", color: "var(--teal)" }}
                       >
                         ✓
                       </span>

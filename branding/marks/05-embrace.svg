@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- The Embrace: two stones lean in to cradle the seed - shelter and support around new life -->
+  <circle cx="32" cy="33" r="7.5" fill="#C5E600"/>
+  <rect x="7.5" y="38.5" width="23" height="11" rx="5.5" fill="#005353" transform="rotate(16 19 44)"/>
+  <rect x="33.5" y="38.5" width="23" height="11" rx="5.5" fill="#005353" transform="rotate(-16 45 44)"/>
+</svg>

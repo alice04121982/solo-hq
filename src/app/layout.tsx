@@ -18,17 +18,17 @@ const siteDescription =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cairnfertility.vercel.app"),
-  title: "Cairn Fertility | Compare IVF Clinics",
+  title: "CairnFertility | Compare IVF Clinics",
   description: siteDescription,
   openGraph: {
-    title: "Cairn Fertility | Compare IVF Clinics",
+    title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,
-    siteName: "Cairn Fertility",
+    siteName: "CairnFertility",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cairn Fertility | Compare IVF Clinics",
+    title: "CairnFertility | Compare IVF Clinics",
     description: siteDescription,
   },
 };

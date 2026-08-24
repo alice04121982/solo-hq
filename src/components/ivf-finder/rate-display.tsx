@@ -9,12 +9,12 @@ import { rateFor } from "@/lib/clinics";
  */
 export function VerificationBadge({ verification }: { verification: "hfea" | "clinic" }) {
   return verification === "hfea" ? (
-    <span className="inline-flex items-center gap-1 rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-semibold text-teal-ink whitespace-nowrap">
+    <span className="inline-flex items-center gap-1 rounded-full bg-accent/20 px-2 py-0.5 text-[12px] font-semibold text-teal-ink whitespace-nowrap">
       <ShieldCheck className="h-3 w-3" aria-hidden />
       HFEA verified
     </span>
   ) : (
-    <span className="inline-flex items-center gap-1 rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold text-muted whitespace-nowrap">
+    <span className="inline-flex items-center gap-1 rounded-full bg-background border border-border px-2 py-0.5 text-[12px] font-semibold text-muted whitespace-nowrap">
       <FileText className="h-3 w-3" aria-hidden />
       Clinic reported
     </span>

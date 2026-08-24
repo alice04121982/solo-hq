@@ -69,11 +69,11 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "This guide maps the route to solo motherhood: deciding, choosing a donor, choosing a clinic, treatment, pregnancy, and the first year. Whether you are still researching or already mid-treatment, start at the step you are on.",
     cardSummary:
-      "For women choosing motherhood independently — via IUI or IVF, with donor sperm from a bank or a known donor, donor eggs, or both.",
+      "For women having a baby on their own: the decision, treatment, and the first year.",
     image: "/photos/story-solo-mum.webp",
     imageAlt: "A mother holding her young child, looking out at the sky",
     hideHeroImage: true,
-    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
@@ -166,11 +166,11 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners, this guide walks you through every stage with clarity.",
     cardSummary:
-      "For female same-sex couples using donor sperm, including the reciprocal IVF option.",
+      "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
     image: "/photos/story-two-mums.webp",
     imageAlt: "Two women sitting together, one kissing the other on the cheek",
     heroShapeBackdrop: true,
-    treatmentHighlight: "IUI · IVF · Reciprocal IVF · Donor Sperm",
+    treatmentHighlight: "IUI · IVF · ICSI · Reciprocal IVF · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
@@ -180,7 +180,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Fertility assessments for the carrying partner(s)",
-        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This establishes the best starting point and helps your clinic recommend IUI (simpler) vs IVF (more effective). If both of you have good fertility markers, reciprocal IVF becomes a more viable option.",
+        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This establishes the best starting point and helps your clinic recommend IUI (simpler) vs IVF (more effective). If both of you have good fertility markers, reciprocal IVF becomes a more viable option. And if egg quality turns out to be a challenge, donor eggs and double donation are exactly as open to you as to any other patient.",
       },
       {
         number: 3,
@@ -261,10 +261,10 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "For two men wanting to become fathers, the path involves surrogacy: a process that's legal, increasingly common, and achievable in the UK. It's also more complex than other routes. This guide explains every step honestly, from finding a surrogate to the parental order that makes you your child's legal parents.",
     cardSummary:
-      "For male same-sex couples pursuing parenthood via surrogacy and donor eggs.",
+      "For two men building a family: finding a surrogate, treatment, and becoming legal parents.",
     image: "/photos/story-two-dads.webp",
     imageAlt: "Two men embracing and smiling at each other",
-    treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
+    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
         number: 1,
@@ -355,10 +355,10 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "More men than ever are choosing to become solo fathers. The path (surrogacy with a donor egg) is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
     cardSummary:
-      "For solo dads pursuing fatherhood independently via surrogacy and donor eggs.",
+      "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
     image: "/photos/cta-family.webp",
     imageAlt: "A father holding and kissing his young son",
-    treatmentHighlight: "Surrogacy · Donor Egg · IVF · ICSI",
+    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
     steps: [
       {
         number: 1,
@@ -449,10 +449,10 @@ export const FAMILY_TYPES: FamilyType[] = [
     heroCopy:
       "Fertility treatment for heterosexual couples covers an enormous range of situations, from unexplained infertility to specific diagnoses like low sperm count, PCOS, or poor egg reserve. Whatever brought you here, this guide helps you navigate your options with clarity: from initial investigations to embryo transfer, and everything in between.",
     cardSummary:
-      "For couples navigating fertility challenges together: unexplained infertility, MFI, PCOS, and more.",
+      "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
     image: "/photos/newborn.webp",
     imageAlt: "A couple holding their newborn baby by a window",
-    treatmentHighlight: "IVF · ICSI · IUI · Donor Egg · Donor Sperm",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
     steps: [
       {
         number: 1,
