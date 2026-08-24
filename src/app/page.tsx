@@ -162,8 +162,11 @@ export default function Home() {
         </Link>
 
         <p className="text-xs font-sans mt-8" style={{ color: "var(--muted)" }}>
-          Illustrative stories while we collect real, consented accounts. Share yours:
-          stories@cairnfertility.co.uk
+          Illustrative stories while we collect real, consented accounts.{" "}
+          <Link href="/stories/share" className="underline underline-offset-2" style={{ color: "var(--foreground)" }}>
+            Share yours
+          </Link>
+          .
         </p>
       </Section>
 

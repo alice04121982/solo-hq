@@ -349,7 +349,7 @@ export default function FaithPage() {
               </p>
             </div>
             <Link
-              href="/get-started"
+              href="/stories/share"
               className="inline-flex items-center gap-2 shrink-0 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
