@@ -18,7 +18,7 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
   if (guides.length === 0) return null;
 
   return (
-    <section className="border-b border-border" style={{ background: "var(--cream)" }}>
+    <section id="resources" className="border-b border-border scroll-mt-20" style={{ background: "var(--cream)" }}>
       <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"

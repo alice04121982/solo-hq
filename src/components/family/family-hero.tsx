@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FAMILY_SHAPES, ShapeMark } from "../shapes";
 import Image from "next/image";
@@ -67,18 +68,18 @@ export function FamilyHero({ family }: { family: FamilyType }) {
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <a
+              <Link
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full bg-accent text-on-accent px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
                 Compare clinics
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/families"
                 className="inline-flex items-center gap-2 rounded-full border border-teal/20 text-teal px-8 py-3.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
               >
                 All family types
-              </a>
+              </Link>
             </div>
 
             <p className="text-xs font-sans text-muted mt-8 pb-0 border-t border-border pt-6">

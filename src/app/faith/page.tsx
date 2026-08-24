@@ -289,6 +289,9 @@ export default function FaithPage() {
             Faith and treatment, at the same time, in front of families who had views.
             None of these people resolved it neatly. That is rather the point.
           </p>
+          <p className="text-xs font-sans mb-12 -mt-8" style={{ color: "var(--muted)" }}>
+            Illustrative stories while we collect real, consented accounts.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
             {FAITH_STORIES.map((story) => (

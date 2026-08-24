@@ -217,7 +217,7 @@ const STAGES = [
   {
     number: "01",
     title: "Ovarian Stimulation",
-    duration: "Days 1–12 of treatment",
+    duration: "Days 1–14 of treatment",
     body: [
       "In a natural cycle, one follicle matures and releases one egg. Stimulation changes that. Daily hormone injections, usually FSH (follicle-stimulating hormone), encourage both ovaries to develop multiple follicles at the same time.",
       "During this phase you will attend monitoring scans every 2–3 days and have blood tests to track hormone levels. The aim is usually 8–15 mature follicles, though every ovary is different and fewer is not a failure.",
@@ -232,7 +232,7 @@ const STAGES = [
   {
     number: "02",
     title: "Egg Retrieval",
-    duration: "30–40 minutes, under sedation",
+    duration: "About 20–30 minutes, under sedation",
     body: [
       "Around 36 hours after your trigger injection, egg retrieval takes place. Under sedation, an ultrasound probe with a very fine attached needle is passed transvaginally to reach each follicle. The needle punctures the follicle wall and the fluid inside, including the egg, is gently aspirated.",
       "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You won't feel anything during the procedure and most people go home within a few hours.",
@@ -249,8 +249,8 @@ const STAGES = [
     title: "ICSI: Sperm Meets Egg",
     duration: "Hours 0–4, in the laboratory",
     body: [
-      "For most solo parents and same-sex female couples using frozen donor sperm, fertilisation is done via ICSI (intracytoplasmic sperm injection). The embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
-      "The egg is held in place with a blunt holding pipette on one side while the injection pipette approaches from the other. The sperm is deposited into the cytoplasm in seconds. ICSI is used routinely because the freeze-thaw process reduces sperm motility.",
+      "Some clinics recommend ICSI (intracytoplasmic sperm injection) when using frozen donor sperm, though conventional IVF works just as well when the thawed sample is good quality — donor sperm is screened for exactly that, so ask your clinic which they recommend and why. With ICSI, the embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
+      "With ICSI, the egg is held in place with a blunt holding pipette on one side while the injection pipette approaches from the other. The sperm is deposited into the cytoplasm in seconds.",
     ],
     facts: [
       "ICSI requires the egg's surrounding cumulus cells to be removed first",
@@ -262,14 +262,14 @@ const STAGES = [
   {
     number: "04",
     title: "Fertilisation Confirmed",
-    duration: "Day 1: 16–20 hours after ICSI",
+    duration: "Day 1: 16–18 hours after fertilisation",
     body: [
       "The morning after ICSI, the embryologist checks each injected egg under the microscope. A successfully fertilised egg, now called a zygote, shows two small spheres called pronuclei: one carrying your genetic material, one carrying the donor sperm's.",
       "Not every injected egg will fertilise. A typical fertilisation rate is 60–80% of mature eggs. Those that don't fertilise are not used further. You will usually receive an update from your clinic on day 1.",
     ],
     facts: [
       "Two pronuclei (2PN) is the sign of normal, successful fertilisation",
-      "Three pronuclei (3PN) means two sperm fertilised the egg; these embryos are not transferred",
+      "Three pronuclei (3PN) signals abnormal fertilisation; these embryos are not transferred",
       "A fertilisation rate of 70% from mature eggs is considered good",
     ],
     Illustration: FertilisationIllustration,
@@ -280,7 +280,7 @@ const STAGES = [
     duration: "Days 2–4",
     body: [
       "A fertilised egg begins to divide. By day 2 it has 2–4 cells. By day 3, a typical embryo has 6–8 cells, known as blastomeres. The embryologist grades embryos at each check: cell number, whether the cells are even in size, and how much fragmentation is present.",
-      "The cells don't grow: the same cytoplasm from the original egg is simply divided into smaller and smaller units. Each blastomere at this stage is genetically identical to the others.",
+      "The cells don't grow: the same cytoplasm from the original egg is simply divided into smaller and smaller units. Each blastomere at this stage is essentially genetically identical to the others.",
     ],
     facts: [
       "Grading systems vary between clinics but all assess cell number, symmetry, and fragmentation",
@@ -295,7 +295,7 @@ const STAGES = [
     duration: "Day 5–6",
     body: [
       "By day 5, a good-quality embryo has transformed into a blastocyst: a fluid-filled sphere with two distinct cell populations. The outer layer (trophectoderm) will become the placenta. The inner cell mass (ICM), a tight cluster on one side, will become the baby.",
-      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation. Grading uses expansion (1–6), ICM quality (A/B/C), and trophectoderm quality (A/B/C), so a 4AA is top grade.",
+      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation. Grading uses expansion (1–6), ICM quality (A/B/C), and trophectoderm quality (A/B/C), so a 4AA is a top-grade embryo.",
     ],
     facts: [
       "On average 40–60% of fertilised eggs reach blastocyst stage",
@@ -333,6 +333,32 @@ const STAGES = [
       "Even a perfectly graded blastocyst doesn't always implant; chromosomal abnormalities in the embryo are the most common reason for failure",
     ],
     Illustration: ImplantationIllustration,
+  },
+];
+
+/** When the clinical content above was last checked against the sources below. */
+const CLINICAL_LAST_REVIEWED = "August 2026";
+
+const CLINICAL_SOURCES = [
+  {
+    label: "HFEA — In vitro fertilisation (IVF)",
+    href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/",
+  },
+  {
+    label: "NHS — IVF: what happens",
+    href: "https://www.nhs.uk/conditions/ivf/what-happens/",
+  },
+  {
+    label: "HFEA — Intracytoplasmic sperm injection (ICSI)",
+    href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intracytoplasmic-sperm-injection-icsi/",
+  },
+  {
+    label: "NICE — Fertility problems: assessment and management (NG257)",
+    href: "https://www.nice.org.uk/guidance/ng257",
+  },
+  {
+    label: "ESHRE/Alpha Vienna consensus on laboratory performance indicators (fertilisation and blastocyst rates)",
+    href: "https://academic.oup.com/hropen/article/2017/2/hox011/4062213",
   },
 ];
 
@@ -431,6 +457,33 @@ export default function HowIVFWorksPage() {
           </Section>
         );
       })}
+
+      {/* Sources and review date — every clinical figure above traces here. */}
+      <Section band={0} padding="py-16">
+        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+          Sources
+        </p>
+        <ul className="space-y-2 mb-8">
+          {CLINICAL_SOURCES.map((src) => (
+            <li key={src.href}>
+              <a
+                href={src.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-sans underline underline-offset-4 text-muted hover:text-foreground transition-colors"
+              >
+                {src.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p className="text-[15px] font-sans leading-relaxed text-muted" style={{ maxWidth: "68ch" }}>
+          Clinical content last reviewed {CLINICAL_LAST_REVIEWED}. Figures like fertilisation and
+          blastocyst rates are laboratory averages, not predictions for any one cycle, and protocols
+          vary between clinics. Nothing on this page is medical advice: your clinic&rsquo;s guidance
+          about your own treatment always takes precedence.
+        </p>
+      </Section>
 
       <CTASection />
     </main>

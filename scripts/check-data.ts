@@ -19,6 +19,9 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { CLINIC_RECORDS, CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
 import { CLINIC_EXCLUSIONS, exclusionFor } from "../src/lib/clinic-exclusions.ts";
+import { GUIDES } from "../src/lib/guides.ts";
+import { FAMILY_TYPES } from "../src/lib/family-types.ts";
+import { ALL_STORIES, FEATURED_STORIES } from "../src/lib/stories.ts";
 import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
 import { NEWS_ITEMS, NEWS_PROVENANCE } from "../src/lib/news.ts";
 
@@ -113,6 +116,28 @@ for (const c of CLINICS) {
 }
 
 if (CLINICS.length === 0) errors.push("Clinic database is empty.");
+
+// ── Cross-file references ──
+// The dynamic routes resolve slugs against these files; a dangling reference
+// means a link somewhere on the site 404s.
+const guideSlugs = new Set(GUIDES.map((g) => g.slug));
+if (guideSlugs.size !== GUIDES.length) errors.push("Duplicate guide slug in guides.ts.");
+
+const storyIds = new Set(ALL_STORIES.map((s) => s.id));
+if (storyIds.size !== ALL_STORIES.length) errors.push("Duplicate story id in stories.ts.");
+for (const s of FEATURED_STORIES) {
+  if (!s) errors.push("FEATURED_IDS in stories.ts references a story id that does not exist.");
+}
+
+const familySlugs = new Set<string>();
+for (const f of FAMILY_TYPES) {
+  if (familySlugs.has(f.slug)) errors.push(`family-types.ts: duplicate slug "${f.slug}".`);
+  familySlugs.add(f.slug);
+  for (const r of f.resources) {
+    if (!guideSlugs.has(r))
+      errors.push(`family-types.ts (${f.slug}): resources references missing guide slug "${r}".`);
+  }
+}
 
 // ── Travel estimates ──
 //
@@ -287,7 +312,8 @@ for (const file of sourceFiles(srcRoot)) {
 for (const w of warnings) console.warn(`WARN  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
 console.log(
-  `\nChecked ${CLINICS.length} listed clinics (${CLINIC_EXCLUSIONS.length} exclusion(s) in force) ` +
+  `\nChecked ${CLINICS.length} listed clinics (${CLINIC_EXCLUSIONS.length} exclusion(s) in force), ` +
+    `${GUIDES.length} guides, ${FAMILY_TYPES.length} family types, ${ALL_STORIES.length} stories, ` +
     `and ${NEWS_ITEMS.length} media items: ${errors.length} error(s), ${warnings.length} warning(s). ` +
     `Prices last verified ${DATA_PROVENANCE.pricesVerifiedOn}.`
 );

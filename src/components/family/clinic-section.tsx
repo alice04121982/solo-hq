@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ShapeMark } from "../shapes";
 import { ArrowRight } from "lucide-react";
@@ -44,19 +45,19 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a
+              <Link
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full bg-accent text-on-accent px-8 py-3.5 text-sm font-sans font-medium hover:bg-accent-dark transition-colors duration-200"
               >
                 Open comparison tool
                 <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/ivf-finder"
                 className="inline-flex items-center gap-2 rounded-full border border-teal/20 text-teal px-8 py-3.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
               >
                 Search by location
-              </a>
+              </Link>
             </div>
           </motion.div>
 

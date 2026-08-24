@@ -115,7 +115,7 @@ export default function FamiliesPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
           {[
             { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood, tailored to your specific treatment route." },
-            { num: "02", title: "Personal stories", body: "Real accounts from people who've been through it. The emotional truth, not just the clinical facts." },
+            { num: "02", title: "Personal stories", body: "Illustrative stories of what the journey feels like, while we collect real, consented accounts. The emotional truth, not just the clinical facts." },
             { num: "03", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
             { num: "04", title: "Newsletter", body: "Updates specific to your family type: clinic data changes, new research, community stories." },
           ].map((item) => (
