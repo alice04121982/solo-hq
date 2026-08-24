@@ -77,7 +77,17 @@ function LinkColumn({
 
 export function SiteFooter() {
   return (
-    <footer style={{ background: TEAL }}>
+    <footer
+      style={{
+        background: TEAL,
+        // Belt and braces for the overscroll fix in globals.css: browsers
+        // that ignore overscroll-behavior (Safari before 16) still bounce
+        // past the end of the page, so the footer bleeds its teal downwards
+        // and the bounce shows footer colour instead of a white slab. A
+        // shadow is ink, not layout — it adds no height and no scroll.
+        boxShadow: `0 50vh 0 0 ${TEAL}`,
+      }}
+    >
       <div className="mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-36">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
           {/* Brand */}
