@@ -146,7 +146,13 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
       {/* ── Filters: inline on desktop, a sheet on mobile ── */}
       <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
-        <FilterControls filters={filters} onChange={setFilters} />
+        <FilterControls
+          filters={filters}
+          onChange={setFilters}
+          onClearAll={() =>
+            setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+          }
+        />
       </div>
       <div className="md:hidden mb-4">
         <button
@@ -164,7 +170,10 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         </button>
       </div>
 
-      <div className="mb-6">
+      {/* The active-filter Tags stand in for the filter row on mobile, where it
+          sits behind the sheet. On desktop the row states its own selections,
+          so repeating them here would be the same list twice. */}
+      <div className="md:hidden mb-6">
         <ActiveFilterTags filters={filters} onChange={setFilters} />
       </div>
 

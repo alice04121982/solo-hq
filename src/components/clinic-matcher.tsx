@@ -102,7 +102,6 @@ const DEFAULT_PROFILE: MatcherProfile = {
 const PROFILES: Record<string, MatcherProfile> = {
   "london-womens-clinic": { priceTransparency: 4, soloFriendliness: 5, lgbtqFriendliness: 5, ivfExtrasGBP: 2700 },
   "create-fertility": { priceTransparency: 5, soloFriendliness: 5, lgbtqFriendliness: 5 },
-  "care-cambridge": { priceTransparency: 3, soloFriendliness: 4, lgbtqFriendliness: 4, ivfExtrasGBP: 3900 },
   "bourn-hall": { priceTransparency: 4, soloFriendliness: 5, lgbtqFriendliness: 4 },
   "herts-essex": { priceTransparency: 4, soloFriendliness: 4, lgbtqFriendliness: 4 },
   "lister-fertility": { priceTransparency: 2, soloFriendliness: 4, lgbtqFriendliness: 4 },
@@ -166,14 +165,15 @@ const CLINICS: MatchClinic[] = DB_CLINICS.map((c) => {
 /**
  * Indicative IUI live birth rates per cycle by age, national ranges rather
  * than per-clinic figures: clinics rarely publish IUI rates by bracket, and
- * we never invent per-clinic numbers. The HFEA puts IUI success at roughly a
- * third of IVF's; ranges match the treatment guide in src/lib/guides.ts.
+ * we never invent per-clinic numbers. Bands bracket HFEA-derived national
+ * figures (~15.8% under 35, ~11% at 35–39, ~4.7% at 40–42) and match the
+ * treatment guide in src/lib/guides.ts.
  */
 const IUI_SUCCESS_BAND: Partial<Record<AgeKey, string>> = {
-  under35: "10–18%",
-  age35to37: "8–14%",
-  age38to39: "5–10%",
-  age40to42: "3–8%",
+  under35: "14–17%",
+  age35to37: "10–13%",
+  age38to39: "8–11%",
+  age40to42: "3–6%",
 };
 
 // ─── Matching logic ───────────────────────────────────────────────────────────
@@ -360,7 +360,7 @@ function OptionCard({
     <button
       onClick={onClick}
       className={`w-full text-left p-4 rounded-xl border transition-all duration-150 ${
-        selected ? "border-foreground bg-foreground/5" : "border-border hover:border-foreground/40"
+        selected ? "border-teal bg-teal/5" : "border-border hover:border-teal/40"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -384,7 +384,7 @@ function OptionCard({
           </div>
         </div>
         <div className={`shrink-0 h-5 w-5 rounded-full border-2 flex items-center justify-center transition-colors mt-0.5 ${
-          selected ? "border-foreground bg-foreground" : "border-border"
+          selected ? "border-teal bg-teal" : "border-border"
         }`}>
           {selected && <Check className="h-3 w-3 text-background" strokeWidth={3} />}
         </div>
@@ -399,8 +399,8 @@ function ConditionChip({ selected, onClick, label }: { selected: boolean; onClic
       onClick={onClick}
       className={`rounded-full border px-4 py-2 text-sm font-sans transition-all duration-150 ${
         selected
-          ? "border-foreground bg-foreground text-background"
-          : "border-border text-muted hover:border-foreground/40 hover:text-foreground"
+          ? "border-teal bg-teal text-on-teal"
+          : "border-border text-muted hover:border-teal/40 hover:text-teal"
       }`}
     >
       {label}
@@ -794,7 +794,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                   {String(idx + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="font-sans font-medium text-foreground leading-tight">{r.clinic.name}</p>
+                  <p className="font-sans font-medium text-teal leading-tight">{r.clinic.name}</p>
                   <div className="flex items-center gap-1 mt-1">
                     {r.clinic.region === "abroad"
                       ? <Globe className="h-3 w-3 text-muted" />
@@ -813,7 +813,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="text-xs font-sans text-muted line-through">
                   £{r.baseGBP.toLocaleString()} quoted
                 </p>
-                <p className="font-sans font-medium text-foreground text-lg leading-tight">
+                <p className="font-sans font-medium text-teal text-lg leading-tight">
                   £{r.realGBP.toLocaleString()}
                 </p>
                 <p className="text-[12px] font-sans text-muted">
@@ -827,7 +827,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
                 <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1.5">
                   {r.treatment === "iui" ? "IUI success" : successLabel}
                 </p>
-                <p className="font-sans font-medium text-foreground text-lg leading-none">
+                <p className="font-sans font-medium text-teal text-lg leading-none">
                   {r.treatment === "iui"
                     ? IUI_SUCCESS_BAND[ageKey] ?? "—"
                     : r.clinic.successRates[ageKey] != null
@@ -939,14 +939,14 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
       <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
         <Link
           href="/ivf-finder"
-          className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-sans font-medium hover:bg-accent hover:text-foreground transition-colors duration-200"
+          className="inline-flex items-center gap-2 rounded-full bg-teal text-on-teal px-6 py-3 text-sm font-sans font-medium hover:bg-accent hover:text-foreground transition-colors duration-200"
         >
           See full clinic comparison <ArrowRight className="h-3.5 w-3.5" />
         </Link>
         {familyGuide && (
           <Link
             href={`/families/${familyGuide.slug}`}
-            className="inline-flex items-center gap-2 rounded-full border border-foreground text-foreground px-6 py-3 text-sm font-sans font-medium hover:bg-foreground hover:text-background transition-colors duration-200"
+            className="inline-flex items-center gap-2 rounded-full border border-teal text-teal px-6 py-3 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
           >
             Read our {familyGuide.label} guide <ArrowRight className="h-3.5 w-3.5" />
           </Link>
@@ -1050,7 +1050,11 @@ export function ClinicMatcher() {
   const toggleCondition = (c: Condition) => {
     setS((prev) => {
       const next = new Set(prev.conditions);
-      next.has(c) ? next.delete(c) : next.add(c);
+      if (next.has(c)) {
+        next.delete(c);
+      } else {
+        next.add(c);
+      }
       return { ...prev, conditions: next };
     });
   };
@@ -1118,7 +1122,7 @@ export function ClinicMatcher() {
           className={isResults ? undefined : "max-w-2xl mx-auto"}
         >
           <h2
-            className="font-sans font-bold text-foreground mb-1 text-center"
+            className="font-sans font-bold text-teal mb-1 text-center"
             style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", lineHeight: 1.15 }}
           >
             {STEPS[step].title}
@@ -1144,7 +1148,7 @@ export function ClinicMatcher() {
           <button
             onClick={() => setStep((p) => p + 1)}
             disabled={!canAdvance}
-            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent hover:text-foreground disabled:opacity-25 transition-colors duration-200"
+            className="inline-flex items-center gap-2 rounded-full bg-teal text-on-teal px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent hover:text-foreground disabled:opacity-25 transition-colors duration-200"
           >
             {step === STEPS.length - 2 ? "Show my matches" : "Continue"}
             <ArrowRight className="h-3.5 w-3.5" />

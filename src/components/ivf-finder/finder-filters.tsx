@@ -179,10 +179,19 @@ interface FilterControlsProps {
  * scans in one pass and the explanatory copy lives inside the panel it
  * belongs to instead of padding out the page.
  *
+ * Each pill states its own selection, so where the row itself is visible it is
+ * the whole account of the current narrowing — no second strip repeating it.
+ *
  * Rendered inline on desktop and inside the filter sheet on mobile, so both
  * share one source of truth.
  */
-export function FilterControls({ filters, onChange }: FilterControlsProps) {
+export function FilterControls({ filters, onChange, onClearAll }: FilterControlsProps & {
+  /**
+   * Renders a reset at the end of the row once anything is active. Omitted
+   * where a surrounding surface already offers one, as the mobile sheet does.
+   */
+  onClearAll?: () => void;
+}) {
   const ageOptions: FilterOption<AgeBracket>[] = AGE_BRACKETS.map((b) => ({
     value: b.value,
     label: b.label,
@@ -250,14 +259,26 @@ export function FilterControls({ filters, onChange }: FilterControlsProps) {
         active={filters.remoteConsultation}
         onToggle={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
       />
+
+      {onClearAll && countActiveFilters(filters) > 0 && (
+        <button
+          type="button"
+          onClick={onClearAll}
+          className="ml-1 px-2 py-2 text-sm font-medium text-muted underline underline-offset-2 hover:text-teal transition-colors"
+        >
+          Clear all
+        </button>
+      )}
     </div>
   );
 }
 
 /**
- * Removable Tags for every active optional filter, shown above the results so
- * the current narrowing is always visible and reversible in one tap. The age
- * bracket is not here: it is required, so it has no removed state.
+ * Removable Tags for every active optional filter. These stand in for the
+ * filter row where it is not on screen — on mobile, where the controls live
+ * behind the sheet — so the current narrowing is still visible and reversible
+ * in one tap. The age bracket is not here: it is required, so it has no
+ * removed state.
  */
 export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
   const active = countActiveFilters(filters);

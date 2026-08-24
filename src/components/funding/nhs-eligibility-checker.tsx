@@ -38,7 +38,7 @@ const QUESTIONS: Question[] = [
   {
     id: "nation",
     label: "Where do you live?",
-    help: "This is the single biggest factor. England has no national policy — 42 local boards each set their own.",
+    help: "This is the single biggest factor. England has no national policy — 36 local boards (down from 42 after the April 2026 mergers) each set their own.",
     options: [
       { value: "england", label: "England" },
       { value: "scotland", label: "Scotland" },
@@ -189,7 +189,9 @@ function evaluate(a: Answers): Result {
     );
   }
   if (a.nation === "northern-ireland") {
-    conditions.push("Northern Ireland funds one full cycle for eligible women under 40, under national criteria.");
+    conditions.push(
+      "Northern Ireland funds one full cycle for eligible women under 40, under national criteria — since the 2024 expansion that includes transferring all frozen embryos from the cycle.",
+    );
   }
 
   if (donorRoute) {
@@ -405,7 +407,7 @@ export function NHSEligibilityChecker() {
             <Link
               href="/get-started"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
-              style={{ background: "var(--accent)", color: "#1A3A25" }}
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
               Find clinics that treat your family type
               <ArrowRight className="h-3.5 w-3.5" />

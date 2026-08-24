@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { SectionHeading } from "@/components/section-heading";
 import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, ExternalLink, Map, FileText, Heart, Baby } from "lucide-react";
 import { FAMILY_TYPES, type FamilyType } from "@/lib/family-types";
@@ -139,18 +140,15 @@ export default function ResourcesPage() {
 
       {/* Header — one oversized egg mark bleeding off the band edge */}
       <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-18" backdrop={{ shape: "egg" }}>
-        <span className="inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 mb-5 bg-accent text-on-accent">
-          The library
-        </span>
-        <h1
-          className="font-sans font-bold text-foreground mb-4"
-          style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05 }}
-        >
-          Resources
-        </h1>
-        <p className="text-lg font-sans text-muted leading-relaxed mb-6" style={{ maxWidth: "52ch" }}>
-          Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.
-        </p>
+        <SectionHeading
+          level={1}
+          eyebrow="The library"
+          mark="egg"
+          title="Resources"
+          intro="Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment."
+          introWidth="52ch"
+          className="mb-6"
+        />
         <p className="text-sm font-sans font-medium text-teal">
           {TOTAL_RESOURCES} free resources · {CATEGORIES.length} topics · No sign-up needed
         </p>
@@ -169,7 +167,7 @@ export default function ResourcesPage() {
                 Start here if cost is the question
               </p>
             </div>
-            <h2 className="font-sans font-bold text-foreground text-2xl mb-2">
+            <h2 className="font-sans font-bold text-teal text-2xl mb-2">
               Funding &amp; payment options
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
@@ -194,7 +192,7 @@ export default function ResourcesPage() {
                 Essential external resource · All family types
               </p>
             </div>
-            <h2 className="font-sans font-bold text-foreground text-2xl mb-2">
+            <h2 className="font-sans font-bold text-teal text-2xl mb-2">
               Donor Conception Network
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
@@ -216,18 +214,7 @@ export default function ResourcesPage() {
 
       {/* The library — every topic as a white card on the cream band */}
       <Section band={2} padding="py-16 md:py-24">
-        <div className="flex flex-col gap-3 mb-10">
-          <p className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 text-teal">
-            <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
-            Browse by topic
-          </p>
-          <h2
-            className="font-sans font-bold text-foreground"
-            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, letterSpacing: "-0.8px" }}
-          >
-            Everything, organised.
-          </h2>
-        </div>
+        <SectionHeading eyebrow="Browse by topic" mark="bloom" title="Everything, organised." />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
           {CATEGORIES.map((cat) => (
@@ -235,7 +222,7 @@ export default function ResourcesPage() {
               <div className="flex items-center gap-4 mb-3">
                 <CategoryIcon>{cat.icon}</CategoryIcon>
                 <div>
-                  <h3 className="font-sans font-bold text-foreground text-lg leading-snug">{cat.title}</h3>
+                  <h3 className="font-sans font-bold text-teal text-lg leading-snug">{cat.title}</h3>
                   <p className="text-[13px] font-sans text-muted">
                     {cat.resources.length} resources
                   </p>
@@ -246,7 +233,7 @@ export default function ResourcesPage() {
                   <li key={r.title}>
                     <Link href={r.href ?? `/resources/${r.slug}`} className="flex items-center gap-3 group py-3">
                       <div className="flex-1">
-                        <p className="text-sm font-sans text-foreground/75 leading-snug group-hover:text-foreground transition-colors duration-150">
+                        <p className="text-sm font-sans text-teal/75 leading-snug group-hover:text-teal transition-colors duration-150">
                           {r.title}
                         </p>
                         <span className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans">
@@ -265,20 +252,13 @@ export default function ResourcesPage() {
 
       {/* Browse by family type — shape-coded cards on the teal band */}
       <Section tone="teal" backdrop={{ shape: "dots", side: "left" }}>
-        <div className="flex flex-col gap-3 mb-10">
-          <span className="self-start inline-block text-[11px] font-[700] uppercase tracking-[0.16em] font-sans rounded-full px-3 py-1 bg-accent text-on-accent">
-            Made for your family
-          </span>
-          <h2
-            className="font-sans font-bold text-on-teal"
-            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, letterSpacing: "-0.8px" }}
-          >
-            Browse by family type.
-          </h2>
-          <p className="text-lg font-sans leading-relaxed text-on-teal-muted" style={{ maxWidth: "52ch" }}>
-            Each family guide ends with a hand-picked reading list for that path — start there if you want only what applies to you.
-          </p>
-        </div>
+        <SectionHeading
+          tone="teal"
+          eyebrow="Made for your family"
+          title="Browse by family type."
+          intro="Each family guide ends with a hand-picked reading list for that path — start there if you want only what applies to you."
+          introWidth="52ch"
+        />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
           {families.map((family) => (
@@ -286,7 +266,7 @@ export default function ResourcesPage() {
               key={family.slug}
               href={`/families/${family.slug}#resources`}
               className="group flex flex-col gap-4 rounded-2xl p-6 transition-transform duration-200 hover:-translate-y-1"
-              style={{ background: "rgba(255,255,255,0.07)" }}
+              style={{ background: "var(--teal-card)" }}
             >
               <ShapeMark
                 name={FAMILY_SHAPES[family.slug]}

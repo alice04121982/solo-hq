@@ -22,8 +22,8 @@ export function CopyButton({ text }: { text: string }) {
       title={copied ? "Copied!" : "Copy to clipboard"}
       className="shrink-0 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-sans font-medium transition-colors"
       style={{
-        background: copied ? "#1A3A25" : "#E8E8E8",
-        color: copied ? "white" : "#1A3A25",
+        background: copied ? "var(--teal)" : "var(--border)",
+        color: copied ? "var(--on-teal)" : "var(--teal)",
       }}
     >
       {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}

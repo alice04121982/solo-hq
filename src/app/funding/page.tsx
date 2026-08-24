@@ -4,11 +4,13 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
+import { ShapeMark } from "@/components/shapes";
 import { StatCard } from "@/components/stat-card";
 import { FundingRouteExplorer } from "@/components/funding/funding-route-explorer";
 import { InternationalFunding } from "@/components/funding/international-funding";
 import { NHSEligibilityChecker } from "@/components/funding/nhs-eligibility-checker";
 import {
+  COST_ANCHORS,
   FUNDING_ROUTES,
   INTERNATIONAL_FUNDING,
   LAST_REVIEWED,
@@ -39,13 +41,6 @@ const JUMP_LINKS = [
   { label: "Before you sign", href: "#before-you-sign" },
 ];
 
-/** Money anchors, so the routes below have something to be measured against. */
-const COST_ANCHORS = [
-  { value: "£5,000–£7,000", label: "Advertised price of a private IVF cycle, before drugs, ICSI, freezing and storage" },
-  { value: "£1,000–£2,500", label: "Drugs for a stimulated cycle — almost always charged on top of the headline price" },
-  { value: "£8,000–£14,000", label: "Realistic all-in cost of one cycle using donor sperm, once everything is counted" },
-  { value: "25%", label: "Share of IVF cycles in England that were NHS-funded in 2024, down from 32% in 2019" },
-];
 
 /** Things that should stop a decision, not merely inform it. */
 const RED_FLAGS = [
@@ -69,7 +64,11 @@ export default function FundingPage() {
 
       {/* Hero */}
       <Section band={0} padding="pt-20 pb-16 md:pt-28 md:pb-20">
-        <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="bloom" size={14} style={{ color: "var(--lavender)" }} />
           Funding &amp; payment options
         </p>
         <h1
@@ -132,7 +131,11 @@ export default function FundingPage() {
 
       {/* What it costs */}
       <Section band={1} id="costs" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
           The numbers to hold on to
         </p>
         <h2
@@ -144,7 +147,8 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Every funding route below is a way of paying one of these bills. The headline price a clinic
           advertises is not one of them: drugs, ICSI, freezing and storage are charged separately, and
-          donor sperm adds roughly £800–£1,800 a vial plus import and handling. That gap between the
+          donor sperm adds roughly £650–£1,150 a vial at the main banks (premium donors run to about
+          £1,700) plus import and handling. That gap between the
           quoted figure and the settled one is what catches most people out.
         </p>
 
@@ -176,7 +180,11 @@ export default function FundingPage() {
 
       {/* NHS */}
       <Section band={2} id="nhs" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="egg" size={14} style={{ color: "var(--lavender)" }} />
           What is free on the NHS
         </p>
         <h2
@@ -188,7 +196,7 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
           Almost every confusing thing about NHS fertility funding follows from one split: NICE writes
           the clinical recommendation, and the body that holds the budget where you live decides what
-          to commission. In England that is 42 Integrated Care Boards with 42 policies. In Scotland,
+          to commission. In England that is 36 Integrated Care Boards with 36 policies (42 until they were merged in April 2026, with further mergers planned for 2027). In Scotland,
           Wales and Northern Ireland there is one set of national criteria each.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
@@ -338,7 +346,11 @@ export default function FundingPage() {
 
       {/* Eligibility checker */}
       <Section band={3} id="check" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="cross" size={14} style={{ color: "var(--lavender)" }} />
           Self-check
         </p>
         <h2
@@ -358,7 +370,11 @@ export default function FundingPage() {
 
       {/* Routes */}
       <Section band={4} id="routes" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="asterisk" size={14} style={{ color: "var(--lavender)" }} />
           Every funding route
         </p>
         <h2
@@ -379,7 +395,11 @@ export default function FundingPage() {
 
       {/* Outside the UK */}
       <Section band={5} id="outside-uk" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
           Outside the UK
         </p>
         <h2
@@ -414,7 +434,11 @@ export default function FundingPage() {
 
       {/* Before you sign */}
       <Section band={6} id="before-you-sign" className="border-t border-border scroll-mt-20">
-        <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
+        <p
+          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
+          style={{ color: "var(--teal)" }}
+        >
+          <ShapeMark name="pause" size={14} style={{ color: "var(--lavender)" }} />
           Due diligence
         </p>
         <h2
