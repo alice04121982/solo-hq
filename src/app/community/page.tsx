@@ -54,8 +54,8 @@ export default function CommunityPage() {
             A small, guarded room for people doing IVF.
           </h1>
           <p className="text-lg font-sans text-muted leading-[1.65] mb-4" style={{ maxWidth: "58ch" }}>
-            Solo, same-sex, or together — IVF is easier alongside people who
-            get it. This is a private {platform} group, not a forum: no
+            Solo or coupled, straight or queer — IVF is easier alongside
+            people who get it. This is a private {platform} group, not a forum: no
             profiles, no comment threads, no strangers scrolling your worst
             week.
           </p>
