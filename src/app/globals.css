@@ -231,15 +231,6 @@
       outline-color 160ms ease;
   }
 
-  /* Option "citrus": the HFEA badge yellow promoted to the card fill. */
-  .clinic-card--citrus {
-    --card-surface:            var(--accent-pale);
-    --card-edge:               transparent;
-    /* The pale pill would vanish into the fill, so verified goes solid lime. */
-    --card-badge-verified-bg:  var(--accent);
-    --card-badge-verified-ink: var(--on-accent);
-  }
-
   /* Option "outline": no fill at all — the cream band shows through. */
   .clinic-card--outline {
     --card-surface:            transparent;

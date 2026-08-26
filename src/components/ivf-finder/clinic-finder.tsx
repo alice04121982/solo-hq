@@ -137,7 +137,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     AGE_BRACKETS.find((b) => b.value === filters.ageBracket)?.label ?? "";
   const activeFilterCount = countActiveFilters(filters);
 
-  // ?cards=paper|citrus|outline forces both grids onto one card treatment, so
+  // ?cards=paper|outline forces both grids onto one card treatment, so
   // the options can be compared on the real page with the real data. Absent or
   // unrecognised, each grid keeps its own default.
   const cardOverride = parseCardVariant(searchParams.get(CARD_VARIANT_PARAM));
