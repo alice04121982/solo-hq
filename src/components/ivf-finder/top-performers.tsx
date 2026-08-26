@@ -47,8 +47,9 @@ function bestOf(clinics: Clinic[], bracket: AgeBracket): Clinic | undefined {
  * rendered blank, and a clinic topping two slots appears once with both
  * labels.
  *
- * The strip is meant to read as picked out of the list below it, so it takes
- * the pale citrus fill by default while the results grid stays on white.
+ * The strip is meant to read as picked out of the list below it, which its
+ * heading and its position above the results do; the cards themselves stay on
+ * the same white fill as the grid below.
  */
 export function TopPerformers({
   clinics,

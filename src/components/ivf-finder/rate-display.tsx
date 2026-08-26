@@ -9,7 +9,7 @@ import { rateFor } from "@/lib/clinics";
  *
  * Both badges take their colours from the card they sit in
  * (`--card-badge-*`, set in globals.css), so a badge stays legible whether the
- * card is white, pale citrus, or inverted to teal on hover. Clinic reported is
+ * card is white, unfilled, or inverted to teal on hover. Clinic reported is
  * an outline rather than a grey fill — grey on the cream band goes muddy.
  */
 export function VerificationBadge({ verification }: { verification: "hfea" | "clinic" }) {
