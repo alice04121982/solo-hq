@@ -10,6 +10,16 @@ on:
   schedule:
     - cron: "0 7 * * 1" # Mondays 07:00 UTC, an hour after the data check
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "sweep files the usual issue; check-feeds only reports which feeds are alive"
+        type: choice
+        options: [sweep, check-feeds]
+        default: sweep
+      probe:
+        description: "check-feeds only: extra feed URLs to test, space separated"
+        type: string
+        default: ""
   pull_request:
     paths:
       - "scripts/find-news.ts"
@@ -34,11 +44,27 @@ jobs:
       - name: Self-test the parser and filters
         run: npm run find:news -- --self-test
 
+      # Are the feeds still feeds? A wrong URL cannot be diagnosed from a
+      # sandbox with no outbound network, and the weekly issue is a slow way
+      # to find out. So this runs on demand — `probe` carries candidate
+      # replacements, so a new URL can be confirmed before it is committed —
+      # and on every pull request that touches this file, because such a pull
+      # request is usually a change to FEEDS and the whole question is whether
+      # the new URL works. On a pull request it reports without gating: a
+      # publisher's outage should not block an unrelated merge, so read the
+      # step's log rather than its tick.
+      - name: Check the feeds are alive
+        if: inputs.mode == 'check-feeds' || github.event_name == 'pull_request'
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
+        env:
+          PROBE: ${{ inputs.probe }}
+        run: npm run find:news -- --check-feeds $PROBE
+
       # Everything a previous run already proposed, so a candidate nobody
       # wanted is not proposed again every Monday. Comments count: after the
       # first run the proposals live there, not in the body.
       - name: Collect what has already been proposed
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.mode != 'check-feeds'
         uses: actions/github-script@v7
         with:
           script: |
@@ -65,13 +91,13 @@ jobs:
             core.setOutput('open_issue', String(issues.find((i) => i.state === 'open')?.number ?? ''));
 
       - name: Sweep the feeds
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.mode != 'check-feeds'
         env:
           NEWS_PRIOR_ISSUE_FILE: prior-proposals.txt
         run: npm run find:news | tee candidates.md
 
       - name: Open or update the candidates issue
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.mode != 'check-feeds'
         uses: actions/github-script@v7
         with:
           script: |

@@ -19,6 +19,14 @@
  *
  * `--self-test` runs the parser and filter against fixtures and makes no
  * network calls; the workflow runs it before the real thing.
+ *
+ * `--check-feeds [url...]` fetches each feed and says whether it is still a
+ * feed, without proposing anything. Extra URLs given on the command line are
+ * checked alongside `FEEDS`, which is how a replacement for a dead feed gets
+ * confirmed before it is committed. Run it from CI (the News candidates
+ * workflow takes a `check-feeds` mode): a sandbox with no outbound network
+ * cannot tell a wrong URL from a right one, and guessing is what put a 404 in
+ * this list in the first place.
  */
 import { readFileSync } from "node:fs";
 
@@ -26,11 +34,12 @@ import { readFileSync } from "node:fs";
  * Feeds to sweep.
  *
  * `verified` records whether the URL has actually been confirmed to serve a
- * feed. The seed list was written in a sandbox with no outbound network, so
- * these follow each publisher's usual convention and are marked false until a
- * real run proves them. A feed that fails is reported, not swallowed — an
- * unreachable feed and a quiet week look identical otherwise, and a silently
- * dead feed is how a roundup stops being a roundup.
+ * feed. The seed list was written in a sandbox with no outbound network and
+ * followed each publisher's usual convention; the first real run (2026-08-24)
+ * settled which of those guesses were right. Only a verified feed is allowed
+ * to return nothing quietly — for the rest, an empty result is more likely a
+ * wrong URL than a quiet week. A feed that fails is reported, not swallowed:
+ * a silently dead feed is how a roundup stops being a roundup.
  */
 interface Feed {
   outlet: string;
@@ -41,10 +50,17 @@ interface Feed {
 }
 
 const FEEDS: Feed[] = [
-  { outlet: "BBC News", url: "https://feeds.bbci.co.uk/news/health/rss.xml", topic: "Safety & regulation", verified: false },
-  { outlet: "The Guardian", url: "https://www.theguardian.com/society/fertility-problems/rss", topic: "Costs & funding", verified: false },
-  { outlet: "Progress Educational Trust (BioNews)", url: "https://www.progress.org.uk/feed/", topic: "Donor conception", verified: false },
-  { outlet: "HFEA", url: "https://www.hfea.gov.uk/rss/news/", topic: "Safety & regulation", verified: false },
+  { outlet: "BBC News", url: "https://feeds.bbci.co.uk/news/health/rss.xml", topic: "Safety & regulation", verified: true },
+  { outlet: "The Guardian", url: "https://www.theguardian.com/society/fertility-problems/rss", topic: "Costs & funding", verified: true },
+  { outlet: "Progress Educational Trust (BioNews)", url: "https://www.progress.org.uk/feed/", topic: "Donor conception", verified: true },
+  // hfea.gov.uk serves no feed we could find — /rss/news/ was a guess, and it
+  // has 404'd every week since. The regulator is also a GOV.UK organisation,
+  // and every GOV.UK organisation page serves its announcements as Atom from
+  // the same path with `.atom` on the end. That is a documented convention
+  // rather than a guess, but it is still unconfirmed: the sandbox this was
+  // written in has no outbound network. `--check-feeds` settles it in CI, and
+  // until it does this stays unverified so an empty result is reported.
+  { outlet: "HFEA", url: "https://www.gov.uk/government/organisations/human-fertilisation-and-embryology-authority.atom", topic: "Safety & regulation", verified: false },
 ];
 
 /**
@@ -114,8 +130,17 @@ function entryDate(block: string): string | undefined {
   return parsed.toISOString().slice(0, 10);
 }
 
+/**
+ * The `<item>`/`<entry>` blocks in a document. Separate from `parseFeed` so
+ * `--check-feeds` can tell "this is a feed with nothing on topic" apart from
+ * "this is not a feed" — a 200 that serves an HTML error page has neither.
+ */
+export function entryBlocks(xml: string): string[] {
+  return xml.match(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi) ?? [];
+}
+
 export function parseFeed(xml: string, feed: Feed): Candidate[] {
-  const blocks = xml.match(/<(item|entry)[\s>][\s\S]*?<\/\1>/gi) ?? [];
+  const blocks = entryBlocks(xml);
   const out: Candidate[] = [];
   for (const block of blocks) {
     const title = tagContent(block, "title");
@@ -234,6 +259,12 @@ function selfTest(): number {
   check("RSS: decodes entities in titles", rss[1]?.title === "Egg & sperm donor rules reviewed");
   check("RSS: leaves an undated item undated", rss[1]?.published === undefined);
 
+  check("RSS: counts every entry, on topic or not", entryBlocks(RSS_FIXTURE).length === 3);
+  check(
+    "not a feed: an HTML page has no entries",
+    entryBlocks("<html><body><h1>Page not found</h1><p>item</p></body></html>").length === 0
+  );
+
   const atom = parseFeed(ATOM_FIXTURE, feed);
   check("Atom: reads the alternate link", atom[0]?.url === "https://example.org/d");
   check("Atom: reads the published date", atom[0]?.published === "2026-08-01");
@@ -265,6 +296,47 @@ async function fetchFeed(feed: Feed): Promise<{ xml?: string; error?: string }> 
   } catch (error) {
     return { error: error instanceof Error ? error.message : String(error) };
   }
+}
+
+/**
+ * Fetch every feed and say what came back. Proposes nothing and writes
+ * nothing: this exists so a dead feed can be diagnosed, and a candidate
+ * replacement confirmed, without waiting a week for Monday's issue.
+ *
+ * Exit code is non-zero when a feed is unreachable or is not a feed at all,
+ * so a scheduled run of this can fail loudly. A feed that is plainly a feed
+ * but has nothing on topic this week is fine and says so.
+ */
+async function checkFeeds(extraUrls: string[]): Promise<number> {
+  const checks: Feed[] = [
+    ...FEEDS,
+    ...extraUrls.map((url) => ({ outlet: "(command line)", url, topic: "Safety & regulation", verified: false })),
+  ];
+
+  let broken = 0;
+  for (const feed of checks) {
+    const label = `${feed.outlet} — ${feed.url}`;
+    const { xml, error } = await fetchFeed(feed);
+    if (error || !xml) {
+      console.log(`BROKEN     ${label} — ${error ?? "empty response"}`);
+      broken += 1;
+      continue;
+    }
+    const entries = entryBlocks(xml).length;
+    if (entries === 0) {
+      console.log(`NOT A FEED ${label} — fetched ${xml.length} bytes with no <item> or <entry>`);
+      broken += 1;
+      continue;
+    }
+    const onTopic = parseFeed(xml, feed).length;
+    console.log(`OK         ${label} — ${entries} entries, ${onTopic} on topic`);
+  }
+
+  console.log(
+    `\n${checks.length} checked, ${broken} to fix.` +
+      (broken > 0 ? " Correct the URL in `FEEDS` or drop the feed." : "")
+  );
+  return broken === 0 ? 0 : 1;
 }
 
 async function main(): Promise<number> {
@@ -336,5 +408,10 @@ async function main(): Promise<number> {
   return 0;
 }
 
-const exitCode = process.argv.includes("--self-test") ? selfTest() : await main();
+const args = process.argv.slice(2);
+const exitCode = args.includes("--self-test")
+  ? selfTest()
+  : args.includes("--check-feeds")
+    ? await checkFeeds(args.filter((a) => /^https?:\/\//.test(a)))
+    : await main();
 process.exit(exitCode);
