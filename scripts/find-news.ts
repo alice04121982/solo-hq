@@ -53,7 +53,14 @@ const FEEDS: Feed[] = [
   { outlet: "BBC News", url: "https://feeds.bbci.co.uk/news/health/rss.xml", topic: "Safety & regulation", verified: true },
   { outlet: "The Guardian", url: "https://www.theguardian.com/society/fertility-problems/rss", topic: "Costs & funding", verified: true },
   { outlet: "Progress Educational Trust (BioNews)", url: "https://www.progress.org.uk/feed/", topic: "Donor conception", verified: true },
-  { outlet: "HFEA", url: "https://www.hfea.gov.uk/rss/news/", topic: "Safety & regulation", verified: false },
+  // hfea.gov.uk serves no feed we could find — /rss/news/ was a guess, and it
+  // has 404'd every week since. The regulator is also a GOV.UK organisation,
+  // and every GOV.UK organisation page serves its announcements as Atom from
+  // the same path with `.atom` on the end. That is a documented convention
+  // rather than a guess, but it is still unconfirmed: the sandbox this was
+  // written in has no outbound network. `--check-feeds` settles it in CI, and
+  // until it does this stays unverified so an empty result is reported.
+  { outlet: "HFEA", url: "https://www.gov.uk/government/organisations/human-fertilisation-and-embryology-authority.atom", topic: "Safety & regulation", verified: false },
 ];
 
 /**

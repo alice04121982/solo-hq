@@ -44,12 +44,18 @@ jobs:
       - name: Self-test the parser and filters
         run: npm run find:news -- --self-test
 
-      # Are the feeds still feeds? Run on demand, and on its own: a wrong URL
-      # cannot be diagnosed from a sandbox with no outbound network, and the
-      # weekly issue is a slow way to find out. `probe` carries candidate
-      # replacements, so a new URL is confirmed here before it is committed.
+      # Are the feeds still feeds? A wrong URL cannot be diagnosed from a
+      # sandbox with no outbound network, and the weekly issue is a slow way
+      # to find out. So this runs on demand — `probe` carries candidate
+      # replacements, so a new URL can be confirmed before it is committed —
+      # and on every pull request that touches this file, because such a pull
+      # request is usually a change to FEEDS and the whole question is whether
+      # the new URL works. On a pull request it reports without gating: a
+      # publisher's outage should not block an unrelated merge, so read the
+      # step's log rather than its tick.
       - name: Check the feeds are alive
-        if: inputs.mode == 'check-feeds'
+        if: inputs.mode == 'check-feeds' || github.event_name == 'pull_request'
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
         env:
           PROBE: ${{ inputs.probe }}
         run: npm run find:news -- --check-feeds $PROBE
