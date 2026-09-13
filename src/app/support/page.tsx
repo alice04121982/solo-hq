@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiteNav } from "@/components/site-nav";
-import { Section } from "@/components/section";
+import { Section, alternatingTone } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
 import {
   SUPPORT_LAST_CHECKED,
@@ -74,7 +74,12 @@ export default function SupportPage() {
         </nav>
       </Section>
 
-      {SUPPORT_SECTIONS.map((section, i) => (
+      {SUPPORT_SECTIONS.map((section, i) => {
+        // Cards carry no border: they separate from the band by fill alone,
+        // white on a cream band and cream on a white one. Never pink on cream.
+        const cardFill =
+          alternatingTone(i + 1) === "cream" ? "var(--background)" : "var(--cream)";
+        return (
         <Section
           key={section.id}
           band={i + 1}
@@ -106,12 +111,12 @@ export default function SupportPage() {
           )}
 
           {section.items && (
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {section.items.map((item) => (
                 <li
                   key={item.name}
-                  className="rounded-2xl border p-6"
-                  style={{ borderColor: "var(--card-border)", background: "var(--card-bg)" }}
+                  className="rounded-2xl p-6"
+                  style={{ background: cardFill }}
                 >
                   <h3 className="font-sans font-bold text-[17px] leading-snug text-teal mb-2">
                     {item.name}
@@ -147,7 +152,8 @@ export default function SupportPage() {
             </p>
           )}
         </Section>
-      ))}
+        );
+      })}
     </main>
   );
 }

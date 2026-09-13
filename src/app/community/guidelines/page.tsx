@@ -79,12 +79,8 @@ export default function CommunityGuidelinesPage() {
                 {i === 1 && (
                   <p
                     id="phone"
-                    className="text-sm font-sans text-foreground leading-relaxed mt-4 rounded-2xl border p-4"
-                    style={{
-                      maxWidth: "56ch",
-                      borderColor: "var(--card-border)",
-                      background: "var(--card-bg)",
-                    }}
+                    className="text-sm font-sans text-foreground leading-relaxed mt-4 rounded-2xl p-4"
+                    style={{ maxWidth: "56ch", background: "var(--cream)" }}
                   >
                     {PHONE_NUMBER_NOTICE}
                   </p>

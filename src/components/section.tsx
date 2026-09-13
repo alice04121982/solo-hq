@@ -61,7 +61,7 @@ export interface SectionBackdrop {
  * Even bands are cream, so every page opens warm beneath the white nav and no
  * two neighbouring bands ever share a background.
  */
-function alternatingTone(band: number): SectionTone {
+export function alternatingTone(band: number): SectionTone {
   return band % 2 === 0 ? "cream" : "white";
 }
 
