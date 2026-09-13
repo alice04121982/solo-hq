@@ -18,31 +18,11 @@ import {
 export const metadata: Metadata = {
   title: "Faith, Culture & IVF | CairnFertility",
   description:
-    "Where the major religious traditions stand on IVF, what to ask your own clergy, and how to handle conversations (at home, in your community, and online) that turn against your treatment.",
+    "Where nine religious traditions stand on IVF, donors and embryos, with sources; what to ask your own clergy; and what to say when family, community or a religious leader turns against your treatment.",
 };
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
-
-/** The four rules the section is written under. Stated up front rather than buried. */
-const PRINCIPLES = [
-  {
-    title: "We describe. We don't rule.",
-    body: "Nothing here is a religious ruling, and CairnFertility has no standing to give one. We set out what traditions teach so you can have a better conversation with someone who does.",
-  },
-  {
-    title: "No tradition is a monolith.",
-    body: "Every entry below names the internal disagreement as well as the mainstream position, because the disagreement is usually the part that matters to the person reading.",
-  },
-  {
-    title: "Everything is sourced.",
-    body: "Each tradition links to documents you can open and read yourself: a faith's own texts and UK regulators, not clinics writing about someone else's religion.",
-  },
-  {
-    title: "Belief is yours to work out.",
-    body: "Some people here will decide their tradition is right and stop. Some will go ahead anyway. Both are reading this page, and it is written for both.",
-  },
-];
 
 export default function FaithPage() {
   return (
@@ -90,7 +70,6 @@ export default function FaithPage() {
             { label: "What's actually at stake", href: "#at-stake" },
             { label: "Where traditions stand", href: "#traditions" },
             { label: "Practical observance", href: "#observance" },
-            { label: "Stories", href: "#stories" },
             { label: "Difficult conversations", href: "#conversations" },
             { label: "Support", href: "#support" },
           ].map((l) => (
@@ -116,21 +95,16 @@ export default function FaithPage() {
             <Info className="h-3.5 w-3.5" />
             How we&rsquo;ve written this
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
-            {PRINCIPLES.map((p) => (
-              <div key={p.title}>
-                <h2 className="font-sans font-bold text-base mb-2" style={{ color: TEAL }}>
-                  {p.title}
-                </h2>
-                <p
-                  className="text-[15px] font-sans leading-relaxed"
-                  style={{ color: "rgba(0, 83, 83, 0.75)" }}
-                >
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p
+            className="text-[16px] font-sans leading-relaxed"
+            style={{ color: "rgba(0, 83, 83, 0.85)", maxWidth: "68ch" }}
+          >
+            We describe what traditions teach, including where they disagree internally,
+            and we do not rule: nothing here is a religious opinion. Each tradition links
+            to sources you can check, the tradition&rsquo;s own documents where they exist
+            and scholarly overviews where they don&rsquo;t, and where the documentation is
+            thin we say so.
+          </p>
         </div>
       </section>
 
@@ -208,8 +182,7 @@ export default function FaithPage() {
           >
             Each entry sets out the mainstream position, the places where serious people
             inside that tradition disagree, and questions you can take to your own priest,
-            imam, rabbi, pandit, granthi or teacher. Sources are linked so you never have
-            to take our word for any of it.
+            imam, rabbi, pandit, granthi or teacher. Sources are linked under each entry.
           </p>
 
           <TraditionExplorer traditions={FAITH_TRADITIONS} />
@@ -471,8 +444,8 @@ export default function FaithPage() {
             style={{ maxWidth: "62ch" }}
           >
             Organisations that will not be surprised by any part of this conversation.
-            Where we don&rsquo;t know of a dedicated service for a tradition, we have said
-            so rather than inventing one.
+            Chana is the only tradition-specific fertility service we know of in the UK;
+            the others are general or faith-community groups.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
@@ -490,20 +463,39 @@ export default function FaithPage() {
                     {s.name}
                   </h3>
                   <p className="text-[15px] font-sans leading-relaxed text-muted mb-4">{s.body}</p>
-                  <a
-                    href={s.href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
-                    style={{ color: TEAL }}
-                  >
-                    {external ? "Visit" : "Compare clinics"}
-                    {external ? (
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    ) : (
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    )}
-                  </a>
+                  {s.links ? (
+                    <ul className="space-y-1.5">
+                      {s.links.map((l) => (
+                        <li key={l.href}>
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
+                            style={{ color: TEAL }}
+                          >
+                            {l.label}
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <a
+                      href={s.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
+                      style={{ color: TEAL }}
+                    >
+                      {external ? "Visit" : "Find your clinic"}
+                      {external ? (
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      ) : (
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      )}
+                    </a>
+                  )}
                 </div>
               );
             })}

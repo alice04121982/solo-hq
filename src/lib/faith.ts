@@ -1,21 +1,8 @@
 /**
- * Content for /faith — religion, culture and belief around fertility treatment.
- *
- * Editorial rules for anything added to this file. They are not decoration;
- * this is the one area of the site where getting the tone wrong does real
- * harm to a reader who is already having a hard week.
- *
- *  1. Describe, never rule. We say what a tradition teaches. We never tell a
- *     reader what they may do, and we never imply CairnFertility has standing
- *     to issue a religious opinion.
- *  2. No tradition is a monolith. Every entry carries a `viewsDiffer` section,
- *     because the internal disagreement is usually the part a reader actually
- *     needs and the part other sites flatten out.
- *  3. Every factual claim has a source a reader can open and check. Prefer a
- *     tradition's own documents and UK regulators over fertility clinics
- *     writing marketing copy about someone else's religion.
- *  4. Where the honest answer is "this is unsettled", say that on the page
- *     rather than rounding it up to a confident sentence.
+ * Content for /faith. Rules: describe, never rule; every entry has `viewsDiffer`;
+ * every claim has an openable source (a tradition's own documents first, scholarly
+ * overviews only where none exist); thin documentation is flagged in `note`.
+ * Every source and organisation was opened and checked on 13 September 2026.
  */
 
 export interface SourceLink {
@@ -26,59 +13,46 @@ export interface SourceLink {
 export interface FaithTradition {
   slug: string;
   name: string;
-  /** Shown when the card is collapsed. Must read as description, not verdict. */
+  /** Collapsed-card text. Description, not verdict. */
   summary: string;
-  /** Where formal teaching generally lands. */
   commonlyTaught: string[];
-  /** Real internal disagreement, named plainly. */
   viewsDiffer: string[];
-  /** Phrased as questions the reader can take to their own clergy. */
   questionsToAsk: string[];
-  /** Observance that changes the treatment calendar or the clinic room. */
   practicalNotes?: string[];
+  /** Shown when the documentation behind an entry is thin. */
+  note?: string;
   sources: SourceLink[];
 }
 
-/**
- * Ordered roughly by how often UK clinics report being asked about them, not
- * by size or seniority of tradition.
- */
 export const FAITH_TRADITIONS: FaithTradition[] = [
   {
     slug: "catholicism",
     name: "Catholicism",
     summary:
-      "Formal teaching does not permit IVF, while fully affirming the desire for a child and the grief of infertility.",
+      "Formal teaching does not permit IVF, while affirming the desire for a child and the grief of infertility.",
     commonlyTaught: [
-      "Two documents from the Congregation for the Doctrine of the Faith set the position: Donum Vitae (1987) and Dignitas Personae (2008). Both conclude that conception should arise from the marital act, and that IVF replaces that act rather than assisting it.",
-      "The objection is not to treating infertility. Investigation, surgery, hormone treatment and anything that restores the body's own capacity to conceive are encouraged, not discouraged.",
-      "The status of the embryo is central. Because the Church holds that a human person exists from conception, the freezing, grading, discarding and research use of surplus embryos are treated as grave matters rather than laboratory admin.",
-      "Church documents state plainly that a child conceived through IVF is fully and equally a person of full dignity. Teaching that opposes the procedure does not permit anyone to treat the resulting child, or their parents, as lesser.",
+      "Two documents from the Congregation for the Doctrine of the Faith (now the Dicastery for the Doctrine of the Faith) set the position: Donum Vitae (1987) and Dignitas Personae (2008). Both hold that conception should arise from the marital act, and that IVF replaces that act rather than assisting it.",
+      "The objection is not to treating infertility: anything that restores the body's own capacity to conceive is encouraged. Because a person is held to exist from conception, freezing, grading and discarding surplus embryos are grave matters.",
+      "Donum Vitae says that although conception through IVF \"cannot be approved\", every child \"must in any case be accepted as a living gift of the divine Goodness and must be brought up with love\".",
     ],
     viewsDiffer: [
-      "Teaching is settled. Practice is not. Large numbers of practising Catholics use IVF, and lay opinion in most countries sits well to the permissive side of the formal position.",
-      "Priests vary enormously in pastoral response, from strict counsel to quiet accompaniment. The doctrine you read is fixed; the conversation you get depends heavily on who you ask.",
-      "What should happen to embryos already frozen is genuinely unresolved in Catholic bioethics, including the question of whether another woman may adopt and carry them.",
-      "Restorative approaches such as NaProTechnology are promoted in some Catholic settings as an alternative to IVF. How their success rates compare with IVF is contested in mainstream fertility medicine, and you are entitled to see the underlying evidence before choosing.",
+      "Teaching is settled; practice is not. Many practising Catholics use IVF, and priests vary from strict counsel to quiet accompaniment.",
+      "What should happen to embryos already frozen is unresolved in Catholic bioethics, including whether another woman may adopt and carry them.",
+      "On access, the documents are uniform: Donum Vitae says artificial fertilisation of an unmarried woman \"cannot be morally justified\". Quest, a group for LGBTQ+ Catholics, is listed under Support.",
     ],
     questionsToAsk: [
-      "Is there someone in this diocese who regularly accompanies couples through infertility, rather than whichever priest I can get an appointment with first?",
-      "If I have already had IVF, what does the Church actually say about my situation and about my child?",
-      "If we decide not to pursue IVF, what is here for us? Does anyone in this parish talk about involuntary childlessness?",
+      "Is there someone in this diocese who regularly accompanies people through infertility?",
+      "If I have already had IVF, what does the Church say about my situation and my child?",
       "Can you help me separate what is binding teaching from what is your own view?",
     ],
     sources: [
       {
-        label: "Donum Vitae (1987): full text, vatican.va",
+        label: "Donum Vitae (1987)",
         href: "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_con_cfaith_doc_19870222_respect-for-human-life_en.html",
       },
       {
-        label: "Dignitas Personae (2008): full text, vatican.va",
+        label: "Dignitas Personae (2008)",
         href: "https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_con_cfaith_doc_20081208_dignitas-personae_en.html",
-      },
-      {
-        label: "Begotten Not Made: USCCB",
-        href: "https://www.usccb.org/issues-and-action/human-life-and-dignity/reproductive-technology/begotten-not-made-a-catholic-view-of-reproductive-technology",
       },
     ],
   },
@@ -86,30 +60,30 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     slug: "orthodox-christianity",
     name: "Orthodox Christianity",
     summary:
-      "Broadly cautious, with real variation between jurisdictions, and rather less central paperwork than people expect.",
+      "Broadly cautious. Some churches have published clear positions; others leave it to pastoral judgement.",
     commonlyTaught: [
-      "Orthodox churches encourage the medical and surgical treatment of infertility, and treat the desire for children as good.",
-      "Because the Church holds that life begins at conception, the creation of surplus embryos is the sharpest point of concern. Some bishops have advised couples to fertilise and transfer as few embryos as possible to avoid producing embryos that will not be used.",
-      "Third-party involvement (donor sperm, donor eggs, embryo donation, surrogacy) is widely opposed on the grounds that it introduces a third party into the marriage.",
+      "Orthodox churches encourage the medical treatment of infertility and treat the desire for children as good.",
+      "The Russian Orthodox Church's Bases of the Social Concept (2000) is the fullest published statement. It accepts \"artificial insemination by the husband's germ cells\" and calls \"morally inadmissible\" any IVF involving the production, storage and deliberate destruction of \"spare\" embryos, donor sperm or eggs, surrogacy \"even in those cases where it is realised on a non-commercial basis\", and prenatal diagnosis used to choose a child's sex.",
+      "Many bishops who bless IVF ask couples to transfer one embryo at a time.",
     ],
     viewsDiffer: [
-      "There is no single Orthodox magisterium issuing one binding ruling for all Orthodox Christians. Guidance is issued jurisdiction by jurisdiction, and Greek, Russian, Antiochian, Serbian and other churches have not all landed identically.",
-      "Some jurisdictions permit IVF within marriage using the couple's own gametes when no embryos are discarded. Others discourage the procedure altogether. Both positions are held by serious Orthodox theologians.",
-      "Economia (the pastoral discretion to apply a rule with mercy in a particular case) means your spiritual father may have more latitude than a written statement suggests. This is a conversation to have in person.",
+      "There is no single Orthodox magisterium (central teaching authority). Greek, Russian, Antiochian, Serbian and other churches have not all published the same thing, or published at all.",
+      "The Church has not formally ruled on whether un-implanted or frozen embryos are persons. Economia (pastoral discretion to apply a rule with mercy in a particular case) means your spiritual father may have more latitude than a written statement suggests.",
+      "On access: the Russian document says inseminating a single woman with donor cells deprives the child \"of the right to have mother and father\". We found no comparable statement from other jurisdictions.",
     ],
     questionsToAsk: [
-      "What has our own jurisdiction actually published on this, as distinct from what Orthodoxy in general is said to teach?",
+      "What has our own church published on this, as distinct from what Orthodoxy in general is said to teach?",
       "If we transfer every embryo we create and freeze none, does that change your counsel?",
-      "May we discuss this under economia, and what would that mean in practice for us?",
+      "May we discuss this under economia, and what would that mean for us?",
     ],
     sources: [
       {
-        label: "Embryohood, Childhood, Personhood: Public Orthodoxy",
-        href: "https://publicorthodoxy.org/2024/04/26/embryohood-childhood-personhood/",
+        label: "Bases of the Social Concept, XII: Russian Orthodox Church (2000)",
+        href: "https://old.mospat.ru/en/documents/social-concepts/xii/",
       },
       {
-        label: "Religious aspects of assisted reproduction: peer-reviewed overview",
-        href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096425/",
+        label: "Embryohood, Childhood, Personhood: Public Orthodoxy (2024)",
+        href: "https://publicorthodoxy.org/2024/04/26/embryohood-childhood-personhood/",
       },
     ],
   },
@@ -119,28 +93,27 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     summary:
       "Generally permissive about IVF itself; the disagreement is about donors and about what happens to embryos.",
     commonlyTaught: [
-      "Anglican and most mainline Protestant churches have accepted IVF within marriage since the 1980s. The common reasoning is that medicine which helps a couple conceive is a legitimate use of God-given skill.",
-      "Most churches in this family accept contraception, and many have argued it would be inconsistent to accept that and then refuse assisted conception.",
-      "Concern concentrates on two questions rather than on IVF as a technique: the moral status of surplus embryos, and whether donor gametes introduce a third party into a marriage.",
+      "The Church of England's 1985 report Personal Origins, commended by General Synod and revised in 1996, remains its fullest statement. Synod welcomed a statutory regulator for fertility services rather than opposing treatment, and affirmed marriage as \"the ideal context\" for raising children.",
+      "Concern concentrates on surplus embryos and on whether donor gametes (donor eggs or sperm) introduce a third party into a marriage; in 1988 Synod asked for a review of donor insemination, citing psychological risks to the children conceived.",
     ],
     viewsDiffer: [
-      "This is the broadest church family on the page and the range inside it is correspondingly wide. Liberal and progressive congregations may actively support solo parents and same-sex couples using donor gametes; conservative evangelical congregations may hold positions closer to Catholic teaching on the embryo.",
-      "There is no central authority. A denomination's national statement does not bind your local minister, and your local minister does not bind you.",
-      "Views on who may access treatment (married couples only, or also single people and same-sex couples) vary far more within this family than views on the laboratory procedure itself.",
+      "Liberal congregations may actively support solo parents and same-sex couples using donor gametes; conservative evangelical bodies sit closer to Catholic teaching on the embryo. The Southern Baptist Convention's 2024 resolution affirmed the right to life of every human being \"including those in an embryonic stage\" and urged care \"especially in the number of embryos generated in the IVF process\".",
+      "There is no central authority. A national statement does not bind your local minister, and your minister does not bind you.",
+      "Views on who may access treatment vary more within this family than views on the procedure. OneBodyOneFaith, listed under Support, works with LGBTQ+ Christians across denominations.",
     ],
     questionsToAsk: [
-      "What does our denomination actually say, and how much weight does that carry in this congregation?",
+      "What does our denomination say, and how much weight does that carry in this congregation?",
       "Would it change your view if we created only as many embryos as we intend to transfer?",
       "If we use a donor, would our child be welcomed here without qualification?",
     ],
     sources: [
       {
-        label: "Religious aspects of assisted reproduction: peer-reviewed overview",
-        href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096425/",
+        label: "Embryo research: some Christian perspectives (GS 1511), Church of England",
+        href: "https://www.churchofengland.org/sites/default/files/2018-10/gs1511-embryo-research-some-christian-perspectives.pdf",
       },
       {
-        label: "Is the human embryo sacrosanct? (Progress Educational Trust)",
-        href: "https://www.progress.org.uk/is-the-human-embryo-sacrosanct-gamete-donation-and-doctrine/",
+        label: "SBC resolution on reproductive technologies (2024)",
+        href: "https://www.sbc.net/resource-library/resolutions/on-the-ethical-realities-of-reproductive-technologies-and-the-dignity-of-the-human-embryo/",
       },
     ],
   },
@@ -150,39 +123,31 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     summary:
       "IVF is widely accepted within a marriage using the couple's own gametes. Third-party donation is where Sunni and Shia jurisprudence part company.",
     commonlyTaught: [
-      "Fatwas issued from Al-Azhar in Egypt from 1980 onwards established the mainstream Sunni position: IVF is permissible where the sperm is the husband's, the egg is the wife's, and the embryo is transferred to that same wife during a valid marriage.",
-      "Treating infertility is regarded positively. Seeking medical help is not seen as a failure of tawakkul (trust in God).",
-      "The prohibition on third-party gametes rests on preserving nasab (lineage and the certainty of parentage), which Islamic law treats as a matter of serious public interest, not private preference.",
-      "Most scholars hold that treatment must end at the end of the marriage: embryos created during a marriage would not be transferred after divorce or the husband's death.",
+      "Fatwas from Al-Azhar in Egypt from 1980 onwards set the mainstream Sunni position: IVF is permissible where the sperm is the husband's, the egg is the wife's, and the embryo is transferred to that wife during a valid marriage.",
+      "Treating infertility is regarded positively. Seeking medical help is not a failure of tawakkul (trust in God).",
+      "The prohibition on third-party gametes rests on preserving nasab (lineage and certainty of parentage), which Islamic law treats as a serious public interest.",
     ],
     viewsDiffer: [
-      "The Sunni–Shia divergence here is substantial and well documented. Since a 1999 fatwa by Ayatollah Khamenei, third-party egg and sperm donation has been permitted by many Shia authorities under specified conditions, a position most Sunni scholars do not share.",
-      "Shia authorities do not agree among themselves either. Different marja' have reached different conclusions, and the consequences for inheritance and for the child's legal parentage are debated even where donation is allowed.",
-      "Surrogacy is prohibited in mainstream Sunni jurisprudence and permitted by some Shia jurists, one of the sharpest single differences in this area.",
-      "Local custom and family expectation frequently do more work than jurisprudence. Plenty of Muslim patients report that the ruling was the easy part and the family conversation was not.",
+      "Since a 1999 fatwa by Ayatollah Khamenei, some Shia authorities permit donor eggs and sperm under specified conditions, a position most Sunni scholars do not share. Shia marja' (senior jurists whose rulings their followers adopt) disagree among themselves; Ayatollah Sistani opposes donation.",
+      "Surrogacy is prohibited in mainstream Sunni jurisprudence and permitted by some Shia jurists.",
+      "On access: because the Al-Azhar position requires a valid marriage, it does not extend to single people or same-sex couples. Imaan, listed under Support, supports LGBTQI+ Muslims.",
     ],
     questionsToAsk: [
-      "Which school or which marja' am I following on this, and what have they specifically said, rather than what 'Islam says' in general?",
-      "Does the clinic understand that donor gametes are not an option for me, and will it stop suggesting them?",
-      "Can the clinic document the chain of custody for our samples so I can be confident nothing was mixed?",
+      "Which school or marja' am I following, and what have they specifically said?",
+      "Does the clinic understand that donor gametes are not an option for me, and can it document the chain of custody for our samples?",
       "How do we schedule stimulation and egg collection around Ramadan, and is fasting safe on these drugs?",
-    ],
-    practicalNotes: [
-      "Fasting and stimulation drugs need planning together. Ask your consultant early whether your protocol is compatible with fasting, and remember that Islamic law itself exempts the sick and those under medical treatment from fasting.",
-      "You can ask for female clinicians and sonographers, and for a chaperone. UK clinics are used to this request; make it at booking rather than at the door.",
-      "If you avoid porcine- or bovine-derived ingredients, ask the clinic pharmacist for the full ingredient list of each drug you are prescribed, including capsule shells and pessary bases.",
     ],
     sources: [
       {
-        label: "Making Muslim Babies: IVF and gamete donation in Sunni versus Shi'a Islam (Inhorn)",
+        label: "Making Muslim Babies: Inhorn (2006)",
         href: "https://link.springer.com/article/10.1007/s11013-006-9027-x",
       },
       {
-        label: "The Al-Azhar fatwa on artificial insemination: The Muslim World",
+        label: "Al-Azhar fatwa on artificial insemination: Shabana, The Muslim World (2021; journal access may be needed)",
         href: "https://onlinelibrary.wiley.com/doi/10.1111/muwo.12406",
       },
       {
-        label: "Sperm donation: a Shia perspective (Journal of Midwifery & Reproductive Health)",
+        label: "Sperm donation, a Shia perspective: Ghodrati (2023)",
         href: "https://jmrh.mums.ac.ir/article_21293.html",
       },
     ],
@@ -191,27 +156,23 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     slug: "judaism",
     name: "Judaism",
     summary:
-      "Among the most supportive traditions on this page. Fertility treatment is widely treated as a mitzvah rather than a concession.",
+      "Generally supportive: having children carries religious weight, and treatment is widely permitted.",
     commonlyTaught: [
-      "The commandment to be fruitful and multiply (Genesis 1:28) gives having children real religious weight, and halacha generally treats medical intervention to overcome infertility as permitted and often encouraged.",
-      "There is broad rabbinic agreement that IVF is acceptable where the husband's sperm and the wife's eggs are used.",
-      "Embryos are not accorded the status of a full person in halacha, which is why Jewish law is comparatively relaxed about freezing. Wanton destruction is still discouraged.",
-      "In observant communities, halachic supervision of the laboratory (mashgichim) is increasingly common, to guard against mix-ups and to keep genetic material accompanied.",
+      "The commandment to be fruitful and multiply (Genesis 1:28) gives having children religious weight, and halacha (Jewish law) generally treats medical intervention to overcome infertility as permitted and often encouraged. There is broad rabbinic agreement that IVF is acceptable with the husband's sperm and the wife's eggs.",
+      "Embryos are not accorded the status of a full person in halacha, so Jewish law is comparatively relaxed about freezing. Wanton destruction is still discouraged. In observant communities, halachic supervision of the laboratory by mashgichim (trained supervisors) is increasingly common.",
     ],
     viewsDiffer: [
-      "Donor gametes are the live question. Orthodox authorities are broadly cautious, particularly about donor sperm; Conservative and Reform authorities are generally more permissive.",
-      "Where donation is permitted, rabbis disagree about whether a non-Jewish donor is preferable, a question that turns on lineage and on the halachic definition of who the mother is.",
-      "Egg donation raises the maternity question directly: is the mother the woman who provided the egg or the woman who gave birth? This is a genuine, unresolved dispute among poskim, not a settled matter.",
-      "Access for single women and same-sex couples varies sharply across the movements, from full support to none.",
+      "Donor gametes are the live question. Orthodox authorities are broadly cautious, particularly about donor sperm; Masorti (Conservative), Reform and Liberal authorities are generally more permissive.",
+      "Egg donation raises the maternity question: is the mother the woman who provided the egg or the woman who gave birth? This is unresolved among poskim (rabbinic decisors), as is whether a non-Jewish donor is preferable.",
+      "Access for single women and same-sex couples varies sharply across the movements, from full support to none. KeshetUK, listed under Support, works across the Liberal, Masorti, Orthodox and Reform communities.",
     ],
     questionsToAsk: [
-      "Would you be willing to speak directly to my clinic about what supervision would involve?",
-      "Are there timing constraints (Shabbat, yom tov, counting) that I should give the clinic before they set my protocol?",
-      "If we need a donor, what would you advise, and is this a question you would refer on to a specialist posek?",
+      "Are there timing constraints around Shabbat and festivals that I should give the clinic before they set my protocol?",
+      "Could bleeding after egg collection or transfer affect my niddah (menstrual purity) status, and what should I plan for before stimulation starts?",
+      "If we need a donor, is this a question you would refer to a specialist posek?",
     ],
     practicalNotes: [
-      "Egg collection, transfer and injection timing can collide with Shabbat and festivals. Clinics can often shift a protocol by a day if they know early; they cannot once you are mid-stimulation.",
-      "Chana is a UK Jewish charity supporting people through fertility treatment, baby loss and reproductive health, including the halachic and practical sides.",
+      "Chana (chana.org.uk) is a UK Jewish charity supporting people through fertility treatment and baby loss, including the halachic side.",
     ],
     sources: [
       {
@@ -219,12 +180,8 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
         href: "https://www.jewishvirtuallibrary.org/assisted-reproduction-and-judaism",
       },
       {
-        label: "How Orthodox Jewish law is adapting to assisted reproduction: Religion Unplugged",
+        label: "Orthodox Jewish law and assisted reproduction: Religion Unplugged (2022)",
         href: "https://religionunplugged.com/news/2022/2/1/how-orthodox-jewish-law-is-adapting-to-assisted-reproductive-technology",
-      },
-      {
-        label: "Chana: Jewish fertility support (UK)",
-        href: "https://www.chana.org.uk/",
       },
     ],
   },
@@ -232,21 +189,19 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     slug: "hinduism",
     name: "Hinduism",
     summary:
-      "No central prohibition, and a generally permissive approach, with family and lineage expectations often weighing more than doctrine.",
+      "No central prohibition and a generally permissive approach, with family and lineage expectations often weighing more than doctrine.",
     commonlyTaught: [
-      "There is no single Hindu authority and no doctrinal ban on assisted reproduction. Having children is widely understood as part of dharma, which tends to make treatment to overcome infertility easy to justify.",
-      "Classical texts contain narratives of conception outside ordinary means, and these are commonly cited as showing that assisted conception is not foreign to the tradition.",
-      "Concern, where it exists, is usually about lineage (gotra) and about the destruction of embryos, rather than about the laboratory procedure.",
+      "There is no single Hindu authority and no doctrinal ban on assisted reproduction. Having children is widely understood as part of dharma (religious duty), and classical texts contain narratives of conception outside ordinary means.",
+      "Concern, where it exists, is usually about lineage (gotra, the patrilineal clan line) and the destruction of embryos, rather than the procedure.",
     ],
     viewsDiffer: [
-      "Attitudes to donor gametes range from full acceptance to a preference for the couple's own gametes on lineage grounds. Some families prefer a donor of the same community; others regard that as irrelevant.",
-      "Because there is no central ruling body, what you encounter will usually be a family or community position presented as a religious one. Those are worth separating.",
-      "Stigma around infertility can be intense and heavily gendered even where the theology is permissive, which is why many Hindu patients treat secrecy as the default.",
+      "Attitudes to donor gametes range from full acceptance to a preference for the couple's own on lineage grounds. Some families prefer a donor of the same community or faith; others regard that as irrelevant.",
+      "With no central ruling body, what you encounter will often be a family or community position presented as a religious one. Stigma can be intense and heavily gendered even where the theology is permissive.",
     ],
     questionsToAsk: [
-      "Is the objection I am hearing actually scriptural, or is it a family expectation wearing scripture's clothes?",
-      "Whose opinion in this family will genuinely shape how our child is treated, and do they need to be brought in early?",
-      "If lineage is the concern, what would address it, and is that something we are willing to do?",
+      "Is this objection based on scripture, or on family expectations? Both matter, but they need different conversations.",
+      "Whose opinion in this family will shape how our child is treated, and do they need to be brought in early?",
+      "If lineage is the concern, what would address it?",
     ],
     sources: [
       {
@@ -254,7 +209,7 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
         href: "https://www.ijrcog.org/index.php/ijrcog/article/view/17091",
       },
       {
-        label: "Is the human embryo sacrosanct? (Progress Educational Trust)",
+        label: "Is the human embryo sacrosanct? Progress Educational Trust (2009)",
         href: "https://www.progress.org.uk/is-the-human-embryo-sacrosanct-gamete-donation-and-doctrine/",
       },
     ],
@@ -263,29 +218,30 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     slug: "sikhism",
     name: "Sikhism",
     summary:
-      "No prohibition on IVF. Where concern arises it is usually about embryos, about honesty, and about what the community will say.",
+      "No prohibition on IVF is recorded, and the tradition's texts do not address assisted conception directly.",
     commonlyTaught: [
-      "The Sikh Rehat Maryada does not address assisted reproduction, and there is no ruling prohibiting IVF. Medical treatment for infertility is not regarded as interference with divine will.",
-      "IVF and IUI using a married couple's own gametes are widely regarded as legitimate.",
-      "Concern is most often expressed about the deliberate destruction of embryos, and about anonymity: transparency with a child about their origins fits the tradition's emphasis on truthfulness.",
+      "Neither the Guru Granth Sahib nor the Sikh Rehat Maryada (code of conduct) contains an explicit injunction on assisted conception.",
+      "Having a family is highly valued, and treatment for a married couple using their own gametes is generally regarded as acceptable. Conception is expected within marriage.",
+      "The Progress Educational Trust's multi-faith conference recorded that Sikhism \"does not approve of any procedure which destroys or meddles with embryos\".",
     ],
     viewsDiffer: [
-      "Anonymous donation is discouraged by some Sikh commentators and accepted by others. There is no binding position either way.",
-      "Some Sikhs keep treatment private because of community stigma rather than doctrine. That is a social calculation, and a reasonable one, but it is worth naming it as separate from religious obligation.",
+      "Some Sikhs read infertility as God's will and treatment as going against it; others regard doctors who treat infertility as performing sewa (selfless service).",
+      "Donor sperm is regarded by some as wrong because it brings a third person into the marriage; others take a different view. Where a family cares about a donor's religious background, that is a family position rather than a ruling.",
     ],
     questionsToAsk: [
-      "Is there anything in our tradition that actually prohibits this, or is the discomfort I am sensing about what people will say?",
+      "Is there anything in our tradition that prohibits this, or is the discomfort I am sensing about what people will say?",
       "If we use a donor, how and when do we plan to tell our child?",
-      "Who in the sangat can we trust with this while we are still deciding?",
+      "Who in the sangat (congregation) can we trust with this while we are still deciding?",
     ],
+    note: "Thinly documented. We found no statement from a Sikh religious body on assisted conception; the sources below are a conference report and a UK exam-board summary, so this entry is shorter and more hedged than the others.",
     sources: [
       {
-        label: "Is the human embryo sacrosanct? (Progress Educational Trust)",
+        label: "Is the human embryo sacrosanct? Progress Educational Trust (2009)",
         href: "https://www.progress.org.uk/is-the-human-embryo-sacrosanct-gamete-donation-and-doctrine/",
       },
       {
-        label: "Religious aspects of assisted reproduction: peer-reviewed overview",
-        href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096425/",
+        label: "Sikhism and bioethics: infertility (A level resource), WJEC",
+        href: "https://resource.download.wjec.co.uk/vtc/2021-22/el21-22_14-1/wjec/12-wjec-a-level-sikhism-theme-4C-sikhism-and-bioethics-infertility.pdf",
       },
     ],
   },
@@ -295,56 +251,43 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
     summary:
       "No unified position and no central authority. Reasoning tends to run through intention and the relief of suffering.",
     commonlyTaught: [
-      "There is no Buddhist governing body issuing rulings on reproductive medicine, and no scriptural prohibition on IVF.",
-      "Where the question is engaged, it is usually approached through intention (cetana) and through the reduction of suffering, which tends to support treating infertility.",
-      "Ahimsa, non-harm, makes the deliberate destruction of embryos the point of greatest concern for many Buddhist teachers.",
+      "There is no Buddhist governing body issuing rulings on reproductive medicine, and no scriptural prohibition on IVF. Where the question is engaged, it is usually approached through cetana (intention) and the reduction of suffering.",
+      "Ahimsa (non-harm) makes the deliberate destruction of embryos the point of greatest concern. One scholarly overview describes disposing of leftover embryos after IVF as \"ethically problematic\" in Buddhist terms, with reservations about freezing.",
     ],
     viewsDiffer: [
-      "Traditions differ on when a being is understood to be present in an embryo, and this shapes how seriously embryo disposal is weighed. Theravada, Mahayana and Vajrayana teachers do not answer this the same way.",
-      "Donor conception is widely accepted in Buddhist discussion, often with an accompanying emphasis on the child's right to know their origins.",
-      "Because so little is codified, the answer you receive will depend almost entirely on the individual teacher you ask.",
+      "Traditions differ on when a being is present in an embryo. Theravada, Mahayana and Vajrayana teachers do not answer this the same way, and the answer you receive will depend largely on the teacher you ask.",
+      "Donor conception is little discussed in the sources we found, so we have not recorded a position on it.",
     ],
     questionsToAsk: [
       "How does this teacher understand the status of an early embryo?",
       "If I want to avoid creating embryos I will not transfer, what protocol would let me do that?",
       "What would a compassionate decision look like here, for everyone involved, including a future child?",
     ],
+    note: "Thinly documented. We found no statement from a Buddhist body on assisted conception; the source below is a scholarly overview of several religions, not a Buddhist document.",
     sources: [
       {
-        label: "Religious aspects of assisted reproduction: peer-reviewed overview",
-        href: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5096425/",
-      },
-      {
-        label: "Is the human embryo sacrosanct? (Progress Educational Trust)",
-        href: "https://www.progress.org.uk/is-the-human-embryo-sacrosanct-gamete-donation-and-doctrine/",
+        label: "Bioethics and oncofertility, insights from religious traditions: Zoloth and Henning (2010)",
+        href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3086485/",
       },
     ],
   },
   {
     slug: "interfaith-and-mixed-belief",
-    name: "Interfaith, convert & mixed-belief households",
+    name: "Interfaith & mixed-belief households",
     summary:
-      "Two traditions in one house, or one believer and one not. Common, rarely written about, and worth planning for deliberately.",
+      "Two traditions in one house, or one believer and one not. Common, rarely written about, and worth planning for.",
     commonlyTaught: [
-      "There is no tradition to consult here, because the situation is the meeting of two. What exists instead is a set of decisions that are much easier made in advance than in a waiting room.",
-      "The recurring flashpoints are consistent: whether to use a donor, what happens to surplus embryos, who is told, and how a child will be raised and identified.",
-      "Converts often carry an additional weight: being held to a stricter standard than those born into a community, or fearing that using treatment will be read as insufficient commitment.",
+      "The recurring flashpoints are whether to use a donor, what happens to surplus embryos, who is told, and how a child will be raised and identified. Each is easier settled in advance than in a waiting room.",
     ],
     viewsDiffer: [
-      "Some couples resolve this by following the more restrictive tradition on every point. Others take each decision on its own merits. Neither is wrong, but drifting between the two without saying so is where most conflict comes from.",
-      "Where only one partner is observant, the non-observant partner often ends up carrying the practical load of the treatment while the observant partner carries the moral weight. Naming that imbalance early tends to help.",
+      "Some couples follow the more restrictive tradition on every point; others take each decision on its merits. Drifting between the two without saying so is where most conflict comes from.",
     ],
     questionsToAsk: [
       "If we disagree about the embryos, what have we agreed to do, before we have any?",
-      "Whose community, if either, are we telling? Are we telling them the same thing?",
-      "If treatment fails, do we both mean the same thing by stopping?",
       "Would we see a counsellor together before we start, rather than after something goes wrong?",
     ],
     sources: [
-      {
-        label: "Find a fertility counsellor: BICA",
-        href: "https://www.bica.net/find-a-counsellor",
-      },
+      { label: "Find a fertility counsellor: BICA", href: "https://www.bica.net/find-a-counsellor" },
       {
         label: "Rights and the law: Donor Conception Network",
         href: "https://dcnetwork.org/books-and-resources/rights-and-the-law/",
@@ -353,12 +296,7 @@ export const FAITH_TRADITIONS: FaithTradition[] = [
   },
 ];
 
-/**
- * The reframe that makes the tradition cards usable: faiths rarely answer
- * "is IVF allowed" as one question. They answer six or seven smaller ones,
- * and a reader who knows which one is being argued about can have a far more
- * productive conversation with their own clergy.
- */
+/** Faiths rarely answer "is IVF allowed" as one question. They answer several smaller ones. */
 export interface FaithQuestion {
   question: string;
   why: string;
@@ -367,35 +305,35 @@ export interface FaithQuestion {
 export const FAITH_QUESTIONS: FaithQuestion[] = [
   {
     question: "Is conception outside the body acceptable at all?",
-    why: "The narrowest objection, and the one that makes Catholic teaching distinctive. Most traditions on this page answer yes; the argument then moves on to the questions below.",
+    why: "The narrowest objection, and the one that makes Catholic teaching distinctive. Most traditions here answer yes.",
   },
   {
     question: "Whose egg and whose sperm?",
-    why: "Third-party donation is the single biggest dividing line across every tradition here. Many that accept IVF without hesitation stop at a donor.",
+    why: "Third-party donation is the biggest dividing line across every tradition here. Many that accept IVF stop at a donor.",
   },
   {
     question: "What happens to embryos you do not transfer?",
-    why: "Freezing, storage limits, donation to research, and discarding. For traditions that hold a person exists from conception, this, not the procedure, is the heart of the matter.",
+    why: "Freezing, storage, donation to research, discarding. For traditions that hold a person exists from conception, this is the heart of the matter.",
   },
   {
     question: "Who counts as the parent?",
-    why: "Lineage, inheritance and legitimacy. This is a legal and theological question at once, and it is why donor conception is treated so seriously in Islamic and Jewish law.",
+    why: "Lineage, inheritance and legitimacy: why donor conception is treated so seriously in Islamic and Jewish law.",
   },
   {
     question: "Is surrogacy different?",
-    why: "Almost always treated as its own question rather than an extension of IVF, and answered more restrictively.",
+    why: "Almost always treated as its own question, and answered more restrictively.",
   },
   {
     question: "Who may access treatment?",
-    why: "Married couples only, or also single people and same-sex couples. Traditions that agree completely about the laboratory can disagree sharply here.",
+    why: "Married couples only, or also single people and same-sex couples. Traditions that agree about the laboratory can disagree sharply here.",
   },
   {
     question: "What about testing and selecting embryos?",
-    why: "PGT and selective reduction raise separate concerns about disability, sex selection and the grounds on which an embryo may be set aside.",
+    why: "Testing embryos (PGT) raises questions about disability and the grounds for setting an embryo aside. In the UK, choosing an embryo's sex for non-medical reasons is illegal.",
   },
   {
     question: "How do I keep practising while I'm in treatment?",
-    why: "Fasting, Sabbath and festival timing, modesty, prayer, medication ingredients. Rarely doctrinal, frequently the thing that actually disrupts a cycle.",
+    why: "Fasting, Sabbath and festival timing, modesty, medication ingredients. Rarely doctrinal, frequently the thing that disrupts a cycle.",
   },
 ];
 
@@ -403,185 +341,99 @@ export const FAITH_QUESTIONS: FaithQuestion[] = [
 export const OBSERVANCE_NOTES: { title: string; body: string }[] = [
   {
     title: "Say it at booking, not at the door",
-    body: "Requests for a female sonographer, a chaperone, a private room for prayer, or scheduling around a festival are routine for UK clinics, but only if they land before the rota and your protocol are set. Put them in writing when you book.",
+    body: "Requests for a female sonographer, a chaperone, a room for prayer, or scheduling around a festival are routine for UK clinics if they arrive before the rota and your protocol are set. Put them in writing when you book.",
   },
   {
     title: "Fasting and stimulation drugs",
-    body: "Ramadan, Yom Kippur and other fasts can overlap a stimulation cycle. Ask your consultant specifically whether your protocol is safe alongside fasting, and take that medical answer to your own religious adviser. Most traditions exempt those under medical treatment.",
+    body: "Ramadan, Yom Kippur and other fasts can overlap a stimulation cycle. Ask your consultant whether your protocol is safe alongside fasting. Many traditions allow exemptions for illness; ask your religious adviser whether that applies to you, with your consultant's answer in hand.",
   },
   {
     title: "Check what is in your medication",
-    body: "If you avoid porcine, bovine or alcohol-derived ingredients, ask the clinic pharmacist for the full ingredient list of every drug, including capsule shells and pessary bases. Alternatives sometimes exist; nobody will offer them unprompted.",
+    body: "If you avoid porcine, bovine or alcohol-derived ingredients, ask the clinic pharmacist for the full ingredient list of every drug, including capsule shells and pessary bases. Alternatives sometimes exist.",
   },
   {
     title: "You can ask for a faith-aware counsellor",
-    body: "UK clinics are required to offer counselling before you consent to treatment. You are allowed to ask for someone who understands your tradition, or to go outside the clinic and find your own.",
+    body: "UK clinics must offer you counselling before you consent to treatment. You can ask for someone who understands your tradition, or find your own outside the clinic.",
   },
   {
     title: "Limiting the embryos you create",
-    body: "If surplus embryos are your sticking point, this is a clinical conversation, not only a religious one. Ask what a protocol looks like that fertilises fewer eggs, and ask honestly what it costs you in success rate so you are choosing with the real numbers.",
-  },
-  {
-    title: "Bring your adviser into the room",
-    body: "Rabbis, imams and priests can and do speak to clinics directly. A ten-minute call between your adviser and your embryologist resolves more than a month of second-hand messages.",
+    body: "If surplus embryos are your sticking point, ask what a protocol that fertilises fewer eggs looks like, and what it costs you in success rate.",
   },
 ];
 
-// ─── Difficult conversations ────────────────────────────────────────────────
+// Difficult conversations
 
 export interface ConversationScenario {
   slug: string;
-  /** Tab label. Short. */
   label: string;
   situation: string;
-  /** What is usually driving it — helps a reader respond to the real thing. */
   whatsHappening: string[];
-  /** Things a reader can actually say. Written to be said out loud. */
+  /** Written to be said out loud. */
   tryThis: string[];
-  /** What they are not obliged to do. */
   notYourJob: string[];
-  /** A line to end the conversation with. */
   exitLine: string;
 }
 
 export const CONVERSATION_SCENARIOS: ConversationScenario[] = [
   {
-    slug: "relative-objects",
-    label: "A relative objects on religious grounds",
+    slug: "family-objects",
+    label: "A relative objects, or says it wouldn't be your child",
     situation:
-      "A parent, grandparent or elder tells you that what you are doing is against your faith.",
+      "A parent, grandparent or elder tells you that what you are doing is against your faith, or that a donor-conceived child would not be yours.",
     whatsHappening: [
-      "Sometimes this is a genuine doctrinal objection held sincerely. Often it is fear (about your standing in the community, about the child, about being blamed for your choices) reaching for the most authoritative language available.",
-      "It is worth finding out which one you are dealing with, because they need different responses. A doctrinal objection can be discussed with a source. Fear cannot be argued down, only reassured or left alone.",
+      "Sometimes this is a sincere doctrinal objection, which can be discussed with a source. Often it is fear, about your standing in the community or about the child, in the most authoritative language available. Where lineage carries religious weight, \"it wouldn't be your child\" may be meant as a fact rather than an insult.",
     ],
     tryThis: [
       "\"I know you're saying this because you care. Can you tell me what specifically worries you? I'd rather understand it than guess.\"",
-      "\"I've read what our tradition says about this, and I've spoken to someone about it. I'm not doing this casually.\"",
-      "\"You don't have to agree with me. I'm not asking for your permission. I'm telling you because you matter to me.\"",
-      "\"Can we agree that whatever you think of the treatment, this child will be your grandchild?\"",
-    ],
-    notYourJob: [
-      "Winning a theological argument. You are not obliged to out-scholar anyone about your own body.",
-      "Producing a ruling that satisfies them. If they want a religious authority, they can go and consult one themselves.",
-      "Managing their feelings about your infertility on top of your own.",
-    ],
-    exitLine:
-      "\"I've heard you. I'm not going to keep discussing it, but I'm not going anywhere either.\"",
-  },
-  {
-    slug: "not-really-yours",
-    label: "\"It wouldn't really be your child\"",
-    situation:
-      "Someone challenges donor conception directly: the child won't be yours, won't be part of the family, won't count.",
-    whatsHappening: [
-      "This one lands harder than almost anything else, because it goes at the thing you are most afraid of rather than at the procedure.",
-      "In traditions where lineage carries legal and religious weight, the person saying it may believe they are stating a fact rather than an insult. That does not make it hurt less, and it does not oblige you to absorb it.",
-    ],
-    tryThis: [
-      "\"That's my child you're talking about. I need you to be careful with how you say that.\"",
       "\"Our child's parents are defined by law, not by DNA, and that's settled. If the question is religious, I've already asked someone qualified.\"",
-      "\"Our child will know exactly where they came from. We're not hiding it, and we're not ashamed of it.\"",
-      "\"You can have your view. You can't say that in front of my child.\"",
     ],
-    notYourJob: [
-      "Justifying your family's legitimacy to someone who has already decided.",
-      "Explaining the biology in detail to someone using it as a weapon.",
-      "Keeping the peace at your child's expense.",
-    ],
-    exitLine:
-      "\"That's not something I'm willing to debate. Let's talk about something else.\"",
+    notYourJob: ["Justifying your family to someone who has already decided."],
+    exitLine: "\"I've heard you. I'm not going to keep discussing it, but I'm not going anywhere either.\"",
   },
   {
-    slug: "community-talk",
+    slug: "community",
     label: "The community is talking",
     situation:
-      "Word has spread. You are being discussed at the mosque, the shul, the temple, the church hall, the school gate.",
+      "Word has spread. You are being discussed at the mosque, the shul, the temple, the church hall, and someone has forwarded you a sermon clip about IVF.",
     whatsHappening: [
-      "Community stigma around infertility is often more forceful than any doctrine, and it is frequently gendered: the woman is assumed to be the problem, regardless of the diagnosis.",
-      "You have less control over gossip than over any other conversation on this page. What you can control is what is true, who hears it from you first, and how much of your energy it gets.",
+      "Community stigma around infertility is often more forceful than doctrine, and frequently gendered: the woman is assumed to be the problem, whatever the diagnosis. You cannot control gossip; you can control who hears it from you first and how much energy it gets.",
     ],
     tryThis: [
-      "Choose two or three people and tell them properly, before the story arrives without you in it.",
-      "Give a short, flat, repeatable line and use the same one every time: \"We're dealing with some health stuff. We'll share news when there's news.\"",
-      "\"I know people are talking. I'd rather you asked me than wondered.\"",
-      "If someone brings you gossip: \"I'd rather not hear what other people are saying about me. Thanks for telling me you care.\"",
+      "Tell two or three people properly, before the story arrives without you in it. Then use one repeatable line: \"We're dealing with some health stuff. We'll share news when there's news.\"",
+      "For forwarded videos and articles: \"Please don't send me things like this while I'm in treatment. If you want to talk about it properly some time, I'm up for that, but not by link.\"",
     ],
-    notYourJob: [
-      "Correcting every version of the story in circulation.",
-      "Attending everything to prove you are fine.",
-      "Being the community's teaching example about infertility while you are still in the middle of it.",
-    ],
-    exitLine:
-      "\"There's nothing to update. When there is, you'll hear it from me.\"",
+    notYourJob: ["Correcting every version of the story, or fact-checking everything anyone sends you."],
+    exitLine: "\"There's nothing to update. When there is, you'll hear it from me.\"",
   },
   {
-    slug: "unsupportive-leader",
+    slug: "religious-leader",
     label: "Your religious leader isn't supportive",
     situation:
       "You went to your priest, imam, rabbi or teacher for guidance and came away feeling judged.",
     whatsHappening: [
-      "Clergy are not uniformly trained in reproductive medicine or in pastoral care around infertility. A cold response is often inexperience rather than doctrine.",
-      "A tradition's teaching and one representative's delivery of it are different things. You are allowed to seek out a second person within the same tradition without leaving it.",
+      "Clergy are not uniformly trained in reproductive medicine or pastoral care around infertility; a cold response is often inexperience rather than doctrine. You can seek a second person within the same tradition.",
     ],
     tryThis: [
       "\"Can you help me understand which part of that is binding teaching and which is your own view?\"",
-      "\"Is there someone in the community who has accompanied couples through fertility treatment before? I'd like to speak to them.\"",
-      "\"I came here for support rather than a ruling. Is that something you're able to offer me?\"",
-      "Ask your clinic's counsellor whether they have worked with patients from your tradition. Many have, and will not be shocked by any of it.",
+      "\"Is there someone in the community who has accompanied people through fertility treatment before? I'd like to speak to them.\"",
     ],
-    notYourJob: [
-      "Accepting the first answer you are given as the whole of your tradition.",
-      "Leaving your faith because one representative handled you badly.",
-      "Going back to a person who makes it worse.",
-    ],
-    exitLine:
-      "\"Thank you for your time. I'm going to speak to someone else about this as well.\"",
+    notYourJob: ["Going back to a person who makes it worse."],
+    exitLine: "\"Thank you for your time. I'm going to speak to someone else about this as well.\"",
   },
   {
-    slug: "anti-ivf-content",
-    label: "Someone sends you anti-IVF content",
-    situation:
-      "A well-meaning friend forwards a video, an article or a sermon clip about the evils of IVF.",
-    whatsHappening: [
-      "Much of the anti-IVF material circulating online mixes genuine ethical argument with straightforwardly incorrect claims about the science and the law.",
-      "You are allowed to not read it. You are also allowed to check it. Some of the ethical arguments in this space are serious and worth engaging with once you are ready, on your own timetable rather than an algorithm's.",
-    ],
-    tryThis: [
-      "\"I'm not going to watch that. I'm in the middle of it and I need to protect my head a bit.\"",
-      "\"I've done a lot of reading on this. If you want to talk about it properly some time, I'm up for that, but not by forwarded link.\"",
-      "\"Please don't send me things like this while I'm in treatment.\"",
-      "Mute, don't argue. You do not owe a group chat a debate.",
-    ],
-    notYourJob: [
-      "Fact-checking everything anyone sends you.",
-      "Staying in a group chat that is making treatment harder.",
-      "Explaining why the video is wrong to someone who found it convincing.",
-    ],
-    exitLine:
-      "\"I'd rather we didn't do this over text. Let's leave it.\"",
-  },
-  {
-    slug: "partner-disagreement",
+    slug: "partner",
     label: "You and your partner disagree",
     situation:
       "One of you believes this is permitted and the other does not, or one of you has stopped being sure.",
     whatsHappening: [
-      "This is the hardest conversation on the page, because there is no third party to set a boundary against. It is also the one most improved by a neutral professional in the room.",
-      "Very often the disagreement is not really about doctrine. It is about who is carrying the physical burden, who is carrying the moral weight, and whether both of you actually chose this.",
+      "Very often the disagreement is not about doctrine but about who carries the physical burden, who carries the moral weight, and whether both of you chose this. A neutral professional helps most here: clinics must offer counselling, and BICA lists independent counsellors.",
     ],
     tryThis: [
       "\"Can we separate what you believe from what you're afraid of? I want to hear both, but I want to know which is which.\"",
-      "\"What would have to be true for you to be at peace with this?\"",
       "\"Can we agree a limit now (cycles, money, time) so we're not deciding this while we're exhausted?\"",
-      "\"I'd like us to see a fertility counsellor together. Not because we're in trouble, because this is hard.\"",
     ],
-    notYourJob: [
-      "Talking your partner into a procedure they object to.",
-      "Abandoning your own conviction to keep the peace.",
-      "Pretending to be certain when you are not.",
-    ],
-    exitLine:
-      "\"Let's stop here for tonight. Neither of us decides anything while we're this tired.\"",
+    notYourJob: ["Talking your partner into a procedure they object to, or abandoning your own conviction to keep the peace."],
+    exitLine: "\"Let's stop here for tonight. Neither of us decides anything while we're this tired.\"",
   },
   {
     slug: "your-own-doubt",
@@ -589,57 +441,22 @@ export const CONVERSATION_SCENARIOS: ConversationScenario[] = [
     situation:
       "Nobody is challenging you. You believe your tradition disapproves, and you want this anyway.",
     whatsHappening: [
-      "This is more common than the page's other scenarios and far less discussed, because there is no opponent to describe: the argument is internal.",
-      "Guilt and belief are not the same thing. Plenty of people carry guilt about a decision they have thought through carefully and would make again, and plenty of traditions have more room in them than a person under pressure remembers.",
+      "The argument here is internal. Guilt and belief are not the same thing; many people carry guilt about a decision they have thought through and would make again.",
     ],
     tryThis: [
-      "Write down what you actually believe, separately from what you were taught to say. Look at the gap without rushing to close it.",
+      "Write down what you believe, separately from what you were taught to say. Look at the gap without rushing to close it.",
       "Take the specific question to someone who knows the tradition well. \"Is this prohibited?\" often has a more nuanced answer than the version that circulates informally.",
-      "Ask whether you are carrying guilt about the treatment or grief about the infertility. They feel similar and need different care.",
-      "Find one person from your own background who has done this. It changes the conversation from theory to lived experience faster than anything else.",
     ],
-    notYourJob: [
-      "Resolving a centuries-old theological debate before your next appointment.",
-      "Being a perfect representative of your tradition while you are grieving.",
-      "Deciding today.",
-    ],
-    exitLine:
-      "\"I don't have to have this settled to take the next step. I can keep thinking while I keep going.\"",
-  },
-  {
-    slug: "family-gatherings",
-    label: "Festivals and family gatherings",
-    situation:
-      "Eid, Christmas, Diwali, Pesach, a wedding, a naming. Everyone is there and everyone asks.",
-    whatsHappening: [
-      "Religious calendars are built around family, which makes them precisely the hardest days. The question \"any news?\" is usually affection, badly aimed.",
-      "The single most effective thing is deciding your answer and your exit before you walk in, rather than improvising while holding a plate.",
-    ],
-    tryThis: [
-      "Agree one line with your partner and both use it: \"Nothing to report. How are you?\" The redirect does most of the work.",
-      "Bring your own transport. Being able to leave changes how the whole day feels, whether or not you use it.",
-      "Brief one ally in the room. Someone who can change the subject is worth more than a perfect script.",
-      "\"I'll tell you the moment there's anything to tell. Ask me about literally anything else.\"",
-      "Decide in advance which parts you will skip. Missing the baby-heavy hour is not a failure of faith.",
-    ],
-    notYourJob: [
-      "Attending every event to prove nothing is wrong.",
-      "Holding the newborn if you cannot do it today.",
-      "Explaining your absence in detail.",
-    ],
-    exitLine: "\"We're going to head off. It's been lovely. See you soon.\"",
+    notYourJob: ["Resolving a centuries-old theological debate before your next appointment."],
+    exitLine: "\"I don't have to have this settled to take the next step. I can keep thinking while I keep going.\"",
   },
 ];
 
-/**
- * Verifiable points a reader can reach for when a conversation is running on
- * misinformation. Everything here must be checkable via the linked source —
- * do not add persuasive-sounding claims without one.
- */
+/** Every fact must be checkable via its link. */
 export const GROUNDING_FACTS: { fact: string; source: SourceLink }[] = [
   {
-    fact: "Every UK fertility clinic is licensed and inspected by the HFEA, the statutory regulator. Treatment here is not unregulated.",
-    source: { label: "HFEA", href: "https://www.hfea.gov.uk/" },
+    fact: "Every UK fertility clinic must hold an HFEA licence and, by law, is inspected at least every two years. Treatment here is not unregulated.",
+    source: { label: "How we regulate: HFEA", href: "https://www.hfea.gov.uk/about-us/how-we-regulate/" },
   },
   {
     fact: "Donor anonymity ended in the UK in 2005. People conceived from donations made after 1 April 2005 can apply to the HFEA for identifying information about their donor when they turn 18.",
@@ -649,22 +466,21 @@ export const GROUNDING_FACTS: { fact: string; source: SourceLink }[] = [
     },
   },
   {
-    fact: "Surplus embryos do not have to be discarded. They can be kept in storage, donated to another patient, or donated to research. The choice is recorded on your consent forms and you can change it.",
-    source: { label: "HFEA", href: "https://www.hfea.gov.uk/" },
-  },
-  {
-    fact: "Clinics must give you the opportunity to receive counselling about the implications of treatment before you consent to it.",
-    source: { label: "HFEA", href: "https://www.hfea.gov.uk/" },
-  },
-  {
-    fact: "Legal parenthood in donor conception is set by UK law, not by genetics. Support with the paperwork exists, and getting it right at the clinic stage matters.",
+    fact: "Surplus embryos do not have to be discarded. They can be kept in storage, donated to another patient, or donated to research or training. Consent can be varied or withdrawn at any time before the embryos are used.",
     source: {
-      label: "Rights and the law: Donor Conception Network",
-      href: "https://dcnetwork.org/books-and-resources/rights-and-the-law/",
+      label: "Embryo freezing: HFEA",
+      href: "https://www.hfea.gov.uk/treatments/fertility-preservation/embryo-freezing/",
     },
   },
   {
-    fact: "In surrogacy, legal parenthood passes to the intended parents through a parental order after the birth.",
+    fact: "All clinics licensed by the HFEA must offer you the opportunity to talk to a counsellor before you start treatment.",
+    source: {
+      label: "Getting emotional support: HFEA",
+      href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-emotional-support/",
+    },
+  },
+  {
+    fact: "Legal parenthood in donor conception is set by UK law, not by genetics, and depends on the consent forms completed at the clinic. In surrogacy, it passes to the intended parents through a parental order after the birth.",
     source: {
       label: "Legal rights when using surrogates and donors: GOV.UK",
       href: "https://www.gov.uk/legal-rights-when-using-surrogates-and-donors",
@@ -672,40 +488,50 @@ export const GROUNDING_FACTS: { fact: string; source: SourceLink }[] = [
   },
 ];
 
-export const FAITH_SUPPORT: {
+export interface FaithSupportEntry {
   name: string;
   href: string;
   scope: string;
   body: string;
-}[] = [
+  /** Further organisations for a card that covers several. */
+  links?: SourceLink[];
+}
+
+export const FAITH_SUPPORT: FaithSupportEntry[] = [
   {
     name: "Chana",
     href: "https://www.chana.org.uk/",
     scope: "Jewish community · UK",
-    body: "Support through infertility, baby loss and reproductive health for the Jewish community, covering the emotional, practical and halachic sides together. Confidential helpline and specialist fertility psychotherapists.",
+    body: "Support through infertility and baby loss for the Jewish community, covering the emotional, practical and halachic sides. Confidential helpline and specialist fertility psychotherapists.",
+  },
+  {
+    name: "LGBTQ+ and single people of faith",
+    href: "https://www.keshetuk.org/",
+    scope: "Faith-specific LGBTQ+ groups · UK",
+    body: "None of these is a fertility service. Each is a place to find people from your own tradition who will not be surprised by your family, and who often know which clergy to approach.",
+    links: [
+      { label: "KeshetUK (Jewish)", href: "https://www.keshetuk.org/" },
+      { label: "Imaan (Muslim)", href: "https://imaanlgbtqi.carrd.co/" },
+      { label: "Quest (Catholic)", href: "https://questlgbti.uk/" },
+      { label: "OneBodyOneFaith (Christian)", href: "https://www.onebodyonefaith.org.uk/" },
+    ],
   },
   {
     name: "BICA: Find a Counsellor",
     href: "https://www.bica.net/find-a-counsellor",
     scope: "All faiths and none · UK",
-    body: "The professional association for fertility counsellors in the UK. You can search the directory yourself and choose someone independent of your clinic, which is useful if you want to talk about belief without it going in your notes.",
+    body: "The professional association for UK fertility counsellors. Choose someone independent of your clinic if you want to talk about belief without it going in your notes.",
   },
   {
     name: "Donor Conception Network",
     href: "https://dcnetwork.org/",
     scope: "Donor-conceived families · UK",
-    body: "The UK charity for families created with donor gametes. Particularly useful on how and when to tell a child their story: the question that most often follows a religious objection about lineage.",
-  },
-  {
-    name: "HFEA",
-    href: "https://www.hfea.gov.uk/",
-    scope: "Statutory regulator · UK",
-    body: "The regulator's own patient information: what clinics must do, what your consent covers, what happens to embryos, and what donor-conceived people are entitled to know.",
+    body: "The UK charity for families created with donor gametes, for all family types, and the best source on how and when to tell a child their story.",
   },
   {
     name: "Your own clinic's counselling service",
     href: "/ivf-finder",
     scope: "Ask before you consent",
-    body: "Clinics must offer implications counselling. Ask specifically whether anyone on the team has worked with patients from your tradition, and if the answer is no, ask them to find someone who has.",
+    body: "Clinics must offer implications counselling. Ask whether anyone on the team has worked with patients from your tradition.",
   },
 ];

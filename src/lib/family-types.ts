@@ -1,9 +1,15 @@
 /**
- * NOT FOR PUBLIC RENDERING: every story in this file is fictional. Owner
- * decision: invented stories and quotes are not shown on any public page
- * until real, consented accounts exist. The `Story` type and `stories` arrays
- * are kept only so existing types and code still compile. Do not render them
- * (see the TODO in `PersonalStories`), and no story may endorse Cairn itself.
+ * Owner decision: invented stories and quotes are not shown on any public
+ * page until real, consented accounts exist. The `Story` type and the (now
+ * empty) `stories` arrays are kept only so `PersonalStories` still compiles.
+ * No story may endorse Cairn itself.
+ *
+ * Sources for the shared lines below (verified 13 September 2026): HFEA
+ * Family Formations 2022 (NHS funding by family type; the 2024 trends report
+ * has no such split); HFEA surrogacy page (expenses); Brilliant Beginnings
+ * budget page (£50,000 to £60,000); PET 19 May 2025 (reform postponed, April
+ * 2025 statement); HFE Act 2008 s54A; Golombok et al. 2016, J Fam Psychol
+ * 30(4) 409-418.
  */
 export type FamilyTypeSlug =
   | "solo-mum"
@@ -73,15 +79,28 @@ export interface FamilyType {
   resources: string[];
 }
 
+/**
+ * Contract C6, adjusted after verification: the family-type split of NHS
+ * funding is published only in Family Formations 2022, so the line says 2022.
+ */
+const NHS_FUNDING_BY_FAMILY_TYPE =
+  "In 2022, 18% of single patients and 16% of female same-sex couples aged 18 to 39 had NHS funding for their first IVF cycle, against 52% of opposite-sex couples in the same age group (HFEA, Family Formations 2022).";
+
+const SURROGACY_COSTS =
+  "Surrogates can receive only reasonable expenses, typically £10,000 to £15,000 (HFEA). Brilliant Beginnings suggests an overall UK budget of £50,000 to £60,000 once IVF, donor eggs, screening and legal fees are included.";
+
+const SURROGACY_REFORM =
+  "Reform proposed by the Law Commission in 2023 has been postponed; the current parental-order process applies.";
+
 export const FAMILY_TYPES: FamilyType[] = [
   {
     slug: "solo-mum",
     label: "Solo Mums",
     headline: "Having a baby\non your own.",
     heroCopy:
-      "This guide maps the route to solo motherhood: deciding, choosing a donor, choosing a clinic, treatment, pregnancy, and the first year. Whether you are still researching or already mid-treatment, start at the step you are on.",
+      "This guide covers the route to solo motherhood: deciding, choosing a donor and a clinic, treatment, pregnancy and the first year. Start at the step you are on.",
     cardSummary:
-      "For women having a baby on their own: the decision, treatment, and the first year.",
+      "For anyone who will carry a pregnancy on their own: the decision, treatment, and the first year.",
     image: "/photos/story-solo-mum.webp",
     imageAlt: "A mother holding her young child, looking out at the sky",
     hideHeroImage: true,
@@ -90,7 +109,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 1,
         title: "Understand your fertility baseline",
-        body: "Start with a fertility MOT: AMH (anti-Müllerian hormone), AFC (antral follicle count), and baseline bloods. These tests tell you where you stand and help you decide between IUI (simpler, less costly) and IVF (more intensive, higher success rates). Most clinics can run these on day 2–3 of your cycle.",
+        body: "Start with a fertility MOT: AMH (anti-Müllerian hormone), AFC (antral follicle count), and baseline bloods. These tests show where you stand and help you decide between IUI (simpler, less costly) and IVF (more intensive, higher success rates). AMH can be tested on any day; the AFC scan is timed to the start of your cycle. Set a budget ceiling and a stopping point before you start.",
       },
       {
         number: 2,
@@ -100,12 +119,12 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 3,
         title: "Select your sperm donor",
-        body: "In the UK, HFEA law requires that donors are traceable: your child can access identifying information at 18. You can use a UK sperm bank, or an overseas bank whose donors meet UK rules; your clinic will tell you which banks it accepts. Profiles typically include physical traits, health history, and a personal statement. Take your time: this decision matters.",
+        body: "In the UK, HFEA law requires that donors are traceable: your child can access identifying information at 18. You can use a UK sperm bank, or an overseas bank whose donors meet UK rules; your clinic will tell you which banks it accepts. Profiles typically include physical traits, health history, and a personal statement.",
       },
       {
         number: 4,
         title: "Choose your clinic",
-        body: "Every UK fertility clinic must be HFEA-licensed. Compare clinics on HFEA-reported success rates for your age bracket, solo-patient policy (some add friction; others specialise in it), pricing transparency, and waiting times. Our comparison tool lets you do this side by side.",
+        body: `Every UK fertility clinic must be HFEA-licensed. Compare clinics on HFEA-reported success rates for your age bracket, whether they routinely treat single patients, pricing transparency, and waiting times. Our comparison tool lets you do this side by side. ${NHS_FUNDING_BY_FAMILY_TYPE} Check your own ICB or health board's policy before assuming you will pay privately.`,
       },
       {
         number: 5,
@@ -114,61 +133,30 @@ export const FAMILY_TYPES: FamilyType[] = [
       },
       {
         number: 6,
-        title: "Embryo banking (optional but worth considering)",
-        body: "If you want the option of a second child or want to maximise your success rate per round, consider creating and freezing multiple embryos across several egg collections before your first transfer. This is sometimes called 'batch IVF' and can be more cost-effective in the long run.",
+        title: "Embryo banking (optional)",
+        body: "If you want the option of a second child, you can create and freeze embryos across several egg collections before your first transfer. This is sometimes called 'batch IVF'. Ask your clinic for the cost of each extra collection and of storage before deciding.",
       },
       {
         number: 7,
         title: "Pregnancy and birth",
-        body: "Solo pregnancy is common, and you'll be far from the only one navigating it without a co-parent. Build your support team early: a good midwife, a birth partner (friend, family member, or doula), and your community. Cairn's birth partner and doula guides cover the practical detail.",
+        body: "Tell your midwife you had fertility treatment. Decide early who will come to scans and who will be your birth partner: a friend, a family member or a doula.",
       },
       {
         number: 8,
-        title: "Life ahead: thriving as a solo parent",
-        body: "Solo parenthood is a legitimate, well-researched, and increasingly common family structure. Children of solo mums by choice show strong outcomes across wellbeing measures. The practical and emotional realities are real, but so is the joy. Our resources section covers everything from childcare planning to talking to your child about their donor.",
+        title: "Life ahead as a solo parent",
+        body: "A Cambridge study (Golombok and colleagues, 2016) compared 51 solo-mother families with 52 two-parent families, all with children aged 4 to 9 conceived by donor insemination, and found no differences in child adjustment. Our guide on talking to your child about their donor covers what to say and when.",
       },
     ],
-    stories: [
-      {
-        image: "/photos/hands.webp",
-        imageAlt: "An adult hand holding a small child's hand",
-        name: "Alice",
-        age: 37,
-        location: "Bristol",
-        tag: "IVF with donor sperm",
-        title: "From 'someday' to mum of one in 22 months",
-        body: "I started researching after a relationship ended in my mid-thirties. I gave myself three months to decide. Two IUI rounds and one IVF cycle later, my daughter Iris was born in 2023. The hardest part wasn't the injections or the waiting. It was trusting myself to make this decision without anyone to share it with. An online community of women on the same path gave me that.",
-        quote: "The hardest part wasn't the injections or the waiting. It was trusting myself to make this decision without anyone to share it with.",
-        treatment: "IUI × 2, IVF × 1",
-      },
-      {
-        name: "Natalie",
-        age: 40,
-        location: "London",
-        tag: "Double donation",
-        title: "I used donor eggs and I'm not ashamed of it",
-        body: "After three failed cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then, after reading dozens of stories from women who'd been exactly here, at peace with it. My twins Evi and Rosa are two and a half. I tell them their origin story regularly, and they think it's completely normal. Because it is.",
-        treatment: "Double donation (donor eggs and donor sperm)",
-      },
-      {
-        name: "Jo",
-        age: 34,
-        location: "Manchester",
-        tag: "First IVF cycle",
-        title: "The bit nobody talks about: the two-week wait, alone",
-        body: "Everyone warns you about the injections, the bloating, the retrieval. No one warns you how hard the two-week wait is when there's no partner to distract you at 2am. I found my people in an online group during my wait. We all got our results the same week. Two of us got positives. All of us showed up for each other regardless.",
-        treatment: "IVF with donor sperm",
-      },
-    ],
+    stories: [],
     clinicNote:
-      "Filter our comparison tool for donor sperm availability and solo-patient friendliness to find clinics that specialise in supporting single women.",
+      "Filter our comparison tool for donor sperm and IUI or IVF, then compare success rates for your age group alongside cost and waiting times. Ask each clinic whether it routinely treats single patients.",
     resources: [
       "complete-solo-ivf-cost-breakdown",
       "how-to-choose-a-sperm-donor",
       "consultation-questions",
       "donor-conception-legal-parenthood",
-      "solo-pregnancy-support-team",
-      "uk-support-groups",
+      "iui-vs-ivf-vs-donor-eggs",
+      "talking-to-child-donor-conception",
     ],
   },
   {
@@ -176,7 +164,7 @@ export const FAMILY_TYPES: FamilyType[] = [
     label: "Two Mums",
     headline: "Two mums:\nwho carries, and how.",
     heroCopy:
-      "For two women building a family together, the options are rich and the path is well-trodden. Whether you're deciding who carries, exploring reciprocal IVF, or navigating the legal landscape of parenthood for both partners, this guide walks you through every stage with clarity.",
+      "For two women building a family together: who carries, reciprocal IVF, and legal parenthood for both of you. Start at the step you are on.",
     cardSummary:
       "For two women building a family: who carries, the routes open to you, and legal parenthood for both mums.",
     heroShapeBackdrop: true,
@@ -185,32 +173,32 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 1,
         title: "Decide who carries (or both)",
-        body: "The first decision is whether one of you will carry, both of you will carry (reciprocal IVF), or you'll take turns. There's no right answer: it depends on fertility markers, physical health, how you feel emotionally about pregnancy, and practical factors. Many couples find the carrying partner 'obvious' quite quickly; others take longer.",
+        body: "The first decision is whether one of you will carry, both of you will carry (reciprocal IVF), or you'll take turns. The choice depends on fertility markers, physical health, how each of you feels about pregnancy, and practical factors such as work.",
       },
       {
         number: 2,
         title: "Fertility assessments for the carrying partner(s)",
-        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This establishes the best starting point and helps your clinic recommend IUI (simpler) vs IVF (more effective). If both of you have good fertility markers, reciprocal IVF becomes a more viable option. And if egg quality turns out to be a challenge, donor eggs and double donation are exactly as open to you as to any other patient.",
+        body: "The partner who will carry (or both, if considering reciprocal IVF) should have a fertility MOT: AMH, AFC, and baseline bloods. This helps your clinic recommend IUI (simpler) or IVF (more effective). If egg quality turns out to be a problem, donor eggs and double donation are open to you as to any other patient.",
       },
       {
         number: 3,
         title: "Explore reciprocal IVF",
-        body: "Reciprocal IVF (also called ROPA, Reception of Oocytes from Partner) means one partner provides the eggs, those eggs are fertilised with donor sperm, and the resulting embryo is carried by the other partner. Both of you are biologically involved in the pregnancy. It's available at most HFEA-licensed clinics and costs similarly to standard IVF.",
+        body: "Reciprocal IVF (also called ROPA, Reception of Oocytes from Partner) means one partner provides the eggs, those eggs are fertilised with donor sperm, and the resulting embryo is carried by the other partner. Ask clinics for an itemised quote, since it involves treatment for both of you. Legally, the partner who gives birth is the mother. Providing the eggs does not make the other partner a parent on its own; marriage, civil partnership or signed consent forms before treatment do.",
       },
       {
         number: 4,
         title: "Choose your sperm donor",
-        body: "UK law requires all donors to be HFEA-registered and traceable. Your child can request identifying information at 18. You can use donor sperm from an overseas bank, but a UK clinic will only accept donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic which banks it works with.",
+        body: "UK law requires donors to be traceable: your child can request identifying information at 18. You can use donor sperm from an overseas bank, but a UK clinic will only accept donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic which banks it works with.",
       },
       {
         number: 5,
         title: "Choose your clinic",
-        body: "Look for HFEA-licensed clinics with an explicit LGBTQ+ inclusive policy: not just tolerance, but active experience with same-sex couples. Ask about their reciprocal IVF process, waiting times, and whether both partners are supported throughout consultations and monitoring. Our comparison tool flags LGBTQ+ friendly clinics.",
+        body: `Ask HFEA-licensed clinics about their experience with same-sex couples and reciprocal IVF, their waiting times, and whether both partners are included in consultations and monitoring. ${NHS_FUNDING_BY_FAMILY_TYPE} Check your own ICB or health board's policy before assuming you will pay privately.`,
       },
       {
         number: 6,
         title: "Treatment and the two-week wait",
-        body: "For IUI, the carrying partner attends for insemination during ovulation. For IVF, stimulation injections begin around day 2 of the cycle. For reciprocal IVF, the egg-providing partner goes through stimulation and retrieval while the carrying partner takes hormones to prepare her uterus for transfer. Both partners are deeply involved.",
+        body: "For IUI, the carrying partner attends for insemination during ovulation. For IVF, stimulation injections begin around day 2 of the cycle. For reciprocal IVF, the egg-providing partner goes through stimulation and retrieval while the carrying partner takes hormones to prepare her uterus for transfer.",
       },
       {
         number: 7,
@@ -220,48 +208,19 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Pregnancy, birth, and building your family",
-        body: "Pregnancy as a same-sex couple is medically identical to any other pregnancy, but the social and emotional landscape has its own flavours: people's assumptions, family reactions, and the deep joy of two parents who chose this together. You will not be the first: two-mum families are well represented in UK communities like the Donor Conception Network.",
+        body: "Pregnancy as a same-sex couple is medically the same as any other pregnancy. Expect other people's assumptions about who the mother is. The Donor Conception Network runs groups for two-mum families.",
       },
     ],
-    stories: [
-      {
-        name: "Sarah & Priya",
-        age: 35,
-        location: "London",
-        tag: "Reciprocal IVF",
-        title: "We both wanted to be part of making her",
-        body: "We agonised over who would carry. Then our consultant mentioned reciprocal IVF and something clicked. Priya provided the eggs, they were fertilised with our chosen donor's sperm, and I carried the embryo. Our daughter Maya was born in 2024. She has Priya's eyes. She has both of us in her completely.",
-        quote: "She has Priya's eyes. She has both of us in her completely.",
-        treatment: "Reciprocal IVF",
-      },
-      {
-        name: "Kat",
-        age: 38,
-        location: "Edinburgh",
-        tag: "IVF with donor sperm",
-        title: "The admin was harder than the injections",
-        body: "Finding a clinic that knew how to handle a two-mum family (not just wasn't hostile, but genuinely got it) took us three attempts. When we found the right clinic it changed everything. My wife was included in every appointment. They never once asked which of us was 'the patient'.",
-        treatment: "IVF with donor sperm",
-      },
-      {
-        name: "Gemma & Lola",
-        age: 33,
-        location: "Brighton",
-        tag: "IUI journey",
-        title: "Four rounds of IUI and then: positive",
-        body: "We chose IUI first because my fertility markers were good and it felt less like launching straight into the deep end. After three unsuccessful rounds, we almost switched to IVF. We decided to try one more IUI. It worked. Our son Theo is 18 months. We're starting the conversation about round two.",
-        treatment: "IUI × 4",
-      },
-    ],
+    stories: [],
     clinicNote:
-      "Use the LGBTQ+ filter in our comparison tool to find clinics with genuine experience supporting same-sex female couples, including reciprocal IVF.",
+      "Filter our comparison tool for donor sperm and IUI or IVF, then compare success rates for your age group alongside cost and waiting times. The tool does not flag reciprocal IVF; ask each clinic directly.",
     resources: [
       "iui-vs-ivf-vs-donor-eggs",
       "how-to-choose-a-sperm-donor",
       "consultation-questions",
       "donor-conception-legal-parenthood",
       "talking-to-child-donor-conception",
-      "uk-support-groups",
+      "understanding-hfea-success-rates",
     ],
   },
   {
@@ -269,7 +228,7 @@ export const FAMILY_TYPES: FamilyType[] = [
     label: "Two Dads",
     headline: "Two dads:\nsurrogacy, step by step.",
     heroCopy:
-      "For two men wanting to become fathers, the path involves surrogacy: a process that's legal, increasingly common, and achievable in the UK. It's also more complex than other routes. This guide explains every step honestly, from finding a surrogate to the parental order that makes you your child's legal parents.",
+      "For two men becoming fathers through surrogacy in the UK: finding a surrogate, IVF with donor eggs, and the parental order that makes you the legal parents. Matching and the court process both take time.",
     cardSummary:
       "For two men building a family: finding a surrogate, treatment, and becoming legal parents.",
     treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
@@ -277,12 +236,12 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 1,
         title: "Understand UK surrogacy law",
-        body: "In the UK, surrogacy is legal but commercial surrogacy is not: surrogates can only receive 'reasonable expenses'. The surrogate is the legal mother at birth, even if she has no genetic connection to the child. You'll need a parental order after birth to become the legal parents. This is standard and achievable, but the legal timeline matters.",
+        body: `In the UK, surrogacy is legal but commercial surrogacy is not. ${SURROGACY_COSTS} The surrogate is the legal mother at birth, even if she has no genetic connection to the child. A parental order after birth makes you the legal parents: this is possible, but it often takes a long time and involves a court process. ${SURROGACY_REFORM}`,
       },
       {
         number: 2,
         title: "Find a surrogate",
-        body: "Many intended parents find a surrogate through a not-for-profit organisation such as Surrogacy UK, Brilliant Beginnings or My Surrogacy Journey. Matching is not guaranteed and can take time. The matching process involves detailed conversations about expectations, values, and the type of ongoing relationship you want. Building a genuine relationship with your surrogate is essential.",
+        body: "Many intended parents find a surrogate through a not-for-profit organisation such as Surrogacy UK, Brilliant Beginnings or My Surrogacy Journey. There are more intended parents than surrogates, so matching is not guaranteed and can take a long time. The matching process involves detailed conversations about expectations, values, and the type of ongoing relationship you want.",
       },
       {
         number: 3,
@@ -302,7 +261,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 6,
         title: "Support your surrogate through pregnancy",
-        body: "Your surrogate is carrying your child and her wellbeing directly affects the pregnancy. Stay connected: most surrogacy arrangements involve regular contact, attending scans, and genuine ongoing relationship. Discuss boundaries and expectations openly. Many intended fathers describe this as one of the most profound relationships of their lives.",
+        body: "Your surrogate is carrying your child and her wellbeing directly affects the pregnancy. Most surrogacy arrangements involve regular contact and attending scans. Agree boundaries and expectations early, and revisit them as the pregnancy goes on.",
       },
       {
         number: 7,
@@ -312,48 +271,18 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Life as two dads",
-        body: "Two-dad families are raising children who are, by every measure, thriving. The journey is longer and more complex than other routes, but the dads who have done it consistently say the intentionality of it (the number of conversations, the depth of preparation) shapes the family they become.",
+        body: "Research so far finds children in two-dad families do as well as others. The route is longer than most, and the conversations you have before and during it (with each other, your surrogate and your donor's clinic) are the ones your child will later ask about; our guide on talking to your child covers them.",
       },
     ],
-    stories: [
-      {
-        name: "Tom & Marcus",
-        age: 38,
-        location: "London",
-        tag: "UK surrogacy",
-        title: "We met our surrogate at a barbecue. She changed our lives.",
-        body: "We'd been matched through a surrogacy organisation for six months when we met Jo at an introductory event. By the end of the night we knew she was right. Three months later, treatment started. Our son Elliot was born in 2023. Jo is his auntie. It's messier and more beautiful than we expected.",
-        quote: "Jo is his auntie. It's messier and more beautiful than we expected.",
-        treatment: "IVF, UK surrogate",
-      },
-      {
-        name: "Ravi & Ben",
-        age: 41,
-        location: "Manchester",
-        tag: "Donor egg IVF",
-        title: "Understanding what 'altruistic' really means",
-        body: "We had to un-learn everything we thought we knew about surrogacy from American TV. In the UK, it's different, and in many ways more personal. Our surrogate Claire became someone we care about deeply. The process took longer than we hoped. Our daughter is 14 months. It was worth every moment of it.",
-        treatment: "Donor egg IVF, UK surrogate",
-      },
-      {
-        name: "Alex & Dan",
-        age: 35,
-        location: "Bristol",
-        tag: "First-time fathers",
-        title: "The two years that made us parents",
-        body: "Nobody tells you how long the matching process takes, or how many conversations you'll have before you feel ready. But every conversation mattered. By the time we started treatment, we felt completely prepared. Our twins are four. They know their origin story and they love it.",
-        treatment: "IVF with donor eggs × 2 embryos",
-      },
-    ],
+    stories: [],
     clinicNote:
-      "Our comparison tool highlights clinics with surrogacy experience. Filter for donor egg IVF and ICSI availability when selecting your clinic.",
+      "Filter our comparison tool for donor egg IVF and ICSI, then ask each clinic how many surrogacy arrangements it has treated and how it works with your surrogate's own GP and hospital.",
     resources: [
       "consultation-questions",
       "donor-conception-legal-parenthood",
-      "hfea-register",
-      "known-donor-legal-agreements",
+      "complete-solo-ivf-cost-breakdown",
+      "understanding-hfea-success-rates",
       "talking-to-child-donor-conception",
-      "uk-support-groups",
     ],
   },
   {
@@ -361,7 +290,7 @@ export const FAMILY_TYPES: FamilyType[] = [
     label: "Solo Dads",
     headline: "Solo fatherhood\nvia surrogacy.",
     heroCopy:
-      "More men than ever are choosing to become solo fathers. The path (surrogacy with a donor egg) is clear, legal, and achievable. It takes time, intention, and the right support. This guide covers everything you need to know, from the legal landscape to finding a surrogate to life on the other side.",
+      "For a man having a baby on his own through surrogacy with donor eggs: the legal steps, finding a surrogate, treatment, and the parental order. It is possible, but it often takes a long time and involves a court process.",
     cardSummary:
       "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
     treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
@@ -369,91 +298,61 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 1,
         title: "Know your legal landscape",
-        body: "UK surrogacy is legal, altruistic, and well-established. The surrogate is the legal mother at birth, regardless of genetics, and you'll need a parental order to become the legal father. As a solo dad, the parental order process is slightly different from couples but equally achievable. Get specialist legal advice from a surrogacy solicitor at the very start.",
+        body: `UK surrogacy is legal and altruistic. ${SURROGACY_COSTS} The surrogate is the legal mother at birth, regardless of genetics. Since 3 January 2019 a single applicant can apply for a parental order (section 54A of the Human Fertilisation and Embryology Act 2008) if your own sperm was used, the child's home is with you and you are domiciled in the UK. ${SURROGACY_REFORM} Get specialist legal advice from a surrogacy solicitor at the start.`,
       },
       {
         number: 2,
-        title: "Connect with the solo surrogacy community",
-        body: "Solo fatherhood via surrogacy is less common than for couples, but not unusual. Surrogacy UK, Brilliant Beginnings and My Surrogacy Journey match intended parents with surrogates. Ask each whether it works with single intended fathers. Reading other solo dads' stories before you start (understanding the emotional landscape) is valuable preparation.",
+        title: "Connect with the surrogacy organisations",
+        body: "Solo fatherhood via surrogacy is less common than for couples. Surrogacy UK, Brilliant Beginnings and My Surrogacy Journey match intended parents with surrogates; ask each whether it works with single intended fathers. There are more intended parents than surrogates, so matching can take a long time.",
       },
       {
         number: 3,
         title: "Find your surrogate",
-        body: "The matching process involves conversations about values, expectations for the relationship during and after pregnancy, and what role (if any) your surrogate would like in your child's life. This takes time and honest reflection. Most intended parents describe finding the right match as one of the most important steps of the entire journey.",
+        body: "The matching process involves conversations about values, expectations for the relationship during and after pregnancy, and what role (if any) your surrogate would like in your child's life.",
       },
       {
         number: 4,
         title: "Choose your egg donor",
-        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. When choosing, consider health screening, open-ID options, and whether the donor has successfully donated before.",
+        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. When choosing, consider health screening and whether the donor has donated before.",
       },
       {
         number: 5,
         title: "IVF treatment",
-        body: "Your sperm is used to fertilise the donor eggs via IVF or ICSI at an HFEA-licensed clinic. Resulting embryos are graded and a selected embryo is transferred to your surrogate. Many dads freeze additional embryos at this stage, preserving the option for a second child from the same genetic source.",
+        body: "Your sperm is used to fertilise the donor eggs via IVF or ICSI at an HFEA-licensed clinic. Resulting embryos are graded and a selected embryo is transferred to your surrogate. Many dads freeze additional embryos at this stage, preserving the option for a second child from the same donor.",
       },
       {
         number: 6,
         title: "Supporting your surrogate",
-        body: "Your surrogate is giving you an enormous gift. Regular contact, attending scans where invited, and genuine care for her wellbeing are part of the relationship. Many solo dads describe their surrogate as a lifelong connection: not a transaction, but a relationship that shaped the family that came from it.",
+        body: "Most arrangements involve regular contact and attending scans where invited. Agree boundaries and expectations early, and revisit them as the pregnancy goes on.",
       },
       {
         number: 7,
         title: "Birth and parental order",
-        body: "Apply for your parental order as soon as possible after birth; the window is 6 months from the birth date. In the UK, as a single intended father, you'll need to show you have a biological connection to the child (i.e. your sperm was used). A specialist solicitor handles the application and it's typically straightforward.",
+        body: "Apply for your parental order within 6 months of the birth. As a single applicant you must show that your sperm was used, that the child's home is with you and that you are domiciled in the UK; the surrogate's consent counts only once the child is at least six weeks old. The process is possible, but it often takes a long time and involves a court process. A specialist solicitor usually prepares the application.",
       },
       {
         number: 8,
         title: "Solo fatherhood: building your village",
-        body: "Solo parenting requires a village, and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. The wider solo parent networks include solo dads by choice who are open about the real experience: hard in places, and worth it overall.",
+        body: "Arrange practical childcare, trusted family or friends, and contact with other solo parents before your child arrives. The wider solo parent networks include solo dads by choice.",
       },
     ],
-    stories: [
-      {
-        name: "James",
-        age: 42,
-        location: "London",
-        tag: "Solo surrogacy journey",
-        title: "I decided at 40. My son was born at 43.",
-        body: "The decision took me two years to fully commit to. Not because I doubted it (I've always wanted to be a father) but because I needed to understand what I was doing before I began. The matching process, the legal preparation, the IVF cycle, the wait. All of it was manageable because I'd done the groundwork. Oscar is three. He is everything.",
-        quote: "The matching process, the legal preparation, the IVF cycle, the wait. All of it was manageable because I'd done the groundwork. Oscar is three. He is everything.",
-        treatment: "IVF with donor eggs, UK surrogate",
-      },
-      {
-        name: "Patrick",
-        age: 38,
-        location: "Birmingham",
-        tag: "International egg donation",
-        title: "Choosing a donor felt enormous. It became straightforward.",
-        body: "I spent weeks agonising over the egg donor decision. Eventually my counsellor said something simple: you're not trying to build the 'perfect' person, you're just trying to find a healthy embryo. After that, the decision came quickly. My daughter Anya is two. She's entirely herself, and I love her for it.",
-        treatment: "ICSI with international egg donor",
-      },
-      {
-        name: "Michael",
-        age: 36,
-        location: "Edinburgh",
-        tag: "Building a village",
-        title: "What nobody tells you about solo fatherhood",
-        body: "My son Finn came home to me when I was 36 and single. The practical stuff (childcare, night feeds, logistics) is hard alone. But the emotional stuff? The joy? That's entirely mine. I don't share it with a co-parent. I get all of it. On the hard days, I remind myself of that.",
-        treatment: "IVF with donor egg, UK surrogate",
-      },
-    ],
+    stories: [],
     clinicNote:
-      "Filter our comparison tool for donor egg IVF and ICSI availability. Look for clinics with experience working with single intended fathers and surrogacy arrangements.",
+      "Filter our comparison tool for donor egg IVF and ICSI, then ask each clinic how many single intended fathers and surrogacy arrangements it has treated.",
     resources: [
       "consultation-questions",
       "donor-conception-legal-parenthood",
-      "hfea-register",
-      "childcare-planning",
-      "two-week-wait",
-      "uk-support-groups",
+      "complete-solo-ivf-cost-breakdown",
+      "understanding-hfea-success-rates",
+      "talking-to-child-donor-conception",
     ],
   },
   {
     slug: "heterosexual-couple",
-    label: "Mum and Dad",
+    label: "Couples (opposite-sex)",
     headline: "When getting pregnant\nneeds help.",
     heroCopy:
-      "Fertility treatment for heterosexual couples covers an enormous range of situations, from unexplained infertility to specific diagnoses like low sperm count, PCOS, or poor egg reserve. Whatever brought you here, this guide helps you navigate your options with clarity: from initial investigations to embryo transfer, and everything in between.",
+      "For couples who need help conceiving: investigations, diagnosis, NHS and private options, and treatment from stimulation to transfer. Start at the step you are on.",
     cardSummary:
       "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
     treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
@@ -466,17 +365,17 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Understand your diagnosis",
-        body: "The most common diagnoses are male factor infertility (MFI, a factor in roughly a third of cases), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, ~25% of couples). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
+        body: "The most common diagnoses are male factor infertility (MFI, which is common), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, about 1 in 4 couples according to the NHS). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
       },
       {
         number: 3,
         title: "Explore your treatment options",
-        body: "IUI (intrauterine insemination) works for mild MFI and ovulatory dysfunction; it's less invasive and cheaper. IVF suits moderate-to-severe MFI, tubal issues, or unexplained infertility after IUI fails. ICSI (injecting a single sperm directly into an egg) is used for severe MFI or fertilisation failure. Donor eggs or sperm are options when your own gametes aren't viable.",
+        body: "IUI (intrauterine insemination) works for mild MFI and ovulatory dysfunction; it's less invasive and cheaper. IVF suits moderate-to-severe MFI, tubal issues, or unexplained infertility after IUI fails. ICSI (injecting a single sperm directly into an egg) is used for severe MFI or fertilisation failure. Donor eggs or sperm are options when your own gametes aren't viable. If you need a surrogate (after a hysterectomy, for example), the surrogacy steps in our two-dads guide are the same for any couple.",
       },
       {
         number: 4,
         title: "NHS vs private: understanding your options",
-        body: "NHS IVF funding in England varies by Integrated Care Board. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends. Check your local criteria carefully; they vary by age, BMI, existing children, and postcode. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
+        body: "NHS IVF funding in England varies by Integrated Care Board. Most English boards fund one cycle, and only two fund the three NICE recommends (PET, February 2026). Check your local criteria carefully; they vary by age, BMI and existing children. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
       },
       {
         number: 5,
@@ -486,58 +385,29 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 6,
         title: "Embryo transfer and the two-week wait",
-        body: "The best embryo is selected for transfer, usually on day 5 (blastocyst stage). Transfer is quick and painless, similar to a smear test. Then comes the two-week wait before a pregnancy test. It's one of the most emotionally challenging periods in IVF. Go easy on yourselves: information-seeking behaviour spikes during this time; try to limit it.",
+        body: "The best embryo is selected for transfer, usually on day 5 (blastocyst stage). Transfer is usually quick and feels similar to a smear test; tell your clinic if smears are difficult for you. Then comes the two-week wait before a pregnancy test.",
       },
       {
         number: 7,
-        title: "If this cycle doesn't work",
-        body: "Most IVF cycles don't succeed first time. A failed cycle is devastating. Allow yourselves to feel it. Then, when you're ready, your consultant should offer a review: what happened, what (if anything) can be changed, and whether to proceed with a frozen embryo transfer (if you have frozen embryos) or a new cycle.",
+        title: "After a cycle: the review",
+        body: "Most IVF cycles don't succeed first time. After a failed cycle your consultant should offer a review: what happened, what (if anything) can be changed, and whether to proceed with a frozen embryo transfer (if you have frozen embryos) or a new cycle.",
       },
       {
         number: 8,
         title: "Pregnancy after IVF",
-        body: "Pregnancy after fertility treatment comes with its own emotional weight: anxiety is very common, even when everything looks fine. Many couples find that the joy is real but complicated by fear. This is normal. Stay in contact with your clinic until the midwife handover, and tell your midwife you've been through IVF; it changes the emotional care they provide.",
+        body: "Anxiety in pregnancy after fertility treatment is common, even when everything looks fine. Stay in contact with your clinic until the midwife handover, and tell your midwife you've been through IVF; it changes the care they offer.",
       },
     ],
-    stories: [
-      {
-        name: "Emma & David",
-        age: 34,
-        location: "London",
-        tag: "Unexplained infertility",
-        title: "Two years of trying. Three months of IVF. One daughter.",
-        body: "We tried naturally for two years before getting investigated. Everything came back 'normal'. Unexplained infertility is its own kind of maddening: there's nothing to fix, nothing to point at. Our consultant recommended IVF. First cycle, first transfer. Our daughter Isla is 18 months. We still don't understand why it works. We stopped needing to.",
-        quote: "We still don't understand why it works. We stopped needing to.",
-        treatment: "IVF × 1",
-      },
-      {
-        name: "Jess & Chris",
-        age: 38,
-        location: "Leeds",
-        tag: "Male factor infertility",
-        title: "Chris's diagnosis changed everything. And nothing.",
-        body: "Chris was diagnosed with severe oligozoospermia (fewer than 1 million sperm per ml). We went straight to ICSI. The first cycle produced four good embryos. We used one on the first transfer and it worked. The other three are frozen. We talk about using them, giving them to research, or both. There's no rush. We're just grateful.",
-        treatment: "ICSI × 1",
-      },
-      {
-        name: "Aisha & Sam",
-        age: 41,
-        location: "Birmingham",
-        tag: "Donor egg IVF",
-        title: "Using donor eggs wasn't a compromise. It was a decision.",
-        body: "At 40 my AMH was very low. After two failed cycles with my own eggs, we had the donor egg conversation. We spent three months on it: reading, talking, counselling. Then we decided, and we were decided. Our son Noah is one. He has Sam's cheekbones. He has my laugh. He is completely ours.",
-        treatment: "Donor egg IVF",
-      },
-    ],
+    stories: [],
     clinicNote:
       "Use our comparison tool to filter by the treatment you need (IVF, ICSI, IUI or donor gametes), then compare success rates for your age group alongside cost, waiting times and how the clinic treats patients. A clinic's rate is an average, not your personal chance.",
     resources: [
       "iui-vs-ivf-vs-donor-eggs",
       "consultation-questions",
       "understanding-hfea-success-rates",
-      "fertility-finance-options",
-      "two-week-wait",
-      "when-treatment-fails",
+      "complete-solo-ivf-cost-breakdown",
+      "ivf-budget-template",
+      "donor-conception-legal-parenthood",
     ],
   },
 ];

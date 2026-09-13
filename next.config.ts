@@ -141,6 +141,27 @@ const nextConfig: NextConfig = {
         destination: "/about#story",
         permanent: true,
       },
+      // Phase 4 (contract C4): thirteen guides were deleted or merged. Each
+      // old URL goes to the page or section that now carries its content.
+      ...[
+        ["fertility-finance-options", "/funding"],
+        ["employer-fertility-benefits", "/work#asking"],
+        ["two-week-wait", "/support#waiting"],
+        ["when-treatment-fails", "/support#cycle-fails"],
+        ["finding-fertility-therapist", "/support#counselling"],
+        ["telling-friends-family", "/support#relationships"],
+        ["hfea-register", "/resources/donor-conception-legal-parenthood"],
+        ["self-employed-maternity-leave", "/work#after-treatment"],
+        ["childcare-planning", "/work#after-treatment"],
+        ["solo-pregnancy-support-team", "/support#loss"],
+        ["birth-partner-options", "/support#loss"],
+        ["online-communities", "/support#peer-support"],
+        ["uk-support-groups", "/support#peer-support"],
+      ].map(([slug, destination]) => ({
+        source: `/resources/${slug}`,
+        destination,
+        permanent: true,
+      })),
       // The old Flying Solo production domain. Vercel redirects it to
       // cairnfertility.vercel.app at platform level (both domains are
       // attached to the project); this app-level rule is a backstop in case

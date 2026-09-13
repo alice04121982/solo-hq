@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Looking after yourself | CairnFertility",
   description:
-    "UK crisis lines, fertility counselling, pregnancy loss support and donor conception support, with phone numbers checked against each organisation's own website.",
+    "UK crisis lines, the wait for a test result, failed cycles, miscarriage and loss, pausing or stopping, partners and family, work, money, counselling and peer support, with every number checked against the organisation's own website.",
 };
 
 const LINK_CLASS =
@@ -31,10 +31,9 @@ function SupportLinkItem({ link }: { link: SupportLink }) {
 }
 
 /**
- * Support signposting: crisis lines, counselling, pregnancy loss, donor
- * conception, and treatment choices. Copy and sources live in
- * `src/lib/support.ts`; recheck every number there when SUPPORT_LAST_CHECKED
- * is bumped.
+ * The "Looking after yourself" section: ten anchored sections on one page,
+ * crisis lines first. Copy and sources live in `src/lib/support.ts`; recheck
+ * every number there when SUPPORT_LAST_CHECKED is bumped.
  */
 export default function SupportPage() {
   return (
@@ -52,17 +51,37 @@ export default function SupportPage() {
           level={1}
           eyebrow="Support"
           title="Looking after yourself"
-          intro="Where to get help during fertility treatment: crisis lines, counselling, and organisations for pregnancy loss and donor conception. All services listed are in the UK."
+          intro="Where to get help at each point in treatment: crisis lines, the wait for a result, a failed cycle, loss, deciding whether to carry on, the people around you, work, money, counselling and peer support. All services listed are in the UK."
           introWidth="58ch"
           className="mb-0"
         />
         <p className="text-sm font-sans text-muted leading-relaxed mt-4" style={{ maxWidth: "58ch" }}>
           Numbers and details last checked on {SUPPORT_LAST_CHECKED}.
         </p>
+
+        {/* Jump links */}
+        <nav aria-label="On this page" className="mt-8 flex flex-wrap gap-2">
+          {SUPPORT_SECTIONS.map((section) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className="inline-flex items-center gap-1.5 rounded-full border border-teal/20 px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
+              style={{ color: "var(--teal)" }}
+            >
+              {section.title}
+            </a>
+          ))}
+        </nav>
       </Section>
 
       {SUPPORT_SECTIONS.map((section, i) => (
-        <Section key={section.id} band={i + 1} id={section.id} padding="py-16 md:py-20">
+        <Section
+          key={section.id}
+          band={i + 1}
+          id={section.id}
+          padding="py-16 md:py-20"
+          className="scroll-mt-20"
+        >
           <SectionHeading title={section.title} intro={section.intro} className="mb-8" />
 
           {section.paragraphs?.map((p) => (
@@ -74,6 +93,17 @@ export default function SupportPage() {
               {p}
             </p>
           ))}
+
+          {section.bullets && section.bullets.length > 0 && (
+            <ul
+              className="list-disc pl-5 mb-6 space-y-3 text-base font-sans text-foreground leading-relaxed"
+              style={{ maxWidth: "62ch" }}
+            >
+              {section.bullets.map((b) => (
+                <li key={b.slice(0, 48)}>{b}</li>
+              ))}
+            </ul>
+          )}
 
           {section.items && (
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -99,6 +129,22 @@ export default function SupportPage() {
                 </li>
               ))}
             </ul>
+          )}
+
+          {section.links && section.links.length > 0 && (
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+              {section.links.map((link) => (
+                <li key={link.href}>
+                  <SupportLinkItem link={link} />
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {section.footnote && (
+            <p className="text-sm font-sans text-muted leading-relaxed mt-6" style={{ maxWidth: "62ch" }}>
+              {section.footnote}
+            </p>
           )}
         </Section>
       ))}

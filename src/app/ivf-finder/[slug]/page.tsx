@@ -26,6 +26,7 @@ import {
   staySearchUrl,
   travelEstimateForCity,
   TRAVEL_ASSUMPTIONS,
+  TRAVEL_ESTIMATE_SCOPE,
 } from "@/lib/travel";
 import { AGE_BRACKETS, HFEA_BANDS } from "@/types/clinic";
 import { eligibilitySummary } from "@/lib/country-eligibility";
@@ -308,6 +309,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
             )}
             {travel != null && (
               <div className="mb-6">
+                <p className="text-xs text-muted mb-2">{TRAVEL_ESTIMATE_SCOPE}</p>
                 {travel.destination.note && (
                   <p className="text-xs text-muted mb-2">{travel.destination.note}</p>
                 )}

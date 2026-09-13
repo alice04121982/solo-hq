@@ -5,7 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
-import { ShapeMark, Spark } from "@/components/shapes";
+import { Spark } from "@/components/shapes";
 import { DATA_PROVENANCE } from "@/lib/clinics";
 import { CONTACT_EMAILS } from "@/lib/legal";
 import { CLINIC_EXCLUSIONS } from "@/lib/clinic-exclusions";
@@ -23,29 +23,6 @@ export const metadata: Metadata = {
   description:
     "CairnFertility is an independent information service helping solo parents, LGBTQ+ families, and couples compare IVF clinics. Built in the open, with the story so far and what's coming next.",
 };
-
-const VALUES = [
-  {
-    shape: "bloom" as const,
-    title: "Every family, on equal footing",
-    body: "Solo mums, solo dads, two mums, two dads, straight couples: the guides, comparisons, and tools here are built for all of it, not retrofitted from a template built for one kind of family.",
-  },
-  {
-    shape: "spark" as const,
-    title: "Headline prices, and what sits on top",
-    body: "Clinics abroad often look cheaper until flights and stays are added. We show each clinic's headline price with a travel estimate beside it, and the clinic's own estimate of a typical total where it publishes one.",
-  },
-  {
-    shape: "egg" as const,
-    title: "Evidence over hype",
-    body: "Success rates are population statistics, not a promise. We label figures copied from the HFEA register separately from clinics' own figures, and we say plainly when a treatment add-on has no strong evidence behind it.",
-  },
-  {
-    shape: "halves" as const,
-    title: "Privacy by design",
-    body: "No accounts, no cookies, no tracking. The clinic matcher's answers, including anything about your health, stay in your browser. We built it that way on purpose, not as an afterthought.",
-  },
-];
 
 const MILESTONES = [
   {
@@ -66,7 +43,7 @@ const MILESTONES = [
   {
     tag: "Building now",
     title: "A community, not just a comparison tool",
-    body: "The next thing we're building is a place to find other people at your stage, hear from people who've been through it, and find local meetups. That's what the waitlist below is for.",
+    body: "The next thing we're building is a place to find other people at your stage, and hear from people who've been through it. That's what the waitlist below is for.",
   },
 ];
 
@@ -153,24 +130,10 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Values */}
-      <Section band={2} backdrop={{ shape: "dots", side: "left" }}>
-        <SectionHeading eyebrow="Our principles" mark="egg" title="What we build against" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {VALUES.map((v) => (
-            <div key={v.title} className="rounded-2xl bg-background p-6 md:p-7">
-              <ShapeMark name={v.shape} size={28} className="mb-4" style={{ color: "var(--lavender)" }} />
-              <h3 className="font-sans font-semibold text-teal text-lg mb-2">{v.title}</h3>
-              <p className="text-sm font-sans text-muted leading-relaxed">{v.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       {/* Methodology: the editorial standard the numbers are held to, and
           where every figure comes from. This is the public statement behind
           the provenance notes shown beside the finder, matcher and guides. */}
-      <Section band={3} id="methodology">
+      <Section band={2} id="methodology">
         <SectionHeading eyebrow="Methodology" mark="halves" title="How we check our numbers." className="mb-5" />
         <p className="text-lg font-sans text-muted leading-relaxed mb-4" style={{ maxWidth: "58ch" }}>
           Our editorial standard for presenting prices and success rates is the{" "}
@@ -266,7 +229,7 @@ export default function AboutPage() {
       {/* Our story: the running build-in-the-open log, merged in from the
           old /our-story page (which now redirects here). Sits last so the
           "building now" milestone hands straight off to the waitlist CTA. */}
-      <Section band={4} id="story">
+      <Section band={3} id="story">
         <SectionHeading
           eyebrow="Our story"
           mark="spark"

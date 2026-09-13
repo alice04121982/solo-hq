@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle, ArrowRight, CheckCircle2, Info, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import { NATION_POLICIES, SHARED_LINES } from "@/lib/funding";
 
 /**
  * A self-check against the criteria that NHS fertility policies have in
@@ -10,12 +11,17 @@ import Link from "next/link";
  * decision belongs to 36 different written policies we cannot read from here,
  * so the honest output is "here is what usually blocks people, here is what
  * usually gates them, go and read your policy".
+ *
+ * Two situations (a solo dad, or two dads, who need an egg donor and a
+ * surrogate) skip the criteria questions altogether, because the route is
+ * self-funded outside Scotland and no criterion changes that. Shared facts
+ * come from SHARED_LINES in src/lib/funding.ts rather than being retyped.
  */
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
-type Field = "nation" | "age" | "children" | "situation" | "smoking" | "bmi" | "inseminations";
+type Field = "nation" | "situation" | "age" | "children" | "smoking" | "bmi" | "inseminations";
 
 interface Option {
   value: string;
@@ -40,6 +46,16 @@ function isSolo(a: Answers) {
   return a.situation === "solo";
 }
 
+/** Solo dads and two dads: an egg donor and a surrogate are needed. */
+function isSurrogacy(a: Answers) {
+  return a.situation === "solo-surrogacy" || a.situation === "two-men";
+}
+
+/** The criteria questions only apply once we know surrogacy is not the route. */
+function criteriaApply(a: Answers) {
+  return a.situation !== undefined && !isSurrogacy(a);
+}
+
 const QUESTIONS: Question[] = [
   {
     id: "nation",
@@ -53,9 +69,21 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
+    id: "situation",
+    label: "Who is the treatment for?",
+    options: [
+      { value: "solo", label: "Me, on my own (I would carry)" },
+      { value: "two-women", label: "Two women" },
+      { value: "mixed", label: "A man and a woman" },
+      { value: "solo-surrogacy", label: "Me, on my own (I need an egg donor and a surrogate)" },
+      { value: "two-men", label: "Two men" },
+    ],
+  },
+  {
     id: "age",
     label: "Age of the person who would carry",
-    help: "Policies apply the limit when treatment starts, not when you are referred.",
+    help: SHARED_LINES.ageAtTreatment,
+    when: criteriaApply,
     options: [
       { value: "under-35", label: "Under 35" },
       { value: "35-39", label: "35–39" },
@@ -65,20 +93,11 @@ const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "situation",
-    label: "Who is the treatment for?",
-    options: [
-      { value: "solo", label: "Me, on my own" },
-      { value: "two-women", label: "Two women" },
-      { value: "mixed", label: "A man and a woman" },
-      { value: "other", label: "Something else" },
-    ],
-  },
-  {
     id: "children",
     label: (a) =>
       isSolo(a) ? "Do you already have a living child?" : "Does either of you already have a living child?",
     help: "Most policies count a partner's children, children living elsewhere, and adopted children.",
+    when: criteriaApply,
     options: (a) =>
       isSolo(a)
         ? [
@@ -94,6 +113,7 @@ const QUESTIONS: Question[] = [
   {
     id: "smoking",
     label: (a) => (isSolo(a) ? "Do you smoke or vape?" : "Does either of you smoke or vape?"),
+    when: criteriaApply,
     options: [
       { value: "no", label: "No" },
       { value: "yes", label: "Yes" },
@@ -103,6 +123,7 @@ const QUESTIONS: Question[] = [
     id: "bmi",
     label: "Is your BMI between 19 and 30?",
     help: "The most common range, though some policies are wider or narrower.",
+    when: criteriaApply,
     options: [
       { value: "in-range", label: "Yes" },
       { value: "outside", label: "No" },
@@ -112,7 +133,7 @@ const QUESTIONS: Question[] = [
   {
     id: "inseminations",
     label: "How many donor insemination cycles have you had at a licensed UK clinic?",
-    help: "Home insemination and unlicensed arrangements are generally not counted, and carry legal-parenthood consequences too.",
+    help: SHARED_LINES.homeInsemination,
     when: (a) => a.situation === "solo" || a.situation === "two-women",
     options: [
       { value: "none", label: "None" },
@@ -122,14 +143,18 @@ const QUESTIONS: Question[] = [
   },
 ];
 
-type Verdict = "unlikely" | "conditional" | "worth-pursuing";
+type Verdict = "unlikely" | "conditional" | "worth-pursuing" | "self-funded";
 
 interface Result {
   verdict: Verdict;
   blockers: string[];
   conditions: string[];
   steps: string[];
+  /** Where to go next; defaults to the clinic finder. */
+  next: { href: string; label: string };
 }
+
+const FIND_CLINICS = { href: "/get-started", label: "Find clinics that treat your family type" };
 
 const VERDICT_COPY: Record<Verdict, { title: string; body: string }> = {
   unlikely: {
@@ -144,16 +169,70 @@ const VERDICT_COPY: Record<Verdict, { title: string; body: string }> = {
     title: "Worth pursuing: start with your GP",
     body: "Nothing in your answers matches the criteria that usually exclude people. The remaining question is what your local policy actually commissions, which is written down and which you can read.",
   },
+  "self-funded": {
+    title: "Self-funded, with one exception in Scotland",
+    body: SHARED_LINES.surrogacy,
+  },
 };
 
+function nationCycles(nation: string | undefined): string | null {
+  return NATION_POLICIES.find((n) => n.slug === nation)?.cycles ?? null;
+}
+
+/**
+ * Solo dads and two dads. No criterion question is asked because none changes
+ * the answer outside Scotland. Grant eligibility is the Fertility Foundation's
+ * own published list (fertilityfoundation.org/ivf-grants, read 13 September
+ * 2026), which names male couples but not single men.
+ */
+function evaluateSurrogacy(a: Answers): Result {
+  const twoMen = a.situation === "two-men";
+  const conditions: string[] = [];
+  const steps: string[] = [];
+
+  if (a.nation === "scotland") {
+    conditions.push(
+      twoMen
+        ? "NHS Lothian's Edinburgh Fertility Centre offers an NHS surrogacy service to male couples. Other health boards may refer to it; ask yours."
+        : `${SHARED_LINES.scotlandSingle} NHS Lothian's Edinburgh Fertility Centre describes its NHS surrogacy service as being for male couples.`,
+    );
+  }
+  conditions.push(
+    twoMen
+      ? "The Fertility Foundation grant (up to £3,000) is open to male couples. It does not cover surrogacy costs, only treatment."
+      : "The Fertility Foundation does not list single men among the applicants eligible for its grant.",
+  );
+  conditions.push(
+    "Surrogates' expenses in the UK are typically £10,000 to £15,000 (HFEA), on top of egg donation, IVF and legal fees.",
+  );
+
+  if (a.nation === "scotland" && twoMen) {
+    steps.push("Ask your GP for a referral and ask your health board what its surrogacy pathway is.");
+  }
+  steps.push("Check your employer's benefits before paying for anything privately; many schemes cover surrogacy-related treatment.");
+  steps.push("Get itemised quotes for egg donation and IVF from more than one clinic, and ask what happens if a cycle is cancelled.");
+
+  return {
+    verdict: "self-funded",
+    blockers: [],
+    conditions,
+    steps,
+    next: twoMen
+      ? { href: "/families/same-sex-male", label: "The two-dads guide: surrogacy, cost and legal parenthood" }
+      : { href: "/families/single-dad", label: "The solo-dad guide: surrogacy, cost and legal parenthood" },
+  };
+}
+
 function evaluate(a: Answers): Result {
+  if (isSurrogacy(a)) return evaluateSurrogacy(a);
+
   const blockers: string[] = [];
   const conditions: string[] = [];
   const steps: string[] = [];
 
   const solo = a.situation === "solo";
   const twoWomen = a.situation === "two-women";
-  const donorRoute = solo || twoWomen || a.situation === "other";
+  const donorRoute = solo || twoWomen;
 
   const niChildren =
     "Northern Ireland's published criteria do not include a rule on existing children. Check your local criteria.";
@@ -194,7 +273,7 @@ function evaluate(a: Answers): Result {
   }
   if (a.children === "one-free") {
     if (a.nation === "england") {
-      blockers.push("In most English policies a partner's child counts, including adopted children.");
+      blockers.push(SHARED_LINES.partnersChild);
     } else if (a.nation === "scotland") {
       conditions.push("Scotland only requires one partner to have no living biological child.");
     } else if (a.nation === "wales") {
@@ -205,9 +284,7 @@ function evaluate(a: Answers): Result {
   }
 
   if (solo && a.nation === "scotland") {
-    blockers.push(
-      "Single women are not currently eligible for NHS-funded treatment in Scotland; a national review is due to report by early summer 2027.",
-    );
+    blockers.push(SHARED_LINES.scotlandSingle);
   }
   if (a.nation === "scotland" && !solo && !twoWomen) {
     conditions.push("In Scotland, couples must have lived together for at least two years.");
@@ -224,35 +301,22 @@ function evaluate(a: Answers): Result {
   }
   if (a.bmi === "unsure") {
     conditions.push(
-      "Find out your BMI before your GP appointment. It is checked against the policy range at the point treatment starts, so it is worth knowing early.",
+      "Find out your BMI before your GP appointment. It is checked against the policy range at the point treatment starts.",
     );
   }
 
   if (a.age === "40-41") {
     conditions.push(
-      "At 40 or 41, NICE recommends a single full cycle and only where there has been no previous IVF. Time matters more than anything else here: the limit applies when treatment begins.",
+      `At 40 or 41, NICE recommends a single full cycle and only where there has been no previous IVF. ${SHARED_LINES.ageAtTreatment}`,
     );
   }
 
-  if (a.nation === "england") {
-    conditions.push(
-      "In England there is no national entitlement; your Integrated Care Board decides. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends (two of 42 in October 2025). Boards merged in April 2026, so policies may change.",
-    );
+  const cycles = nationCycles(a.nation);
+  if (cycles) {
+    conditions.push(a.nation === "england" ? `In England there is no national entitlement. ${cycles}` : cycles);
   }
-  if (a.nation === "scotland") {
-    conditions.push(
-      "Scotland applies national criteria and funds up to three cycles, so eligibility is far more predictable than in England.",
-    );
-  }
-  if (a.nation === "wales") {
-    conditions.push(
-      "Wales applies national criteria, funds two cycles, and provides treatment to single women as well as couples.",
-    );
-  }
-  if (a.nation === "northern-ireland") {
-    conditions.push(
-      "Northern Ireland funds one full cycle under national criteria. Since the 2024 expansion, that includes transferring all frozen embryos from the cycle.",
-    );
+  if (a.nation === "wales" && solo) {
+    conditions.push("Wales funds treatment for single women as well as couples.");
   }
 
   if (donorRoute) {
@@ -267,15 +331,13 @@ function evaluate(a: Answers): Result {
         "You have likely already met the insemination requirement most policies impose. Make sure your clinic's written record of every cycle goes with your referral.",
       );
     } else {
-      conditions.push(
-        "Expect to be asked for six or more donor insemination cycles at a licensed clinic before IVF funding is considered, and outside Scotland you will usually be paying for those cycles, and for the donor sperm, yourself.",
-      );
+      conditions.push(SHARED_LINES.diRequirement);
     }
   }
 
   if (solo && a.nation === "england") {
     conditions.push(
-      "Solo parents are not usually excluded by name in England. The insemination requirement is what excludes most of them in practice, so read that clause of your ICB's policy specifically.",
+      `Solo parents are not usually excluded by name in England; the insemination requirement is the clause to read in your ICB's policy. ${SHARED_LINES.nhsFundedByFamilyType}`,
     );
   }
 
@@ -306,7 +368,15 @@ function evaluate(a: Answers): Result {
         ? "conditional"
         : "worth-pursuing";
 
-  return { verdict, blockers, conditions, steps };
+  return { verdict, blockers, conditions, steps, next: FIND_CLINICS };
+}
+
+/** Answers to questions no longer on screen would skew the result; drop them. */
+function pruneHidden(next: Answers): Answers {
+  for (const q of QUESTIONS) {
+    if (q.when && !q.when(next)) delete next[q.id];
+  }
+  return next;
 }
 
 function Chip({
@@ -367,13 +437,7 @@ export function NHSEligibilityChecker() {
                   selected={answers[q.id] === o.value}
                   onClick={() =>
                     setAnswers((prev) => {
-                      const next = { ...prev, [q.id]: o.value };
-                      // Changing who the treatment is for can retire the
-                      // insemination question, and a stale answer to a
-                      // question no longer on screen would skew the result.
-                      if (q.id === "situation" && !(o.value === "solo" || o.value === "two-women")) {
-                        delete next.inseminations;
-                      }
+                      const next: Answers = { ...prev, [q.id]: o.value };
                       // Solo and couple applicants get different children
                       // options, so drop an answer the new list no longer offers.
                       if (q.id === "situation" && next.children) {
@@ -387,7 +451,7 @@ export function NHSEligibilityChecker() {
                           delete next.children;
                         }
                       }
-                      return next;
+                      return pruneHidden(next);
                     })
                   }
                 >
@@ -413,7 +477,7 @@ export function NHSEligibilityChecker() {
               className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
               style={{ color: TEAL_SOFT }}
             >
-              {result.verdict === "unlikely" ? (
+              {result.verdict === "unlikely" || result.verdict === "self-funded" ? (
                 <AlertTriangle className="h-3.5 w-3.5" />
               ) : (
                 <CheckCircle2 className="h-3.5 w-3.5" />
@@ -481,11 +545,11 @@ export function NHSEligibilityChecker() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <Link
-              href="/get-started"
+              href={result.next.href}
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity hover:opacity-90"
               style={{ background: "var(--accent)", color: "var(--on-accent)" }}
             >
-              Find clinics that treat your family type
+              {result.next.label}
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <button

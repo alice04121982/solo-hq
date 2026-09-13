@@ -45,9 +45,6 @@ export default function ContactPage() {
             </li>
           ))}
         </ul>
-        <p className="text-sm font-sans text-muted leading-relaxed mt-6 pt-6 border-t border-border" style={{ maxWidth: "56ch" }}>
-          All three reach the same person.
-        </p>
       </div>
     </LegalPageLayout>
   );

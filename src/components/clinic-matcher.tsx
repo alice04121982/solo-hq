@@ -12,6 +12,7 @@ import {
   staySearchUrl,
   formatRangeGbp,
   TRAVEL_ASSUMPTIONS,
+  TRAVEL_ESTIMATE_SCOPE,
   type TravelEstimate,
 } from "@/lib/travel";
 import type { AgeBracket, Clinic } from "@/types/clinic";
@@ -567,6 +568,7 @@ function ResultCard({ m, surrogacy, index }: { m: Match; surrogacy: boolean; ind
               <span>+ {formatRangeGbp(m.travel)} travel (estimate, {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips)</span>
             </p>
           )}
+          {m.travel && <p className="pl-5">{TRAVEL_ESTIMATE_SCOPE}</p>}
           {m.travel?.destination.note && <p className="pl-5">{m.travel.destination.note}</p>}
           {x.checkedOn && <p>Checked {x.checkedOn}.</p>}
         </div>

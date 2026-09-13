@@ -3,6 +3,7 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { ShapeMark } from "@/components/shapes";
 import { WaitlistForm } from "@/components/waitlist-form";
+import { FORMS_CLOSED_NOTICE, FORMS_OPEN } from "@/lib/launch";
 
 export const metadata: Metadata = {
   title: "Keep in Touch | CairnFertility",
@@ -39,7 +40,11 @@ export default function WaitlistPage() {
 
       <Section band={1} padding="py-12 md:py-16">
         <div className="max-w-2xl">
-          <WaitlistForm />
+          {FORMS_OPEN ? (
+            <WaitlistForm />
+          ) : (
+            <p className="text-[16px] font-sans text-muted leading-[1.65]">{FORMS_CLOSED_NOTICE}</p>
+          )}
         </div>
       </Section>
     </main>

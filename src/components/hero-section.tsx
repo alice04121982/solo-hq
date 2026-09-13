@@ -10,7 +10,6 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const TRUST_SIGNALS = [
   "Travel estimates beside overseas prices",
   "UK success rates from the HFEA register",
-  "HFEA-licensed UK clinics flagged",
   "Donor sperm & egg options compared",
 ];
 

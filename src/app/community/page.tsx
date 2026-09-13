@@ -5,6 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { BentoCard } from "@/components/bento-card";
 import { CommunityApplicationForm } from "@/components/community-application-form";
+import { FORMS_CLOSED_NOTICE, FORMS_OPEN } from "@/lib/launch";
 import {
   COMMUNITY_FEATURES,
   JOIN_STEPS,
@@ -212,7 +213,11 @@ export default function CommunityPage() {
           </div>
 
           <BentoCard className="lg:sticky lg:top-8">
-            <CommunityApplicationForm />
+            {FORMS_OPEN ? (
+              <CommunityApplicationForm />
+            ) : (
+              <p className="text-[16px] font-sans text-muted leading-[1.65]">{FORMS_CLOSED_NOTICE}</p>
+            )}
           </BentoCard>
         </div>
       </Section>

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { FORMS_CLOSED_API_MESSAGE, FORMS_OPEN } from "@/lib/launch";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import {
   isGuardFailure,
@@ -41,6 +42,12 @@ const LINK_PATTERN = /(https?:\/\/|www\.|\[url|<a\s)/i;
  * boundary. The security boundary is the human who reads it.
  */
 export async function POST(request: Request) {
+  // Closed until launch (see src/lib/launch.ts). Checked before anything is
+  // read, so a closed form stores nothing and spends no rate-limit budget.
+  if (!FORMS_OPEN) {
+    return NextResponse.json({ error: FORMS_CLOSED_API_MESSAGE }, { status: 503 });
+  }
+
   // Two tiers, because the two things being limited are different. The outer
   // one is generous: someone who mistypes an email, forgets the checkbox, then
   // writes a longer answer has made three requests and done nothing wrong, and

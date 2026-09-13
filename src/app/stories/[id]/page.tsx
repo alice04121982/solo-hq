@@ -10,8 +10,8 @@ import { getFamilyType } from "@/lib/family-types";
 /** Guides shown under a story with no specific family type. */
 const GENERAL_RESOURCES = [
   "consultation-questions",
-  "two-week-wait",
-  "uk-support-groups",
+  "understanding-hfea-success-rates",
+  "complete-solo-ivf-cost-breakdown",
 ];
 
 interface PageProps {
