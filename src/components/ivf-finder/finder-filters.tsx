@@ -11,7 +11,14 @@ import {
   type Region,
   type Treatment,
 } from "@/types/clinic";
-import { cheapestPublishedPrice, FINDER_SORTS, priceBounds, type FinderSort } from "@/lib/clinics";
+import {
+  cheapestPublishedPrice,
+  FINDER_SORTS,
+  priceBounds,
+  rateFor,
+  verdictFor,
+  type FinderSort,
+} from "@/lib/clinics";
 import { RATE_NOTE } from "@/lib/rate-labels";
 import {
   FilterTogglePill,
@@ -41,7 +48,17 @@ export interface FinderFilterState {
   priceCeiling: number | null;
   donorAnonymity: "any" | "identifiable" | "anonymous";
   remoteConsultation: boolean;
+  /**
+   * Narrow by the published rate for the chosen age bracket. The two
+   * "average" options use the HFEA's own verdict on each UK clinic, so they
+   * never compare figures across clinics ourselves; overseas clinics have no
+   * verdict and drop out of those two. "published" keeps any clinic with a
+   * figure for the bracket, whoever published it.
+   */
+  successRate: SuccessRateFilter;
 }
+
+export type SuccessRateFilter = "any" | "above" | "consistentOrAbove" | "published";
 
 export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   ageBracket: "under35",
@@ -52,7 +69,26 @@ export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   priceCeiling: null,
   donorAnonymity: "any",
   remoteConsultation: false,
+  successRate: "any",
 };
+
+const SUCCESS_RATE_OPTIONS: FilterOption<SuccessRateFilter>[] = [
+  { value: "any", label: "Any" },
+  {
+    value: "above",
+    label: "Above the national average (HFEA)",
+    shortLabel: "above national average",
+  },
+  {
+    value: "consistentOrAbove",
+    label: "At or above the national average (HFEA)",
+    shortLabel: "at or above national average",
+  },
+  { value: "published", label: "Has a published rate", shortLabel: "published rate" },
+];
+
+const SUCCESS_RATE_NOTE =
+  "The average options use the HFEA's own verdict for the chosen age group, so they show UK clinics only. Rates are averages across many patients, not a prediction for you.";
 
 const DONOR_OPTIONS: FilterOption<FinderFilterState["donorAnonymity"]>[] = [
   { value: "any", label: "Any" },
@@ -128,6 +164,13 @@ export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
 
   if (f.remoteConsultation && !clinic.remoteConsultation) return false;
 
+  if (f.successRate === "published" && rateFor(clinic, f.ageBracket) == null) return false;
+  if (f.successRate === "above" && verdictFor(clinic, f.ageBracket) !== "above") return false;
+  if (f.successRate === "consistentOrAbove") {
+    const verdict = verdictFor(clinic, f.ageBracket);
+    if (verdict !== "above" && verdict !== "consistent") return false;
+  }
+
   return true;
 }
 
@@ -138,7 +181,8 @@ export function countActiveFilters(f: FinderFilterState): number {
     f.treatments.length +
     (f.priceCeiling != null ? 1 : 0) +
     (f.donorAnonymity !== "any" ? 1 : 0) +
-    (f.remoteConsultation ? 1 : 0)
+    (f.remoteConsultation ? 1 : 0) +
+    (f.successRate !== "any" ? 1 : 0)
   );
 }
 
@@ -270,6 +314,25 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         onToggle={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
       />
 
+      {/* Someone narrowing by rate wants the strongest figures first, so
+          choosing an option here also moves the list into rate order when
+          it is still in the default alphabetical order. The sort stays
+          theirs to change afterwards. */}
+      <SingleSelectDropdown
+        label="Success rate"
+        options={SUCCESS_RATE_OPTIONS}
+        value={filters.successRate}
+        defaultValue="any"
+        onChange={(successRate) =>
+          onChange({
+            ...filters,
+            successRate,
+            sort: successRate !== "any" && filters.sort === "name" ? "rate" : filters.sort,
+          })
+        }
+        note={SUCCESS_RATE_NOTE}
+      />
+
       {/* Display order, not a filter: it never narrows the list and is not
           counted in the active-filter badge. */}
       <SingleSelectDropdown
@@ -358,6 +421,13 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
           label="Remote consultations"
           active
           onToggle={() => remove({ remoteConsultation: false })}
+        />
+      )}
+      {filters.successRate !== "any" && (
+        <FilterTag
+          label={SUCCESS_RATE_OPTIONS.find((o) => o.value === filters.successRate)?.label ?? ""}
+          active
+          onToggle={() => remove({ successRate: "any" })}
         />
       )}
       <button
