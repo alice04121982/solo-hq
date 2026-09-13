@@ -38,7 +38,7 @@ const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
  * The header composition: one oversized bloom cropped by the right edge, with
  * two small marks off it. Pinks rather than lime, because the header sits on
  * the cream band and lime goes muddy against it. The movement is deliberately
- * near-imperceptible — a minute for one rotation of the bloom — so the band
+ * near-imperceptible, a minute for one rotation of the bloom, so the band
  * reads as alive rather than animated.
  */
 const HERO_MARKS: HeaderMark[] = [
@@ -397,7 +397,7 @@ export default function WorkPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Employers increasingly put fertility cover in the recruitment pack, which makes it a
           negotiable, comparable part of an offer, and one of the few where the difference between
-          two employers can exceed £10,000. Ask before you sign; it is a benefits question like
+          two employers can run to thousands of pounds. Ask before you sign; it is a benefits question like
           pension matching, and you are not declaring anything by asking it.
         </p>
 

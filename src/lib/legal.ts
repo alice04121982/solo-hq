@@ -344,8 +344,8 @@ const TERMS: LegalPage = {
         "We try hard to be accurate, and we are explicit about the provenance of the numbers we publish:",
       ],
       bullets: [
-        "UK clinic success rates marked as HFEA-verified are drawn from data published by the Human Fertilisation and Embryology Authority, the UK regulator, at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/). The HFEA does not endorse this site.",
-        "Figures for overseas clinics are self-reported by the clinics themselves and are not independently verified. We label them as such.",
+        "UK clinic success rates marked as from the HFEA register are copied from the Choose a Clinic pages published by the Human Fertilisation and Embryology Authority, the UK regulator, at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/). The HFEA does not endorse this site.",
+        "Figures for overseas clinics are the clinics' own published figures, which we have not checked against a regulator. We label them as such, and we do not show a rate where a clinic publishes none or measures something other than births.",
         "Prices are indicative, move frequently, and rarely include everything you will actually pay. Treat every price on this site as a starting point for your own written quote, never as an offer.",
         "Success rates are population statistics. They vary substantially with age, diagnosis, and protocol, and no published rate is a prediction for any individual.",
       ],

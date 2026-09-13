@@ -1,5 +1,5 @@
 /**
- * Content for /funding — how people actually pay for fertility treatment in
+ * Content for /funding, how people actually pay for fertility treatment in
  * the UK, and what is free on the NHS.
  *
  * Editorial rules for anything added to this file. Money copy goes wrong in a
@@ -10,7 +10,7 @@
  *     page is a range with its exclusions attached, because the exclusions are
  *     what the reader gets caught by.
  *  2. Say who carries the risk. Every funding route moves the risk of a failed
- *     cycle somewhere — onto the patient, the clinic, a lender or an insurer.
+ *     cycle somewhere, onto the patient, the clinic, a lender or an insurer.
  *     That is the thing being bought, so it is stated on every card.
  *  3. Eligibility is local. NICE recommends; the NHS body where you live
  *     decides. Never state a national rule that is actually an ICB policy.
@@ -27,22 +27,35 @@ export interface SourceLink {
 }
 
 /** When the funding facts on the page were last checked against sources. */
-export const LAST_REVIEWED = "August 2026";
+export const LAST_REVIEWED = "September 2026";
 
 /**
  * Money anchors the funding routes are measured against. Kept here rather
  * than in page JSX so the periodic data re-verification covers them.
+ *
+ * Price figures come from the site's reference price set (published price
+ * lists read September 2026, method on /about#methodology): CREATE IVF £3,795
+ * (excludes drugs, monitoring bloods, sedation and the HFEA fee); Bourn Hall
+ * £4,495 (includes monitoring, scans, sedation and the HFEA fee; drugs extra);
+ * LWC IVF £3,995, and LWC's own typical total of £9,140–£10,640. The HFEA
+ * average is from its IVF page ("one cycle of IVF costs £5,000 on average,
+ * although this varies considerably"):
+ * https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/
+ *
  * The NHS-funded share is England-specific, from the HFEA's "Fertility
  * treatment 2024: trends and figures" (published June 2026):
  * https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures/
  * (UK-wide the 2024 share was 28%, down from 35% in 2019.)
  */
 export const COST_ANCHORS: { value: string; label: string }[] = [
-  { value: "£5,000–£7,000", label: "Advertised price of a private IVF cycle, before drugs, ICSI, freezing and storage" },
-  { value: "£1,000–£2,500", label: "Drugs for a stimulated cycle, almost always charged on top of the headline price" },
-  { value: "£8,000–£14,000", label: "Realistic all-in cost of one cycle using donor sperm, once everything is counted" },
+  { value: "£3,795–£4,495", label: "Headline price per IVF cycle, own eggs, at CREATE, LWC and Bourn Hall. Drugs are extra at all three, and what else is included differs" },
+  { value: "About £5,000", label: "The HFEA's average for one cycle of IVF, which it says varies considerably" },
+  { value: "£9,140–£10,640", label: "Clinic's own estimate of a typical total: LWC's published figure for one IVF cycle once drugs and extras are counted" },
   { value: "25%", label: "Share of IVF cycles in England that were NHS-funded in 2024, down from 32% in 2019 (HFEA)" },
 ];
+
+/** Shown under the cost anchors, followed by a link to /about#methodology. */
+export const COST_ANCHORS_SOURCE = "Based on published price lists checked September 2026";
 
 /* ── The order of operations ─────────────────────────────────────────────── */
 
@@ -102,7 +115,7 @@ export const NATION_POLICIES: NationPolicy[] = [
     slug: "england",
     name: "England",
     cycles:
-      "Set locally by your Integrated Care Board, not nationally. Most ICBs fund one full cycle; a minority fund the three NICE recommends, and a few fund none.",
+      "Set locally by your Integrated Care Board, not nationally. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends (two of 42 in October 2025). Boards merged in April 2026, so policies may change.",
     nhsFundedShare:
       "25% of IVF cycles in England were NHS-funded in 2024, down from 32% in 2019, and it ranged from 51% in the North East to 20% in the South West and East Midlands.",
     donorRoute:
@@ -117,6 +130,8 @@ export const NATION_POLICIES: NationPolicy[] = [
     ],
     sources: [
       { label: "HFEA: fertility treatment 2024 trends and figures", href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures" },
+      { label: "BFS and Fertility Alliance: Ending IVF inequity (October 2025)", href: "https://www.britishfertilitysociety.org.uk/wp-content/uploads/2025/10/Business-case-for-IVF-three-rounds-FA-BFS-final.pdf" },
+      { label: "PET: NHS fertility funding tracker", href: "https://www.progress.org.uk/fertility-policy-tracker/" },
     ],
   },
   {
@@ -364,10 +379,10 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     typicalCost:
       "Typically free or heavily discounted IVF, sometimes leaving only the HFEA licence fee and drugs. The largest single saving available to anyone who qualifies.",
     riskHolder:
-      "Shared. If too few eggs are collected the share may not go ahead and the discount can fall away, so ask what happens then before you start.",
+      "Shared. HFEA guidance says that if too few eggs are collected, you should be offered all of them for your own treatment at the agreed discount. Ask the clinic to confirm this in writing.",
     howItWorks: [
       "You have IVF as normal, and the eggs collected are split between you and a recipient who cannot use their own.",
-      "Clinics set their own criteria; commonly under 35 or 36, a BMI in range, good ovarian reserve (AMH thresholds are typical), and meeting HFEA donor screening.",
+      "Clinics set their own criteria. The HFEA's general guide is that sharers are 35 or under, with a BMI in range, good ovarian reserve (AMH thresholds are typical), and meeting HFEA donor screening.",
       "Freeze-and-share applies the same principle to elective egg freezing.",
     ],
     suits: [
@@ -377,7 +392,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     watchOuts: [
       "Donation in the UK is identity-release: any child born from your donated eggs can obtain your identifying details from the HFEA at 18. This is the real decision, not the money.",
       "Counselling is required, and worth taking seriously rather than treating as a formality.",
-      "If your response to stimulation is poor, you may end up sharing eggs you would rather have kept, or losing the discount. Get the clinic's rule in writing.",
+      "Ask what happens if your response to stimulation is poor. HFEA guidance says you should be offered all the eggs for your own treatment at the agreed discount; get the clinic's rule in writing.",
     ],
     sources: [{ label: "HFEA: egg sharing", href: "https://www.hfea.gov.uk/donation/donors/egg-sharing/" }],
   },
@@ -388,7 +403,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     summary:
       "Lower drug doses and a leaner service model cut the per-cycle price, at the cost of fewer eggs per attempt.",
     typicalCost:
-      "Advertised cycles from roughly £2,500–£3,500 against £5,000–£7,000 for standard IVF, though the realistic all-in figure is usually well above the headline.",
+      "Advertised prices sit below standard IVF, though the realistic all-in figure is usually well above the headline.",
     riskHolder: "You. A cheaper cycle is still a cycle you have paid for.",
     howItWorks: [
       "Mild and natural protocols use little or no stimulation, so the drug bill (often £1,000–£2,500 in standard IVF) drops sharply.",
@@ -431,7 +446,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     summary:
       "The HFEA rates treatment add-ons by evidence, and most are rated as not proven to improve the chance of a live birth.",
     where: "The HFEA ratings are UK, but the evidence they summarise is international and worth using anywhere.",
-    typicalCost: "Add-ons commonly run £150–£3,000 each; declining them is the cheapest decision on this page.",
+    typicalCost: "Add-ons are charged on top of the cycle price; declining them is the cheapest decision on this page.",
     riskHolder: "You: this is money spent, not risk transferred.",
     howItWorks: [
       "The HFEA rates each add-on green, yellow, grey, black or red, based on evidence from trials. When we checked, no add-on was rated green.",
@@ -451,7 +466,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     summary:
       "Cycle prices in parts of Europe run well below UK levels, with travel, law and follow-up as the trade-offs.",
     typicalCost:
-      "Roughly €2,500–€4,500 a cycle in the Czech Republic and around €5,000–€6,000 in Spain, before drugs, travel, accommodation and repeat visits.",
+      "Clinic price lists abroad are often below UK headline prices, before drugs, travel, accommodation and repeat visits. Get the clinic's own itemised quote.",
     riskHolder: "You, with less regulatory protection than the HFEA provides at home.",
     howItWorks: [
       "Monitoring is often done in the UK and the collection and transfer abroad, which means coordinating two clinics.",
@@ -543,16 +558,16 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Multi-cycle and refund programmes",
     group: "share",
     summary:
-      "A fixed fee for two or three cycles, with part or all of it refunded if you do not have a baby.",
+      "Two different products. Refund programmes: a fixed fee for two or three cycles, with part or all of it refunded if you do not have a baby. Multi-cycle packages: a discounted fixed price for several cycles, with no refund.",
     where: "UK providers named; equivalents exist in most private fertility markets.",
     typicalCost:
-      "A discount of roughly a third against paying cycle by cycle, in exchange for paying up front. Refund levels are commonly 50%, 70% or 100% of the programme fee depending on age and plan.",
+      "Access Fertility's published refund options are 50%, 70% or 100% of the programme fee, for patients under 40, and it states a saving of at least 30% against paying the clinic directly (accessfertility.com, September 2026). Multi-cycle packages are cheaper per cycle but return nothing if treatment does not work.",
     riskHolder:
-      "Shared, and priced accordingly. The provider carries the risk of failure; you carry the risk of succeeding first time and having pre-paid for cycles you never needed.",
+      "Shared on a refund programme, and priced accordingly: the provider carries the risk of failure; you carry the risk of succeeding first time and having pre-paid for cycles you never needed. On a multi-cycle package with no refund, you carry both.",
     howItWorks: [
-      "Access Fertility is the largest UK provider, sold through around 70 clinics across the UK, Ireland and Spain. Assured Fertility is a newer entrant offering a single fixed cost with a refund if there is no baby, and a partial refund if you succeed early.",
-      "Several clinics and groups run their own refund or multi-cycle packages directly (Bourn Hall and the larger clinic groups among them), so compare the clinic's own scheme against the third-party one.",
-      "Programmes typically bundle two or three fresh cycles with unlimited frozen embryo transfers from those cycles.",
+      "Refund programmes (money back if no baby): a fixed fee for two or three egg collections plus the frozen transfers from them, with part or all of the fee refunded if you do not have a baby. Access Fertility, the largest UK provider, offers its refund programme to patients under 40.",
+      "Multi-cycle packages (cheaper per cycle, no refund): a discounted fixed price for several cycles, with nothing back if treatment does not work. Access Fertility's covers up to two cycles, or up to four at selected clinics, and is the route it offers patients aged 40 to 45.",
+      "Several clinics and groups run their own refund or multi-cycle packages directly, so compare the clinic's own scheme against the third-party one.",
       "Medical eligibility applies: these are underwritten products and not everyone is accepted.",
     ],
     suits: [
@@ -576,14 +591,13 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "share",
     summary:
       "You pay a premium or protection fee; the plan carries the treatment cost, and you repay it only if you have a child.",
-    where: "Gaia in the UK; Future Family, Sunfish and BUNDL are the equivalents in the US market.",
+    where: "Gaia in the UK.",
     typicalCost:
-      "A premium priced on your own predicted odds, with the treatment cost repaid over a period of years if you have a baby.",
-    riskHolder: "The insurer, which is the entire point of the product, and it prices that risk from your clinical data.",
+      "A fee priced on your own predicted odds, with the treatment cost repaid over a period of years if you have a baby.",
+    riskHolder: "The plan provider, which prices that risk from your clinical data.",
     howItWorks: [
-      "Gaia is the established UK product and the only one here that is genuinely insurance: it assesses your data, prices a plan, and writes off the treatment cost if you do not have a child after the covered rounds. Stopping early is generally treated as a discount rather than a write-off, so check that clause specifically.",
-      "If you do have a child, you repay the treatment cost in instalments over a period of years, on top of the premiums already paid.",
-      "In the US the same idea is sold in several shapes: Future Family's monthly plans and loans, Sunfish's bundled packages with a partial money-back guarantee, and BUNDL's multi-cycle bundles with full or partial refunds. They are financing products with an outcome guarantee attached rather than regulated insurance, which changes what protection you have if the company fails.",
+      "Plans like Gaia charge a fee on top of treatment. If you do not have a baby after the covered rounds, you do not repay the treatment cost. If you do, you repay it over several years, on top of the fees already paid.",
+      "Gaia Family is the trading name of Gaia Fertility Limited; its website gives its FCA firm reference number as 985551. Check the firm on the FCA register yourself, and read what happens if you stop early.",
     ],
     suits: [
       "People with reasonable predicted odds who cannot fund several cycles up front",
@@ -597,9 +611,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     ],
     sources: [
       { label: "Gaia: IVF plans", href: "https://gaiafamily.com/en-gb" },
-      { label: "Future Family", href: "https://www.futurefamily.com/" },
-      { label: "Sunfish", href: "https://www.joinsunfish.com/" },
-      { label: "BUNDL Fertility", href: "https://bundlfertility.com/" },
+      { label: "FCA register", href: "https://register.fca.org.uk/" },
     ],
   },
 
@@ -609,12 +621,12 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Clinic 0% payment plans",
     group: "spread",
     summary:
-      "Interest-free credit arranged at the clinic, usually over 10–12 months, through a regulated healthcare lender.",
+      "Interest-free credit arranged at the clinic through a regulated healthcare lender.",
     where: "UK lenders named; almost every private fertility market has an equivalent at the point of sale.",
     typicalCost: "No interest over the promotional term; watch for arrangement fees and monthly account charges.",
     riskHolder: "You. Credit does not reduce the cost or the risk, it only moves when you pay.",
     howItWorks: [
-      "Clinics partner with regulated lenders (Chrysalis Finance and Novuna are the ones most often seen), and the application is made at the point of treatment.",
+      "Clinics partner with regulated lenders, and the application is made at the point of treatment.",
       "Longer terms are usually available at an interest rate rather than at 0%.",
     ],
     suits: ["People who can clear the balance within the interest-free period from income"],
@@ -653,7 +665,7 @@ export interface CountryFunding {
   summary: string;
   /** What the state pays for. */
   publicFunding: string[];
-  /** Who can actually get it — the part most guides leave out. */
+  /** Who can actually get it, the part most guides leave out. */
   access: string;
   /** The private market and the products that finance it. */
   privateRoutes: string[];
@@ -667,7 +679,7 @@ export interface CountryFunding {
  *
  * Each entry is deliberately short: the shape of the system, who it admits,
  * and what finances the rest. Anything more specific belongs in a page of its
- * own, written the way the UK section was — from that country's own sources.
+ * own, written the way the UK section was, from that country's own sources.
  */
 export const INTERNATIONAL_FUNDING: CountryFunding[] = [
   {
@@ -820,7 +832,7 @@ export const PROTECTIONS: { title: string; body: string; source?: SourceLink }[]
   },
   {
     title: "Success-rate claims are regulated",
-    body: "Compare clinics using the HFEA's published data rather than the figure on a clinic's own homepage, and check that the figure quoted to you is for patients of your age and diagnosis, per cycle started rather than per transfer.",
+    body: "Compare clinics using the HFEA's published figures, which are births per embryo transferred and births per egg collection for your age group, rather than the figure on a clinic's own homepage. Treat a rate on a clinic's own website with care unless it says how it was calculated.",
     source: { label: "HFEA: choose a clinic", href: "https://www.hfea.gov.uk/choose-a-clinic/" },
   },
   {

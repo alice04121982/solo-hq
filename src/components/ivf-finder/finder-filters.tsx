@@ -11,7 +11,8 @@ import {
   type Region,
   type Treatment,
 } from "@/types/clinic";
-import { cheapestPublishedPrice, priceBounds } from "@/lib/clinics";
+import { cheapestPublishedPrice, FINDER_SORTS, priceBounds, type FinderSort } from "@/lib/clinics";
+import { RATE_NOTE } from "@/lib/rate-labels";
 import {
   FilterTogglePill,
   MultiSelectDropdown,
@@ -24,13 +25,15 @@ import { CountryFlag } from "@/components/country-flag";
 /**
  * Filter state for the Cairn clinic finder.
  *
- * Everything except the age bracket is optional and combinable, and none of it
- * gates results: the empty state matches every clinic in the database. The age
- * bracket is required because it drives the ranking, not because it narrows
- * the list.
+ * Everything except the age bracket and the sort is optional and combinable,
+ * and none of it gates results: the empty state matches every clinic in the
+ * database. The age bracket is required because it chooses which published
+ * figure a card shows, not because it narrows the list. The sort is display
+ * order only and is never counted as a filter.
  */
 export interface FinderFilterState {
   ageBracket: AgeBracket;
+  sort: FinderSort;
   regions: Region[];
   countries: string[];
   treatments: Treatment[];
@@ -42,6 +45,7 @@ export interface FinderFilterState {
 
 export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   ageBracket: "under35",
+  sort: "name",
   regions: [],
   countries: [],
   treatments: [],
@@ -80,7 +84,7 @@ export function priceCeilingOptions(): FilterOption<string>[] {
  * The price the ceiling filter compares against, priced per treatment: IUI is
  * a fraction of an IVF cycle, so a £1,500 budget with IUI selected must look
  * at the IUI price, not the IVF headline. With no treatment selected, the
- * clinic's cheapest published price counts — "treatment under £5k" includes
+ * clinic's cheapest published price counts, "treatment under £5k" includes
  * IUI, not just IVF. Undefined means nothing relevant is published, and the
  * clinic is excluded while a ceiling is set.
  */
@@ -180,7 +184,7 @@ interface FilterControlsProps {
  * belongs to instead of padding out the page.
  *
  * Each pill states its own selection, so where the row itself is visible it is
- * the whole account of the current narrowing — no second strip repeating it.
+ * the whole account of the current narrowing, no second strip repeating it.
  *
  * Rendered inline on desktop and inside the filter sheet on mobile, so both
  * share one source of truth.
@@ -202,10 +206,16 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
     label: t,
   }));
   const priceOptions = priceCeilingOptions();
+  const sortOptions: FilterOption<FinderSort>[] = FINDER_SORTS.map((s) => ({
+    value: s.value,
+    label: s.label,
+    shortLabel: s.label.toLowerCase(),
+  }));
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {/* Age drives the ranking, so it is required and always shows its value. */}
+      {/* Age chooses which published figure each card shows, so it is
+          required and always shows its value. */}
       <SingleSelectDropdown
         label="Age"
         options={ageOptions}
@@ -213,7 +223,7 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         defaultValue={DEFAULT_FINDER_FILTERS.ageBracket}
         alwaysShowValue
         onChange={(ageBracket) => onChange({ ...filters, ageBracket })}
-        note="Results rank by live birth rate for this age group."
+        note={RATE_NOTE}
       />
 
       {/* Region and country narrow the same list; neither gates it. */}
@@ -243,7 +253,7 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         onChange={(value) =>
           onChange({ ...filters, priceCeiling: value === "any" ? null : Number(value) })
         }
-        note="Compares the cheapest published price for your selected treatments: IUI prices where IUI is selected, all treatments when none are."
+        note="Filters on IUI price if you pick IUI, otherwise on the IVF price."
       />
 
       <SingleSelectDropdown
@@ -258,6 +268,18 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         label="Remote consultations"
         active={filters.remoteConsultation}
         onToggle={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
+      />
+
+      {/* Display order, not a filter: it never narrows the list and is not
+          counted in the active-filter badge. */}
+      <SingleSelectDropdown
+        label="Sort"
+        options={sortOptions}
+        value={filters.sort}
+        defaultValue={DEFAULT_FINDER_FILTERS.sort}
+        alwaysShowValue
+        onChange={(sort) => onChange({ ...filters, sort })}
+        note="Sorting by rate shows HFEA register figures and clinics' own figures as two separate groups, because the measures differ."
       />
 
       {onClearAll && countActiveFilters(filters) > 0 && (
@@ -275,8 +297,8 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
 
 /**
  * Removable Tags for every active optional filter. These stand in for the
- * filter row where it is not on screen — on mobile, where the controls live
- * behind the sheet — so the current narrowing is still visible and reversible
+ * filter row where it is not on screen, on mobile, where the controls live
+ * behind the sheet, so the current narrowing is still visible and reversible
  * in one tap. The age bracket is not here: it is required, so it has no
  * removed state.
  */
@@ -341,7 +363,7 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
       <button
         type="button"
         onClick={() =>
-          onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+          onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket, sort: filters.sort })
         }
         className="text-xs font-medium text-muted underline underline-offset-2 hover:opacity-70 transition-opacity"
       >

@@ -29,7 +29,7 @@ export const REGULATORS: Regulator[] = [
     registerUrl: "https://www.hfea.gov.uk/choose-a-clinic/clinic-search/",
     treatmentGuideUrl: "https://www.hfea.gov.uk/treatments/",
     description:
-      "The UK's independent regulator of fertility treatment. Every UK clinic must be licensed and inspected by the HFEA, and its public register publishes verified success rates and inspection ratings for each one.",
+      "The UK's independent regulator of fertility treatment. Every UK clinic must be licensed and inspected by the HFEA, and its public register publishes success rates, patient ratings and inspection ratings for each one.",
   },
 ];
 

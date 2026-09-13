@@ -6,7 +6,7 @@ import { ClinicMatcher } from "@/components/clinic-matcher";
 
 export const metadata = {
   title: "Find Your Clinic | CairnFertility",
-  description: "Tell us about your situation and we'll match you with the clinics most suited to your age, family type, and budget.",
+  description: "Answer four questions to see clinics that fit your family type, budget and travel range, with every figure's source.",
 };
 
 export default function GetStartedPage() {
@@ -24,7 +24,7 @@ export default function GetStartedPage() {
             style={{ color: "var(--teal)" }}
           >
             <ShapeMark name="halves" size={14} style={{ color: "var(--lavender)" }} />
-            Personalised matching
+            Clinic matcher
           </p>
           <h1
             className="font-sans font-bold text-teal mb-4"
@@ -33,12 +33,11 @@ export default function GetStartedPage() {
             Find clinics that fit your situation.
           </h1>
           <p className="text-[16px] font-sans text-muted leading-[1.65]">
-            Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget, not just headline numbers.
+            Answer four questions and we&apos;ll show you clinics that fit your family type, budget and travel range, with every figure&apos;s source.
           </p>
           <p className="text-[13px] font-sans text-muted leading-relaxed mt-4">
-            Your answers, including anything about your health, stay on your device. The
-            matching runs entirely in your browser, and nothing you enter here is sent to us
-            or stored anywhere. See our{" "}
+            Your answers stay on your device. The matching runs entirely in your browser, and
+            nothing you enter here is sent to us or stored anywhere. See our{" "}
             <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground transition-colors">
               privacy policy
             </Link>
@@ -47,7 +46,7 @@ export default function GetStartedPage() {
         </div>
       </Section>
 
-      {/* Wizard — gets the full container width; it keeps question steps in a
+      {/* Wizard: gets the full container width; it keeps question steps in a
           centred column and lets the results grid span the whole page. The
           wizard renders its own state-driven backdrop mark, so the band only
           needs to crop the bleed. overflow-clip rather than overflow-hidden:

@@ -27,7 +27,7 @@ export interface Story {
   body: string;
   /**
    * A line lifted verbatim from `body`, pulled out as a speech-bubble quote
-   * near the top of the guide. Optional — only the lead story of each family
+   * near the top of the guide. Optional, only the lead story of each family
    * type carries one, since that is the only place a quote is rendered.
    */
   quote?: string;
@@ -45,7 +45,7 @@ export interface FamilyType {
   slug: FamilyTypeSlug;
   /**
    * The family type category. Doubles as the hero eyebrow, so it deliberately
-   * names the family only — routes and donation types vary far too much within
+   * names the family only, routes and donation types vary far too much within
    * a category (home insemination, IUI, a known donor) to be pinned down here.
    */
   label: string;
@@ -54,7 +54,7 @@ export interface FamilyType {
   cardSummary: string;
   /**
    * Optional so a guide can ship before its photograph has been licensed.
-   * Where it is absent the hero renders a designed panel instead — never
+   * Where it is absent the hero renders a designed panel instead, never
    * substitute a stock photo of someone else's family to fill the gap.
    */
   image?: string;
@@ -62,7 +62,7 @@ export interface FamilyType {
   hideHeroImage?: boolean;
   /**
    * Renders the family's shape mark (per `FAMILY_SHAPES`) as an oversized
-   * backdrop cropped by the hero's top edge — the band-backdrop treatment
+   * backdrop cropped by the hero's top edge, the band-backdrop treatment
    * from `Section`, applied to the guide hero.
    */
   heroShapeBackdrop?: boolean;
@@ -95,7 +95,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Choose your treatment route",
-        body: "IUI uses donor sperm inserted directly into the uterus during ovulation. It's less invasive and costs roughly £1,000–£1,500 per cycle. IVF involves stimulating your ovaries, retrieving eggs, fertilising them in the lab, and transferring an embryo. For women under 35 with good fertility markers, IUI is often a sensible first step.",
+        body: "IUI uses donor sperm inserted directly into the uterus during ovulation. It's less invasive. IUI typically costs about a quarter of an IVF cycle, plus donor sperm; success rates are around a third of IVF's (HFEA). IVF involves stimulating your ovaries, retrieving eggs, fertilising them in the lab, and transferring an embryo. For women under 35 with good fertility markers, IUI is often a sensible first step.",
       },
       {
         number: 3,
@@ -145,10 +145,10 @@ export const FAMILY_TYPES: FamilyType[] = [
         name: "Natalie",
         age: 40,
         location: "London",
-        tag: "Donor egg journey",
+        tag: "Double donation",
         title: "I used donor eggs and I'm not ashamed of it",
         body: "After three failed cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then, after reading dozens of stories from women who'd been exactly here, at peace with it. My twins Evi and Rosa are two and a half. I tell them their origin story regularly, and they think it's completely normal. Because it is.",
-        treatment: "Donor egg IVF",
+        treatment: "Double donation (donor eggs and donor sperm)",
       },
       {
         name: "Jo",
@@ -476,7 +476,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 4,
         title: "NHS vs private: understanding your options",
-        body: "NHS IVF funding varies enormously by Clinical Commissioning Group (now ICB). Some areas fund 1–3 cycles; others fund none. Check your local criteria carefully; they vary by age, BMI, existing children, and postcode. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
+        body: "NHS IVF funding in England varies by Integrated Care Board. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends. Check your local criteria carefully; they vary by age, BMI, existing children, and postcode. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
       },
       {
         number: 5,
@@ -530,7 +530,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       },
     ],
     clinicNote:
-      "Use our comparison tool to filter by treatment type (IVF, ICSI, IUI, or donor gametes) and sort by success rate for your age bracket to find the clinic that gives you the best chance.",
+      "Use our comparison tool to filter by the treatment you need (IVF, ICSI, IUI or donor gametes), then compare success rates for your age group alongside cost, waiting times and how the clinic treats patients. A clinic's rate is an average, not your personal chance.",
     resources: [
       "iui-vs-ivf-vs-donor-eggs",
       "consultation-questions",

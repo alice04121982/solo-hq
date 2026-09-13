@@ -1,5 +1,5 @@
 /**
- * Content for /work — fertility treatment and employment.
+ * Content for /work, fertility treatment and employment.
  *
  * Editorial rules for anything added to this file. This section carries more
  * legal risk than the rest of the site, and the failure modes are specific.
@@ -51,7 +51,7 @@ export const WORKPLACE_STATS = [
  * One law/not-law entry, written as a claim you can scan plus the detail
  * behind it. Split deliberately: readers arrive at this section to find out
  * where they stand, and a wall of full sentences buries the answer. The
- * `point` must stand alone as a true statement — the `detail` qualifies it,
+ * `point` must stand alone as a true statement, the `detail` qualifies it,
  * it never reverses it.
  */
 export interface RightsPoint {
@@ -273,12 +273,12 @@ export const BENEFIT_SHAPES: BenefitShape[] = [
   {
     title: "A contribution",
     body: "A fixed sum towards treatment, often once per employee rather than per cycle.",
-    worth: "£500–£3,000 is common in the UK.",
+    worth: "A fixed sum, often a few thousand pounds at most.",
   },
   {
     title: "A lifetime fund",
     body: "A pot you draw against for treatment, drugs and sometimes storage, usually administered by a benefits platform.",
-    worth: "The most valuable common shape. US lifetime caps cluster around $20,000; the largest UK schemes run higher.",
+    worth: "The most valuable common shape.",
   },
   {
     title: "Full cycle cover",
@@ -288,7 +288,7 @@ export const BENEFIT_SHAPES: BenefitShape[] = [
   {
     title: "Paid leave for treatment",
     body: "Dedicated days off for appointments, separate from annual leave and sickness.",
-    worth: "10 days is the emerging benchmark where it exists. Worth more than a small contribution to most people in treatment.",
+    worth: "Where it exists, usually 5–10 days a year. Worth more than a small contribution to most people in treatment.",
   },
   {
     title: "A support platform with no treatment money",
@@ -487,7 +487,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
   {
     slug: "job-offer",
     label: "At the offer stage",
-    situation: "You are choosing between jobs, and one of them may quietly be worth £10,000 more than the other.",
+    situation: "You are choosing between jobs, and one of them may quietly be worth thousands of pounds more than the other.",
     whatsHappening: [
       "Benefits questions are entirely normal at offer stage, and family-forming provision is a benefits question like pension matching. Recruiters answer these daily.",
       "You are not obliged to say you are planning treatment, and asking about a benefit is not a declaration that you will use it.",

@@ -20,14 +20,14 @@ export interface Story {
   body: string;
   /**
    * A line lifted verbatim from `body`, used when this story is quoted on
-   * another page. It is never rendered alongside its own body — a pull quote
+   * another page. It is never rendered alongside its own body, a pull quote
    * sitting directly under the sentence it came from just reads as a stutter.
    */
   quote: string;
   treatment: string;
   /**
    * Optional so a story can ship before its photograph has been licensed.
-   * Where it is absent the card renders a typographic panel instead — never
+   * Where it is absent the card renders a typographic panel instead, never
    * substitute a stock photo of someone else's community to fill the gap.
    */
   image?: string;
@@ -85,12 +85,12 @@ export const ALL_STORIES: Story[] = [
     name: "Natalie",
     age: 40,
     location: "London",
-    tag: "Donor egg IVF",
+    tag: "Double donation",
     title: "I used donor eggs and I'm not ashamed of it",
     excerpt: "After three failed cycles with her own eggs, Natalie chose donor eggs. Her twins Evi and Rosa are two and a half, and she tells them their story regularly.",
-    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I heard the words and went somewhere else in my head for the rest of the appointment. I'd carried a picture of a child with my grandmother's nose through three rounds of injections, and it felt like being asked to grieve someone who had never existed.\n\nI was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. That order matters, and I don't think you can skip a stage. My counsellor said something that stuck: I wasn't giving up on a child, I was giving up on one route to a child. The destination hadn't moved.\n\nThe practical side was gentler than the emotional side. The success rates for donor egg IVF at my age were three or four times what my own eggs could offer, which at 40 is simply information worth having. My donor was a woman in her twenties who had donated before. Under UK rules my children can access her identifying information at 18, and I'm glad of that. It means their story has no locked doors in it.\n\nI transferred one embryo and froze the rest. The one split. Nobody plans for the sentence 'it's twins' when you have spent two years planning for the possibility of nobody.\n\nMy twins Evi and Rosa are two and a half. They have each other's laugh and, apparently, my scowl, which shouldn't be genetically possible and yet here we are. Epigenetics or imitation, I've stopped caring which.\n\nI tell them their origin story regularly, and they think it's completely normal. Because it is. We have the picture books, and 'the kind lady who helped' is part of the furniture of their lives. There will be harder questions when they're older and I'd rather meet those questions in the open than have them find a locked drawer.\n\nIf you're staring at the donor egg conversation and it hurts: let it hurt for a while. Then read the stories of people who are on the other side of it. Not the statistics. The stories. That's what moved me, in the end.",
+    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I heard the words and went somewhere else in my head for the rest of the appointment. I'd carried a picture of a child with my grandmother's nose through three rounds of injections, and it felt like being asked to grieve someone who had never existed.\n\nI was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. That order matters, and I don't think you can skip a stage. My counsellor said something that stuck: I wasn't giving up on a child, I was giving up on one route to a child. The destination hadn't moved.\n\nThe practical side was gentler than the emotional side. Donor eggs gave me a much better chance at my age, which at 40 is simply information worth having. My donor was a woman in her twenties who had donated before. Under UK rules my children can access her identifying information at 18, and I'm glad of that. It means their story has no locked doors in it.\n\nI transferred one embryo and froze the rest. The one split. Nobody plans for the sentence 'it's twins' when you have spent two years planning for the possibility of nobody.\n\nMy twins Evi and Rosa are two and a half. They have each other's laugh and, apparently, my scowl, which shouldn't be genetically possible and yet here we are. Epigenetics or imitation, I've stopped caring which.\n\nI tell them their origin story regularly, and they think it's completely normal. Because it is. We have the picture books, and 'the kind lady who helped' is part of the furniture of their lives. There will be harder questions when they're older and I'd rather meet those questions in the open than have them find a locked drawer.\n\nIf you're staring at the donor egg conversation and it hurts: let it hurt for a while. Then read the stories of people who are on the other side of it. Not the statistics. The stories. That's what moved me, in the end.",
     quote: "I tell them their origin story regularly, and they think it's completely normal. Because it is.",
-    treatment: "Donor egg IVF",
+    treatment: "Double donation (donor eggs and donor sperm)",
     image: "/photos/hands.webp",
     imageAlt: "An adult hand holding a small child's hand",
   },
@@ -140,7 +140,7 @@ export const ALL_STORIES: Story[] = [
   // ─── Faith, culture & belief ──────────────────────────────────────────────
   // PRE-LAUNCH: these are written examples showing the shape and tone the
   // section needs. They are not yet accounts from named, consenting people.
-  // Replace them with real contributors before this page goes public —
+  // Replace them with real contributors before this page goes public:
   // attributing a religious position to a named individual who did not say it
   // is the one mistake this section cannot afford. See
   // docs/faith-section-brief.md for the sourcing and photography checklist.

@@ -11,6 +11,7 @@ import { InternationalFunding } from "@/components/funding/international-funding
 import { NHSEligibilityChecker } from "@/components/funding/nhs-eligibility-checker";
 import {
   COST_ANCHORS,
+  COST_ANCHORS_SOURCE,
   FUNDING_ROUTES,
   INTERNATIONAL_FUNDING,
   LAST_REVIEWED,
@@ -48,7 +49,7 @@ const RED_FLAGS = [
   "A refund or multi-cycle programme that will not give you the full written terms to take home.",
   "Medication offered by anyone other than a registered pharmacy, including other patients online.",
   "A credit or insurance product from a firm you cannot find on the FCA register.",
-  "A clinic quoting a success rate that is not the HFEA-published figure for patients of your age and diagnosis.",
+  "A clinic that will not say how its success rate was calculated.",
   "Pressure to decide on a package during the consultation. Nothing on this page needs to be signed the same day.",
 ];
 
@@ -147,9 +148,9 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Every funding route below is a way of paying one of these bills. The headline price a clinic
           advertises is not one of them: drugs, ICSI, freezing and storage are charged separately, and
-          donor sperm adds roughly £650–£1,150 a vial at the main banks (premium donors run to about
-          £1,700) plus import and handling. That gap between the
-          quoted figure and the settled one is what catches most people out.
+          donor sperm adds roughly £1,000–£1,800 a vial at UK-facing banks, plus VAT on imports, a
+          family-slot or reservation fee and shipping (bank price lists, September 2026). That gap
+          between the quoted figure and the settled one is what catches most people out.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
@@ -157,6 +158,13 @@ export default function FundingPage() {
             <StatCard key={s.label} value={s.value} label={s.label} delay={i * 0.08} />
           ))}
         </div>
+        <p className="text-[13px] font-sans leading-relaxed text-muted mt-6" style={{ maxWidth: "68ch" }}>
+          {COST_ANCHORS_SOURCE} (see{" "}
+          <Link href="/about#methodology" className="underline underline-offset-2">
+            how we check prices
+          </Link>
+          ).
+        </p>
 
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
