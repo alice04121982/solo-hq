@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Check, X } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { rateBandLabel, rateFor } from "@/lib/clinics";
-import { travelEstimateForCity, TRAVEL_ASSUMPTIONS } from "@/lib/travel";
+import { travelEstimateForCity, TRAVEL_ASSUMPTIONS, TRAVEL_ESTIMATE_SCOPE } from "@/lib/travel";
 import {
   BADGE_CLINIC,
   BADGE_HFEA,
@@ -183,7 +183,8 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
         comparable with figures marked &ldquo;{BADGE_HFEA}&rdquo;. The travel estimate adds our
         destination figure for flights and stays across {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–
         {TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips to the headline price; drugs, ICSI, donor
-        material and storage are usually charged on top. Check live prices for your own dates.
+        material and storage are usually charged on top. {TRAVEL_ESTIMATE_SCOPE} Check live prices
+        for your own dates.
       </p>
     </div>
   );

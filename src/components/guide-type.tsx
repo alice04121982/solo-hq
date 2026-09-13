@@ -6,15 +6,14 @@ import {
   Lightbulb,
   ListChecks,
   MessagesSquare,
-  Quote,
   Signpost,
   type LucideIcon,
 } from "lucide-react";
 
 /**
  * The format system for resources: every entry format gets a flat icon that
- * depicts what the resource actually is — a checklist for checklists, an
- * open book for guides — so the format is recognisable before its title is
+ * depicts what the resource actually is (a checklist for checklists, an
+ * open book for guides) so the format is recognisable before its title is
  * read. An unknown format falls back to the signpost, the "points elsewhere"
  * mark.
  */
@@ -28,12 +27,11 @@ export const GUIDE_TYPE_ICONS: Record<string, LucideIcon> = {
   Directory: Signpost, // points elsewhere
   "Reading list": Library, // a shelf of books
   Hub: Compass, // a page that gathers everything on a topic
-  Stories: Quote, // people in their own words
 };
 
 /**
  * The format's flat icon at a fixed 48px, tinted with the format accent.
- * Decorative — the format is always named in text beside it.
+ * Decorative: the format is always named in text beside it.
  */
 export function GuideTypeIcon({ type, className }: { type: string; className?: string }) {
   const Icon = GUIDE_TYPE_ICONS[type] ?? Signpost;
@@ -47,7 +45,7 @@ export function GuideTypeIcon({ type, className }: { type: string; className?: s
   );
 }
 
-/** The format label — the compact text form used beside the icon on cards. */
+/** The format label: the compact text form used beside the icon on cards. */
 export function GuideTypeBadge({
   type,
   className,

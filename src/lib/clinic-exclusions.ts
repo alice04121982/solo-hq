@@ -96,7 +96,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (BBC documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
@@ -136,7 +136,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (BBC documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {

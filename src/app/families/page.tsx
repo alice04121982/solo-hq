@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "Fertility treatment guidance for every family: solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };
 
-// Display order: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad
+// Display order: Solo Mums, Solo Dads, Two Mums, Two Dads, Couples (opposite-sex)
 const DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
 
 function getOrdered(): FamilyType[] {
@@ -105,31 +105,6 @@ export default function FamiliesPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
           {families.map((family) => (
             <FamilyCard key={family.slug} family={family} />
-          ))}
-        </div>
-      </Section>
-
-      {/* What each guide includes */}
-      <Section band={2}>
-        <SectionHeading
-          eyebrow="What you'll find"
-          mark="spark"
-          title="Every guide includes:"
-          className="mb-12"
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8">
-          {[
-            { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood, tailored to your specific treatment route." },
-            { num: "02", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
-            { num: "03", title: "Newsletter", body: "Updates specific to your family type: clinic data changes and new research." },
-          ].map((item) => (
-            <div key={item.num} className="py-6 border-t border-border">
-              <p className="font-sans font-medium mb-3" style={{ fontSize: "1.5rem", color: "var(--lavender-dark)" }}>
-                {item.num}
-              </p>
-              <p className="font-sans font-medium text-teal text-lg mb-2">{item.title}</p>
-              <p className="text-sm font-sans text-muted leading-relaxed">{item.body}</p>
-            </div>
           ))}
         </div>
       </Section>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Check, Plus } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { formatCheckedDate } from "@/lib/clinics";
-import { travelEstimateForCity, TRAVEL_ASSUMPTIONS } from "@/lib/travel";
+import { travelEstimateForCity, TRAVEL_ASSUMPTIONS, TRAVEL_ESTIMATE_SCOPE } from "@/lib/travel";
 import { PRICE_HEADLINE } from "@/lib/rate-labels";
 import { eligibilitySummary } from "@/lib/country-eligibility";
 import { CountryFlag } from "@/components/country-flag";
@@ -98,6 +98,11 @@ export function ClinicCard({
           )}
         </div>
       </div>
+      {travel && clinic.pricePerCycleGbp != null && (
+        <p className="text-[11px] leading-snug -mt-2 mb-4" style={inkMuted}>
+          {TRAVEL_ESTIMATE_SCOPE}
+        </p>
+      )}
 
       <div className="flex gap-2 mt-auto">
         <button

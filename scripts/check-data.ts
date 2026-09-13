@@ -223,6 +223,45 @@ if (earliestCheckedOn && DATA_PROVENANCE.pricesVerifiedOn > earliestCheckedOn)
       `per-clinic checkedOn (${earliestCheckedOn}). Set it to the earliest date, not today.`
   );
 
+// ── Guide sources and freshness ──
+//
+// Every guide carries the sources it rests on and the date it was last read
+// against them. The date is stored in its display form ("13 September 2026")
+// so the page can print it as written; it is parsed here rather than kept
+// twice.
+const MONTHS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december",
+];
+
+/** "13 September 2026" -> "2026-09-13", or undefined when it does not parse. */
+function displayDateToIso(display: string): string | undefined {
+  const m = /^(\d{1,2}) ([A-Za-z]+) (\d{4})$/.exec(display.trim());
+  if (!m) return undefined;
+  const month = MONTHS.indexOf(m[2].toLowerCase());
+  if (month < 0) return undefined;
+  return `${m[3]}-${String(month + 1).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
+}
+
+for (const g of GUIDES) {
+  const id = `guides.ts (${g.slug})`;
+  if (!g.sources || g.sources.length === 0) errors.push(`${id}: needs at least one source.`);
+  for (const s of g.sources ?? []) {
+    if (!s.label || !s.href) errors.push(`${id}: a source is missing its label or href.`);
+    if (!/^https:\/\//.test(s.href)) errors.push(`${id}: source "${s.label}" is not an https link.`);
+  }
+  const iso = displayDateToIso(g.lastReviewed ?? "");
+  if (!iso) {
+    errors.push(`${id}: lastReviewed "${g.lastReviewed}" is not in the form "13 September 2026".`);
+    continue;
+  }
+  checkFreshness(
+    `${id} lastReviewed`,
+    iso,
+    "Re-open every source listed on the guide, correct anything that has changed, then update lastReviewed."
+  );
+}
+
 // ── Cross-file references ──
 // The dynamic routes resolve slugs against these files; a dangling reference
 // means a link somewhere on the site 404s.

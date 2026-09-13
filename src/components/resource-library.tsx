@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Briefcase, Calculator, Compass, Map, FileText, Heart, Baby } from "lucide-react";
+import { ArrowRight, Briefcase, Calculator, Compass, Map, FileText, Heart } from "lucide-react";
 import { GuideTypeBadge, GuideTypeIcon, GUIDE_TYPE_ICONS } from "./guide-type";
 
 /**
@@ -13,7 +13,7 @@ import { GuideTypeBadge, GuideTypeIcon, GUIDE_TYPE_ICONS } from "./guide-type";
  *
  * The category data lives here rather than in the page because the filter
  * needs client state, and lucide icon elements cannot cross the
- * server→client prop boundary.
+ * server-to-client prop boundary.
  */
 
 interface CategoryResource {
@@ -31,10 +31,8 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     title: "Finance & Costs",
     resources: [
       { title: "Funding & payment options: NHS, employers, plans and loans", type: "Hub", href: "/funding" },
-      { title: "The complete IVF cost breakdown (2025)", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
-      { title: "Fertility finance options: loans, grants & employer schemes", type: "Guide", slug: "fertility-finance-options" },
-      { title: "Budget spreadsheet template", type: "Template", slug: "ivf-budget-template" },
-      { title: "How to ask your employer about fertility benefits", type: "Script", slug: "employer-fertility-benefits" },
+      { title: "What IVF really costs", type: "Guide", slug: "complete-solo-ivf-cost-breakdown" },
+      { title: "IVF budget template (donor sperm)", type: "Template", slug: "ivf-budget-template" },
     ],
   },
   {
@@ -44,7 +42,6 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
       { title: "Your rights at work during fertility treatment", type: "Explainer", href: "/work#rights" },
       { title: "What employers offer, and how to find out what yours does", type: "Guide", href: "/work#find-out" },
       { title: "What to say at work without disclosing more than you want", type: "Scripts", href: "/work#asking" },
-      { title: "Weighing fertility benefits when you take a job", type: "Checklist", href: "/work#job-offers" },
     ],
   },
   {
@@ -58,34 +55,12 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     ],
   },
   {
-    icon: <Heart className="h-7 w-7" />,
-    title: "Emotional Wellbeing",
-    resources: [
-      { title: "Managing the two-week wait", type: "Guide", slug: "two-week-wait" },
-      { title: "When treatment doesn't work: what next?", type: "Guide", slug: "when-treatment-fails" },
-      { title: "Finding a fertility-aware therapist", type: "Directory", slug: "finding-fertility-therapist" },
-      { title: "Telling friends and family about your journey", type: "Guide", slug: "telling-friends-family" },
-      { title: "Looking after yourself", type: "Directory", href: "/support" },
-    ],
-  },
-  {
     icon: <FileText className="h-7 w-7" />,
-    title: "Legal & Admin",
+    title: "Law & your child",
     resources: [
       { title: "Donor conception and legal parenthood explained", type: "Explainer", slug: "donor-conception-legal-parenthood" },
-      { title: "What the HFEA register means for your child", type: "Guide", slug: "hfea-register" },
       { title: "Known donors: legal agreements you need", type: "Guide", slug: "known-donor-legal-agreements" },
-      { title: "Maternity leave as a self-employed parent", type: "Guide", slug: "self-employed-maternity-leave" },
-    ],
-  },
-  {
-    icon: <Baby className="h-7 w-7" />,
-    title: "Pregnancy & Beyond",
-    resources: [
-      { title: "Pregnancy: building your support team", type: "Guide", slug: "solo-pregnancy-support-team" },
-      { title: "Birth partner options", type: "Guide", slug: "birth-partner-options" },
       { title: "Talking to your child about donor conception", type: "Guide", slug: "talking-to-child-donor-conception" },
-      { title: "Childcare planning: a parent's guide", type: "Guide", slug: "childcare-planning" },
     ],
   },
   {
@@ -93,18 +68,18 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     title: "Faith, Culture & Belief",
     resources: [
       { title: "Where the major traditions stand on IVF", type: "Explainer", href: "/faith#traditions" },
-      { title: "Handling conversations that are anti-IVF", type: "Scripts", href: "/faith#conversations" },
+      { title: "Difficult conversations", type: "Scripts", href: "/faith#conversations" },
       { title: "Keeping your practice through a treatment cycle", type: "Guide", href: "/faith#observance" },
       { title: "Faith-aware counselling and support", type: "Directory", href: "/faith#support" },
     ],
   },
   {
-    icon: <BookOpen className="h-7 w-7" />,
-    title: "Community & Stories",
+    icon: <Heart className="h-7 w-7" />,
+    title: "Support & community",
     resources: [
-      { title: "Recommended books for every family type", type: "Reading list", slug: "recommended-books" },
-      { title: "Online communities worth joining", type: "Directory", slug: "online-communities" },
-      { title: "UK support groups: in-person and online", type: "Directory", slug: "uk-support-groups" },
+      { title: "Looking after yourself", type: "Directory", href: "/support" },
+      { title: "The Cairn community", type: "Hub", href: "/community" },
+      { title: "Books: a short list", type: "Reading list", slug: "recommended-books" },
     ],
   },
 ];
@@ -112,14 +87,13 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
 export const RESOURCE_COUNT = CATEGORIES.reduce((sum, c) => sum + c.resources.length, 0);
 export const TOPIC_COUNT = CATEGORIES.length;
 
-/** Format filter groups — each led by its format's flat icon. */
+/** Format filter groups, each led by its format's flat icon. */
 const FORMAT_GROUPS: { key: string; label: string; types: string[] }[] = [
   { key: "Guide", label: "Guides", types: ["Guide"] },
   { key: "Explainer", label: "Explainers", types: ["Explainer"] },
   { key: "Checklist", label: "Checklists", types: ["Checklist"] },
   { key: "Template", label: "Templates & scripts", types: ["Template", "Script", "Scripts"] },
   { key: "Directory", label: "Directories & lists", types: ["Directory", "Reading list", "Hub"] },
-  { key: "Stories", label: "Stories", types: ["Stories"] },
 ];
 
 /** A category icon, drawn straight onto the card in brand teal. */
@@ -137,7 +111,7 @@ export function ResourceLibrary() {
 
   return (
     <div>
-      {/* Format filter — the shape bank as a legend */}
+      {/* Format filter: the shape bank as a legend */}
       <div className="flex flex-wrap gap-2 mb-10">
         <button
           onClick={() => setFormat("all")}
@@ -183,7 +157,7 @@ export function ResourceLibrary() {
         })}
       </div>
 
-      {/* Topic cards — categories with no matching entries collapse away */}
+      {/* Topic cards: categories with no matching entries collapse away */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
         {CATEGORIES.map((cat) => {
           const visible = activeTypes

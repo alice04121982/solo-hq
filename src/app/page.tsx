@@ -4,8 +4,7 @@ import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
-import { TealCard } from "@/components/teal-card";
-import { FAMILY_SHAPES, ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
+import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
 const CARD_THEME = { bg: "var(--background)", text: "var(--teal)" };
@@ -80,52 +79,32 @@ export default function Home() {
 
       {/* 3 — Clinic comparison teaser: teal full section */}
       <Section tone="teal" id="compare" backdrop={{ shape: "dots" }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div>
-            <SectionHeading
-              tone="teal"
-              eyebrow="The comparison tool"
-              title={
-                <>
-                  The full picture,
-                  <br />
-                  not the brochure version.
-                </>
-              }
-              intro="Greece might look £4,000 cheaper. Add three return flights and two hotel stays and suddenly it isn’t. We factor in travel and accommodation so the comparison is honest."
-              introWidth="46ch"
-              className="mb-5"
-            />
-            <p className="text-lg font-sans leading-relaxed mb-10" style={{ maxWidth: "46ch", color: "var(--on-teal-muted)" }}>
-              Success rates by age bracket, solo- and LGBTQ+-friendliness, HFEA-verified data flags, and all six treatment types: IVF, ICSI, IUI, donor egg, donor sperm, and double donor.
-            </p>
-            <Link
-              href="/ivf-finder"
-              className="inline-flex items-center gap-2 rounded-full px-9 py-4 text-base font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
-              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
-            >
-              Open comparison tool
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
-
-          {/* Stats grid — one shape from the bank per card, in the same
-              rotation the family cards use. */}
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { value: "HFEA data", label: "UK success rates from the public register" },
-              { value: "Travel added", label: "A flights and stays estimate beside every overseas price" },
-              { value: "Source shown", label: "Every rate says who published it, the year and what it measures" },
-              { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
-            ].map((s, i) => (
-              <TealCard
-                key={s.label}
-                mark={SHAPE_CYCLE[i % SHAPE_CYCLE.length]}
-                value={s.value}
-                label={s.label}
-              />
-            ))}
-          </div>
+        <div className="max-w-3xl">
+          <SectionHeading
+            tone="teal"
+            eyebrow="The comparison tool"
+            title={
+              <>
+                The full picture,
+                <br />
+                not the brochure version.
+              </>
+            }
+            intro="Overseas prices are shown with a travel estimate beside them, and every success rate says who published it and which year it covers."
+            introWidth="46ch"
+            className="mb-5"
+          />
+          <p className="text-lg font-sans leading-relaxed mb-10" style={{ maxWidth: "46ch", color: "var(--on-teal-muted)" }}>
+            Filter by treatment (IVF, ICSI, IUI, donor egg, donor sperm or double donation) and compare UK success rates by age group from the HFEA register.
+          </p>
+          <Link
+            href="/ivf-finder"
+            className="inline-flex items-center gap-2 rounded-full px-9 py-4 text-base font-sans font-[600] transition-opacity duration-200 hover:opacity-90"
+            style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+          >
+            Open comparison tool
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
         </div>
       </Section>
 
