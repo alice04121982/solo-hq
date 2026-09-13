@@ -1,8 +1,9 @@
 /**
- * ILLUSTRATIVE CONTENT: every story in this file is fictional — written to
- * show what each journey feels like while real, consented accounts are
- * collected. Any component rendering `stories` must carry an "illustrative"
- * disclaimer (see `PersonalStories`), and no story may endorse Cairn itself.
+ * NOT FOR PUBLIC RENDERING: every story in this file is fictional. Owner
+ * decision: invented stories and quotes are not shown on any public page
+ * until real, consented accounts exist. The `Story` type and `stories` arrays
+ * are kept only so existing types and code still compile. Do not render them
+ * (see the TODO in `PersonalStories`), and no story may endorse Cairn itself.
  */
 export type FamilyTypeSlug =
   | "solo-mum"
@@ -99,7 +100,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 3,
         title: "Select your sperm donor",
-        body: "In the UK, HFEA law requires that donors are traceable: your child can access identifying information at 18. Choose from a UK-licensed sperm bank or arrange importation from a European bank (common for wider choice). Profiles typically include physical traits, health history, and a personal statement. Take your time: this decision matters.",
+        body: "In the UK, HFEA law requires that donors are traceable: your child can access identifying information at 18. You can use a UK sperm bank, or an overseas bank whose donors meet UK rules; your clinic will tell you which banks it accepts. Profiles typically include physical traits, health history, and a personal statement. Take your time: this decision matters.",
       },
       {
         number: 4,
@@ -199,7 +200,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 4,
         title: "Choose your sperm donor",
-        body: "UK law requires all donors to be HFEA-registered and traceable. Your child can request identifying information at 18. UK sperm banks are smaller than European ones; many couples import from banks in Denmark or Spain (this is legal in the UK with HFEA-registered donor sperm). Profiles include physical traits, health screening, and a personal statement.",
+        body: "UK law requires all donors to be HFEA-registered and traceable. Your child can request identifying information at 18. You can use donor sperm from an overseas bank, but a UK clinic will only accept donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic which banks it works with.",
       },
       {
         number: 5,
@@ -281,17 +282,17 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Find a surrogate",
-        body: "Most couples in the UK find a surrogate through a recognised matching organisation such as Brilliant Beginnings or COTS (Childlessness Overcome Through Surrogacy). The matching process involves detailed conversations about expectations, values, and the type of ongoing relationship you want. Building a genuine relationship with your surrogate is essential.",
+        body: "Many intended parents find a surrogate through a not-for-profit organisation such as Surrogacy UK, Brilliant Beginnings or My Surrogacy Journey. Matching is not guaranteed and can take time. The matching process involves detailed conversations about expectations, values, and the type of ongoing relationship you want. Building a genuine relationship with your surrogate is essential.",
       },
       {
         number: 3,
         title: "Choose your egg donor",
-        body: "You'll need an egg donor. UK egg donation is altruistic and donor-conceived individuals have the right to identifying information at 18. UK egg banks are available, as is importation from HFEA-registered donors abroad. Decide together which of you (or both, using two separate embryos) will provide the sperm for fertilisation.",
+        body: "You'll need an egg donor. UK egg donation is altruistic and donor-conceived individuals have the right to identifying information at 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. Decide together which of you (or both, using two separate embryos) will provide the sperm for fertilisation.",
       },
       {
         number: 4,
         title: "Get legal advice before treatment starts",
-        body: "This step is non-negotiable. Work with a specialist surrogacy solicitor; firms like Natalie Gamble Associates or Brilliant Beginnings Legal can guide you. Agreements should be in place before any treatment begins, covering the intended role of the surrogate after birth, financial arrangements, and what happens in edge cases.",
+        body: "Get advice from a specialist fertility or surrogacy solicitor before treatment starts. Many intended parents and surrogates write down what they have agreed (contact, expenses, difficult scenarios). This helps everyone, but UK surrogacy agreements are not legally enforceable.",
       },
       {
         number: 5,
@@ -306,12 +307,12 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 7,
         title: "Birth and immediate legal steps",
-        body: "At birth, your surrogate is legally the mother. In the UK, if you're married and one of you is the biological father, you may automatically be a legal parent, but a parental order is still required to transfer legal parenthood fully. Apply for the parental order as soon as possible after birth (you have 6 months).",
+        body: "At birth, your surrogate is the legal mother. If she is married or in a civil partnership, her spouse is normally the second legal parent unless they did not consent, whatever your own relationship status. A parental order transfers legal parenthood to you. Apply within 6 months of the birth.",
       },
       {
         number: 8,
         title: "Life as two dads",
-        body: "Two-dad families are raising children who are, by every measure, thriving. The journey is longer and more complex than other routes, but the dads who have done it consistently say the intentionality of it (the number of conversations, the depth of preparation) shapes the family they become. Our community includes two-dad families from day one through teenage years.",
+        body: "Two-dad families are raising children who are, by every measure, thriving. The journey is longer and more complex than other routes, but the dads who have done it consistently say the intentionality of it (the number of conversations, the depth of preparation) shapes the family they become.",
       },
     ],
     stories: [
@@ -373,7 +374,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 2,
         title: "Connect with the solo surrogacy community",
-        body: "Solo fatherhood via surrogacy is less common than for couples, but not unusual. Organisations like COTS and Brilliant Beginnings have experience matching solo dads with surrogates. Reading other solo dads' stories before you start (understanding the emotional landscape) is valuable preparation.",
+        body: "Solo fatherhood via surrogacy is less common than for couples, but not unusual. Surrogacy UK, Brilliant Beginnings and My Surrogacy Journey match intended parents with surrogates. Ask each whether it works with single intended fathers. Reading other solo dads' stories before you start (understanding the emotional landscape) is valuable preparation.",
       },
       {
         number: 3,
@@ -383,7 +384,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 4,
         title: "Choose your egg donor",
-        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are smaller; many solo fathers import from HFEA-registered egg banks in Spain, Czech Republic, or Greece. When choosing, consider health screening, open-ID options, and whether the donor has successfully donated before.",
+        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. When choosing, consider health screening, open-ID options, and whether the donor has successfully donated before.",
       },
       {
         number: 5,
@@ -403,7 +404,7 @@ export const FAMILY_TYPES: FamilyType[] = [
       {
         number: 8,
         title: "Solo fatherhood: building your village",
-        body: "Solo parenting requires a village, and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. Surrogacy organisations like COTS and the wider solo parent networks include solo dads by choice who are open about the real experience: hard in places, and worth it overall.",
+        body: "Solo parenting requires a village, and building yours before your child arrives makes an enormous difference. This means practical childcare arrangements, trusted family or friends, and community with other solo parents. The wider solo parent networks include solo dads by choice who are open about the real experience: hard in places, and worth it overall.",
       },
     ],
     stories: [

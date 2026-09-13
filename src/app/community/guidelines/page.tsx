@@ -104,6 +104,21 @@ export default function CommunityGuidelinesPage() {
           >
             {PHONE_NUMBER_NOTICE}
           </p>
+          <p
+            className="text-sm font-sans leading-relaxed mt-6"
+            style={{ color: "var(--on-teal-muted)", maxWidth: "56ch" }}
+          >
+            This group is peer support, not a support line. If you need help
+            urgently, see{" "}
+            <Link
+              href="/support#crisis"
+              className="underline underline-offset-4"
+              style={{ color: "var(--on-teal)" }}
+            >
+              Looking after yourself
+            </Link>
+            .
+          </p>
         </div>
       </Section>
 

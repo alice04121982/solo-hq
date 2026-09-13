@@ -65,6 +65,7 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
       { title: "When treatment doesn't work: what next?", type: "Guide", slug: "when-treatment-fails" },
       { title: "Finding a fertility-aware therapist", type: "Directory", slug: "finding-fertility-therapist" },
       { title: "Telling friends and family about your journey", type: "Guide", slug: "telling-friends-family" },
+      { title: "Looking after yourself", type: "Directory", href: "/support" },
     ],
   },
   {
@@ -101,7 +102,6 @@ const CATEGORIES: { icon: React.ReactNode; title: string; resources: CategoryRes
     icon: <BookOpen className="h-7 w-7" />,
     title: "Community & Stories",
     resources: [
-      { title: "Real stories: families share their journeys", type: "Stories", slug: "real-stories" },
       { title: "Recommended books for every family type", type: "Reading list", slug: "recommended-books" },
       { title: "Online communities worth joining", type: "Directory", slug: "online-communities" },
       { title: "UK support groups: in-person and online", type: "Directory", slug: "uk-support-groups" },

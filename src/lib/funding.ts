@@ -117,7 +117,6 @@ export const NATION_POLICIES: NationPolicy[] = [
     ],
     sources: [
       { label: "HFEA: fertility treatment 2024 trends and figures", href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures" },
-      { label: "Fertility Network UK: NHS funding by area", href: "https://fertilitynetworkuk.org/access-support/nhs-funding/" },
     ],
   },
   {
@@ -127,15 +126,18 @@ export const NATION_POLICIES: NationPolicy[] = [
       "Up to three full cycles for those who meet the criteria, under a single national access policy rather than local ones.",
     nhsFundedShare: "54% of IVF cycles in Scotland were NHS-funded in 2024, the highest in the UK.",
     donorRoute:
-      "The most inclusive route in the UK: NHS Scotland funds donor insemination for female same-sex couples and single women, commonly up to six cycles, before moving to one to three IVF cycles if the access criteria are met.",
+      "NHS Scotland funds donor insemination and then IVF for female couples who have lived together for at least two years. The national criteria refer to six to eight insemination cycles; check the number with your health board. Single women are not currently eligible; a national review is due to report by early summer 2027.",
     criteria: [
       "National criteria applied by every health board, so the postcode lottery within Scotland is far smaller",
       "Age, BMI and non-smoking requirements still apply, and the age band is assessed at treatment",
-      "No living children in the relationship, on the same terms as elsewhere",
+      "At least one partner has no living biological child",
+      "Couples must have lived together for at least two years",
+      "One cycle at 40–42 if you have never had IVF and there is no evidence of poor ovarian reserve",
       "Waiting times vary by board even though the criteria do not",
     ],
     sources: [
-      { label: "NHS Inform: fertility treatment in Scotland", href: "https://www.nhsinform.scot/tests-and-treatments/medical-procedures/fertility-treatment/" },
+      { label: "Scottish Government: NHS IVF access criteria review", href: "https://www.gov.scot/news/nhs-ivf-access-criteria-review/" },
+      { label: "NHS Scotland: access criteria for NHS IVF treatment (PDF)", href: "https://www.fertility.nhs.scot/wp-content/uploads/2025/02/Access-Criteria-NHS-IVF-Treatment-Scotland.pdf" },
     ],
   },
   {
@@ -146,28 +148,31 @@ export const NATION_POLICIES: NationPolicy[] = [
     donorRoute:
       "Wales funds treatment for single women as well as couples, and female same-sex couples are generally expected to complete donor insemination cycles before IVF funding.",
     criteria: [
-      "At least one partner child-free",
+      "No living children together, or one partner with no living children (biological or adopted)",
       "BMI 19–30 and non-smoking",
+      "One cycle at 40–42 if you have never had IVF and there is no evidence of low ovarian reserve",
       "National criteria, so eligibility does not change between health boards",
     ],
     sources: [
       { label: "NHS 111 Wales: fertility services", href: "https://111.wales.nhs.uk/fertility/" },
+      { label: "Senedd Research: access to IVF treatment in Wales", href: "https://research.senedd.wales/research-articles/what-s-the-latest-on-access-to-ivf-treatment-in-wales/" },
     ],
   },
   {
     slug: "northern-ireland",
     name: "Northern Ireland",
-    cycles: "One full cycle for eligible women under 40.",
+    cycles: "One full cycle.",
     nhsFundedShare: "50% of IVF cycles in Northern Ireland were NHS-funded in 2024.",
     donorRoute:
       "Single women and female same-sex couples are generally expected to have completed donor insemination cycles first, and donor gametes are not usually funded.",
     criteria: [
-      "Both partners with a BMI of 19–30",
-      "Neither partner sterilised",
-      "Non-smoking, and no living children",
+      "Under 40, or 40–42 if you have never had IVF and there is no evidence of low ovarian reserve",
+      "BMI of 19–30 for the woman having treatment",
+      "Neither partner sterilised, and neither has had three or more IVF cycles, NHS or private",
+      "The published criteria do not include a rule on existing children; check your local criteria",
     ],
     sources: [
-      { label: "nidirect: fertility treatment", href: "https://www.nidirect.gov.uk/articles/fertility-treatment" },
+      { label: "Belfast Trust: eligibility for publicly funded treatment", href: "https://belfasttrust.hscni.net/services/rfc/first-steps/nhs-funded-treatment/" },
     ],
   },
 ];
@@ -231,7 +236,7 @@ export const NHS_APPLICATION_STEPS: FundingStep[] = [
 export const NHS_PITFALLS: { title: string; body: string }[] = [
   {
     title: "A partner's child counts",
-    body: "Most policies require that neither partner has a living child, including children from previous relationships, children who live elsewhere, and adopted children.",
+    body: "In most English policies a partner's child counts, including adopted children. Scotland only requires one partner to have no living biological child; Wales, that you have no children together or one of you has none.",
   },
   {
     title: "Donor sperm is usually not funded",
@@ -429,12 +434,12 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     typicalCost: "Add-ons commonly run £150–£3,000 each; declining them is the cheapest decision on this page.",
     riskHolder: "You: this is money spent, not risk transferred.",
     howItWorks: [
-      "The HFEA publishes a traffic-light rating for each add-on based on the evidence from randomised trials.",
+      "The HFEA rates each add-on green, yellow, grey, black or red, based on evidence from trials. When we checked, no add-on was rated green.",
       "Ask any clinic proposing one: what is its HFEA rating, what would it cost, and what is the evidence it improves live birth for someone with my diagnosis?",
     ],
     suits: ["Everyone paying privately, and anyone being offered a long list of extras at consultation"],
     watchOuts: [
-      "A red or grey rating does not mean fraudulent: it means the evidence is not there yet, and you are paying for that uncertainty.",
+      "Grey means there is not enough evidence. Black means the evidence shows it makes no difference. Red means there are safety concerns or evidence it could lower your chances.",
       "Some add-ons are clinically indicated for specific diagnoses. The question is whether yours is one of them.",
     ],
     sources: [{ label: "HFEA: treatment add-ons ratings", href: "https://www.hfea.gov.uk/treatments/treatment-add-ons/" }],
@@ -520,12 +525,12 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     typicalCost: "UK grants are typically up to around £3,000 and are usually paid direct to the clinic.",
     riskHolder: "The charity, for the amount awarded.",
     howItWorks: [
-      "The Fertility Foundation is the main UK grant-maker, with an annual application round that opens in January and decisions by around the end of April.",
+      "The Fertility Foundation is the main UK grant-maker. Its grants run from January to March each year.",
       "Some clinics run their own hardship or bursary schemes, which are rarely advertised. Ask directly.",
     ],
     suits: ["People who can fund part of a cycle but not all of it, and who can apply within the annual window"],
     watchOuts: [
-      "Read the eligibility criteria before investing time: The Fertility Foundation's published criteria require a cohabiting couple, with at least one applicant in full-time employment, which rules out solo applicants.",
+      "The Fertility Foundation's grants are open to single women and all couples. Its published criteria: up to £3,000 per grant; applicants must be British citizens living full time in the UK; the woman must be 42 or under; at least one applicant must be in full-time work; couples must live together; you need proof you can fund the rest of treatment; and there is a £30 non-refundable application fee.",
       "Grants rarely cover a whole cycle, and most schemes ask for proof you can fund the remainder including drugs.",
       "Anything asking for an application fee, or promising funded IVF in exchange for a payment, should be treated as a scam.",
     ],

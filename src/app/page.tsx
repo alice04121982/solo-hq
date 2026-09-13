@@ -2,15 +2,11 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
 import { CTASection } from "@/components/cta-section";
-import { StoriesCarousel } from "@/components/stories-carousel";
 import { Section } from "@/components/section";
-import { QuoteCard } from "@/components/quote-card";
 import { SectionHeading } from "@/components/section-heading";
 import { TealCard } from "@/components/teal-card";
 import { FAMILY_SHAPES, ShapeMark, SHAPE_CYCLE } from "@/components/shapes";
 import { FAMILY_TYPES } from "@/lib/family-types";
-import { FEATURED_STORIES } from "@/lib/stories";
-import { HOMEPAGE_QUOTES } from "@/lib/quotes";
 
 const CARD_THEME = { bg: "var(--background)", text: "var(--teal)" };
 
@@ -133,77 +129,28 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* 4 — Personal stories: white */}
-      <Section tone="white" id="stories">
-        <SectionHeading
-          eyebrow="Stories"
-          mark="spark"
-          markClassName="shape-spin"
-          title="In their own words."
-          action={
-            <Link
-              href="/stories"
-              className="hidden sm:inline-flex items-center gap-2 text-sm font-sans font-medium rounded-full border px-5 py-2 transition-colors duration-150 shrink-0"
-              style={{ borderColor: "var(--teal-35)", color: "var(--teal)" }}
-            >
-              See all stories <ArrowRight className="h-3.5 w-3.5" />
+      {/* 4 — Stories and support: small white band. Invented stories and
+          quotes were taken down until real, consented accounts exist. */}
+      <Section tone="white" id="stories" padding="py-12 md:py-16">
+        <div className="space-y-3 text-base font-sans leading-relaxed" style={{ maxWidth: "60ch", color: "var(--foreground)" }}>
+          <p>
+            We&rsquo;re collecting real stories from people at every stage, including when
+            treatment didn&rsquo;t work.{" "}
+            <Link href="/stories/share" className="underline underline-offset-2" style={{ color: "var(--teal)" }}>
+              Share yours
             </Link>
-          }
-        />
-
-        <StoriesCarousel stories={FEATURED_STORIES} />
-
-        <Link
-          href="/stories"
-          className="sm:hidden inline-flex items-center gap-2 text-sm font-sans font-medium transition-opacity duration-150 hover:opacity-70 mt-6"
-          style={{ color: "var(--teal)" }}
-        >
-          See all stories <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-
-        <p className="text-xs font-sans mt-8" style={{ color: "var(--muted)" }}>
-          Illustrative stories while we collect real, consented accounts.{" "}
-          <Link href="/stories/share" className="underline underline-offset-2" style={{ color: "var(--foreground)" }}>
-            Share yours
-          </Link>
-          .
-        </p>
-      </Section>
-
-      {/* 5 — Community voices: warm cream, speech-bubble quotes */}
-      <Section
-        tone="cream"
-        id="voices"
-        /* The trailing dot is cropped by the seam with the pink CTA band, so it
-           takes the lime — pink on pink there reads as a smudge, not a shape. */
-        backdrop={{ shape: "dots", side: "left", color: "var(--lavender)", endColor: "var(--accent)" }}
-      >
-        <SectionHeading
-          eyebrow="Community voices"
-          mark="egg"
-          title="Voices from the journey."
-        />
-        <p className="text-xs font-sans mb-10 -mt-6" style={{ color: "var(--muted)", maxWidth: "60ch" }}>
-          Illustrative quotes while we collect real, consented accounts.
-        </p>
-
-        {/* The middle card takes the teal so the row has a centre of gravity. */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
-          {HOMEPAGE_QUOTES.map((q, i) => (
-            <QuoteCard
-              key={q.name}
-              quote={q.quote}
-              name={q.name}
-              eyebrow={q.stage}
-              meta={[q.location]}
-              avatar={q.avatar}
-              tone={i === 1 ? "teal" : "pink"}
-            />
-          ))}
+            .
+          </p>
+          <p>
+            <Link href="/support" className="underline underline-offset-2" style={{ color: "var(--teal)" }}>
+              Looking after yourself
+            </Link>
+            : crisis help, counselling and support.
+          </p>
         </div>
       </Section>
 
-      {/* 6 — Newsletter + CTA: hot pink */}
+      {/* 5 — Newsletter + CTA: hot pink */}
       <CTASection />
     </main>
   );

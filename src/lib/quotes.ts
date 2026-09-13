@@ -26,6 +26,8 @@ export interface Quote {
  * Cairn or its tools — a fabricated product testimonial is a fake review,
  * label or no label.
  */
+// TODO(phase1): these quotes are not rendered anywhere. Add real, consented
+// quotes here before showing any community quotes on a public page.
 export const COMMUNITY_QUOTES: Quote[] = [
   {
     quote:

@@ -11,7 +11,7 @@ Infectious disease screening (required before donor sperm use),200,,=C11-B11,
 Sperm bank registration / import admin fee,250,,=C12-B12,
 Donor sperm vials (buy 3–4 upfront for sibling potential),2500,,=C13-B13,"e.g. 4 × £625 avg"
 Sperm storage (year 1),350,,=C14-B14,
-Counselling (mandatory before treatment + personal sessions),500,,=C15-B15,
+Counselling: clinics must offer it. Ask whether it is in your quote.,500,,=C15-B15,
 "Legal advice (if using known donor, optional otherwise)",300,,=C16-B16,
 ,,,,
 ONE-TIME TOTAL,=SUM(B9:B16),=SUM(C9:C16),=SUM(D9:D16),

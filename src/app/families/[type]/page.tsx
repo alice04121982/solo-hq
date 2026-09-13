@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteNav } from "@/components/site-nav";
 import { FamilyHero } from "@/components/family/family-hero";
 import { ProcessSteps } from "@/components/family/process-steps";
-import { PersonalStories } from "@/components/family/personal-stories";
 import { NewsletterSection } from "@/components/family/newsletter-section";
 import { ResourcesSection } from "@/components/family/resources-section";
 import { ClinicSection } from "@/components/family/clinic-section";
 import { JourneyMap } from "@/components/journey-map";
 import { BentoCard } from "@/components/bento-card";
 import { Section } from "@/components/section";
-import { QuoteCard } from "@/components/quote-card";
 import { getFamilyType, FAMILY_TYPES, type FamilyTypeSlug } from "@/lib/family-types";
 
 interface PageProps {
@@ -37,10 +36,6 @@ export default async function FamilyTypePage({ params }: PageProps) {
 
   if (!family) notFound();
 
-  // Only the lead story carries a quote. It is pulled up here, a full section
-  // clear of the story it came from further down the page.
-  const voice = family.stories.find((s) => s.quote);
-
   return (
     <main className="min-h-screen bg-background">
       {/* Nav */}
@@ -53,24 +48,18 @@ export default async function FamilyTypePage({ params }: PageProps) {
       {/* Hero */}
       <FamilyHero family={family} />
 
-      {/* A voice from this community, before the practical steps */}
-      {voice?.quote && (
-        <Section tone="white" padding="pb-4 md:pb-8">
-          <div className="max-w-2xl">
-            <QuoteCard
-              quote={voice.quote}
-              name={voice.name}
-              eyebrow={voice.tag}
-              meta={[`${voice.age}`, voice.location]}
-              avatar={voice.image}
-              tone="pink"
-            />
-          </div>
-        </Section>
-      )}
-
       {/* Step-by-step guide */}
       <ProcessSteps steps={family.steps} />
+
+      {/* Support link: the one emotional-support pointer on this page */}
+      <Section tone="white" padding="pb-8 md:pb-12">
+        <p className="text-base font-sans" style={{ color: "var(--teal)" }}>
+          <Link href="/support" className="underline underline-offset-2" style={{ color: "var(--teal)" }}>
+            Looking after yourself
+          </Link>
+          : counselling and support during treatment.
+        </p>
+      </Section>
 
       {/* Solo Navigator — solo-mum page only */}
       {family.slug === "solo-mum" && (
@@ -95,8 +84,7 @@ export default async function FamilyTypePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Personal stories */}
-      <PersonalStories stories={family.stories} />
+      {/* Personal stories are not rendered until real, consented accounts exist. */}
 
       {/* Resources */}
       <ResourcesSection resources={family.resources} />
