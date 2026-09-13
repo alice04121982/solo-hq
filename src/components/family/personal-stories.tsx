@@ -1,5 +1,9 @@
 "use client";
 
+// TODO: not rendered until real, consented stories exist. The stories in
+// `family-types.ts` are illustrative placeholders and must not be shown on
+// any public page. Re-enable only with real accounts and written consent.
+
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";

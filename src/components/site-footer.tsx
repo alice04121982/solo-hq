@@ -28,6 +28,7 @@ const TOOL_LINKS = [
   { label: "NHS Eligibility Check", href: "/funding#check" },
   { label: "IVF & Work", href: "/work" },
   { label: "Resources", href: "/resources" },
+  { label: "Looking after yourself", href: "/support" },
   { label: "Community", href: "/community" },
   { label: "Community Rules", href: "/community/guidelines" },
   { label: "In the Media", href: "/news" },
@@ -103,12 +104,24 @@ export function SiteFooter() {
           <p className="text-xs font-sans" style={{ color: PINK }}>
             &copy; {new Date().getFullYear()} CairnFertility. Made in the UK.
           </p>
-          <p
-            className="text-xs font-sans leading-relaxed"
-            style={{ maxWidth: "60ch", color: PINK_MUTED }}
-          >
-            CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
-          </p>
+          <div className="flex flex-col gap-3" style={{ maxWidth: "60ch" }}>
+            <p className="text-xs font-sans leading-relaxed" style={{ color: PINK }}>
+              Need help now? Call 999 in an emergency, or Samaritans free on{" "}
+              <a href="tel:116123" className="underline underline-offset-2">
+                116 123
+              </a>
+              , any time. More support:{" "}
+              <a href="/support#crisis" className="underline underline-offset-2">
+                Looking after yourself
+              </a>
+            </p>
+            <p
+              className="text-xs font-sans leading-relaxed"
+              style={{ color: PINK_MUTED }}
+            >
+              CairnFertility is not a medical provider. All content is for informational purposes only and does not constitute medical advice. Always consult a qualified fertility specialist before beginning treatment. HFEA success rate data is publicly available and used here for educational comparison.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

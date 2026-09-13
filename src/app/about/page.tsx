@@ -59,9 +59,9 @@ const MILESTONES = [
     body: "Solo mums, solo dads, two mums, two dads, and couples each get their own guide, written for their actual path rather than adapted from a straight-couple template.",
   },
   {
-    tag: "Live",
-    title: "Real stories, honestly labelled",
-    body: "Stories and quotes from the community, built to make an unfamiliar process feel less abstract, clearly marked as illustrative composites rather than presented as verified case studies.",
+    tag: "Paused",
+    title: "Real stories, when we have them",
+    body: "We've taken down our example stories and quotes. We'll publish real accounts, including ones where treatment didn't work, only with the writer's consent.",
   },
   {
     tag: "Building now",
@@ -125,7 +125,7 @@ export default function AboutPage() {
                 "Compare UK and overseas IVF clinics on true cost, verified success rates, and solo- and LGBTQ+-friendliness.",
                 "Publish plain-English guides for every family type and every stage of the process.",
                 "Run a clinic matcher that narrows the field to your situation, entirely in your own browser.",
-                "Share real, illustrative stories from the community, clearly labelled as composites.",
+                "Publish real stories from people at every stage, only with their consent.",
               ].map((item) => (
                 <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
                   {item}

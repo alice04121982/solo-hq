@@ -226,6 +226,7 @@ const STAGES = [
       "Stimulation typically lasts 10–14 days",
       "Follicles need to reach roughly 18 mm before retrieval",
       "Your ovaries may feel heavy or tender; this is expected and normal",
+      "Call your clinic straight away if you have severe bloating, tummy pain or sickness. These can be signs of ovarian hyperstimulation syndrome (OHSS). Call 999 if you have difficulty breathing or chest pain",
     ],
     Illustration: StimulationIllustration,
   },
@@ -235,7 +236,7 @@ const STAGES = [
     duration: "About 20–30 minutes, under sedation",
     body: [
       "Around 36 hours after your trigger injection, egg retrieval takes place. Under sedation, an ultrasound probe with a very fine attached needle is passed transvaginally to reach each follicle. The needle punctures the follicle wall and the fluid inside, including the egg, is gently aspirated.",
-      "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You won't feel anything during the procedure and most people go home within a few hours.",
+      "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You'll have sedation (or sometimes a general anaesthetic), so most people feel little or nothing, and most go home within a few hours.",
     ],
     facts: [
       "Most people feel bloated or crampy afterwards but recover the same day",

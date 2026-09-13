@@ -85,7 +85,7 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       {
         point: "Pregnancy protection begins at embryo transfer.",
         detail:
-          "From the point of transfer you have the rights of a pregnant worker, including paid time off for antenatal appointments: a materially stronger position than the weeks before it.",
+          "From embryo transfer you are protected from pregnancy discrimination. This protection depends on your employer knowing about the transfer. You never have to tell them, but if you want to rely on it you will need to, ideally in writing. Once a pregnancy is confirmed you also have the right to paid time off for antenatal care.",
       },
       {
         point: "If the transfer fails, protection continues for two weeks.",
@@ -114,9 +114,9 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
         detail: "So the paid-time-off right for antenatal care does not reach them.",
       },
       {
-        point: "Nothing forces an employer to discount treatment absence.",
+        point: "Before embryo transfer, nothing forces an employer to discount treatment absence.",
         detail:
-          "Many good policies keep it out of sickness triggers. That is a choice, not a duty, so ask for it explicitly.",
+          "Many good policies keep it out of sickness triggers, so ask for it. After transfer, pregnancy-related sickness should be recorded separately and not counted towards absence trigger points.",
       },
       {
         point: "The statutory right that keeps being proposed is still a proposal.",
@@ -125,7 +125,7 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       },
     ],
     useIt: [
-      "If you are at or past embryo transfer and a request is being refused, say so plainly and in writing: your position changed at that point.",
+      "If you are past embryo transfer and are being treated unfavourably, you may be protected. Talk to Acas before deciding whether to raise it.",
       "Ask for treatment absence to be recorded separately from ordinary sickness, and get the answer in writing before you need it.",
       "Acas and Working Families both run free advice lines; use them before a disagreement hardens.",
     ],
@@ -450,7 +450,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
     situation: "You are mid-treatment, the appointments have multiplied, and work is starting to notice.",
     whatsHappening: [
       "This is the point where people quit. More than a third of UK employees in treatment have left a job or considered it, and the trigger is usually unpredictability rather than the treatment itself.",
-      "If you have reached embryo transfer, your legal position in the UK is stronger than it was a fortnight earlier, and that is worth saying out loud.",
+      "If you have reached embryo transfer, you may be protected from pregnancy discrimination, but only once your employer knows.",
     ],
     notYourJob: [
       "Pretending nothing is happening in order to protect other people's comfort.",
@@ -460,7 +460,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
     tryThis: [
       "The next three weeks are heavy on appointments. Can we look at what moves, rather than me trying to do all of it and doing it badly?",
       "I'd like to record this as treatment-related rather than ordinary sickness absence, in line with the policy.",
-      "I'm now at a stage where the pregnancy-related protections apply. I'd like to agree the appointments on that basis.",
+      "I've had an embryo transfer, so pregnancy protections apply from now, but only once you know. I'm telling you so it's on record, and I'll confirm it in writing.",
     ],
     exitLine: "I'll keep you posted on timings as I get them. I'm not asking to disappear. I'm asking for the calendar to be realistic.",
   },
@@ -469,8 +469,8 @@ export const WORK_SCENARIOS: WorkScenario[] = [
     label: "When it is handled badly",
     situation: "You told someone, and the response was dismissive, intrusive or worse.",
     whatsHappening: [
-      "Poor responses are usually ignorance rather than malice, which does not make them cost you less. Either way the fix is the same: get it in writing and move it up.",
-      "Detrimental treatment because of fertility treatment can be sex discrimination, and from embryo transfer the pregnancy protections apply directly.",
+      "Poor responses are usually ignorance rather than malice, which does not make them cost you less. Either way you can put it in writing, and decide later whether to take it further.",
+      "Detrimental treatment because of fertility treatment can be sex discrimination, and from embryo transfer the pregnancy protections can apply once your employer knows.",
     ],
     notYourJob: [
       "Educating your manager about fertility while you are mid-cycle.",
@@ -533,6 +533,5 @@ export const POLICY_ELEMENTS: string[] = [
 
 export const CASE_SOURCES: SourceLink[] = [
   { label: "CIPD: employer guide to fertility support", href: "https://www.cipd.org/en/knowledge/guides/fertility-challenges/" },
-  { label: "Fertility Network UK: workplace resources", href: "https://fertilitynetworkuk.org/" },
   { label: "Acas: pregnancy and IVF at work", href: "https://www.acas.org.uk/pregnancy-at-work/ivf-treatment" },
 ];

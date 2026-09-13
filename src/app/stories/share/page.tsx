@@ -49,7 +49,7 @@ export default function ShareStoryPage() {
           mark="spark"
           markClassName="shape-spin"
           title="Tell it the way it actually happened."
-          intro="The stories on this site are illustrative while we collect real, consented accounts to replace them, and the accounts that help most are written by people who lived them. Whatever stage you're at, however it went, we'd like to hear it."
+          intro="We're collecting real, consented accounts, and the ones that help most are written by people who lived them. Whatever stage you're at, however it went, we'd like to hear it."
           introWidth="58ch"
           className="mb-0"
         />

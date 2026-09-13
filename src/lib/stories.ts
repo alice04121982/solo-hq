@@ -43,6 +43,10 @@ export interface Story {
  * illustrative wherever they render. Replace with real, consented accounts
  * (via stories@cairnfertility.com) before removing those labels.
  */
+// TODO(phase1): add real, consented accounts here, including ones where treatment did not work
+export const PUBLISHED_STORIES: Story[] = [];
+
+// DRAFT, NOT RENDERED
 export const ALL_STORIES: Story[] = [
   {
     id: "alice-iris",
@@ -271,7 +275,6 @@ const FEATURED_IDS = [
   "tom-marcus-elliot", // two dads
   "james-oscar",       // solo dad
   "emma-david-isla",   // mum and dad
-  "aisha-yusuf",       // faith & belief
 ];
 export const FEATURED_STORIES = FEATURED_IDS.map(
   (id) => ALL_STORIES.find((s) => s.id === id)!,

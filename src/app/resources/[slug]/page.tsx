@@ -71,6 +71,12 @@ export default async function GuidePage({ params }: PageProps) {
           <p className="text-lg font-sans text-muted leading-relaxed">
             {guide.intro}
           </p>
+
+          {(guide.categorySlug === "emotional-wellbeing" || guide.categorySlug === "community-stories") && (
+            <p className="mt-4 text-[16px] font-sans text-muted leading-relaxed">
+              <Link href="/support" className="font-[500] text-teal underline underline-offset-4 hover:text-foreground">Looking after yourself</Link>: crisis help, counselling and support.
+            </p>
+          )}
         </div>
       </section>
 
