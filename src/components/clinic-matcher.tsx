@@ -212,15 +212,24 @@ function matchClinic(clinic: Clinic, s: WizardState): Match | null {
 }
 
 /** Countries whose clinics passed the travel filter but whose law excludes this family type. */
-function excludedCountries(s: WizardState): string[] {
-  if (!s.family || !s.travel) return [];
-  const family = s.family;
+/**
+ * Countries in range whose clinics are left out for this family type, split by
+ * why: `barred` where the law is confirmed to exclude them, `unconfirmed` where
+ * we could not confirm it either way. The results page words the two differently.
+ */
+function excludedCountries(s: WizardState): { barred: string[]; unconfirmed: string[] } {
+  if (!s.family || !s.travel) return { barred: [], unconfirmed: [] };
+  const field = ELIGIBILITY_FIELD[s.family];
   const travel = s.travel;
-  return [
-    ...new Set(
-      CLINICS.filter((c) => travelAllows(travel, c) && !countryAllows(c.country, family)).map((c) => c.country)
-    ),
-  ].sort();
+  const barred = new Set<string>();
+  const unconfirmed = new Set<string>();
+  for (const c of CLINICS) {
+    if (!travelAllows(travel, c)) continue;
+    const value = eligibilityFor(c.country)?.[field];
+    if (value === true) continue;
+    (value === false ? barred : unconfirmed).add(c.country);
+  }
+  return { barred: [...barred].sort(), unconfirmed: [...unconfirmed].sort() };
 }
 
 function byName(a: Match, b: Match): number {
@@ -612,10 +621,18 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
     if (need.egg) notes.push(DONOR_EGG_NOTE);
   }
 
-  const exclusionLine =
-    excluded.length > 0 && s.family
-      ? `Clinics in ${joinList(excluded)} are not shown because we have not confirmed their law allows treatment for ${FAMILY_PLURAL[s.family]}.`
-      : null;
+  const exclusionLine = s.family
+    ? [
+        excluded.barred.length > 0
+          ? `Clinics in ${joinList(excluded.barred)} are not shown because the law there does not allow treatment for ${FAMILY_PLURAL[s.family]}.`
+          : null,
+        excluded.unconfirmed.length > 0
+          ? `Clinics in ${joinList(excluded.unconfirmed)} are not shown because we have not confirmed their law allows treatment for ${FAMILY_PLURAL[s.family]}.`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" ") || null
+    : null;
 
   const familyGuide = s.family ? getFamilyType(FAMILY_GUIDE_SLUG[s.family]) : undefined;
 
