@@ -19,8 +19,12 @@ export const metadata: Metadata = {
  * The community's rules, in full.
  *
  * Linked from the application form, from the invite redemption page, and from
- * the community page — the same text in all three places, so nobody can say
+ * the community page: the same text in all three places, so nobody can say
  * they agreed to something they never saw. Copy lives in `src/lib/community.ts`.
+ *
+ * This page is the canonical home of the phone-number notice, anchored at
+ * #phone directly under rule 2 so that PHONE_NUMBER_LINE elsewhere can link
+ * to it.
  */
 export default function CommunityGuidelinesPage() {
   return (
@@ -72,54 +76,37 @@ export default function CommunityGuidelinesPage() {
                 >
                   {rule.body}
                 </p>
+                {i === 1 && (
+                  <p
+                    id="phone"
+                    className="text-sm font-sans text-foreground leading-relaxed mt-4 rounded-2xl border p-4"
+                    style={{
+                      maxWidth: "56ch",
+                      borderColor: "var(--card-border)",
+                      background: "var(--card-bg)",
+                    }}
+                  >
+                    {PHONE_NUMBER_NOTICE}
+                  </p>
+                )}
               </div>
             </li>
           ))}
         </ol>
-      </Section>
-
-      {/* The trade-off we cannot engineer away, given its own band rather than
-          a footnote. */}
-      <Section tone="teal">
-        <div className="max-w-3xl">
-          <p
-            className="text-[13px] font-[500] uppercase font-sans mb-6"
-            style={{ color: "var(--accent)", letterSpacing: "1.65px" }}
+        <p
+          className="max-w-3xl text-sm font-sans text-muted leading-relaxed mt-12"
+          style={{ maxWidth: "56ch" }}
+        >
+          This group is peer support, not a support line. If you need help
+          urgently, see{" "}
+          <Link
+            href="/support#crisis"
+            className="text-teal underline decoration-teal/35 underline-offset-4 hover:decoration-teal transition-colors"
           >
-            One thing to know before you join
-          </p>
-          <h2
-            className="font-sans font-bold mb-6"
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 3.25rem)",
-              lineHeight: 1.1,
-              color: "var(--on-teal)",
-            }}
-          >
-            Other members will see your phone number.
-          </h2>
-          <p
-            className="text-sm font-sans leading-relaxed"
-            style={{ color: "var(--on-teal-muted)", maxWidth: "56ch" }}
-          >
-            {PHONE_NUMBER_NOTICE}
-          </p>
-          <p
-            className="text-sm font-sans leading-relaxed mt-6"
-            style={{ color: "var(--on-teal-muted)", maxWidth: "56ch" }}
-          >
-            This group is peer support, not a support line. If you need help
-            urgently, see{" "}
-            <Link
-              href="/support#crisis"
-              className="underline underline-offset-4"
-              style={{ color: "var(--on-teal)" }}
-            >
-              Looking after yourself
-            </Link>
-            .
-          </p>
-        </div>
+            Looking after yourself
+          </Link>
+          .
+        </p>
       </Section>
 
       <Section band={3}>

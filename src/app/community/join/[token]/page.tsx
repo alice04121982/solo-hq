@@ -4,7 +4,11 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { BentoCard } from "@/components/bento-card";
 import { CommunityJoinForm } from "@/components/community-join-form";
-import { COMMUNITY_RULES, PHONE_NUMBER_NOTICE } from "@/lib/community";
+import {
+  COMMUNITY_RULES,
+  PHONE_NUMBER_LINE,
+  PHONE_NUMBER_NOTICE,
+} from "@/lib/community";
 import {
   getCommunityPlatform,
   hashToken,
@@ -42,7 +46,7 @@ interface PageProps {
 type InviteStatus = "valid" | "used" | "expired" | "revoked" | "unknown" | "error";
 
 async function readInviteStatus(token: string): Promise<InviteStatus> {
-  // A malformed token never reaches the database — the shape is checkable
+  // A malformed token never reaches the database: the shape is checkable
   // here, and a lookup that cannot possibly match is a lookup worth skipping.
   if (!isWellFormedToken(token)) return "unknown";
 
@@ -62,8 +66,32 @@ const DEAD_INVITE = {
 
 const ERROR_INVITE = {
   heading: "We couldn't check your invite.",
-  body: "Something on our side is not answering. Your invite has not been used up. Please try this link again in a few minutes, and email us if it keeps happening.",
+  body: "Something on our side is not answering. Your invite has not been used up. Please try this link again in a few minutes, and email us at hello@cairnfertility.com if it keeps happening.",
 };
+
+/**
+ * Renders a string containing at most one `[text](/path)` markdown link, as
+ * used by PHONE_NUMBER_LINE. Internal paths only.
+ */
+function renderLinkedLine(text: string) {
+  const match = /\[([^\]]+)\]\((\/[^)\s]*)\)/.exec(text);
+  if (!match) return text;
+  const [whole, label, href] = match;
+  const before = text.slice(0, match.index);
+  const after = text.slice(match.index + whole.length);
+  return (
+    <>
+      {before}
+      <Link
+        href={href}
+        className="text-teal underline decoration-teal/35 underline-offset-4 hover:decoration-teal transition-colors"
+      >
+        {label}
+      </Link>
+      {after}
+    </>
+  );
+}
 
 export default async function CommunityJoinPage({ params }: PageProps) {
   const { token } = await params;
@@ -119,7 +147,7 @@ export default async function CommunityJoinPage({ params }: PageProps) {
             className="font-sans font-bold text-foreground mb-6"
             style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06 }}
           >
-            You&rsquo;re in: one last thing.
+            Nearly there: one last thing.
           </h1>
           <p className="text-lg font-sans text-muted leading-[1.65]" style={{ maxWidth: "56ch" }}>
             Someone read your application and said yes. Before we open the
@@ -165,6 +193,9 @@ export default async function CommunityJoinPage({ params }: PageProps) {
             >
               <p className="text-sm font-sans text-foreground leading-relaxed">
                 {PHONE_NUMBER_NOTICE}
+              </p>
+              <p className="mt-3 text-xs font-sans text-muted leading-relaxed">
+                {renderLinkedLine(PHONE_NUMBER_LINE)}
               </p>
             </div>
             <p className="mt-4 text-sm font-sans text-muted leading-relaxed">

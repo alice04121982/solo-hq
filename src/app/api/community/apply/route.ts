@@ -33,7 +33,7 @@ const LINK_PATTERN = /(https?:\/\/|www\.|\[url|<a\s)/i;
  *
  * What this endpoint deliberately does not do is decide anything. It records
  * an application as `pending` and stops. Approval happens elsewhere, by a
- * person, with a key this deployment does not hold — which is why a bug here
+ * person, with a key this deployment does not hold, which is why a bug here
  * cannot let anyone into the group.
  *
  * The bot defences below (honeypot, rate limit, link rejection, strict field
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   const { body } = parsed;
 
   // Honeypot: a field no human sees and no human fills. Answer as though the
-  // application were accepted — a bot that learns it was caught adapts.
+  // application were accepted; a bot that learns it was caught adapts.
   if (readString(body, "website", 200) !== "") {
     return NextResponse.json({ status: "received" });
   }
@@ -125,6 +125,17 @@ export async function POST(request: Request) {
     );
   }
 
+  // Explicit consent to store health-related data (the answer, path and
+  // stage). A separate checkbox from the rules, checked separately here, and
+  // checked again in the database function, which refuses to insert without
+  // it. The message matches the form's own validation text (plan contract C1).
+  if (body.healthDataConsent !== true) {
+    return NextResponse.json(
+      { error: "Please tick the consent box so we can store and read your application." },
+      { status: 400 }
+    );
+  }
+
   // Everything below this line writes. A person applies once; four complete,
   // valid applications from one address in ten minutes is a script.
   const writes = rateLimit(`community-apply-write:${clientKey(request)}`, 4, 10 * 60_000);
@@ -144,6 +155,7 @@ export async function POST(request: Request) {
       p_interests: interests,
       p_reason: reason,
       p_affiliation: affiliation || null,
+      p_health_consent: true,
     })
   );
 

@@ -10,7 +10,7 @@ import { isValidEmail } from "@/lib/community-application";
  *
  * The email field is not paperwork. An invite link travels through a mail
  * server, sits in a browser history, and appears in the hosting platform's
- * request logs — so the token alone is not treated as proof of anything. The
+ * request logs, so the token alone is not treated as proof of anything. The
  * address it was issued to is the second half, and this is where it is asked
  * for.
  *
@@ -96,9 +96,9 @@ export function CommunityJoinForm({
           <ArrowRight className="h-4 w-4" />
         </a>
         <p className="text-xs font-sans text-muted mt-6 leading-relaxed" style={{ maxWidth: "46ch" }}>
-          Say hello when you get there. An admin will introduce you. If the
-          button doesn&rsquo;t work on this device, open this page on the phone
-          you use for {platform} before closing the tab.
+          Say hello whenever you&rsquo;re ready, or just read for a while. Both
+          are fine. If the button doesn&rsquo;t work on this device, open this
+          page on the phone you use for {platform} before closing the tab.
         </p>
       </div>
     );

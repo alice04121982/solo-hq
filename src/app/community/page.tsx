@@ -25,7 +25,9 @@ export const metadata: Metadata = {
  * It used to say "not open yet, join the waitlist". It is open now, and the
  * honest framing has moved rather than gone: applying is not joining, a person
  * reads every application, and not everyone gets in. Copy on this page must
- * keep that true — nothing here may imply instant access or a public link.
+ * keep that true: nothing here may imply instant access or a public link.
+ * The full phone-number notice is shown here and on the invite page; the
+ * guidelines page holds the canonical copy at #phone.
  */
 export default function CommunityPage() {
   const platform = getCommunityPlatform();
@@ -58,9 +60,8 @@ export default function CommunityPage() {
             week.
           </p>
           <p className="text-lg font-sans text-muted leading-[1.65] mb-10" style={{ maxWidth: "58ch" }}>
-            It is open, and it is not open to everyone. Every member applied
-            and was read by a person before they got in. That is slower than a
-            join button, and it is the entire point.
+            Every member applied and was read by a person first. It&rsquo;s
+            slower than a join button, and that&rsquo;s what keeps it safe.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
@@ -82,7 +83,7 @@ export default function CommunityPage() {
         </div>
       </Section>
 
-      {/* How joining works — set expectations before the form, not after */}
+      {/* How joining works: set expectations before the form, not after */}
       <Section band={1}>
         <div className="max-w-2xl mb-14">
           <h2
@@ -93,7 +94,7 @@ export default function CommunityPage() {
           </h2>
           <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "50ch" }}>
             Four steps, one of which is a person reading what you wrote. There
-            is no automatic route in, and there is no link to find.
+            is no automatic route in.
           </p>
         </div>
         <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
@@ -137,10 +138,9 @@ export default function CommunityPage() {
             className="text-sm font-sans leading-relaxed"
             style={{ color: "var(--on-teal-muted)", maxWidth: "52ch" }}
           >
-            People going through fertility treatment are a target: for
-            clinics, for supplement sellers, and occasionally for worse. Four
-            things about how this group works, each of which we have to keep
-            true.
+            People going through fertility treatment are a target for clinics
+            and supplement sellers. Four things about how this group works,
+            each of which we have to keep true.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
@@ -217,7 +217,7 @@ export default function CommunityPage() {
         </div>
       </Section>
 
-      {/* Not ready — the lighter commitment */}
+      {/* Not ready: the lighter commitment */}
       <Section band={4} id="follow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
