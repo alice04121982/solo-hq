@@ -17,12 +17,18 @@ const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 type Field = "nation" | "age" | "children" | "situation" | "smoking" | "bmi" | "inseminations";
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 interface Question {
   id: Field;
   /** A function where the wording depends on who the treatment is for. */
   label: string | ((a: Answers) => string);
   help?: string;
-  options: { value: string; label: string }[];
+  /** A function where the choices depend on who the treatment is for. */
+  options: Option[] | ((a: Answers) => Option[]);
   /** Only asked when the answers so far make it relevant. */
   when?: (a: Answers) => boolean;
 }
@@ -54,7 +60,8 @@ const QUESTIONS: Question[] = [
       { value: "under-35", label: "Under 35" },
       { value: "35-39", label: "35–39" },
       { value: "40-41", label: "40–41" },
-      { value: "42-plus", label: "42 or over" },
+      { value: "42", label: "42" },
+      { value: "43-plus", label: "43 or over" },
     ],
   },
   {
@@ -72,10 +79,17 @@ const QUESTIONS: Question[] = [
     label: (a) =>
       isSolo(a) ? "Do you already have a living child?" : "Does either of you already have a living child?",
     help: "Most policies count a partner's children, children living elsewhere, and adopted children.",
-    options: [
-      { value: "no", label: "No" },
-      { value: "yes", label: "Yes" },
-    ],
+    options: (a) =>
+      isSolo(a)
+        ? [
+            { value: "no", label: "No" },
+            { value: "yes", label: "Yes" },
+          ]
+        : [
+            { value: "no", label: "No" },
+            { value: "one-free", label: "Yes, but one of us has no children" },
+            { value: "both", label: "Yes, both of us have children" },
+          ],
   },
   {
     id: "smoking",
@@ -141,15 +155,62 @@ function evaluate(a: Answers): Result {
   const twoWomen = a.situation === "two-women";
   const donorRoute = solo || twoWomen || a.situation === "other";
 
-  if (a.age === "42-plus") {
+  const niChildren =
+    "Northern Ireland's published criteria do not include a rule on existing children. Check your local criteria.";
+
+  if (a.age === "43-plus") {
+    blockers.push("NHS policies across the UK do not fund IVF from age 43.");
+  }
+  if (a.age === "42") {
+    if (a.nation === "england") {
+      blockers.push(
+        "From 42, NICE does not recommend NHS-funded IVF on cost-effectiveness grounds, and virtually no policy funds it.",
+      );
+    } else if (a.nation === "scotland" || a.nation === "wales") {
+      conditions.push(
+        "In Scotland and Wales, one cycle may be funded at 40–42 if you have not had IVF before and there is no evidence of low ovarian reserve.",
+      );
+    } else if (a.nation === "northern-ireland") {
+      conditions.push(
+        "In Northern Ireland, one cycle may be funded at 40–42 if you have not had IVF before and there is no evidence of low ovarian reserve.",
+      );
+    }
+  }
+
+  if (a.children === "yes" || a.children === "both") {
+    if (a.nation === "northern-ireland") {
+      conditions.push(niChildren);
+    } else if (a.nation === "wales" && a.children === "both") {
+      conditions.push(
+        "Wales requires that you have no children together or one of you has none. If any of your children are together, you will not qualify.",
+      );
+    } else if (a.nation === "scotland" && a.children === "both") {
+      blockers.push("In Scotland, couples where both partners already have a child are not currently eligible.");
+    } else {
+      blockers.push(
+        "Almost every policy requires that you (and a partner, if you have one) have no living child. That includes children from a previous relationship, children living elsewhere, and adopted children.",
+      );
+    }
+  }
+  if (a.children === "one-free") {
+    if (a.nation === "england") {
+      blockers.push("In most English policies a partner's child counts, including adopted children.");
+    } else if (a.nation === "scotland") {
+      conditions.push("Scotland only requires one partner to have no living biological child.");
+    } else if (a.nation === "wales") {
+      conditions.push("Wales requires that you have no children together or one of you has none.");
+    } else if (a.nation === "northern-ireland") {
+      conditions.push(niChildren);
+    }
+  }
+
+  if (solo && a.nation === "scotland") {
     blockers.push(
-      "From 42, NICE does not recommend NHS-funded IVF on cost-effectiveness grounds, and virtually no policy funds it.",
+      "Single women are not currently eligible for NHS-funded treatment in Scotland; a national review is due to report by early summer 2027.",
     );
   }
-  if (a.children === "yes") {
-    blockers.push(
-      "Almost every policy requires that you (and a partner, if you have one) have no living child. That includes children from a previous relationship, children living elsewhere, and adopted children.",
-    );
+  if (a.nation === "scotland" && !solo && !twoWomen) {
+    conditions.push("In Scotland, couples must have lived together for at least two years.");
   }
   if (a.smoking === "yes") {
     blockers.push(
@@ -190,15 +251,17 @@ function evaluate(a: Answers): Result {
   }
   if (a.nation === "northern-ireland") {
     conditions.push(
-      "Northern Ireland funds one full cycle for eligible women under 40, under national criteria. Since the 2024 expansion, that includes transferring all frozen embryos from the cycle.",
+      "Northern Ireland funds one full cycle under national criteria. Since the 2024 expansion, that includes transferring all frozen embryos from the cycle.",
     );
   }
 
   if (donorRoute) {
     if (a.nation === "scotland") {
-      conditions.push(
-        "Scotland is the most inclusive route in the UK for donor insemination: NHS-funded DI cycles, commonly up to six, before IVF is considered.",
-      );
+      if (twoWomen) {
+        conditions.push(
+          "NHS Scotland funds donor insemination and then IVF for female couples who have lived together for at least two years. The national criteria refer to six to eight insemination cycles; check the number with your health board.",
+        );
+      }
     } else if (a.inseminations === "6-plus") {
       conditions.push(
         "You have likely already met the insemination requirement most policies impose. Make sure your clinic's written record of every cycle goes with your referral.",
@@ -298,7 +361,7 @@ export function NHSEligibilityChecker() {
               </p>
             )}
             <div className="flex flex-wrap gap-2 mt-3">
-              {q.options.map((o) => (
+              {(typeof q.options === "function" ? q.options(answers) : q.options).map((o) => (
                 <Chip
                   key={o.value}
                   selected={answers[q.id] === o.value}
@@ -310,6 +373,19 @@ export function NHSEligibilityChecker() {
                       // question no longer on screen would skew the result.
                       if (q.id === "situation" && !(o.value === "solo" || o.value === "two-women")) {
                         delete next.inseminations;
+                      }
+                      // Solo and couple applicants get different children
+                      // options, so drop an answer the new list no longer offers.
+                      if (q.id === "situation" && next.children) {
+                        const childrenQ = QUESTIONS.find((x) => x.id === "children");
+                        const opts = childrenQ
+                          ? typeof childrenQ.options === "function"
+                            ? childrenQ.options(next)
+                            : childrenQ.options
+                          : [];
+                        if (!opts.some((x) => x.value === next.children)) {
+                          delete next.children;
+                        }
                       }
                       return next;
                     })

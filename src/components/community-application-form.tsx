@@ -122,7 +122,7 @@ function SubmittedPanel({
       <ul className="space-y-3 mb-8">
         {[
           { label: "Read the group rules in full", href: "/community/guidelines" },
-          { label: "Read stories from people on your path", href: "/stories" },
+          { label: "Looking after yourself", href: "/support" },
           { label: "Compare clinics with real costs", href: "/ivf-finder" },
         ].map((l) => (
           <li key={l.href}>

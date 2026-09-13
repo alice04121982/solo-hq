@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
-import { QuoteCard } from "@/components/quote-card";
 import { BentoCard } from "@/components/bento-card";
 import { CommunityApplicationForm } from "@/components/community-application-form";
 import {
@@ -13,12 +12,11 @@ import {
   SAFETY_PROMISES,
 } from "@/lib/community";
 import { getCommunityPlatform } from "@/lib/community-invite";
-import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
 export const metadata: Metadata = {
   title: "Join the Community | CairnFertility",
   description:
-    "A small, vetted community for everyone doing IVF their own way. Every member is approved by a person, invites work once, and nothing said inside leaves the group. Apply to join.",
+    "A small, vetted community for everyone doing IVF their own way. Every member is approved by a person, invites work once, and members agree to keep what's shared in the group private. Apply to join.",
 };
 
 /**
@@ -219,37 +217,8 @@ export default function CommunityPage() {
         </div>
       </Section>
 
-      {/* Voices — the people already ahead on the path */}
-      <Section band={4}>
-        <div className="mb-10">
-          <h2
-            className="font-sans font-bold text-foreground mb-3"
-            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1 }}
-          >
-            The people you&rsquo;ll meet.
-          </h2>
-          <p className="text-xs font-sans" style={{ color: "var(--muted)", maxWidth: "60ch" }}>
-            Illustrative quotes while we collect real, consented accounts.
-            Nothing said inside the group is ever quoted here.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
-          {COMMUNITY_QUOTES.slice(0, 3).map((q, i) => (
-            <QuoteCard
-              key={q.name}
-              quote={q.quote}
-              name={q.name}
-              eyebrow={q.stage}
-              meta={[q.location]}
-              avatar={q.avatar}
-              tone={i === 1 ? "teal" : "pink"}
-            />
-          ))}
-        </div>
-      </Section>
-
       {/* Not ready — the lighter commitment */}
-      <Section band={5} id="follow">
+      <Section band={4} id="follow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <p

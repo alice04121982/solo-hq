@@ -479,7 +479,7 @@ export const CONVERSATION_SCENARIOS: ConversationScenario[] = [
     ],
     tryThis: [
       "\"That's my child you're talking about. I need you to be careful with how you say that.\"",
-      "\"In UK law I am the legal parent from birth. If the question is religious, that's a question for a rabbi/imam/priest, and it's one I've already asked.\"",
+      "\"Our child's parents are defined by law, not by DNA, and that's settled. If the question is religious, I've already asked someone qualified.\"",
       "\"Our child will know exactly where they came from. We're not hiding it, and we're not ashamed of it.\"",
       "\"You can have your view. You can't say that in front of my child.\"",
     ],
@@ -661,6 +661,13 @@ export const GROUNDING_FACTS: { fact: string; source: SourceLink }[] = [
     source: {
       label: "Rights and the law: Donor Conception Network",
       href: "https://dcnetwork.org/books-and-resources/rights-and-the-law/",
+    },
+  },
+  {
+    fact: "In surrogacy, legal parenthood passes to the intended parents through a parental order after the birth.",
+    source: {
+      label: "Legal rights when using surrogates and donors: GOV.UK",
+      href: "https://www.gov.uk/legal-rights-when-using-surrogates-and-donors",
     },
   },
 ];

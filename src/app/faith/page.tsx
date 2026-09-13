@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { StoryImage } from "@/components/story-image";
 import { ShapeMark } from "@/components/shapes";
 import { TraditionExplorer } from "@/components/faith/tradition-explorer";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
@@ -15,7 +14,6 @@ import {
   GROUNDING_FACTS,
   OBSERVANCE_NOTES,
 } from "@/lib/faith";
-import { FAITH_STORIES } from "@/lib/stories";
 
 export const metadata: Metadata = {
   title: "Faith, Culture & IVF | CairnFertility",
@@ -286,49 +284,9 @@ export default function FaithPage() {
             className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
-            Faith and treatment, at the same time, in front of families who had views.
-            None of these people resolved it neatly. That is rather the point.
+            We&rsquo;re collecting accounts from people who have gone through treatment
+            alongside their faith.
           </p>
-          <p className="text-xs font-sans mb-12 -mt-8" style={{ color: "var(--muted)" }}>
-            Illustrative stories while we collect real, consented accounts.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {FAITH_STORIES.map((story) => (
-              <Link
-                key={story.id}
-                href={`/stories/${story.id}`}
-                className="group flex flex-col gap-4 transition-transform duration-200 hover:-translate-y-1"
-              >
-                <div className="relative h-52 rounded-xl overflow-hidden bg-background-alt">
-                  <StoryImage
-                    src={story.image}
-                    alt={story.imageAlt}
-                    label={story.theme === "faith" ? "Faith & Culture" : story.familyLabel}
-                    sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-3 flex-1">
-                  <span className="text-[12px] font-[600] uppercase tracking-[0.12em] text-accent font-sans">
-                    {story.tag}
-                  </span>
-                  <h3
-                    className="font-sans font-bold text-lg leading-snug"
-                    style={{ color: TEAL }}
-                  >
-                    {story.title}
-                  </h3>
-                  <p className="text-sm font-sans text-muted leading-relaxed flex-1">
-                    {story.excerpt}
-                  </p>
-                  <p className="text-[13px] font-[600] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
-                    {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
 
           <div
             className="mt-14 rounded-2xl border p-6 md:p-8 flex flex-col sm:flex-row sm:items-center gap-5"
@@ -339,7 +297,7 @@ export default function FaithPage() {
                 className="text-[12px] font-[700] uppercase tracking-[0.12em] mb-2 font-sans"
                 style={{ color: TEAL_SOFT }}
               >
-                We want more of these
+                Share yours
               </p>
               <p className="font-sans font-bold text-base mb-1" style={{ color: TEAL }}>
                 Navigating treatment alongside your faith?
@@ -465,7 +423,30 @@ export default function FaithPage() {
               right tool. Tell your clinic (they have safeguarding routes) or speak to
               a counsellor independently of everyone involved.
             </p>
+            <p
+              className="text-[16px] font-sans leading-relaxed mt-4 font-[600]"
+              style={{ color: "var(--on-teal)" }}
+            >
+              If you are in immediate danger, call 999.
+            </p>
+            <ul
+              className="mt-2 space-y-1 text-[15px] font-sans leading-relaxed"
+              style={{ color: "var(--on-teal)", maxWidth: "64ch" }}
+            >
+              <li>England: National Domestic Abuse Helpline, 0808 2000 247</li>
+              <li>Honour-based abuse and forced marriage: Karma Nirvana, 0800 5999 247</li>
+              <li>Scotland: Domestic Abuse and Forced Marriage Helpline, 0800 027 1234</li>
+              <li>Wales: Live Fear Free, 0808 80 10 800</li>
+              <li>Northern Ireland: Domestic and Sexual Abuse Helpline, 0808 802 1414</li>
+            </ul>
           </div>
+
+          <p className="text-[15px] font-sans leading-relaxed text-muted mt-6">
+            <Link href="/support" className="underline underline-offset-2" style={{ color: TEAL }}>
+              Looking after yourself
+            </Link>
+            : counselling and support.
+          </p>
         </div>
       </section>
 

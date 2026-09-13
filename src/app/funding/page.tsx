@@ -366,6 +366,13 @@ export default function FundingPage() {
         </p>
 
         <NHSEligibilityChecker />
+
+        <p className="text-[15px] font-sans leading-relaxed text-muted mt-8">
+          <Link href="/support" className="underline underline-offset-2" style={{ color: TEAL }}>
+            Looking after yourself
+          </Link>
+          : counselling and support.
+        </p>
       </Section>
 
       {/* Routes */}

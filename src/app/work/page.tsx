@@ -111,8 +111,9 @@ export default function WorkPage() {
           knowing what to ask, and asking it in writing.
         </p>
         <p className="text-[16px] font-sans leading-relaxed text-muted mt-4" style={{ maxWidth: "58ch" }}>
-          Every script here is written for someone who has told nobody, because that is most
-          people. Disclosure is a choice you make later, if you want to.
+          Most scripts here work without telling anyone about your treatment. The ones that rely
+          on pregnancy protection after embryo transfer only work once your employer knows, and
+          they say so.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-2">
@@ -175,7 +176,7 @@ export default function WorkPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "60ch" }}>
           The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
           <strong className="font-[600]">embryo transfer</strong>, not when a pregnancy is
-          confirmed, and not when treatment starts.
+          confirmed, and not when treatment starts. It applies once your employer knows.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "60ch" }}>
           Below, what the law actually gives you is kept apart from what is policy, proposal or
@@ -202,6 +203,13 @@ export default function WorkPage() {
             solicitor before you respond to it. Most of them will do a first conversation free.
           </p>
         </div>
+
+        <p className="text-[15px] font-sans leading-relaxed text-muted mt-6">
+          <Link href="/support" className="underline underline-offset-2" style={{ color: TEAL }}>
+            Looking after yourself
+          </Link>
+          : counselling and support.
+        </p>
       </Section>
 
       {/* What employers offer */}

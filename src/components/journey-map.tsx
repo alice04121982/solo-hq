@@ -32,8 +32,8 @@ const PHASES: Phase[] = [
   {
     id: "donor", number: 3, title: "The Donor Hunt", subtitle: "Navigating sperm banks",
     icon: <Search className="h-4 w-4" />,
-    description: "Choosing a donor is deeply personal and logistically complex. You'll navigate international sperm banks, shipping regulations, open-ID vs. anonymous debates, and the emotional weight of selecting half your child's genetics.",
-    actions: ["Create accounts at major banks: Cryos International, Xytex, European Sperm Bank, London Sperm Bank", "Understand open-ID donors (child can contact at 18) vs. anonymous; UK law requires traceability", "Budget for 2–4 vials per cycle attempt, plus additional storage for siblings", "Coordinate shipping logistics and tank rental with your chosen clinic in advance", "Consider CMV status, blood type matching, and extended family health history"],
+    description: "Choosing a donor is deeply personal and logistically complex. You'll navigate international sperm banks, shipping regulations, and the emotional weight of selecting half your child's genetics.",
+    actions: ["Create accounts at major banks: Cryos International, Xytex, European Sperm Bank, London Sperm Bank", "UK clinics can only use donors who are identifiable to your child at 18", "Budget for 2–4 vials per cycle attempt, plus additional storage for siblings", "Coordinate shipping logistics and tank rental with your chosen clinic in advance", "Consider CMV status, blood type matching, and extended family health history"],
   },
   {
     id: "clinic", number: 4, title: "Choosing a Clinic", subtitle: "More than just success rates",
@@ -45,7 +45,7 @@ const PHASES: Phase[] = [
     id: "treatment", number: 5, title: "Treatment", subtitle: "IUI, IVF, or donor eggs",
     icon: <FlaskConical className="h-4 w-4" />,
     description: "The clinical phase is intense: injections, scans, and a lot of waiting. Understanding your protocol helps you advocate for yourself and avoid costly add-ons with little evidence base.",
-    actions: ["Get baseline bloods done: AMH, FSH, LH, TSH, prolactin, and an antral follicle count", "Discuss IUI vs. IVF with your consultant; IUI is cheaper but has lower success rates per cycle", "Understand your stimulation protocol: long, short, or natural/modified", "Know which add-ons have HFEA amber/green traffic light status and which are unproven", "Prepare for the two-week wait: plan distractions, not obsessive symptom-tracking"],
+    actions: ["Get baseline bloods done: AMH, FSH, LH, TSH, prolactin, and an antral follicle count", "Discuss IUI vs. IVF with your consultant; IUI is cheaper but has lower success rates per cycle", "Understand your stimulation protocol: long, short, or natural/modified", "Check any add-on against the HFEA's ratings (green, yellow, grey, black, red). For most patients, proven treatment works without any add-ons", "Prepare for the two-week wait: plan distractions, not obsessive symptom-tracking"],
   },
   {
     id: "resilience", number: 6, title: "Resilience & Loss", subtitle: "When it doesn't go to plan",

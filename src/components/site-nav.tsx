@@ -12,7 +12,7 @@ const PRIMARY_LINKS = [
   { label: "Family Types", href: "/families" },
   { label: "How IVF Works", href: "/how-ivf-works" },
   { label: "Compare Clinics", href: "/ivf-finder" },
-  { label: "Stories", href: "/stories" },
+  { label: "Support", href: "/support" },
 ];
 
 const MORE_LINKS = [
@@ -21,6 +21,7 @@ const MORE_LINKS = [
   { label: "IVF & Work", href: "/work" },
   { label: "Faith & Culture", href: "/faith" },
   { label: "Resources", href: "/resources" },
+  { label: "Share your story", href: "/stories" },
   { label: "About", href: "/about" },
 ];
 

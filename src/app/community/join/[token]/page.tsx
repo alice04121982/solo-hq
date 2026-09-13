@@ -167,6 +167,17 @@ export default async function CommunityJoinPage({ params }: PageProps) {
                 {PHONE_NUMBER_NOTICE}
               </p>
             </div>
+            <p className="mt-4 text-sm font-sans text-muted leading-relaxed">
+              This group is peer support, not a support line. If you need help
+              urgently, see{" "}
+              <Link
+                href="/support#crisis"
+                className="text-teal underline decoration-teal/35 underline-offset-4 hover:decoration-teal transition-colors"
+              >
+                Looking after yourself
+              </Link>
+              .
+            </p>
           </div>
 
           <BentoCard className="lg:sticky lg:top-8">

@@ -94,7 +94,7 @@ export default function FamiliesPage() {
               <br />your path starts here.
             </>
           }
-          intro="IVF looks different depending on who you are. Find your family type below for a guide built specifically for you: the right treatment routes, real stories, and a clear step-by-step from first consultation to family."
+          intro="IVF looks different depending on who you are. Find your family type below for a guide built specifically for you: the right treatment routes and a clear step-by-step from first consultation to family."
           introWidth="55ch"
           className="mb-0"
         />
@@ -117,12 +117,11 @@ export default function FamiliesPage() {
           title="Every guide includes:"
           className="mb-12"
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8">
           {[
             { num: "01", title: "Step-by-step process", body: "A clear, honest walkthrough from initial tests to parenthood, tailored to your specific treatment route." },
-            { num: "02", title: "Personal stories", body: "Illustrative stories of what the journey feels like, while we collect real, consented accounts. The emotional truth, not just the clinical facts." },
-            { num: "03", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
-            { num: "04", title: "Newsletter", body: "Updates specific to your family type: clinic data changes, new research, community stories." },
+            { num: "02", title: "Clinic comparison", body: "Link directly to our comparison tool filtered for your treatment type, with success rates by age bracket." },
+            { num: "03", title: "Newsletter", body: "Updates specific to your family type: clinic data changes and new research." },
           ].map((item) => (
             <div key={item.num} className="py-6 border-t border-border">
               <p className="font-sans font-medium mb-3" style={{ fontSize: "1.5rem", color: "var(--lavender-dark)" }}>

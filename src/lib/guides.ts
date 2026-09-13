@@ -53,7 +53,7 @@ export const GUIDES: Guide[] = [
           "Donor sperm: £800–£1,800 per vial (most solo patients buy 2–4 vials upfront)",
           "Sperm import and handling fee: £300–£600",
           "CMV testing and additional screening: £100–£300",
-          "Mandatory counselling (HFEA requirement): £150–£400 per session, typically 2–3 sessions",
+          "Counselling: clinics must offer it. Ask whether it is in your quote.",
           "Initial consultation: £150–£300",
           "Baseline blood tests and scans: £200–£500",
           "Embryo freezing and annual storage: £300–£500/year",
@@ -78,7 +78,7 @@ export const GUIDES: Guide[] = [
         ],
         bullets: [
           "Sperm banks: prices vary significantly between Cryos, European Sperm Bank, London Sperm Bank, and others. Shop around for the same donor profile at a lower vial price.",
-          "Drugs: ask your GP if any stimulation medications can be prescribed on the NHS. Some ICBs will prescribe these even for private patients.",
+          "Drug prices vary between pharmacies. Ask your clinic whether you can get quotes from more than one.",
           "Multi-cycle packages: most clinics offer 2- or 3-cycle packages at 10–20% discount. If you have the capital, these save money and reduce paperwork.",
           "Monitoring scans: some clinics allow you to do mid-cycle monitoring scans at a local clinic or hospital rather than travelling back to the treating clinic for every appointment.",
           "Consultations: once you have a diagnosis and a treatment plan, follow-up calls are often unnecessary. Ask for email updates where possible.",
@@ -149,16 +149,15 @@ export const GUIDES: Guide[] = [
           "Several charities and foundations offer grants specifically for fertility treatment. Competition is high, but the amounts are meaningful and do not need to be repaid.",
         ],
         bullets: [
-          "The Fertility Foundation (fertilityfoundation.org): the main UK IVF grant charity. Note its published criteria require a cohabiting couple with at least one applicant in full-time employment, so solo applicants are not currently eligible: check the criteria before investing time in an application.",
+          "The Fertility Foundation (fertilityfoundation.org): grants of up to £3,000 towards treatment, open to single women and to heterosexual and same-sex couples. Applicants must be British citizens living full time in the UK with no criminal record, the woman must be 42 or under, at least one applicant must be in full-time work, and couples must live together. You also need proof you can pay the rest of the cost. There is a £30 non-refundable application fee, and applications open at set times, so check the website for dates.",
           "Some clinics run their own hardship or bursary programmes; always ask",
-          "Pay It Forward schemes: some patients who complete treatment donate unused medications. Check Fertility Network UK's Facebook groups.",
+          "Unused fertility medicines can't legally be passed on. Return them to your pharmacy or clinic.",
         ],
       },
       {
         heading: "Tax considerations",
         body: [
-          "Fertility treatment costs are not tax-deductible for employees in the UK. However, if you are self-employed and receiving fertility treatment partly to preserve your ability to work, some costs may have a legitimate business case; discuss this with an accountant.",
-          "If your employer pays for fertility treatment, HMRC currently treats employer-funded IVF as a non-taxable medical benefit in most circumstances, but this is an evolving area. Check with a tax adviser if your employer is offering significant funding.",
+          "If your employer pays for fertility treatment, it is usually a taxable benefit in kind, reported on a P11D. Ask HR how yours is treated before you count on the full amount.",
         ],
       },
     ],
@@ -166,7 +165,7 @@ export const GUIDES: Guide[] = [
       "Check your employer's benefits portal; fertility funding is more common than most employees realise",
       "NHS funding criteria vary enormously by area and often exclude single women and same-sex couples, so always check your local ICB criteria",
       "Specialist fertility loans and clinic payment plans can spread the cost with low or zero interest",
-      "The Fertility Foundation and Gift of IVF offer grants that do not need to be repaid",
+      "The Fertility Foundation offers grants that don't need to be repaid",
       "Never borrow more than you need for one cycle at a time",
     ],
   },
@@ -194,7 +193,7 @@ export const GUIDES: Guide[] = [
         bullets: [
           "Initial consultation fee: £150–£300",
           "Baseline tests (AMH, FSH, AFC, blood panel): £200–£500",
-          "Mandatory counselling sessions (HFEA requirement): £150–£400 × 2–3 sessions",
+          "Counselling: clinics must offer it. Ask whether it is in your quote.",
           "Donor sperm selection (bank registration fee): £0–£150",
           "Sperm vials: £800–£1,800 per vial × quantity purchased (buy 3–4 upfront for sibling potential)",
           "Sperm import and quarantine: £300–£600",
@@ -354,7 +353,7 @@ export const GUIDES: Guide[] = [
         body: [
           "Donor egg IVF uses eggs from a screened, identity-release donor rather than your own eggs. It is typically recommended when egg quality or quantity is significantly reduced, usually from around 42–43+ or after multiple failed IVF cycles with your own eggs.",
           "Success rates for donor egg IVF are substantially higher than own-egg IVF for older patients (around 35–45% per transfer regardless of the recipient's age) because the outcome depends primarily on the donor's egg quality, not the recipient's ovarian reserve.",
-          "In the UK, egg donation is not anonymous. Donors are identity-release: a donor-conceived person can access non-identifying information about their donor at any age, and identifying information from the HFEA register once they turn 18. This is an important consideration in your decision and in how you plan to talk to your future child about their conception.",
+          "Donors registered since 1 April 2005 are identity-release. You can ask the HFEA for non-identifying information about your donor at any time; your child can from 16, and from 18 can request the donor's name, date of birth and last known address. This is an important consideration in your decision and in how you plan to talk to your future child about their conception.",
         ],
       },
       {
@@ -539,7 +538,7 @@ export const GUIDES: Guide[] = [
         body: [
           "In the UK, all sperm donors used through HFEA-licensed clinics must be registered with the HFEA. Anonymous donation is not permitted; donor-conceived people have the right to access their donor's identifying information when they turn 18.",
           "This is known as an identity-release or open-ID system. Donors are not anonymous, but contact is not mandatory; the donor-conceived person chooses whether to make contact. Most clinics and sperm banks refer to UK-compliant donors as 'open-ID' donors.",
-          "Using sperm purchased abroad and imported into a UK HFEA-licensed clinic is allowed, but the donor must still be registered with the HFEA. Your clinic will handle this registration as part of the import process.",
+          "You can use an overseas sperm bank, but a UK clinic will only accept sperm from banks that meet UK rules. Your clinic will tell you which it works with.",
         ],
         callout:
           "The HFEA's position and the research on donor-conceived adults both support openness from an early age. The decision you make about your donor will be part of your child's story. Plan now for how you will share it.",
@@ -559,20 +558,20 @@ export const GUIDES: Guide[] = [
           "Extended profiles at sperm banks often include audio messages, staff impressions, and childhood photographs",
         ],
         postBody: [
-          "What you do not get: contact details, surname, or current circumstances. These are accessible to your child through the HFEA register at age 18.",
+          "What you do not get: contact details or anything about the donor's current life. From 18 your child can request the donor's name, date of birth and last known address. Neither side has to make contact.",
         ],
       },
       {
         heading: "Sperm banks operating in the UK",
         body: [
-          "You can use a UK-registered bank or an overseas bank that ships to the UK. Both options are widely used by solo patients and couples alike. The main differences are cost, donor pool size, and the depth of profile information available.",
+          "You can use a UK bank or an overseas bank that ships to the UK. A UK clinic will only accept donors who meet UK rules, so ask your clinic which banks it works with. The main differences are cost, donor pool size, and the depth of profile information available.",
         ],
         bullets: [
-          "Cryos International (cryosinternational.com): the world's largest sperm bank. Very large donor pool, detailed profiles, ships worldwide. HFEA-registered donors available.",
+          "Cryos International (cryosinternational.com): the world's largest sperm bank. Very large donor pool, detailed profiles, ships worldwide.",
           "European Sperm Bank (europeanspermbank.com): Danish bank with strong UK presence. Known for rigorous screening and detailed profiles.",
           "London Sperm Bank (londonspermbank.com): UK-based. More limited pool but straightforward logistics (no import required).",
           "Manchester Fertility (manchesterfertility.com): UK-based bank with a growing donor pool.",
-          "California Cryobank (cryobank.com): US-based, ships to UK with HFEA registration. Large pool, video profiles and audio messages available.",
+          "California Cryobank (cryobank.com): US-based, ships to the UK. Large pool, video profiles and audio messages available.",
         ],
       },
       {
@@ -593,7 +592,7 @@ export const GUIDES: Guide[] = [
     ],
     keyTakeaways: [
       "UK law requires identity-release donors; your child can access identifying information at age 18",
-      "Using overseas banks is allowed as long as the donor is HFEA-registered (your clinic handles this)",
+      "UK clinics only accept sperm from banks that meet UK rules",
       "Extended donor profiles at large banks include personal statements, audio, and sometimes childhood photos",
       "Buy 3–4 vials upfront if you find a donor you connect with, for multiple cycle attempts and sibling potential",
       "Give the decision time and structure: decide which attributes matter before you start browsing",
@@ -635,6 +634,12 @@ export const GUIDES: Guide[] = [
           "Checking fertility forums for reassurance: other people's symptoms and timelines are not your data",
           "Telling everyone and then having to manage their expectations on top of your own",
           "Treating this period as 'just waiting': it is an active emotional experience that deserves real support",
+        ],
+      },
+      {
+        heading: "When to call your clinic straight away",
+        body: [
+          "Call your clinic, or its out-of-hours number, if you have severe tummy pain or swelling, feel sick or are vomiting, are short of breath, feel faint, or are passing much less urine. These can be signs of OHSS, which can start or get worse after transfer. If you can't reach your clinic, call 111. Call 999 or go to A&E if you have difficulty breathing or chest pain.",
         ],
       },
       {
@@ -683,8 +688,7 @@ export const GUIDES: Guide[] = [
         bullets: [
           "Request a debrief appointment with your consultant. This should cover: what happened in the cycle, what the data suggests, and what the recommended next steps are. Take notes or bring someone with you.",
           "Ask specifically: 'Is there anything from this cycle that changes your protocol recommendation for next time?'",
-          "If you had embryos tested (PGT-A), ask for the full genetic report; this gives more information about why a transfer may not have worked",
-          "If you have had two or more failures with chromosomally normal embryos, ask about recurrent implantation failure investigations",
+          "If you're offered extra tests or treatments after a failed cycle, ask what the evidence is and check the HFEA's add-on ratings before paying. For example, the HFEA rates endometrial receptivity testing red, because the evidence suggests it may make treatment less effective. PGT-A is rated red for improving the chance of having a baby for most patients, and green for reducing the chance of miscarriage.",
           "Review your finances. A failed cycle is a reasonable point at which to reassess how many more cycles you are prepared to fund and on what timeline",
         ],
       },
@@ -717,7 +721,7 @@ export const GUIDES: Guide[] = [
       "Request a thorough debrief with your consultant after any failed cycle",
       "Continuing treatment should be a genuine choice, not a default; check in with your actual desires",
       "Donor eggs offer a meaningfully different success rate profile if own-egg IVF is not working",
-      "There is support available, from counsellors, from your community, and from Fertility Network UK",
+      "Support is available from your clinic's counsellor and from counsellors listed by BICA",
     ],
   },
 
@@ -742,28 +746,26 @@ export const GUIDES: Guide[] = [
         heading: "Where to find one",
         body: ["These directories and organisations are the most reliable starting points:"],
         bullets: [
-          "British Infertility Counselling Association (bica.net): directory of qualified fertility counsellors. All listed members have completed specialist fertility counselling training. Filter by location and approach.",
-          "Fertility Network UK (fertilitynetworkuk.org): peer support and counsellor signposting, plus a telephone helpline",
-          "The Miscarriage Association (miscarriageassociation.org.uk): specifically for pregnancy loss support, with trained counsellors and peer support groups",
-          "HFEA website: all HFEA-licensed clinics are legally required to offer patients access to counselling. Ask your clinic for a referral to their counsellor even if you prefer to see someone independently.",
+          "British Infertility Counselling Association (bica.net): directory of fertility counsellors; each listing shows the counsellor's accreditation level. Most work privately.",
+          "Miscarriage UK (miscarriageuk.org, formerly the Miscarriage Association): support after pregnancy loss, with a helpline and a directory of counsellors",
+          "Your clinic: every HFEA-licensed clinic must offer you the chance to talk to a counsellor before you start treatment. Some offer it free; others charge.",
           "Psychology Today (psychologytoday.com/gb): searchable directory; filter by 'fertility' under specialisms",
         ],
       },
       {
         heading: "Online therapy options",
         body: [
-          "If you live in an area with limited local provision, or if the flexibility of online sessions suits your treatment schedule better, several platforms offer fertility-aware therapists remotely:",
+          "If there are few counsellors near you, or online sessions fit around treatment better:",
         ],
         bullets: [
-          "Betterhelp (betterhelp.com): large platform with fertility specialist filter",
-          "Spill (spill.chat): workplace mental health platform sometimes offered via employer EAP",
-          "Your clinic's in-house counsellor (if HFEA-licensed, this must be offered): typically free or low-cost as part of treatment",
+          "BICA's directory includes counsellors who work online.",
+          "Your clinic: ask whether its counsellor offers phone or video sessions.",
         ],
       },
       {
         heading: "What to ask in an initial consultation",
         body: [
-          "Most therapists offer a free 20-minute initial call. Use it to assess fit:",
+          "Some therapists offer a short free first call. Use it to assess fit:",
         ],
         bullets: [
           "'Have you worked with people going through IVF or fertility treatment before?'",
@@ -778,7 +780,7 @@ export const GUIDES: Guide[] = [
     keyTakeaways: [
       "Fertility-specific experience matters; use BICA (bica.net) to find qualified fertility counsellors",
       "Your HFEA-licensed clinic must offer access to counselling; ask for it",
-      "Online therapy removes geographic barriers; several platforms offer fertility specialists",
+      "BICA's directory includes counsellors who work online",
       "Start therapy before you need it, ideally before treatment begins",
       "It is not a sign of struggle; it is a sign of preparation",
     ],
@@ -857,11 +859,11 @@ export const GUIDES: Guide[] = [
         heading: "Who is the legal parent?",
         body: [
           "When you conceive through licensed fertility treatment at an HFEA-licensed clinic using donor sperm, the donor is not a legal parent of your child. The sperm donor has no legal parental status and no parental rights or responsibilities, including no obligation to pay child maintenance.",
-          "This is set out in the Human Fertilisation and Embryology Act 2008. It applies to all treatments carried out at HFEA-licensed clinics. It does not apply if you use a donor outside of a licensed clinic (for example, via a home insemination arrangement), in which case the legal position is more complex.",
-          "If you are solo and unmarried, you are the sole legal parent from birth. If you are married or in a civil partnership, your spouse or civil partner is normally the second legal parent unless they have explicitly opted out. If you are a couple who are neither married nor in a civil partnership, the non-carrying partner can become the second legal parent by signing the clinic's parenthood consent forms before treatment: ask your clinic about this before you start.",
+          "This is set out in the Human Fertilisation and Embryology Act 2008. For single women and unmarried couples, this protection only applies to treatment at a UK licensed clinic.",
+          "If you are solo and unmarried, you are the sole legal parent from birth. If you are married or in a civil partnership, your spouse or civil partner is normally the second legal parent unless they did not consent to the treatment. If you are a couple who are neither married nor in a civil partnership, the non-carrying partner can become the second legal parent by signing the clinic's parenthood consent forms before treatment: ask your clinic about this before you start.",
         ],
         callout:
-          "The key protection: treatment at a licensed clinic. If you are using a home insemination kit or a known donor outside of a clinic, get legal advice before proceeding; the donor may have legal rights.",
+          "If you are single or unmarried and conceive at home or outside a UK licensed clinic, the donor is normally your child's legal father, with the rights and responsibilities that brings, whatever you agree in writing. If you are unmarried, your partner will not automatically be a legal parent. If you are married or in a civil partnership and conceive by artificial insemination, your spouse is normally the other legal parent unless they did not consent; this does not cover conception through sex. Get specialist legal advice before trying at home.",
       },
       {
         heading: "The donor's legal position",
@@ -876,7 +878,7 @@ export const GUIDES: Guide[] = [
           "Can be identified by a donor-conceived child who has reached 18 via the HFEA register",
         ],
         postBody: [
-          "Donors must consent to the identity-release system when they donate. They know that any children conceived from their donation may contact them at 18. They cannot withdraw this consent after donation.",
+          "Donors registered since 1 April 2005 can't donate anonymously. Separately, a donor can withdraw consent to their sperm being used up to the point it is used.",
         ],
       },
       {
@@ -884,22 +886,28 @@ export const GUIDES: Guide[] = [
         body: [
           "Donor-conceived children in the UK have the right to access non-identifying information about their donor at age 16, and identifying information (including name, date of birth, and last known address) at age 18.",
           "This information is held by the HFEA register and cannot be removed. Your child can request it themselves when they reach adulthood; it is not conditional on your consent at that point.",
-          "Your child also has the right to know the number of other families created from the same donor (up to 10 families per donor in the UK), and may be able to connect with donor siblings through the HFEA or the Donor Sibling Registry.",
+          "From 16: the number, sex and year of birth of donor-conceived siblings. From 18: Donor Sibling Link, to swap contact details with siblings who have also joined.",
         ],
       },
       {
         heading: "Birth registration",
         body: [
-          "If you are a solo parent, you will register the birth as the sole parent and the birth certificate will show your name only; there is no donor entry. If there is a second legal parent through marriage, civil partnership, or the clinic's parenthood consent forms, both names go on the birth certificate. Either way this is legally straightforward when treatment happened at a licensed clinic.",
-          "You may choose to register your child's donor conception with the HFEA by noting it on the child's medical record. This is recommended by many fertility specialists as a way of ensuring medical staff are aware, and the information is preserved regardless of what you tell your child directly.",
+          "If you are a solo parent, you will register the birth as the sole parent and the birth certificate will show your name only; there is no donor entry. If there is a second legal parent through marriage, civil partnership, or the clinic's parenthood consent forms, both names go on the birth certificate.",
+          "Your clinic reports your treatment to the HFEA; you don't need to register anything. Whether to tell your GP is your choice.",
+        ],
+      },
+      {
+        heading: "If you are using a surrogate",
+        body: [
+          "The woman who gives birth is the legal mother, even after treatment at a licensed clinic, and if she is married or in a civil partnership her spouse is normally the second legal parent. Legal parenthood passes to you through a parental order, which you apply for within 6 months of the birth. Get specialist legal advice early.",
         ],
       },
     ],
     keyTakeaways: [
-      "Treatment at an HFEA-licensed clinic = the donor is not a legal parent, full stop",
+      "After treatment at a UK licensed clinic with the right consent forms, the donor is not a legal parent",
       "The sperm donor has no parental rights and no maintenance obligations",
       "Your child can access the donor's identifying information from the HFEA at age 18",
-      "Home insemination with a known donor creates a different legal picture; get legal advice first",
+      "If you are single or unmarried and conceive at home, the donor is normally your child's legal father; get specialist legal advice first",
       "Birth registration is straightforward, whether as a sole parent or with a second legal parent",
     ],
   },
@@ -932,12 +940,15 @@ export const GUIDES: Guide[] = [
           "A donor-conceived person can access the HFEA register in stages:",
         ],
         bullets: [
-          "Age 16+: non-identifying information about their donor (physical characteristics, personal statement)",
-          "Age 18+: identifying information (name, date of birth, last known address)",
-          "Age 18+: details of any donor siblings (other families created from the same donor, if they have also registered an interest)",
+          "From 16: non-identifying information about their donor (physical characteristics, personal statement)",
+          "From 16: the number, sex and year of birth of donor-conceived siblings",
+          "From 18: the donor's name, date of birth and last known address",
+          "From 18: Donor Sibling Link, to swap contact details with siblings who have also joined",
         ],
         postBody: [
-          "Access is not automatic; your child must apply to the HFEA. The process involves verifying their identity and completing an application. The HFEA offers counselling support as part of this process.",
+          "Access is not automatic; your child must apply to the HFEA.",
+          "The HFEA encourages people to get support before applying, for example from a qualified counsellor. Some clinics offer a small number of free sessions; otherwise counselling is paid.",
+          "As a parent you can apply to the HFEA now, free, for non-identifying information about your donor and the number, sex and year of birth of donor siblings.",
         ],
       },
       {
@@ -975,14 +986,15 @@ export const GUIDES: Guide[] = [
     categorySlug: "legal-admin",
     readTime: "5 min read",
     intro:
-      "Using a known donor (a friend, acquaintance, or someone found through an online platform) is a meaningful choice that comes with specific legal complexities. This guide covers the legal agreements you need and the risks of proceeding without them.",
+      "Some people use a known donor, such as a friend. The safest way is through a UK licensed clinic. This guide covers the legal agreements you need and the risks of going ahead without them.",
     sections: [
       {
         heading: "The critical difference: licensed clinic vs. home insemination",
         body: [
           "How you use a known donor determines the entire legal picture:",
-          "If you use your known donor's sperm through an HFEA-licensed clinic, the same legal protections apply as with any other clinic treatment: you are the sole legal parent, and the donor has no parental rights or obligations. The donor's sperm must be screened and quarantined before use (typically a six-month wait for quarantine).",
-          "If you use a known donor through home insemination (without a licensed clinic), the legal position is fundamentally different: the donor may have parental rights and maintenance obligations, regardless of any private agreement you have made. Private agreements between you and your donor about parental responsibility are not legally enforceable.",
+          "If you use your known donor's sperm through an HFEA-licensed clinic, the same legal protections apply as with any other clinic treatment: the donor is not a legal parent and has no parental rights or obligations. The donor's sperm must be screened and quarantined before use (typically a six-month wait for quarantine).",
+          "If you are single or unmarried and conceive at home or outside a UK licensed clinic, the donor is normally your child's legal father, with the rights and responsibilities that brings, whatever you agree in writing. If you are unmarried, your partner will not automatically be a legal parent. If you are married or in a civil partnership and conceive by artificial insemination, your spouse is normally the other legal parent unless they did not consent; this does not cover conception through sex. Get specialist legal advice before trying at home.",
+          "Donors used outside a licensed clinic, including people met online, won't have had a clinic's health checks, so there is a risk of infections and of passing on conditions such as cystic fibrosis, sickle cell disease or thalassaemia.",
         ],
         callout:
           "A written agreement with a known donor that says 'he will have no parental rights' is not legally enforceable in the UK outside of the licensed clinic system. Courts look at the welfare of the child, not the terms of private contracts.",
@@ -1009,11 +1021,7 @@ export const GUIDES: Guide[] = [
         ],
         bullets: [
           "NGA Law (ngalaw.co.uk, formerly Natalie Gamble Associates): specialists in donor conception and fertility law",
-          "Brilliant Beginnings (brilliantbeginnings.co.uk): NGA Law's sister non-profit surrogacy agency (an agency rather than a law firm, but a useful starting point for surrogacy journeys)",
           "The Law Society's solicitor finder (solicitors.lawsociety.org.uk) filtered by 'family' and 'surrogacy and fertility'",
-        ],
-        postBody: [
-          "A known donor agreement typically costs £300–£800. Given what is at stake, this is always worth it.",
         ],
       },
       {
@@ -1031,10 +1039,10 @@ export const GUIDES: Guide[] = [
       },
     ],
     keyTakeaways: [
-      "Using a known donor through a licensed clinic gives you full legal protection; home insemination does not",
-      "Private agreements about parental rights are not enforceable outside the licensed clinic system",
+      "At a UK licensed clinic the donor is not a legal parent; if you are single or unmarried and conceive at home, the donor is normally your child's legal father",
+      "A written agreement cannot change who is a legal parent",
       "A written agreement is still advisable even with a licensed clinic, for relational clarity, not legal enforcement",
-      "Use a specialist fertility law solicitor: Natalie Gamble Associates or Brilliant Families",
+      "Use a solicitor who specialises in fertility law",
       "Have explicit conversations about the donor's intended role before you start; document your alignment",
     ],
   },
@@ -1069,7 +1077,7 @@ export const GUIDES: Guide[] = [
         bullets: [
           "What is the minimum monthly income you need to cover essential outgoings?",
           "How much can you save in advance to supplement MA during the months you plan to take off?",
-          "Can your work be structured to allow some part-time activity during maternity leave without affecting your MA? (Keeping in Touch days or Shared Parental Leave equivalents do not apply to self-employed, but the rules around what counts as 'working' during MA are less restrictive than for employees)",
+          "You can work up to 10 'keeping in touch' days while getting Maternity Allowance. Tell the DWP about any days you work; working more than 10 can reduce your payments.",
           "Have you registered for the Government's 30-hours free childcare offer (available from 9 months old), and what is the timeline from birth to eligibility?",
           "Do you have professional indemnity or income protection insurance that would pay out for pregnancy-related inability to work?",
         ],
@@ -1373,54 +1381,6 @@ export const GUIDES: Guide[] = [
 
   // ─── Community & Stories ─────────────────────────────────────────────────────
   {
-    slug: "real-stories",
-    title: "Real stories: solo mums share their journeys",
-    type: "Stories",
-    category: "Community & Stories",
-    categorySlug: "community-stories",
-    readTime: "10 min read",
-    intro:
-      "Nothing helps more than reading about someone who has been exactly where you are. The accounts below show what the journey looks like at different stages. They are illustrative examples while we collect real, consented stories; if you would like to share yours, the contact details are at the end.",
-    sections: [
-      {
-        heading: "Sarah, 38: Two rounds of IUI, one round of IVF",
-        body: [
-          "I made the decision at 36. I had been thinking about it for two years and I finally gave myself permission to stop waiting for something that might not come. Starting the process felt like taking back control after a long time of feeling like life was happening to me rather than being something I was choosing.",
-          "The two IUI cycles were harder emotionally than I expected. I think I had convinced myself they would work because they were 'easier'. When the second one failed I felt devastated, which surprised me; I had not let myself feel how much I wanted this until it did not happen.",
-          "IVF was a completely different experience in terms of commitment: more injections, more monitoring, more waiting. But it worked on the first cycle. My daughter is two now. The part I was least prepared for was how un-alone I felt the moment she arrived. I thought I would feel the absence of a partner more in those first days. Mostly I just felt incredibly present.",
-        ],
-        callout:
-          "What I wish someone had told me: the community of solo mums online is extraordinary. I found an Instagram community early in my journey and those connections became some of my closest relationships during treatment. Don't wait to find your people.",
-      },
-      {
-        heading: "Priya, 41: Own eggs, then donor eggs",
-        body: [
-          "I started IVF at 40 using my own eggs. My AMH was on the lower side for my age and my consultant was honest that it would be harder, but possible. I had two failed cycles. The second one yielded three embryos, all of which either failed to develop properly or did not implant.",
-          "The conversation about donor eggs was not easy. I had a very specific idea of what my child would look like and I had to let go of that. My fertility counsellor helped me think about what really mattered, and what I realised was that I wanted to be a mother, and the genetic connection, while something I had assumed, was not what I was pursuing.",
-          "I found a donor through my clinic's egg bank: a woman in her late twenties who had donated before. The transfer worked first time. My son is four months old. He looks like no one in particular and he is perfectly himself. The story I tell him already is that he was so wanted that I looked and looked until I found exactly the right way to make him.",
-        ],
-      },
-      {
-        heading: "Gemma, 35: Single transfer, now 10 weeks pregnant",
-        body: [
-          "I am still in it: ten weeks pregnant after a single IVF cycle. I do not quite believe it is real yet. The two-week wait was the strangest experience of my life; I went to a lot of cinema screenings. I booked tickets in advance for the specific purpose of having somewhere to be at a specific time every evening.",
-          "What surprised me about telling people was the response. I had braced myself for difficult reactions. Almost everyone was genuinely happy for me. My mum, who I had most worried about, cried and said she had been hoping I would do this for years.",
-          "I am trying to be in it rather than planning it all to death. That is my new daily challenge.",
-        ],
-        callout:
-          "Want to share your story? We are always looking for honest accounts from every stage of the journey, whether you are at the beginning, in the middle of treatment, pregnant, or already a mum. Contact us at stories@cairnfertility.com.",
-      },
-    ],
-    keyTakeaways: [
-      "Every journey is different: some take one cycle, some take many, and the destination is sometimes not the one you expected",
-      "The SMC community is consistently cited as one of the most valuable parts of the journey",
-      "Difficult decisions, like moving to donor eggs, often feel clearer after speaking with a fertility counsellor",
-      "Preparing for both outcomes during treatment (not just the positive one) is protective",
-      "The solo part often feels less significant than expected once the baby arrives",
-    ],
-  },
-
-  {
     slug: "recommended-books",
     title: "Books every solo mum by choice should read",
     type: "Reading list",
@@ -1454,8 +1414,7 @@ export const GUIDES: Guide[] = [
         heading: "For the fertility and clinical journey",
         body: ["Practical and informative:"],
         bullets: [
-          "It Starts with the Egg by Rebecca Fett: the most evidence-based guide to improving egg quality through supplements, diet, and environment. Particularly relevant for women over 35.",
-          "Fertile by Emma Cannon: integrative approach to fertility combining conventional and Chinese medicine perspectives.",
+          "It Starts with the Egg by Rebecca Fett: on egg quality, diet and supplements. The HFEA has found no good evidence that the supplements it has assessed (DHEA and testosterone) improve your chance of having a baby; talk to your clinic before taking any.",
         ],
       },
       {
@@ -1471,7 +1430,6 @@ export const GUIDES: Guide[] = [
     ],
     keyTakeaways: [
       "Choosing Single Motherhood by Mikki Morrissette is the essential starting point for the decision-making phase",
-      "It Starts with the Egg is the most evidence-based guide for improving outcomes through diet and supplements",
       "Donor Conception Network publishes the best age-appropriate books for talking to your child",
       "Memoirs are especially valuable during treatment; they remind you that others have been in exactly this place",
       "Reading before you start the clinical process can significantly improve the quality of your decision-making",
@@ -1510,7 +1468,6 @@ export const GUIDES: Guide[] = [
           "Mumsnet Lone Parents board (mumsnet.com/talk/lone_parents): the largest UK parenting forum has an active lone-parent community. Searchable archives make it particularly useful.",
           "Reddit r/SingleMothersbyChoice: active global community covering all stages. Good for candid, anonymous discussion.",
           "Fertility Friends (fertilityfriends.co.uk): long-running UK fertility forum with a huge searchable archive of treatment experiences, including solo treatment boards.",
-          "Fertility Network UK discussion boards: moderated and supportive",
         ],
       },
       {
@@ -1550,9 +1507,8 @@ export const GUIDES: Guide[] = [
         heading: "Fertility-specific organisations",
         body: ["These organisations provide support during the treatment phase:"],
         bullets: [
-          "Fertility Network UK (fertilitynetworkuk.org): the UK's leading patient support charity. Helpline, information, local support groups, and online community. Particularly strong on emotional support and advocacy.",
           "The Donor Conception Network (dcnetwork.org): support and resources for those using donor conception. Runs workshops, webinars, and has an extensive library of resources for parents and donor-conceived people.",
-          "The Miscarriage Association (miscarriageassociation.org.uk): specialist support for pregnancy loss. Helpline, counselling referrals, and peer support.",
+          "Miscarriage UK (miscarriageuk.org, formerly the Miscarriage Association): support after miscarriage, ectopic pregnancy or molar pregnancy, with a helpline and a directory of counsellors.",
           "Progress Educational Trust (progress.org.uk): independent charity providing information on fertility treatment, genetics, and stem cell research. Evidence-based and patient-focused.",
           "BICA (bica.net): British Infertility Counselling Association. Directory of trained fertility counsellors.",
         ],
@@ -1571,8 +1527,8 @@ export const GUIDES: Guide[] = [
         heading: "NHS and clinical support",
         body: ["Within the healthcare system:"],
         bullets: [
-          "Your HFEA-licensed clinic is legally required to offer access to counselling at all stages of treatment. Ask your clinic coordinator about this; it is often underused.",
-          "Your GP can refer you to NHS talking therapies (Improving Access to Psychological Therapies / IAPT) for anxiety and depression support during treatment.",
+          "Every HFEA-licensed clinic must offer you the chance to talk to a counsellor before you start treatment. Some offer it free; others charge.",
+          "In England you can refer yourself to NHS Talking Therapies for free, without your GP. Elsewhere in the UK, ask your GP.",
           "NHS 111 and your midwifery team are your first ports of call for clinical concerns during pregnancy.",
         ],
       },
@@ -1587,7 +1543,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     keyTakeaways: [
-      "Fertility Network UK (fertilitynetworkuk.org) is the first port of call for support during treatment",
+      "Your clinic's counsellor and BICA's directory are good places to start",
       "Donor Conception Network (dcnetwork.org) is essential for anyone using donor conception: workshops and resources for all stages",
       "Your HFEA-licensed clinic must offer counselling access; ask for it",
       "Gingerbread (gingerbread.org.uk) covers the practical landscape of single parenting comprehensively",

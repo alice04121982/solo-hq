@@ -588,7 +588,7 @@ function StepConditionsSurrogacy({
     {
       value: "matching",
       title: "In the surrogate matching process",
-      subtitle: "I'm working with a surrogacy organisation (e.g. Brilliant Beginnings, COTS) to find a match",
+      subtitle: "I'm working with a surrogacy organisation (e.g. Brilliant Beginnings, Surrogacy UK) to find a match",
       icon: <Handshake className="h-5 w-5" strokeWidth={1.75} />,
     },
     {
@@ -733,7 +733,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
   const donorNeed = s.family ? getDonorNeed(s.family, s.conditions) : "neither";
 
   const donorNote = surrogacy
-    ? "You'll need a surrogate matched separately through a UK organisation (e.g. Brilliant Beginnings or COTS). The clinics below handle the IVF element. Budget £15,000–£25,000 on top for surrogate expenses and legal fees."
+    ? "You'll need a surrogate matched separately through a UK organisation (e.g. Brilliant Beginnings or Surrogacy UK). The clinics below handle the IVF element. Budget £15,000–£25,000 on top for surrogate expenses and legal fees."
     : {
         sperm: "You'll need donor sperm: budget an extra £1,950–£2,500 for 2 vials + shipping.",
         egg: "Donor eggs will significantly increase per-cycle cost; expect £8,000–£14,000 total.",

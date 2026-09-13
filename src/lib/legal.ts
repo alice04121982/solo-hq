@@ -111,6 +111,9 @@ export const LEGAL_CONTACT_EMAIL = CONTACT_EMAILS.general;
 
 const EFFECTIVE_DATE = "24 August 2026";
 
+/** Terms, disclaimer and contact were revised on this date (support and stories wording). */
+const REVISED_DATE = "13 September 2026";
+
 /* ─── Privacy Policy ──────────────────────────────────────────────────────── */
 
 const PRIVACY: LegalPage = {
@@ -315,7 +318,7 @@ const TERMS: LegalPage = {
     "The terms that apply when you use CairnFertility: what the service is, what our information can and cannot be relied on for, and where responsibility sits.",
   standfirst:
     "These terms are the agreement between you and CairnFertility when you use this website. We have kept them as plain as the law allows.",
-  effectiveDate: EFFECTIVE_DATE,
+  effectiveDate: REVISED_DATE,
   sections: [
     {
       heading: "Who we are and what this is",
@@ -348,7 +351,7 @@ const TERMS: LegalPage = {
       ],
       postBody: [
         "We have adopted the Competition and Markets Authority's [consumer law guidance for fertility clinics](https://www.gov.uk/cma-cases/self-funded-ivf-consumer-law-guidance) (June 2021) as our editorial standard for how prices and success rates are presented, and our [methodology](/about#methodology) explains how we apply it.",
-        "Personal stories and quotes on this site are illustrative composites reflecting common experiences in the community. They are not accounts of real, identifiable patients unless expressly stated otherwise.",
+        "We don't currently publish personal stories or quotes. When we do, they will be real accounts published with the writer's consent.",
       ],
     },
     {
@@ -366,7 +369,7 @@ const TERMS: LegalPage = {
       body: [
         "Our community is a private group on WhatsApp, not part of this website. Applying is free, and approval is at our discretion: we read every application and we decline the ones we are not comfortable with, without being obliged to explain why. That discretion exists to protect the people already in the group and we intend to keep using it.",
         "Membership is conditional on the [group rules](/community/guidelines), which you accept when you apply and again when you redeem your invite. The rule that matters most is that nothing said in the group is repeated outside it. We may remove any member at any time for breaking the rules, and we will do so without notice where somebody's safety or privacy is at stake.",
-        "Once you are in the group, WhatsApp is provided to you by Meta under its own terms, and other members can see your phone number. We say this on the application page, in the rules, and in our [privacy policy](/privacy), because it is the one thing about the group we cannot control. We are not responsible for what individual members say or do, and we are not a moderation service, a support line, or a substitute for professional care. If something in the group worries you, tell an admin.",
+        "Once you are in the group, WhatsApp is provided to you by Meta under its own terms, and other members can see your phone number. We say this on the application page, in the rules, and in our [privacy policy](/privacy), because it is the one thing about the group we cannot control. We are not responsible for what individual members say or do. Admins moderate the group, but they are not a support line or a substitute for professional care. If something in the group worries you, tell an admin.",
       ],
     },
     {
@@ -483,7 +486,7 @@ const DISCLAIMER: LegalPage = {
     "CairnFertility is an information service, not a medical provider. What our content can be used for, what it must never replace, and where to get real medical help.",
   standfirst:
     "We publish information to make fertility treatment easier to navigate. It is not medical advice, and this page draws that line as clearly as we can.",
-  effectiveDate: EFFECTIVE_DATE,
+  effectiveDate: REVISED_DATE,
   sections: [
     {
       heading: "We are not a medical provider",
@@ -512,9 +515,9 @@ const DISCLAIMER: LegalPage = {
       ],
     },
     {
-      heading: "Stories are illustrative",
+      heading: "Personal stories",
       body: [
-        "The personal stories and quotes on this site are illustrative composites, drawn from experiences common in the community, and are not accounts of real, identifiable patients unless expressly stated. They exist to make an unfamiliar journey feel less abstract, never as evidence that any path or clinic will work for you.",
+        "We don't currently publish personal stories or quotes. When we do, they will be real accounts published with the writer's consent.",
       ],
     },
     {
@@ -531,7 +534,7 @@ const DISCLAIMER: LegalPage = {
       bullets: [
         "In a medical emergency, call 999 (UK) or your local emergency number now. Do not rely on any website, including this one.",
         "For urgent but non-emergency medical concerns in the UK, call NHS 111.",
-        "Fertility treatment is emotionally hard. If you are struggling, Fertility Network UK ([fertilitynetworkuk.org](https://fertilitynetworkuk.org)) offers free support, and the Samaritans are available day and night on 116 123.",
+        "Fertility treatment can be emotionally hard. Samaritans are available free, any time, on 116 123, and [Looking after yourself](/support) lists crisis lines and counselling.",
       ],
       callout:
         "If anything on this site ever seems to conflict with what your doctor tells you, your doctor wins. Every time.",
@@ -605,7 +608,7 @@ const CONTACT: LegalPage = {
     "How to reach CairnFertility: questions, corrections, story submissions, privacy requests, accessibility problems, and complaints.",
   standfirst:
     "Email is the best way to reach us. Here is where to send what, and what to expect back.",
-  effectiveDate: EFFECTIVE_DATE,
+  effectiveDate: REVISED_DATE,
   sections: [
     {
       heading: "What we can help with",
@@ -636,7 +639,7 @@ const CONTACT: LegalPage = {
     {
       heading: "What we cannot help with",
       body: [
-        "Please do not send us medical questions. We are not clinicians, and it would be wrong of us to answer, however simple the question seems. Your GP, your clinic, or NHS 111 are the right doors for anything medical, and in an emergency it is always 999. For emotional support around fertility, Fertility Network UK ([fertilitynetworkuk.org](https://fertilitynetworkuk.org)) is free and understands this world deeply.",
+        "Please do not send us medical questions. We are not clinicians, and it would be wrong of us to answer, however simple the question seems. Your GP, your clinic, or NHS 111 are the right doors for anything medical, and in an emergency it is always 999. For emotional support, see [Looking after yourself](/support).",
         "For the same reason, please keep medical details out of emails to us where you can. We don't need them, and the less sensitive information sits in inboxes anywhere, the better.",
       ],
     },
