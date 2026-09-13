@@ -20,7 +20,7 @@ import { FAITH_STORIES } from "@/lib/stories";
 export const metadata: Metadata = {
   title: "Faith, Culture & IVF | CairnFertility",
   description:
-    "Where the major religious traditions stand on IVF, what to ask your own clergy, and how to handle conversations — at home, in your community, and online — that turn against your treatment.",
+    "Where the major religious traditions stand on IVF, what to ask your own clergy, and how to handle conversations (at home, in your community, and online) that turn against your treatment.",
 };
 
 const TEAL = "var(--teal)";
@@ -38,7 +38,7 @@ const PRINCIPLES = [
   },
   {
     title: "Everything is sourced.",
-    body: "Each tradition links to documents you can open and read yourself — a faith's own texts and UK regulators, not clinics writing about someone else's religion.",
+    body: "Each tradition links to documents you can open and read yourself: a faith's own texts and UK regulators, not clinics writing about someone else's religion.",
   },
   {
     title: "Belief is yours to work out.",
@@ -77,7 +77,7 @@ export default function FaithPage() {
         >
           For a lot of people, the hardest part of fertility treatment isn&rsquo;t the
           injections or the cost. It&rsquo;s reconciling it with what you were raised to
-          believe — and then handling everyone who has an opinion about it.
+          believe, and then handling everyone who has an opinion about it.
         </p>
         <p
           className="text-[16px] font-sans leading-relaxed text-muted mt-4"
@@ -162,8 +162,8 @@ export default function FaithPage() {
           >
             Traditions rarely answer it as a single yes or no. They answer seven or eight
             smaller ones, and they disagree in different places. Knowing which question is
-            being argued about turns a stalled conversation with your clergy — or your
-            mother — into a specific one.
+            being argued about turns a stalled conversation with your clergy (or your
+            mother) into a specific one.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
@@ -249,7 +249,7 @@ export default function FaithPage() {
             style={{ maxWidth: "62ch" }}
           >
             Most of what disrupts observant patients isn&rsquo;t doctrinal. It&rsquo;s
-            scheduling, staffing and ingredients — all of which a clinic can usually
+            scheduling, staffing and ingredients, all of which a clinic can usually
             accommodate, and none of which it will offer unprompted.
           </p>
 
@@ -462,7 +462,7 @@ export default function FaithPage() {
               medication or your appointments, threatening you, or telling you that you
               will be cut off from your family or community unless you comply, that
               isn&rsquo;t a theological conversation and none of these scripts are the
-              right tool. Tell your clinic — they have safeguarding routes — or speak to
+              right tool. Tell your clinic (they have safeguarding routes) or speak to
               a counsellor independently of everyone involved.
             </p>
           </div>

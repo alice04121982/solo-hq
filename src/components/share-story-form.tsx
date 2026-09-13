@@ -60,7 +60,7 @@ export function ShareStoryForm() {
     `Location: ${location.trim() || "(not given)"}`,
     `My pathway: ${pathwayLabel || "(not given)"}`,
     `Where I am in the journey: ${stage || "(not given)"}`,
-    `Publish as: ${anonymous ? "Anonymous — please don't use my name" : name.trim() || "(name above)"}`,
+    `Publish as: ${anonymous ? "Anonymous (please don't use my name)" : name.trim() || "(name above)"}`,
     "",
     "My story:",
     "",
@@ -175,7 +175,7 @@ export function ShareStoryForm() {
           ))}
         </select>
         <p className={hintClass}>
-          Every stage counts — the beginning, the middle, and the endings that
+          Every stage counts: the beginning, the middle, and the endings that
           didn&rsquo;t go the way anyone hoped.
         </p>
       </div>
@@ -197,7 +197,7 @@ export function ShareStoryForm() {
         />
         <p id="ss-story-hint" className={hintClass}>
           Only include what you&rsquo;d be comfortable seeing published. You
-          don&rsquo;t need to share clinical detail — what treatment felt like
+          don&rsquo;t need to share clinical detail. What treatment felt like
           matters more than the protocol you were on.
         </p>
       </div>
@@ -233,7 +233,7 @@ export function ShareStoryForm() {
           publishing it.
           <span id="ss-consent-hint" className="block text-[13px] text-muted mt-0.5">
             Nothing is published from this email alone. We&rsquo;ll agree the
-            final version with you, and you can change your mind at any point —
+            final version with you, and you can change your mind at any point,
             before or after it goes live.
           </span>
         </span>
@@ -279,7 +279,7 @@ export function ShareStoryForm() {
       {attempted && !ready && (
         <p role="alert" className="text-sm font-sans text-foreground -mt-2">
           {story.trim().length === 0
-            ? "Write your story above first — that's the one part we can't do without."
+            ? "Write your story above first. That's the one part we can't do without."
             : "Please tick the consent box first, so we know you're happy for us to read and reply."}
         </p>
       )}

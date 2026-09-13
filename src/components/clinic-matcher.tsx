@@ -928,7 +928,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         destination-specific flights and stays across{" "}
         {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips.
         Solo, LGBTQ+ and pricing scores are Cairn&apos;s own
-        editorial assessments of published clinic information — not patient reviews or
+        editorial assessments of published clinic information, not patient reviews or
         independently verified ratings.
       </p>
 

@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Stories | CairnFertility",
   description:
-    "Illustrative stories of building a family through fertility treatment — solo mums, solo dads, two mums, two dads, and couples — while we collect real, consented accounts.",
+    "Illustrative stories of building a family through fertility treatment (solo mums, solo dads, two mums, two dads, and couples) while we collect real, consented accounts.",
 };
 
 export default function StoriesLayout({

@@ -6,7 +6,7 @@ import { WaitlistForm } from "@/components/waitlist-form";
 
 export const metadata: Metadata = {
   title: "Keep in Touch | CairnFertility",
-  description: "Get an email when there's something worth telling you about CairnFertility. To join the community itself, apply on the community page — every member is approved by a person.",
+  description: "Get an email when there's something worth telling you about CairnFertility. To join the community itself, apply on the community page. Every member is approved by a person.",
 };
 
 export default function WaitlistPage() {

@@ -39,7 +39,7 @@ function buildEmail(market: Market, situation: Situation): string {
     "",
     "I'm going through our benefits package properly and wanted to ask about fertility and family-forming support. Could you point me to the written policy, and confirm the following?",
     "",
-    "1. What support is available — a contribution, a fund, treatment cover, paid leave, or access to a support platform?",
+    "1. What support is available: a contribution, a fund, treatment cover, paid leave, or access to a support platform?",
     "2. Is anything included via the private medical scheme separately from the standard benefits list?",
     "3. What is inside the benefit: are medication, donor sperm or eggs, storage and frozen transfers covered, or charged separately?",
     "4. Does treatment have to be at a partner clinic?",
@@ -54,7 +54,7 @@ function buildEmail(market: Market, situation: Situation): string {
         : situation === "same-sex"
           ? "same-sex couples"
           : "couples using donor gametes";
-    lines.push(`7. Is the eligibility wording written around family building rather than an infertility diagnosis — in other words, does it cover ${who}?`);
+    lines.push(`7. Is the eligibility wording written around family building rather than an infertility diagnosis? In other words, does it cover ${who}?`);
   }
 
   if (market === "usa") {

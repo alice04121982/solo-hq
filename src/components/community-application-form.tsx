@@ -104,7 +104,7 @@ function SubmittedPanel({
         className="text-sm font-sans text-muted leading-relaxed mb-6"
         style={{ maxWidth: "48ch" }}
       >
-        A person will read what you wrote — usually within a few days, and by
+        A person will read what you wrote, usually within a few days, and by
         someone rather than something. If you&rsquo;re in, you&rsquo;ll get one
         email with a link that works once and only for you. If we don&rsquo;t
         think the group is right for you, we&rsquo;ll tell you that too, rather
@@ -114,7 +114,7 @@ function SubmittedPanel({
         className="text-sm font-sans text-muted leading-relaxed mb-8"
         style={{ maxWidth: "48ch" }}
       >
-        Check your junk folder when it&rsquo;s due — the invite is the only
+        Check your junk folder when it&rsquo;s due. The invite is the only
         email we&rsquo;ll ever send you, so there is nothing else to look for.
       </p>
 
@@ -181,11 +181,11 @@ export function CommunityApplicationForm() {
       return;
     }
     if (!isValidEmail(email)) {
-      setError("That email doesn't look right — check it and try again.");
+      setError("That email doesn't look right. Check it and try again.");
       return;
     }
     if (!pathway) {
-      setError("Pick the path that fits — 'still deciding' counts.");
+      setError("Pick the path that fits: 'still deciding' counts.");
       return;
     }
     if (!stage) {
@@ -194,7 +194,7 @@ export function CommunityApplicationForm() {
     }
     if (reason.trim().length < REASON_MIN) {
       setError(
-        "Please say a little more about why you'd like to join — a couple of sentences is plenty."
+        "Please say a little more about why you'd like to join. A couple of sentences is plenty."
       );
       return;
     }
@@ -340,7 +340,7 @@ export function CommunityApplicationForm() {
             <div className="mb-7">
               <FieldLabel>Why you&rsquo;d like to join</FieldLabel>
               <p className="text-xs font-sans text-muted mb-3" style={{ maxWidth: "46ch" }}>
-                In your own words — a couple of sentences. This is the part a
+                In your own words, a couple of sentences. This is the part a
                 person reads, and it is how we tell an applicant from a bot.
                 Share only what you&rsquo;re comfortable having read.
               </p>
@@ -355,7 +355,7 @@ export function CommunityApplicationForm() {
               <p className="text-xs font-sans text-muted mt-2">
                 {reasonRemaining > 0
                   ? `${reasonRemaining} more character${reasonRemaining === 1 ? "" : "s"} to go.`
-                  : "That's plenty — thank you."}
+                  : "That's plenty, thank you."}
               </p>
             </div>
 
@@ -363,7 +363,7 @@ export function CommunityApplicationForm() {
               <FieldLabel>Do you work in fertility? (optional)</FieldLabel>
               <p className="text-xs font-sans text-muted mb-3" style={{ maxWidth: "46ch" }}>
                 Clinic, agency, coaching, research, press. Saying yes
-                doesn&rsquo;t rule you out — plenty of members have been on
+                doesn&rsquo;t rule you out. Plenty of members have been on
                 both sides. Not saying, and us finding out, does.
               </p>
               <input
@@ -392,7 +392,7 @@ export function CommunityApplicationForm() {
                   >
                     group rules
                   </a>{" "}
-                  and I agree to them — including that nothing said in the
+                  and I agree to them, including that nothing said in the
                   group gets repeated outside it.
                 </span>
               </label>

@@ -107,8 +107,8 @@ export const GUIDES: Guide[] = [
       {
         heading: "NHS funding: who can actually access it",
         body: [
-          "NHS-funded IVF is extremely patchy in practice. NICE guideline NG257, which replaced the 2013 guideline in 2026, recommends up to three full cycles under 40 and one at 40 to 41 — but in England the decision belongs to 36 local Integrated Care Boards (42 before the April 2026 mergers), most of which fund one cycle rather than three. Only about a quarter of IVF cycles in England are NHS-funded. Scotland funds up to three cycles under national criteria, Wales two, and Northern Ireland one.",
-          "Criteria vary by postcode, age, BMI, smoking and existing children — including a partner's. Solo parents and two-mum families are rarely excluded by name; what excludes most of them outside Scotland is a requirement to complete six or more self-funded donor insemination cycles at a licensed clinic first.",
+          "NHS-funded IVF is extremely patchy in practice. NICE guideline NG257, which replaced the 2013 guideline in 2026, recommends up to three full cycles under 40 and one at 40 to 41, but in England the decision belongs to 36 local Integrated Care Boards (42 before the April 2026 mergers), most of which fund one cycle rather than three. Only about a quarter of IVF cycles in England are NHS-funded. Scotland funds up to three cycles under national criteria, Wales two, and Northern Ireland one.",
+          "Criteria vary by postcode, age, BMI, smoking and existing children, including a partner's. Solo parents and two-mum families are rarely excluded by name; what excludes most of them outside Scotland is a requirement to complete six or more self-funded donor insemination cycles at a licensed clinic first.",
           "Before assuming you are ineligible, find your ICB's published assisted conception policy and read it, or ask your GP surgery. Criteria change, and some areas have quietly become more inclusive in recent years. It is always worth asking.",
         ],
       },
@@ -333,7 +333,7 @@ export const GUIDES: Guide[] = [
           "IUI is a reasonable starting point if you are under 35, have good ovarian reserve, no known tube or egg quality issues, and want to begin treatment with a lower financial and physical commitment. It is not recommended as a first-line treatment for women over 40.",
         ],
         callout:
-          "Cost: typically £950–£1,500 per cycle for the procedure itself — the HFEA puts IUI at around a quarter of the cost of an IVF cycle — plus donor sperm and any medication, so budget £2,000–£3,000 all-in for a first donor-sperm cycle. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
+          "Cost: typically £950–£1,500 per cycle for the procedure itself (the HFEA puts IUI at around a quarter of the cost of an IVF cycle) plus donor sperm and any medication, so budget £2,000–£3,000 all-in for a first donor-sperm cycle. For context, three failed IUI cycles costs roughly the same as one IVF cycle; factor this into your planning.",
       },
       {
         heading: "IVF with donor sperm",
@@ -1009,7 +1009,7 @@ export const GUIDES: Guide[] = [
         ],
         bullets: [
           "NGA Law (ngalaw.co.uk, formerly Natalie Gamble Associates): specialists in donor conception and fertility law",
-          "Brilliant Beginnings (brilliantbeginnings.co.uk): NGA Law's sister non-profit surrogacy agency — an agency rather than a law firm, but a useful starting point for surrogacy journeys",
+          "Brilliant Beginnings (brilliantbeginnings.co.uk): NGA Law's sister non-profit surrogacy agency (an agency rather than a law firm, but a useful starting point for surrogacy journeys)",
           "The Law Society's solicitor finder (solicitors.lawsociety.org.uk) filtered by 'family' and 'surrogacy and fertility'",
         ],
         postBody: [
@@ -1054,11 +1054,11 @@ export const GUIDES: Guide[] = [
         body: [
           "Self-employed women in the UK can claim Maternity Allowance (MA) rather than Statutory Maternity Pay (SMP); SMP is only available through employed positions. MA is paid by the government and is separate from your employer.",
           "The standard rate of Maternity Allowance in 2026/27 is £194.32 per week (or 90% of your average weekly earnings if that is lower) for up to 39 weeks, provided you have been registered self-employed for at least 26 of the 66 weeks before your due date and are treated as having paid Class 2 National Insurance for at least 13 of those weeks.",
-          "If your profits are below the small profits threshold and you have not paid voluntary Class 2 NI, you qualify for a reduced rate of £27 per week for the same 39 weeks — but see the callout: you can usually pay your way up to the full rate.",
+          "If your profits are below the small profits threshold and you have not paid voluntary Class 2 NI, you qualify for a reduced rate of £27 per week for the same 39 weeks, but see the callout: you can usually pay your way up to the full rate.",
           "To claim: submit form MA1 to the Department for Work and Pensions (Jobcentre Plus), which you can do from 26 weeks pregnant; payments can start 11 weeks before your due date. You will need a MATB1 certificate from your midwife and evidence of your self-employment income.",
         ],
         callout:
-          "Class 2 NI: if your profits are at or above the small profits threshold (£7,105 in 2026/27), you are treated as having paid Class 2 automatically and qualify for the standard MA rate. Below the threshold, you can pay voluntary Class 2 (£3.65 per week in 2026/27) to reach the full rate — after you claim, HMRC sends a bill for the missing weeks, and paying it uplifts your award. Given the gap between £27 and £194.32 a week, this is almost always worth it.",
+          "Class 2 NI: if your profits are at or above the small profits threshold (£7,105 in 2026/27), you are treated as having paid Class 2 automatically and qualify for the standard MA rate. Below the threshold, you can pay voluntary Class 2 (£3.65 per week in 2026/27) to reach the full rate. After you claim, HMRC sends a bill for the missing weeks, and paying it uplifts your award. Given the gap between £27 and £194.32 a week, this is almost always worth it.",
       },
       {
         heading: "Planning: what the numbers look like",
@@ -1097,7 +1097,7 @@ export const GUIDES: Guide[] = [
     ],
     keyTakeaways: [
       "Self-employed women claim Maternity Allowance (not SMP): up to £194.32/week for 39 weeks in 2026/27",
-      "Eligibility requires Class 2 NI (paid or credited) for 13 of the 66 weeks before your due date — voluntary top-ups count",
+      "Eligibility requires Class 2 NI (paid or credited) for 13 of the 66 weeks before your due date (voluntary top-ups count)",
       "Submit form MA1 to the DWP (Jobcentre Plus) from 26 weeks pregnant",
       "Plan to supplement MA with savings; it covers a fraction of typical self-employed income",
       "Free childcare from 9 months is available to self-employed parents; apply early as places are limited",

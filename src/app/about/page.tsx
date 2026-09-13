@@ -21,7 +21,7 @@ const CMA_FERTILITY_GUIDANCE_URL =
 export const metadata: Metadata = {
   title: "About | CairnFertility",
   description:
-    "CairnFertility is an independent information service helping solo parents, LGBTQ+ families, and couples compare IVF clinics — built in the open, with the story so far and what's coming next.",
+    "CairnFertility is an independent information service helping solo parents, LGBTQ+ families, and couples compare IVF clinics. Built in the open, with the story so far and what's coming next.",
 };
 
 const VALUES = [
@@ -195,12 +195,12 @@ export default function AboutPage() {
         <ul className="space-y-3 max-w-3xl">
           {[
             `UK success rates come from the ${HFEA.shortName}'s public Choose a Clinic register, the independently verified source, and are labelled with their year and denominator (live births per embryo transfer). Overseas figures are self-reported by each clinic and labelled as not independently verified.`,
-            "A success-rate bracket a clinic has not published is shown as \"not published\" — never guessed, estimated, or filled with a zero.",
-            `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost — medications, consultations, donor material, travel where relevant — beside the headline quote, never instead of it.`,
+            "A success-rate bracket a clinic has not published is shown as \"not published\", never guessed, estimated, or filled with a zero.",
+            `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost (medications, consultations, donor material, travel where relevant) beside the headline quote, never instead of it.`,
             `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
             "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
             "Some clinics are deliberately not listed. Where credible reporting or an open regulatory investigation means we cannot stand behind what a clinic tells patients, we leave it out of the finder rather than list it with a caveat, and we say which clinics and why below.",
-            `Spotted a figure that looks wrong or out of date? Email ${CONTACT_EMAILS.general} — corrections go to the top of the list.`,
+            `Spotted a figure that looks wrong or out of date? Email ${CONTACT_EMAILS.general}. Corrections go to the top of the list.`,
           ].map((item) => (
             <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
               {item}
@@ -224,7 +224,7 @@ export default function AboutPage() {
             {CLINIC_EXCLUSIONS.map((x) => (
               <li key={x.name} className="pl-5 border-l-2 border-border">
                 <p className="font-sans font-semibold text-teal text-[15px] mb-1">
-                  {x.name} &mdash; {x.country}
+                  {x.name}, {x.country}
                 </p>
                 <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>
                 {x.response && (

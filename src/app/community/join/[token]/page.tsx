@@ -57,12 +57,12 @@ async function readInviteStatus(token: string): Promise<InviteStatus> {
  *  API gives one: a person holding a token should not learn whose it is. */
 const DEAD_INVITE = {
   heading: "This invite isn't open any more.",
-  body: "Invites work once and expire after seven days, so this one has either been used already or run out of time. If it was yours and you haven't been in yet, reply to the email we sent and we'll send a fresh one — it takes a minute.",
+  body: "Invites work once and expire after seven days, so this one has either been used already or run out of time. If it was yours and you haven't been in yet, reply to the email we sent and we'll send a fresh one. It takes a minute.",
 };
 
 const ERROR_INVITE = {
   heading: "We couldn't check your invite.",
-  body: "Something on our side is not answering. Your invite has not been used up — please try this link again in a few minutes, and email us if it keeps happening.",
+  body: "Something on our side is not answering. Your invite has not been used up. Please try this link again in a few minutes, and email us if it keeps happening.",
 };
 
 export default async function CommunityJoinPage({ params }: PageProps) {
@@ -119,7 +119,7 @@ export default async function CommunityJoinPage({ params }: PageProps) {
             className="font-sans font-bold text-foreground mb-6"
             style={{ fontSize: "clamp(2.25rem, 4.5vw, 4rem)", lineHeight: 1.06 }}
           >
-            You&rsquo;re in — one last thing.
+            You&rsquo;re in: one last thing.
           </h1>
           <p className="text-lg font-sans text-muted leading-[1.65]" style={{ maxWidth: "56ch" }}>
             Someone read your application and said yes. Before we open the

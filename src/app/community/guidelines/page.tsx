@@ -46,7 +46,7 @@ export default function CommunityGuidelinesPage() {
           <p className="text-lg font-sans text-muted leading-[1.65]" style={{ maxWidth: "58ch" }}>
             People tell this group things they have not told their families.
             That only works if everyone here holds the same line. These are
-            short on purpose — a code of conduct nobody finishes reading
+            short on purpose: a code of conduct nobody finishes reading
             protects nobody.
           </p>
         </div>

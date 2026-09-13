@@ -46,7 +46,7 @@ export default function ContactPage() {
           ))}
         </ul>
         <p className="text-sm font-sans text-muted leading-relaxed mt-6 pt-6 border-t border-border" style={{ maxWidth: "56ch" }}>
-          All three reach the same place, read by a real person — pick the
+          All three reach the same place, read by a real person. Pick the
           wrong one and nothing is lost. We aim to reply within five working
           days, and always within the statutory deadline for privacy requests.
         </p>

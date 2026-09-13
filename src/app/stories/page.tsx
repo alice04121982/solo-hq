@@ -97,8 +97,8 @@ export default function StoriesPage() {
 
         {filter === "faith" && (
           <p className="text-sm font-sans text-muted -mt-5 mb-10" style={{ maxWidth: "58ch" }}>
-            More on religion, culture and belief — including where the major traditions
-            stand and how to handle conversations that turn against you — is in{" "}
+            More on religion, culture and belief (including where the major traditions
+            stand and how to handle conversations that turn against you) is in{" "}
             <Link href="/faith" className="underline underline-offset-2 text-foreground">
               Faith &amp; Culture
             </Link>

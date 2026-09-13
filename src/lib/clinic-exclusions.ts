@@ -83,20 +83,20 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     sources: [
       {
         label:
-          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "BBC News: IVF staff accused of misleading UK parents about sperm and egg donors " +
           "in northern Cyprus",
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
-        label: "Cyprus Mail — North launches probe into IVF clinic after sperm mix-up claims",
+        label: "Cyprus Mail: North launches probe into IVF clinic after sperm mix-up claims",
         url: "https://cyprus-mail.com/2026/04/02/north-launches-probe-into-ivf-clinic-after-sperm-mix-up-claims",
       },
       {
-        label: "Progress Educational Trust — UK families treated with wrong donor sperm in Northern Cyprus",
+        label: "Progress Educational Trust: UK families treated with wrong donor sperm in Northern Cyprus",
         url: "https://www.progress.org.uk/uk-families-treated-with-wrong-donor-sperm-in-northern-cyprus/",
       },
     ],
@@ -121,16 +121,16 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     sources: [
       {
         label:
-          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "BBC News: IVF staff accused of misleading UK parents about sperm and egg donors " +
           "in northern Cyprus",
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
-        label: "Progress Educational Trust — UK families treated with wrong donor sperm in Northern Cyprus",
+        label: "Progress Educational Trust: UK families treated with wrong donor sperm in Northern Cyprus",
         url: "https://www.progress.org.uk/uk-families-treated-with-wrong-donor-sperm-in-northern-cyprus/",
       },
     ],

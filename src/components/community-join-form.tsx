@@ -82,7 +82,7 @@ export function CommunityJoinForm({
           style={{ maxWidth: "48ch" }}
         >
           This button opens the group on your phone. Your invite is now used
-          up, so please don&rsquo;t forward this page to anyone — send them to
+          up, so please don&rsquo;t forward this page to anyone. Send them to
           apply instead, and they&rsquo;ll get an invite of their own.
         </p>
         <a
@@ -96,7 +96,7 @@ export function CommunityJoinForm({
           <ArrowRight className="h-4 w-4" />
         </a>
         <p className="text-xs font-sans text-muted mt-6 leading-relaxed" style={{ maxWidth: "46ch" }}>
-          Say hello when you get there — an admin will introduce you. If the
+          Say hello when you get there. An admin will introduce you. If the
           button doesn&rsquo;t work on this device, open this page on the phone
           you use for {platform} before closing the tab.
         </p>
@@ -132,7 +132,7 @@ export function CommunityJoinForm({
             className="mt-1 h-4 w-4 shrink-0 accent-teal"
           />
           <span className="text-sm font-sans text-foreground leading-relaxed">
-            I agree to the group rules — above all, that nothing said in the
+            I agree to the group rules: above all, that nothing said in the
             group gets repeated outside it, and that I will not save or reuse
             anyone&rsquo;s phone number.
           </span>

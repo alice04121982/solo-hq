@@ -54,7 +54,7 @@ export function WaitlistForm() {
             {status === "joined" ? "You're on the list." : "You're already on the list."}
           </p>
           <p className="text-sm font-sans text-muted leading-relaxed">
-            We&apos;ll email you when there is something worth telling you. The community itself is open now and takes applications —{" "}
+            We&apos;ll email you when there is something worth telling you. The community itself is open now and takes applications:{" "}
             <a href="/community" className="underline decoration-muted/40 hover:decoration-teal">apply to join</a>.
           </p>
         </div>

@@ -249,7 +249,7 @@ const STAGES = [
     title: "ICSI: Sperm Meets Egg",
     duration: "Hours 0–4, in the laboratory",
     body: [
-      "Some clinics recommend ICSI (intracytoplasmic sperm injection) when using frozen donor sperm, though conventional IVF works just as well when the thawed sample is good quality — donor sperm is screened for exactly that, so ask your clinic which they recommend and why. With ICSI, the embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
+      "Some clinics recommend ICSI (intracytoplasmic sperm injection) when using frozen donor sperm, though conventional IVF works just as well when the thawed sample is good quality. Donor sperm is screened for exactly that, so ask your clinic which they recommend and why. With ICSI, the embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
       "With ICSI, the egg is held in place with a blunt holding pipette on one side while the injection pipette approaches from the other. The sperm is deposited into the cytoplasm in seconds.",
     ],
     facts: [
@@ -341,19 +341,19 @@ const CLINICAL_LAST_REVIEWED = "August 2026";
 
 const CLINICAL_SOURCES = [
   {
-    label: "HFEA — In vitro fertilisation (IVF)",
+    label: "HFEA: In vitro fertilisation (IVF)",
     href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/",
   },
   {
-    label: "NHS — IVF: what happens",
+    label: "NHS: IVF, what happens",
     href: "https://www.nhs.uk/conditions/ivf/what-happens/",
   },
   {
-    label: "HFEA — Intracytoplasmic sperm injection (ICSI)",
+    label: "HFEA: Intracytoplasmic sperm injection (ICSI)",
     href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intracytoplasmic-sperm-injection-icsi/",
   },
   {
-    label: "NICE — Fertility problems: assessment and management (NG257)",
+    label: "NICE: Fertility problems, assessment and management (NG257)",
     href: "https://www.nice.org.uk/guidance/ng257",
   },
   {
