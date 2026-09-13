@@ -7,7 +7,7 @@ import Link from "next/link";
 /**
  * A self-check against the criteria that NHS fertility policies have in
  * common. It deliberately does not pretend to be a decision: in England the
- * decision belongs to 42 different written policies we cannot read from here,
+ * decision belongs to 36 different written policies we cannot read from here,
  * so the honest output is "here is what usually blocks people, here is what
  * usually gates them, go and read your policy".
  */
@@ -236,7 +236,7 @@ function evaluate(a: Answers): Result {
 
   if (a.nation === "england") {
     conditions.push(
-      "In England there is no national entitlement. Your Integrated Care Board decides, most fund one cycle rather than the three NICE recommends, and a few fund none.",
+      "In England there is no national entitlement; your Integrated Care Board decides. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends (two of 42 in October 2025). Boards merged in April 2026, so policies may change.",
     );
   }
   if (a.nation === "scotland") {

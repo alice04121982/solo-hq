@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { Check, Plus } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
-import { travelEstimateForCity } from "@/lib/travel";
+import { formatCheckedDate } from "@/lib/clinics";
+import { travelEstimateForCity, TRAVEL_ASSUMPTIONS } from "@/lib/travel";
+import { PRICE_HEADLINE } from "@/lib/rate-labels";
+import { eligibilitySummary } from "@/lib/country-eligibility";
 import { CountryFlag } from "@/components/country-flag";
 import {
   clinicCardClasses,
@@ -26,9 +29,8 @@ interface ClinicCardProps {
  *
  * Elevation comes from surfaces and edges, never shadows, and never from grey:
  * these cards sit on the cream band, where a grey hairline reads as dirt over
- * the warm tone. The resting edge is warm or brand-tinted (see the variants in
- * lib/card-style), hovering fills the card with the brand teal and inverts
- * everything on it, and selection draws a 2px ring — inset over the resting
+ * the warm tone. Hovering fills the card with the brand teal and inverts
+ * everything on it, and selection draws a 2px ring inset over the resting
  * border, so selecting a card never shifts its contents by a pixel.
  *
  * Every colour below is read from a custom property set by `.clinic-card`, so
@@ -45,6 +47,7 @@ export function ClinicCard({
   const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
   const ink = { color: "var(--card-ink)" };
   const inkMuted = { color: "var(--card-ink-muted)" };
+  const trips = `${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`;
 
   return (
     <div className={clinicCardClasses(variant, isSelected)}>
@@ -55,14 +58,17 @@ export function ClinicCard({
       <h3 className="text-base font-bold leading-tight" style={ink}>
         {clinic.name}
       </h3>
-      {/* The flag replaces the pin: it says where far faster, and the pin was
-          only ever repeating what the line beneath it already said. */}
       <div className="flex items-center gap-1.5 mt-1 mb-4">
         <CountryFlag country={clinic.country} />
         <p className="text-xs truncate" style={inkMuted}>
           {clinic.city}, {clinic.country}
         </p>
       </div>
+      {clinic.region !== "UK" && (
+        <p className="text-xs -mt-2 mb-4" style={inkMuted}>
+          {eligibilitySummary(clinic.country)}
+        </p>
+      )}
 
       <div className="flex items-end justify-between gap-3 mb-4">
         <RateFigure clinic={clinic} bracket={ageBracket} />
@@ -73,21 +79,21 @@ export function ClinicCard({
               : "Not published"}
           </p>
           <p className="text-xs" style={inkMuted}>
-            per IVF cycle
+            {PRICE_HEADLINE.toLowerCase()}, per IVF cycle
           </p>
           {travel && clinic.pricePerCycleGbp != null && (
-            <>
-              <p className="text-xs font-semibold mt-0.5" style={ink}>
-                ≈ £{(clinic.pricePerCycleGbp + travel.mid).toLocaleString()} with travel
-              </p>
-              <p className="text-xs" style={inkMuted}>
-                est. flights + stays
-              </p>
-            </>
+            <p className="text-xs mt-0.5" style={inkMuted}>
+              + £{travel.low.toLocaleString()}–£{travel.high.toLocaleString()} travel (estimate, {trips})
+            </p>
           )}
           {clinic.iuiPricePerCycleGbp != null && (
             <p className="text-xs mt-0.5" style={inkMuted}>
               IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()}
+            </p>
+          )}
+          {clinic.checkedOn && (
+            <p className="text-xs mt-0.5" style={inkMuted}>
+              Checked {formatCheckedDate(clinic.checkedOn)}
             </p>
           )}
         </div>

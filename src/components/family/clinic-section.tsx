@@ -9,7 +9,6 @@ import { SHAPE_CYCLE } from "../shapes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const TEAL = "var(--teal)";
-const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function ClinicSection({ clinicNote }: { clinicNote: string }) {
   return (
@@ -71,9 +70,9 @@ export function ClinicSection({ clinicNote }: { clinicNote: string }) {
             style={{ background: "var(--teal)" }}
           >
             {[
-              { value: "HFEA data", label: "success rates from the public register" },
+              { value: "Source shown", label: "on every rate and price" },
               { value: "UK & abroad", label: "including Spain, Czech Republic & Greece" },
-              { value: "5 age brackets", label: "success rates from under 35 to 43+" },
+              { value: "HFEA age groups", label: "under 38 and 38 and over for UK clinics" },
               { value: "6 treatment types", label: "IVF, ICSI, IUI, donor egg, donor sperm & double donor" },
             ].map((s, i) => (
               <TealCard

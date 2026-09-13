@@ -123,7 +123,7 @@ function SubmittedPanel({
         {[
           { label: "Read the group rules in full", href: "/community/guidelines" },
           { label: "Looking after yourself", href: "/support" },
-          { label: "Compare clinics with real costs", href: "/ivf-finder" },
+          { label: "Compare clinics", href: "/ivf-finder" },
         ].map((l) => (
           <li key={l.href}>
             <a

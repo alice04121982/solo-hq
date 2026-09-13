@@ -12,7 +12,7 @@ import { CLINIC_EXCLUSIONS } from "@/lib/clinic-exclusions";
 import { HFEA } from "@/lib/regulators";
 
 /**
- * The CMA's June 2021 consumer-law guidance for fertility clinics — adopted
+ * The CMA's June 2021 consumer-law guidance for fertility clinics, adopted
  * here as Cairn's editorial standard for presenting prices and success rates.
  */
 const CMA_FERTILITY_GUIDANCE_URL =
@@ -32,13 +32,13 @@ const VALUES = [
   },
   {
     shape: "spark" as const,
-    title: "The real cost, not the headline one",
-    body: "Clinics abroad often look cheaper until flights and hotels are added. We show the honest, all-in comparison next to UK options so a price is something you can actually plan around.",
+    title: "Headline prices, and what sits on top",
+    body: "Clinics abroad often look cheaper until flights and stays are added. We show each clinic's headline price with a travel estimate beside it, and the clinic's own estimate of a typical total where it publishes one.",
   },
   {
     shape: "egg" as const,
     title: "Evidence over hype",
-    body: "Success rates are population statistics, not a promise. We label HFEA-verified UK data separately from self-reported overseas figures, and we say plainly when a treatment add-on has no strong evidence behind it.",
+    body: "Success rates are population statistics, not a promise. We label figures copied from the HFEA register separately from clinics' own figures, and we say plainly when a treatment add-on has no strong evidence behind it.",
   },
   {
     shape: "halves" as const,
@@ -51,7 +51,7 @@ const MILESTONES = [
   {
     tag: "Live",
     title: "Comparing UK and overseas clinics",
-    body: "The clinic finder and matcher went live first: true-cost comparisons, HFEA-verified success rates where they exist, and filters for solo- and LGBTQ+-friendliness that most comparison sites don't ask about.",
+    body: "The clinic finder and matcher went live first: UK and overseas clinics side by side, with the source and year behind every figure.",
   },
   {
     tag: "Live",
@@ -92,7 +92,7 @@ export default function AboutPage() {
             />
           </div>
 
-          {/* Arch-cropped photo — the same geometric mask the hero grid uses,
+          {/* Arch-cropped photo: the same geometric mask the hero grid uses,
               with a spark pinned over the corner as on the CTA band. */}
           <div className="relative w-64 md:w-80 justify-self-center lg:justify-self-end">
             <div className="relative aspect-[4/5] overflow-hidden rounded-t-full">
@@ -122,7 +122,7 @@ export default function AboutPage() {
             </h2>
             <ul className="space-y-3">
               {[
-                "Compare UK and overseas IVF clinics on true cost, verified success rates, and solo- and LGBTQ+-friendliness.",
+                "Compare UK and overseas IVF clinics on headline price, travel and published success rates, with the source behind every figure.",
                 "Publish plain-English guides for every family type and every stage of the process.",
                 "Run a clinic matcher that narrows the field to your situation, entirely in your own browser.",
                 "Publish real stories from people at every stage, only with their consent.",
@@ -167,7 +167,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Methodology — the editorial standard the numbers are held to, and
+      {/* Methodology: the editorial standard the numbers are held to, and
           where every figure comes from. This is the public statement behind
           the provenance notes shown beside the finder, matcher and guides. */}
       <Section band={3} id="methodology">
@@ -186,17 +186,17 @@ export default function AboutPage() {
           </a>{" "}
           (June 2021). It was written for clinics, but it is the definitive UK statement of
           what fair price and success-rate information looks like, and we hold our own pages
-          to it: all-in costs rather than headline prices, and success rates that always say
-          what they measure, which year they cover, and where they come from.
+          to it: headline prices with what they leave out stated beside them, and success rates
+          that always say what they measure, which year they cover, and where they come from.
         </p>
         <p className="text-[15px] font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "58ch" }}>
           In practice, that means:
         </p>
         <ul className="space-y-3 max-w-3xl">
           {[
-            `UK success rates come from the ${HFEA.shortName}'s public Choose a Clinic register, the independently verified source, and are labelled with their year and denominator (live births per embryo transfer). Overseas figures are self-reported by each clinic and labelled as not independently verified.`,
-            "A success-rate bracket a clinic has not published is shown as \"not published\", never guessed, estimated, or filled with a zero.",
-            `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost (medications, consultations, donor material, travel where relevant) beside the headline quote, never instead of it.`,
+            `UK success rates are copied from the ${HFEA.shortName}'s public Choose a Clinic page for each clinic, which currently shows 2023 births per embryo transferred for two age groups (under 38, and 38 and over) with the ${HFEA.shortName}'s verdict against the national average. Overseas figures are the clinic's own, labelled as not checked by us, and are never sorted into one list with UK figures.`,
+            "A success-rate age group a clinic has not published is shown as \"not published\", never guessed, estimated, or filled with a zero.",
+            `Prices are headline figures from ${DATA_PROVENANCE.pricesSourceLabel}, sanity-checked against the HFEA's national cost guidance. Beside the headline price we show a travel estimate for treatment abroad and, where a clinic publishes one, its own estimate of a typical total. Drugs, ICSI, donor material and storage are usually charged on top.`,
             `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
             "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
             "Some clinics are deliberately not listed. Where credible reporting or an open regulatory investigation means we cannot stand behind what a clinic tells patients, we leave it out of the finder rather than list it with a caveat, and we say which clinics and why below.",
@@ -209,7 +209,7 @@ export default function AboutPage() {
         </ul>
 
         {/* The exclusions themselves, in full. A policy of leaving clinics
-            out is only honest if the list is visible and sourced — the same
+            out is only honest if the list is visible and sourced, the same
             standard we hold the numbers to. */}
         <div className="mt-12 rounded-[24px] bg-cream p-6 md:p-8" style={{ maxWidth: "72ch" }}>
           <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
@@ -263,7 +263,7 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Our story — the running build-in-the-open log, merged in from the
+      {/* Our story: the running build-in-the-open log, merged in from the
           old /our-story page (which now redirects here). Sits last so the
           "building now" milestone hands straight off to the waitlist CTA. */}
       <Section band={4} id="story">

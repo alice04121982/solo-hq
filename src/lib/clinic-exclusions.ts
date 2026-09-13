@@ -5,7 +5,7 @@ import type { Region } from "@/types/clinic";
  *
  * The finder exists to help people choose a clinic, so the list of clinics we
  * decline to put in front of anyone is an editorial decision that has to be
- * written down, sourced, and reviewable — not a quiet deletion from
+ * written down, sourced, and reviewable, not a quiet deletion from
  * `src/lib/clinics.ts` that nobody can audit later.
  *
  * How it is enforced, twice over:
@@ -27,8 +27,16 @@ import type { Region } from "@/types/clinic";
  * - Individuals are never named here. The unit of the decision is the clinic.
  * - An exclusion is shown, not hidden. The finder renders these entries under
  *   its results, and `country`/`region` put them in reach of the same geography
- *   filters as a listed clinic — so someone searching where a clinic operates
- *   is told it was removed and why, instead of being handed an empty list.
+ *   filters as a listed clinic, so someone searching where a clinic operates
+ *   is told it is not listed and why, instead of being handed an empty list.
+ * - Every factual sentence in `reason` and `response` maps to a sentence in
+ *   one of the entry's sources and says who reported it. Sentences that only
+ *   state our own position ("We do not list...") are the exception.
+ *
+ * Wording checked against sources on 2026-09-13. The BBC article of 18 August
+ * 2026 was read via syndicated copies credited to BBC News (Yahoo News and
+ * Capital FM Kenya); the 31 March 2026 BBC report was read via AOL News. The
+ * wording about named clinics needs a media solicitor's review before merge.
  */
 
 export interface ClinicExclusion {
@@ -71,15 +79,15 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     country: "Northern Cyprus",
     region: "Europe",
     reason:
-      "BBC News reported in August 2026 that at least 30 children, most of them British, are " +
-      "feared to have been conceived in northern Cyprus using sperm or egg donors other than " +
-      "the ones their parents selected, and that half of those children were born from " +
-      "procedures at this clinic. The territory's Ministry of Health has said it opened an " +
-      "official investigation. Cryos International, the sperm bank the clinic advertised as a " +
-      "supplier, told the BBC it has no record of ever delivering sperm to the clinic and has " +
-      "blacklisted it since 2016. Donor provenance is the one thing a patient cannot check " +
-      "for themselves afterwards, so while that is unresolved we will not put the clinic in " +
-      "front of anyone as an option.",
+      "BBC News reported on 18 August 2026 that at least 30 children, most of them British, " +
+      "are feared to have been conceived at clinics in northern Cyprus using sperm or egg " +
+      "donors other than the ones their parents chose, and that half of the 30 were born from " +
+      "procedures at Dogus IVF Centre. The BBC reported that the territory's Ministry of " +
+      "Health said it had launched an official investigation. The BBC also reported that the " +
+      "sperm bank Cryos International says it has \"no record of ever delivering sperm to the " +
+      "Dogus clinic\" and that it had blacklisted the clinic in 2016. In its earlier report of " +
+      "31 March 2026, the BBC said the Dogus clinic had not responded to its request for " +
+      "comment. We do not list the clinic while that investigation is open.",
     sources: [
       {
         label:
@@ -101,7 +109,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
       },
     ],
     excludedOn: "2026-08-18",
-    reviewOn: "2027-02-18",
+    reviewOn: "2026-12-01",
   },
   {
     name: "Miracle IVF",
@@ -110,14 +118,16 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     country: "Northern Cyprus",
     region: "Europe",
     reason:
-      "Named in the same BBC News reporting, which linked further cases of the same kind to " +
-      "the clinic. Cryos International told the BBC it has suspended supplying the clinic " +
-      "until the northern Cyprus Ministry of Health investigation concludes. We are holding " +
-      "to the same line as the sperm bank: not listed while the investigation is open.",
+      "Named in the same BBC News reporting. On 31 March 2026 the BBC reported that two " +
+      "families treated at Miracle IVF felt they had been misled about their egg donors. On " +
+      "18 August 2026 the BBC reported that the sperm bank Cryos International had suspended " +
+      "working with Miracle IVF until the northern Cyprus government investigation has " +
+      "concluded. We do not list the clinic while that investigation is open.",
     response:
-      "The clinic says it has always complied with the law, that patients sign consent forms " +
-      "explaining how donors are chosen, and that it has been cleared of breaching any laws. " +
-      "The BBC reported it was unable to confirm that clearance with the Ministry of Health.",
+      "The BBC reported that the clinic's doctor insists it has always complied with the law " +
+      "and says that patients sign consent forms which explain how donors are chosen. The BBC " +
+      "also reported that she says she has been cleared of breaching any laws, and that the " +
+      "BBC had been unable to confirm this with the territory's Ministry of Health.",
     sources: [
       {
         label:
@@ -135,7 +145,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
       },
     ],
     excludedOn: "2026-08-18",
-    reviewOn: "2027-02-18",
+    reviewOn: "2026-12-01",
   },
 ];
 

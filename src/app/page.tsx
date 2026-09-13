@@ -114,8 +114,8 @@ export default function Home() {
           <div className="grid grid-cols-2 gap-4">
             {[
               { value: "HFEA data", label: "UK success rates from the public register" },
-              { value: "True cost", label: "Travel & stays factored in, not just clinic fees" },
-              { value: "5 brackets", label: "Success rates from under 35 to 43+" },
+              { value: "Travel added", label: "A flights and stays estimate beside every overseas price" },
+              { value: "Source shown", label: "Every rate says who published it, the year and what it measures" },
               { value: "6 types", label: "IVF · ICSI · IUI · Donor Egg · Sperm · Double Donor" },
             ].map((s, i) => (
               <TealCard

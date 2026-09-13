@@ -7,7 +7,19 @@ import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { CompareButton } from "@/components/ivf-finder/compare-button";
 import { VerificationBadge } from "@/components/ivf-finder/rate-display";
-import { CLINICS, DATA_PROVENANCE, getClinic } from "@/lib/clinics";
+import {
+  CLINICS,
+  DATA_PROVENANCE,
+  formatCheckedDate,
+  getClinic,
+  NO_RESULTS_PAGE_LABEL,
+} from "@/lib/clinics";
+import {
+  BADGE_HFEA,
+  PRICE_CLINIC_ESTIMATE,
+  PRICE_HEADLINE,
+  VERDICT_LABELS,
+} from "@/lib/rate-labels";
 import {
   formatRangeGbp,
   googleFlightsUrl,
@@ -15,7 +27,8 @@ import {
   travelEstimateForCity,
   TRAVEL_ASSUMPTIONS,
 } from "@/lib/travel";
-import { AGE_BRACKETS } from "@/types/clinic";
+import { AGE_BRACKETS, HFEA_BANDS } from "@/types/clinic";
+import { eligibilitySummary } from "@/lib/country-eligibility";
 import { RegulatorNotice } from "@/components/regulator-notice";
 
 interface PageProps {
@@ -31,7 +44,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!clinic) return {};
   return {
     title: `${clinic.name}, ${clinic.city} | CairnFertility`,
-    description: `Success rates, pricing and treatment options for ${clinic.name} in ${clinic.city}, ${clinic.country}, with the source behind every figure.`,
+    description: `Published success rates, headline prices and treatment options for ${clinic.name} in ${clinic.city}, ${clinic.country}, with the source behind every figure.`,
   };
 }
 
@@ -41,21 +54,37 @@ const DONOR_LABELS = {
   both: "Identifiable and anonymous donors",
 } as const;
 
+const CURRENCY_SYMBOLS = { GBP: "£", EUR: "€", USD: "$", DKK: "DKK ", ZAR: "R" } as const;
+
 export default async function ClinicDetailPage({ params }: PageProps) {
   const clinic = getClinic((await params).slug);
   if (!clinic) notFound();
 
   const report = clinic.successRates;
   const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
+  const hasBracketFigures = Object.keys(report.byBracket).length > 0;
+  const hasFigures = report.byHfeaBand != null || hasBracketFigures || (report.publishedBands?.length ?? 0) > 0;
+  const localNote =
+    clinic.localPrice && clinic.localPrice.currency !== "GBP"
+      ? `; from ${CURRENCY_SYMBOLS[clinic.localPrice.currency]}${clinic.localPrice.amount.toLocaleString()}`
+      : "";
 
   const facts: { label: string; value: string }[] = [
     {
-      label: "Price per cycle",
+      label: PRICE_HEADLINE,
       value:
         clinic.pricePerCycleGbp != null
-          ? `£${clinic.pricePerCycleGbp.toLocaleString()} (own-egg IVF, headline price)`
+          ? `£${clinic.pricePerCycleGbp.toLocaleString()} per IVF cycle (own eggs${localNote})`
           : "Not published",
     },
+    ...(clinic.publishedAllInEstimateGbp
+      ? [
+          {
+            label: PRICE_CLINIC_ESTIMATE,
+            value: `£${clinic.publishedAllInEstimateGbp.low.toLocaleString()}–£${clinic.publishedAllInEstimateGbp.high.toLocaleString()} per cycle`,
+          },
+        ]
+      : []),
     ...(clinic.iuiPricePerCycleGbp != null
       ? [
           {
@@ -68,20 +97,39 @@ export default async function ClinicDetailPage({ params }: PageProps) {
       ? [
           {
             label: "Travel estimate",
-            value: `${formatRangeGbp(travel)} flights + stays over ${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`,
+            value: `${formatRangeGbp(travel)} flights and stays over ${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`,
           },
         ]
       : []),
     {
+      label: "Who the country's law allows clinics to treat",
+      value: eligibilitySummary(clinic.country),
+    },
+    {
       label: "Donor anonymity",
-      value: clinic.donorAnonymity ? DONOR_LABELS[clinic.donorAnonymity] : "No donor treatment offered",
+      value: clinic.donorAnonymity
+        ? DONOR_LABELS[clinic.donorAnonymity]
+        : (clinic.donorAnonymityNote ?? "No donor treatment offered"),
     },
     {
       label: "Remote consultation",
       value: clinic.remoteConsultation ? "Available" : "Not offered",
     },
     ...(clinic.hfeaLicensed
-      ? [{ label: "HFEA licence", value: clinic.hfeaNumber ? `Licensed, centre ${clinic.hfeaNumber}` : "Licensed" }]
+      ? [
+          {
+            label: "HFEA licence",
+            value: [
+              clinic.hfeaNumber ? `Licensed, centre ${clinic.hfeaNumber}` : "Licensed",
+              clinic.licenceExpiry ? `until ${formatCheckedDate(clinic.licenceExpiry)}` : null,
+            ]
+              .filter(Boolean)
+              .join(", "),
+          },
+        ]
+      : []),
+    ...(clinic.checkedOn
+      ? [{ label: "Prices and details checked", value: formatCheckedDate(clinic.checkedOn) }]
       : []),
   ];
 
@@ -144,44 +192,94 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           <div className="rounded-[24px] bg-background p-6">
             <h2 className="text-base font-bold text-teal-ink mb-1">Live birth rates</h2>
             <p className="text-xs text-muted mb-5">
-              Measured {report.denominator}, covering {report.year}.{" "}
-              {report.verification === "hfea"
-                ? "Verified against the HFEA register."
-                : "Self-reported by the clinic and not independently verified. Not directly comparable with HFEA verified UK figures."}
+              {report.byHfeaBand
+                ? DATA_PROVENANCE.successRates.uk.description
+                : hasFigures
+                  ? `Measured ${report.denominator}, covering ${report.year}. Published by the clinic and not checked by us. Not directly comparable with figures marked "${BADGE_HFEA}".`
+                  : "This clinic does not publish live birth rates by age in a form we can show."}
             </p>
-            <div>
-              {AGE_BRACKETS.map((b) => {
-                const rate = report.byBracket[b.value];
-                return (
-                  <div
-                    key={b.value}
-                    className="flex items-center justify-between gap-2 py-2.5 border-t border-border-warm"
-                  >
+
+            {report.byHfeaBand && (
+              <div>
+                {HFEA_BANDS.map((b) => {
+                  const fig = report.byHfeaBand?.[b.value];
+                  return (
+                    <div key={b.value} className="py-2.5 border-t border-border-warm">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm text-muted">{b.label}</span>
+                        {fig ? (
+                          <span className="text-sm font-bold text-teal-ink">{fig.rate}%</span>
+                        ) : (
+                          <span className="text-sm text-muted">Not published</span>
+                        )}
+                      </div>
+                      {fig && (
+                        <p className="text-xs text-muted mt-0.5">
+                          {VERDICT_LABELS[fig.vsNationalAverage]} ({fig.nationalAverage}%). HFEA range{" "}
+                          {fig.range.low}–{fig.range.high}%, from {fig.count.toLocaleString()} embryos transferred.
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {!report.byHfeaBand && report.publishedBands && report.publishedBands.length > 0 && (
+              <div>
+                {report.publishedBands.map((b) => (
+                  <div key={b.label} className="flex items-center justify-between gap-2 py-2.5 border-t border-border-warm">
                     <span className="text-sm text-muted">{b.label}</span>
-                    {rate != null ? (
-                      <span className="text-sm font-bold text-teal-ink">{rate}%</span>
-                    ) : (
-                      <span className="text-sm text-muted">Not published</span>
-                    )}
+                    <span className="text-sm font-bold text-teal-ink">{b.rate}%</span>
                   </div>
-                );
-              })}
-            </div>
-            <a
-              href={report.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2 mt-4"
-            >
-              Source: {report.sourceLabel}
-              <ExternalLink className="h-3 w-3" aria-hidden />
-            </a>
+                ))}
+                <p className="text-xs text-muted mt-2">Age groups as the clinic publishes them.</p>
+              </div>
+            )}
+
+            {!report.byHfeaBand && !report.publishedBands && hasBracketFigures && (
+              <div>
+                {AGE_BRACKETS.map((b) => {
+                  const rate = report.byBracket[b.value];
+                  return (
+                    <div
+                      key={b.value}
+                      className="flex items-center justify-between gap-2 py-2.5 border-t border-border-warm"
+                    >
+                      <span className="text-sm text-muted">{b.label}</span>
+                      {rate != null ? (
+                        <span className="text-sm font-bold text-teal-ink">{rate}%</span>
+                      ) : (
+                        <span className="text-sm text-muted">Not published</span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {report.sourceLabel === NO_RESULTS_PAGE_LABEL ? (
+              <p className="text-xs text-muted mt-4">{NO_RESULTS_PAGE_LABEL}.</p>
+            ) : (
+              <a
+                href={report.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-start gap-1.5 text-xs font-medium text-teal hover:underline underline-offset-2 mt-4"
+              >
+                <span>Source: {report.sourceLabel}</span>
+                <ExternalLink className="h-3 w-3 shrink-0 mt-0.5" aria-hidden />
+              </a>
+            )}
+            {report.checkedOn && (
+              <p className="text-xs text-muted mt-2">Source page read {formatCheckedDate(report.checkedOn)}.</p>
+            )}
           </div>
 
           {/* ── Key facts ── */}
           <div className="rounded-[24px] bg-background p-6">
             <h2 className="text-base font-bold text-teal-ink mb-5">Key facts</h2>
-            <div className="mb-6">
+            <div className="mb-4">
               {facts.map((f) => (
                 <div key={f.label} className="flex items-start justify-between gap-4 py-2.5 border-t border-border-warm">
                   <span className="text-sm text-muted shrink-0">{f.label}</span>
@@ -189,8 +287,27 @@ export default async function ClinicDetailPage({ params }: PageProps) {
                 </div>
               ))}
             </div>
+            {clinic.priceIncludes && (
+              <p className="text-xs text-muted mb-2">{clinic.priceIncludes}</p>
+            )}
+            {clinic.priceListUrl && (
+              <p className="text-xs mb-6">
+                <a
+                  href={clinic.priceListUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 font-medium text-teal hover:underline underline-offset-2"
+                >
+                  Clinic&rsquo;s price list
+                  <ExternalLink className="h-3 w-3" aria-hidden />
+                </a>
+                {clinic.localPrice && clinic.localPrice.currency !== "GBP" && (
+                  <span className="text-muted"> {DATA_PROVENANCE.fxNote}</span>
+                )}
+              </p>
+            )}
             {travel != null && (
-              <div className="mb-6 -mt-2">
+              <div className="mb-6">
                 {travel.destination.note && (
                   <p className="text-xs text-muted mb-2">{travel.destination.note}</p>
                 )}
@@ -232,21 +349,7 @@ export default async function ClinicDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <p className="text-xs text-muted mt-8" style={{ maxWidth: "70ch" }}>
-          Figures on this page are indicative and change over time. Prices are compiled from{" "}
-          {DATA_PROVENANCE.pricesSourceLabel} and were last verified on{" "}
-          {new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-            timeZone: "UTC",
-          })}
-          . Confirm current prices and success rates directly with the clinic before making
-          decisions, and ask for live births per embryo transfer for your age group so quotes
-          are comparable.
-        </p>
-
-        <div className="mt-6">
+        <div className="mt-8">
           <RegulatorNotice />
         </div>
       </Section>

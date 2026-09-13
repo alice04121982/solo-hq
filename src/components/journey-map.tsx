@@ -21,7 +21,7 @@ const PHASES: Phase[] = [
     id: "decision", number: 1, title: "The Decision", subtitle: "Am I really doing this?",
     icon: <Lightbulb className="h-4 w-4" />,
     description: "For most solo mums by choice, the decision takes months or years. There's no right timeline. This phase is about getting honest with yourself about what you want, what you fear, and what 'good enough' conditions look like before you start.",
-    actions: ["Sit with the question without rushing to an answer; most women take 6–24 months to decide", "Read memoirs and join SMC communities before committing to anything clinical", "Talk to a therapist experienced in fertility and solo parenthood, not to be talked out of it, but to be properly prepared", "Have the honest conversation about your support network: who will actually show up?", "Set a personal 'decision deadline' so the thinking doesn't go on forever"],
+    actions: ["Sit with the question without rushing to an answer","Read memoirs and join SMC communities before committing to anything clinical", "Talk to a therapist experienced in fertility and solo parenthood, not to be talked out of it, but to be properly prepared", "Have the honest conversation about your support network: who will actually show up?", "Set a personal 'decision deadline' so the thinking doesn't go on forever"],
   },
   {
     id: "foundations", number: 2, title: "Foundations", subtitle: "Building your base",
@@ -33,13 +33,13 @@ const PHASES: Phase[] = [
     id: "donor", number: 3, title: "The Donor Hunt", subtitle: "Navigating sperm banks",
     icon: <Search className="h-4 w-4" />,
     description: "Choosing a donor is deeply personal and logistically complex. You'll navigate international sperm banks, shipping regulations, and the emotional weight of selecting half your child's genetics.",
-    actions: ["Create accounts at major banks: Cryos International, Xytex, European Sperm Bank, London Sperm Bank", "UK clinics can only use donors who are identifiable to your child at 18", "Budget for 2–4 vials per cycle attempt, plus additional storage for siblings", "Coordinate shipping logistics and tank rental with your chosen clinic in advance", "Consider CMV status, blood type matching, and extended family health history"],
+    actions: ["Ask your clinic which UK-compliant banks it works with and how many vials it uses per cycle.", "UK clinics can only use donors who are identifiable to your child at 18", "Ask what it would cost to store extra vials for a sibling","Coordinate shipping logistics and tank rental with your chosen clinic in advance", "Consider CMV status, blood type matching, and extended family health history"],
   },
   {
     id: "clinic", number: 4, title: "Choosing a Clinic", subtitle: "More than just success rates",
     icon: <Stethoscope className="h-4 w-4" />,
     description: "HFEA success rates are a starting point, not the whole story. For solo patients, solo-friendliness, all-in pricing transparency, and communication quality matter as much as headline numbers.",
-    actions: ["Always ask: 'Do you routinely treat single women?' Not all clinics are equally welcoming", "Request a written quote covering everything: ICSI, donor sperm admin, counselling, storage", "Check HFEA success rates for your age group, not the clinic's overall headline figure", "Ask about waiting times for appointments and treatment slots", "Consider location vs. cost: London clinics are 30–40% pricier on average"],
+    actions: ["Always ask: 'Do you routinely treat single women?' Not all clinics are equally welcoming", "Request a written quote covering everything: ICSI, donor sperm admin, counselling, storage", "Check HFEA success rates for your age group, not the clinic's overall headline figure", "Ask about waiting times for appointments and treatment slots", "Weigh location against cost, and get written quotes from more than one clinic"],
   },
   {
     id: "treatment", number: 5, title: "Treatment", subtitle: "IUI, IVF, or donor eggs",
@@ -63,7 +63,7 @@ const PHASES: Phase[] = [
     id: "birth", number: 8, title: "Birth & Early Days", subtitle: "Your village matters most now",
     icon: <Sunrise className="h-4 w-4" />,
     description: "The fourth trimester is relentless for every new parent, and doing it without a co-parent is hard in specific, practical ways. Planning ahead for the first 12 weeks makes a real difference.",
-    actions: ["Create a postnatal support rota before you give birth: meals, visits, and practical help", "Research local NCT groups and solo parent meetups in your area", "If you can, book a postnatal doula or night nanny for the first few weeks", "Set up your home for single-handed operation: formula prep, changing station, safe sleeping", "Know the signs of postnatal depression and have someone to call; solo mums are at higher risk"],
+    actions: ["Create a postnatal support rota before you give birth: meals, visits, and practical help", "Research local NCT groups and solo parent meetups in your area", "If you can, book a postnatal doula or night nanny for the first few weeks", "Set up your home for single-handed operation: formula prep, changing station, safe sleeping", "Know the signs of postnatal depression and have someone to call"],
   },
   {
     id: "life-ahead", number: 9, title: "Life Ahead", subtitle: "Thriving as a solo family",

@@ -3,8 +3,15 @@
 import Link from "next/link";
 import { Check, X } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
-import { rateFor } from "@/lib/clinics";
+import { rateBandLabel, rateFor } from "@/lib/clinics";
 import { travelEstimateForCity, TRAVEL_ASSUMPTIONS } from "@/lib/travel";
+import {
+  BADGE_CLINIC,
+  BADGE_HFEA,
+  PRICE_HEADLINE,
+  PRICE_HEADLINE_TRAVEL,
+  rateLine,
+} from "@/lib/rate-labels";
 import { VerificationBadge } from "./rate-display";
 
 interface ComparisonTableProps {
@@ -20,36 +27,16 @@ const DONOR_LABELS: Record<NonNullable<Clinic["donorAnonymity"]>, string> = {
   both: "Identifiable and anonymous",
 };
 
-function BestBadge() {
-  return (
-    <span className="ml-1.5 inline-block bg-accent/20 text-teal-ink text-[11px] font-bold px-1 py-0.5 rounded align-middle">
-      best
-    </span>
-  );
-}
-
 /**
  * Side-by-side comparison, one clinic per row. The table scrolls horizontally
  * on narrow screens with the clinic name column pinned, so a row never loses
  * its identity mid-scroll. Cells sit flat on the card surface: separation is
- * borders only, no shadows.
+ * borders only, no shadows. Nothing in the table is marked "best": the
+ * figures carry different measures and the HFEA advises against reading
+ * small differences as a ranking.
  */
 export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove }: ComparisonTableProps) {
   if (clinics.length < 2) return null;
-
-  const rates = clinics.map((c) => rateFor(c, ageBracket));
-  const bestRate = Math.max(...rates.filter((r): r is number => r != null));
-
-  // "Best" is judged on the travel-inclusive true cost, never the headline
-  // price: comparing a Brno quote with a London one without the flights is
-  // exactly the distortion this table exists to remove.
-  const trueCostFor = (c: Clinic): number | null => {
-    if (c.pricePerCycleGbp == null) return null;
-    const travel = c.region !== "UK" ? travelEstimateForCity(c.city) : null;
-    return c.pricePerCycleGbp + (travel?.mid ?? 0);
-  };
-  const trueCosts = clinics.map(trueCostFor).filter((p): p is number => p != null);
-  const bestTrueCost = trueCosts.length > 0 ? Math.min(...trueCosts) : null;
 
   const headerCell =
     "px-4 py-3 text-left text-[12px] font-[700] uppercase tracking-[0.12em] text-muted whitespace-nowrap";
@@ -62,7 +49,7 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
         <h2 className="text-base font-bold text-teal-ink">
           Comparing {clinics.length} clinics
         </h2>
-        <p className="text-xs text-muted">Success rates shown for {ageBracketLabel.toLowerCase()}</p>
+        <p className="text-xs text-muted">Rates shown for {ageBracketLabel.toLowerCase()}</p>
       </div>
 
       <div className="rounded-[24px] bg-background overflow-x-auto">
@@ -72,10 +59,10 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
               <th className={`${headerCell} sticky left-0 z-10 bg-background border-r border-border-warm`}>
                 Clinic
               </th>
-              <th className={headerCell}>Success rate, {ageBracketLabel.toLowerCase()}</th>
+              <th className={headerCell}>Published rate, {ageBracketLabel.toLowerCase()}</th>
               <th className={headerCell}>Source</th>
-              <th className={headerCell}>Price per cycle</th>
-              <th className={headerCell}>True cost with travel</th>
+              <th className={headerCell}>{PRICE_HEADLINE}</th>
+              <th className={headerCell}>{PRICE_HEADLINE_TRAVEL}</th>
               <th className={headerCell}>Location</th>
               <th className={headerCell}>Donor anonymity</th>
               <th className={headerCell}>Remote consultation</th>
@@ -88,10 +75,8 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
           <tbody>
             {clinics.map((clinic, i) => {
               const rate = rateFor(clinic, ageBracket);
-              const isBestRate = rate != null && rate === bestRate;
               const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
-              const trueCost = trueCostFor(clinic);
-              const isBestTrueCost = bestTrueCost != null && trueCost === bestTrueCost;
+              const price = clinic.pricePerCycleGbp;
               return (
                 <tr
                   key={clinic.slug}
@@ -112,10 +97,10 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                     {rate != null ? (
                       <>
                         <span className="font-bold text-teal-ink">{rate}%</span>
-                        {isBestRate && <BestBadge />}
-                        <p className="text-xs text-muted mt-0.5">
-                          {clinic.successRates.denominator}, {clinic.successRates.year}
-                        </p>
+                        <p className="text-xs text-muted mt-0.5">{rateLine(clinic)}</p>
+                        {clinic.successRates.verification === "hfea" && (
+                          <p className="text-xs text-muted">HFEA band: {rateBandLabel(clinic, ageBracket)}</p>
+                        )}
                       </>
                     ) : (
                       <span className="text-muted">Not published</span>
@@ -125,24 +110,29 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                     <VerificationBadge verification={clinic.successRates.verification} />
                   </td>
                   <td className={bodyCell}>
-                    {clinic.pricePerCycleGbp != null ? (
-                      <span className="font-semibold">
-                        £{clinic.pricePerCycleGbp.toLocaleString()}
-                      </span>
+                    {price != null ? (
+                      <>
+                        <span className="font-semibold">£{price.toLocaleString()}</span>
+                        <p className="text-xs text-muted mt-0.5">per IVF cycle, own eggs</p>
+                      </>
                     ) : (
                       <span className="text-muted">Not published</span>
                     )}
                   </td>
                   <td className={bodyCell}>
-                    {trueCost != null ? (
+                    {price != null && travel != null ? (
                       <>
-                        <span className="font-semibold">≈ £{trueCost.toLocaleString()}</span>
-                        {isBestTrueCost && <BestBadge />}
+                        <span className="font-semibold">
+                          £{(price + travel.low).toLocaleString()}–£{(price + travel.high).toLocaleString()}
+                        </span>
                         <p className="text-xs text-muted mt-0.5">
-                          {travel != null
-                            ? `incl. ~£${travel.mid.toLocaleString()} flights + stays`
-                            : "no travel needed"}
+                          incl. £{travel.low.toLocaleString()}–£{travel.high.toLocaleString()} flights and stays
                         </p>
+                      </>
+                    ) : price != null ? (
+                      <>
+                        <span className="font-semibold">£{price.toLocaleString()}</span>
+                        <p className="text-xs text-muted mt-0.5">no travel estimate added</p>
                       </>
                     ) : (
                       <span className="text-muted">Not published</span>
@@ -152,6 +142,8 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                   <td className={bodyCell}>
                     {clinic.donorAnonymity != null ? (
                       DONOR_LABELS[clinic.donorAnonymity]
+                    ) : clinic.donorAnonymityNote ? (
+                      <span className="text-muted">{clinic.donorAnonymityNote}</span>
                     ) : (
                       <span className="text-muted">No donor treatment</span>
                     )}
@@ -187,11 +179,11 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
       </div>
 
       <p className="text-xs text-muted mt-3">
-        Figures marked Clinic reported are self-published, use different denominators, and are
-        not directly comparable with HFEA verified UK figures. True cost adds our
-        destination-specific estimate of flights and stays across{" "}
-        {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips to
-        the headline price; check live prices for your own dates before budgeting.
+        Figures marked &ldquo;{BADGE_CLINIC}&rdquo; use different measures and are not directly
+        comparable with figures marked &ldquo;{BADGE_HFEA}&rdquo;. The travel estimate adds our
+        destination figure for flights and stays across {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–
+        {TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips to the headline price; drugs, ICSI, donor
+        material and storage are usually charged on top. Check live prices for your own dates.
       </p>
     </div>
   );
