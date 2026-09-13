@@ -9,7 +9,7 @@ const isDev = process.env.NODE_ENV === "development";
  * trade. Nonce-based CSP requires every page to render dynamically, which for
  * a site that is almost entirely static reading material means losing static
  * generation and CDN caching site-wide. What it would buy is protection
- * against injected inline scripts — and the thing that makes that attack
+ * against injected inline scripts, and the thing that makes that attack
  * valuable, a session to steal, does not exist here: no accounts, no login, no
  * cookies, and no user-submitted content is ever rendered back out as HTML.
  *
@@ -17,8 +17,8 @@ const isDev = process.env.NODE_ENV === "development";
  * nonce) and the directives that actually carry weight for this site are the
  * strict ones:
  *
- *   connect-src   the browser may only talk to this origin and the postcode
- *                 lookup — an injected script cannot post data anywhere else
+ *   connect-src   the browser may only talk to this origin; an injected
+ *                 script cannot post data anywhere else
  *   form-action   a form on this site cannot be made to submit elsewhere
  *   frame-ancestors  nobody can frame the application form and harvest it
  *   base-uri      no rewriting where relative URLs resolve to
@@ -36,9 +36,12 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://images.unsplash.com",
   "font-src 'self'",
-  // api.postcodes.io resolves browser coordinates to a postcode for the
-  // location search. It is the only third party the browser ever contacts.
-  `connect-src 'self' https://api.postcodes.io${isDev ? " ws: http://localhost:*" : ""}`,
+  // The browser contacts no third party at all. Every fetch() in src/ goes to
+  // a same-origin /api route (waitlist, community apply, community join);
+  // server-side calls to Supabase are made from route handlers and are not
+  // governed by this directive. If a browser-side call to another origin is
+  // ever added, it must be listed here or it will be blocked silently.
+  `connect-src 'self'${isDev ? " ws: http://localhost:*" : ""}`,
   "form-action 'self'",
   "base-uri 'none'",
   "object-src 'none'",
@@ -48,13 +51,14 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 /**
- * Everything the browser is allowed to ask for. Geolocation is `self` because
- * the clinic location search asks for it (with a permission prompt, on a
- * click); everything else is off, so a compromised dependency cannot quietly
- * reach for a camera or a microphone.
+ * Everything the browser is allowed to ask for: nothing. No page uses
+ * geolocation, camera, microphone or any other powerful feature, so each one
+ * is switched off and a compromised dependency cannot quietly reach for them.
+ * If a feature that needs one of these is ever added, allow it here for
+ * `self` in the same change.
  */
 const permissionsPolicy = [
-  "geolocation=(self)",
+  "geolocation=()",
   "camera=()",
   "microphone=()",
   "payment=()",

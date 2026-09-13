@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <LegalPageLayout page={page}>
-      {/* Email card — the only channel that exists today. Three addresses,
+      {/* Email card, the only channel that exists today. Three addresses,
           one mailbox behind them, each with its purpose beside it so nobody
           has to guess which one their message belongs in. */}
       <div className="mt-12 rounded-2xl bg-background p-6 md:p-8">
@@ -46,9 +46,7 @@ export default function ContactPage() {
           ))}
         </ul>
         <p className="text-sm font-sans text-muted leading-relaxed mt-6 pt-6 border-t border-border" style={{ maxWidth: "56ch" }}>
-          All three reach the same place, read by a real person. Pick the
-          wrong one and nothing is lost. We aim to reply within five working
-          days, and always within the statutory deadline for privacy requests.
+          All three reach the same person.
         </p>
       </div>
     </LegalPageLayout>
