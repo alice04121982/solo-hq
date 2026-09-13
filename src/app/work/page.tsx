@@ -106,7 +106,7 @@ export default function WorkPage() {
           What you&rsquo;re owed, and what you have to ask for.
         </h1>
         <p className="text-[18px] font-sans leading-[1.6] text-muted" style={{ maxWidth: "58ch" }}>
-          A small amount of this is law. A great deal of it is policy — money and time your
+          A small amount of this is law. A great deal of it is policy: money and time your
           employer may already provide and never mention. The gap between the two is closed by
           knowing what to ask, and asking it in writing.
         </p>
@@ -174,7 +174,7 @@ export default function WorkPage() {
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "60ch" }}>
           The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
-          <strong className="font-[600]">embryo transfer</strong> — not when a pregnancy is
+          <strong className="font-[600]">embryo transfer</strong>, not when a pregnancy is
           confirmed, and not when treatment starts.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "60ch" }}>
@@ -197,8 +197,8 @@ export default function WorkPage() {
             style={{ color: "var(--on-teal)", maxWidth: "64ch" }}
           >
             This is a summary of the position with its sources attached, not legal advice, and
-            CairnFertility is not a law firm. If something has already gone wrong at work — a
-            refusal, a disciplinary, a dismissal — talk to Acas, your union, or an employment
+            CairnFertility is not a law firm. If something has already gone wrong at work (a
+            refusal, a disciplinary, a dismissal), talk to Acas, your union, or an employment
             solicitor before you respond to it. Most of them will do a first conversation free.
           </p>
         </div>
@@ -248,7 +248,7 @@ export default function WorkPage() {
           </h3>
           <p className="text-[16px] font-sans leading-relaxed text-muted mb-10" style={{ maxWidth: "62ch" }}>
             If your employer uses one of these, the platform rather than HR usually holds the detail
-            of what you can claim — and its own support team will answer questions your employer
+            of what you can claim, and its own support team will answer questions your employer
             never sees.
           </p>
 
@@ -280,7 +280,7 @@ export default function WorkPage() {
           </h3>
           <p className="text-[16px] font-sans leading-relaxed text-muted mb-8" style={{ maxWidth: "62ch" }}>
             A short list on purpose. These are employers whose fertility provision has been publicly
-            reported — useful as precedent when you are asking your own employer to catch up, and as
+            reported, useful as precedent when you are asking your own employer to catch up, and as
             a starting point if you are job-hunting.
           </p>
 
@@ -303,7 +303,7 @@ export default function WorkPage() {
 
           <p className="text-[14px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "68ch" }}>
             Reported provision as at {WORK_LAST_REVIEWED}. Benefits are withdrawn as quietly as they
-            are announced, and the detail — caps, eligibility, waiting periods — is rarely in the
+            are announced, and the detail (caps, eligibility, waiting periods) is rarely in the
             press release. Confirm directly with the employer before relying on any of it, and never
             accept a job on the strength of a benefit you have not seen documented.
           </p>
@@ -328,7 +328,7 @@ export default function WorkPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Everyone knows to &ldquo;ask HR&rdquo;. Almost nobody knows which questions separate a
           benefit that will pay for treatment from one that will not. Pick where you work, and this
-          builds the email — asking all of them, disclosing none of your own plans.
+          builds the email, asking all of them, disclosing none of your own plans.
         </p>
 
         <BenefitsAudit steps={AUDIT_STEPS} />
@@ -352,7 +352,7 @@ export default function WorkPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "62ch" }}>
           Treatment runs on a calendar you do not control: scans move at 48 hours&rsquo; notice,
           collection lands when it lands. That unpredictability, rather than the treatment itself, is
-          what turns work into a problem — and it can be managed without telling anyone why.
+          what turns work into a problem, and it can be managed without telling anyone why.
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Pick the conversation you are having. Every line is written to be said out loud, and can be
@@ -388,7 +388,7 @@ export default function WorkPage() {
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Employers increasingly put fertility cover in the recruitment pack, which makes it a
-          negotiable, comparable part of an offer — and one of the few where the difference between
+          negotiable, comparable part of an offer, and one of the few where the difference between
           two employers can exceed £10,000. Ask before you sign; it is a benefits question like
           pension matching, and you are not declaring anything by asking it.
         </p>
@@ -421,12 +421,12 @@ export default function WorkPage() {
             </p>
             <CopyButton
               text={
-                "Before I confirm, could you send me the benefits documentation — including anything on family forming and fertility? I'd like to check whether it's available from day one, what the cap is, and whether medication and donor gametes are included."
+                "Before I confirm, could you send me the benefits documentation, including anything on family forming and fertility? I'd like to check whether it's available from day one, what the cap is, and whether medication and donor gametes are included."
               }
             />
           </div>
           <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
-            Before I confirm, could you send me the benefits documentation — including anything on
+            Before I confirm, could you send me the benefits documentation, including anything on
             family forming and fertility? I&rsquo;d like to check whether it&rsquo;s available from
             day one, what the cap is, and whether medication and donor gametes are included.
           </p>

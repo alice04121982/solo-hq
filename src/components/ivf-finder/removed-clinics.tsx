@@ -85,7 +85,7 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
           {exclusions.map((x) => (
             <div key={x.name} className="border-l-2 border-teal/15 pl-4">
               <p className="text-sm font-semibold text-teal-ink">
-                {x.name} &mdash; {x.country}
+                {x.name}, {x.country}
               </p>
               <p className="text-xs text-muted leading-relaxed mt-1">{x.reason}</p>
               {x.response && (
@@ -116,7 +116,7 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
           <p className="text-xs text-muted leading-relaxed">
             Removing a clinic is not a finding against it, and nothing here is an allegation of
             ours. Each entry records what a named publication has reported and is reviewed on
-            the date held with it &mdash; see{" "}
+            the date held with it. See{" "}
             <a
               href="/about#methodology"
               className="font-medium text-teal hover:underline underline-offset-2"

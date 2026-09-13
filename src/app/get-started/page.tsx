@@ -36,7 +36,7 @@ export default function GetStartedPage() {
             Answer five questions and we&apos;ll show you clinics ranked for your age, family type, and real budget, not just headline numbers.
           </p>
           <p className="text-[13px] font-sans text-muted leading-relaxed mt-4">
-            Your answers — including anything about your health — stay on your device. The
+            Your answers, including anything about your health, stay on your device. The
             matching runs entirely in your browser, and nothing you enter here is sent to us
             or stored anywhere. See our{" "}
             <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground transition-colors">

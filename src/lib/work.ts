@@ -29,7 +29,7 @@ export const WORK_LAST_REVIEWED = "August 2026";
 export const WORKPLACE_STATS = [
   {
     value: "50%",
-    label: "Of US employers with 500+ staff now cover IVF, up from 27% in 2020 — and most of their employees do not know it",
+    label: "Of US employers with 500+ staff now cover IVF, up from 27% in 2020, and most of their employees do not know it",
   },
   {
     value: "27%",
@@ -80,12 +80,12 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
     slug: "uk",
     name: "United Kingdom",
     summary:
-      "No statutory right to time off for treatment — but real pregnancy protection that begins earlier than most people, and most employers, realise.",
+      "No statutory right to time off for treatment, but real pregnancy protection that begins earlier than most people, and most employers, realise.",
     theLaw: [
       {
         point: "Pregnancy protection begins at embryo transfer.",
         detail:
-          "From the point of transfer you have the rights of a pregnant worker, including paid time off for antenatal appointments — a materially stronger position than the weeks before it.",
+          "From the point of transfer you have the rights of a pregnant worker, including paid time off for antenatal appointments: a materially stronger position than the weeks before it.",
       },
       {
         point: "If the transfer fails, protection continues for two weeks.",
@@ -125,14 +125,14 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       },
     ],
     useIt: [
-      "If you are at or past embryo transfer and a request is being refused, say so plainly and in writing — your position changed at that point.",
+      "If you are at or past embryo transfer and a request is being refused, say so plainly and in writing: your position changed at that point.",
       "Ask for treatment absence to be recorded separately from ordinary sickness, and get the answer in writing before you need it.",
       "Acas and Working Families both run free advice lines; use them before a disagreement hardens.",
     ],
     sources: [
-      { label: "Acas — IVF treatment and pregnancy at work", href: "https://www.acas.org.uk/pregnancy-at-work/ivf-treatment" },
-      { label: "CIPD — workplace support for fertility challenges", href: "https://www.cipd.org/uk/knowledge/reports/fertility-challenges/" },
-      { label: "Working Families — rights during fertility treatment", href: "https://workingfamilies.org.uk/articles/workplace-rights-for-those-undertaking-fertility-treatment/" },
+      { label: "Acas: IVF treatment and pregnancy at work", href: "https://www.acas.org.uk/pregnancy-at-work/ivf-treatment" },
+      { label: "CIPD: workplace support for fertility challenges", href: "https://www.cipd.org/uk/knowledge/reports/fertility-challenges/" },
+      { label: "Working Families: rights during fertility treatment", href: "https://workingfamilies.org.uk/articles/workplace-rights-for-those-undertaking-fertility-treatment/" },
     ],
   },
   {
@@ -156,14 +156,14 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       {
         point: "Bank of Ireland and Vodafone chose 10 days; nobody made them.",
         detail:
-          "Both introduced fertility leave voluntarily and other large employers have followed. That is policy rather than entitlement — but useful precedent when asking your own employer to catch up.",
+          "Both introduced fertility leave voluntarily and other large employers have followed. That is policy rather than entitlement, but useful precedent when asking your own employer to catch up.",
       },
     ],
     useIt: [
       "Check whether your sector has a collective agreement or a public-sector policy covering fertility leave; several universities and public bodies have adopted one.",
-      "If you are asking your employer to create a policy, name the employers who already have one — it moves the conversation from principle to catching up.",
+      "If you are asking your employer to create a policy, name the employers who already have one: it moves the conversation from principle to catching up.",
     ],
-    sources: [{ label: "Citizens Information — leave and holidays", href: "https://www.citizensinformation.ie/en/employment/employment-rights-and-conditions/leave-and-holidays/" }],
+    sources: [{ label: "Citizens Information: leave and holidays", href: "https://www.citizensinformation.ie/en/employment/employment-rights-and-conditions/leave-and-holidays/" }],
   },
   {
     slug: "europe",
@@ -191,19 +191,19 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       {
         point: "Treat every entry here as a pointer to check locally.",
         detail:
-          "This is the part of the page that varies most and dates fastest — it is not a statement of your own position.",
+          "This is the part of the page that varies most and dates fastest. It is not a statement of your own position.",
       },
     ],
     useIt: [
       "Ask your employer's HR for the local policy in writing, and if you work for a multinational, ask whether the group fertility policy applies in your country. It often does, and is often better than local law.",
     ],
-    sources: [{ label: "Ius Laboris — fertility and employment across jurisdictions", href: "https://iuslaboris.com/insights/fertility-crisis-impact-on-employment/" }],
+    sources: [{ label: "Ius Laboris: fertility and employment across jurisdictions", href: "https://iuslaboris.com/insights/fertility-crisis-impact-on-employment/" }],
   },
   {
     slug: "usa",
     name: "United States",
     summary:
-      "No fertility-specific leave right, but three federal laws do work in the background — and the benefit itself is where the real money sits.",
+      "No fertility-specific leave right, but three federal laws do work in the background, and the benefit itself is where the real money sits.",
     theLaw: [
       {
         point: "FMLA can cover treatment-related absence.",
@@ -241,12 +241,12 @@ export const RIGHTS_BY_COUNTRY: RightsEntry[] = [
       },
     ],
     useIt: [
-      "Get the plan's Summary Plan Description and read the infertility definition. If it requires a period of unprotected heterosexual intercourse, that clause is what excludes solo and same-sex patients — and many plans have now dropped it.",
+      "Get the plan's Summary Plan Description and read the infertility definition. If it requires a period of unprotected heterosexual intercourse, that clause is what excludes solo and same-sex patients, and many plans have now dropped it.",
       "Ask HR whether the plan is fully insured or self-funded. Self-funded plans are exempt from state mandates, so your state's IVF law may not reach you.",
     ],
     sources: [
-      { label: "RESOLVE — insurance coverage and your rights", href: "https://resolve.org/learn/financial-resources/insurance-coverage/" },
-      { label: "US Department of Labor — FMLA", href: "https://www.dol.gov/agencies/whd/fmla" },
+      { label: "RESOLVE: insurance coverage and your rights", href: "https://resolve.org/learn/financial-resources/insurance-coverage/" },
+      { label: "US Department of Labor: FMLA", href: "https://www.dol.gov/agencies/whd/fmla" },
     ],
   },
 ];
@@ -422,7 +422,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
       "Is there a written fertility policy I can read, rather than the summary on the intranet?",
       "Does the fertility provision cover solo parents and same-sex couples, and does it include donor gametes and medication?",
     ],
-    exitLine: "Thanks — that's all I need for now. If I have questions once I've read it, I'll come back to you.",
+    exitLine: "Thanks, that's all I need for now. If I have questions once I've read it, I'll come back to you.",
   },
   {
     slug: "manager-time-off",
@@ -440,7 +440,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
     tryThis: [
       "I have a course of medical appointments over the next few weeks. Some are scheduled at short notice and early in the morning. I'd like to agree how to handle them so it's predictable for both of us.",
       "I'd rather not go into the detail, but this is ongoing medical treatment rather than a one-off. Can we look at what the policy allows?",
-      "I can make the time up, but the appointments themselves can't move — the clinic sets them.",
+      "I can make the time up, but the appointments themselves can't move: the clinic sets them.",
     ],
     exitLine: "I'm happy to keep this between us for now. If anything changes that affects the team, I'll tell you first.",
   },
@@ -462,7 +462,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
       "I'd like to record this as treatment-related rather than ordinary sickness absence, in line with the policy.",
       "I'm now at a stage where the pregnancy-related protections apply. I'd like to agree the appointments on that basis.",
     ],
-    exitLine: "I'll keep you posted on timings as I get them. I'm not asking to disappear — I'm asking for the calendar to be realistic.",
+    exitLine: "I'll keep you posted on timings as I get them. I'm not asking to disappear. I'm asking for the calendar to be realistic.",
   },
   {
     slug: "handled-badly",
@@ -480,7 +480,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
     tryThis: [
       "I'd like to put what we discussed in writing so we're both clear on what was agreed.",
       "That's a more personal question than I'm going to answer. What I need is agreement on the appointments.",
-      "I'd like to raise this with HR — not as a complaint about you, but because I want the position documented.",
+      "I'd like to raise this with HR, not as a complaint about you, but because I want the position documented.",
     ],
     exitLine: "I'm going to leave it there for today. I'll follow up by email so we have a record.",
   },
@@ -498,7 +498,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
       "Assuming a benefit announced in the press is available from day one.",
     ],
     tryThis: [
-      "Before I confirm, could you send me the benefits documentation — including anything on family forming and fertility?",
+      "Before I confirm, could you send me the benefits documentation, including anything on family forming and fertility?",
       "Is that provision available from day one, or is there a qualifying period?",
       "Does it cover solo parents and same-sex couples, and does the fund include medication and donor gametes?",
     ],
@@ -510,7 +510,7 @@ export const WORK_SCENARIOS: WorkScenario[] = [
 
 export const OFFER_CHECKS: string[] = [
   "Is the benefit available from day one, or after a qualifying period? A fund that unlocks after twelve months is no use for a cycle you are planning in March.",
-  "What is the cap — per cycle, per year, or lifetime — and is it stated in money or in cycles?",
+  "What is the cap (per cycle, per year, or lifetime), and is it stated in money or in cycles?",
   "Does it cover donor sperm and eggs? For solo parents and two-mum families this is thousands of pounds of the real bill.",
   "Are drugs inside the fund or charged separately?",
   "Does the eligibility wording cover solo parents and same-sex couples, or is it written around a couple with an infertility diagnosis?",
@@ -532,7 +532,7 @@ export const POLICY_ELEMENTS: string[] = [
 ];
 
 export const CASE_SOURCES: SourceLink[] = [
-  { label: "CIPD — employer guide to fertility support", href: "https://www.cipd.org/en/knowledge/guides/fertility-challenges/" },
-  { label: "Fertility Network UK — workplace resources", href: "https://fertilitynetworkuk.org/" },
-  { label: "Acas — pregnancy and IVF at work", href: "https://www.acas.org.uk/pregnancy-at-work/ivf-treatment" },
+  { label: "CIPD: employer guide to fertility support", href: "https://www.cipd.org/en/knowledge/guides/fertility-challenges/" },
+  { label: "Fertility Network UK: workplace resources", href: "https://fertilitynetworkuk.org/" },
+  { label: "Acas: pregnancy and IVF at work", href: "https://www.acas.org.uk/pregnancy-at-work/ivf-treatment" },
 ];

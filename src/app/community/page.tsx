@@ -54,7 +54,7 @@ export default function CommunityPage() {
             A small, guarded room for people doing IVF.
           </h1>
           <p className="text-lg font-sans text-muted leading-[1.65] mb-4" style={{ maxWidth: "58ch" }}>
-            Solo, same-sex, or together — IVF is easier alongside people who
+            Solo, same-sex, or together: IVF is easier alongside people who
             get it. This is a private {platform} group, not a forum: no
             profiles, no comment threads, no strangers scrolling your worst
             week.
@@ -139,7 +139,7 @@ export default function CommunityPage() {
             className="text-sm font-sans leading-relaxed"
             style={{ color: "var(--on-teal-muted)", maxWidth: "52ch" }}
           >
-            People going through fertility treatment are a target — for
+            People going through fertility treatment are a target: for
             clinics, for supplement sellers, and occasionally for worse. Four
             things about how this group works, each of which we have to keep
             true.
@@ -187,7 +187,7 @@ export default function CommunityPage() {
               What it&rsquo;s for.
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "48ch" }}>
-              Three things. No engagement tricks, no follower counts — just the
+              Three things. No engagement tricks, no follower counts, just the
               people and the conversations.
             </p>
 
@@ -267,7 +267,7 @@ export default function CommunityPage() {
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "48ch" }}>
               We&rsquo;re building this in the open. Our story, on the About
               page, is the running log of what we&rsquo;re making and what
-              we&rsquo;re learning about IVF along the way — clinic pricing,
+              we&rsquo;re learning about IVF along the way: clinic pricing,
               policy changes, and the community as it grows. No signup, no
               commitment, and applying later is always open.
             </p>
@@ -282,7 +282,7 @@ export default function CommunityPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <p className="text-xs font-sans text-muted">
-              Or find us on the socials in the footer below — same honesty,
+              Or find us on the socials in the footer below: same honesty,
               shorter form.
             </p>
           </div>

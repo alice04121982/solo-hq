@@ -51,7 +51,7 @@ export function CTASection() {
               style={{ color: "var(--teal)" }}
             >
               Whatever your path, IVF is easier alongside people who get it.
-              Our community is a small, private group — not a forum — where you
+              Our community is a small, private group (not a forum) where you
               can find others at your stage, ask people who have been through
               it, and meet up in real life. Every member is approved by a
               person before they get in.

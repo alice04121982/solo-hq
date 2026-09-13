@@ -77,7 +77,7 @@ export default function ResourcesPage() {
               Funding &amp; payment options
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
-              What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest — employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
+              What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest: employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
             </p>
             <Link
               href="/funding"
@@ -131,7 +131,7 @@ export default function ResourcesPage() {
           tone="teal"
           eyebrow="Made for your family"
           title="Browse by family type."
-          intro="Each family guide ends with a hand-picked reading list for that path — start there if you want only what applies to you."
+          intro="Each family guide ends with a hand-picked reading list for that path. Start there if you want only what applies to you."
           introWidth="52ch"
         />
 

@@ -38,7 +38,7 @@ const QUESTIONS: Question[] = [
   {
     id: "nation",
     label: "Where do you live?",
-    help: "This is the single biggest factor. England has no national policy — 36 local boards (down from 42 after the April 2026 mergers) each set their own.",
+    help: "This is the single biggest factor. England has no national policy: 36 local boards (down from 42 after the April 2026 mergers) each set their own.",
     options: [
       { value: "england", label: "England" },
       { value: "scotland", label: "Scotland" },
@@ -120,14 +120,14 @@ interface Result {
 const VERDICT_COPY: Record<Verdict, { title: string; body: string }> = {
   unlikely: {
     title: "Unlikely on the criteria most policies use",
-    body: "One or more of your answers is a criterion that NHS policies apply strictly. That does not always mean no — some of these change, and some are worth challenging — but plan on funding treatment another way while you check.",
+    body: "One or more of your answers is a criterion that NHS policies apply strictly. That does not always mean no (some of these change, and some are worth challenging), but plan on funding treatment another way while you check.",
   },
   conditional: {
     title: "Possible, with a condition to clear first",
     body: "Nothing in your answers rules you out, but there is a requirement standing between you and a funding decision. What it costs you to clear it is the thing to work out before anything else.",
   },
   "worth-pursuing": {
-    title: "Worth pursuing — start with your GP",
+    title: "Worth pursuing: start with your GP",
     body: "Nothing in your answers matches the criteria that usually exclude people. The remaining question is what your local policy actually commissions, which is written down and which you can read.",
   },
 };
@@ -148,7 +148,7 @@ function evaluate(a: Answers): Result {
   }
   if (a.children === "yes") {
     blockers.push(
-      "Almost every policy requires that you — and a partner, if you have one — have no living child. That includes children from a previous relationship, children living elsewhere, and adopted children.",
+      "Almost every policy requires that you (and a partner, if you have one) have no living child. That includes children from a previous relationship, children living elsewhere, and adopted children.",
     );
   }
   if (a.smoking === "yes") {
@@ -163,7 +163,7 @@ function evaluate(a: Answers): Result {
   }
   if (a.bmi === "unsure") {
     conditions.push(
-      "Find out your BMI before your GP appointment — it is checked against the policy range at the point treatment starts, so it is worth knowing early.",
+      "Find out your BMI before your GP appointment. It is checked against the policy range at the point treatment starts, so it is worth knowing early.",
     );
   }
 
@@ -190,7 +190,7 @@ function evaluate(a: Answers): Result {
   }
   if (a.nation === "northern-ireland") {
     conditions.push(
-      "Northern Ireland funds one full cycle for eligible women under 40, under national criteria — since the 2024 expansion that includes transferring all frozen embryos from the cycle.",
+      "Northern Ireland funds one full cycle for eligible women under 40, under national criteria. Since the 2024 expansion, that includes transferring all frozen embryos from the cycle.",
     );
   }
 
@@ -205,7 +205,7 @@ function evaluate(a: Answers): Result {
       );
     } else {
       conditions.push(
-        "Expect to be asked for six or more donor insemination cycles at a licensed clinic before IVF funding is considered — and outside Scotland you will usually be paying for those cycles, and for the donor sperm, yourself.",
+        "Expect to be asked for six or more donor insemination cycles at a licensed clinic before IVF funding is considered, and outside Scotland you will usually be paying for those cycles, and for the donor sperm, yourself.",
       );
     }
   }
@@ -218,7 +218,7 @@ function evaluate(a: Answers): Result {
 
   steps.push(
     a.nation === "england"
-      ? "Find your Integrated Care Board by postcode and download its assisted conception policy — the full document, not a summary page."
+      ? "Find your Integrated Care Board by postcode and download its assisted conception policy: the full document, not a summary page."
       : "Read the national access criteria for your nation and note the version date.",
   );
   steps.push(
@@ -231,7 +231,7 @@ function evaluate(a: Answers): Result {
   }
   if (blockers.length > 0) {
     steps.push(
-      "Ask for any refusal in writing, with the specific criterion you failed — policies are reviewed periodically, and there is an Individual Funding Request route for genuinely unusual clinical circumstances.",
+      "Ask for any refusal in writing, with the specific criterion you failed. Policies are reviewed periodically, and there is an Individual Funding Request route for genuinely unusual clinical circumstances.",
     );
   }
   steps.push("Whatever the answer, check your employer's benefits before paying for anything privately.");

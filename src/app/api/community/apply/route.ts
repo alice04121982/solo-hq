@@ -76,7 +76,7 @@ export async function POST(request: Request) {
   const email = readString(body, "email", 254).toLowerCase();
   if (!EMAIL_PATTERN.test(email)) {
     return NextResponse.json(
-      { error: "That email doesn't look right — check it and try again." },
+      { error: "That email doesn't look right. Check it and try again." },
       { status: 400 }
     );
   }
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
   const pathway = readString(body, "pathway", 40) as CommunityPathway;
   if (!(PATHWAY_VALUES as string[]).includes(pathway)) {
     return NextResponse.json(
-      { error: "Pick the path that fits — 'still deciding' counts." },
+      { error: "Pick the path that fits: 'still deciding' counts." },
       { status: 400 }
     );
   }
@@ -104,7 +104,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Please say a little more about why you'd like to join — a couple of sentences is plenty. A person reads this.",
+          "Please say a little more about why you'd like to join. A couple of sentences is plenty. A person reads this.",
       },
       { status: 400 }
     );

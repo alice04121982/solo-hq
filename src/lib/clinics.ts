@@ -43,17 +43,17 @@ export const DATA_PROVENANCE = {
   /** National benchmarks the figures are sanity-checked against. */
   benchmarks: [
     {
-      label: "HFEA — In vitro fertilisation (IVF)",
+      label: "HFEA: In vitro fertilisation (IVF)",
       url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/",
       note: "One cycle of IVF costs £5,000 on average, though this varies considerably.",
     },
     {
-      label: "HFEA — Intrauterine insemination (IUI)",
+      label: "HFEA: Intrauterine insemination (IUI)",
       url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intrauterine-insemination-iui/",
       note: "One cycle of IUI is typically around a quarter of the price of one IVF cycle.",
     },
     {
-      label: "NHS — IVF availability and cost",
+      label: "NHS: IVF availability and cost",
       url: "https://www.nhs.uk/conditions/ivf/availability/",
       note: "One cycle of private IVF can cost up to £5,000 or more.",
     },

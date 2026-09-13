@@ -132,9 +132,9 @@ const PRIVACY: LegalPage = {
       bullets: [
         "We set no cookies and run no analytics, advertising, or tracking of any kind.",
         "We have no user accounts, no passwords, and we take no payments.",
-        "We store your email address if you join our waitlist, and your answers if you apply to join the community — including what you write about your own treatment. Applying is the one place on this site where health information reaches us, it is entirely your choice, and we delete it on a short schedule.",
+        "We store your email address if you join our waitlist, and your answers if you apply to join the community, including what you write about your own treatment. Applying is the one place on this site where health information reaches us, it is entirely your choice, and we delete it on a short schedule.",
         "We never ask for your phone number, anywhere.",
-        "Your answers in our clinic matching tool — including anything about your health — are processed entirely within your own browser. They are never sent to us or to anyone else.",
+        "Your answers in our clinic matching tool (including anything about your health) are processed entirely within your own browser. They are never sent to us or to anyone else.",
         "If you use the location search, your coordinates go to one UK postcode-lookup service, with your permission, and are not stored by us.",
         "We never sell personal data, and we never share it for advertising. There are no exceptions to this.",
       ],
@@ -145,12 +145,12 @@ const PRIVACY: LegalPage = {
     {
       heading: "Who we are",
       body: [
-        "CairnFertility is a UK-based information service that helps people compare IVF clinics and understand fertility treatment. It is published by an independent individual rather than a registered company, and that person is the \"controller\" of the small amount of personal data described in this policy — meaning they decide how and why it is used. If CairnFertility is ever incorporated, we will publish the company's registered details on our [contact page](/contact) and update this policy first.",
+        "CairnFertility is a UK-based information service that helps people compare IVF clinics and understand fertility treatment. It is published by an independent individual rather than a registered company, and that person is the \"controller\" of the small amount of personal data described in this policy, meaning they decide how and why it is used. If CairnFertility is ever incorporated, we will publish the company's registered details on our [contact page](/contact) and update this policy first.",
         "For anything about this policy or your personal data, email [privacy@cairnfertility.com](mailto:privacy@cairnfertility.com). For anything else, [hello@cairnfertility.com](mailto:hello@cairnfertility.com) reaches us.",
       ],
     },
     {
-      heading: "What we collect — and what we deliberately don't",
+      heading: "What we collect, and what we deliberately don't",
       body: [
         "Most of this site is plain reading material, and reading it sends us nothing beyond the standard technical information any website receives. Here is every way personal data can arise on this site today:",
       ],
@@ -158,27 +158,27 @@ const PRIVACY: LegalPage = {
         {
           term: "Email you send us",
           description:
-            "If you email us, we receive your address and whatever you choose to write. We use it only to reply and to keep a record of the correspondence. Please don't include medical details in an email — we are not a medical service and don't need them.",
+            "If you email us, we receive your address and whatever you choose to write. We use it only to reply and to keep a record of the correspondence. Please don't include medical details in an email. We are not a medical service and don't need them.",
         },
         {
           term: "The share-your-story form",
           description:
-            "Our story form works the same way as writing to us directly: what you type stays in your browser while you draft, and is only sent — by you, from your own email app — when you choose to send it. We have no submission backend, so we cannot see drafts, and an unsent story never reaches us. Stories are published only after we have agreed the final text with you by email, and you can withdraw a story at any time.",
+            "Our story form works the same way as writing to us directly: what you type stays in your browser while you draft, and is only sent (by you, from your own email app) when you choose to send it. We have no submission backend, so we cannot see drafts, and an unsent story never reaches us. Stories are published only after we have agreed the final text with you by email, and you can withdraw a story at any time.",
         },
         {
           term: "Joining the waitlist",
           description:
-            "If you submit your email on our keep-in-touch page, it is stored, together with the date you joined, in a database hosted by Supabase (in the EU) so we can email you occasionally about the site. We don't add you to any other list, and this database cannot be browsed or searched back out over the public website — only new emails can be added to it. See 'Who we share data with' below for Supabase's role.",
+            "If you submit your email on our keep-in-touch page, it is stored, together with the date you joined, in a database hosted by Supabase (in the EU) so we can email you occasionally about the site. We don't add you to any other list, and this database cannot be browsed or searched back out over the public website. Only new emails can be added to it. See 'Who we share data with' below for Supabase's role.",
         },
         {
           term: "Applying to join the community",
           description:
-            "This is the most personal thing we collect, so it gets the most detail. The form asks for your first name, your email address, which pathway you're on, what stage you're at, optionally what you're hoping to find, optionally whether you work in the fertility sector, and — in your own words — why you'd like to join. That last answer is the important one: it is what a person actually reads, and it is why the form exists rather than a join button. It is stored in our Supabase database in the EU, it is read by us, and it is not shared with anyone. We ask you to share only what you're comfortable having read, and we delete it on the schedule in 'How long we keep things' below. We never ask for your phone number, your address, your date of birth, or any medical records.",
+            "This is the most personal thing we collect, so it gets the most detail. The form asks for your first name, your email address, which pathway you're on, what stage you're at, optionally what you're hoping to find, optionally whether you work in the fertility sector, and, in your own words, why you'd like to join. That last answer is the important one: it is what a person actually reads, and it is why the form exists rather than a join button. It is stored in our Supabase database in the EU, it is read by us, and it is not shared with anyone. We ask you to share only what you're comfortable having read, and we delete it on the schedule in 'How long we keep things' below. We never ask for your phone number, your address, your date of birth, or any medical records.",
         },
         {
           term: "Your invite, if we approve you",
           description:
-            "Approving an application creates a single-use invite link. We store only a cryptographic hash of it, never the link itself, so nobody — including us, and including anyone who obtained a copy of the database — can work out a working invite from what is stored. The link expires after seven days, works once, and only opens for someone who can also enter the email address it was issued to.",
+            "Approving an application creates a single-use invite link. We store only a cryptographic hash of it, never the link itself, so nobody (including us, and including anyone who obtained a copy of the database) can work out a working invite from what is stored. The link expires after seven days, works once, and only opens for someone who can also enter the email address it was issued to.",
         },
         {
           term: "Location search (optional)",
@@ -197,16 +197,16 @@ const PRIVACY: LegalPage = {
         },
       ],
       postBody: [
-        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, no passwords, and no marketing lists beyond the single waitlist described above. There is no forum, no comment box, and no profile anywhere on this site — the community is a separate private group on WhatsApp, and nothing said in it is ever published here.",
+        "And what we don't do: no cookies or similar tracking technologies, no analytics services, no advertising networks or pixels, no social-media trackers, no fingerprinting, no accounts, no passwords, and no marketing lists beyond the single waitlist described above. There is no forum, no comment box, and no profile anywhere on this site. The community is a separate private group on WhatsApp, and nothing said in it is ever published here.",
       ],
     },
     {
       heading: "Health information gets special treatment",
       body: [
         "Data about your health, fertility, or sex life is \"special category data\" under UK data protection law, which sets a much higher bar for handling it. Almost everywhere on this site, we handle that bar by making sure the data never reaches us at all. There is exactly one exception, and we would rather name it plainly than bury it.",
-        "The clinic matcher necessarily asks health-related questions — that is how it narrows the list of clinics — but the filtering happens on your device, in your browser, and the answers are not sent anywhere. We hold no record that you used the tool, let alone what you answered. The same is true of the cost calculator and every filter in the clinic finder.",
-        "The exception is the community application form. When you write why you'd like to join, you will almost certainly say something about your treatment, and that is special category data that reaches our database and is read by a person. We ask for it because it is the only reliable way to tell a real applicant from a bot or from someone who should not be in a room with vulnerable people. You give it under your explicit consent, freely — nothing else on this site is gated behind it — you can withdraw that consent and have it deleted at any time, and we delete it ourselves once it has served its purpose. It is never used for anything except deciding on your application.",
-        "If we ever build another feature that would require health information to leave your browser — an account that saves your progress, for example — we will ask for your explicit, specific consent before any of it is collected, explain exactly where it goes, and update this policy first. We will never treat your continued use of the site as consent for something like that.",
+        "The clinic matcher necessarily asks health-related questions (that is how it narrows the list of clinics), but the filtering happens on your device, in your browser, and the answers are not sent anywhere. We hold no record that you used the tool, let alone what you answered. The same is true of the cost calculator and every filter in the clinic finder.",
+        "The exception is the community application form. When you write why you'd like to join, you will almost certainly say something about your treatment, and that is special category data that reaches our database and is read by a person. We ask for it because it is the only reliable way to tell a real applicant from a bot or from someone who should not be in a room with vulnerable people. You give it under your explicit consent, freely (nothing else on this site is gated behind it). You can withdraw that consent and have it deleted at any time, and we delete it ourselves once it has served its purpose. It is never used for anything except deciding on your application.",
+        "If we ever build another feature that would require health information to leave your browser (an account that saves your progress, for example), we will ask for your explicit, specific consent before any of it is collected, explain exactly where it goes, and update this policy first. We will never treat your continued use of the site as consent for something like that.",
       ],
     },
     {
@@ -223,12 +223,12 @@ const PRIVACY: LegalPage = {
         {
           term: "Explicit consent (for the community application)",
           description:
-            "Special category data needs more than ordinary consent — it needs explicit consent under Article 9(2)(a). That is why applying is a deliberate act with a tick-box, why nothing else on this site is locked behind it, and why the form tells you before you write that a person will read it. You can withdraw it at any time by emailing us, and we will delete the application; if you are already in the group, withdrawing consent does not remove you from it, and leaving the group is always yours to do without giving a reason.",
+            "Special category data needs more than ordinary consent: it needs explicit consent under Article 9(2)(a). That is why applying is a deliberate act with a tick-box, why nothing else on this site is locked behind it, and why the form tells you before you write that a person will read it. You can withdraw it at any time by emailing us, and we will delete the application; if you are already in the group, withdrawing consent does not remove you from it, and leaving the group is always yours to do without giving a reason.",
         },
         {
           term: "Legitimate interests",
           description:
-            "Replying to emails you send us, and the security and operational logging our hosting provider performs to keep the site available and safe. These uses are minimal, expected, and easy to object to — contact details are below.",
+            "Replying to emails you send us, and the security and operational logging our hosting provider performs to keep the site available and safe. These uses are minimal, expected, and easy to object to. Contact details are below.",
         },
       ],
     },
@@ -236,7 +236,7 @@ const PRIVACY: LegalPage = {
       heading: "How long we keep things",
       body: [
         "We keep email correspondence for as long as it is genuinely needed to deal with your enquiry and for a reasonable period afterwards, then delete it. Waitlist emails are kept until you ask us to remove you. Hosting logs are kept by Vercel on infrastructure timescales (typically days, not months) under their own retention policies.",
-        "Community applications have their own schedule, and it is deliberately short. If we decline an application, the whole record — including everything you wrote — is deleted within 30 days. If you join, the free-text answer and any sector declaration are deleted within 90 days of applying; what remains is your first name, email, pathway and stage, so we know who is in the group. If you leave or are removed, ask us and the record goes entirely. Invite records are kept only while the invite could still be used.",
+        "Community applications have their own schedule, and it is deliberately short. If we decline an application, the whole record, including everything you wrote, is deleted within 30 days. If you join, the free-text answer and any sector declaration are deleted within 90 days of applying; what remains is your first name, email, pathway and stage, so we know who is in the group. If you leave or are removed, ask us and the record goes entirely. Invite records are kept only while the invite could still be used.",
       ],
     },
     {
@@ -245,9 +245,9 @@ const PRIVACY: LegalPage = {
         "We use three service providers, and this list is exhaustive:",
       ],
       bullets: [
-        "Vercel Inc. — hosts and serves the website. Vercel is a US company; where visitor data such as IP addresses is processed outside the UK, that transfer is covered by recognised safeguards including the UK Extension to the EU–US Data Privacy Framework and standard contractual clauses.",
-        "Supabase Inc. — stores waitlist email addresses and community applications in a database hosted in the EU. Supabase is a US company operating EU infrastructure for this data; where any transfer outside the UK/EU occurs, it is covered by standard contractual clauses.",
-        "Ideal Postcodes (Postcodes.io) — a UK service that converts coordinates to postcodes, used only when you choose the location search and grant permission.",
+        "Vercel Inc. hosts and serves the website. Vercel is a US company; where visitor data such as IP addresses is processed outside the UK, that transfer is covered by recognised safeguards including the UK Extension to the EU–US Data Privacy Framework and standard contractual clauses.",
+        "Supabase Inc. stores waitlist email addresses and community applications in a database hosted in the EU. Supabase is a US company operating EU infrastructure for this data; where any transfer outside the UK/EU occurs, it is covered by standard contractual clauses.",
+        "Ideal Postcodes (Postcodes.io): a UK service that converts coordinates to postcodes, used only when you choose the location search and grant permission.",
       ],
       callout:
         "The community group runs on WhatsApp, and WhatsApp is not on that list because we send it nothing. We do not upload your email, your application, or any contact list to Meta. You join with your own WhatsApp account, under your own agreement with Meta, and from that moment Meta handles your data as your provider rather than ours. One consequence is worth stating plainly rather than leaving you to discover it: in a WhatsApp group, other members can see your phone number. We tell every applicant this before they apply and again before they join, because it is the one thing about the group we cannot design away.",
@@ -258,14 +258,14 @@ const PRIVACY: LegalPage = {
     {
       heading: "Requests from police, courts, and other authorities",
       body: [
-        "Reproductive health is an area where people rightly worry about who can demand data. Our first protection is architectural: we hold almost nothing, so there is almost nothing to hand over — no account records, no saved matcher answers, no browsing histories.",
+        "Reproductive health is an area where people rightly worry about who can demand data. Our first protection is architectural: we hold almost nothing, so there is almost nothing to hand over: no account records, no saved matcher answers, no browsing histories.",
         "If we ever receive a request from law enforcement or another authority for personal data, we will disclose only what we are legally compelled to provide under valid UK legal process, we will challenge requests that appear overbroad or improper, and we will tell the person affected unless the law prohibits us from doing so.",
       ],
     },
     {
       heading: "Your rights",
       body: [
-        "You have rights over personal data we hold about you — in practice, that means email correspondence, your waitlist entry if you've joined it, and your community application if you've made one, since those are the only personal data we keep:",
+        "You have rights over personal data we hold about you. In practice, that means email correspondence, your waitlist entry if you've joined it, and your community application if you've made one, since those are the only personal data we keep:",
       ],
       bullets: [
         "Access: ask for a copy of what we hold about you.",
@@ -284,7 +284,7 @@ const PRIVACY: LegalPage = {
       heading: "Visitors outside the UK",
       body: [
         "This site is written for people considering fertility treatment in or from the UK, but anyone may read it. If you visit from the EU or EEA, the rights above apply to you in materially the same form under the EU GDPR.",
-        "If you visit from the United States: we do not sell or share personal information as those terms are defined in state privacy laws such as the California Consumer Privacy Act, and we do not collect \"consumer health data\" as defined in laws such as Washington's My Health My Data Act — health-related answers in our tools never leave your device. Because we set no cookies and run no tracking, there is nothing to opt out of; universal opt-out signals such as Global Privacy Control are honoured by default, since the tracking they exist to switch off is not present.",
+        "If you visit from the United States: we do not sell or share personal information as those terms are defined in state privacy laws such as the California Consumer Privacy Act, and we do not collect \"consumer health data\" as defined in laws such as Washington's My Health My Data Act (health-related answers in our tools never leave your device). Because we set no cookies and run no tracking, there is nothing to opt out of; universal opt-out signals such as Global Privacy Control are honoured by default, since the tracking they exist to switch off is not present.",
       ],
     },
     {
@@ -320,18 +320,18 @@ const TERMS: LegalPage = {
     {
       heading: "Who we are and what this is",
       body: [
-        "CairnFertility (\"we\", \"us\") publishes this website to help people — solo parents by choice, LGBTQ+ families, and couples — understand fertility treatment and compare IVF clinics. It is run by an independent individual in the UK, not a registered company. Contact us at [hello@cairnfertility.com](mailto:hello@cairnfertility.com).",
+        "CairnFertility (\"we\", \"us\") publishes this website to help people (solo parents by choice, LGBTQ+ families, and couples) understand fertility treatment and compare IVF clinics. It is run by an independent individual in the UK, not a registered company. Contact us at [hello@cairnfertility.com](mailto:hello@cairnfertility.com).",
         "By using the site you accept these terms. If you do not accept them, please do not use the site. Nothing in these terms affects rights you have as a consumer that the law does not allow to be limited or excluded.",
       ],
     },
     {
-      heading: "What the service is — and is not",
+      heading: "What the service is, and is not",
       body: [
         "This site is an editorial information and comparison service. It is currently free to use, with no accounts and no purchases. What it is not:",
       ],
       bullets: [
         "It is not medical advice, and we are not a healthcare provider. Our [medical disclaimer](/disclaimer) is part of these terms; please read it.",
-        "It is not a clinic, an agent, or a broker. We have no commercial relationship with the clinics we list, you cannot book treatment through us, and appearing on this site is not an endorsement by us — nor is it an endorsement of us by any clinic or by the HFEA.",
+        "It is not a clinic, an agent, or a broker. We have no commercial relationship with the clinics we list, you cannot book treatment through us, and appearing on this site is not an endorsement by us, nor is it an endorsement of us by any clinic or by the HFEA.",
         "It is not a substitute for a clinic's own current information. Prices, waiting times, eligibility policies, and success rates change; always confirm directly with a clinic before making decisions.",
       ],
     },
@@ -355,10 +355,10 @@ const TERMS: LegalPage = {
       heading: "Using the site acceptably",
       body: ["You agree not to:"],
       bullets: [
-        "use the site unlawfully, or in a way that could harm it or other users — including attempting to breach its security, scrape it at scale, or interfere with its operation;",
-        "reproduce our content commercially without permission (personal, non-commercial use — printing a comparison to discuss with your clinic, for instance — is fine and encouraged);",
+        "use the site unlawfully, or in a way that could harm it or other users, including attempting to breach its security, scrape it at scale, or interfere with its operation;",
+        "reproduce our content commercially without permission (personal, non-commercial use, for instance printing a comparison to discuss with your clinic, is fine and encouraged);",
         "misrepresent this site's content as medical advice, or present it as endorsed by us, a clinic, or a regulator;",
-        "apply to the community under false pretences — for a clinic, a brand, a research study, or a press story — or use it to sell, recruit, or promote anything.",
+        "apply to the community under false pretences (for a clinic, a brand, a research study, or a press story) or use it to sell, recruit, or promote anything.",
       ],
     },
     {
@@ -366,13 +366,13 @@ const TERMS: LegalPage = {
       body: [
         "Our community is a private group on WhatsApp, not part of this website. Applying is free, and approval is at our discretion: we read every application and we decline the ones we are not comfortable with, without being obliged to explain why. That discretion exists to protect the people already in the group and we intend to keep using it.",
         "Membership is conditional on the [group rules](/community/guidelines), which you accept when you apply and again when you redeem your invite. The rule that matters most is that nothing said in the group is repeated outside it. We may remove any member at any time for breaking the rules, and we will do so without notice where somebody's safety or privacy is at stake.",
-        "Once you are in the group, WhatsApp is provided to you by Meta under its own terms, and other members can see your phone number — we say this on the application page, in the rules, and in our [privacy policy](/privacy), because it is the one thing about the group we cannot control. We are not responsible for what individual members say or do, and we are not a moderation service, a support line, or a substitute for professional care. If something in the group worries you, tell an admin.",
+        "Once you are in the group, WhatsApp is provided to you by Meta under its own terms, and other members can see your phone number. We say this on the application page, in the rules, and in our [privacy policy](/privacy), because it is the one thing about the group we cannot control. We are not responsible for what individual members say or do, and we are not a moderation service, a support line, or a substitute for professional care. If something in the group worries you, tell an admin.",
       ],
     },
     {
       heading: "Intellectual property",
       body: [
-        "The content of this site — text, design, graphics, and the way our comparisons are compiled and presented — belongs to CairnFertility or its licensors. Underlying public data, such as HFEA statistics, remains public: our rights are in our expression and compilation, not in facts, which belong to everyone.",
+        "The content of this site (text, design, graphics, and the way our comparisons are compiled and presented) belongs to CairnFertility or its licensors. Underlying public data, such as HFEA statistics, remains public: our rights are in our expression and compilation, not in facts, which belong to everyone.",
       ],
     },
     {
@@ -384,7 +384,7 @@ const TERMS: LegalPage = {
     {
       heading: "Availability and changes",
       body: [
-        "The site is provided \"as available\". We may change, suspend, or withdraw any part of it at any time, and we do not promise it will be uninterrupted or error-free. If we ever introduce paid features or subscriptions, they will come with their own clear terms — including pricing, renewal, cooling-off, and cancellation rights — presented before you pay anything, and cancelling will be as easy as signing up.",
+        "The site is provided \"as available\". We may change, suspend, or withdraw any part of it at any time, and we do not promise it will be uninterrupted or error-free. If we ever introduce paid features or subscriptions, they will come with their own clear terms (including pricing, renewal, cooling-off, and cancellation rights) presented before you pay anything, and cancelling will be as easy as signing up.",
       ],
     },
     {
@@ -398,11 +398,11 @@ const TERMS: LegalPage = {
     {
       heading: "The legal frame",
       body: [
-        "These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction — except that if you live in Scotland, Northern Ireland, or an EU member state, you keep the protection of your local mandatory consumer law and may bring proceedings in your local courts.",
+        "These terms are governed by the law of England and Wales, and the courts of England and Wales have jurisdiction, except that if you live in Scotland, Northern Ireland, or an EU member state, you keep the protection of your local mandatory consumer law and may bring proceedings in your local courts.",
         "If any part of these terms turns out to be unenforceable, the rest continues to apply. If we update these terms, the new version takes effect when posted here, with the date above updated; continuing to use the site after that means you accept the revised terms.",
       ],
       callout:
-        "Questions about these terms — or something here that seems unfair or unclear? Email us. Terms written for a fertility community should be understandable by the people in it.",
+        "Questions about these terms, or something here that seems unfair or unclear? Email us. Terms written for a fertility community should be understandable by the people in it.",
     },
   ],
 };
@@ -415,7 +415,7 @@ const COOKIES: LegalPage = {
   title: "Cookie Policy",
   metaTitle: "Cookie Policy | CairnFertility",
   metaDescription:
-    "CairnFertility sets no cookies of any kind — no analytics, no advertising, no tracking. This policy explains that in full, and what would have to change first.",
+    "CairnFertility sets no cookies of any kind: no analytics, no advertising, no tracking. This policy explains that in full, and what would have to change first.",
   standfirst:
     "This is an unusual cookie policy, because the honest summary is one sentence long: this site sets no cookies at all.",
   effectiveDate: EFFECTIVE_DATE,
@@ -430,7 +430,7 @@ const COOKIES: LegalPage = {
     {
       heading: "What a cookie is, for completeness",
       body: [
-        "A cookie is a small text file a website stores in your browser so it can recognise you between pages or visits. Cookies range from the genuinely necessary (keeping you logged in) to the purely commercial (following you around the internet for advertising). UK law — the Privacy and Electronic Communications Regulations, alongside the UK GDPR — requires your consent before any non-essential cookie is set.",
+        "A cookie is a small text file a website stores in your browser so it can recognise you between pages or visits. Cookies range from the genuinely necessary (keeping you logged in) to the purely commercial (following you around the internet for advertising). UK law (the Privacy and Electronic Communications Regulations, alongside the UK GDPR) requires your consent before any non-essential cookie is set.",
       ],
     },
     {
@@ -456,7 +456,7 @@ const COOKIES: LegalPage = {
     {
       heading: "If this ever changes",
       body: [
-        "If we ever introduce a feature that needs cookies or similar storage — a login session, a saved comparison, or analytics — we will do three things before it ships:",
+        "If we ever introduce a feature that needs cookies or similar storage (a login session, a saved comparison, or analytics), we will do three things before it ships:",
       ],
       bullets: [
         "update this policy with a full table of every cookie: its name, who sets it, what it does, and how long it lasts;",
@@ -464,10 +464,10 @@ const COOKIES: LegalPage = {
         "continue to honour universal opt-out signals such as Global Privacy Control.",
       ],
       postBody: [
-        "You can also control or delete cookies for any site through your browser's settings — see your browser's help pages, or the ICO's guidance at [ico.org.uk](https://ico.org.uk/for-the-public/online/cookies/).",
+        "You can also control or delete cookies for any site through your browser's settings. See your browser's help pages, or the ICO's guidance at [ico.org.uk](https://ico.org.uk/for-the-public/online/cookies/).",
       ],
       callout:
-        "If you ever find a cookie set by this site while this policy still says there are none, please tell us at privacy@cairnfertility.com — that would be a bug in the site or in this policy, and either way we will fix it.",
+        "If you ever find a cookie set by this site while this policy still says there are none, please tell us at privacy@cairnfertility.com. That would be a bug in the site or in this policy, and either way we will fix it.",
     },
   ],
 };
@@ -489,13 +489,13 @@ const DISCLAIMER: LegalPage = {
       heading: "We are not a medical provider",
       body: [
         "CairnFertility is an editorial information and comparison service. We are not a clinic, hospital, or healthcare provider; we are not licensed by the HFEA or any medical regulator; and no doctors review your personal situation through this site. Reading our content, or using our tools, does not create a doctor–patient or any other clinical relationship.",
-        "Everything on this site — guides, comparisons, statistics, stories, and tool results — is general information for educational purposes. It is not medical advice, diagnosis, or treatment, and it is not tailored to your medical circumstances, however specific it may seem.",
+        "Everything on this site (guides, comparisons, statistics, stories, and tool results) is general information for educational purposes. It is not medical advice, diagnosis, or treatment, and it is not tailored to your medical circumstances, however specific it may seem.",
       ],
     },
     {
       heading: "Our tools are filters, not clinical assessments",
       body: [
-        "The clinic matcher and comparison tools take the preferences and facts you enter and use them to sort and filter publicly available information about clinics. That is all they do. They do not assess your fertility, estimate your chances, diagnose any condition, or recommend treatment. They are not a medical device, and their output is a shortlist to discuss with a professional — not a clinical conclusion of any kind.",
+        "The clinic matcher and comparison tools take the preferences and facts you enter and use them to sort and filter publicly available information about clinics. That is all they do. They do not assess your fertility, estimate your chances, diagnose any condition, or recommend treatment. They are not a medical device, and their output is a shortlist to discuss with a professional, not a clinical conclusion of any kind.",
         "Nothing on this site should be used to make decisions about contraception, pregnancy, medication, or treatment without a qualified clinician involved.",
       ],
     },
@@ -514,19 +514,19 @@ const DISCLAIMER: LegalPage = {
     {
       heading: "Stories are illustrative",
       body: [
-        "The personal stories and quotes on this site are illustrative composites, drawn from experiences common in the community, and are not accounts of real, identifiable patients unless expressly stated. They exist to make an unfamiliar journey feel less abstract — never as evidence that any path or clinic will work for you.",
+        "The personal stories and quotes on this site are illustrative composites, drawn from experiences common in the community, and are not accounts of real, identifiable patients unless expressly stated. They exist to make an unfamiliar journey feel less abstract, never as evidence that any path or clinic will work for you.",
       ],
     },
     {
       heading: "No endorsements, in either direction",
       body: [
-        "A clinic appearing on this site is not a recommendation, and we accept no payment for inclusion or placement. Equally, no clinic, regulator, or professional body has endorsed this site. Verify any clinic's current licence and inspection history yourself — for UK clinics, on the HFEA register at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/).",
+        "A clinic appearing on this site is not a recommendation, and we accept no payment for inclusion or placement. Equally, no clinic, regulator, or professional body has endorsed this site. Verify any clinic's current licence and inspection history yourself: for UK clinics, on the HFEA register at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/).",
       ],
     },
     {
       heading: "Where to get real help",
       body: [
-        "Always talk to your GP or a qualified fertility specialist before starting, stopping, or changing any treatment — and about anything on this site you plan to act on.",
+        "Always talk to your GP or a qualified fertility specialist before starting, stopping, or changing any treatment, and about anything on this site you plan to act on.",
       ],
       bullets: [
         "In a medical emergency, call 999 (UK) or your local emergency number now. Do not rely on any website, including this one.",
@@ -561,7 +561,7 @@ const ACCESSIBILITY: LegalPage = {
     {
       heading: "What we have built in so far",
       bullets: [
-        "Semantic HTML structure — proper headings, landmarks, lists, and labels — so screen readers can navigate meaningfully.",
+        "Semantic HTML structure (proper headings, landmarks, lists, and labels) so screen readers can navigate meaningfully.",
         "Reduced-motion support: our animations and decorative movement are disabled automatically when your system's \"reduce motion\" preference is on.",
         "A single, highly legible typeface with fluid sizing, generous line spacing, and text that scales with your browser's zoom and font-size settings.",
         "Colour choices managed through a design system tested for contrast between text and its background.",
@@ -572,7 +572,7 @@ const ACCESSIBILITY: LegalPage = {
     {
       heading: "Known limitations",
       body: [
-        "We are honest about the gaps. This site has not yet had a formal third-party accessibility audit, and some areas may fall short of our target — particularly the more complex interactive tools such as the clinic comparison table and multi-step matcher, where we are still improving screen-reader announcements and focus handling. Some images sourced from photo libraries may have adequate but imperfect alternative text.",
+        "We are honest about the gaps. This site has not yet had a formal third-party accessibility audit, and some areas may fall short of our target, particularly the more complex interactive tools such as the clinic comparison table and multi-step matcher, where we are still improving screen-reader announcements and focus handling. Some images sourced from photo libraries may have adequate but imperfect alternative text.",
         "We are working through these, and an independent audit is planned as the product matures.",
       ],
     },
@@ -610,13 +610,13 @@ const CONTACT: LegalPage = {
     {
       heading: "What we can help with",
       body: [
-        "Three addresses, all reaching the same place. Use whichever fits — nothing gets lost if you pick the wrong one.",
+        "Three addresses, all reaching the same place. Use whichever fits. Nothing gets lost if you pick the wrong one.",
       ],
       definitions: [
         {
           term: "hello@cairnfertility.com",
           description:
-            "General questions about the site, our guides, or how our comparisons are put together. Corrections too — if a price, policy, or success rate we publish looks out of date, we genuinely want to know. Accessibility problems (see our [accessibility statement](/accessibility)) and complaints about anything we have published or done also belong here.",
+            "General questions about the site, our guides, or how our comparisons are put together. Corrections too: if a price, policy, or success rate we publish looks out of date, we genuinely want to know. Accessibility problems (see our [accessibility statement](/accessibility)) and complaints about anything we have published or done also belong here.",
         },
         {
           term: "privacy@cairnfertility.com",
@@ -636,8 +636,8 @@ const CONTACT: LegalPage = {
     {
       heading: "What we cannot help with",
       body: [
-        "Please do not send us medical questions. We are not clinicians, and it would be wrong of us to answer — however simple the question seems. Your GP, your clinic, or NHS 111 are the right doors for anything medical, and in an emergency it is always 999. For emotional support around fertility, Fertility Network UK ([fertilitynetworkuk.org](https://fertilitynetworkuk.org)) is free and understands this world deeply.",
-        "For the same reason, please keep medical details out of emails to us where you can — we don't need them, and the less sensitive information sits in inboxes anywhere, the better.",
+        "Please do not send us medical questions. We are not clinicians, and it would be wrong of us to answer, however simple the question seems. Your GP, your clinic, or NHS 111 are the right doors for anything medical, and in an emergency it is always 999. For emotional support around fertility, Fertility Network UK ([fertilitynetworkuk.org](https://fertilitynetworkuk.org)) is free and understands this world deeply.",
+        "For the same reason, please keep medical details out of emails to us where you can. We don't need them, and the less sensitive information sits in inboxes anywhere, the better.",
       ],
     },
     {

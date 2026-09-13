@@ -201,8 +201,8 @@ export default function FundingPage() {
         </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           It is also worth separating funded treatment from everything else the NHS can do for you.
-          Investigations and diagnosis — blood tests, an AMH level, scans, semen analysis where
-          relevant, and a referral to a specialist — are usually free even in areas that fund no
+          Investigations and diagnosis (blood tests, an AMH level, scans, semen analysis where
+          relevant, and a referral to a specialist) are usually free even in areas that fund no
           treatment at all, and those results shape which private route makes sense. A GP appointment
           is worth making regardless of what you have been told about your chances.
         </p>
@@ -361,7 +361,7 @@ export default function FundingPage() {
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Six questions against the criteria NHS fertility policies have in common. It cannot tell you
-          what your own board has commissioned — nothing on the internet can — but it will tell you
+          what your own board has commissioned (nothing on the internet can), but it will tell you
           which clause to look for first, and what it is likely to cost you to clear it.
         </p>
 
@@ -409,7 +409,7 @@ export default function FundingPage() {
           The same questions, different answers.
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-6" style={{ maxWidth: "62ch" }}>
-          Every route above exists in some form in every private fertility market — it is the
+          Every route above exists in some form in every private fertility market: it is the
           companies and the public entitlements that change. Israel funds unlimited cycles regardless
           of relationship status; France reimburses four; the United States has no national
           entitlement at all and leans on employers instead.
@@ -417,7 +417,7 @@ export default function FundingPage() {
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           Two things travel with you and matter as much as price. Whether a system admits solo
           parents and same-sex couples is a separate question from whether it funds treatment, and
-          donor anonymity differs country by country — which is a decision about your child rather
+          donor anonymity differs country by country, which is a decision about your child rather
           than about your budget.
         </p>
 

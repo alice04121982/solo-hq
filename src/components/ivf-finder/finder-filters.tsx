@@ -243,7 +243,7 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         onChange={(value) =>
           onChange({ ...filters, priceCeiling: value === "any" ? null : Number(value) })
         }
-        note="Compares the cheapest published price for your selected treatments — IUI prices where IUI is selected, all treatments when none are."
+        note="Compares the cheapest published price for your selected treatments: IUI prices where IUI is selected, all treatments when none are."
       />
 
       <SingleSelectDropdown

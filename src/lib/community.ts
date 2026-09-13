@@ -59,7 +59,7 @@ export const PATHWAY_OPTIONS: CommunityOption<CommunityPathway>[] = [
 
 export const STAGE_OPTIONS: CommunityOption<CommunityStage>[] = [
   { value: "deciding", label: "Researching and deciding" },
-  { value: "preparing", label: "Preparing — tests, donor, money" },
+  { value: "preparing", label: "Preparing: tests, donor, money" },
   { value: "in-treatment", label: "In treatment now" },
   { value: "pregnant", label: "Pregnant" },
   { value: "parent", label: "Already a parent" },
@@ -81,7 +81,7 @@ export const INTEREST_VALUES = INTEREST_OPTIONS.map((o) => o.value);
 export const COMMUNITY_FEATURES = [
   {
     title: "Find others at your stage",
-    body: "Deciding, stimming, in the two-week wait, or holding a newborn — talk to people in the same week of the journey, not just the same postcode.",
+    body: "Deciding, stimming, in the two-week wait, or holding a newborn: talk to people in the same week of the journey, not just the same postcode.",
   },
   {
     title: "Hear from people who've been through it",
@@ -102,7 +102,7 @@ export const COMMUNITY_FEATURES = [
 export const JOIN_STEPS = [
   {
     title: "You apply",
-    body: "A short form — who you are, where you are in the journey, and why you want in. The last part matters most: it is what a person reads.",
+    body: "A short form: who you are, where you are in the journey, and why you want in. The last part matters most: it is what a person reads.",
   },
   {
     title: "A person reads it",
@@ -157,7 +157,7 @@ export interface CommunityRule {
 export const COMMUNITY_RULES: CommunityRule[] = [
   {
     title: "What is said here stays here",
-    body: "No screenshots, no forwarding, no quoting members anywhere else — not to a partner, not to a journalist, not on social media. This is the rule that makes every other one worth having, and breaking it is the fastest way out.",
+    body: "No screenshots, no forwarding, no quoting members anywhere else. Not to a partner, not to a journalist, not on social media. This is the rule that makes every other one worth having, and breaking it is the fastest way out.",
   },
   {
     title: "Nobody's numbers are yours to keep",
@@ -165,7 +165,7 @@ export const COMMUNITY_RULES: CommunityRule[] = [
   },
   {
     title: "Share your own story, not someone else's",
-    body: "Your donor, your ex, your clinic staff, your family — they did not join this group. Keep them unidentifiable.",
+    body: "Your donor, your ex, your clinic staff, your family: they did not join this group. Keep them unidentifiable.",
   },
   {
     title: "No medical advice, ever",
@@ -195,7 +195,7 @@ export const COMMUNITY_RULES: CommunityRule[] = [
  * applicant is told before they apply and again before they redeem.
  */
 export const PHONE_NUMBER_NOTICE =
-  "The group runs on a messaging app, which means members can see each other's phone numbers. We cannot change that, and we would rather you knew now than found out later. If that is not a trade you want to make, this is the wrong group — and that is a completely reasonable place to land.";
+  "The group runs on a messaging app, which means members can see each other's phone numbers. We cannot change that, and we would rather you knew now than found out later. If that is not a trade you want to make, this is the wrong group, and that is a completely reasonable place to land.";
 
 /** Grounds for removal, stated up front so removal is never a surprise. */
 export const REMOVAL_GROUNDS = [
