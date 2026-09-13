@@ -12,6 +12,11 @@
  *   npm run community -- remove  <email> ["note"]
  *   npm run community -- purge
  *
+ * `list` runs the retention purge before it prints, and `purge` runs it on
+ * its own. The purge itself lives in the database
+ * (supabase/migrations/0004_community_retention.sql) and runs there every
+ * night under pg_cron; this script only asks for it and prints the counts.
+ *
  * ── Why it is a local script and not an admin page ──
  * An admin page needs authentication, and authentication on a site that
  * otherwise has none is a new attack surface guarding the most sensitive data
@@ -60,9 +65,21 @@ const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://cairnfertili
  *  the site as "seven days" in src/lib/community.ts — change both together. */
 const INVITE_TTL_DAYS = 7;
 
-/** Retention, enforced by `purge`. */
-const DECLINED_RETENTION_DAYS = 30;
-const REASON_RETENTION_DAYS = 90;
+/**
+ * Retention schedule, in days. Repeated here for the messages this script
+ * prints; it is ENFORCED in public.purge_community_data() (migration 0004)
+ * and mirrored for the app in src/lib/retention.ts. This script shares no
+ * module with the app on purpose, so the numbers are typed out again. Change
+ * all three together, and the privacy policy with them.
+ */
+const RETENTION_DAYS = {
+  declined: 30,
+  unreviewed: 90,
+  approvedUnused: 30,
+  joinedFreeText: 90,
+  removedDetails: 30,
+  spentInvite: 30,
+} as const;
 
 if (!SUPABASE_URL || !SERVICE_KEY) {
   console.error(
@@ -113,6 +130,18 @@ interface Application {
   status: string;
   reviewed_at: string | null;
   review_note: string | null;
+  /** Added by migration 0003. Null on rows that predate the consent box. */
+  health_data_consent_at?: string | null;
+}
+
+/** The one row public.purge_community_data() returns. */
+interface PurgeCounts {
+  declined_deleted: number;
+  unreviewed_deleted: number;
+  approved_unused_deleted: number;
+  joined_cleared: number;
+  removed_cleared: number;
+  invites_deleted: number;
 }
 
 const encode = (value: string) => encodeURIComponent(value);
@@ -142,9 +171,14 @@ async function setStatus(id: string, status: string, note?: string) {
 /* ── Commands ──────────────────────────────────────────────────────────── */
 
 async function list(status = "pending") {
+  // Apply the retention schedule before showing anything, so the list never
+  // contains a row the policy says should already be gone (for instance if
+  // the project was paused and the nightly job did not fire).
+  await purge({ quiet: true });
+
   const rows = (await rest(
     `community_applications?status=eq.${encode(status)}&order=created_at.asc` +
-      `&select=email,first_name,pathway,stage,created_at,affiliation`
+      `&select=email,first_name,pathway,stage,created_at,affiliation,health_data_consent_at`
   )) as Application[];
 
   if (!rows.length) {
@@ -153,7 +187,11 @@ async function list(status = "pending") {
   }
   console.log(`${rows.length} ${status} application(s):\n`);
   for (const row of rows) {
-    const flag = row.affiliation ? "  ⚑ declared sector connection" : "";
+    const flags = [
+      row.affiliation ? "⚑ declared sector connection" : "",
+      row.health_data_consent_at ? "" : "legacy: no recorded consent",
+    ].filter(Boolean);
+    const flag = flags.length ? `  ${flags.join("; ")}` : "";
     console.log(
       `  ${row.created_at.slice(0, 10)}  ${row.first_name.padEnd(14)} ` +
         `${row.email.padEnd(32)} ${row.pathway} / ${row.stage}${flag}`
@@ -220,13 +258,33 @@ async function approve(email: string) {
 `);
 }
 
+/**
+ * The decline email, ready to paste. The wording is contract C5 in the Phase
+ * 3 plan and is repeated in docs/community-runbook.md; change both together.
+ * It mentions "within 30 days" because that is RETENTION_DAYS.declined.
+ */
+function declineEmail(firstName: string): string {
+  return (
+    `Hello ${firstName}. Thank you for applying to the CairnFertility community. ` +
+    `We are not able to offer you a place at the moment. Your application will be ` +
+    `deleted within 30 days. If you have questions, reply to this email.`
+  );
+}
+
 async function decline(email: string, note?: string) {
   const app = await findByEmail(email);
   await setStatus(app.id, "declined", note);
-  console.log(
-    `Declined ${app.email}. Their application is deleted automatically after ` +
-      `${DECLINED_RETENTION_DAYS} days (npm run community -- purge).`
-  );
+  console.log(`
+  Declined ${app.email}. Everything they wrote is deleted automatically
+  ${RETENTION_DAYS.declined} days from now by the nightly purge.
+
+  Now tell them. Send this to ${app.email}, from hello@cairnfertility.com,
+  and nothing more; do not include the note above.
+
+    Subject: Your CairnFertility community application
+
+    ${declineEmail(app.first_name)}
+`);
 }
 
 async function remove(email: string, note?: string) {
@@ -247,46 +305,60 @@ async function remove(email: string, note?: string) {
   }
   admin controls now, and rotate the group's join link afterwards if the
   removal was for sharing it.
+
+  Everything except their email and status is cleared ${RETENTION_DAYS.removedDetails} days from
+  now by the nightly purge. The email stays so the address cannot re-apply.
 `);
 }
 
 /**
- * Retention. The application text is collected to answer one question — is
- * this a real person we can let in — and is deleted once it has answered it.
+ * Retention. Asks the database to apply the schedule the privacy policy
+ * states (public.purge_community_data, migration 0004) and prints what it
+ * did. The same function runs every night under pg_cron, so running this by
+ * hand is never required; it is here for "I want it gone now" and for the
+ * days after a paused project is resumed.
+ *
+ * Nothing is computed client-side: the periods live in the database function
+ * so the nightly job and this command can never disagree.
  */
-async function purge() {
-  const declinedCutoff = new Date(
-    Date.now() - DECLINED_RETENTION_DAYS * 86_400_000
-  ).toISOString();
-  const reasonCutoff = new Date(Date.now() - REASON_RETENTION_DAYS * 86_400_000).toISOString();
-
-  const declined = (await rest(
-    `community_applications?status=in.(declined)&reviewed_at=lt.${declinedCutoff}` +
-      `&select=id`
-  )) as { id: string }[];
-  for (const row of declined) {
-    await rest(`community_applications?id=eq.${row.id}`, {
-      method: "DELETE",
-      prefer: "return=minimal",
-    });
+async function purge(options: { quiet?: boolean } = {}): Promise<PurgeCounts> {
+  const rows = (await rest("rpc/purge_community_data", {
+    method: "POST",
+    body: "{}",
+  })) as PurgeCounts[];
+  const counts = rows[0];
+  if (!counts) {
+    throw new Error("purge_community_data returned no row. Has migration 0004 been applied?");
   }
 
-  const stale = (await rest(
-    `community_applications?status=in.(joined,removed)&created_at=lt.${reasonCutoff}` +
-      `&reason=not.is.null&select=id`
-  )) as { id: string }[];
-  for (const row of stale) {
-    await rest(`community_applications?id=eq.${row.id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ reason: null, affiliation: null }),
-      prefer: "return=minimal",
-    });
+  const total =
+    counts.declined_deleted +
+    counts.unreviewed_deleted +
+    counts.approved_unused_deleted +
+    counts.joined_cleared +
+    counts.removed_cleared +
+    counts.invites_deleted;
+
+  if (options.quiet) {
+    if (total > 0) {
+      console.log(`Retention purge applied first: ${total} change(s). Run purge to see them.\n`);
+    }
+    return counts;
   }
 
-  console.log(
-    `Purged ${declined.length} declined application(s) and cleared the free text ` +
-      `on ${stale.length} settled one(s).`
-  );
+  console.log(`
+  Retention purge applied.
+
+    Declined, deleted (${RETENTION_DAYS.declined} days after the decision)        ${counts.declined_deleted}
+    Never reviewed, deleted (${RETENTION_DAYS.unreviewed} days after applying)        ${counts.unreviewed_deleted}
+    Approved, invite unused, deleted (${RETENTION_DAYS.approvedUnused} days after)   ${counts.approved_unused_deleted}
+    Joined, free text cleared (${RETENTION_DAYS.joinedFreeText} days after applying)  ${counts.joined_cleared}
+    Removed, details cleared (${RETENTION_DAYS.removedDetails} days after removal)    ${counts.removed_cleared}
+    Invites deleted (${RETENTION_DAYS.spentInvite} days after spent or expired)      ${counts.invites_deleted}
+
+  The same purge runs in the database every night at 03:15 UTC.
+`);
+  return counts;
 }
 
 /* ── Dispatch ──────────────────────────────────────────────────────────── */
@@ -294,12 +366,12 @@ async function purge() {
 const [command, ...args] = process.argv.slice(2);
 
 const USAGE = `
-  npm run community -- list [status]        applications awaiting review (default: pending)
+  npm run community -- list [status]        applications awaiting review (default: pending); runs the purge first
   npm run community -- show    <email>      read one application in full
   npm run community -- approve <email>      mint a single-use invite and print it
-  npm run community -- decline <email> [note]
+  npm run community -- decline <email> [note]   mark declined and print the email to send
   npm run community -- remove  <email> [note]   revoke invites and mark removed
-  npm run community -- purge                apply the retention policy
+  npm run community -- purge                apply the retention schedule now (it also runs nightly)
 `;
 
 /**

@@ -3,18 +3,22 @@
 import { useState } from "react";
 import { Check, Copy, Mail } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
-import { LEGAL_CONTACT_EMAIL } from "@/lib/legal";
+import { CONTACT_EMAILS } from "@/lib/legal";
 
 /**
  * The share-your-story form.
  *
- * Deliberately not wired to a server: the site has no API routes and the
- * privacy policy promises that nothing leaves the browser except email the
- * reader sends themselves (see src/lib/legal.ts). So this form is a drafting
- * tool — it assembles a message locally and hands it to the reader's own
- * email app, or their clipboard. If a submission backend is ever added, the
- * privacy policy must change in the same pull request.
+ * Deliberately not wired to a server: the privacy policy promises that
+ * nothing typed here leaves the browser except email the reader sends
+ * themselves (see src/lib/legal.ts). So this form is a drafting tool: it
+ * assembles a message locally and hands it to the reader's own email app, or
+ * their clipboard. If a submission backend is ever added, the privacy policy
+ * must change in the same pull request.
+ *
+ * Stories go to the stories@ address, the same one the contact page names.
  */
+
+const STORIES_EMAIL = CONTACT_EMAILS.stories;
 
 const STAGES = [
   "Thinking about starting",
@@ -69,7 +73,7 @@ export function ShareStoryForm() {
     "I understand you'll reply before anything is published, and that nothing goes live until I've confirmed the final version by email.",
   ].join("\n");
 
-  const mailtoHref = `mailto:${LEGAL_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoHref = `mailto:${STORIES_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   const handleCopy = async () => {
     if (!ready) {
@@ -78,12 +82,12 @@ export function ShareStoryForm() {
     }
     try {
       await navigator.clipboard.writeText(
-        `To: ${LEGAL_CONTACT_EMAIL}\nSubject: ${subject}\n\n${body}`,
+        `To: ${STORIES_EMAIL}\nSubject: ${subject}\n\n${body}`,
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Clipboard unavailable — the mailto button still works.
+      // Clipboard unavailable; the mailto button still works.
     }
   };
 
@@ -288,7 +292,7 @@ export function ShareStoryForm() {
         This form works entirely in your browser: nothing you type here is sent
         to us, or anywhere else, until you send the email yourself from your
         own email app. If your email app cuts the message short, use
-        &ldquo;copy&rdquo; and paste it into a new email to {LEGAL_CONTACT_EMAIL}.
+        &ldquo;copy&rdquo; and paste it into a new email to {STORIES_EMAIL}.
       </p>
     </form>
   );

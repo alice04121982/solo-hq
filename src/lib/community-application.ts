@@ -6,13 +6,15 @@ import type { CommunityInterest, CommunityPathway, CommunityStage } from "./comm
 /**
  * Client-side state for the community application journey.
  *
- * What gets remembered on the device is deliberately thin: a first name and
- * the date. Not the email, not the pathway, not the stage, and above all not
- * the "why do you want to join" answer — that is somebody's fertility
- * treatment written in their own words, and browsers are shared. A partner, a
- * flatmate, or a family member opening this page should learn nothing beyond
- * "someone applied", and a returning applicant still gets a page that knows
- * them rather than an empty form asking again.
+ * What gets remembered on the device is a marker and nothing else: the date
+ * the application was sent and the date the marker expires. Not the name, not
+ * the email, not the pathway or stage, and not the "why do you want to join"
+ * answer. Browsers are shared: a partner, a flatmate or a family member opening
+ * this page should learn nothing beyond "an application was sent from this
+ * browser". The marker is what lets a returning applicant see that their
+ * application was received instead of an empty form, and it is described in
+ * the cookie policy under its key name, so the key and the shape here must
+ * match that description.
  */
 
 export interface ApplicationInput {
@@ -25,28 +27,60 @@ export interface ApplicationInput {
   affiliation: string;
   agreedToRules: boolean;
   /**
+   * Explicit consent to store the health-related content of the application
+   * (the free-text answer, pathway and stage). Separate from the rules
+   * checkbox; the server rejects the application unless it is exactly `true`.
+   */
+  healthDataConsent: boolean;
+  /**
    * Honeypot. Always empty when a person fills the form in; the server treats
    * a non-empty value as a bot and quietly discards the submission.
    */
   website?: string;
 }
 
-/** The only part that survives the submit. */
+/**
+ * The only part that survives the submit. Both values are ISO 8601 strings.
+ * `expiresAt` is `submittedAt` plus REMEMBER_DAYS; after that the marker is
+ * treated as absent and removed.
+ */
 export interface RememberedApplication {
-  firstName: string;
   submittedAt: string;
+  expiresAt: string;
 }
 
 const STORAGE_KEY = "cairn-community-application";
+const REMEMBER_DAYS = 30;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
+ * Accepts only the current shape, unexpired. Anything else is treated as
+ * absent: an expired marker, a value that fails to parse, or a legacy value
+ * from before September 2026, which held the applicant's first name and no
+ * expiry. Returning null for a legacy value makes the store remove it.
+ */
+function readRemembered(raw: unknown): RememberedApplication | null {
+  if (typeof raw !== "object" || raw === null) return null;
+  const value = raw as Record<string, unknown>;
+  if ("firstName" in value) return null;
+  const { submittedAt, expiresAt } = value;
+  if (typeof submittedAt !== "string" || typeof expiresAt !== "string") return null;
+  const expires = Date.parse(expiresAt);
+  if (Number.isNaN(expires) || expires <= Date.now()) return null;
+  return { submittedAt, expiresAt };
+}
 
 /**
  * A localStorage-backed store shaped for `useSyncExternalStore`: the parsed
  * value is cached so `getSnapshot` returns a stable reference, and every write
  * notifies subscribers. localStorage itself can throw (private mode, storage
- * full) — treated as "nothing remembered" on read and as a lost-but-harmless
- * persist on write, so the journey never breaks.
+ * full), which is treated as "nothing remembered" on read and as a
+ * lost-but-harmless persist on write, so the journey never breaks.
+ *
+ * `read` validates whatever is found under the key. If it returns null for a
+ * value that was present, the stored value is removed rather than left behind.
  */
-function createStore<T>(key: string) {
+function createStore<T>(key: string, read: (raw: unknown) => T | null) {
   let cache: T | null = null;
   let loaded = false;
   const listeners = new Set<() => void>();
@@ -61,14 +95,17 @@ function createStore<T>(key: string) {
         loaded = true;
         try {
           const raw = window.localStorage.getItem(key);
-          cache = raw ? (JSON.parse(raw) as T) : null;
+          cache = raw ? read(JSON.parse(raw)) : null;
+          if (raw && cache === null) {
+            window.localStorage.removeItem(key);
+          }
         } catch {
           cache = null;
         }
       }
       return cache;
     },
-    /** The server never has an application — the page renders the empty form. */
+    /** The server never has an application: the page renders the empty form. */
     getServerSnapshot(): T | null {
       return null;
     },
@@ -90,7 +127,7 @@ function createStore<T>(key: string) {
   };
 }
 
-const store = createStore<RememberedApplication>(STORAGE_KEY);
+const store = createStore<RememberedApplication>(STORAGE_KEY, readRemembered);
 
 export function useRememberedApplication(): RememberedApplication | null {
   return useSyncExternalStore(
@@ -101,7 +138,8 @@ export function useRememberedApplication(): RememberedApplication | null {
 }
 
 /**
- * Sends the application, then remembers only that it happened.
+ * Sends the application, then remembers only that it happened and for how
+ * long to remember it.
  *
  * @throws Error with a user-facing message when the API rejects the
  *   application or the network fails; nothing is remembered in that case.
@@ -124,9 +162,10 @@ export async function submitApplication(input: ApplicationInput): Promise<void> 
   if (!res.ok) {
     throw new Error(data.error ?? "Something went wrong. Please try again.");
   }
+  const submitted = new Date();
   store.set({
-    firstName: input.firstName,
-    submittedAt: new Date().toISOString(),
+    submittedAt: submitted.toISOString(),
+    expiresAt: new Date(submitted.getTime() + REMEMBER_DAYS * DAY_MS).toISOString(),
   });
 }
 
