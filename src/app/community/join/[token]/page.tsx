@@ -188,8 +188,8 @@ export default async function CommunityJoinPage({ params }: PageProps) {
             </Link>
 
             <div
-              className="mt-10 rounded-2xl border p-5"
-              style={{ borderColor: "var(--card-border)", background: "var(--card-bg)" }}
+              className="mt-10 rounded-2xl p-5"
+              style={{ background: "var(--cream)" }}
             >
               <p className="text-sm font-sans text-foreground leading-relaxed">
                 {PHONE_NUMBER_NOTICE}
