@@ -33,14 +33,29 @@ import type { Region } from "@/types/clinic";
  *   one of the entry's sources and says who reported it. Sentences that only
  *   state our own position ("We do not list...") are the exception.
  *
- * Wording checked against sources on 2026-09-13. The BBC article of 18 August
- * 2026 was read via syndicated copies credited to BBC News (Yahoo News and
- * Capital FM Kenya); the 31 March 2026 BBC report was read via AOL News. The
- * wording about named clinics needs a media solicitor's review before merge.
+ * Wording, 13 September 2026: until a media solicitor has reviewed the
+ * entries, the site publishes a NEUTRAL version. The finder says that clinics
+ * in northern Cyprus named in BBC News reporting are not listed while the
+ * territory's investigation is open, and links to that reporting. It does not
+ * repeat any allegation against a named clinic, and `name` is no longer
+ * rendered anywhere (it is kept so the exclusion still matches the database).
+ * The fuller, attributed wording that was checked against syndicated copies of
+ * the BBC articles on 13 September 2026 is in the git history of this file
+ * (commit "Copy review phase 2") and can be restored once reviewed.
  */
 
+/** The one reason shown for every exclusion while the neutral wording is in force. */
+const NEUTRAL_REASON =
+  "BBC News reported in 2026 that the northern Cyprus Ministry of Health had opened an " +
+  "investigation into the use of donor sperm and eggs at IVF clinics there. We do not list " +
+  "clinics named in that reporting while the investigation is open. This is a holding " +
+  "position, not a finding of our own, and it is reviewed on the date held with the entry.";
+
 export interface ClinicExclusion {
-  /** The clinic's primary trading name, for display. */
+  /**
+   * The clinic's primary trading name. Used for matching and for the audit
+   * trail in this file; NOT rendered while the neutral wording is in force.
+   */
   name: string;
   /**
    * Every name the clinic is known by, including `name`. A database entry is
@@ -78,16 +93,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     countries: ["cyprus"],
     country: "Northern Cyprus",
     region: "Europe",
-    reason:
-      "BBC News reported on 18 August 2026 that at least 30 children, most of them British, " +
-      "are feared to have been conceived at clinics in northern Cyprus using sperm or egg " +
-      "donors other than the ones their parents chose, and that half of the 30 were born from " +
-      "procedures at Dogus IVF Centre. The BBC reported that the territory's Ministry of " +
-      "Health said it had launched an official investigation. The BBC also reported that the " +
-      "sperm bank Cryos International says it has \"no record of ever delivering sperm to the " +
-      "Dogus clinic\" and that it had blacklisted the clinic in 2016. In its earlier report of " +
-      "31 March 2026, the BBC said the Dogus clinic had not responded to its request for " +
-      "comment. We do not list the clinic while that investigation is open.",
+    reason: NEUTRAL_REASON,
     sources: [
       {
         label:
@@ -117,17 +123,7 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     countries: ["cyprus"],
     country: "Northern Cyprus",
     region: "Europe",
-    reason:
-      "Named in the same BBC News reporting. On 31 March 2026 the BBC reported that two " +
-      "families treated at Miracle IVF felt they had been misled about their egg donors. On " +
-      "18 August 2026 the BBC reported that the sperm bank Cryos International had suspended " +
-      "working with Miracle IVF until the northern Cyprus government investigation has " +
-      "concluded. We do not list the clinic while that investigation is open.",
-    response:
-      "The BBC reported that the clinic's doctor insists it has always complied with the law " +
-      "and says that patients sign consent forms which explain how donors are chosen. The BBC " +
-      "also reported that she says she has been cleared of breaching any laws, and that the " +
-      "BBC had been unable to confirm this with the territory's Ministry of Health.",
+    reason: NEUTRAL_REASON,
     sources: [
       {
         label:
