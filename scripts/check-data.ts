@@ -1,13 +1,13 @@
 /**
  * Treatment-data integrity and freshness check.
  *
- * Run with `npm run check:data` (Node 22.6+ — executes TypeScript directly
+ * Run with `npm run check:data` (Node 22.6+, executes TypeScript directly
  * via type stripping). Exits non-zero when the data breaks an invariant or
  * has gone stale, so CI can alert before wrong figures reach users.
  *
  * What "stale" means here: DATA_PROVENANCE.pricesVerifiedOn is older than
  * STALE_DAYS. Re-verifying (the treatment-data-check skill walks through it)
- * and bumping that date is the fix — never bump the date without actually
+ * and bumping that date is the fix, never bump the date without actually
  * re-checking the figures.
  *
  * Also enforces the clinic exclusion policy (src/lib/clinic-exclusions.ts),
@@ -17,8 +17,10 @@
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
-import { CLINIC_RECORDS, CLINICS, DATA_PROVENANCE } from "../src/lib/clinics.ts";
+import { CLINIC_RECORDS, CLINICS, DATA_PROVENANCE, NO_RESULTS_PAGE_LABEL } from "../src/lib/clinics.ts";
+import { HFEA_BANDS } from "../src/types/clinic.ts";
 import { CLINIC_EXCLUSIONS, exclusionFor } from "../src/lib/clinic-exclusions.ts";
+import { eligibilityFor } from "../src/lib/country-eligibility.ts";
 import { GUIDES } from "../src/lib/guides.ts";
 import { FAMILY_TYPES } from "../src/lib/family-types.ts";
 import { ALL_STORIES, FEATURED_STORIES } from "../src/lib/stories.ts";
@@ -53,7 +55,7 @@ function checkFreshness(label: string, isoDate: string, fixHint: string) {
 checkFreshness(
   "DATA_PROVENANCE.pricesVerifiedOn",
   DATA_PROVENANCE.pricesVerifiedOn,
-  "Re-verify prices against each clinic's published price list and the HFEA/NHS benchmarks " +
+  "Re-verify prices against each clinic's published price list and the HFEA cost guidance " +
     "(see the treatment-data-check skill), then update pricesVerifiedOn."
 );
 checkFreshness(
@@ -66,6 +68,23 @@ checkFreshness(
 // ── Per-clinic invariants ──
 const slugs = new Set<string>();
 const currentYear = new Date().getUTCFullYear();
+const LICENCE_WARNING_DAYS = 30;
+
+/** Parses an ISO date, recording an error under `label` when it is missing or malformed. */
+function isoDate(id: string, label: string, value: string | undefined, required: boolean): Date | undefined {
+  if (value == null) {
+    if (required) errors.push(`${id}: ${label} is required.`);
+    return undefined;
+  }
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) {
+    errors.push(`${id}: ${label} is not a valid ISO date: "${value}".`);
+    return undefined;
+  }
+  return date;
+}
+
+let earliestCheckedOn: string | undefined;
 
 for (const c of CLINICS) {
   const id = c.slug || c.name || "<unnamed clinic>";
@@ -73,19 +92,101 @@ for (const c of CLINICS) {
   slugs.add(c.slug);
 
   if (!c.name || !c.city || !c.country) errors.push(`${id}: missing name, city or country.`);
+  if (c.country && !eligibilityFor(c.country)) {
+    errors.push(`${id}: no entry for "${c.country}" in src/lib/country-eligibility.ts; the matcher and finder cannot say who its law allows clinics to treat.`);
+  }
 
+  // Every clinic carries the date its price, address and treatments were
+  // last read. The file-level pricesVerifiedOn may not be later than the
+  // earliest of them: it is a promise about the whole file.
+  const checked = isoDate(id, "checkedOn", c.checkedOn, true);
+  if (checked && checked.getTime() > Date.now() + 86_400_000)
+    errors.push(`${id}: checkedOn (${c.checkedOn}) is in the future.`);
+  if (c.checkedOn && (earliestCheckedOn == null || c.checkedOn < earliestCheckedOn))
+    earliestCheckedOn = c.checkedOn;
+
+  const report = c.successRates;
   if (c.country === "United Kingdom") {
     if (!c.hfeaLicensed) errors.push(`${id}: UK clinic must be HFEA licensed.`);
     if (!c.hfeaNumber) errors.push(`${id}: UK clinic must carry its HFEA centre number.`);
-    if (c.successRates.verification !== "hfea")
+    if (report.verification !== "hfea")
       errors.push(`${id}: UK success rates must carry verification "hfea" and cite the register.`);
-  } else if (c.successRates.verification !== "clinic") {
-    errors.push(`${id}: overseas success rates must carry verification "clinic" (self-reported).`);
+    if (report.denominator !== "per embryo transferred")
+      errors.push(`${id}: HFEA figures are births per embryo transferred; the denominator says "${report.denominator}".`);
+    if (!/\/choose-a-clinic\/clinic-search\/results\/\d+\/?$/.test(report.sourceUrl))
+      errors.push(`${id}: UK sourceUrl must be the clinic's own Choose a Clinic results page.`);
+    // The register publishes three bands; nothing else is entered for UK
+    // clinics, so a six-bracket figure can never be passed off as HFEA data.
+    if (Object.keys(report.byBracket).length > 0)
+      errors.push(`${id}: UK reports must not carry byBracket figures; the register publishes HFEA bands only.`);
+    if (!report.byHfeaBand) {
+      errors.push(`${id}: UK report needs byHfeaBand copied from the register (empty object if the page shows nothing).`);
+    } else {
+      for (const band of HFEA_BANDS) {
+        const fig = report.byHfeaBand[band.value];
+        if (!fig) {
+          warnings.push(`${id}: no HFEA figure for "${band.label}"; it renders as "Not published".`);
+          continue;
+        }
+        if (fig.rate < 0 || fig.rate > 80 || fig.nationalAverage < 0 || fig.nationalAverage > 80)
+          errors.push(`${id}: ${band.value} rate ${fig.rate}% or national average ${fig.nationalAverage}% is outside the plausible range.`);
+        if (fig.range.low > fig.rate || fig.range.high < fig.rate)
+          errors.push(`${id}: ${band.value} rate ${fig.rate}% sits outside its own range ${fig.range.low}–${fig.range.high}%.`);
+        if (fig.count <= 0) errors.push(`${id}: ${band.value} count must be positive.`);
+      }
+      if (report.vsNationalAverage == null)
+        errors.push(`${id}: UK report needs the all-ages vsNationalAverage verdict.`);
+    }
+    isoDate(id, "successRates.checkedOn", report.checkedOn, true);
+
+    // Licences are routinely renewed, so an approaching expiry is a prompt to
+    // re-read the register page, not a defect. Past expiry fails the build
+    // until someone has looked.
+    const expiry = isoDate(id, "licenceExpiry", c.licenceExpiry, true);
+    if (expiry) {
+      const daysLeft = Math.floor((expiry.getTime() - Date.now()) / 86_400_000);
+      if (daysLeft < 0)
+        errors.push(`${id}: HFEA licence expiry ${c.licenceExpiry} has passed. Re-read the register page and update licenceExpiry.`);
+      else if (daysLeft <= LICENCE_WARNING_DAYS)
+        warnings.push(`${id}: HFEA licence expires in ${daysLeft} day(s) (${c.licenceExpiry}). Re-check the register page soon.`);
+    }
+  } else {
+    if (report.verification !== "clinic")
+      errors.push(`${id}: overseas success rates must carry verification "clinic".`);
+    if (report.byHfeaBand)
+      errors.push(`${id}: only UK clinics carry byHfeaBand.`);
+    const hasFigures = Object.keys(report.byBracket).length > 0 || (report.publishedBands?.length ?? 0) > 0;
+    if (hasFigures && report.sourceLabel === NO_RESULTS_PAGE_LABEL)
+      errors.push(`${id}: carries figures but says no results page was found.`);
+    if (hasFigures && report.sourceUrl.replace(/\/$/, "") === (c.website ?? "").replace(/\/$/, ""))
+      errors.push(`${id}: rate figures must link the results page they were read from, not the homepage.`);
+    for (const band of report.publishedBands ?? []) {
+      if (band.rate < 0 || band.rate > 80)
+        errors.push(`${id}: published band "${band.label}" rate ${band.rate}% is outside the plausible range.`);
+    }
+    if (c.pricePerCycleGbp != null && c.localPrice == null)
+      warnings.push(`${id}: overseas price has no localPrice; record the clinic's own currency figure.`);
+    if (c.pricePerCycleGbp != null && !c.priceListUrl)
+      errors.push(`${id}: a published price needs the priceListUrl it was read from.`);
+  }
+
+  // Donor labels are legal claims; each carries the date the law was checked.
+  if (c.donorAnonymity != null) isoDate(id, "donorLawCheckedOn", c.donorLawCheckedOn, true);
+  const offersDonor = c.treatments.some((t) => t === "Donor eggs" || t === "Donor sperm" || t === "Double donor");
+  if (offersDonor && c.donorAnonymity == null && !c.donorAnonymityNote)
+    errors.push(`${id}: offers donor treatment but has neither donorAnonymity nor a donorAnonymityNote.`);
+
+  if (c.publishedAllInEstimateGbp) {
+    const e = c.publishedAllInEstimateGbp;
+    if (e.low > e.high) errors.push(`${id}: publishedAllInEstimateGbp low is above high.`);
+    if (c.pricePerCycleGbp != null && e.low < c.pricePerCycleGbp)
+      errors.push(`${id}: the clinic's typical total (£${e.low}) is below its headline price (£${c.pricePerCycleGbp}).`);
+    if (!e.sourceUrl.startsWith("https://")) errors.push(`${id}: publishedAllInEstimateGbp.sourceUrl is not an https link.`);
   }
 
   const offersIui = c.treatments.includes("IUI");
   if (offersIui && c.iuiPricePerCycleGbp == null)
-    errors.push(`${id}: offers IUI but has no iuiPricePerCycleGbp — the budget filter cannot price it.`);
+    errors.push(`${id}: offers IUI but has no iuiPricePerCycleGbp, the budget filter cannot price it.`);
   if (!offersIui && c.iuiPricePerCycleGbp != null)
     errors.push(`${id}: has an IUI price but IUI is not in treatments.`);
 
@@ -116,6 +217,50 @@ for (const c of CLINICS) {
 }
 
 if (CLINICS.length === 0) errors.push("Clinic database is empty.");
+if (earliestCheckedOn && DATA_PROVENANCE.pricesVerifiedOn > earliestCheckedOn)
+  errors.push(
+    `DATA_PROVENANCE.pricesVerifiedOn (${DATA_PROVENANCE.pricesVerifiedOn}) is later than the earliest ` +
+      `per-clinic checkedOn (${earliestCheckedOn}). Set it to the earliest date, not today.`
+  );
+
+// ── Guide sources and freshness ──
+//
+// Every guide carries the sources it rests on and the date it was last read
+// against them. The date is stored in its display form ("13 September 2026")
+// so the page can print it as written; it is parsed here rather than kept
+// twice.
+const MONTHS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december",
+];
+
+/** "13 September 2026" -> "2026-09-13", or undefined when it does not parse. */
+function displayDateToIso(display: string): string | undefined {
+  const m = /^(\d{1,2}) ([A-Za-z]+) (\d{4})$/.exec(display.trim());
+  if (!m) return undefined;
+  const month = MONTHS.indexOf(m[2].toLowerCase());
+  if (month < 0) return undefined;
+  return `${m[3]}-${String(month + 1).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
+}
+
+for (const g of GUIDES) {
+  const id = `guides.ts (${g.slug})`;
+  if (!g.sources || g.sources.length === 0) errors.push(`${id}: needs at least one source.`);
+  for (const s of g.sources ?? []) {
+    if (!s.label || !s.href) errors.push(`${id}: a source is missing its label or href.`);
+    if (!/^https:\/\//.test(s.href)) errors.push(`${id}: source "${s.label}" is not an https link.`);
+  }
+  const iso = displayDateToIso(g.lastReviewed ?? "");
+  if (!iso) {
+    errors.push(`${id}: lastReviewed "${g.lastReviewed}" is not in the form "13 September 2026".`);
+    continue;
+  }
+  checkFreshness(
+    `${id} lastReviewed`,
+    iso,
+    "Re-open every source listed on the guide, correct anything that has changed, then update lastReviewed."
+  );
+}
 
 // ── Cross-file references ──
 // The dynamic routes resolve slugs against these files; a dangling reference
@@ -141,9 +286,9 @@ for (const f of FAMILY_TYPES) {
 
 // ── Travel estimates ──
 //
-// The true-cost figures across the finder, wizard and calculator depend on
-// every overseas clinic city having a travel entry: a missing entry silently
-// reverts that clinic to headline-price-only comparison.
+// The travel estimates shown beside overseas headline prices depend on every
+// overseas clinic city having a travel entry: a missing entry silently drops
+// the estimate for that clinic.
 const travelCities = new Set(DESTINATIONS.map((d) => d.city));
 const overseasCities = new Set(
   CLINICS.filter((c) => c.region !== "UK").map((c) => c.city)
@@ -151,8 +296,8 @@ const overseasCities = new Set(
 for (const city of overseasCities) {
   if (!travelCities.has(city))
     errors.push(
-      `Overseas clinic city "${city}" has no travel entry in src/lib/travel.ts — ` +
-        `its true cost falls back to the headline price.`
+      `Overseas clinic city "${city}" has no travel entry in src/lib/travel.ts; ` +
+        `no travel estimate can be shown beside its headline price.`
     );
 }
 for (const d of DESTINATIONS) {
@@ -180,7 +325,7 @@ for (const c of CLINIC_RECORDS) {
   if (excluded)
     errors.push(
       `${c.slug || c.name}: matches the exclusion for "${excluded.name}" in ` +
-        `src/lib/clinic-exclusions.ts — remove the clinic from src/lib/clinics.ts, or ` +
+        `src/lib/clinic-exclusions.ts, remove the clinic from src/lib/clinics.ts, or ` +
         `retire the exclusion there if the reason no longer holds.`
     );
 }
@@ -190,7 +335,7 @@ for (const x of CLINIC_EXCLUSIONS) {
   if (x.names.length === 0 || x.countries.length === 0)
     errors.push(`${id}: an exclusion needs at least one name and one country to match on.`);
   if (!x.names.some((n) => n.toLowerCase().includes(x.name.split(" ")[0].toLowerCase())))
-    warnings.push(`${id}: none of its match names look like its display name — check for a typo.`);
+    warnings.push(`${id}: none of its match names look like its display name, check for a typo.`);
   if (x.reason.length < 80)
     errors.push(`${id}: the reason is too short to be a record of anything. Say what was reported and by whom.`);
   if (x.sources.length === 0)
@@ -209,7 +354,7 @@ for (const x of CLINIC_EXCLUSIONS) {
   const review = new Date(`${x.reviewOn}T00:00:00Z`);
   if (Number.isNaN(review.getTime())) errors.push(`${id}: reviewOn is not a valid ISO date.`);
   else if (review.getTime() < Date.now())
-    warnings.push(`${id}: passed its review date (${x.reviewOn}) — re-check it against its sources.`);
+    warnings.push(`${id}: passed its review date (${x.reviewOn}), re-check it against its sources.`);
 }
 
 // ── Media roundup ──
@@ -302,7 +447,7 @@ for (const file of sourceFiles(srcRoot)) {
     if (match)
       errors.push(
         `${relative(srcRoot, file)}:${i + 1}: names the prescription medicine brand ` +
-          `"${match[1]}" — describe medication by category and cost range instead ` +
+          `"${match[1]}", describe medication by category and cost range instead ` +
           `(Human Medicines Regulations 2012, regs 280/284).`
       );
   });

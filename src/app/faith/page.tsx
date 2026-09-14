@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowRight, ExternalLink, Info } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
-import { StoryImage } from "@/components/story-image";
 import { ShapeMark } from "@/components/shapes";
 import { TraditionExplorer } from "@/components/faith/tradition-explorer";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
@@ -15,36 +14,15 @@ import {
   GROUNDING_FACTS,
   OBSERVANCE_NOTES,
 } from "@/lib/faith";
-import { FAITH_STORIES } from "@/lib/stories";
 
 export const metadata: Metadata = {
   title: "Faith, Culture & IVF | CairnFertility",
   description:
-    "Where the major religious traditions stand on IVF, what to ask your own clergy, and how to handle conversations — at home, in your community, and online — that turn against your treatment.",
+    "Where nine religious traditions stand on IVF, donors and embryos, with sources; what to ask your own clergy; and what to say when family, community or a religious leader turns against your treatment.",
 };
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
-
-/** The four rules the section is written under. Stated up front rather than buried. */
-const PRINCIPLES = [
-  {
-    title: "We describe. We don't rule.",
-    body: "Nothing here is a religious ruling, and CairnFertility has no standing to give one. We set out what traditions teach so you can have a better conversation with someone who does.",
-  },
-  {
-    title: "No tradition is a monolith.",
-    body: "Every entry below names the internal disagreement as well as the mainstream position, because the disagreement is usually the part that matters to the person reading.",
-  },
-  {
-    title: "Everything is sourced.",
-    body: "Each tradition links to documents you can open and read yourself — a faith's own texts and UK regulators, not clinics writing about someone else's religion.",
-  },
-  {
-    title: "Belief is yours to work out.",
-    body: "Some people here will decide their tradition is right and stop. Some will go ahead anyway. Both are reading this page, and it is written for both.",
-  },
-];
 
 export default function FaithPage() {
   return (
@@ -77,7 +55,7 @@ export default function FaithPage() {
         >
           For a lot of people, the hardest part of fertility treatment isn&rsquo;t the
           injections or the cost. It&rsquo;s reconciling it with what you were raised to
-          believe — and then handling everyone who has an opinion about it.
+          believe, and then handling everyone who has an opinion about it.
         </p>
         <p
           className="text-[16px] font-sans leading-relaxed text-muted mt-4"
@@ -92,7 +70,6 @@ export default function FaithPage() {
             { label: "What's actually at stake", href: "#at-stake" },
             { label: "Where traditions stand", href: "#traditions" },
             { label: "Practical observance", href: "#observance" },
-            { label: "Stories", href: "#stories" },
             { label: "Difficult conversations", href: "#conversations" },
             { label: "Support", href: "#support" },
           ].map((l) => (
@@ -118,21 +95,16 @@ export default function FaithPage() {
             <Info className="h-3.5 w-3.5" />
             How we&rsquo;ve written this
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-7">
-            {PRINCIPLES.map((p) => (
-              <div key={p.title}>
-                <h2 className="font-sans font-bold text-base mb-2" style={{ color: TEAL }}>
-                  {p.title}
-                </h2>
-                <p
-                  className="text-[15px] font-sans leading-relaxed"
-                  style={{ color: "rgba(0, 83, 83, 0.75)" }}
-                >
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p
+            className="text-[16px] font-sans leading-relaxed"
+            style={{ color: "rgba(0, 83, 83, 0.85)", maxWidth: "68ch" }}
+          >
+            We describe what traditions teach, including where they disagree internally,
+            and we do not rule: nothing here is a religious opinion. Each tradition links
+            to sources you can check, the tradition&rsquo;s own documents where they exist
+            and scholarly overviews where they don&rsquo;t, and where the documentation is
+            thin we say so.
+          </p>
         </div>
       </section>
 
@@ -162,8 +134,8 @@ export default function FaithPage() {
           >
             Traditions rarely answer it as a single yes or no. They answer seven or eight
             smaller ones, and they disagree in different places. Knowing which question is
-            being argued about turns a stalled conversation with your clergy — or your
-            mother — into a specific one.
+            being argued about turns a stalled conversation with your clergy (or your
+            mother) into a specific one.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
@@ -210,8 +182,7 @@ export default function FaithPage() {
           >
             Each entry sets out the mainstream position, the places where serious people
             inside that tradition disagree, and questions you can take to your own priest,
-            imam, rabbi, pandit, granthi or teacher. Sources are linked so you never have
-            to take our word for any of it.
+            imam, rabbi, pandit, granthi or teacher. Sources are linked under each entry.
           </p>
 
           <TraditionExplorer traditions={FAITH_TRADITIONS} />
@@ -249,7 +220,7 @@ export default function FaithPage() {
             style={{ maxWidth: "62ch" }}
           >
             Most of what disrupts observant patients isn&rsquo;t doctrinal. It&rsquo;s
-            scheduling, staffing and ingredients — all of which a clinic can usually
+            scheduling, staffing and ingredients, all of which a clinic can usually
             accommodate, and none of which it will offer unprompted.
           </p>
 
@@ -286,49 +257,9 @@ export default function FaithPage() {
             className="text-lg font-sans leading-relaxed text-muted mb-12"
             style={{ maxWidth: "62ch" }}
           >
-            Faith and treatment, at the same time, in front of families who had views.
-            None of these people resolved it neatly. That is rather the point.
+            We&rsquo;re collecting accounts from people who have gone through treatment
+            alongside their faith.
           </p>
-          <p className="text-xs font-sans mb-12 -mt-8" style={{ color: "var(--muted)" }}>
-            Illustrative stories while we collect real, consented accounts.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {FAITH_STORIES.map((story) => (
-              <Link
-                key={story.id}
-                href={`/stories/${story.id}`}
-                className="group flex flex-col gap-4 transition-transform duration-200 hover:-translate-y-1"
-              >
-                <div className="relative h-52 rounded-xl overflow-hidden bg-background-alt">
-                  <StoryImage
-                    src={story.image}
-                    alt={story.imageAlt}
-                    label={story.theme === "faith" ? "Faith & Culture" : story.familyLabel}
-                    sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-3 flex-1">
-                  <span className="text-[12px] font-[600] uppercase tracking-[0.12em] text-accent font-sans">
-                    {story.tag}
-                  </span>
-                  <h3
-                    className="font-sans font-bold text-lg leading-snug"
-                    style={{ color: TEAL }}
-                  >
-                    {story.title}
-                  </h3>
-                  <p className="text-sm font-sans text-muted leading-relaxed flex-1">
-                    {story.excerpt}
-                  </p>
-                  <p className="text-[13px] font-[600] uppercase tracking-[0.12em] text-muted font-sans pt-3 border-t border-border">
-                    {story.name}, {story.age} &nbsp;·&nbsp; {story.location}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
 
           <div
             className="mt-14 rounded-2xl border p-6 md:p-8 flex flex-col sm:flex-row sm:items-center gap-5"
@@ -339,7 +270,7 @@ export default function FaithPage() {
                 className="text-[12px] font-[700] uppercase tracking-[0.12em] mb-2 font-sans"
                 style={{ color: TEAL_SOFT }}
               >
-                We want more of these
+                Share yours
               </p>
               <p className="font-sans font-bold text-base mb-1" style={{ color: TEAL }}>
                 Navigating treatment alongside your faith?
@@ -462,10 +393,33 @@ export default function FaithPage() {
               medication or your appointments, threatening you, or telling you that you
               will be cut off from your family or community unless you comply, that
               isn&rsquo;t a theological conversation and none of these scripts are the
-              right tool. Tell your clinic — they have safeguarding routes — or speak to
+              right tool. Tell your clinic (they have safeguarding routes) or speak to
               a counsellor independently of everyone involved.
             </p>
+            <p
+              className="text-[16px] font-sans leading-relaxed mt-4 font-[600]"
+              style={{ color: "var(--on-teal)" }}
+            >
+              If you are in immediate danger, call 999.
+            </p>
+            <ul
+              className="mt-2 space-y-1 text-[15px] font-sans leading-relaxed"
+              style={{ color: "var(--on-teal)", maxWidth: "64ch" }}
+            >
+              <li>England: National Domestic Abuse Helpline, 0808 2000 247</li>
+              <li>Honour-based abuse and forced marriage: Karma Nirvana, 0800 5999 247</li>
+              <li>Scotland: Domestic Abuse and Forced Marriage Helpline, 0800 027 1234</li>
+              <li>Wales: Live Fear Free, 0808 80 10 800</li>
+              <li>Northern Ireland: Domestic and Sexual Abuse Helpline, 0808 802 1414</li>
+            </ul>
           </div>
+
+          <p className="text-[15px] font-sans leading-relaxed text-muted mt-6">
+            <Link href="/support" className="underline underline-offset-2" style={{ color: TEAL }}>
+              Looking after yourself
+            </Link>
+            : counselling and support.
+          </p>
         </div>
       </section>
 
@@ -490,8 +444,8 @@ export default function FaithPage() {
             style={{ maxWidth: "62ch" }}
           >
             Organisations that will not be surprised by any part of this conversation.
-            Where we don&rsquo;t know of a dedicated service for a tradition, we have said
-            so rather than inventing one.
+            Chana is the only tradition-specific fertility service we know of in the UK;
+            the others are general or faith-community groups.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
@@ -509,20 +463,39 @@ export default function FaithPage() {
                     {s.name}
                   </h3>
                   <p className="text-[15px] font-sans leading-relaxed text-muted mb-4">{s.body}</p>
-                  <a
-                    href={s.href}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
-                    style={{ color: TEAL }}
-                  >
-                    {external ? "Visit" : "Compare clinics"}
-                    {external ? (
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    ) : (
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    )}
-                  </a>
+                  {s.links ? (
+                    <ul className="space-y-1.5">
+                      {s.links.map((l) => (
+                        <li key={l.href}>
+                          <a
+                            href={l.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
+                            style={{ color: TEAL }}
+                          >
+                            {l.label}
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <a
+                      href={s.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-1.5 text-sm font-sans font-medium transition-opacity hover:opacity-70"
+                      style={{ color: TEAL }}
+                    >
+                      {external ? "Visit" : "Find your clinic"}
+                      {external ? (
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      ) : (
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      )}
+                    </a>
+                  )}
                 </div>
               );
             })}

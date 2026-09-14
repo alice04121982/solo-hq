@@ -8,9 +8,8 @@ import { HeroShapeGrid } from "./hero-shape-grid";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const TRUST_SIGNALS = [
-  "True cost: flights + hotels included",
-  "Success rates verified where possible",
-  "HFEA-licensed UK clinics flagged",
+  "Travel estimates beside overseas prices",
+  "UK success rates from the HFEA register",
   "Donor sperm & egg options compared",
 ];
 
@@ -48,9 +47,9 @@ export function HeroSection() {
               className="text-[18px] leading-[28px] mb-7 font-sans max-w-[560px]"
               style={{ color: "var(--on-teal-muted)" }}
             >
-              Clinics abroad often look cheaper until you add flights and hotels. We show the{" "}
-              <span style={{ color: "var(--on-teal)" }}>true cost</span> beside UK clinics, and
-              flag which success rates are verified.
+              Clinics abroad often look cheaper until you add flights and hotels. We show a{" "}
+              <span style={{ color: "var(--on-teal)" }}>travel estimate</span> beside every overseas
+              price, and every success rate says where it came from.
             </p>
 
             {/* Trust signals — a vertical list, sitting above the CTA */}

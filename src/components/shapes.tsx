@@ -15,7 +15,7 @@ import type { CSSProperties } from "react";
  *  - Spark    — the four-point star: the day it works.
  *  - Asterisk — eight flat-ended spokes.
  *  - Pause    — two square bars: the wait between cycles, plans put on hold.
- *  - Halves   — two arcs that only close into a circle together.
+ *  - Halves   — two offset half-rings that only read whole together.
  *
  * All shapes draw in `currentColor` on a 100×100 viewBox, so colour comes
  * from CSS `color` and size from the `size` prop (or width/height classes).
@@ -111,20 +111,21 @@ export function Spark(props: ShapeProps) {
 }
 
 /**
- * Two halves of a ring, split down the middle with a gap either side —
- * two separate marks that only read as a circle together.
- *
- * Each half is an arc band spanning 160° between radius 22 and 44, so the
- * 20° gaps at top and bottom stay open at small sizes rather than closing
- * up into a solid ring.
+ * Two half-rings, offset — the Two Dads mark. An open C sits high on the
+ * left, a mirrored C sits low on the right, and the two only read as a
+ * whole together. Supplied artwork (116×161) scaled to fit the 100×100 box
+ * by height and centred horizontally, so it keeps the same 6–94 margins as
+ * the other marks.
  */
 export function Halves(props: ShapeProps) {
   return (
     <svg {...svgProps(props)}>
-      {/* right half — outer arc down through 0°, inner arc back up */}
-      <path d="M57.64 6.67A44 44 0 0 1 57.64 93.33L53.82 71.67A22 22 0 0 0 53.82 28.33Z" />
-      {/* left half — outer arc up through 180°, inner arc back down */}
-      <path d="M42.36 93.33A44 44 0 0 1 42.36 6.67L46.18 28.33A22 22 0 0 0 46.18 71.67Z" />
+      <g transform="translate(18.27 6) scale(0.54966)">
+        {/* upper-left C — opens to the right */}
+        <path d="M57.5225 0V24.5605H57.5215C39.3172 24.5608 24.5596 39.3181 24.5596 57.5225C24.5596 75.7269 39.3171 90.4851 57.5215 90.4854H57.5225V115.044H57.5215C25.753 115.045 0 89.291 0 57.5225C0 25.7539 25.753 0.000227369 57.5215 0H57.5225Z" />
+        {/* lower-right C — opens to the left */}
+        <path d="M57.9344 45.0529L57.9335 45.0539V69.6125L57.9344 69.6135C76.1388 69.6137 90.8963 84.371 90.8964 102.575C90.8964 120.78 76.1389 135.538 57.9346 135.538H57.9335V160.098H57.9351C89.7033 160.097 115.456 134.344 115.456 102.575C115.456 70.8069 89.7029 45.0532 57.9344 45.0529Z" />
+      </g>
     </svg>
   );
 }

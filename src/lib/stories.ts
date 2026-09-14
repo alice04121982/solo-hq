@@ -20,14 +20,14 @@ export interface Story {
   body: string;
   /**
    * A line lifted verbatim from `body`, used when this story is quoted on
-   * another page. It is never rendered alongside its own body — a pull quote
+   * another page. It is never rendered alongside its own body, a pull quote
    * sitting directly under the sentence it came from just reads as a stutter.
    */
   quote: string;
   treatment: string;
   /**
    * Optional so a story can ship before its photograph has been licensed.
-   * Where it is absent the card renders a typographic panel instead — never
+   * Where it is absent the card renders a typographic panel instead, never
    * substitute a stock photo of someone else's community to fill the gap.
    */
   image?: string;
@@ -43,6 +43,10 @@ export interface Story {
  * illustrative wherever they render. Replace with real, consented accounts
  * (via stories@cairnfertility.com) before removing those labels.
  */
+// TODO(phase1): add real, consented accounts here, including ones where treatment did not work
+export const PUBLISHED_STORIES: Story[] = [];
+
+// DRAFT, NOT RENDERED
 export const ALL_STORIES: Story[] = [
   {
     id: "alice-iris",
@@ -81,12 +85,12 @@ export const ALL_STORIES: Story[] = [
     name: "Natalie",
     age: 40,
     location: "London",
-    tag: "Donor egg IVF",
+    tag: "Double donation",
     title: "I used donor eggs and I'm not ashamed of it",
     excerpt: "After three failed cycles with her own eggs, Natalie chose donor eggs. Her twins Evi and Rosa are two and a half, and she tells them their story regularly.",
-    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I heard the words and went somewhere else in my head for the rest of the appointment. I'd carried a picture of a child with my grandmother's nose through three rounds of injections, and it felt like being asked to grieve someone who had never existed.\n\nI was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. That order matters, and I don't think you can skip a stage. My counsellor said something that stuck: I wasn't giving up on a child, I was giving up on one route to a child. The destination hadn't moved.\n\nThe practical side was gentler than the emotional side. The success rates for donor egg IVF at my age were three or four times what my own eggs could offer, which at 40 is simply information worth having. My donor was a woman in her twenties who had donated before. Under UK rules my children can access her identifying information at 18, and I'm glad of that. It means their story has no locked doors in it.\n\nI transferred one embryo and froze the rest. The one split. Nobody plans for the sentence 'it's twins' when you have spent two years planning for the possibility of nobody.\n\nMy twins Evi and Rosa are two and a half. They have each other's laugh and, apparently, my scowl, which shouldn't be genetically possible and yet here we are. Epigenetics or imitation, I've stopped caring which.\n\nI tell them their origin story regularly, and they think it's completely normal. Because it is. We have the picture books, and 'the kind lady who helped' is part of the furniture of their lives. There will be harder questions when they're older and I'd rather meet those questions in the open than have them find a locked drawer.\n\nIf you're staring at the donor egg conversation and it hurts: let it hurt for a while. Then read the stories of people who are on the other side of it. Not the statistics. The stories. That's what moved me, in the end.",
+    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I heard the words and went somewhere else in my head for the rest of the appointment. I'd carried a picture of a child with my grandmother's nose through three rounds of injections, and it felt like being asked to grieve someone who had never existed.\n\nI was devastated, then slowly curious, then, after reading a dozen stories from women who'd been exactly here, at peace with it. That order matters, and I don't think you can skip a stage. My counsellor said something that stuck: I wasn't giving up on a child, I was giving up on one route to a child. The destination hadn't moved.\n\nThe practical side was gentler than the emotional side. Donor eggs gave me a much better chance at my age, which at 40 is simply information worth having. My donor was a woman in her twenties who had donated before. Under UK rules my children can access her identifying information at 18, and I'm glad of that. It means their story has no locked doors in it.\n\nI transferred one embryo and froze the rest. The one split. Nobody plans for the sentence 'it's twins' when you have spent two years planning for the possibility of nobody.\n\nMy twins Evi and Rosa are two and a half. They have each other's laugh and, apparently, my scowl, which shouldn't be genetically possible and yet here we are. Epigenetics or imitation, I've stopped caring which.\n\nI tell them their origin story regularly, and they think it's completely normal. Because it is. We have the picture books, and 'the kind lady who helped' is part of the furniture of their lives. There will be harder questions when they're older and I'd rather meet those questions in the open than have them find a locked drawer.\n\nIf you're staring at the donor egg conversation and it hurts: let it hurt for a while. Then read the stories of people who are on the other side of it. Not the statistics. The stories. That's what moved me, in the end.",
     quote: "I tell them their origin story regularly, and they think it's completely normal. Because it is.",
-    treatment: "Donor egg IVF",
+    treatment: "Double donation (donor eggs and donor sperm)",
     image: "/photos/hands.webp",
     imageAlt: "An adult hand holding a small child's hand",
   },
@@ -136,7 +140,7 @@ export const ALL_STORIES: Story[] = [
   // ─── Faith, culture & belief ──────────────────────────────────────────────
   // PRE-LAUNCH: these are written examples showing the shape and tone the
   // section needs. They are not yet accounts from named, consenting people.
-  // Replace them with real contributors before this page goes public —
+  // Replace them with real contributors before this page goes public:
   // attributing a religious position to a named individual who did not say it
   // is the one mistake this section cannot afford. See
   // docs/faith-section-brief.md for the sourcing and photography checklist.
@@ -170,8 +174,8 @@ export const ALL_STORIES: Story[] = [
     title: "A mashgiach in the lab, and a rabbi on speed dial",
     excerpt:
       "Halachic supervision sounded complicated until it wasn't. The harder part was being twenty-nine in a community where everyone marries early.",
-    body: "I was twenty-seven when we started, which in our community felt late, because everyone around us had married at twenty-two and had two children by twenty-five. That's the part nobody prepares you for — not the theology, the arithmetic of other people's families.\n\nHalacha was the straightforward bit. Our rav was clear that IVF with our own gametes is not only permitted but a mitzvah, and he arranged supervision in the lab. The clinic had done it before and barely blinked. Our embryologist and our mashgiach got on well, which I did not expect.\n\nWhat I'd tell someone starting: give the clinic your calendar on day one. Shabbat, yom tov, the whole thing. Ours moved a collection by a day without any drama because we asked in week one rather than week four.",
-    quote: "That's the part nobody prepares you for — not the theology, the arithmetic of other people's families.",
+    body: "I was twenty-seven when we started, which in our community felt late, because everyone around us had married at twenty-two and had two children by twenty-five. That's the part nobody prepares you for: not the theology, the arithmetic of other people's families.\n\nHalacha was the straightforward bit. Our rav was clear that IVF with our own gametes is not only permitted but a mitzvah, and he arranged supervision in the lab. The clinic had done it before and barely blinked. Our embryologist and our mashgiach got on well, which I did not expect.\n\nWhat I'd tell someone starting: give the clinic your calendar on day one. Shabbat, yom tov, the whole thing. Ours moved a collection by a day without any drama because we asked in week one rather than week four.",
+    quote: "That's the part nobody prepares you for: not the theology, the arithmetic of other people's families.",
     treatment: "IVF × 3, halachic supervision",
   },
   {
@@ -187,7 +191,7 @@ export const ALL_STORIES: Story[] = [
     title: "I went ahead knowing the Church disagreed. I didn't stop going to Mass.",
     excerpt:
       "The hardest conversation Maria had about IVF was not with her family or her parish. It was the one she kept having with herself.",
-    body: "I read Donum Vitae properly, which I'd recommend to anyone in my position, because the version that gets repeated informally is harsher than the actual document. It is still a no. But it also says, in plain terms, that a child conceived this way is fully a person and that the desire for a child is good. That mattered to me more than I expected.\n\nI went ahead anyway. I want to be honest that I did not resolve it — I decided, which is a different thing. I still go to Mass. I told one priest, who was kind, and didn't tell the other, who I suspect would not have been.\n\nThe guilt and the grief turned out to be two separate things wearing the same coat. It took a counsellor to point that out. Once I could tell them apart, the guilt got much smaller and the grief got easier to carry.",
+    body: "I read Donum Vitae properly, which I'd recommend to anyone in my position, because the version that gets repeated informally is harsher than the actual document. It is still a no. But it also says, in plain terms, that a child conceived this way is fully a person and that the desire for a child is good. That mattered to me more than I expected.\n\nI went ahead anyway. I want to be honest that I did not resolve it. I decided, which is a different thing. I still go to Mass. I told one priest, who was kind, and didn't tell the other, who I suspect would not have been.\n\nThe guilt and the grief turned out to be two separate things wearing the same coat. It took a counsellor to point that out. Once I could tell them apart, the guilt got much smaller and the grief got easier to carry.",
     quote: "The guilt and the grief turned out to be two separate things wearing the same coat.",
     treatment: "IVF × 2",
   },
@@ -204,7 +208,7 @@ export const ALL_STORIES: Story[] = [
     title: "Nothing in our religion forbade it. Everything in our family did.",
     excerpt:
       "The objection sounded scriptural and turned out to be about lineage, reputation and what the aunties would say.",
-    body: "When we said donor eggs, the reaction from Anand's side of the family was immediate and framed entirely in religious language. It took us months to work out that there was no scriptural objection underneath it at all. It was about gotra, and about what people would say, and about a fear that the child wouldn't count.\n\nOnce we could name that, it got easier to answer, because those are answerable. The pandit we spoke to was completely relaxed about it and slightly puzzled that we'd asked.\n\nWe told the family we were doing it, not asking. Two relatives stopped speaking to us for a year. Both of them now come to birthdays. Our daughter is three and knows the outline of her story already — we decided early that she would never have a day where she found out.",
+    body: "When we said donor eggs, the reaction from Anand's side of the family was immediate and framed entirely in religious language. It took us months to work out that there was no scriptural objection underneath it at all. It was about gotra, and about what people would say, and about a fear that the child wouldn't count.\n\nOnce we could name that, it got easier to answer, because those are answerable. The pandit we spoke to was completely relaxed about it and slightly puzzled that we'd asked.\n\nWe told the family we were doing it, not asking. Two relatives stopped speaking to us for a year. Both of them now come to birthdays. Our daughter is three and knows the outline of her story already. We decided early that she would never have a day where she found out.",
     quote: "We told the family we were doing it, not asking.",
     treatment: "IVF with donor eggs",
   },
@@ -221,7 +225,7 @@ export const ALL_STORIES: Story[] = [
     title: "My church didn't have a category for me",
     excerpt:
       "Grace's congregation had no objection to IVF and no idea what to do with a single woman using donor sperm.",
-    body: "My church has no problem with IVF in principle — several couples there have been through it and been prayed for openly. A single woman using donor sperm was a different matter. There wasn't a rule against it. There just wasn't a category.\n\nI told my small group before I told my parents, which sounds odd, but I needed to know whether I was going to lose the community before I took on anything else. Some of them were wonderful. Two weren't. The leadership landed somewhere in the middle, which I've made my peace with.\n\nWhat helped was finding one other woman, two churches over, who had done the same thing four years earlier. One conversation with her was worth about six months of reading. If you're the first person in your congregation to do this, go and find someone who was the first in theirs.",
+    body: "My church has no problem with IVF in principle: several couples there have been through it and been prayed for openly. A single woman using donor sperm was a different matter. There wasn't a rule against it. There just wasn't a category.\n\nI told my small group before I told my parents, which sounds odd, but I needed to know whether I was going to lose the community before I took on anything else. Some of them were wonderful. Two weren't. The leadership landed somewhere in the middle, which I've made my peace with.\n\nWhat helped was finding one other woman, two churches over, who had done the same thing four years earlier. One conversation with her was worth about six months of reading. If you're the first person in your congregation to do this, go and find someone who was the first in theirs.",
     quote: "There wasn't a rule against it. There just wasn't a category.",
     treatment: "IUI × 3, IVF × 1, donor sperm",
   },
@@ -238,7 +242,7 @@ export const ALL_STORIES: Story[] = [
     title: "We kept the faith and changed the church",
     excerpt:
       "Two women, one congregation that couldn't agree about them, and a decision to stop waiting for permission.",
-    body: "We'd both grown up in church and neither of us wanted to give that up to have a family. For a while we tried to hold both by being quiet, which worked until I was visibly pregnant.\n\nThe congregation split about us, fairly politely. Our vicar was supportive; a section of the congregation was not; nobody was rude to our faces. We eventually moved to a church twenty minutes further away where the question simply didn't arise, and I wish we'd done it two years earlier instead of treating it as a defeat.\n\nReciprocal IVF itself was the easy part — Ruth's eggs, my body, our donor. The theology we'd already worked out for ourselves years before. What took longer was accepting that we didn't need a committee to ratify it.",
+    body: "We'd both grown up in church and neither of us wanted to give that up to have a family. For a while we tried to hold both by being quiet, which worked until I was visibly pregnant.\n\nThe congregation split about us, fairly politely. Our vicar was supportive; a section of the congregation was not; nobody was rude to our faces. We eventually moved to a church twenty minutes further away where the question simply didn't arise, and I wish we'd done it two years earlier instead of treating it as a defeat.\n\nReciprocal IVF itself was the easy part: Ruth's eggs, my body, our donor. The theology we'd already worked out for ourselves years before. What took longer was accepting that we didn't need a committee to ratify it.",
     quote: "What took longer was accepting that we didn't need a committee to ratify it.",
     treatment: "Reciprocal IVF",
   },
@@ -255,8 +259,8 @@ export const ALL_STORIES: Story[] = [
     title: "We told the whole gurdwara in the end. It was a relief.",
     excerpt:
       "Three years of secrecy, one accidental disclosure, and the discovery that four other couples had been hiding the same thing.",
-    body: "There is nothing in Sikhi that prohibits IVF. We checked properly, twice, because the silence around it in our community made us assume there must be something. There isn't. The secrecy was entirely social.\n\nWe hid it for three years. Fake work trips to cover appointments, that sort of thing. Then Harjit's mother worked it out and told one person, and within a fortnight everyone knew.\n\nIt was a relief. Four other couples came to us privately in the following months, all of whom had been doing exactly what we'd been doing, none of whom had told each other. That's what stigma does — it makes five families each think they're the only one. If we'd said something at the start we'd have had four years of company.",
-    quote: "That's what stigma does — it makes five families each think they're the only one.",
+    body: "There is nothing in Sikhi that prohibits IVF. We checked properly, twice, because the silence around it in our community made us assume there must be something. There isn't. The secrecy was entirely social.\n\nWe hid it for three years. Fake work trips to cover appointments, that sort of thing. Then Harjit's mother worked it out and told one person, and within a fortnight everyone knew.\n\nIt was a relief. Four other couples came to us privately in the following months, all of whom had been doing exactly what we'd been doing, none of whom had told each other. That's what stigma does: it makes five families each think they're the only one. If we'd said something at the start we'd have had four years of company.",
+    quote: "That's what stigma does: it makes five families each think they're the only one.",
     treatment: "ICSI × 2",
   },
 ];
@@ -271,7 +275,6 @@ const FEATURED_IDS = [
   "tom-marcus-elliot", // two dads
   "james-oscar",       // solo dad
   "emma-david-isla",   // mum and dad
-  "aisha-yusuf",       // faith & belief
 ];
 export const FEATURED_STORIES = FEATURED_IDS.map(
   (id) => ALL_STORIES.find((s) => s.id === id)!,

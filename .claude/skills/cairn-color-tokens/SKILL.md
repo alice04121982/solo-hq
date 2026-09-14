@@ -40,7 +40,7 @@ replace it with the token it duplicates (table below).
 | `--cream` | #FBF2EB | warm section bands, story tag pills |
 | `--lavender` | #F0A8C4 | bubblegum pink: CTA band, shape marks |
 | `--lavender-light` / `--lavender-dark` | #FBE0EE / #C47098 | pink tints and shades |
-| `--card-bg` / `--card-border` | #FDE8F2 / #f5c6dd | pink card fills and edges |
+| `--card-bg` / `--card-border` | #FDE8F2 / #f5c6dd | legacy pink card fill and edge. Cards no longer take either: see the pairing rules. Not for use on cream. |
 
 Legacy aliases (`--charcoal`, `--navy`, `--lime`, `--warm-white`) resolve to
 the tokens above and exist so old Tailwind classes still work. Prefer the
@@ -76,6 +76,26 @@ canonical names in new code.
   band numbering shifts, prefer the warm and brand-tinted tokens by default
   and reach for `--border` only where the component can never leave a white
   band.
+- **No pink on cream. Ever.** The pink family (`--lavender`,
+  `--lavender-light`, `--lavender-dark`, `--card-bg`, `--card-border`,
+  `--on-teal`) never sits on `--cream`, as a fill, an edge, a pill or a
+  hover state. Pink on the warm salmon of cream reads as a clash, not an
+  accent, and a pink card on a cream band is the case that prompted the
+  rule. Pink belongs on teal (the on-teal text set), on white (the CTA
+  band, quote bubbles, shape marks) or as its own full-bleed band. A card
+  on a cream band is white; if it needs colour, the band changes, not the
+  card. The one standing exception is the decorative backdrop shape on a
+  cream band, which `Section` still draws in `--lavender-light`; treat that
+  as a site-wide decision to revisit rather than a pattern to copy.
+- **No lime on pink. Ever.** `--accent`, `--accent-soft`, `--accent-dark`,
+  `--accent-pale` and `--lime` never sit on `--lavender` (the CTA band or
+  any other pink surface), as a fill, a mark, a badge or text. Lime on
+  bubblegum pink vibrates. On the pink band the only inks are dark green
+  (`--teal`) and white (`--background`): the primary button is `--teal`
+  with white text, the secondary button is a `--teal-35` outline with
+  `--teal` text, and shape marks are `--teal` (or `--lavender-dark` for
+  tone-on-tone). The owner ruled on this on 2026-09-14 after seeing the
+  lime "Apply to Join" button on the pink community band.
 - **Content boxes are white on a tinted band, cream on a white one.** Cards,
   notices, callouts, panels and form containers take `--background` on cream
   or teal and `--cream` on white — never `--surface-sunken` or
@@ -113,8 +133,9 @@ existing sections. Follow the homepage as the reference rhythm.
 ## Self-check before finalising a colour
 
 1. Is it a token (Tailwind class or `var(--token)`), not a hex literal?
-1. Is it grey, and could it ever sit on a cream band? If so, swap it for the
-   warm or brand-tinted equivalent.
+1. Is it grey or pink, and could it ever sit on a cream band? If so, swap it
+   for the warm or brand-tinted equivalent (grey) or move it off cream (pink).
+1. Is it lime, and does it sit on the pink band? If so, use `--teal` or white.
 1. Is it a border on a card? Cards have no resting border — check the fill
    contrasts with the band instead.
 2. Does the text/icon colour match the surface it sits on (on-teal set for

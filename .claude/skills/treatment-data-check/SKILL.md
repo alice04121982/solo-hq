@@ -31,7 +31,7 @@ it from there.
 
 2. **Re-verify each clinic** in `src/lib/clinics.ts`:
    - Fetch the clinic's published price list (use `priceListUrl` if set,
-     otherwise find it from `website` — and set `priceListUrl` once found,
+     otherwise find it from `website`: and set `priceListUrl` once found,
      only with a URL you actually loaded).
    - Compare `pricePerCycleGbp` (headline own-egg IVF) and
      `iuiPricePerCycleGbp` (IUI excluding drugs and donor sperm). Update on
@@ -40,23 +40,34 @@ it from there.
      https://www.hfea.gov.uk/choose-a-clinic/clinic-search/ and that its
      treatment list is still right.
    - Do not deep-link to individual HFEA register pages by constructing
-     URLs from `hfeaNumber` — the register's numeric page IDs are internal
+     URLs from `hfeaNumber`: the register's numeric page IDs are internal
      and don't reliably match licence numbers. Link the register search.
 
 3. **Re-check the national benchmarks** quoted in `DATA_PROVENANCE`
    (HFEA IUI page, HFEA IVF page, NHS IVF availability page). If the
    quoted figures or URLs changed, update the `benchmarks` entries.
 
-4. **Check for newer HFEA success-rate data.** The register updates
-   periodically and an annual "Fertility treatment: trends and figures"
-   report is published each year (`DATA_PROVENANCE.successRates.
-   latestNationalReportUrl`). If newer per-clinic rates are available,
-   update `byBracket` and `year` per clinic — keeping each clinic's own
-   published denominator, and leaving unpublished brackets absent.
+4. **Re-read each UK clinic's HFEA page.** UK figures live in
+   `successRates.byHfeaBand`, shaped exactly as the Choose a Clinic page
+   shows them: three bands (`under38`, `age38plus`, `all`), each with
+   `rate`, `range` (the HFEA's low and high), `count` (embryos
+   transferred), `nationalAverage` and `vsNationalAverage` ("above",
+   "consistent" or "below"). The figures sit in the page HTML as `data-*`
+   attributes on the "Births per embryo transferred, excluding donor eggs
+   and PGT-A" chart labels. Copy the period's year into `year`, the
+   all-ages verdict into `vsNationalAverage`, today's date into
+   `checkedOn`, and the "Licensed until" date into the clinic's
+   `licenceExpiry`. `byBracket` stays `{}` for UK clinics; `check:data`
+   rejects anything else. Overseas clinics keep `byBracket` only where the
+   clinic publishes live births in matching age bands, and
+   `publishedBands` where its bands differ; pregnancy rates are never
+   entered as live births. The national report
+   (`DATA_PROVENANCE.successRates.latestNationalReportUrl`) is for the
+   site-wide averages, not per-clinic figures.
 
 5. **Sweep the prose figures** so copy doesn't drift from the data file:
-   - `src/lib/guides.ts` — £ figures in guide text (IUI callout especially).
-   - `src/components/cost-calculator.tsx` — `BASE_COSTS`, `SOLO_COSTS`,
+   - `src/lib/guides.ts`: £ figures in guide text (IUI callout especially).
+   - `src/components/cost-calculator.tsx`: `BASE_COSTS`, `SOLO_COSTS`,
      `MEDS_COST`, `ADD_ONS`.
    - `public/downloads/cairn-ivf-budget-template.csv`.
 
