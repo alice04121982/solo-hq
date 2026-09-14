@@ -34,9 +34,12 @@ interface ToolkitLabels {
 export function ConversationToolkit({
   scenarios,
   labels,
+  compact = false,
 }: {
   scenarios: ToolkitScenario[];
   labels?: ToolkitLabels;
+  /** One column: the context paragraphs, then the lines to say with the exit line last. */
+  compact?: boolean;
 }) {
   const [active, setActive] = useState(scenarios[0].slug);
   const scenario = scenarios.find((s) => s.slug === active) ?? scenarios[0];
@@ -83,9 +86,15 @@ export function ConversationToolkit({
           {scenario.situation}
         </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16">
+        <div
+          className={
+            compact
+              ? "max-w-[72ch]"
+              : "grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-16"
+          }
+        >
           {/* What's going on */}
-          <div>
+          <div className={compact ? "mb-8" : undefined}>
             <p
               className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
               style={{ color: TEAL_SOFT }}
@@ -102,29 +111,31 @@ export function ConversationToolkit({
               </p>
             ))}
 
-            <div
-              className="mt-8 rounded-2xl border p-5"
-              style={{ borderColor: "var(--border)" }}
-            >
-              <p
-                className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
-                style={{ color: TEAL_SOFT }}
+            {!compact && (
+              <div
+                className="mt-8 rounded-2xl border p-5"
+                style={{ borderColor: "var(--border)" }}
               >
-                <ShieldOff className="h-3.5 w-3.5" />
-                {labels?.notYourJob ?? "Not your job"}
-              </p>
-              <ul className="space-y-2">
-                {scenario.notYourJob.map((item, i) => (
-                  <li
-                    key={i}
-                    className="text-[14px] font-sans leading-relaxed"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <p
+                  className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
+                  style={{ color: TEAL_SOFT }}
+                >
+                  <ShieldOff className="h-3.5 w-3.5" />
+                  {labels?.notYourJob ?? "Not your job"}
+                </p>
+                <ul className="space-y-2">
+                  {scenario.notYourJob.map((item, i) => (
+                    <li
+                      key={i}
+                      className="text-[14px] font-sans leading-relaxed"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
           {/* Scripts */}
@@ -137,7 +148,7 @@ export function ConversationToolkit({
               {labels?.scripts ?? "Things you can actually say"}
             </p>
             <ul className="space-y-3">
-              {scenario.tryThis.map((line, i) => (
+              {(compact ? [...scenario.tryThis, scenario.exitLine] : scenario.tryThis).map((line, i) => (
                 <li
                   key={i}
                   className="rounded-2xl p-4 md:p-5 flex items-start justify-between gap-4"
@@ -156,24 +167,26 @@ export function ConversationToolkit({
               ))}
             </ul>
 
-            <div
-              className="mt-6 rounded-2xl p-5"
-              style={{ background: "var(--teal)" }}
-            >
-              <p
-                className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
-                style={{ color: "var(--on-teal-muted)" }}
+            {!compact && (
+              <div
+                className="mt-6 rounded-2xl p-5"
+                style={{ background: "var(--teal)" }}
               >
-                <DoorOpen className="h-3.5 w-3.5" />
-                {labels?.exit ?? "A way out"}
-              </p>
-              <p
-                className="text-[15px] font-sans leading-relaxed font-[500]"
-                style={{ color: "var(--on-teal)" }}
-              >
-                {scenario.exitLine}
-              </p>
-            </div>
+                <p
+                  className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
+                  style={{ color: "var(--on-teal-muted)" }}
+                >
+                  <DoorOpen className="h-3.5 w-3.5" />
+                  {labels?.exit ?? "A way out"}
+                </p>
+                <p
+                  className="text-[15px] font-sans leading-relaxed font-[500]"
+                  style={{ color: "var(--on-teal)" }}
+                >
+                  {scenario.exitLine}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
