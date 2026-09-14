@@ -518,11 +518,12 @@ function MatchFigure({ m, surrogacy, age }: { m: Match; surrogacy: boolean; age:
 
 /**
  * A matched clinic. The same card as the finder's results (`.clinic-card`:
- * fill for the edge, no stroke, dark-green hover that re-tints every child
- * from one rule), on the cream variant because the wizard panel is white.
+ * fill for the edge, no stroke, every child tinted from one rule), on the
+ * teal variant: the dark-green fill is the resting state and there is no
+ * hover, because the card is the answer and the way in is its button.
  *
  * The card carries one accent, the verification badge; everything else is
- * teal ink on cream, in three tiers: the clinic, the two figures, the notes.
+ * the on-teal ink, in three tiers: the clinic, the two figures, the notes.
  */
 function ResultCard({
   m, surrogacy, age, index,
@@ -554,7 +555,7 @@ function ResultCard({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.35, ease: EASE }}
-      className={clinicCardClasses("cream", false)}
+      className={clinicCardClasses("teal", false)}
     >
       <div className="flex flex-wrap items-center gap-2 mb-4">
         <VerificationBadge verification={c.successRates.verification} />
