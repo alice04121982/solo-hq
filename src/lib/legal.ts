@@ -44,6 +44,12 @@
  *   and matching them to applications, and the policy says so.
  * - The clinic matcher's answers (family type, age, medical history, budget)
  *   are held in browser memory only and never transmitted or stored.
+ * - The clinic finder's location search (a typed place or UK postcode, or
+ *   the device position via the browser's geolocation prompt, allowed for
+ *   `self` in the Permissions-Policy) resolves against a gazetteer bundled
+ *   in src/lib/geo.ts and is used in the page to order clinics by distance.
+ *   No geocoding service is called; nothing is transmitted, stored, or put
+ *   in the URL. See src/components/ivf-finder/location-search.tsx.
  * - The share-your-story form (/stories/share) drafts an email entirely in
  *   the browser; nothing is transmitted unless the reader sends it from
  *   their own email app. There is no submission backend.
@@ -127,7 +133,7 @@ export const CONTROLLER = {
 export const ICO_REGISTRATION_NUMBER = null as string | null;
 
 /** Every page in the set was revised on this date (Phase 3, privacy and legal). */
-const REVISED_DATE = "13 September 2026";
+const REVISED_DATE = "14 September 2026";
 
 const PUBLISHER_SENTENCE = `CairnFertility is published by ${CONTROLLER.name}, trading as ${CONTROLLER.tradingAs}, from ${CONTROLLER.address} in the United Kingdom.`;
 
@@ -159,6 +165,7 @@ const PRIVACY: LegalPage = {
         "We store your email if you join our list. If you apply to the community we store your first name, email, path, stage, and what you write, and a person reads it. Path, stage and what you write are health-related data. We delete them on the schedule below.",
         "This website never asks for your phone number.",
         "Your answers in our clinic matching tool, including anything about your health, are processed within your own browser. They are never sent to us or to anyone else.",
+        "If you tell the clinic finder where you are, or let it use your device's location, that stays in your browser too. It is used only to put the nearest clinics first, and is never sent to us or to anyone else.",
         "We never sell personal data, and we never share it for advertising.",
       ],
     },
@@ -207,6 +214,11 @@ const PRIVACY: LegalPage = {
             "Our matching tool asks about your family type, age range, relevant medical conditions, budget and willingness to travel. These answers stay in your browser's memory while you use the tool and disappear when you leave the page. They are never transmitted to our servers or to any third party.",
         },
         {
+          term: "Your location in the clinic finder",
+          description:
+            "The clinic finder lets you type a town, city or UK postcode, or ask your browser for your device's position, so that the nearest clinics come first. Typed places are matched against a list built into the page, and the position comes from your browser's own location prompt, which you can decline. Either way the location is used in your browser to order and filter the list, is never sent to us or to any mapping or geocoding service, is not stored, and is not included in the address of the page, so a comparison link you share does not carry it. It is forgotten when you leave the page.",
+        },
+        {
           term: "Hosting logs",
           description:
             "The site is served by Vercel, our hosting provider. Vercel's servers process your IP address and standard request information (browser type, pages requested, timestamps) in short-lived operational logs used for security and to keep the site running. See Vercel's own [privacy policy](https://vercel.com/legal/privacy-policy) for details.",
@@ -220,7 +232,7 @@ const PRIVACY: LegalPage = {
       heading: "Health information gets special treatment",
       body: [
         "Data about your health, fertility or sex life is \"special category data\" under UK data protection law, which sets a higher bar for handling it. Almost everywhere on this site we meet that bar by making sure the data never reaches us.",
-        "The clinic matcher, the cost calculator and the clinic finder ask health-related questions, but the filtering happens in your browser and the answers are not sent anywhere. We hold no record that you used them or what you answered.",
+        "The clinic matcher, the cost calculator and the clinic finder ask health-related questions, and the finder can also take your location, but the filtering happens in your browser and the answers are not sent anywhere. We hold no record that you used them, what you answered, or where you were.",
         "The community application is different. Your path, your stage and what you write about why you would like to join are special category data: \"two mums\" says something about your sexual orientation, and \"in treatment now\" is information about your health. We store them only because you tick a separate consent box on the form saying we may, and a person reads them to decide on your application. Nothing else on this site is gated behind that consent. You can withdraw it at any time by emailing [privacy@cairnfertility.com](mailto:privacy@cairnfertility.com) and we will delete your application. Your path and stage are kept while you are a member and deleted when you leave or ask; what you wrote is deleted on the schedule in 'How long we keep things' below.",
         "If we ever build a feature that needs health information to leave your browser, we will ask for your explicit consent first and update this policy before it goes live.",
       ],

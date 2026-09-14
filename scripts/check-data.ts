@@ -26,6 +26,7 @@ import { FAMILY_TYPES } from "../src/lib/family-types.ts";
 import { ALL_STORIES, FEATURED_STORIES } from "../src/lib/stories.ts";
 import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
 import { NEWS_ITEMS, NEWS_PROVENANCE } from "../src/lib/news.ts";
+import { PLACES, distanceMiles, postcodeArea, searchPlaces } from "../src/lib/geo.ts";
 
 const STALE_DAYS = Number(process.env.STALE_DAYS ?? 120);
 
@@ -92,6 +93,21 @@ for (const c of CLINICS) {
   slugs.add(c.slug);
 
   if (!c.name || !c.city || !c.country) errors.push(`${id}: missing name, city or country.`);
+
+  // The distance sort and "within" filter read every clinic's coordinates;
+  // a missing or implausible pair would silently misplace the clinic.
+  if (!c.coordinates || !Number.isFinite(c.coordinates.lat) || !Number.isFinite(c.coordinates.lng)) {
+    errors.push(`${id}: coordinates are required for the distance sort.`);
+  } else {
+    const { lat, lng } = c.coordinates;
+    if (Math.abs(lat) > 90 || Math.abs(lng) > 180)
+      errors.push(`${id}: coordinates ${lat}, ${lng} are not on the earth.`);
+    if (c.region === "UK" && (lat < 49 || lat > 61 || lng < -9 || lng > 2.5))
+      errors.push(`${id}: coordinates ${lat}, ${lng} are outside the UK for a UK clinic.`);
+    const place = PLACES.find((pl) => pl.name === c.city);
+    if (place && distanceMiles(place, c.coordinates) > 40)
+      errors.push(`${id}: coordinates are ${Math.round(distanceMiles(place, c.coordinates))} miles from ${c.city} in the gazetteer; one of them is wrong.`);
+  }
   if (c.country && !eligibilityFor(c.country)) {
     errors.push(`${id}: no entry for "${c.country}" in src/lib/country-eligibility.ts; the matcher and finder cannot say who its law allows clinics to treat.`);
   }
@@ -452,6 +468,50 @@ for (const file of sourceFiles(srcRoot)) {
       );
   });
 }
+
+// ── Gazetteer ──
+//
+// The finder's location search resolves against src/lib/geo.ts. Every UK
+// postcode area must resolve somewhere (a postcode that returns nothing looks
+// like a broken search), no two places may claim the same area, and every
+// entry must be somewhere plausible for its country.
+const UK_POSTCODE_AREAS = [
+  "AB","AL","B","BA","BB","BD","BH","BL","BN","BR","BS","BT","CA","CB","CF","CH","CM","CO","CR","CT",
+  "CV","CW","DA","DD","DE","DG","DH","DL","DN","DT","DY","E","EC","EH","EN","EX","FK","FY","G","GL",
+  "GU","GY","HA","HD","HG","HP","HR","HS","HU","HX","IG","IM","IP","IV","JE","KA","KT","KW","KY","L",
+  "LA","LD","LE","LL","LN","LS","LU","M","ME","MK","ML","N","NE","NG","NN","NP","NR","NW","OL","OX",
+  "PA","PE","PH","PL","PO","PR","RG","RH","RM","S","SA","SE","SG","SK","SL","SM","SN","SO","SP","SR",
+  "SS","ST","SW","SY","TA","TD","TF","TN","TQ","TR","TS","TW","UB","W","WA","WC","WD","WF","WN","WR",
+  "WS","WV","YO","ZE",
+];
+const areaOwners = new Map<string, string>();
+const placeKeys = new Set<string>();
+for (const place of PLACES) {
+  const key = `${place.name}, ${place.country}`;
+  if (placeKeys.has(key)) errors.push(`geo.ts: duplicate place "${key}".`);
+  placeKeys.add(key);
+  if (Math.abs(place.lat) > 90 || Math.abs(place.lng) > 180)
+    errors.push(`geo.ts: "${key}" has coordinates ${place.lat}, ${place.lng}, which are not on the earth.`);
+  if (place.country === "United Kingdom" && (place.lat < 49 || place.lat > 61 || place.lng < -9 || place.lng > 2.5))
+    errors.push(`geo.ts: "${key}" is outside the UK.`);
+  for (const area of place.postcodeAreas ?? []) {
+    if (!UK_POSTCODE_AREAS.includes(area))
+      errors.push(`geo.ts: "${key}" claims postcode area "${area}", which is not a UK postcode area.`);
+    const owner = areaOwners.get(area);
+    if (owner) errors.push(`geo.ts: postcode area "${area}" is claimed by both "${owner}" and "${key}".`);
+    areaOwners.set(area, key);
+  }
+}
+for (const area of UK_POSTCODE_AREAS) {
+  if (!areaOwners.has(area)) errors.push(`geo.ts: no place resolves UK postcode area "${area}".`);
+}
+// A few searches that must keep working.
+if (postcodeArea("CB23 2TN") !== "CB" || searchPlaces("CB23 2TN")[0]?.name !== "Cambridge")
+  errors.push('geo.ts: "CB23 2TN" should resolve to Cambridge.');
+if (searchPlaces("Bath")[0]?.name !== "Bath")
+  errors.push('geo.ts: "Bath" should find the city, not the BA postcode area.');
+if (searchPlaces("manch")[0]?.name !== "Manchester")
+  errors.push('geo.ts: "manch" should suggest Manchester first.');
 
 // ── Report ──
 for (const w of warnings) console.warn(`WARN  ${w}`);

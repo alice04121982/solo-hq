@@ -51,14 +51,17 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 /**
- * Everything the browser is allowed to ask for: nothing. No page uses
- * geolocation, camera, microphone or any other powerful feature, so each one
- * is switched off and a compromised dependency cannot quietly reach for them.
- * If a feature that needs one of these is ever added, allow it here for
- * `self` in the same change.
+ * Everything the browser is allowed to ask for: geolocation for this origin
+ * only, and nothing else. The clinic finder's "Use my location" button asks
+ * the browser for the device position, on a click, and the coordinates are
+ * used in the page to order clinics by distance; they are never sent
+ * anywhere (connect-src above still allows no other origin). Camera,
+ * microphone and the rest stay off, so a compromised dependency cannot
+ * quietly reach for them. If a feature that needs one of these is ever
+ * added, allow it here for `self` in the same change.
  */
 const permissionsPolicy = [
-  "geolocation=()",
+  "geolocation=(self)",
   "camera=()",
   "microphone=()",
   "payment=()",

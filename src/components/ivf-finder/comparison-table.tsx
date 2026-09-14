@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Check, X } from "lucide-react";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { rateBandLabel, rateFor } from "@/lib/clinics";
+import { distanceMiles, formatMiles, type FinderLocation } from "@/lib/geo";
 import { travelEstimateForCity, TRAVEL_ASSUMPTIONS, TRAVEL_ESTIMATE_SCOPE } from "@/lib/travel";
 import {
   BADGE_CLINIC,
@@ -18,6 +19,8 @@ interface ComparisonTableProps {
   clinics: Clinic[];
   ageBracket: AgeBracket;
   ageBracketLabel: string;
+  /** Adds a distance column when the finder has a location to measure from. */
+  origin?: FinderLocation | null;
   onRemove: (slug: string) => void;
 }
 
@@ -35,7 +38,13 @@ const DONOR_LABELS: Record<NonNullable<Clinic["donorAnonymity"]>, string> = {
  * figures carry different measures and the HFEA advises against reading
  * small differences as a ranking.
  */
-export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove }: ComparisonTableProps) {
+export function ComparisonTable({
+  clinics,
+  ageBracket,
+  ageBracketLabel,
+  origin = null,
+  onRemove,
+}: ComparisonTableProps) {
   if (clinics.length < 2) return null;
 
   const headerCell =
@@ -64,6 +73,11 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
               <th className={headerCell}>{PRICE_HEADLINE}</th>
               <th className={headerCell}>{PRICE_HEADLINE_TRAVEL}</th>
               <th className={headerCell}>Location</th>
+              {origin && (
+                <th className={headerCell}>
+                  Distance from {origin.source === "device" ? "you" : origin.label}
+                </th>
+              )}
               <th className={headerCell}>Donor anonymity</th>
               <th className={headerCell}>Remote consultation</th>
               <th className={headerCell}>Treatments</th>
@@ -139,6 +153,9 @@ export function ComparisonTable({ clinics, ageBracket, ageBracketLabel, onRemove
                     )}
                   </td>
                   <td className={bodyCell}>{clinic.region}</td>
+                  {origin && (
+                    <td className={bodyCell}>{formatMiles(distanceMiles(origin, clinic.coordinates))}</td>
+                  )}
                   <td className={bodyCell}>
                     {clinic.donorAnonymity != null ? (
                       DONOR_LABELS[clinic.donorAnonymity]
