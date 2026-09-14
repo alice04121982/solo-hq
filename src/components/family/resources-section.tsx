@@ -43,12 +43,12 @@ export function ResourcesSection({ resources }: ResourcesSectionProps) {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {guides.map((guide) => (
             <Link
               key={guide.slug}
               href={`/resources/${guide.slug}`}
-              className="group flex flex-col gap-2 p-6 bg-white hover:bg-[var(--card-bg)] transition-colors duration-150"
+              className="group flex flex-col gap-2 p-6 rounded-2xl bg-white hover:bg-[var(--card-bg)] transition-colors duration-150"
             >
               <span
                 className="inline-block text-[12px] font-[600] uppercase tracking-[0.1em] font-sans rounded-full px-2.5 py-1 w-fit"

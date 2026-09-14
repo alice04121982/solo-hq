@@ -148,7 +148,7 @@ export function ShareStoryForm() {
             id="ss-pathway"
             value={pathway}
             onChange={(e) => setPathway(e.target.value)}
-            className={inputClass}
+            className={`select-chevron ${inputClass}`}
           >
             <option value="">Choose one, if one fits</option>
             {FAMILY_TYPES.map((f) => (
@@ -169,7 +169,7 @@ export function ShareStoryForm() {
           id="ss-stage"
           value={stage}
           onChange={(e) => setStage(e.target.value)}
-          className={inputClass}
+          className={`select-chevron ${inputClass}`}
         >
           <option value="">Choose the closest</option>
           {STAGES.map((s) => (

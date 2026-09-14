@@ -198,6 +198,17 @@
    These live in @layer components so Tailwind utilities on the same element
    still win — an unlayered rule here would silently beat them. */
 @layer components {
+  /* Native selects: hide the browser arrow and draw our own chevron with
+     breathing room on the right, so the text never runs into it. */
+  .select-chevron {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23005353' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='m6 9 6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 14px 14px;
+    padding-right: 2.5rem;
+  }
+
   .clinic-card {
     --card-surface:            var(--background);
     /* No resting stroke: a white card on the cream band is defined by its

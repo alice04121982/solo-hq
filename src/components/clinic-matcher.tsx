@@ -699,7 +699,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 max-w-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
           {matches.length} clinic{matches.length !== 1 ? "s" : ""} match
         </p>
@@ -708,7 +708,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="rounded-full border border-border bg-background px-3 py-1.5 text-[13px] font-sans text-foreground"
+            className="select-chevron rounded-full border border-border bg-background pl-4 py-1.5 text-[13px] font-sans text-foreground"
           >
             <option value="name">Name, A to Z</option>
             <option value="price">Headline price{s.travel === "uk-only" ? "" : " + travel estimate"}</option>
