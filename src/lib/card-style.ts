@@ -23,16 +23,20 @@
  * Both drop the grey border entirely (grey on the cream band goes muddy) and
  * share the same dark-green hover.
  *
- * The default below is what ships. `?cards=paper|outline` on the finder
+ * The finder ships on `teal`, the same fill as the matcher, with white
+ * controls and inks that pass AA at 12px. `?cards=paper|outline` on the
+ * finder overrides it, so the light options can still be compared without a
+ * rebuild.
+|outline` on the finder
  * overrides it, so the two can be flipped between without a rebuild.
  */
 export type ClinicCardVariant = "paper" | "outline" | "cream" | "teal";
 
-/** The two the finder can flip between; `cream` and `teal` are for the matcher. */
+/** The light options the finder can be flipped to for comparison; `cream` is for the matcher. */
 export const CLINIC_CARD_VARIANTS: ClinicCardVariant[] = ["paper", "outline"];
 
-/** The results grid ships on paper. */
-export const DEFAULT_RESULT_VARIANT: ClinicCardVariant = "paper";
+/** The results grid ships on the dark-green fill (owner decision, 2026-09-14). */
+export const DEFAULT_RESULT_VARIANT: ClinicCardVariant = "teal";
 
 /** The URL parameter that overrides the grid. */
 export const CARD_VARIANT_PARAM = "cards";
