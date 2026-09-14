@@ -433,7 +433,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     typicalCost: "Add-ons are charged on top of the cycle price; declining them is the cheapest decision on this page.",
     riskHolder: "You: this is money spent, not risk transferred.",
     howItWorks: [
-      "The HFEA rates each add-on green, yellow, grey, black or red, based on evidence from trials. When we checked, no add-on was rated green.",
+      "The HFEA rates each add-on green, yellow, grey, black or red, based on evidence from trials, and rates some add-ons separately for different outcomes. When we checked, no add-on was rated green for improving the chance of a baby.",
       "Ask any clinic proposing one: what is its HFEA rating, what would it cost, and what is the evidence it improves live birth for someone with my diagnosis?",
     ],
     suits: ["Everyone paying privately, and anyone being offered a long list of extras at consultation"],
