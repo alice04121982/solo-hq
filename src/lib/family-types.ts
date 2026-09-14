@@ -94,6 +94,69 @@ const SURROGACY_REFORM =
 
 export const FAMILY_TYPES: FamilyType[] = [
   {
+    slug: "heterosexual-couple",
+    label: "Mum and Dad",
+    headline: "When getting pregnant\nneeds help.",
+    heroCopy:
+      "For couples who need help conceiving: investigations, diagnosis, NHS and private options, and treatment from stimulation to transfer. Start at the step you are on.",
+    cardSummary:
+      "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
+    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
+    steps: [
+      {
+        number: 1,
+        title: "Initial investigations for both of you",
+        body: "Fertility investigation is a two-person process. For women: AMH, AFC, day 2/3 bloods, and ideally a HyCoSy (tube patency test). For men: a semen analysis covering count, motility, and morphology. These tests take 2–4 weeks and give your clinic the information they need to recommend the right treatment route.",
+      },
+      {
+        number: 2,
+        title: "Understand your diagnosis",
+        body: "The most common diagnoses are male factor infertility (MFI, which is common), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, about 1 in 4 couples according to the NHS). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
+      },
+      {
+        number: 3,
+        title: "Explore your treatment options",
+        body: "IUI (intrauterine insemination) works for mild MFI and ovulatory dysfunction; it's less invasive and cheaper. IVF suits moderate-to-severe MFI, tubal issues, or unexplained infertility after IUI fails. ICSI (injecting a single sperm directly into an egg) is used for severe MFI or fertilisation failure. Donor eggs or sperm are options when your own gametes aren't viable. If you need a surrogate (after a hysterectomy, for example), the surrogacy steps in our two-dads guide are the same for any couple.",
+      },
+      {
+        number: 4,
+        title: "NHS vs private: understanding your options",
+        body: "NHS IVF funding in England varies by Integrated Care Board. Most English boards fund one cycle, and only two fund the three NICE recommends (PET, February 2026). Check your local criteria carefully; they vary by age, BMI and existing children. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
+      },
+      {
+        number: 5,
+        title: "Starting IVF: stimulation and egg collection",
+        body: "IVF begins with ovarian stimulation injections (typically 10–14 days). You'll have regular monitoring scans to track follicle growth. Egg collection is a day-case procedure under sedation. Your partner provides a sperm sample the same day. Fertilisation happens in the lab overnight. You'll hear how many embryos have developed the next morning.",
+      },
+      {
+        number: 6,
+        title: "Embryo transfer and the two-week wait",
+        body: "The best embryo is selected for transfer, usually on day 5 (blastocyst stage). Transfer is usually quick and feels similar to a smear test; tell your clinic if smears are difficult for you. Then comes the two-week wait before a pregnancy test.",
+      },
+      {
+        number: 7,
+        title: "After a cycle: the review",
+        body: "Most IVF cycles don't succeed first time. After a failed cycle your consultant should offer a review: what happened, what (if anything) can be changed, and whether to proceed with a frozen embryo transfer (if you have frozen embryos) or a new cycle.",
+      },
+      {
+        number: 8,
+        title: "Pregnancy after IVF",
+        body: "Anxiety in pregnancy after fertility treatment is common, even when everything looks fine. Stay in contact with your clinic until the midwife handover, and tell your midwife you've been through IVF; it changes the care they offer.",
+      },
+    ],
+    stories: [],
+    clinicNote:
+      "Use our comparison tool to filter by the treatment you need (IVF, ICSI, IUI or donor gametes), then compare success rates for your age group alongside cost, waiting times and how the clinic treats patients. A clinic's rate is an average, not your personal chance.",
+    resources: [
+      "iui-vs-ivf-vs-donor-eggs",
+      "consultation-questions",
+      "understanding-hfea-success-rates",
+      "complete-solo-ivf-cost-breakdown",
+      "ivf-budget-template",
+      "donor-conception-legal-parenthood",
+    ],
+  },
+  {
     slug: "solo-mum",
     label: "Solo Mums",
     headline: "Having a baby\non your own.",
@@ -156,6 +219,68 @@ export const FAMILY_TYPES: FamilyType[] = [
       "consultation-questions",
       "donor-conception-legal-parenthood",
       "iui-vs-ivf-vs-donor-eggs",
+      "talking-to-child-donor-conception",
+    ],
+  },
+  {
+    slug: "single-dad",
+    label: "Solo Dads",
+    headline: "Solo fatherhood\nvia surrogacy.",
+    heroCopy:
+      "For a man having a baby on his own through surrogacy with donor eggs: the legal steps, finding a surrogate, treatment, and the parental order. It is possible, but it often takes a long time and involves a court process.",
+    cardSummary:
+      "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
+    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
+    steps: [
+      {
+        number: 1,
+        title: "Know your legal landscape",
+        body: `UK surrogacy is legal and altruistic. ${SURROGACY_COSTS} The surrogate is the legal mother at birth, regardless of genetics. Since 3 January 2019 a single applicant can apply for a parental order (section 54A of the Human Fertilisation and Embryology Act 2008) if your own sperm was used, the child's home is with you and you are domiciled in the UK. ${SURROGACY_REFORM} Get specialist legal advice from a surrogacy solicitor at the start.`,
+      },
+      {
+        number: 2,
+        title: "Connect with the surrogacy organisations",
+        body: "Solo fatherhood via surrogacy is less common than for couples. Surrogacy UK, Brilliant Beginnings and My Surrogacy Journey match intended parents with surrogates; ask each whether it works with single intended fathers. There are more intended parents than surrogates, so matching can take a long time.",
+      },
+      {
+        number: 3,
+        title: "Find your surrogate",
+        body: "The matching process involves conversations about values, expectations for the relationship during and after pregnancy, and what role (if any) your surrogate would like in your child's life.",
+      },
+      {
+        number: 4,
+        title: "Choose your egg donor",
+        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. When choosing, consider health screening and whether the donor has donated before.",
+      },
+      {
+        number: 5,
+        title: "IVF treatment",
+        body: "Your sperm is used to fertilise the donor eggs via IVF or ICSI at an HFEA-licensed clinic. Resulting embryos are graded and a selected embryo is transferred to your surrogate. Many dads freeze additional embryos at this stage, preserving the option for a second child from the same donor.",
+      },
+      {
+        number: 6,
+        title: "Supporting your surrogate",
+        body: "Most arrangements involve regular contact and attending scans where invited. Agree boundaries and expectations early, and revisit them as the pregnancy goes on.",
+      },
+      {
+        number: 7,
+        title: "Birth and parental order",
+        body: "Apply for your parental order within 6 months of the birth. As a single applicant you must show that your sperm was used, that the child's home is with you and that you are domiciled in the UK; the surrogate's consent counts only once the child is at least six weeks old. The process is possible, but it often takes a long time and involves a court process. A specialist solicitor usually prepares the application.",
+      },
+      {
+        number: 8,
+        title: "Solo fatherhood: building your village",
+        body: "Arrange practical childcare, trusted family or friends, and contact with other solo parents before your child arrives. The wider solo parent networks include solo dads by choice.",
+      },
+    ],
+    stories: [],
+    clinicNote:
+      "Filter our comparison tool for donor egg IVF and ICSI, then ask each clinic how many single intended fathers and surrogacy arrangements it has treated.",
+    resources: [
+      "consultation-questions",
+      "donor-conception-legal-parenthood",
+      "complete-solo-ivf-cost-breakdown",
+      "understanding-hfea-success-rates",
       "talking-to-child-donor-conception",
     ],
   },
@@ -283,131 +408,6 @@ export const FAMILY_TYPES: FamilyType[] = [
       "complete-solo-ivf-cost-breakdown",
       "understanding-hfea-success-rates",
       "talking-to-child-donor-conception",
-    ],
-  },
-  {
-    slug: "single-dad",
-    label: "Solo Dads",
-    headline: "Solo fatherhood\nvia surrogacy.",
-    heroCopy:
-      "For a man having a baby on his own through surrogacy with donor eggs: the legal steps, finding a surrogate, treatment, and the parental order. It is possible, but it often takes a long time and involves a court process.",
-    cardSummary:
-      "For men having a baby on their own: the surrogacy process, the legal steps, and life as a solo dad.",
-    treatmentHighlight: "Surrogacy · IVF · ICSI · Donor Eggs",
-    steps: [
-      {
-        number: 1,
-        title: "Know your legal landscape",
-        body: `UK surrogacy is legal and altruistic. ${SURROGACY_COSTS} The surrogate is the legal mother at birth, regardless of genetics. Since 3 January 2019 a single applicant can apply for a parental order (section 54A of the Human Fertilisation and Embryology Act 2008) if your own sperm was used, the child's home is with you and you are domiciled in the UK. ${SURROGACY_REFORM} Get specialist legal advice from a surrogacy solicitor at the start.`,
-      },
-      {
-        number: 2,
-        title: "Connect with the surrogacy organisations",
-        body: "Solo fatherhood via surrogacy is less common than for couples. Surrogacy UK, Brilliant Beginnings and My Surrogacy Journey match intended parents with surrogates; ask each whether it works with single intended fathers. There are more intended parents than surrogates, so matching can take a long time.",
-      },
-      {
-        number: 3,
-        title: "Find your surrogate",
-        body: "The matching process involves conversations about values, expectations for the relationship during and after pregnancy, and what role (if any) your surrogate would like in your child's life.",
-      },
-      {
-        number: 4,
-        title: "Choose your egg donor",
-        body: "In the UK, egg donors are identifiable at your child's request from age 18. UK egg banks are available. A UK clinic can also import eggs from an overseas bank, but only from donors who meet UK rules, including being identifiable to your child at 18. Ask your clinic to confirm this before you choose. When choosing, consider health screening and whether the donor has donated before.",
-      },
-      {
-        number: 5,
-        title: "IVF treatment",
-        body: "Your sperm is used to fertilise the donor eggs via IVF or ICSI at an HFEA-licensed clinic. Resulting embryos are graded and a selected embryo is transferred to your surrogate. Many dads freeze additional embryos at this stage, preserving the option for a second child from the same donor.",
-      },
-      {
-        number: 6,
-        title: "Supporting your surrogate",
-        body: "Most arrangements involve regular contact and attending scans where invited. Agree boundaries and expectations early, and revisit them as the pregnancy goes on.",
-      },
-      {
-        number: 7,
-        title: "Birth and parental order",
-        body: "Apply for your parental order within 6 months of the birth. As a single applicant you must show that your sperm was used, that the child's home is with you and that you are domiciled in the UK; the surrogate's consent counts only once the child is at least six weeks old. The process is possible, but it often takes a long time and involves a court process. A specialist solicitor usually prepares the application.",
-      },
-      {
-        number: 8,
-        title: "Solo fatherhood: building your village",
-        body: "Arrange practical childcare, trusted family or friends, and contact with other solo parents before your child arrives. The wider solo parent networks include solo dads by choice.",
-      },
-    ],
-    stories: [],
-    clinicNote:
-      "Filter our comparison tool for donor egg IVF and ICSI, then ask each clinic how many single intended fathers and surrogacy arrangements it has treated.",
-    resources: [
-      "consultation-questions",
-      "donor-conception-legal-parenthood",
-      "complete-solo-ivf-cost-breakdown",
-      "understanding-hfea-success-rates",
-      "talking-to-child-donor-conception",
-    ],
-  },
-  {
-    slug: "heterosexual-couple",
-    label: "Couples (opposite-sex)",
-    headline: "When getting pregnant\nneeds help.",
-    heroCopy:
-      "For couples who need help conceiving: investigations, diagnosis, NHS and private options, and treatment from stimulation to transfer. Start at the step you are on.",
-    cardSummary:
-      "For couples who need help conceiving: investigations, diagnoses, and choosing a treatment.",
-    treatmentHighlight: "IUI · IVF · ICSI · Donor Sperm · Donor Eggs · Double Donation",
-    steps: [
-      {
-        number: 1,
-        title: "Initial investigations for both of you",
-        body: "Fertility investigation is a two-person process. For women: AMH, AFC, day 2/3 bloods, and ideally a HyCoSy (tube patency test). For men: a semen analysis covering count, motility, and morphology. These tests take 2–4 weeks and give your clinic the information they need to recommend the right treatment route.",
-      },
-      {
-        number: 2,
-        title: "Understand your diagnosis",
-        body: "The most common diagnoses are male factor infertility (MFI, which is common), PCOS (polycystic ovary syndrome), endometriosis, low ovarian reserve, or 'unexplained infertility' (no identifiable cause, about 1 in 4 couples according to the NHS). Each has different treatment implications. Ask your consultant to explain the evidence for your specific situation.",
-      },
-      {
-        number: 3,
-        title: "Explore your treatment options",
-        body: "IUI (intrauterine insemination) works for mild MFI and ovulatory dysfunction; it's less invasive and cheaper. IVF suits moderate-to-severe MFI, tubal issues, or unexplained infertility after IUI fails. ICSI (injecting a single sperm directly into an egg) is used for severe MFI or fertilisation failure. Donor eggs or sperm are options when your own gametes aren't viable. If you need a surrogate (after a hysterectomy, for example), the surrogacy steps in our two-dads guide are the same for any couple.",
-      },
-      {
-        number: 4,
-        title: "NHS vs private: understanding your options",
-        body: "NHS IVF funding in England varies by Integrated Care Board. Most English boards fund one cycle, and only two fund the three NICE recommends (PET, February 2026). Check your local criteria carefully; they vary by age, BMI and existing children. If you don't qualify or can't wait, private treatment gives you more control over timing and clinic choice.",
-      },
-      {
-        number: 5,
-        title: "Starting IVF: stimulation and egg collection",
-        body: "IVF begins with ovarian stimulation injections (typically 10–14 days). You'll have regular monitoring scans to track follicle growth. Egg collection is a day-case procedure under sedation. Your partner provides a sperm sample the same day. Fertilisation happens in the lab overnight. You'll hear how many embryos have developed the next morning.",
-      },
-      {
-        number: 6,
-        title: "Embryo transfer and the two-week wait",
-        body: "The best embryo is selected for transfer, usually on day 5 (blastocyst stage). Transfer is usually quick and feels similar to a smear test; tell your clinic if smears are difficult for you. Then comes the two-week wait before a pregnancy test.",
-      },
-      {
-        number: 7,
-        title: "After a cycle: the review",
-        body: "Most IVF cycles don't succeed first time. After a failed cycle your consultant should offer a review: what happened, what (if anything) can be changed, and whether to proceed with a frozen embryo transfer (if you have frozen embryos) or a new cycle.",
-      },
-      {
-        number: 8,
-        title: "Pregnancy after IVF",
-        body: "Anxiety in pregnancy after fertility treatment is common, even when everything looks fine. Stay in contact with your clinic until the midwife handover, and tell your midwife you've been through IVF; it changes the care they offer.",
-      },
-    ],
-    stories: [],
-    clinicNote:
-      "Use our comparison tool to filter by the treatment you need (IVF, ICSI, IUI or donor gametes), then compare success rates for your age group alongside cost, waiting times and how the clinic treats patients. A clinic's rate is an average, not your personal chance.",
-    resources: [
-      "iui-vs-ivf-vs-donor-eggs",
-      "consultation-questions",
-      "understanding-hfea-success-rates",
-      "complete-solo-ivf-cost-breakdown",
-      "ivf-budget-template",
-      "donor-conception-legal-parenthood",
     ],
   },
 ];

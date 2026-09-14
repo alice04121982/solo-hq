@@ -87,6 +87,15 @@ canonical names in new code.
   card. The one standing exception is the decorative backdrop shape on a
   cream band, which `Section` still draws in `--lavender-light`; treat that
   as a site-wide decision to revisit rather than a pattern to copy.
+- **No lime on pink. Ever.** `--accent`, `--accent-soft`, `--accent-dark`,
+  `--accent-pale` and `--lime` never sit on `--lavender` (the CTA band or
+  any other pink surface), as a fill, a mark, a badge or text. Lime on
+  bubblegum pink vibrates. On the pink band the only inks are dark green
+  (`--teal`) and white (`--background`): the primary button is `--teal`
+  with white text, the secondary button is a `--teal-35` outline with
+  `--teal` text, and shape marks are `--teal` (or `--lavender-dark` for
+  tone-on-tone). The owner ruled on this on 2026-09-14 after seeing the
+  lime "Apply to Join" button on the pink community band.
 - **Content boxes are white on a tinted band, cream on a white one.** Cards,
   notices, callouts, panels and form containers take `--background` on cream
   or teal and `--cream` on white — never `--surface-sunken` or
@@ -126,6 +135,7 @@ existing sections. Follow the homepage as the reference rhythm.
 1. Is it a token (Tailwind class or `var(--token)`), not a hex literal?
 1. Is it grey or pink, and could it ever sit on a cream band? If so, swap it
    for the warm or brand-tinted equivalent (grey) or move it off cream (pink).
+1. Is it lime, and does it sit on the pink band? If so, use `--teal` or white.
 1. Is it a border on a card? Cards have no resting border — check the fill
    contrasts with the band instead.
 2. Does the text/icon colour match the surface it sits on (on-teal set for

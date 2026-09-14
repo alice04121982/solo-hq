@@ -9,11 +9,11 @@ const PINK_MUTED = "#c4a0ae";
 // drift from the labels used on the family pages themselves, in the same
 // display order as the /families index.
 const FAMILY_ORDER = [
+  "heterosexual-couple",
   "solo-mum",
   "single-dad",
   "same-sex-female",
   "same-sex-male",
-  "heterosexual-couple",
 ];
 const FAMILY_LINKS = [...FAMILY_TYPES]
   .sort((a, b) => FAMILY_ORDER.indexOf(a.slug) - FAMILY_ORDER.indexOf(b.slug))

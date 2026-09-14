@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
 
-// Same display order as /families: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad.
-const FAMILY_DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
+// Same display order as /families: Mum and Dad, Solo Mums, Solo Dads, Two Mums, Two Dads.
+const FAMILY_DISPLAY_ORDER = ["heterosexual-couple", "solo-mum", "single-dad", "same-sex-female", "same-sex-male"];
 
 function orderedFamilies(): FamilyType[] {
   return FAMILY_DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);

@@ -61,7 +61,7 @@ export function CTASection() {
               <a
                 href="/community#apply"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
-                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+                style={{ background: "var(--teal)", color: "var(--background)" }}
               >
                 Apply to Join
                 <ArrowRight className="h-4 w-4" />
@@ -87,11 +87,12 @@ export function CTASection() {
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
               <ImagePlaceholder />
             </div>
-            {/* A spark pinned over the photo's corner, turning slowly. */}
+            {/* A spark pinned over the photo's corner, turning slowly. Teal,
+                not lime: lime never sits on the pink band. */}
             <Spark
               size={76}
               className="shape-spin absolute -top-6 -left-6"
-              style={{ color: "var(--accent)" }}
+              style={{ color: "var(--teal)" }}
             />
           </div>
         </div>
