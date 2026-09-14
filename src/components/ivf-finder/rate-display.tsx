@@ -39,6 +39,22 @@ export function VerificationBadge({ verification }: { verification: "hfea" | "cl
 }
 
 /**
+ * The small label over a figure on a clinic card ("Your age group",
+ * "Headline price"), so the finder and the matcher label their figures the
+ * same way. Ink follows the card.
+ */
+export function FigureLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      className="text-[11px] font-sans font-semibold uppercase tracking-[0.12em] whitespace-nowrap mb-1"
+      style={{ color: "var(--card-ink-muted, var(--muted))" }}
+    >
+      {children}
+    </p>
+  );
+}
+
+/**
  * A clinic's headline figure for the selected bracket: the number, then what
  * it measures, which year and who published it. UK figures also name the
  * HFEA band the bracket falls in and the register's verdict against the

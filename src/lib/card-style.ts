@@ -8,6 +8,10 @@
  *            is the only colour on the card.
  *   outline  no fill at all: the cream band shows through a teal hairline.
  *            The most editorial, and the lightest on the page.
+ *   cream    cream fill, no edge. For a card that sits on a white surface
+ *            (the clinic matcher's results panel), where paper would vanish
+ *            and the token rules put a cream fill on white. Not selectable
+ *            on the finder, whose band is already cream.
  *
  * A pale-yellow fill was tried and dropped: yellow cards on the pink band
  * clash, so the citrus surface is deliberately not an option here. The badge
@@ -19,8 +23,9 @@
  * The default below is what ships. `?cards=paper|outline` on the finder
  * overrides it, so the two can be flipped between without a rebuild.
  */
-export type ClinicCardVariant = "paper" | "outline";
+export type ClinicCardVariant = "paper" | "outline" | "cream";
 
+/** The two the finder can flip between; `cream` is for white surfaces only. */
 export const CLINIC_CARD_VARIANTS: ClinicCardVariant[] = ["paper", "outline"];
 
 /** The results grid ships on paper. */
@@ -38,6 +43,7 @@ export function parseCardVariant(raw: string | null): ClinicCardVariant | null {
 const VARIANT_CLASS: Record<ClinicCardVariant, string> = {
   paper: "",
   outline: "clinic-card--outline",
+  cream: "clinic-card--cream",
 };
 
 /**
@@ -51,7 +57,7 @@ export function clinicCardClasses(variant: ClinicCardVariant, isSelected: boolea
     "clinic-card",
     VARIANT_CLASS[variant],
     isSelected && "clinic-card--selected",
-    "rounded-[24px] p-5 flex flex-col",
+    "rounded-[24px] p-6 flex flex-col",
   ]
     .filter(Boolean)
     .join(" ");

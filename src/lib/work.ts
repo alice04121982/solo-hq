@@ -270,43 +270,12 @@ export const NAMED_EMPLOYERS: NamedEmployer[] = [
   },
 ];
 
-/* ── Finding out what you have ───────────────────────────────────────────── */
-
-export interface AuditStep {
-  title: string;
-  body: string;
-}
-
-export const AUDIT_STEPS: AuditStep[] = [
-  {
-    title: "Search the benefits portal before you ask anyone",
-    body: "Search for 'fertility', 'IVF', 'family forming' and 'family building' (the benefits-team terms). Schemes are frequently live but unadvertised, and this costs you nothing and tells nobody.",
-  },
-  {
-    title: "Check the private medical scheme separately",
-    body: "Some employers buy a fertility module on the corporate health plan rather than a standalone benefit. It will not appear under 'fertility' in the benefits list.",
-  },
-  {
-    title: "Check whether it covers you",
-    body: "Ask whether the benefit is available to solo parents and same-sex couples, whether a partner is covered, and whether it covers surrogacy. Well-designed schemes are written around family building rather than an infertility diagnosis; older ones are not.",
-  },
-  {
-    title: "Ask what is inside the money",
-    body: "Drugs, donor sperm or eggs, storage and frozen transfers are the items most often outside a stated fund, and together they are a large share of the real bill.",
-  },
-  {
-    title: "Ask about clinic restrictions and waiting periods",
-    body: "Whether treatment must be at a partner clinic, and whether there is a qualifying period after joining, decide whether the benefit is usable on the timeline you are actually on.",
-  },
-  {
-    title: "Ask what happens if you leave",
-    body: "Mid-treatment departures are common and rarely covered by the announcement. Get the answer before you need it.",
-  },
-];
-
 /* ── Scripts ─────────────────────────────────────────────────────────────── */
 
-/** The first email to HR, verbatim from the former employer-benefits guide (contract C9). */
+/**
+ * The short first email to HR, verbatim from the former employer-benefits
+ * guide (contract C9). The fuller versions are built in benefits-audit.tsx.
+ */
 export const HR_FIRST_EMAIL =
   "Hi [Name], I wanted to ask whether our benefits package includes any support for fertility treatment or IVF. I understand this is becoming more common and wanted to understand what might be available before I make any plans. Happy to chat if useful. Thanks, [Your name]";
 

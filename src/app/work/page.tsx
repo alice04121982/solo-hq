@@ -8,15 +8,12 @@ import { HeaderShapes, type HeaderMark } from "@/components/header-shapes";
 import { ShapeMark } from "@/components/shapes";
 import { StatCard } from "@/components/stat-card";
 import { ConversationToolkit } from "@/components/conversation-toolkit";
-import { CopyButton } from "@/components/copy-button";
 import { BenefitsAudit } from "@/components/work/benefits-audit";
 import { RightsExplorer } from "@/components/work/rights-explorer";
 import {
   AFTER_TREATMENT_SIGNPOSTS,
-  AUDIT_STEPS,
   BENEFIT_SHAPES,
   CASE_SOURCES,
-  HR_FIRST_EMAIL,
   NAMED_EMPLOYERS,
   PLATFORM_LINE,
   POLICY_ELEMENTS,
@@ -112,8 +109,7 @@ export default function WorkPage() {
             <a
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-full border border-teal/20 px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
-              style={{ color: TEAL }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-sans text-teal transition-colors hover:bg-teal hover:text-white"
             >
               {l.label}
             </a>
@@ -319,14 +315,19 @@ export default function WorkPage() {
           className="font-sans font-bold mb-5"
           style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
         >
-          The audit, and the email.
+          The email to send.
         </h2>
+        <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "62ch" }}>
+          Search your benefits portal for &lsquo;fertility&rsquo;, &lsquo;IVF&rsquo; and
+          &lsquo;family forming&rsquo; before you ask anyone. Schemes are often live but
+          unadvertised, and a search tells nobody.
+        </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Six questions separate a benefit that will pay for treatment from one that will not. This
-          builds the email that asks them, to HR or a recruiter, without disclosing your plans.
+          Then send one email. The full version asks the five questions that separate a benefit
+          that pays for treatment from one that does not, and says nothing about your own plans.
         </p>
 
-        <BenefitsAudit steps={AUDIT_STEPS} />
+        <BenefitsAudit />
       </Section>
 
       <Section band={5} id="asking" className="border-t border-border scroll-mt-20">
@@ -343,40 +344,18 @@ export default function WorkPage() {
         >
           You decide how much anyone knows.
         </h2>
-        {/* The first email: verbatim from the former employer-benefits guide (C9) */}
-        <div
-          className="mt-10 mb-12 rounded-2xl border bg-background p-5 md:p-7"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="flex items-center justify-between gap-3 mb-4">
-            <p
-              className="inline-block rounded-full px-3 py-1 text-[11px] font-[700] uppercase tracking-[0.16em] font-sans"
-              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
-            >
-              A first email to HR
-            </p>
-            <CopyButton text={HR_FIRST_EMAIL} />
-          </div>
-          <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
-            {HR_FIRST_EMAIL}
-          </p>
-          <p className="text-[13px] font-sans leading-relaxed text-muted mt-4">
-            You do not need to say why you are asking.
-          </p>
-        </div>
-
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Pick the conversation you are having. Every line is written to be said out loud.
+          Pick the conversation you are having. Every line is written to be said out loud, and the
+          last one closes it.
         </p>
 
         <ConversationToolkit
+          compact
           scenarios={WORK_SCENARIOS}
           labels={{
             tablist: "Conversations at work",
             context: "What's usually going on",
-            notYourJob: "You don't have to",
             scripts: "Things you can actually say",
-            exit: "How to close it",
           }}
         />
       </Section>
