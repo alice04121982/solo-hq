@@ -1,0 +1,28 @@
+# Keeps the two things that drift on their own current: npm dependencies and
+# the pinned Actions in the workflows. The August 2026 review left npm audit
+# at zero; four weeks later Next.js carried a critical advisory. A weekly
+# pull request is cheaper than finding that out in an audit.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:30"
+      timezone: Europe/London
+    open-pull-requests-limit: 5
+    groups:
+      # Next and its ESLint config move together; a mismatch fails the build.
+      next:
+        patterns: ["next", "eslint-config-next"]
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:30"
+      timezone: Europe/London

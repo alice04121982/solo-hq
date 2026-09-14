@@ -97,10 +97,11 @@ publication has reported and are not findings of our own.
 | Variable | Where | Purpose |
 |---|---|---|
 | `SUPABASE_URL` | Vercel + local | Supabase project URL. |
-| `SUPABASE_ANON_KEY` | Vercel + local | Anon key. It can execute four functions and **read nothing** — every table has RLS on with no policies (see below). |
+| `SUPABASE_PUBLISHABLE_KEY` | Vercel + local | The `sb_publishable_…` key. It can execute four functions and **read nothing** — every table has RLS on with no policies (see below). Mark it Sensitive on Vercel. `SUPABASE_ANON_KEY` (the legacy JWT) is still accepted as a fallback; disable the legacy keys in the dashboard once this is set. |
 | `COMMUNITY_INVITE_URL` | Vercel + local | The group's join link. Server-only; returned by exactly one code path, a successful invite redemption. Never give it a `NEXT_PUBLIC_` name. |
 | `NEXT_PUBLIC_COMMUNITY_PLATFORM` | optional | Display name for the messaging platform, default `WhatsApp`. A word, not a secret. |
-| `SUPABASE_SERVICE_ROLE_KEY` | **local only** | Full database access, used by `npm run community`. Never set this on Vercel. |
+| `SUPABASE_SECRET_KEY` | **local only** | The `sb_secret_…` key: full database access, used by `npm run community`. Never set this on Vercel. `SUPABASE_SERVICE_ROLE_KEY` (legacy) is still accepted. |
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Vercel | Shared store for rate limiting (Upstash Redis from the Vercel Marketplace). Without them the limiter falls back to per-instance memory. |
 
 Create `.env.local` (git-ignored) with the variables above for local development.
 
@@ -114,7 +115,7 @@ the website holds has no privileges on any table.** Row-level security is on
 with no policies, plus an explicit `revoke all`. The site can only execute four
 `security definer` functions — submit a signup, submit an application, check an
 invite, redeem an invite. It cannot read the waitlist, read applications,
-approve anyone, or mint an invite; those need the service-role key, which lives
+approve anyone, or mint an invite; those need the secret key, which lives
 only on a reviewer's machine. A compromise of the website leaks nothing about
 who is on the list.
 

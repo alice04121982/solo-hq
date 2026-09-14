@@ -24,12 +24,14 @@
  * local script needs no login because it is not reachable. It runs with the
  * service-role key, which bypasses row-level security entirely.
  *
- * ── Handling the service-role key ──
- * SUPABASE_SERVICE_ROLE_KEY belongs in a local .env.local (git-ignored) and
- * NOWHERE ELSE. Never add it to Vercel, never paste it into a chat or an
- * issue, and rotate it in the Supabase dashboard if it is ever exposed. The
- * deployed app has no use for it: the site runs on the anon key, which cannot
- * read a single row of any of these tables.
+ * ── Handling the secret key ──
+ * SUPABASE_SECRET_KEY (an `sb_secret_…` key; the legacy
+ * SUPABASE_SERVICE_ROLE_KEY JWT is still accepted) belongs in
+ * ~/Developer/cairn/.env.local (git-ignored) and NOWHERE ELSE. Never add it
+ * to Vercel, never put it in a folder that syncs to iCloud, never paste it
+ * into a chat or an issue, and rotate it in the Supabase dashboard if it is
+ * ever exposed. The deployed app has no use for it: the site runs on the
+ * publishable key, which cannot read a single row of any of these tables.
  */
 import { readFileSync } from "node:fs";
 import { createHash, randomBytes } from "node:crypto";
@@ -57,7 +59,7 @@ function loadEnvFile(path = ".env.local") {
 loadEnvFile();
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
-const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SERVICE_KEY = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
 const SITE_ORIGIN = process.env.NEXT_PUBLIC_SITE_ORIGIN ?? "https://cairnfertility.vercel.app";
 
 /** Invite lifetime. Long enough to catch someone on holiday, short enough
@@ -83,7 +85,7 @@ const RETENTION_DAYS = {
 
 if (!SUPABASE_URL || !SERVICE_KEY) {
   console.error(
-    "SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set (put them in .env.local)."
+    "SUPABASE_URL and SUPABASE_SECRET_KEY must be set (put them in .env.local)."
   );
   process.exit(1);
 }

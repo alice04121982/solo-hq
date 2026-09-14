@@ -16,6 +16,13 @@
  * Variables), which overrides the constant without a code change. Before
  * doing either: pay the ICO fee, fill the controller name and address in
  * src/lib/legal.ts, and have a mailbox to send invites from.
+ *
+ * The database has the same switch (public.app_flags, migration 0005) and
+ * the submit functions refuse to write while it is off, so a leaked key
+ * cannot open the forms early. Flip both in the same sitting:
+ *
+ *   update public.app_flags set enabled = true, updated_at = now()
+ *    where key = 'forms_open';
  */
 
 const FORMS_OPEN_DEFAULT = false;
