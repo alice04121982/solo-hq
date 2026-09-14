@@ -51,6 +51,10 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
 
   const count = exclusions.length;
   const countries = [...new Set(exclusions.map((x) => x.country))];
+  const reasons = [...new Set(exclusions.map((x) => x.reason))];
+  const sources = exclusions
+    .flatMap((x) => x.sources)
+    .filter((src, i, all) => all.findIndex((s) => s.url === src.url) === i);
 
   return (
     <div
@@ -82,41 +86,32 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
 
       {open && (
         <div className="mt-4 space-y-5 pl-7">
-          <p className="text-xs text-muted leading-relaxed">
-            We do not list these clinics while the investigation reported below is open. This is
-            not a judgement of our own.
-          </p>
-          {exclusions.map((x) => (
-            <div key={x.name} className="border-l-2 border-teal/15 pl-4">
-              <p className="text-sm font-semibold text-teal-ink">
-                {x.name}, {x.country}
-              </p>
-              <p className="text-xs text-muted leading-relaxed mt-1">{x.reason}</p>
-              {x.response && (
-                <p className="text-xs text-muted leading-relaxed mt-2">
-                  <span className="font-medium text-teal-ink">Their response:</span> {x.response}
-                </p>
-              )}
-              <p className="text-xs text-muted leading-relaxed mt-2">
-                Sources:{" "}
-                {x.sources.map((src, i) => (
-                  <span key={src.url}>
-                    {i > 0 && "; "}
-                    <a
-                      href={src.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-teal hover:underline underline-offset-2"
-                    >
-                      {src.label}
-                      <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
-                    </a>
-                  </span>
-                ))}
-                .
-              </p>
-            </div>
+          {/* Neutral wording (see src/lib/clinic-exclusions.ts): one shared
+              reason, no clinic names, and the sources deduplicated across
+              entries, so nothing here attaches an allegation to a named clinic. */}
+          {reasons.map((reason) => (
+            <p key={reason} className="text-xs text-muted leading-relaxed">
+              {reason}
+            </p>
           ))}
+          <p className="text-xs text-muted leading-relaxed">
+            Reporting:{" "}
+            {sources.map((src, i) => (
+              <span key={src.url}>
+                {i > 0 && "; "}
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-teal hover:underline underline-offset-2"
+                >
+                  {src.label}
+                  <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+                </a>
+              </span>
+            ))}
+            .
+          </p>
           <p className="text-xs text-muted leading-relaxed">
             Each entry records what a named publication has reported and is reviewed on the
             date held with it. See{" "}
