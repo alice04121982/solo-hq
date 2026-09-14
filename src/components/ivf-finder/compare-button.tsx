@@ -50,7 +50,7 @@ export function CompareButton({ slug }: { slug: string }) {
             ? "bg-teal text-on-teal hover:opacity-90"
             : isFull
               ? "bg-background text-muted opacity-60 cursor-not-allowed"
-              : "bg-background text-teal hover:bg-surface-hover"
+              : "bg-background text-teal hover:bg-teal hover:text-white"
         }`}
       >
         {isSelected ? (

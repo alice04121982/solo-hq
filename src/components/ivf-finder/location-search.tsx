@@ -176,7 +176,7 @@ export function LocationSearch({ value, onChange }: LocationSearchProps) {
           type="button"
           onClick={useDevice}
           disabled={locating}
-          className="inline-flex items-center justify-center gap-2 h-11 rounded-full border border-teal/20 bg-background px-4 text-sm font-medium text-teal transition-colors hover:bg-surface-hover disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-2 h-11 rounded-full border border-teal/20 bg-background px-4 text-sm font-medium text-teal transition-colors hover:border-teal hover:bg-teal hover:text-white disabled:opacity-60"
         >
           <LocateFixed className={`h-4 w-4 ${locating ? "animate-pulse" : ""}`} aria-hidden />
           {locating ? "Finding you…" : "Use my location"}

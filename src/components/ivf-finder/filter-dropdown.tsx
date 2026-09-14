@@ -13,16 +13,16 @@ import { ChevronDown, X } from "lucide-react";
  * no-shadow elevation.
  */
 
-/** Shared trigger styling, so every pill in the row lines up. */
+/**
+ * Shared trigger styling, so every pill in the row lines up. Hover fills the
+ * pill teal and puts white text and a pink chevron on it; the resting colour
+ * lives in a class, never inline, so the hover can override it.
+ */
 const TRIGGER_BASE =
-  "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors";
+  "group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-teal hover:text-white";
 
 function triggerClasses(active: boolean): string {
-  return `${TRIGGER_BASE} ${
-    active
-      ? "bg-teal-10 text-teal"
-      : "bg-background text-teal hover:bg-surface-hover"
-  }`;
+  return `${TRIGGER_BASE} ${active ? "bg-teal-10 text-teal" : "bg-background text-teal"}`;
 }
 
 /** Panel width, matching the `w-64` below. Used for edge-collision checks. */
@@ -110,7 +110,7 @@ export function FilterDropdown({
       >
         <span className="max-w-[15rem] truncate">{triggerLabel}</span>
         <ChevronDown
-          className={`h-4 w-4 shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`h-4 w-4 shrink-0 transition-[transform,color] group-hover:text-on-teal ${open ? "rotate-180" : ""}`}
           aria-hidden
         />
       </button>

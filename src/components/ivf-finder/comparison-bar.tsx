@@ -54,7 +54,7 @@ export function ComparisonBar({ selected, onRemove, onCompare, onClear }: Compar
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={onClear}
-                className="text-on-teal-muted hover:text-on-teal text-xs transition-colors"
+                className="text-on-teal-body hover:text-on-teal text-xs transition-colors"
               >
                 Clear
               </button>

@@ -261,14 +261,14 @@ function FilterTag({
       type="button"
       onClick={onToggle}
       aria-pressed={active}
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+      className={`group inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
         active
-          ? "bg-teal text-on-teal"
-          : "bg-background text-teal hover:bg-surface-hover"
+          ? "bg-teal text-on-teal hover:text-white"
+          : "bg-background text-teal hover:bg-teal hover:text-white"
       }`}
     >
       {label}
-      {active && <X className="h-3 w-3" aria-hidden />}
+      {active && <X className="h-3 w-3 group-hover:text-on-teal transition-colors" aria-hidden />}
     </button>
   );
 }

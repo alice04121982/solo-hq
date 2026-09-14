@@ -31,9 +31,11 @@ interface ClinicCardProps {
  *
  * Elevation comes from surfaces and edges, never shadows, and never from grey:
  * these cards sit on the cream band, where a grey hairline reads as dirt over
- * the warm tone. Hovering fills the card with the brand teal and inverts
- * everything on it, and selection draws a 2px ring inset over the resting
- * border, so selecting a card never shifts its contents by a pixel.
+ * the warm tone. The card ships on the dark-green fill with pink and white
+ * inks and white controls, held still on hover (the controls are the way
+ * in). The light `paper` and `outline` variants invert to the same teal on
+ * hover. Selection draws a 2px ring inset over the resting border, so
+ * selecting a card never shifts its contents by a pixel.
  *
  * Every colour below is read from a custom property set by `.clinic-card`, so
  * the hover inversion needs no group-hover class on any child.
