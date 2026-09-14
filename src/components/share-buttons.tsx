@@ -59,7 +59,7 @@ export function ShareButtons({ title }: { title: string }) {
   };
 
   const btn =
-    "inline-flex items-center justify-center h-9 w-9 rounded-full border transition-colors hover:bg-background-alt";
+    "inline-flex items-center justify-center h-9 w-9 rounded-full bg-surface-hover transition-colors hover:bg-teal-10";
 
   return (
     <div className="flex flex-wrap items-center gap-2">

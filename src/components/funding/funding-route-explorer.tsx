@@ -52,11 +52,11 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
           type="button"
           onClick={() => setGroup("all")}
           aria-pressed={group === "all"}
-          className="rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150"
+          className="rounded-full px-4 py-2 text-sm font-sans transition-colors duration-150"
           style={
             group === "all"
-              ? { background: TEAL, borderColor: TEAL, color: "#FFFFFF" }
-              : { borderColor: "var(--border)", color: TEAL }
+              ? { background: TEAL, color: "#FFFFFF" }
+              : { color: TEAL, background: "var(--background)" }
           }
         >
           Everything ({routes.length})
@@ -70,11 +70,11 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
               type="button"
               onClick={() => setGroup(g.id)}
               aria-pressed={selected}
-              className="rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150"
+              className="rounded-full px-4 py-2 text-sm font-sans transition-colors duration-150"
               style={
                 selected
-                  ? { background: TEAL, borderColor: TEAL, color: "#FFFFFF" }
-                  : { borderColor: "var(--border)", color: TEAL }
+                  ? { background: TEAL, color: "#FFFFFF" }
+                  : { color: TEAL, background: "var(--background)" }
               }
             >
               {g.label} ({count})
@@ -188,8 +188,7 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
                           href={s.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
-                          style={{ borderColor: "var(--border)" }}
+                          className="inline-flex items-center gap-1.5 rounded-full bg-background px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
                         >
                           {s.label}
                           <ExternalLink className="h-3 w-3 shrink-0" />

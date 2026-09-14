@@ -45,12 +45,12 @@ export function CompareButton({ slug }: { slug: string }) {
       <button
         onClick={toggle}
         disabled={isFull}
-        className={`inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-full text-sm font-semibold border transition-colors ${
+        className={`inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-full text-sm font-semibold transition-colors ${
           isSelected
-            ? "bg-teal border-teal text-on-teal hover:opacity-90"
+            ? "bg-teal text-on-teal hover:opacity-90"
             : isFull
-              ? "bg-background border-teal/15 text-muted opacity-60 cursor-not-allowed"
-              : "bg-background border-teal/20 text-teal hover:bg-surface-hover"
+              ? "bg-background text-muted opacity-60 cursor-not-allowed"
+              : "bg-background text-teal hover:bg-surface-hover"
         }`}
       >
         {isSelected ? (

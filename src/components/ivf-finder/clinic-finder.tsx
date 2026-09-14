@@ -172,7 +172,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         <button
           type="button"
           onClick={() => setSheetOpen(true)}
-          className="flex items-center gap-2 rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-hover"
+          className="flex items-center gap-2 rounded-full bg-surface-hover px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-teal-10"
         >
           <SlidersHorizontal className="h-4 w-4" aria-hidden />
           Filters and sort

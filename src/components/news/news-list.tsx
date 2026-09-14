@@ -138,10 +138,10 @@ function TopicFilter({
         type="button"
         onClick={() => onChange(key)}
         aria-pressed={isActive}
-        className={`rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150 ${
+        className={`rounded-full px-4 py-2 text-sm font-sans transition-colors duration-150 ${
           isActive
-            ? "border-teal bg-teal text-on-teal"
-            : "border-border bg-background text-muted hover:bg-surface-hover hover:text-teal"
+            ? "bg-teal text-on-teal"
+            : "bg-background text-muted hover:bg-surface-hover hover:text-teal"
         }`}
       >
         {label}

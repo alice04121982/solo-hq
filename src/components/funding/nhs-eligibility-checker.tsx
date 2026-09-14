@@ -393,11 +393,11 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className="rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150"
+      className="rounded-full px-4 py-2 text-sm font-sans transition-colors duration-150"
       style={
         selected
-          ? { background: TEAL, borderColor: TEAL, color: "#FFFFFF" }
-          : { borderColor: "var(--border)", color: TEAL, background: "var(--background)" }
+          ? { background: TEAL, color: "#FFFFFF" }
+          : { color: TEAL, background: "var(--background)" }
       }
     >
       {children}
@@ -555,8 +555,8 @@ export function NHSEligibilityChecker() {
             <button
               type="button"
               onClick={() => setAnswers({})}
-              className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-sm font-sans transition-colors hover:bg-surface-hover"
-              style={{ borderColor: "var(--border)", color: TEAL }}
+              className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-3 text-sm font-sans transition-colors hover:bg-surface-hover"
+              style={{ color: TEAL }}
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Start again

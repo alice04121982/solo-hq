@@ -89,11 +89,11 @@ export function BenefitsAudit() {
               role="tab"
               aria-selected={selected}
               onClick={() => setVariant(v.value)}
-              className="rounded-full border px-4 py-2 text-sm font-sans transition-colors duration-150"
+              className="rounded-full px-4 py-2 text-sm font-sans transition-colors duration-150"
               style={
                 selected
-                  ? { background: TEAL, borderColor: TEAL, color: "#FFFFFF" }
-                  : { borderColor: "var(--border)", color: TEAL, background: "var(--background)" }
+                  ? { background: TEAL, color: "#FFFFFF" }
+                  : { color: TEAL, background: "var(--background)" }
               }
             >
               {v.label}

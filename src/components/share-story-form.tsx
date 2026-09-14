@@ -266,7 +266,7 @@ export function ShareStoryForm() {
           type="button"
           onClick={handleCopy}
           aria-disabled={!ready}
-          className={`inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3.5 text-sm font-sans font-medium transition-colors duration-200 ${
+          className={`inline-flex items-center justify-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-sans font-medium transition-colors duration-200 ${
             ready ? "hover:bg-surface-hover" : "opacity-50 cursor-not-allowed"
           }`}
           style={{ borderColor: "var(--teal-35)", color: "var(--teal)" }}

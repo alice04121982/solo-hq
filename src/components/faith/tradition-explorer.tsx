@@ -130,8 +130,7 @@ export function TraditionExplorer({ traditions }: { traditions: FaithTradition[]
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-sans text-[var(--teal)] transition-colors hover:bg-[var(--teal)] hover:text-white"
-                      style={{ borderColor: "var(--border)" }}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-background px-3.5 py-1.5 text-xs font-sans text-[var(--teal)] transition-colors hover:bg-[var(--teal)] hover:text-white"
                     >
                       {s.label}
                       <ExternalLink className="h-3 w-3 shrink-0" />

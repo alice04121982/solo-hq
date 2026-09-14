@@ -82,10 +82,10 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      className={`rounded-full border px-4 py-2 text-sm font-sans transition-all duration-150 ${
+      className={`rounded-full px-4 py-2 text-sm font-sans transition-all duration-150 ${
         selected
-          ? "border-teal bg-teal text-on-teal"
-          : "border-border text-muted hover:border-teal/40 hover:text-teal"
+          ? "bg-teal text-on-teal"
+          : "bg-background text-muted hover:bg-surface-hover hover:text-teal"
       }`}
     >
       {label}

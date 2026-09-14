@@ -73,7 +73,7 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
               <button
                 type="button"
                 onClick={() => onChange(clearedFilters(filters))}
-                className="flex-1 py-2.5 text-sm font-medium rounded-full border border-teal/20 text-teal transition-colors hover:bg-surface-hover"
+                className="flex-1 py-2.5 text-sm font-medium rounded-full bg-surface-hover text-teal transition-colors hover:bg-teal-10"
               >
                 Clear all
               </button>

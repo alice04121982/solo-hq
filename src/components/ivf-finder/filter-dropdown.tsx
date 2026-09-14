@@ -15,13 +15,13 @@ import { ChevronDown, X } from "lucide-react";
 
 /** Shared trigger styling, so every pill in the row lines up. */
 const TRIGGER_BASE =
-  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors";
+  "inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors";
 
 function triggerClasses(active: boolean): string {
-  return `${TRIGGER_BASE} bg-background ${
+  return `${TRIGGER_BASE} ${
     active
-      ? "border-teal text-teal"
-      : "border-teal/20 text-teal hover:bg-surface-hover"
+      ? "bg-teal-10 text-teal"
+      : "bg-background text-teal hover:bg-surface-hover"
   }`;
 }
 

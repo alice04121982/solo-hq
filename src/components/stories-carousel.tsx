@@ -42,7 +42,7 @@ export function StoriesCarousel({ stories }: { stories: Story[] }) {
   };
 
   const arrowStyle = (enabled: boolean) => ({
-    borderColor: "rgba(0, 83, 83, 0.3)",
+    background: "var(--surface-hover)",
     color: "var(--teal)",
     opacity: enabled ? 1 : 0.3,
   });
@@ -99,7 +99,7 @@ export function StoriesCarousel({ stories }: { stories: Story[] }) {
           onClick={() => step(-1)}
           disabled={!canPrev}
           aria-label="Previous stories"
-          className="inline-flex items-center justify-center h-12 w-12 rounded-full border transition-opacity duration-150"
+          className="inline-flex items-center justify-center h-12 w-12 rounded-full transition-opacity duration-150"
           style={arrowStyle(canPrev)}
         >
           <ArrowLeft className="h-5 w-5" />
@@ -108,7 +108,7 @@ export function StoriesCarousel({ stories }: { stories: Story[] }) {
           onClick={() => step(1)}
           disabled={!canNext}
           aria-label="Next stories"
-          className="inline-flex items-center justify-center h-12 w-12 rounded-full border transition-opacity duration-150"
+          className="inline-flex items-center justify-center h-12 w-12 rounded-full transition-opacity duration-150"
           style={arrowStyle(canNext)}
         >
           <ArrowRight className="h-5 w-5" />
