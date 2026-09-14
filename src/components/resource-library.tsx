@@ -115,10 +115,10 @@ export function ResourceLibrary() {
       <div className="flex flex-wrap gap-2 mb-10">
         <button
           onClick={() => setFormat("all")}
-          className={`rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
+          className={`rounded-full text-xs font-sans px-4 py-2 transition-colors duration-150 ${
             format === "all"
-              ? "border-teal bg-teal text-on-teal"
-              : "border-teal/20 text-teal bg-background hover:border-teal/40"
+              ? "bg-teal text-on-teal"
+              : "text-teal bg-background hover:bg-surface-hover"
           }`}
         >
           All formats
@@ -134,10 +134,10 @@ export function ResourceLibrary() {
             <button
               key={g.key}
               onClick={() => setFormat(active ? "all" : g.key)}
-              className={`inline-flex items-center gap-2 rounded-full border text-xs font-sans px-4 py-2 transition-colors duration-150 ${
+              className={`inline-flex items-center gap-2 rounded-full text-xs font-sans px-4 py-2 transition-colors duration-150 ${
                 active
-                  ? "border-teal bg-teal text-on-teal"
-                  : "border-teal/20 text-teal bg-background hover:border-teal/40"
+                  ? "bg-teal text-on-teal"
+                  : "text-teal bg-background hover:bg-surface-hover"
               }`}
             >
               {(() => {

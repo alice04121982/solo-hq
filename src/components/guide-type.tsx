@@ -30,7 +30,7 @@ export const GUIDE_TYPE_ICONS: Record<string, LucideIcon> = {
 };
 
 /**
- * The format's flat icon at a fixed 48px, tinted with the format accent.
+ * The format's flat icon at a fixed 24px, tinted with the format accent.
  * Decorative: the format is always named in text beside it.
  */
 export function GuideTypeIcon({ type, className }: { type: string; className?: string }) {
@@ -39,7 +39,7 @@ export function GuideTypeIcon({ type, className }: { type: string; className?: s
     <Icon
       aria-hidden
       strokeWidth={1.75}
-      className={["h-12 w-12 shrink-0", className].filter(Boolean).join(" ")}
+      className={["h-6 w-6 shrink-0", className].filter(Boolean).join(" ")}
       style={{ color: "var(--lavender)" }}
     />
   );

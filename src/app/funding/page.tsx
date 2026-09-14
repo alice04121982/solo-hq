@@ -88,8 +88,7 @@ export default function FundingPage() {
             <a
               key={l.href}
               href={l.href}
-              className="inline-flex items-center gap-1.5 rounded-full border border-teal/20 px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white hover:border-[var(--teal)]"
-              style={{ color: TEAL }}
+              className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-sans text-teal transition-colors hover:bg-teal hover:text-white"
             >
               {l.label}
             </a>
