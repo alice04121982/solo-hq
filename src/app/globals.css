@@ -257,10 +257,33 @@
     --card-surface:            var(--cream);
   }
 
-  /* The dark-green hover. Pointer devices only: on touch, :hover sticks
-     after a tap and would leave a card stranded in its inverted state. */
+  /* The dark-green fill as a resting state, for the clinic matcher's results:
+     the card is the answer, not a control, and the way in is its "Full
+     details and sources" button, so nothing happens on hover. Same tokens
+     as the finder's hover below, held still. */
+  .clinic-card--teal {
+    --card-surface:            var(--teal);
+    --card-edge:               var(--teal);
+    --card-ink:                var(--on-teal);
+    --card-ink-muted:          var(--on-teal-muted);
+    --card-ring:               var(--accent);
+    --card-rule:               var(--teal-card-border);
+    --card-badge-verified-bg:  var(--accent);
+    --card-badge-verified-ink: var(--on-accent);
+    --card-badge-reported-edge: var(--on-teal-muted);
+    --card-badge-reported-ink:  var(--on-teal-muted);
+    --card-control-edge:       var(--on-teal-muted);
+    --card-control-ink:        var(--on-teal);
+    --card-control-wash:       rgba(249, 198, 218, 0.14);
+    --card-control-active-bg:  var(--accent);
+    --card-control-active-ink: var(--on-accent);
+  }
+
+  /* The dark-green hover on the finder's selectable cards. Pointer devices
+     only: on touch, :hover sticks after a tap and would leave a card
+     stranded in its inverted state. The teal variant is already there. */
   @media (hover: hover) {
-    .clinic-card:hover {
+    .clinic-card:not(.clinic-card--teal):hover {
       --card-surface:            var(--teal);
       --card-edge:               var(--teal);
       --card-ink:                var(--on-teal);
