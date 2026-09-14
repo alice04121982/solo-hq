@@ -518,11 +518,12 @@ function MatchFigure({ m, surrogacy, age }: { m: Match; surrogacy: boolean; age:
 
 /**
  * A matched clinic. The same card as the finder's results (`.clinic-card`:
- * fill for the edge, no stroke, dark-green hover that re-tints every child
- * from one rule), on the cream variant because the wizard panel is white.
+ * fill for the edge, no stroke, every child tinted from one rule), on the
+ * teal variant: the dark-green fill is the resting state and there is no
+ * hover, because the card is the answer and the way in is its button.
  *
  * The card carries one accent, the verification badge; everything else is
- * teal ink on cream, in three tiers: the clinic, the two figures, the notes.
+ * the on-teal ink, in three tiers: the clinic, the two figures, the notes.
  */
 function ResultCard({
   m, surrogacy, age, index,
@@ -554,7 +555,7 @@ function ResultCard({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.35, ease: EASE }}
-      className={clinicCardClasses("cream", false)}
+      className={clinicCardClasses("teal", false)}
     >
       <div className="flex flex-wrap items-center gap-2 mb-4">
         <VerificationBadge verification={c.successRates.verification} />
@@ -812,12 +813,15 @@ function getSteps(family: FamilyType | null): StepMeta[] {
 // ─── Backdrop shape ───────────────────────────────────────────────────────────
 
 // The band's oversized mark, in the style of Section's `backdrop` but driven
-// by wizard state: a neutral egg until a family is chosen, then that family's
-// own mark from the shape bank. It turns a notch on every step and crossfades
-// when the mark itself changes, so the journey visibly moves with the user.
-// Positional classes stay on the wrapper: framer-motion owns `transform`, so
-// rotate/scale live on the inner element where they can't clobber the offsets.
-function WizardBackdrop({ shape, step }: { shape: ShapeName; step: number }) {
+// by wizard state: nothing until a family is chosen, then that family's own
+// mark from the shape bank. The family step itself carries no mark, because
+// any one shape there is one family's shape shown to everyone (the egg once
+// stood in, and read as the old Two Dads mark). It turns a notch on every
+// step and crossfades when the mark itself changes, so the journey visibly
+// moves with the user. Positional classes stay on the wrapper: framer-motion
+// owns `transform`, so rotate/scale live on the inner element where they
+// can't clobber the offsets.
+function WizardBackdrop({ shape, step }: { shape: ShapeName | null; step: number }) {
   return (
     <div
       aria-hidden
@@ -825,15 +829,17 @@ function WizardBackdrop({ shape, step }: { shape: ShapeName; step: number }) {
       style={{ color: "var(--lime)" }}
     >
       <AnimatePresence mode="wait">
-        <motion.div
-          key={shape}
-          initial={{ opacity: 0, scale: 0.8, rotate: step * 24 }}
-          animate={{ opacity: 1, scale: 1, rotate: step * 24 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.5, ease: EASE }}
-        >
-          <ShapeMark name={shape} className="w-full h-auto" />
-        </motion.div>
+        {shape && (
+          <motion.div
+            key={shape}
+            initial={{ opacity: 0, scale: 0.8, rotate: step * 24 }}
+            animate={{ opacity: 1, scale: 1, rotate: step * 24 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, ease: EASE }}
+          >
+            <ShapeMark name={shape} className="w-full h-auto" />
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
@@ -858,8 +864,10 @@ export function ClinicMatcher() {
   const current = STEPS[step];
   const isResults = current.id === "results";
 
-  // Neutral egg mark until step one is answered, then the chosen family's own.
-  const backdropShape: ShapeName = s.family ? FAMILY_SHAPES[FAMILY_GUIDE_SLUG[s.family]] : "egg";
+  // No mark until step one is answered, then the chosen family's own.
+  const backdropShape: ShapeName | null = s.family
+    ? FAMILY_SHAPES[FAMILY_GUIDE_SLUG[s.family]]
+    : null;
 
   const canAdvance: Record<StepId, boolean> = {
     family: s.family !== null,

@@ -5,10 +5,12 @@ import {
   HFEA_BANDS,
   type AgeBracket,
   type Clinic,
+  type GeoPoint,
   type HfeaBand,
   type Region,
 } from "../types/clinic.ts";
 import { excludedCountriesByRegion, exclusionFor } from "./clinic-exclusions.ts";
+import { distanceMiles } from "./geo.ts";
 
 /**
  * Cairn's clinic database: one list, UK and international together.
@@ -111,6 +113,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Cambridge",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 52.1893, lng: -0.0652 },
     address: "Bourn, Cambridge, CB23 2TN",
     phone: "01954 719 111",
     website: "https://www.bournhall.co.uk",
@@ -149,6 +152,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Cheshunt",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 51.7003, lng: -0.0333 },
     address: "Bishop's College, Churchgate, Cheshunt, EN8 9XP",
     phone: "01992 785 060",
     website: "https://www.hertsandessexfertility.com",
@@ -187,6 +191,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "London",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 51.5215, lng: -0.1478 },
     address: "113-115 Harley Street, London, W1G 6AP",
     phone: "020 7563 4309",
     website: "https://www.londonwomensclinic.com",
@@ -230,6 +235,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "London",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 51.5142, lng: -0.0944 },
     address: "150 Cheapside, London, EC2V 6ET",
     phone: "020 3319 9490",
     website: "https://www.createfertility.co.uk",
@@ -268,6 +274,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "London",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 51.4862, lng: -0.1494 },
     address: "The Lister Hospital, Chelsea Bridge Road, London, SW1W 8RH",
     phone: "020 7730 5932",
     website: "https://www.listerfertility.co.uk",
@@ -307,6 +314,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "London",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 51.4688, lng: -0.0912 },
     address: "Fetal Medicine Research Institute, 16-20 Windsor Walk, Denmark Hill, London, SE5 8BB",
     phone: "020 3957 7950",
     website: "https://www.kingsfertility.co.uk",
@@ -345,6 +353,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Cambridge",
     country: "United Kingdom",
     region: "UK",
+    coordinates: { lat: 52.1746, lng: 0.1097 },
     address: "Kefford House, Maris Lane, Trumpington, Cambridge, CB2 9LG",
     phone: "01223 349 010",
     website: "https://www.cambridge-ivf.nhs.uk",
@@ -385,6 +394,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Valencia",
     country: "Spain",
     region: "Europe",
+    coordinates: { lat: 39.482, lng: -0.395 },
     website: "https://ivi-fertility.com/clinics/valencia/",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
@@ -414,6 +424,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Alicante",
     country: "Spain",
     region: "Europe",
+    coordinates: { lat: 38.3625, lng: -0.4545 },
     website: "https://www.institutobernabeu.com/en/",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
@@ -439,6 +450,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Brno",
     country: "Czech Republic",
     region: "Europe",
+    coordinates: { lat: 49.188, lng: 16.581 },
     website: "https://www.reprofit.cz/en/",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "Egg freezing"],
@@ -469,6 +481,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Prague",
     country: "Czech Republic",
     region: "Europe",
+    coordinates: { lat: 50.0985, lng: 14.4265 },
     website: "https://www.gennet.cz/en/",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "PGT-A", "Egg freezing"],
@@ -498,6 +511,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Thessaloniki",
     country: "Greece",
     region: "Europe",
+    coordinates: { lat: 40.581, lng: 22.95 },
     website: "https://embryolab.eu/",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "Egg freezing"],
@@ -524,6 +538,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Copenhagen",
     country: "Denmark",
     region: "Europe",
+    coordinates: { lat: 55.701, lng: 12.537 },
     website: "https://www.copenhagenfertilitycenter.com",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "IUI", "Donor sperm", "Egg freezing"],
@@ -556,6 +571,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Denver",
     country: "United States",
     region: "Rest of world",
+    coordinates: { lat: 39.5375, lng: -104.8745 },
     website: "https://www.ccrmivf.com",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Double donor", "PGT-A", "Egg freezing"],
@@ -594,6 +610,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Cape Town",
     country: "South Africa",
     region: "Rest of world",
+    coordinates: { lat: -33.98, lng: 18.466 },
     website: "https://www.capefertility.co.za",
     hfeaLicensed: false,
     treatments: ["IVF", "ICSI", "Donor eggs", "Donor sperm", "Egg freezing"],
@@ -622,6 +639,7 @@ export const CLINIC_RECORDS: Clinic[] = [
     city: "Istanbul",
     country: "Turkey",
     region: "Rest of world",
+    coordinates: { lat: 41.0625, lng: 28.999 },
     website: "https://bahceci.com/uk/",
     hfeaLicensed: false,
     // Donor treatment is not permitted in Turkey, so no donor options here.
@@ -690,7 +708,7 @@ export function verdictFor(clinic: Clinic, bracket: AgeBracket) {
   return clinic.successRates.byHfeaBand?.[hfeaBandFor(bracket)]?.vsNationalAverage;
 }
 
-export type FinderSort = "name" | "price" | "rate";
+export type FinderSort = "name" | "price" | "rate" | "distance";
 
 export const FINDER_SORTS: { value: FinderSort; label: string }[] = [
   { value: "name", label: "Name (A to Z)" },
@@ -698,21 +716,35 @@ export const FINDER_SORTS: { value: FinderSort; label: string }[] = [
   { value: "rate", label: "Published rate" },
 ];
 
+/** Offered only once the finder has a location to measure from. */
+export const DISTANCE_SORT: { value: FinderSort; label: string } = {
+  value: "distance",
+  label: "Distance",
+};
+
 /**
  * Order a list of clinics. Name is the default. Price sorts by headline IVF
  * price, lowest first, clinics without one last. Rate sorts by the published
- * figure for the bracket, highest first, clinics without one last. Ties fall
- * back to name. Callers sorting by rate must split HFEA and clinic figures
- * into separate groups before calling; see groupByVerification.
+ * figure for the bracket, highest first, clinics without one last. Distance
+ * sorts nearest to `origin` first, and falls back to name when no origin is
+ * given. Ties fall back to name. Callers sorting by rate must split HFEA and
+ * clinic figures into separate groups before calling; see groupByVerification.
  */
-export function sortClinics(clinics: Clinic[], sort: FinderSort, bracket: AgeBracket): Clinic[] {
+export function sortClinics(
+  clinics: Clinic[],
+  sort: FinderSort,
+  bracket: AgeBracket,
+  origin?: GeoPoint | null
+): Clinic[] {
   const byName = (a: Clinic, b: Clinic) => a.name.localeCompare(b.name);
-  if (sort === "name") return [...clinics].sort(byName);
+  if (sort === "name" || (sort === "distance" && !origin)) return [...clinics].sort(byName);
   const key =
     sort === "price"
       ? (c: Clinic) => c.pricePerCycleGbp
-      : (c: Clinic) => rateFor(c, bracket);
-  const direction = sort === "price" ? 1 : -1;
+      : sort === "distance"
+        ? (c: Clinic) => distanceMiles(origin as GeoPoint, c.coordinates)
+        : (c: Clinic) => rateFor(c, bracket);
+  const direction = sort === "rate" ? -1 : 1;
   return [...clinics].sort((a, b) => {
     const ka = key(a);
     const kb = key(b);

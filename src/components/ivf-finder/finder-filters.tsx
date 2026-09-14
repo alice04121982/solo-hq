@@ -13,12 +13,14 @@ import {
 } from "@/types/clinic";
 import {
   cheapestPublishedPrice,
+  DISTANCE_SORT,
   FINDER_SORTS,
   priceBounds,
   rateFor,
   verdictFor,
   type FinderSort,
 } from "@/lib/clinics";
+import { DISTANCE_CEILINGS_MILES, distanceMiles, type FinderLocation } from "@/lib/geo";
 import { RATE_NOTE } from "@/lib/rate-labels";
 import {
   FilterTogglePill,
@@ -56,6 +58,14 @@ export interface FinderFilterState {
    * figure for the bracket, whoever published it.
    */
   successRate: SuccessRateFilter;
+  /**
+   * Where the reader is, when they have said. Not a filter: it orders the
+   * list nearest-first and unlocks the distance ceiling below, but on its own
+   * it hides nothing, so it is not counted as active and survives "Clear all".
+   */
+  location: FinderLocation | null;
+  /** Miles from `location`. null = any distance. Ignored without a location. */
+  maxDistanceMiles: number | null;
 }
 
 export type SuccessRateFilter = "any" | "above" | "consistentOrAbove" | "published";
@@ -70,7 +80,37 @@ export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   donorAnonymity: "any",
   remoteConsultation: false,
   successRate: "any",
+  location: null,
+  maxDistanceMiles: null,
 };
+
+const DISTANCE_OPTIONS: FilterOption<string>[] = [
+  { value: "any", label: "Any distance" },
+  ...DISTANCE_CEILINGS_MILES.map((m) => ({
+    value: String(m),
+    label: `Within ${m} miles`,
+    shortLabel: `within ${m} miles`,
+  })),
+];
+
+/**
+ * Filters and sort as they should stand once a location is set or cleared.
+ * Setting one moves a list still in its default alphabetical order to
+ * nearest-first, the same courtesy the success-rate filter extends to the
+ * rate sort; clearing it drops the distance ceiling and any distance sort,
+ * which mean nothing without a point to measure from.
+ */
+export function withLocation(f: FinderFilterState, location: FinderLocation | null): FinderFilterState {
+  if (location) {
+    return { ...f, location, sort: f.sort === "name" ? "distance" : f.sort };
+  }
+  return {
+    ...f,
+    location: null,
+    maxDistanceMiles: null,
+    sort: f.sort === "distance" ? "name" : f.sort,
+  };
+}
 
 const SUCCESS_RATE_OPTIONS: FilterOption<SuccessRateFilter>[] = [
   { value: "any", label: "Any" },
@@ -164,6 +204,14 @@ export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
 
   if (f.remoteConsultation && !clinic.remoteConsultation) return false;
 
+  if (
+    f.location &&
+    f.maxDistanceMiles != null &&
+    distanceMiles(f.location, clinic.coordinates) > f.maxDistanceMiles
+  ) {
+    return false;
+  }
+
   if (f.successRate === "published" && rateFor(clinic, f.ageBracket) == null) return false;
   if (f.successRate === "above" && verdictFor(clinic, f.ageBracket) !== "above") return false;
   if (f.successRate === "consistentOrAbove") {
@@ -174,6 +222,14 @@ export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
   return true;
 }
 
+/**
+ * Every optional filter off, keeping what is not a filter: the age bracket,
+ * the sort, and the location.
+ */
+export function clearedFilters(f: FinderFilterState): FinderFilterState {
+  return { ...DEFAULT_FINDER_FILTERS, ageBracket: f.ageBracket, sort: f.sort, location: f.location };
+}
+
 export function countActiveFilters(f: FinderFilterState): number {
   return (
     f.regions.length +
@@ -182,7 +238,8 @@ export function countActiveFilters(f: FinderFilterState): number {
     (f.priceCeiling != null ? 1 : 0) +
     (f.donorAnonymity !== "any" ? 1 : 0) +
     (f.remoteConsultation ? 1 : 0) +
-    (f.successRate !== "any" ? 1 : 0)
+    (f.successRate !== "any" ? 1 : 0) +
+    (f.location && f.maxDistanceMiles != null ? 1 : 0)
   );
 }
 
@@ -250,7 +307,11 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
     label: t,
   }));
   const priceOptions = priceCeilingOptions();
-  const sortOptions: FilterOption<FinderSort>[] = FINDER_SORTS.map((s) => ({
+  // Distance is only an order once there is somewhere to measure from.
+  const sortOptions: FilterOption<FinderSort>[] = [
+    ...(filters.location ? [DISTANCE_SORT] : []),
+    ...FINDER_SORTS,
+  ].map((s) => ({
     value: s.value,
     label: s.label,
     shortLabel: s.label.toLowerCase(),
@@ -269,6 +330,22 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         onChange={(ageBracket) => onChange({ ...filters, ageBracket })}
         note={RATE_NOTE}
       />
+
+      {/* Only meaningful with a location set, so it appears with one. */}
+      {filters.location && (
+        <SingleSelectDropdown
+          label="Distance"
+          options={DISTANCE_OPTIONS}
+          value={filters.maxDistanceMiles == null ? "any" : String(filters.maxDistanceMiles)}
+          defaultValue="any"
+          onChange={(value) =>
+            onChange({ ...filters, maxDistanceMiles: value === "any" ? null : Number(value) })
+          }
+          note={`Straight-line miles from ${
+            filters.location.source === "device" ? "your location" : filters.location.label
+          }. Clinics abroad stay in the list at "Any distance".`}
+        />
+      )}
 
       {/* Region and country narrow the same list; neither gates it. */}
       <MultiSelectDropdown
@@ -373,6 +450,13 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
+      {filters.location && filters.maxDistanceMiles != null && (
+        <FilterTag
+          label={`Within ${filters.maxDistanceMiles} miles`}
+          active
+          onToggle={() => remove({ maxDistanceMiles: null })}
+        />
+      )}
       {filters.regions.map((r) => (
         <FilterTag
           key={r}
@@ -432,9 +516,7 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
       )}
       <button
         type="button"
-        onClick={() =>
-          onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket, sort: filters.sort })
-        }
+        onClick={() => onChange(clearedFilters(filters))}
         className="text-xs font-medium text-muted underline underline-offset-2 hover:opacity-70 transition-opacity"
       >
         Clear all

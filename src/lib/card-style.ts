@@ -12,6 +12,9 @@
  *            (the clinic matcher's results panel), where paper would vanish
  *            and the token rules put a cream fill on white. Not selectable
  *            on the finder, whose band is already cream.
+ *   teal     dark-green fill with the on-teal inks, held as the resting
+ *            state with no hover: the clinic matcher's result cards, where
+ *            the card is not a control and the way in is its button.
  *
  * A pale-yellow fill was tried and dropped: yellow cards on the pink band
  * clash, so the citrus surface is deliberately not an option here. The badge
@@ -23,9 +26,9 @@
  * The default below is what ships. `?cards=paper|outline` on the finder
  * overrides it, so the two can be flipped between without a rebuild.
  */
-export type ClinicCardVariant = "paper" | "outline" | "cream";
+export type ClinicCardVariant = "paper" | "outline" | "cream" | "teal";
 
-/** The two the finder can flip between; `cream` is for white surfaces only. */
+/** The two the finder can flip between; `cream` and `teal` are for the matcher. */
 export const CLINIC_CARD_VARIANTS: ClinicCardVariant[] = ["paper", "outline"];
 
 /** The results grid ships on paper. */
@@ -44,6 +47,7 @@ const VARIANT_CLASS: Record<ClinicCardVariant, string> = {
   paper: "",
   outline: "clinic-card--outline",
   cream: "clinic-card--cream",
+  teal: "clinic-card--teal",
 };
 
 /**

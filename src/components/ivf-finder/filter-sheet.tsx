@@ -4,8 +4,8 @@ import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FilterControls,
+  clearedFilters,
   countActiveFilters,
-  DEFAULT_FINDER_FILTERS,
   type FinderFilterState,
 } from "./finder-filters";
 
@@ -72,13 +72,7 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
             <div className="px-6 py-4 border-t border-border-warm flex items-center gap-3 shrink-0">
               <button
                 type="button"
-                onClick={() =>
-                  onChange({
-                    ...DEFAULT_FINDER_FILTERS,
-                    ageBracket: filters.ageBracket,
-                    sort: filters.sort,
-                  })
-                }
+                onClick={() => onChange(clearedFilters(filters))}
                 className="flex-1 py-2.5 text-sm font-medium rounded-full bg-surface-hover text-teal transition-colors hover:bg-teal-10"
               >
                 Clear all

@@ -204,6 +204,41 @@ export const NEWS_ITEMS: NewsItem[] = [
       "price. The HFEA does not endorse this site.",
     related: { label: "Avoiding add-ons", href: "/funding#avoiding-add-ons" },
   },
+  {
+    id: "pet-vanillin-vape-embryo-development",
+    title: "Stem cell research shows vape flavour could affect embryo development",
+    url: "https://www.progress.org.uk/stem-cell-research-shows-vape-flavour-could-affect-embryo-development/",
+    outlet: "Progress Educational Trust (BioNews)",
+    kind: "Article",
+    topic: "Science & evidence",
+    published: "2026-08-17",
+    addedOn: "2026-09-06",
+    note:
+      "Vanillin, the vanilla flavouring standard in many vapes, made human embryonic stem " +
+      "cells in a lab dish lose the ability to develop into other cell types, at doses " +
+      "equivalent to one to four puffs an hour; higher doses killed the cells outright. This " +
+      "was cells in a dish, not a pregnancy, and the researchers themselves say it does not " +
+      "show the same happens to an embryo in the body. But it adds vaping specifically, not " +
+      "just smoking, to the list of things worth cutting out before and during treatment.",
+  },
+  {
+    id: "pet-congresswoman-documents-freezing-eggs",
+    title: "US Congresswoman documents freezing her eggs",
+    url: "https://www.progress.org.uk/us-congresswoman-documents-freezing-her-eggs/",
+    outlet: "Progress Educational Trust (BioNews)",
+    kind: "Article",
+    topic: "Community",
+    published: "2026-08-17",
+    addedOn: "2026-09-06",
+    note:
+      "US Representative Alexandria Ocasio-Cortez is documenting her egg-freezing cycle " +
+      "publicly, saying the decision came partly from how little accessible information " +
+      "exists about what the process actually involves, and that she has felt more in " +
+      "control of her future since going through it. She has acknowledged that going public " +
+      "about it while still in office carries a political cost. Not medical guidance, but a " +
+      "reminder that the information gap around egg freezing is wide enough that a sitting " +
+      "member of Congress felt it was worth closing in public.",
+  },
 ];
 
 /**
