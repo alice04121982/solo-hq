@@ -178,51 +178,44 @@ export default function AboutPage() {
           <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
             Clinics we do not list
           </h3>
-          <p className="text-[15px] font-sans text-muted leading-relaxed mb-6">
+          <p className="text-[15px] font-sans text-muted leading-relaxed mb-4">
             Leaving a clinic out is not a finding against it, and nothing here is an allegation
-            of ours. Each entry records what a named publication has reported, links to it, and
-            notes any response on the record. Each is reviewed on the date shown.
+            of ours. While the wording is under legal review we publish only the reason below,
+            with links to the reporting it rests on. Each exclusion is reviewed on the date shown.
           </p>
-          <ul className="space-y-6">
-            {CLINIC_EXCLUSIONS.map((x) => (
-              <li key={x.name} className="pl-5 border-l-2 border-border">
-                <p className="font-sans font-semibold text-teal text-[15px] mb-1">
-                  {x.name}, {x.country}
-                </p>
-                <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>
-                {x.response && (
-                  <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">
-                    <span className="font-medium text-foreground">Their response:</span> {x.response}
-                  </p>
-                )}
-                <p className="text-[13px] font-sans text-muted leading-relaxed">
-                  Sources:{" "}
-                  {x.sources.map((src, i) => (
-                    <span key={src.url}>
-                      {i > 0 && "; "}
-                      <a
-                        href={src.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-teal hover:underline underline-offset-2"
-                      >
-                        {src.label}
-                        <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
-                      </a>
-                    </span>
-                  ))}
-                  . Next review{" "}
-                  {new Date(`${x.reviewOn}T00:00:00Z`).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                    timeZone: "UTC",
-                  })}
-                  .
-                </p>
-              </li>
-            ))}
-          </ul>
+          {/* Neutral wording (see src/lib/clinic-exclusions.ts): the shared
+              reason, a count by country, and the sources deduplicated. Clinic
+              names are deliberately not rendered here or in the finder. */}
+          {[...new Set(CLINIC_EXCLUSIONS.map((x) => x.reason))].map((reason) => (
+            <p key={reason} className="text-[15px] font-sans text-muted leading-relaxed mb-3">
+              {reason}
+            </p>
+          ))}
+          <p className="text-[13px] font-sans text-muted leading-relaxed">
+            Currently {CLINIC_EXCLUSIONS.length} clinics in{" "}
+            {[...new Set(CLINIC_EXCLUSIONS.map((x) => x.country))].join(" and ")}. Reporting:{" "}
+            {CLINIC_EXCLUSIONS.flatMap((x) => x.sources)
+              .filter((src, i, all) => all.findIndex((s) => s.url === src.url) === i)
+              .map((src, i) => (
+                <span key={src.url}>
+                  {i > 0 && "; "}
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    {src.label}
+                    <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+                  </a>
+                </span>
+              ))}
+            . Next review{" "}
+            {new Date(
+              `${[...CLINIC_EXCLUSIONS.map((x) => x.reviewOn)].sort()[0]}T00:00:00Z`
+            ).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+            .
+          </p>
         </div>
       </Section>
 
