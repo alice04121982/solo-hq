@@ -3,9 +3,10 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { SlidersHorizontal } from "lucide-react";
+import { Info, SlidersHorizontal } from "lucide-react";
 import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
-import { DATA_PROVENANCE, formatCheckedDate, sortClinics } from "@/lib/clinics";
+import { sortClinics } from "@/lib/clinics";
+import type { FinderLocation } from "@/lib/geo";
 import { exclusionsMatchingGeography } from "@/lib/clinic-exclusions";
 import { CARD_VARIANT_PARAM, DEFAULT_RESULT_VARIANT, parseCardVariant } from "@/lib/card-style";
 import { RegulatorNotice } from "@/components/regulator-notice";
@@ -13,11 +14,15 @@ import {
   ActiveFilterTags,
   DEFAULT_FINDER_FILTERS,
   FilterControls,
+  clearedFilters,
   countActiveFilters,
   matchesFilters,
+  withLocation,
   type FinderFilterState,
 } from "./finder-filters";
 import { FilterSheet } from "./filter-sheet";
+import { LocationSearch } from "./location-search";
+import { AboutFiguresDrawer } from "./about-figures-drawer";
 import { ClinicResults } from "./clinic-results";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
@@ -37,6 +42,11 @@ interface ClinicFinderProps {
  * unless the reader asks for a sort, and a sort by rate keeps HFEA figures
  * and clinics' own figures in separate groups.
  *
+ * Saying where you are puts the nearest clinics first, with the rest of the
+ * world following in the same list, and adds a distance ceiling to the
+ * filters. The location lives in component state only, never in the URL,
+ * so a shared link carries the comparison and not where someone lives.
+ *
  * The comparison selection lives in the URL (?compare=slug-a,slug-b), so it
  * survives refreshes, can be shared, and persists untouched while filters
  * change around it.
@@ -49,6 +59,13 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
 
   const [filters, setFilters] = useState<FinderFilterState>(DEFAULT_FINDER_FILTERS);
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+
+  const setLocation = useCallback(
+    (location: FinderLocation | null) => setFilters((f) => withLocation(f, location)),
+    []
+  );
+  const closeAbout = useCallback(() => setAboutOpen(false), []);
 
   const knownSlugs = useMemo(() => new Set(clinics.map((c) => c.slug)), [clinics]);
   const selectedSlugs = useMemo(() => {
@@ -107,9 +124,19 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
   );
 
   const sortedClinics = useMemo(
-    () => sortClinics(filteredClinics, filters.sort, filters.ageBracket),
-    [filteredClinics, filters.sort, filters.ageBracket]
+    () => sortClinics(filteredClinics, filters.sort, filters.ageBracket, filters.location),
+    [filteredClinics, filters.sort, filters.ageBracket, filters.location]
   );
+
+  // When the distance ceiling is what emptied the list, find the nearest
+  // clinic the other filters would still allow, so the empty state can say
+  // how far away it is instead of just asking for a looser filter.
+  const nearestBeyondCeiling = useMemo(() => {
+    if (sortedClinics.length > 0 || !filters.location || filters.maxDistanceMiles == null) return null;
+    const relaxed = { ...filters, maxDistanceMiles: null };
+    const candidates = clinics.filter((c) => matchesFilters(c, relaxed));
+    return sortClinics(candidates, "distance", filters.ageBracket, filters.location)[0] ?? null;
+  }, [sortedClinics.length, clinics, filters]);
 
   // Removals answer the geography filters like a clinic would, so filtering
   // to somewhere we have removed a clinic from returns the removal rather
@@ -128,11 +155,15 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
   // options can be compared on the real page with the real data.
   const cardOverride = parseCardVariant(searchParams.get(CARD_VARIANT_PARAM));
 
-  const clearAll = () =>
-    setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket, sort: filters.sort });
+  const clearAll = () => setFilters(clearedFilters(filters));
 
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
+      {/* ── Where are you? Nearest first, the rest of the world after ── */}
+      <div className="rounded-[24px] bg-background p-4 md:p-6 mb-4">
+        <LocationSearch value={filters.location} onChange={setLocation} />
+      </div>
+
       {/* ── Filters and sort: inline on desktop, a sheet on mobile ── */}
       <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
         <FilterControls filters={filters} onChange={setFilters} onClearAll={clearAll} />
@@ -160,24 +191,25 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         <ActiveFilterTags filters={filters} onChange={setFilters} />
       </div>
 
-      {/* ── About these figures: the one place the provenance is stated ── */}
-      <div className="rounded-2xl bg-background p-4 mb-6 text-xs text-muted leading-relaxed" style={{ maxWidth: "78ch" }}>
-        <p>
-          <strong className="text-teal-ink">About these figures.</strong> These are {clinics.length}{" "}
-          clinics we have selected, not a complete register. Each figure shows when it was last
-          checked. UK rates are copied from each clinic&rsquo;s HFEA Choose a Clinic page (2023,
-          births per embryo transferred). Overseas rates are the clinic&rsquo;s own and use different
-          measures. Prices are headline figures from {DATA_PROVENANCE.pricesSourceLabel}, last
-          checked {formatCheckedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
-        </p>
-        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-          <Link href="/about#methodology" className="font-medium text-teal hover:underline underline-offset-2">
-            How we check these figures
-          </Link>
-          <Link href="/support" className="font-medium text-teal hover:underline underline-offset-2">
-            Looking after yourself
-          </Link>
-        </p>
+      {/* ── About these figures: one line, the detail behind the info icon ── */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6 text-sm">
+        <button
+          type="button"
+          onClick={() => setAboutOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={aboutOpen}
+          className="inline-flex items-center gap-1.5 font-semibold text-teal-ink hover:text-teal transition-colors"
+        >
+          About these figures
+          <Info className="h-4 w-4" aria-hidden />
+          <span className="sr-only">: where they come from and what they measure</span>
+        </button>
+        <Link href="/about#methodology" className="font-medium text-teal hover:underline underline-offset-2">
+          How we check these figures
+        </Link>
+        <Link href="/support" className="font-medium text-teal hover:underline underline-offset-2">
+          Looking after yourself
+        </Link>
       </div>
 
       {/* ── Results ── */}
@@ -191,6 +223,8 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
           variant={cardOverride ?? DEFAULT_RESULT_VARIANT}
+          origin={filters.location}
+          nearestBeyondCeiling={nearestBeyondCeiling}
           onToggleCompare={handleToggleCompare}
         />
       </div>
@@ -212,6 +246,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
             clinics={selectedClinics}
             ageBracket={filters.ageBracket}
             ageBracketLabel={bracketLabel}
+            origin={filters.location}
             onRemove={handleRemove}
           />
         </div>
@@ -236,6 +271,8 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         onCompare={handleCompareNow}
         onClear={handleClear}
       />
+
+      <AboutFiguresDrawer isOpen={aboutOpen} onClose={closeAbout} clinicCount={clinics.length} />
 
       <FilterSheet
         isOpen={sheetOpen}

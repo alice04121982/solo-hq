@@ -21,6 +21,8 @@ interface ClinicCardProps {
   isSelected: boolean;
   compareDisabled: boolean;
   variant?: ClinicCardVariant;
+  /** "12 miles from Cambridge", when the finder has a location to measure from. */
+  distanceText?: string;
   onToggleCompare: (clinic: Clinic) => void;
 }
 
@@ -42,6 +44,7 @@ export function ClinicCard({
   isSelected,
   compareDisabled,
   variant = DEFAULT_RESULT_VARIANT,
+  distanceText,
   onToggleCompare,
 }: ClinicCardProps) {
   const travel = clinic.region !== "UK" ? travelEstimateForCity(clinic.city) : null;
@@ -62,6 +65,7 @@ export function ClinicCard({
         <CountryFlag country={clinic.country} />
         <span className="min-w-0">
           {clinic.city}, {clinic.country}
+          {distanceText && <span> · {distanceText}</span>}
         </span>
       </p>
       {clinic.region !== "UK" && (

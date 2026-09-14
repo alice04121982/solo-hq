@@ -77,7 +77,8 @@ application form on a lookalike page and harvest what people typed into it.
 `next.config.ts` now sets, on every route: `Content-Security-Policy`,
 `Strict-Transport-Security` (2 years, preload-eligible), `X-Frame-Options:
 DENY`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
-(everything off, including geolocation: no page uses it),
+(everything off except geolocation for `self`, which the clinic finder's
+"Use my location" button needs; the position never leaves the page),
 `Cross-Origin-Opener-Policy`, and `X-DNS-Prefetch-Control`. `poweredByHeader`
 is off.
 
@@ -286,10 +287,14 @@ lint-clean.
   `NEXT_PUBLIC_` variable — the only one is the platform's display name, which
   is a word, not a secret.
 - **Third-party calls from the browser.** None; `connect-src 'self'`. Every
-  `fetch()` in `src/` targets a same-origin `/api` route. The earlier
-  `api.postcodes.io` allowance was for a location search that is not in the
-  code and has been removed from the CSP and from the Permissions-Policy. Share
-  buttons build URLs with `encodeURIComponent`.
+  `fetch()` in `src/` targets a same-origin `/api` route. The clinic finder's
+  location search deliberately uses no geocoding service: places and UK
+  postcode areas resolve against a gazetteer bundled in `src/lib/geo.ts`, and
+  "Use my location" reads the browser's own geolocation (allowed for `self` in
+  the Permissions-Policy). Neither the typed place nor the device position is
+  transmitted or stored, and the location is kept out of the URL so a shared
+  comparison link does not carry it. Share buttons build URLs with
+  `encodeURIComponent`.
 - **Client-side storage.** One localStorage key, `cairn-community-application`,
   holding `{ submittedAt: ISO, expiresAt: ISO }`: a date marker kept for 30 days
   so the page can show that an application was received. It holds no name,

@@ -3,6 +3,7 @@
 import { ClinicCard } from "./clinic-card";
 import { DEFAULT_RESULT_VARIANT, type ClinicCardVariant } from "@/lib/card-style";
 import { groupByVerification, type FinderSort } from "@/lib/clinics";
+import { distanceText, type FinderLocation } from "@/lib/geo";
 import { GROUP_CLINIC, GROUP_HFEA, RATE_CAVEAT } from "@/lib/rate-labels";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 
@@ -17,6 +18,13 @@ interface ClinicResultsProps {
   ageBracket: AgeBracket;
   selectedSlugs: string[];
   variant?: ClinicCardVariant;
+  /** Where distances are measured from, once the reader has said. */
+  origin?: FinderLocation | null;
+  /**
+   * When the distance ceiling alone empties the list: the nearest clinic that
+   * would otherwise match, so the empty state can say how far away it is.
+   */
+  nearestBeyondCeiling?: Clinic | null;
   onToggleCompare: (clinic: Clinic) => void;
 }
 
@@ -29,6 +37,8 @@ export function ClinicResults({
   ageBracket,
   selectedSlugs,
   variant = DEFAULT_RESULT_VARIANT,
+  origin = null,
+  nearestBeyondCeiling = null,
   onToggleCompare,
 }: ClinicResultsProps) {
   if (clinics.length === 0) {
@@ -36,7 +46,14 @@ export function ClinicResults({
       <div className="rounded-[24px] bg-background p-12 text-center">
         <p className="text-teal-ink font-semibold mb-1">No clinics match your filters</p>
         <p className="text-sm text-muted">
-          {removedCount > 0
+          {origin && nearestBeyondCeiling
+            ? // Distance was the filter that emptied the list, so the useful
+              // answer is how far the nearest one actually is.
+              `The nearest clinic that fits your other filters is ${nearestBeyondCeiling.name}, ${distanceText(
+                origin,
+                nearestBeyondCeiling.coordinates
+              )}. Widen the distance to see it.`
+            : removedCount > 0
             ? // Empty because what was there was taken out is a different
               // answer from empty because nothing fits, and sending someone
               // off to relax a filter would bury the reason sitting below.
@@ -55,7 +72,11 @@ export function ClinicResults({
       ? "in alphabetical order"
       : sort === "price"
         ? "by headline price"
-        : `by published rate for ${ageBracketLabel.toLowerCase()}, in two groups`;
+        : sort === "distance" && origin
+          ? `nearest to ${origin.source === "device" ? "you" : origin.label} first`
+          : sort === "distance"
+            ? "in alphabetical order"
+            : `by published rate for ${ageBracketLabel.toLowerCase()}, in two groups`;
 
   const grid = (list: Clinic[]) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -67,6 +88,7 @@ export function ClinicResults({
           isSelected={selectedSlugs.includes(clinic.slug)}
           compareDisabled={selectedSlugs.length >= 4}
           variant={variant}
+          distanceText={origin ? distanceText(origin, clinic.coordinates) : undefined}
           onToggleCompare={onToggleCompare}
         />
       ))}

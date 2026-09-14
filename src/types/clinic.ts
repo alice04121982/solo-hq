@@ -173,4 +173,17 @@ export interface Clinic {
   donorLawCheckedOn?: string;
   remoteConsultation: boolean;
   successRates: SuccessReport;
+  /**
+   * Where the clinic is, for the finder's distance sort and "within" filter.
+   * Read from the street address where one is recorded, otherwise the
+   * clinic's own published location, to roughly a kilometre; enough to order
+   * clinics by distance, never a substitute for the address on their site.
+   */
+  coordinates: GeoPoint;
+}
+
+/** A point on the earth, decimal degrees. */
+export interface GeoPoint {
+  lat: number;
+  lng: number;
 }
