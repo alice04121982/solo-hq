@@ -4,27 +4,36 @@ import { notFound } from "next/navigation";
 import { ArticleLayout } from "@/components/article-layout";
 import { QuoteCard } from "@/components/quote-card";
 import { ResourcesSection } from "@/components/family/resources-section";
-import { ALL_STORIES } from "@/lib/stories";
+import { PUBLISHED_STORIES } from "@/lib/stories";
 import { getFamilyType } from "@/lib/family-types";
 
 /** Guides shown under a story with no specific family type. */
 const GENERAL_RESOURCES = [
   "consultation-questions",
-  "two-week-wait",
-  "uk-support-groups",
+  "understanding-hfea-success-rates",
+  "complete-solo-ivf-cost-breakdown",
 ];
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+/**
+ * Only published (real, consented) stories get a page. Any id not returned by
+ * generateStaticParams is a 404, so while PUBLISHED_STORIES is empty every
+ * story URL, including the old example ids, is a 404. Returning an empty
+ * array is valid here because Cache Components is not enabled (see
+ * node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-static-params.md).
+ */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
-  return ALL_STORIES.map((s) => ({ id: s.id }));
+  return PUBLISHED_STORIES.map((s) => ({ id: s.id }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const story = ALL_STORIES.find((s) => s.id === id);
+  const story = PUBLISHED_STORIES.find((s) => s.id === id);
   if (!story) return { title: "Story not found | CairnFertility" };
 
   return {
@@ -41,11 +50,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function StoryPage({ params }: PageProps) {
   const { id } = await params;
-  const story = ALL_STORIES.find((s) => s.id === id);
+  const story = PUBLISHED_STORIES.find((s) => s.id === id);
   if (!story) notFound();
 
   // Same family type first, so the suggestions are relevant rather than random.
-  const related = ALL_STORIES.filter((s) => s.id !== story.id)
+  const related = PUBLISHED_STORIES.filter((s) => s.id !== story.id)
     .sort((a, b) => Number(b.familyType === story.familyType) - Number(a.familyType === story.familyType))
     .slice(0, 2);
 
@@ -68,18 +77,6 @@ export default async function StoryPage({ params }: PageProps) {
       backHref="/stories"
       backLabel="All stories"
     >
-      <p
-        className="text-xs font-sans leading-relaxed mb-8 rounded-xl px-4 py-3"
-        style={{ background: "var(--lime)", color: "var(--muted)" }}
-      >
-        This is an illustrative story, written to show what real accounts will look
-        like here. It does not describe a real person. To share your own story,{" "}
-        <Link href="/stories/share" className="underline underline-offset-2" style={{ color: "var(--foreground)" }}>
-          use our story form
-        </Link>{" "}
-        or write to stories@cairnfertility.com.
-      </p>
-
       <div className="space-y-6">
         {story.body.split("\n\n").map((para, i) => (
           <p

@@ -77,7 +77,7 @@ application form on a lookalike page and harvest what people typed into it.
 `next.config.ts` now sets, on every route: `Content-Security-Policy`,
 `Strict-Transport-Security` (2 years, preload-eligible), `X-Frame-Options:
 DENY`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`
-(everything off except geolocation, which the clinic search needs),
+(everything off, including geolocation: no page uses it),
 `Cross-Origin-Opener-Policy`, and `X-DNS-Prefetch-Control`. `poweredByHeader`
 is off.
 
@@ -285,13 +285,17 @@ lint-clean.
   no key or token appears in the source. Nothing sensitive is exposed through a
   `NEXT_PUBLIC_` variable — the only one is the platform's display name, which
   is a word, not a secret.
-- **Third-party calls from the browser.** Exactly one: `api.postcodes.io`, only
-  after an explicit geolocation permission prompt, and it is the only non-self
-  origin in `connect-src`. Share buttons build URLs with `encodeURIComponent`.
-- **Client-side storage.** The application journey remembers a first name and a
-  date, and deliberately not the email, the pathway, the stage or the free-text
-  answer — browsers are shared, and someone else opening the page should learn
-  nothing beyond "someone applied".
+- **Third-party calls from the browser.** None; `connect-src 'self'`. Every
+  `fetch()` in `src/` targets a same-origin `/api` route. The earlier
+  `api.postcodes.io` allowance was for a location search that is not in the
+  code and has been removed from the CSP and from the Permissions-Policy. Share
+  buttons build URLs with `encodeURIComponent`.
+- **Client-side storage.** One localStorage key, `cairn-community-application`,
+  holding `{ submittedAt: ISO, expiresAt: ISO }`: a date marker kept for 30 days
+  so the page can show that an application was received. It holds no name,
+  email, pathway, stage or free-text answer; an expired or legacy value is
+  treated as absent and removed. Browsers are shared, and someone else opening
+  the page should learn nothing beyond "someone applied".
 - **CI.** `.github/workflows/data-freshness.yml` has correctly scoped
   permissions, no `pull_request_target`, and reads its untrusted input into a
   variable rather than interpolating it into the script body.

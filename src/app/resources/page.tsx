@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   description: "Guides, tools, checklists, and templates for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment.",
 };
 
-// Same display order as /families: Solo Mums, Solo Dads, Two Mums, Two Dads, Mum and Dad.
-const FAMILY_DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
+// Same display order as /families: Mum and Dad, Solo Mums, Solo Dads, Two Mums, Two Dads.
+const FAMILY_DISPLAY_ORDER = ["heterosexual-couple", "solo-mum", "single-dad", "same-sex-female", "same-sex-male"];
 
 function orderedFamilies(): FamilyType[] {
   return FAMILY_DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);
@@ -44,14 +44,14 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Header — one oversized egg mark bleeding off the band edge */}
+      {/* Header: one oversized egg mark bleeding off the band edge */}
       <Section band={0} padding="pt-16 pb-14 md:pt-24 md:pb-18" backdrop={{ shape: "egg" }}>
         <SectionHeading
           level={1}
           eyebrow="The library"
           mark="egg"
           title="Resources"
-          intro="Guides, checklists, templates, and explainers for solo mums, solo dads, two mums, two dads, and couples going through fertility treatment."
+          intro="Guides, checklists, templates and explainers on costs, treatment, clinics and the law, for solo mums, solo dads, two mums, two dads and couples. Each guide lists its sources and the date it was last reviewed."
           introWidth="52ch"
           className="mb-6"
         />
@@ -60,10 +60,10 @@ export default function ResourcesPage() {
         </p>
       </Section>
 
-      {/* Start here — the two things most people arrive needing */}
+      {/* Start here: the two things most people arrive needing */}
       <Section band={1} padding="py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-stretch">
-          {/* Funding — the question that gates every other decision */}
+          {/* Funding: the question that gates every other decision */}
           <div className="flex flex-col rounded-2xl bg-cream p-7 md:p-8">
             <div className="flex items-center gap-4 mb-5">
               <CategoryIcon>
@@ -77,7 +77,7 @@ export default function ResourcesPage() {
               Funding &amp; payment options
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-7" style={{ maxWidth: "52ch" }}>
-              What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest — employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
+              What is free on the NHS and how to qualify, an eligibility self-check, and every route people use to pay for the rest: employer benefits, egg sharing, multi-cycle and refund programmes, insurance-backed plans, grants and 0% clinic finance.
             </p>
             <Link
               href="/funding"
@@ -88,7 +88,7 @@ export default function ResourcesPage() {
             </Link>
           </div>
 
-          {/* DCN — the essential external resource for every family type */}
+          {/* DCN: the essential external resource for every family type */}
           <div className="flex flex-col rounded-2xl bg-cream p-7 md:p-8">
             <div className="flex items-center gap-4 mb-5">
               <CategoryIcon>
@@ -118,20 +118,20 @@ export default function ResourcesPage() {
         </div>
       </Section>
 
-      {/* The library — every topic as a white card on the cream band */}
+      {/* The library: every topic as a white card on the cream band */}
       <Section band={2} padding="py-16 md:py-24">
         <SectionHeading eyebrow="Browse by topic" mark="bloom" title="Everything, organised." />
 
         <ResourceLibrary />
       </Section>
 
-      {/* Browse by family type — shape-coded cards on the teal band */}
+      {/* Browse by family type: shape-coded cards on the teal band */}
       <Section tone="teal" backdrop={{ shape: "dots", side: "left" }}>
         <SectionHeading
           tone="teal"
           eyebrow="Made for your family"
           title="Browse by family type."
-          intro="Each family guide ends with a hand-picked reading list for that path — start there if you want only what applies to you."
+          intro="Each family guide ends with a hand-picked reading list for that path. Start there if you want only what applies to you."
           introWidth="52ch"
         />
 

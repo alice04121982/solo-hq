@@ -18,8 +18,9 @@ interface FilterSheetProps {
 }
 
 /**
- * Mobile home for the finder filters. Changes apply live, so the footer CTA
- * just closes the sheet; nothing here ever blocks results from showing.
+ * Mobile home for the finder filters and the Sort control. Changes apply
+ * live, so the footer CTA just closes the sheet; nothing here ever blocks
+ * results from showing.
  */
 export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }: FilterSheetProps) {
   const activeCount = countActiveFilters(filters);
@@ -48,7 +49,7 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
           >
             <div className="flex items-center justify-between px-6 py-4 border-b border-border-warm shrink-0">
               <div className="flex items-center gap-3">
-                <h2 className="font-sans font-bold text-base text-teal">Filters</h2>
+                <h2 className="font-sans font-bold text-base text-teal">Filters and sort</h2>
                 {activeCount > 0 && (
                   <span className="flex items-center justify-center w-5 h-5 rounded-full text-[13px] font-bold bg-teal text-on-teal">
                     {activeCount}
@@ -72,7 +73,11 @@ export function FilterSheet({ isOpen, onClose, filters, onChange, resultCount }:
               <button
                 type="button"
                 onClick={() =>
-                  onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+                  onChange({
+                    ...DEFAULT_FINDER_FILTERS,
+                    ageBracket: filters.ageBracket,
+                    sort: filters.sort,
+                  })
                 }
                 className="flex-1 py-2.5 text-sm font-medium rounded-full border border-teal/20 text-teal transition-colors hover:bg-surface-hover"
               >

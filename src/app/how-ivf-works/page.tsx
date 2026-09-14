@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
@@ -7,7 +8,7 @@ import { SectionHeading } from "@/components/section-heading";
 export const metadata: Metadata = {
   title: "What Happens During IVF | CairnFertility",
   description:
-    "From ovarian stimulation to implantation: what is happening inside your body and in the laboratory at every step of the IVF process. In plain English.",
+    "From ovarian stimulation to implantation: what is happening in the body and in the laboratory at every step of the IVF process. In plain English.",
 };
 
 // ─── SVG Illustrations ────────────────────────────────────────────────────────
@@ -205,7 +206,6 @@ function ImplantationIllustration() {
       <circle cx="90" cy="115" r="6.5" fill="#F0A8C4" fillOpacity="0.85" stroke="var(--teal)" strokeWidth="1" />
       <circle cx="102" cy="112" r="7" fill="#F0A8C4" fillOpacity="0.85" stroke="var(--teal)" strokeWidth="1" />
       <circle cx="150" cy="40" r="16" fill="#C5E600" />
-      <path d="M 143 40 L 148 45 L 157 36" stroke="#1A3A25" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="74" cy="64" r="9" fill="white" fillOpacity="0.38" />
     </svg>
   );
@@ -226,6 +226,7 @@ const STAGES = [
       "Stimulation typically lasts 10–14 days",
       "Follicles need to reach roughly 18 mm before retrieval",
       "Your ovaries may feel heavy or tender; this is expected and normal",
+      "Call your clinic straight away if you have severe bloating, tummy pain or sickness. These can be signs of ovarian hyperstimulation syndrome (OHSS). Call 999 if you have difficulty breathing or chest pain",
     ],
     Illustration: StimulationIllustration,
   },
@@ -235,7 +236,7 @@ const STAGES = [
     duration: "About 20–30 minutes, under sedation",
     body: [
       "Around 36 hours after your trigger injection, egg retrieval takes place. Under sedation, an ultrasound probe with a very fine attached needle is passed transvaginally to reach each follicle. The needle punctures the follicle wall and the fluid inside, including the egg, is gently aspirated.",
-      "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You won't feel anything during the procedure and most people go home within a few hours.",
+      "An embryologist in the adjacent lab immediately examines the fluid under a microscope to identify and count mature eggs. You'll have sedation (or sometimes a general anaesthetic), so most people feel little or nothing, and most go home within a few hours.",
     ],
     facts: [
       "Most people feel bloated or crampy afterwards but recover the same day",
@@ -246,31 +247,28 @@ const STAGES = [
   },
   {
     number: "03",
-    title: "ICSI: Sperm Meets Egg",
+    title: "Fertilisation in the lab (IVF or ICSI)",
     duration: "Hours 0–4, in the laboratory",
     body: [
-      "Some clinics recommend ICSI (intracytoplasmic sperm injection) when using frozen donor sperm, though conventional IVF works just as well when the thawed sample is good quality — donor sperm is screened for exactly that, so ask your clinic which they recommend and why. With ICSI, the embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle, rather than leaving sperm to find the egg naturally.",
-      "With ICSI, the egg is held in place with a blunt holding pipette on one side while the injection pipette approaches from the other. The sperm is deposited into the cytoplasm in seconds.",
+      "The eggs and sperm are brought together in the laboratory in one of two ways. With conventional IVF, each egg is placed in a dish with prepared sperm and left for fertilisation to happen. With ICSI (intracytoplasmic sperm injection), the embryologist selects a single sperm under high magnification and injects it directly into the egg using a microscopic needle.",
+      "ICSI is used when sperm quality is a concern: a very low count, poor movement or shape, sperm that had to be surgically retrieved, frozen sperm of lower quality, or a previous cycle in which few or no eggs fertilised. Otherwise conventional IVF is used. The HFEA says success rates for the two are very similar.",
     ],
     facts: [
-      "ICSI requires the egg's surrounding cumulus cells to be removed first",
-      "Each mature egg is injected with one carefully selected sperm",
-      "Standard IVF (without ICSI) can be used when sperm quality is high; ask your clinic which they recommend",
+      "With ICSI, each mature egg is injected with one sperm",
+      "Ask your clinic which method it recommends for you, and why",
     ],
     Illustration: ICSIIllustration,
   },
   {
     number: "04",
     title: "Fertilisation Confirmed",
-    duration: "Day 1: 16–18 hours after fertilisation",
+    duration: "Day 1: 16–18 hours after the eggs are injected or mixed with sperm",
     body: [
-      "The morning after ICSI, the embryologist checks each injected egg under the microscope. A successfully fertilised egg, now called a zygote, shows two small spheres called pronuclei: one carrying your genetic material, one carrying the donor sperm's.",
-      "Not every injected egg will fertilise. A typical fertilisation rate is 60–80% of mature eggs. Those that don't fertilise are not used further. You will usually receive an update from your clinic on day 1.",
+      "The morning after insemination or ICSI, the embryologist checks each egg under the microscope. A successfully fertilised egg, now called a zygote, shows two small spheres called pronuclei: one from the egg, one from the sperm.",
+      "Not every egg will fertilise. A typical fertilisation rate is 60–80% of mature eggs. Those that don't fertilise are not used further. You will usually receive an update from your clinic on day 1.",
     ],
     facts: [
       "Two pronuclei (2PN) is the sign of normal, successful fertilisation",
-      "Three pronuclei (3PN) signals abnormal fertilisation; these embryos are not transferred",
-      "A fertilisation rate of 70% from mature eggs is considered good",
     ],
     Illustration: FertilisationIllustration,
   },
@@ -280,10 +278,9 @@ const STAGES = [
     duration: "Days 2–4",
     body: [
       "A fertilised egg begins to divide. By day 2 it has 2–4 cells. By day 3, a typical embryo has 6–8 cells, known as blastomeres. The embryologist grades embryos at each check: cell number, whether the cells are even in size, and how much fragmentation is present.",
-      "The cells don't grow: the same cytoplasm from the original egg is simply divided into smaller and smaller units. Each blastomere at this stage is essentially genetically identical to the others.",
+      "The cells don't grow: the same cytoplasm from the original egg is simply divided into smaller and smaller units.",
     ],
     facts: [
-      "Grading systems vary between clinics but all assess cell number, symmetry, and fragmentation",
       "Some embryos develop more slowly at day 3 but catch up by day 5, so don't read too much into early grades",
       "Most clinics culture embryos to day 5 before selecting one for transfer or freezing",
     ],
@@ -295,10 +292,10 @@ const STAGES = [
     duration: "Day 5–6",
     body: [
       "By day 5, a good-quality embryo has transformed into a blastocyst: a fluid-filled sphere with two distinct cell populations. The outer layer (trophectoderm) will become the placenta. The inner cell mass (ICM), a tight cluster on one side, will become the baby.",
-      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation. Grading uses expansion (1–6), ICM quality (A/B/C), and trophectoderm quality (A/B/C), so a 4AA is a top-grade embryo.",
+      "The blastocyst also begins to hatch out of its outer shell (the zona pellucida) in preparation for implantation.",
     ],
     facts: [
-      "On average 40–60% of fertilised eggs reach blastocyst stage",
+      "Roughly half of fertilised eggs reach blastocyst stage (laboratory benchmarks for patients under 40)",
       "Good expansion and high ICM/TE grades predict better implantation rates",
       "Blastocysts can be vitrified (frozen) and stored for months or years without significant quality loss",
     ],
@@ -325,7 +322,7 @@ const STAGES = [
     duration: "Days 1–10 after transfer",
     body: [
       "After transfer, the blastocyst floats free in the uterus for a day or two before making contact with the endometrium, the uterine lining. The trophectoderm cells begin to burrow into the lining in a process called implantation. Blood vessels start to form between embryo and uterus.",
-      "As the embryo embeds, it starts producing hCG (human chorionic gonadotropin), the hormone detected by pregnancy tests. A blood test 9–14 days after transfer measures hCG to confirm whether implantation has occurred.",
+      "As the embryo embeds, it starts producing hCG (human chorionic gonadotropin), the hormone detected by pregnancy tests. Your clinic will give you a test date, usually about two weeks after transfer.",
     ],
     facts: [
       "Implantation typically occurs 6–10 days after fertilisation",
@@ -337,23 +334,31 @@ const STAGES = [
 ];
 
 /** When the clinical content above was last checked against the sources below. */
-const CLINICAL_LAST_REVIEWED = "August 2026";
+const CLINICAL_LAST_REVIEWED = "September 2026";
+
+/** Shared figure: identical wording on /about#methodology, /funding and the HFEA guide. */
+const HFEA_2024_LINE =
+  "In 2024 the UK average birth rate per embryo transferred was 30%: 38% for patients aged 18 to 34 and 8% at 43 to 44 (HFEA, preliminary figures).";
 
 const CLINICAL_SOURCES = [
   {
-    label: "HFEA — In vitro fertilisation (IVF)",
+    label: "HFEA: Fertility treatment 2024, trends and figures",
+    href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures",
+  },
+  {
+    label: "HFEA: In vitro fertilisation (IVF)",
     href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/",
   },
   {
-    label: "NHS — IVF: what happens",
+    label: "NHS: IVF, what happens",
     href: "https://www.nhs.uk/conditions/ivf/what-happens/",
   },
   {
-    label: "HFEA — Intracytoplasmic sperm injection (ICSI)",
+    label: "HFEA: Intracytoplasmic sperm injection (ICSI)",
     href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intracytoplasmic-sperm-injection-icsi/",
   },
   {
-    label: "NICE — Fertility problems: assessment and management (NG257)",
+    label: "NICE: Fertility problems, assessment and management (NG257)",
     href: "https://www.nice.org.uk/guidance/ng257",
   },
   {
@@ -380,7 +385,7 @@ export default function HowIVFWorksPage() {
           eyebrow="The science"
           mark="egg"
           title="What actually happens."
-          intro="From the first injection to implantation: what is happening inside your body, and inside the laboratory, at every step. In plain English."
+          intro="From the first injection to implantation: what is happening in the body, and inside the laboratory, at every step. In plain English."
           introWidth="56ch"
           className="mb-0"
         />
@@ -400,7 +405,7 @@ export default function HowIVFWorksPage() {
         </div>
       </Section>
 
-      {/* Stages — each picks up the next band after the hero */}
+      {/* Stages, each picks up the next band after the hero */}
       {STAGES.map((stage, i) => {
         const illustrationLeft = i % 2 === 0;
         return (
@@ -458,7 +463,20 @@ export default function HowIVFWorksPage() {
         );
       })}
 
-      {/* Sources and review date — every clinical figure above traces here. */}
+      {/* What happens after the test: the national figure, and where support is. */}
+      <Section band={STAGES.length + 1} padding="py-16">
+        <p className="text-[15px] font-sans leading-relaxed text-muted" style={{ maxWidth: "68ch" }}>
+          {HFEA_2024_LINE}
+        </p>
+        <p className="text-[15px] font-sans leading-relaxed text-muted mt-4">
+          <Link href="/support" className="underline underline-offset-2" style={{ color: "var(--teal)" }}>
+            Looking after yourself
+          </Link>
+          : counselling and support.
+        </p>
+      </Section>
+
+      {/* Sources and review date, every clinical figure above traces here. */}
       <Section band={0} padding="py-16">
         <p className="text-[13px] font-[600] uppercase tracking-[0.15em] text-muted mb-4 font-sans">
           Sources

@@ -41,6 +41,13 @@ export const TRAVEL_ASSUMPTIONS = {
   nightsPerTrip: { low: 3, high: 7 },
 } as const;
 
+/**
+ * What the estimate does and does not cover. Rendered once beside every
+ * travel estimate (clinic card, comparison table, clinic page, matcher).
+ */
+export const TRAVEL_ESTIMATE_SCOPE =
+  "Flights and stays for one person only. Not included: a companion, local transport, UK monitoring scans, time off work, insurance, or rebooking if a cycle is cancelled.";
+
 export const TRAVEL_PROVENANCE = {
   /** ISO date these ranges were last re-checked against booking sites. */
   verifiedOn: "2026-08-12",

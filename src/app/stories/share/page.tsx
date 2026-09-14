@@ -8,7 +8,7 @@ import { ShareStoryForm } from "@/components/share-story-form";
 export const metadata: Metadata = {
   title: "Share Your Story | Cairn Fertility",
   description:
-    "Tell us about your fertility journey — at any stage, under your name or anonymously. Drafted in your browser, sent from your own email, published only with your consent.",
+    "Tell us about your fertility journey, at any stage, under your name or anonymously. Drafted in your browser, sent from your own email, published only with your consent.",
 };
 
 /** What happens after the email arrives — shown beside the form. */
@@ -23,7 +23,7 @@ const NEXT_STEPS = [
   },
   {
     title: "Your name is your call",
-    body: "Under your name, a first name only, or fully anonymous — and you can switch at any time, including after publication.",
+    body: "Under your name, a first name only, or fully anonymous, and you can switch at any time, including after publication.",
   },
   {
     title: "You can withdraw it",
@@ -49,7 +49,7 @@ export default function ShareStoryPage() {
           mark="spark"
           markClassName="shape-spin"
           title="Tell it the way it actually happened."
-          intro="The stories on this site are illustrative while we collect real, consented accounts to replace them — and the accounts that help most are written by people who lived them. Whatever stage you're at, however it went, we'd like to hear it."
+          intro="We're collecting real, consented accounts, and the ones that help most are written by people who lived them. Whatever stage you're at, however it went, we'd like to hear it."
           introWidth="58ch"
           className="mb-0"
         />
@@ -60,8 +60,8 @@ export default function ShareStoryPage() {
             className="underline underline-offset-2 text-foreground"
           >
             stories@cairnfertility.com
-          </a>{" "}
-          — it reaches the same inbox.
+          </a>
+          . It reaches the same inbox.
         </p>
       </Section>
 

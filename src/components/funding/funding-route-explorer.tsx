@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
 import type { FundingRoute, RouteGroup } from "@/lib/funding";
 import { ROUTE_GROUPS } from "@/lib/funding";
+
+/**
+ * Credit and risk-sharing routes are FCA-regulated products, so their middle
+ * column is framed as a prompt to look, not a statement of suitability.
+ */
+function suitsTitle(group: RouteGroup): string {
+  return group === "share" || group === "spread" ? "Might be worth looking at if" : "Who it suits";
+}
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
@@ -154,18 +163,20 @@ export function FundingRouteExplorer({ routes }: { routes: FundingRoute[] }) {
 
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
                     <Column title="How it works" items={r.howItWorks} />
-                    <Column title="Who it suits" items={r.suits} />
+                    <Column title={suitsTitle(r.group)} items={r.suits} />
                     <Column title="Watch out for" items={r.watchOuts} />
                   </div>
 
-                  {/* The route is usually universal; the companies named are
-                      not, so say which market this card is describing. */}
-                  {r.where && (
-                    <p className="text-[13px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "70ch" }}>
-                      <span className="font-[600] uppercase tracking-[0.12em] text-[12px]" style={{ color: TEAL_SOFT }}>
-                        Where this applies ·{" "}
-                      </span>
-                      {r.where}
+                  {r.more && (
+                    <p className="mt-8">
+                      <Link
+                        href={r.more.href}
+                        className="inline-flex items-center gap-1.5 text-[14px] font-sans underline underline-offset-2"
+                        style={{ color: TEAL }}
+                      >
+                        {r.more.label}
+                        <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                      </Link>
                     </p>
                   )}
 
