@@ -498,7 +498,7 @@ const DISCLAIMER: LegalPage = {
       body: ["What our figures can and cannot tell you:"],
       bullets: [
         "Success rates are historical population statistics. Your own likelihood of success depends on age, diagnosis, protocol, and factors no published statistic captures. A clinic's rate is not a prediction for you.",
-        "UK figures labelled as from the HFEA register are copied from the Choose a Clinic pages published by the Human Fertilisation and Embryology Authority at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/); the HFEA does not endorse this site. Overseas figures are the clinics' own published figures, which we have not checked against a regulator. We label which is which, and we show no rate where a clinic publishes none or measures something other than births.",
+        "UK figures labelled as from the HFEA register are copied from the Choose a Clinic pages published by the Human Fertilisation and Embryology Authority at [hfea.gov.uk](https://www.hfea.gov.uk/choose-a-clinic/clinic-search/); the HFEA does not endorse this site. HFEA material contains public sector information licensed under the Open Government Licence v3.0. Overseas figures are the clinics' own published figures, which we have not checked against a regulator. We label which is which, and we show no rate where a clinic publishes none or measures something other than births.",
         "Prices are indicative and dated, and rarely include everything you will actually pay. The only price that matters is the itemised written quote a clinic gives you.",
         "Medical knowledge moves. We review our content, but any page may lag current clinical guidance.",
       ],

@@ -168,7 +168,9 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           checked. UK rates are copied from each clinic&rsquo;s HFEA Choose a Clinic page (2023,
           births per embryo transferred). Overseas rates are the clinic&rsquo;s own and use different
           measures. Prices are headline figures from {DATA_PROVENANCE.pricesSourceLabel}, last
-          checked {formatCheckedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
+          checked {formatCheckedDate(DATA_PROVENANCE.pricesVerifiedOn)}. HFEA material contains
+          public sector information licensed under the Open Government Licence v3.0; the HFEA does
+          not endorse this site.
         </p>
         <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
           <Link href="/about#methodology" className="font-medium text-teal hover:underline underline-offset-2">

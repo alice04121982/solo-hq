@@ -423,7 +423,7 @@ export const SUPPORT_SECTIONS: SupportSection[] = [
     id: "peer-support",
     title: "Peer support and organisations",
     paragraphs: [
-      "This site has its own community forum, open to every family type.",
+      "Cairn runs a small, moderated WhatsApp group for people in treatment, open to every family type. There is no forum on this site.",
     ],
     items: [
       {
