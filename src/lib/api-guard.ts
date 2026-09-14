@@ -24,8 +24,17 @@ const MAX_BODY_BYTES = 8 * 1024;
  * site is a worse outcome than a slightly looser check. A request with no
  * Origin header at all (a curl, a server-to-server call) is allowed through —
  * the header is a browser guarantee, and its absence proves nothing.
+ *
+ * Browsers also send `Sec-Fetch-Site`, which a page cannot forge. When it is
+ * present and says the request came from another site, that is refused
+ * before Origin is even looked at, so a cross-site browser request is caught
+ * even if Origin is missing. `none` is a direct navigation or a non-browser
+ * client and passes, as before.
  */
 function isSameOrigin(request: Request): boolean {
+  const site = request.headers.get("sec-fetch-site");
+  if (site && site !== "same-origin" && site !== "none") return false;
+
   const origin = request.headers.get("origin");
   if (!origin) return true;
 

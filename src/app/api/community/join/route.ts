@@ -43,12 +43,14 @@ export async function POST(request: Request) {
   // Two buckets. The per-IP one slows someone working through email guesses
   // from one place; the per-token one holds even if they spread out, because
   // the token is the thing being attacked and it cannot move.
-  const perIp = rateLimit(`community-join-ip:${clientKey(request)}`, 10, 10 * 60_000);
-  const perToken = rateLimit(
-    `community-join-token:${isWellFormedToken(token) ? hashToken(token) : "malformed"}`,
-    5,
-    15 * 60_000
-  );
+  const [perIp, perToken] = await Promise.all([
+    rateLimit(`community-join-ip:${clientKey(request)}`, 10, 10 * 60_000),
+    rateLimit(
+      `community-join-token:${isWellFormedToken(token) ? hashToken(token) : "malformed"}`,
+      5,
+      15 * 60_000
+    ),
+  ]);
   if (!perIp.ok || !perToken.ok) {
     const retryAfter = Math.max(perIp.retryAfter, perToken.retryAfter);
     return NextResponse.json(

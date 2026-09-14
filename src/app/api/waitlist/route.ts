@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: FORMS_CLOSED_API_MESSAGE }, { status: 503 });
   }
 
-  const limit = rateLimit(`waitlist:${clientKey(request)}`, 5, 60_000);
+  const limit = await rateLimit(`waitlist:${clientKey(request)}`, 5, 60_000);
   if (!limit.ok) {
     return NextResponse.json(
       { error: "Too many attempts. Please wait a moment and try again." },

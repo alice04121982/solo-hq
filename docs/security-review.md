@@ -16,6 +16,39 @@ site compromise. **Medium** — meaningful weakening. **Low** — hardening.
 
 ---
 
+## September 2026 addendum
+
+A second audit on 14 September 2026 covered the platform around the code:
+Supabase grants and advisors, the Vercel project, the GitHub repository and
+the reviewer's machine. Findings are numbered F-01 to F-13 in the audit
+report. The code-side fixes landed on the `security/audit-2026-09` branch:
+
+- **F-01** Next.js 16.3.5 (critical advisory in image optimisation on 16.3.1).
+  `npm audit` is back to zero and the data-freshness workflow now fails on a
+  high or critical production advisory.
+- **F-02** The app reads `SUPABASE_PUBLISHABLE_KEY` and refuses to start with
+  a secret or service-role key (`src/lib/supabase-server.ts`). The legacy
+  anon JWT was shipped to browsers by the old Flying Solo build in April
+  2026 and must be disabled in the dashboard; the publishable key replaces it.
+- **F-05** Rate limiting moves to Upstash Redis when the two
+  `UPSTASH_REDIS_REST_*` variables are set, with the in-memory limiter as the
+  fallback (`src/lib/rate-limit.ts`).
+- **F-06, F-07, F-08, F-12** Migration `0005_close_defaults.sql`: a
+  database-side forms switch the submit functions check first, explicit
+  revokes for `authenticated`, closed default privileges for new objects,
+  and the duplicate clinic policies dropped. **Not yet applied** — apply it
+  from the dashboard SQL editor, then re-run the security advisor.
+- **F-11** Actions pinned to commit SHAs; Dependabot configured for npm and
+  Actions.
+- **F-13** `Sec-Fetch-Site` consulted before Origin in `isSameOrigin()`.
+
+Still yours to do, outside the code: disable the legacy Supabase keys,
+delete the old checkout and its `.env.local` from the iCloud-synced Desktop,
+confirm GitHub 2FA, add a ruleset on `main`, enable Dependabot alerts, and
+enable "Enforce SSL" on the Supabase project.
+
+---
+
 ## Summary
 
 | # | Finding | Severity | State |

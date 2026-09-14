@@ -60,7 +60,7 @@ In your local `.env.local` (git-ignored), the same plus:
 
 | Variable | What it is |
 |---|---|
-| `SUPABASE_SERVICE_ROLE_KEY` | Full database access. **This machine only** |
+| `SUPABASE_SECRET_KEY` | Full database access (`sb_secret_…`; the legacy `SUPABASE_SERVICE_ROLE_KEY` still works). **This machine only**, in `~/Developer/cairn/.env.local`, never a folder iCloud syncs |
 
 The service-role key must never be set on Vercel. The deployed site has no use
 for it, and its absence is what makes a site compromise survivable.

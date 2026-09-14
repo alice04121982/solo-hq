@@ -54,7 +54,7 @@ export async function POST(request: Request) {
   // locking them out of a form they have just written a paragraph into is its
   // own kind of harm. The inner one, further down, is tight, and only a
   // request that is about to reach the database ever spends it.
-  const attempts = rateLimit(`community-apply:${clientKey(request)}`, 15, 10 * 60_000);
+  const attempts = await rateLimit(`community-apply:${clientKey(request)}`, 15, 10 * 60_000);
   if (!attempts.ok) {
     return NextResponse.json(
       { error: "Too many attempts. Please wait a little and try again." },
@@ -145,7 +145,7 @@ export async function POST(request: Request) {
 
   // Everything below this line writes. A person applies once; four complete,
   // valid applications from one address in ten minutes is a script.
-  const writes = rateLimit(`community-apply-write:${clientKey(request)}`, 4, 10 * 60_000);
+  const writes = await rateLimit(`community-apply-write:${clientKey(request)}`, 4, 10 * 60_000);
   if (!writes.ok) {
     return NextResponse.json(
       { error: "Too many attempts. Please wait a little and try again." },
