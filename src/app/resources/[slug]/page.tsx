@@ -1,14 +1,49 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, Download, Tag } from "lucide-react";
-import { CopyButton } from "@/components/copy-button";
+import { ArrowLeft, ArrowRight, Clock, Download, ExternalLink, Tag } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { getGuideBySlug, GUIDES } from "@/lib/guides";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+/**
+ * The words after the support link's colon, per anchor (contract C2: two to
+ * four words). Only guides with a supportAnchor render the link.
+ */
+const SUPPORT_LINK_LABELS: Record<string, string> = {
+  crisis: "help right now",
+  waiting: "waiting for a result",
+  "cycle-fails": "when a cycle fails",
+  loss: "miscarriage and loss",
+  stopping: "pausing or stopping treatment",
+  relationships: "partner, family and friends",
+  work: "work",
+  money: "money worries",
+  counselling: "counselling",
+  "peer-support": "peer support",
+};
+
+const DISCLAIMER =
+  "General information, not medical or financial advice. Your clinic and a regulated adviser can advise on your situation.";
+
+/** Trims a description to `max` characters at a word boundary (G1-30). */
+function trimDescription(text: string, max = 155): string {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${cut.slice(0, lastSpace > 0 ? lastSpace : max).replace(/[,;:]$/, "")}…`;
+}
+
+/** A stable id for a section heading, so other pages can deep-link to it. */
+function headingId(heading: string): string {
+  return heading
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 export async function generateStaticParams() {
@@ -21,7 +56,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!guide) return { title: "Not found | CairnFertility" };
   return {
     title: `${guide.title} | CairnFertility`,
-    description: guide.intro.slice(0, 155),
+    description: trimDescription(guide.intro),
   };
 }
 
@@ -29,6 +64,8 @@ export default async function GuidePage({ params }: PageProps) {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
+
+  const supportLabel = guide.supportAnchor ? SUPPORT_LINK_LABELS[guide.supportAnchor] : undefined;
 
   return (
     <main className="min-h-screen bg-background">
@@ -71,6 +108,12 @@ export default async function GuidePage({ params }: PageProps) {
           <p className="text-lg font-sans text-muted leading-relaxed">
             {guide.intro}
           </p>
+
+          {guide.supportAnchor && supportLabel && (
+            <p className="mt-4 text-[16px] font-sans text-muted leading-relaxed">
+              <Link href={`/support#${guide.supportAnchor}`} className="font-[500] text-teal underline underline-offset-4 hover:text-foreground">Looking after yourself</Link>: {supportLabel}.
+            </p>
+          )}
         </div>
       </section>
 
@@ -78,7 +121,7 @@ export default async function GuidePage({ params }: PageProps) {
       <section className="max-w-3xl mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">
         <div className="space-y-10">
           {guide.sections.map((section) => (
-            <div key={section.heading}>
+            <div key={section.heading} id={headingId(section.heading)} className="scroll-mt-24">
               <h2 className="font-sans font-bold text-teal mb-4" style={{ fontSize: "clamp(1.625rem, 2.5vw, 2.375rem)", lineHeight: 1.2 }}>
                 {section.heading}
               </h2>
@@ -127,14 +170,6 @@ export default async function GuidePage({ params }: PageProps) {
 
               {section.callout && (
                 <div className="mt-4 rounded-2xl bg-surface-hover border border-teal/15 p-5">
-                  {section.calloutCopy && (
-                    <div className="flex items-center justify-between gap-3 mb-3">
-                      <p className="text-[12px] font-[600] uppercase tracking-[0.12em] font-sans text-teal/50">
-                        Sample email
-                      </p>
-                      <CopyButton text={section.callout} />
-                    </div>
-                  )}
                   <p className="text-[15px] font-sans text-teal leading-relaxed font-[500]">
                     {section.callout}
                   </p>
@@ -151,6 +186,22 @@ export default async function GuidePage({ params }: PageProps) {
                     </div>
                   )}
                 </div>
+              )}
+
+              {section.links && section.links.length > 0 && (
+                <ul className="mt-4 space-y-1.5">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="inline-flex items-center gap-1.5 text-[15px] font-sans font-[500] text-teal underline underline-offset-4 hover:text-foreground"
+                      >
+                        {link.label}
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
           ))}
@@ -170,6 +221,28 @@ export default async function GuidePage({ params }: PageProps) {
             </ul>
           </div>
         )}
+
+        {/* Sources and review date */}
+        <div className="mt-10">
+          <h2 className="font-sans font-bold text-teal text-xl mb-4">Sources</h2>
+          <ul className="space-y-2">
+            {guide.sources.map((source) => (
+              <li key={source.href}>
+                <a
+                  href={source.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-start gap-1.5 text-[14px] font-sans text-foreground/70 underline underline-offset-4 hover:text-teal"
+                >
+                  <span>{source.label}</span>
+                  <ExternalLink className="h-3 w-3 mt-1 shrink-0" />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-5 text-[13px] font-sans text-muted">Last reviewed {guide.lastReviewed}.</p>
+          <p className="mt-1 text-[13px] font-sans text-muted">{DISCLAIMER}</p>
+        </div>
 
         {/* Back link */}
         <div className="mt-12 pt-8 border-t border-border">

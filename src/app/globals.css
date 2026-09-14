@@ -218,6 +218,8 @@
     --card-ink:                var(--teal-ink);
     --card-ink-muted:          var(--muted);
     --card-ring:               var(--teal);
+    /* A divider inside the card: warm hairline at rest, pink-tinted on teal. */
+    --card-rule:               var(--border-warm);
     /* HFEA verified: pale citrus pill. Clinic reported: outline only. */
     --card-badge-verified-bg:  var(--accent-pale);
     --card-badge-verified-ink: var(--teal-ink);
@@ -241,21 +243,18 @@
       outline-color 160ms ease;
   }
 
-  /* Option "citrus": the HFEA badge yellow promoted to the card fill. */
-  .clinic-card--citrus {
-    --card-surface:            var(--accent-pale);
-    --card-edge:               transparent;
-    /* The pale pill would vanish into the fill, so verified goes solid lime. */
-    --card-badge-verified-bg:  var(--accent);
-    --card-badge-verified-ink: var(--on-accent);
-  }
-
   /* Option "outline": no fill at all — the cream band shows through. */
   .clinic-card--outline {
     --card-surface:            transparent;
     --card-edge:               var(--teal-20);
     --card-badge-verified-bg:  var(--accent);
     --card-badge-verified-ink: var(--on-accent);
+  }
+
+  /* On a white surface the card takes the cream fill instead: same ink,
+     same badge, same teal hover, only the paper changes. */
+  .clinic-card--cream {
+    --card-surface:            var(--cream);
   }
 
   /* The dark-green hover. Pointer devices only: on touch, :hover sticks
@@ -267,6 +266,7 @@
       --card-ink:                var(--on-teal);
       --card-ink-muted:          var(--on-teal-muted);
       --card-ring:               var(--accent);
+      --card-rule:               var(--teal-card-border);
       --card-badge-verified-bg:  var(--accent);
       --card-badge-verified-ink: var(--on-accent);
       --card-badge-reported-edge: var(--on-teal-muted);
@@ -295,6 +295,8 @@
   }
   .clinic-card__control:hover:not(:disabled) { background: var(--card-control-wash); }
   .clinic-card__control:disabled { opacity: 0.45; cursor: not-allowed; }
+  .clinic-card__link { color: var(--card-ink-muted); }
+  .clinic-card__link:hover { color: var(--card-ink); }
   .clinic-card__control--active,
   .clinic-card__control--active:hover:not(:disabled) {
     background: var(--card-control-active-bg);

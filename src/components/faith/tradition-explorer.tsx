@@ -108,7 +108,22 @@ export function TraditionExplorer({ traditions }: { traditions: FaithTradition[]
                   </div>
                 )}
 
-                <div className="mt-6 flex flex-wrap gap-2">
+                {t.note && (
+                  <p
+                    className="mt-8 text-[14px] font-sans leading-relaxed"
+                    style={{ color: TEAL_SOFT, maxWidth: "70ch" }}
+                  >
+                    {t.note}
+                  </p>
+                )}
+
+                <p
+                  className="mt-6 mb-2 text-[12px] font-[700] uppercase tracking-[0.14em] font-sans"
+                  style={{ color: TEAL_SOFT }}
+                >
+                  Sources
+                </p>
+                <div className="flex flex-wrap gap-2">
                   {t.sources.map((s) => (
                     <a
                       key={s.href}

@@ -5,18 +5,21 @@ import { ChevronDown, ExternalLink, MinusCircle } from "lucide-react";
 import type { ClinicExclusion } from "@/lib/clinic-exclusions";
 
 /**
- * Clinics removed from the finder, shown in the finder.
+ * Clinics the finder does not list, shown in the finder.
  *
  * A clinic that quietly is not in the list looks identical to a clinic nobody
  * has got round to adding, and the difference matters most to the person who
- * has already been sent the clinic's brochure. So the removals sit under the
+ * has already been sent the clinic's brochure. So the exclusions sit under the
  * results with their reasons and their sources, and they answer a geography
- * filter the same way a listed clinic would: filter to where a removed clinic
- * operates and this is what comes back, rather than an empty list.
+ * filter the same way a listed clinic would: filter to where an excluded
+ * clinic operates and this is what comes back, rather than an empty list.
  *
- * It stays collapsed by default — it is context, not a result — and opens
+ * It stays collapsed by default (it is context, not a result) and opens
  * itself when the filters point at it.
  */
+
+const HFEA_EMOTIONAL_SUPPORT_URL =
+  "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-emotional-support/";
 interface RemovedClinicsProps {
   /** Exclusions matching the current geography filters. */
   exclusions: ClinicExclusion[];
@@ -48,6 +51,10 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
 
   const count = exclusions.length;
   const countries = [...new Set(exclusions.map((x) => x.country))];
+  const reasons = [...new Set(exclusions.map((x) => x.reason))];
+  const sources = exclusions
+    .flatMap((x) => x.sources)
+    .filter((src, i, all) => all.findIndex((s) => s.url === src.url) === i);
 
   return (
     <div
@@ -64,13 +71,10 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
         <MinusCircle className="h-4 w-4 text-muted shrink-0 mt-0.5" aria-hidden />
         <span className="flex-1 text-xs text-muted leading-relaxed">
           <strong className="text-teal-ink">
-            {count === 1 ? "1 clinic has" : `${count} clinics have`} been removed from this
-            list
+            {count === 1 ? "1 clinic" : `${count} clinics`} in {countries.join(" and ")}{" "}
+            {count === 1 ? "is" : "are"} not listed.
           </strong>{" "}
-          {countries.length === 1 ? `in ${countries[0]}` : `across ${countries.join(", ")}`}.{" "}
-          {shouldOpen && !open
-            ? "They match your filters, so nothing here is hidden from you."
-            : "We do not list them, and we say why."}
+          See why.
         </span>
         <ChevronDown
           className={`h-4 w-4 text-muted shrink-0 mt-0.5 transition-transform duration-150 ${
@@ -82,41 +86,35 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
 
       {open && (
         <div className="mt-4 space-y-5 pl-7">
-          {exclusions.map((x) => (
-            <div key={x.name} className="border-l-2 border-teal/15 pl-4">
-              <p className="text-sm font-semibold text-teal-ink">
-                {x.name} &mdash; {x.country}
-              </p>
-              <p className="text-xs text-muted leading-relaxed mt-1">{x.reason}</p>
-              {x.response && (
-                <p className="text-xs text-muted leading-relaxed mt-2">
-                  <span className="font-medium text-teal-ink">Their response:</span> {x.response}
-                </p>
-              )}
-              <p className="text-xs text-muted leading-relaxed mt-2">
-                Sources:{" "}
-                {x.sources.map((src, i) => (
-                  <span key={src.url}>
-                    {i > 0 && "; "}
-                    <a
-                      href={src.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-teal hover:underline underline-offset-2"
-                    >
-                      {src.label}
-                      <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
-                    </a>
-                  </span>
-                ))}
-                .
-              </p>
-            </div>
+          {/* Neutral wording (see src/lib/clinic-exclusions.ts): one shared
+              reason, no clinic names, and the sources deduplicated across
+              entries, so nothing here attaches an allegation to a named clinic. */}
+          {reasons.map((reason) => (
+            <p key={reason} className="text-xs text-muted leading-relaxed">
+              {reason}
+            </p>
           ))}
           <p className="text-xs text-muted leading-relaxed">
-            Removing a clinic is not a finding against it, and nothing here is an allegation of
-            ours. Each entry records what a named publication has reported and is reviewed on
-            the date held with it &mdash; see{" "}
+            Reporting:{" "}
+            {sources.map((src, i) => (
+              <span key={src.url}>
+                {i > 0 && "; "}
+                <a
+                  href={src.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-teal hover:underline underline-offset-2"
+                >
+                  {src.label}
+                  <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+                </a>
+              </span>
+            ))}
+            .
+          </p>
+          <p className="text-xs text-muted leading-relaxed">
+            Each entry records what a named publication has reported and is reviewed on the
+            date held with it. See{" "}
             <a
               href="/about#methodology"
               className="font-medium text-teal hover:underline underline-offset-2"
@@ -124,6 +122,19 @@ export function RemovedClinics({ exclusions, targeted, resultsEmpty }: RemovedCl
               how we decide what goes in the finder
             </a>
             .
+          </p>
+          <p className="text-xs text-muted leading-relaxed">
+            If you were treated at one of these clinics, your clinic&apos;s counsellor or the{" "}
+            <a
+              href={HFEA_EMOTIONAL_SUPPORT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-teal hover:underline underline-offset-2"
+            >
+              HFEA&apos;s emotional support page
+              <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+            </a>{" "}
+            can help with next steps.
           </p>
         </div>
       )}

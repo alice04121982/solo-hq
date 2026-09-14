@@ -9,7 +9,6 @@ import type { FamilyType } from "@/lib/family-types";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const TEAL = "var(--teal)";
-const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
 export function FamilyHero({ family }: { family: FamilyType }) {
   const lines = family.headline.split("\n");

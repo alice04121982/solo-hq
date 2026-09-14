@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { FORMS_CLOSED_API_MESSAGE, FORMS_OPEN } from "@/lib/launch";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import {
   isGuardFailure,
@@ -33,7 +34,7 @@ const LINK_PATTERN = /(https?:\/\/|www\.|\[url|<a\s)/i;
  *
  * What this endpoint deliberately does not do is decide anything. It records
  * an application as `pending` and stops. Approval happens elsewhere, by a
- * person, with a key this deployment does not hold — which is why a bug here
+ * person, with a key this deployment does not hold, which is why a bug here
  * cannot let anyone into the group.
  *
  * The bot defences below (honeypot, rate limit, link rejection, strict field
@@ -41,6 +42,12 @@ const LINK_PATTERN = /(https?:\/\/|www\.|\[url|<a\s)/i;
  * boundary. The security boundary is the human who reads it.
  */
 export async function POST(request: Request) {
+  // Closed until launch (see src/lib/launch.ts). Checked before anything is
+  // read, so a closed form stores nothing and spends no rate-limit budget.
+  if (!FORMS_OPEN) {
+    return NextResponse.json({ error: FORMS_CLOSED_API_MESSAGE }, { status: 503 });
+  }
+
   // Two tiers, because the two things being limited are different. The outer
   // one is generous: someone who mistypes an email, forgets the checkbox, then
   // writes a longer answer has made three requests and done nothing wrong, and
@@ -60,7 +67,7 @@ export async function POST(request: Request) {
   const { body } = parsed;
 
   // Honeypot: a field no human sees and no human fills. Answer as though the
-  // application were accepted — a bot that learns it was caught adapts.
+  // application were accepted; a bot that learns it was caught adapts.
   if (readString(body, "website", 200) !== "") {
     return NextResponse.json({ status: "received" });
   }
@@ -76,7 +83,7 @@ export async function POST(request: Request) {
   const email = readString(body, "email", 254).toLowerCase();
   if (!EMAIL_PATTERN.test(email)) {
     return NextResponse.json(
-      { error: "That email doesn't look right — check it and try again." },
+      { error: "That email doesn't look right. Check it and try again." },
       { status: 400 }
     );
   }
@@ -84,7 +91,7 @@ export async function POST(request: Request) {
   const pathway = readString(body, "pathway", 40) as CommunityPathway;
   if (!(PATHWAY_VALUES as string[]).includes(pathway)) {
     return NextResponse.json(
-      { error: "Pick the path that fits — 'still deciding' counts." },
+      { error: "Pick the path that fits: 'still deciding' counts." },
       { status: 400 }
     );
   }
@@ -104,7 +111,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "Please say a little more about why you'd like to join — a couple of sentences is plenty. A person reads this.",
+          "Please say a little more about why you'd like to join. A couple of sentences is plenty. A person reads this.",
       },
       { status: 400 }
     );
@@ -121,6 +128,17 @@ export async function POST(request: Request) {
   if (body.agreedToRules !== true) {
     return NextResponse.json(
       { error: "Please read and accept the group rules before applying." },
+      { status: 400 }
+    );
+  }
+
+  // Explicit consent to store health-related data (the answer, path and
+  // stage). A separate checkbox from the rules, checked separately here, and
+  // checked again in the database function, which refuses to insert without
+  // it. The message matches the form's own validation text (plan contract C1).
+  if (body.healthDataConsent !== true) {
+    return NextResponse.json(
+      { error: "Please tick the consent box so we can store and read your application." },
       { status: 400 }
     );
   }
@@ -144,6 +162,7 @@ export async function POST(request: Request) {
       p_interests: interests,
       p_reason: reason,
       p_affiliation: affiliation || null,
+      p_health_consent: true,
     })
   );
 

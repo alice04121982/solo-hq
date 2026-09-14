@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
-import { QuoteCard } from "@/components/quote-card";
 import { BentoCard } from "@/components/bento-card";
 import { CommunityApplicationForm } from "@/components/community-application-form";
+import { FORMS_CLOSED_NOTICE, FORMS_OPEN } from "@/lib/launch";
 import {
   COMMUNITY_FEATURES,
   JOIN_STEPS,
@@ -13,12 +13,11 @@ import {
   SAFETY_PROMISES,
 } from "@/lib/community";
 import { getCommunityPlatform } from "@/lib/community-invite";
-import { COMMUNITY_QUOTES } from "@/lib/quotes";
 
 export const metadata: Metadata = {
   title: "Join the Community | CairnFertility",
   description:
-    "A small, vetted community for everyone doing IVF their own way. Every member is approved by a person, invites work once, and nothing said inside leaves the group. Apply to join.",
+    "A small, vetted community for everyone doing IVF their own way. Every member is approved by a person, invites work once, and members agree to keep what's shared in the group private. Apply to join.",
 };
 
 /**
@@ -27,7 +26,9 @@ export const metadata: Metadata = {
  * It used to say "not open yet, join the waitlist". It is open now, and the
  * honest framing has moved rather than gone: applying is not joining, a person
  * reads every application, and not everyone gets in. Copy on this page must
- * keep that true — nothing here may imply instant access or a public link.
+ * keep that true: nothing here may imply instant access or a public link.
+ * The full phone-number notice is shown here and on the invite page; the
+ * guidelines page holds the canonical copy at #phone.
  */
 export default function CommunityPage() {
   const platform = getCommunityPlatform();
@@ -54,15 +55,14 @@ export default function CommunityPage() {
             A small, guarded room for people doing IVF.
           </h1>
           <p className="text-lg font-sans text-muted leading-[1.65] mb-4" style={{ maxWidth: "58ch" }}>
-            Solo, same-sex, or together — IVF is easier alongside people who
+            Solo, same-sex, or together: IVF is easier alongside people who
             get it. This is a private {platform} group, not a forum: no
             profiles, no comment threads, no strangers scrolling your worst
             week.
           </p>
           <p className="text-lg font-sans text-muted leading-[1.65] mb-10" style={{ maxWidth: "58ch" }}>
-            It is open, and it is not open to everyone. Every member applied
-            and was read by a person before they got in. That is slower than a
-            join button, and it is the entire point.
+            Every member applied and was read by a person first. It&rsquo;s
+            slower than a join button, and that&rsquo;s what keeps it safe.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <a
@@ -84,7 +84,7 @@ export default function CommunityPage() {
         </div>
       </Section>
 
-      {/* How joining works — set expectations before the form, not after */}
+      {/* How joining works: set expectations before the form, not after */}
       <Section band={1}>
         <div className="max-w-2xl mb-14">
           <h2
@@ -95,7 +95,7 @@ export default function CommunityPage() {
           </h2>
           <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "50ch" }}>
             Four steps, one of which is a person reading what you wrote. There
-            is no automatic route in, and there is no link to find.
+            is no automatic route in.
           </p>
         </div>
         <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
@@ -139,10 +139,9 @@ export default function CommunityPage() {
             className="text-sm font-sans leading-relaxed"
             style={{ color: "var(--on-teal-muted)", maxWidth: "52ch" }}
           >
-            People going through fertility treatment are a target — for
-            clinics, for supplement sellers, and occasionally for worse. Four
-            things about how this group works, each of which we have to keep
-            true.
+            People going through fertility treatment are a target for clinics
+            and supplement sellers. Four things about how this group works,
+            each of which we have to keep true.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14">
@@ -187,7 +186,7 @@ export default function CommunityPage() {
               What it&rsquo;s for.
             </h2>
             <p className="text-sm font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "48ch" }}>
-              Three things. No engagement tricks, no follower counts — just the
+              Three things. No engagement tricks, no follower counts, just the
               people and the conversations.
             </p>
 
@@ -214,42 +213,17 @@ export default function CommunityPage() {
           </div>
 
           <BentoCard className="lg:sticky lg:top-8">
-            <CommunityApplicationForm />
+            {FORMS_OPEN ? (
+              <CommunityApplicationForm />
+            ) : (
+              <p className="text-[16px] font-sans text-muted leading-[1.65]">{FORMS_CLOSED_NOTICE}</p>
+            )}
           </BentoCard>
         </div>
       </Section>
 
-      {/* Voices — the people already ahead on the path */}
-      <Section band={4}>
-        <div className="mb-10">
-          <h2
-            className="font-sans font-bold text-foreground mb-3"
-            style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1 }}
-          >
-            The people you&rsquo;ll meet.
-          </h2>
-          <p className="text-xs font-sans" style={{ color: "var(--muted)", maxWidth: "60ch" }}>
-            Illustrative quotes while we collect real, consented accounts.
-            Nothing said inside the group is ever quoted here.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
-          {COMMUNITY_QUOTES.slice(0, 3).map((q, i) => (
-            <QuoteCard
-              key={q.name}
-              quote={q.quote}
-              name={q.name}
-              eyebrow={q.stage}
-              meta={[q.location]}
-              avatar={q.avatar}
-              tone={i === 1 ? "teal" : "pink"}
-            />
-          ))}
-        </div>
-      </Section>
-
-      {/* Not ready — the lighter commitment */}
-      <Section band={5} id="follow">
+      {/* Not ready: the lighter commitment */}
+      <Section band={4} id="follow">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <p
@@ -267,7 +241,7 @@ export default function CommunityPage() {
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "48ch" }}>
               We&rsquo;re building this in the open. Our story, on the About
               page, is the running log of what we&rsquo;re making and what
-              we&rsquo;re learning about IVF along the way — clinic pricing,
+              we&rsquo;re learning about IVF along the way: clinic pricing,
               policy changes, and the community as it grows. No signup, no
               commitment, and applying later is always open.
             </p>
@@ -282,7 +256,7 @@ export default function CommunityPage() {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <p className="text-xs font-sans text-muted">
-              Or find us on the socials in the footer below — same honesty,
+              Or find us on the socials in the footer below: same honesty,
               shorter form.
             </p>
           </div>

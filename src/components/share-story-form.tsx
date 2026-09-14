@@ -3,18 +3,22 @@
 import { useState } from "react";
 import { Check, Copy, Mail } from "lucide-react";
 import { FAMILY_TYPES } from "@/lib/family-types";
-import { LEGAL_CONTACT_EMAIL } from "@/lib/legal";
+import { CONTACT_EMAILS } from "@/lib/legal";
 
 /**
  * The share-your-story form.
  *
- * Deliberately not wired to a server: the site has no API routes and the
- * privacy policy promises that nothing leaves the browser except email the
- * reader sends themselves (see src/lib/legal.ts). So this form is a drafting
- * tool — it assembles a message locally and hands it to the reader's own
- * email app, or their clipboard. If a submission backend is ever added, the
- * privacy policy must change in the same pull request.
+ * Deliberately not wired to a server: the privacy policy promises that
+ * nothing typed here leaves the browser except email the reader sends
+ * themselves (see src/lib/legal.ts). So this form is a drafting tool: it
+ * assembles a message locally and hands it to the reader's own email app, or
+ * their clipboard. If a submission backend is ever added, the privacy policy
+ * must change in the same pull request.
+ *
+ * Stories go to the stories@ address, the same one the contact page names.
  */
+
+const STORIES_EMAIL = CONTACT_EMAILS.stories;
 
 const STAGES = [
   "Thinking about starting",
@@ -60,7 +64,7 @@ export function ShareStoryForm() {
     `Location: ${location.trim() || "(not given)"}`,
     `My pathway: ${pathwayLabel || "(not given)"}`,
     `Where I am in the journey: ${stage || "(not given)"}`,
-    `Publish as: ${anonymous ? "Anonymous — please don't use my name" : name.trim() || "(name above)"}`,
+    `Publish as: ${anonymous ? "Anonymous (please don't use my name)" : name.trim() || "(name above)"}`,
     "",
     "My story:",
     "",
@@ -69,7 +73,7 @@ export function ShareStoryForm() {
     "I understand you'll reply before anything is published, and that nothing goes live until I've confirmed the final version by email.",
   ].join("\n");
 
-  const mailtoHref = `mailto:${LEGAL_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const mailtoHref = `mailto:${STORIES_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
   const handleCopy = async () => {
     if (!ready) {
@@ -78,12 +82,12 @@ export function ShareStoryForm() {
     }
     try {
       await navigator.clipboard.writeText(
-        `To: ${LEGAL_CONTACT_EMAIL}\nSubject: ${subject}\n\n${body}`,
+        `To: ${STORIES_EMAIL}\nSubject: ${subject}\n\n${body}`,
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      // Clipboard unavailable — the mailto button still works.
+      // Clipboard unavailable; the mailto button still works.
     }
   };
 
@@ -175,7 +179,7 @@ export function ShareStoryForm() {
           ))}
         </select>
         <p className={hintClass}>
-          Every stage counts — the beginning, the middle, and the endings that
+          Every stage counts: the beginning, the middle, and the endings that
           didn&rsquo;t go the way anyone hoped.
         </p>
       </div>
@@ -197,7 +201,7 @@ export function ShareStoryForm() {
         />
         <p id="ss-story-hint" className={hintClass}>
           Only include what you&rsquo;d be comfortable seeing published. You
-          don&rsquo;t need to share clinical detail — what treatment felt like
+          don&rsquo;t need to share clinical detail. What treatment felt like
           matters more than the protocol you were on.
         </p>
       </div>
@@ -233,7 +237,7 @@ export function ShareStoryForm() {
           publishing it.
           <span id="ss-consent-hint" className="block text-[13px] text-muted mt-0.5">
             Nothing is published from this email alone. We&rsquo;ll agree the
-            final version with you, and you can change your mind at any point —
+            final version with you, and you can change your mind at any point,
             before or after it goes live.
           </span>
         </span>
@@ -279,7 +283,7 @@ export function ShareStoryForm() {
       {attempted && !ready && (
         <p role="alert" className="text-sm font-sans text-foreground -mt-2">
           {story.trim().length === 0
-            ? "Write your story above first — that's the one part we can't do without."
+            ? "Write your story above first. That's the one part we can't do without."
             : "Please tick the consent box first, so we know you're happy for us to read and reply."}
         </p>
       )}
@@ -288,7 +292,7 @@ export function ShareStoryForm() {
         This form works entirely in your browser: nothing you type here is sent
         to us, or anywhere else, until you send the email yourself from your
         own email app. If your email app cuts the message short, use
-        &ldquo;copy&rdquo; and paste it into a new email to {LEGAL_CONTACT_EMAIL}.
+        &ldquo;copy&rdquo; and paste it into a new email to {STORIES_EMAIL}.
       </p>
     </form>
   );

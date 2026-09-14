@@ -26,10 +26,12 @@ export interface Quote {
  * Cairn or its tools — a fabricated product testimonial is a fake review,
  * label or no label.
  */
+// TODO(phase1): these quotes are not rendered anywhere. Add real, consented
+// quotes here before showing any community quotes on a public page.
 export const COMMUNITY_QUOTES: Quote[] = [
   {
     quote:
-      "I'd spent two years on the fence, terrified of doing it alone. What got me moving was seeing the real numbers and real timelines — and hearing from women who'd done it that I could too.",
+      "I'd spent two years on the fence, terrified of doing it alone. What got me moving was seeing the real numbers and real timelines, and hearing from women who'd done it that I could too.",
     name: "Gemma, 38",
     location: "Bristol",
     stage: "Mum to a toddler, conceived via donor IUI",

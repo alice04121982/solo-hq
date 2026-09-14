@@ -1,27 +1,14 @@
 "use client";
 
 import { useCallback, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SlidersHorizontal } from "lucide-react";
 import { AGE_BRACKETS, type Clinic } from "@/types/clinic";
-import { DATA_PROVENANCE, rankBySuccessRate } from "@/lib/clinics";
+import { DATA_PROVENANCE, formatCheckedDate, sortClinics } from "@/lib/clinics";
 import { exclusionsMatchingGeography } from "@/lib/clinic-exclusions";
-import {
-  CARD_VARIANT_PARAM,
-  DEFAULT_RESULT_VARIANT,
-  DEFAULT_TOP_PERFORMER_VARIANT,
-  parseCardVariant,
-} from "@/lib/card-style";
+import { CARD_VARIANT_PARAM, DEFAULT_RESULT_VARIANT, parseCardVariant } from "@/lib/card-style";
 import { RegulatorNotice } from "@/components/regulator-notice";
-
-function formatVerifiedDate(iso: string): string {
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
 import {
   ActiveFilterTags,
   DEFAULT_FINDER_FILTERS,
@@ -31,11 +18,9 @@ import {
   type FinderFilterState,
 } from "./finder-filters";
 import { FilterSheet } from "./filter-sheet";
-import { TopPerformers } from "./top-performers";
 import { ClinicResults } from "./clinic-results";
 import { ComparisonBar } from "./comparison-bar";
 import { ComparisonTable } from "./comparison-table";
-import { DisclaimerBanner } from "./disclaimer-banner";
 import { RemovedClinics } from "./removed-clinics";
 
 const COMPARE_PARAM = "compare";
@@ -48,7 +33,9 @@ interface ClinicFinderProps {
 /**
  * The Cairn clinic finder: one search across every clinic in the database, UK
  * and international together. Geography is a filter like any other, never a
- * gate ahead of results.
+ * gate ahead of results. The default order is alphabetical; nothing is ranked
+ * unless the reader asks for a sort, and a sort by rate keeps HFEA figures
+ * and clinics' own figures in separate groups.
  *
  * The comparison selection lives in the URL (?compare=slug-a,slug-b), so it
  * survives refreshes, can be shared, and persists untouched while filters
@@ -119,9 +106,9 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     [clinics, filters]
   );
 
-  const rankedClinics = useMemo(
-    () => rankBySuccessRate(filteredClinics, filters.ageBracket),
-    [filteredClinics, filters.ageBracket]
+  const sortedClinics = useMemo(
+    () => sortClinics(filteredClinics, filters.sort, filters.ageBracket),
+    [filteredClinics, filters.sort, filters.ageBracket]
   );
 
   // Removals answer the geography filters like a clinic would, so filtering
@@ -137,22 +124,18 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
     AGE_BRACKETS.find((b) => b.value === filters.ageBracket)?.label ?? "";
   const activeFilterCount = countActiveFilters(filters);
 
-  // ?cards=paper|citrus|outline forces both grids onto one card treatment, so
-  // the options can be compared on the real page with the real data. Absent or
-  // unrecognised, each grid keeps its own default.
+  // ?cards=paper|outline forces the grid onto one card treatment, so the
+  // options can be compared on the real page with the real data.
   const cardOverride = parseCardVariant(searchParams.get(CARD_VARIANT_PARAM));
+
+  const clearAll = () =>
+    setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket, sort: filters.sort });
 
   return (
     <div className={selectedClinics.length >= 2 ? "pb-32" : ""}>
-      {/* ── Filters: inline on desktop, a sheet on mobile ── */}
+      {/* ── Filters and sort: inline on desktop, a sheet on mobile ── */}
       <div className="hidden md:block rounded-[24px] bg-background p-6 mb-4">
-        <FilterControls
-          filters={filters}
-          onChange={setFilters}
-          onClearAll={() =>
-            setFilters({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
-          }
-        />
+        <FilterControls filters={filters} onChange={setFilters} onClearAll={clearAll} />
       </div>
       <div className="md:hidden mb-4">
         <button
@@ -161,7 +144,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
           className="flex items-center gap-2 rounded-full border border-teal/20 bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-hover"
         >
           <SlidersHorizontal className="h-4 w-4" aria-hidden />
-          Filters
+          Filters and sort
           {activeFilterCount > 0 && (
             <span className="flex items-center justify-center w-5 h-5 rounded-full text-[13px] font-bold bg-teal text-on-teal">
               {activeFilterCount}
@@ -177,44 +160,33 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         <ActiveFilterTags filters={filters} onChange={setFilters} />
       </div>
 
-      {/* Standing context: the lines that must sit above every result. What
-          this list is comes first — a reader comparing three clinics needs to
-          know it is a checked selection, not a register of everything that
-          exists, before they read anything into a clinic's absence. */}
-      <p className="text-xs text-muted mb-6">
-        These are {clinics.length} clinics we have checked by hand, not a complete register of
-        every clinic in the world: a clinic missing from this list has usually not been added
-        yet. Tell us what is missing at{" "}
-        <a
-          href="mailto:stories@cairnfertility.com"
-          className="font-medium text-teal hover:underline underline-offset-2"
-        >
-          stories@cairnfertility.com
-        </a>
-        . UK success rates come from the HFEA register and are independently verified. Overseas
-        figures are self-reported by clinics and are not directly comparable. Prices are
-        indicative, compiled from {DATA_PROVENANCE.pricesSourceLabel}, and were last verified
-        on {formatVerifiedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
-      </p>
-
-      {/* ── Top performers ── */}
-      <div className="mb-8">
-        <TopPerformers
-          clinics={filteredClinics}
-          ageBracket={filters.ageBracket}
-          selectedSlugs={selectedSlugs}
-          compareDisabled={selectedSlugs.length >= COMPARE_CAP}
-          variant={cardOverride ?? DEFAULT_TOP_PERFORMER_VARIANT}
-          onToggleCompare={handleToggleCompare}
-        />
+      {/* ── About these figures: the one place the provenance is stated ── */}
+      <div className="rounded-2xl bg-background p-4 mb-6 text-xs text-muted leading-relaxed" style={{ maxWidth: "78ch" }}>
+        <p>
+          <strong className="text-teal-ink">About these figures.</strong> These are {clinics.length}{" "}
+          clinics we have selected, not a complete register. Each figure shows when it was last
+          checked. UK rates are copied from each clinic&rsquo;s HFEA Choose a Clinic page (2023,
+          births per embryo transferred). Overseas rates are the clinic&rsquo;s own and use different
+          measures. Prices are headline figures from {DATA_PROVENANCE.pricesSourceLabel}, last
+          checked {formatCheckedDate(DATA_PROVENANCE.pricesVerifiedOn)}.
+        </p>
+        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+          <Link href="/about#methodology" className="font-medium text-teal hover:underline underline-offset-2">
+            How we check these figures
+          </Link>
+          <Link href="/support" className="font-medium text-teal hover:underline underline-offset-2">
+            Looking after yourself
+          </Link>
+        </p>
       </div>
 
       {/* ── Results ── */}
       <div className="mb-6">
         <ClinicResults
-          clinics={rankedClinics}
+          clinics={sortedClinics}
           totalCount={clinics.length}
           removedCount={geoFiltered ? relevantExclusions.length : 0}
+          sort={filters.sort}
           ageBracketLabel={bracketLabel}
           ageBracket={filters.ageBracket}
           selectedSlugs={selectedSlugs}
@@ -224,12 +196,12 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
       </div>
 
       {/* Sits with the results, not with the small print below: what has been
-          taken out of this list is part of the answer to a search. */}
+          left out of this list is part of the answer to a search. */}
       <div className="mb-6">
         <RemovedClinics
           exclusions={relevantExclusions}
           targeted={geoFiltered}
-          resultsEmpty={rankedClinics.length === 0}
+          resultsEmpty={sortedClinics.length === 0}
         />
       </div>
 
@@ -245,10 +217,18 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         </div>
       )}
 
-      <div className="space-y-4">
-        <RegulatorNotice />
-        <DisclaimerBanner />
-      </div>
+      <p className="text-xs text-muted mb-4">
+        A clinic missing from this list has usually not been added yet. Tell us what is missing at{" "}
+        <a
+          href="mailto:stories@cairnfertility.com"
+          className="font-medium text-teal hover:underline underline-offset-2"
+        >
+          stories@cairnfertility.com
+        </a>
+        .
+      </p>
+
+      <RegulatorNotice />
 
       <ComparisonBar
         selected={selectedClinics}
@@ -262,7 +242,7 @@ export function ClinicFinder({ clinics }: ClinicFinderProps) {
         onClose={() => setSheetOpen(false)}
         filters={filters}
         onChange={setFilters}
-        resultCount={rankedClinics.length}
+        resultCount={sortedClinics.length}
       />
     </div>
   );

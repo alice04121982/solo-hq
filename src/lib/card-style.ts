@@ -1,37 +1,37 @@
 /**
  * Colour treatments for the clinic finder's cards.
  *
- * Three surfaces are defined here so they can be compared on the real page
+ * Two surfaces are defined here so they can be compared on the real page
  * with real data, rather than in a mockup:
  *
- *   paper    white fill, warm hairline edge. The quietest option — the data
+ *   paper    white fill, warm hairline edge. The quietest option, the data
  *            is the only colour on the card.
- *   citrus   filled with the pale yellow the HFEA verified badge already
- *            uses, promoted to a solid surface. Warmer, and it ties the
- *            cards to the badge.
  *   outline  no fill at all: the cream band shows through a teal hairline.
  *            The most editorial, and the lightest on the page.
+ *   cream    cream fill, no edge. For a card that sits on a white surface
+ *            (the clinic matcher's results panel), where paper would vanish
+ *            and the token rules put a cream fill on white. Not selectable
+ *            on the finder, whose band is already cream.
  *
- * All three drop the grey border entirely (grey on the cream band goes
- * muddy) and share the same dark-green hover.
+ * A pale-yellow fill was tried and dropped: yellow cards on the pink band
+ * clash, so the citrus surface is deliberately not an option here. The badge
+ * keeps the yellow; the card does not.
  *
- * The defaults below are what ships. `?cards=paper|citrus|outline` on the
- * finder overrides both grids at once, so the three can be flipped between
- * without a rebuild.
+ * Both drop the grey border entirely (grey on the cream band goes muddy) and
+ * share the same dark-green hover.
+ *
+ * The default below is what ships. `?cards=paper|outline` on the finder
+ * overrides it, so the two can be flipped between without a rebuild.
  */
-export type ClinicCardVariant = "paper" | "citrus" | "outline";
+export type ClinicCardVariant = "paper" | "outline" | "cream";
 
-export const CLINIC_CARD_VARIANTS: ClinicCardVariant[] = ["paper", "citrus", "outline"];
+/** The two the finder can flip between; `cream` is for white surfaces only. */
+export const CLINIC_CARD_VARIANTS: ClinicCardVariant[] = ["paper", "outline"];
 
-/**
- * The top-performers strip is three cards that are meant to read as picked
- * out, so it takes the citrus fill; the seventeen-card results grid stays on
- * paper, where seventeen yellow cards would be a lot of yellow.
- */
-export const DEFAULT_TOP_PERFORMER_VARIANT: ClinicCardVariant = "citrus";
+/** The results grid ships on paper. */
 export const DEFAULT_RESULT_VARIANT: ClinicCardVariant = "paper";
 
-/** The URL parameter that overrides both grids. */
+/** The URL parameter that overrides the grid. */
 export const CARD_VARIANT_PARAM = "cards";
 
 export function parseCardVariant(raw: string | null): ClinicCardVariant | null {
@@ -42,14 +42,14 @@ export function parseCardVariant(raw: string | null): ClinicCardVariant | null {
 
 const VARIANT_CLASS: Record<ClinicCardVariant, string> = {
   paper: "",
-  citrus: "clinic-card--citrus",
   outline: "clinic-card--outline",
+  cream: "clinic-card--cream",
 };
 
 /**
  * The class list for a card surface. The colours themselves live on
  * `.clinic-card` in globals.css as custom properties, which is what lets the
- * hover state re-tint the whole card — badges and buttons included — from a
+ * hover state re-tint the whole card, badges and buttons included, from a
  * single rule.
  */
 export function clinicCardClasses(variant: ClinicCardVariant, isSelected: boolean): string {
@@ -57,7 +57,7 @@ export function clinicCardClasses(variant: ClinicCardVariant, isSelected: boolea
     "clinic-card",
     VARIANT_CLASS[variant],
     isSelected && "clinic-card--selected",
-    "rounded-[24px] p-5 flex flex-col",
+    "rounded-[24px] p-6 flex flex-col",
   ]
     .filter(Boolean)
     .join(" ");

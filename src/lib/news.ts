@@ -83,6 +83,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     addedOn: "2026-08-18",
     featured: true,
     note:
+      "Content note: some of this reporting may be upsetting if you had treatment abroad. " +
       "At least 30 children, most of them British, are feared to have been conceived in " +
       "northern Cyprus using sperm or egg donors other than the ones their parents chose. " +
       "Eleven have taken commercial DNA tests showing ancestry from Turkey or nearby, rather " +
@@ -103,7 +104,8 @@ export const NEWS_ITEMS: NewsItem[] = [
     topic: "Donor conception",
     addedOn: "2026-08-18",
     note:
-      "The File on 4 documentary the reporting above grew out of: the families themselves, " +
+      "The BBC News documentary the reporting above grew out of (first broadcast on Radio 4's " +
+      "File on 4 on 31 March 2026, then on BBC Two on 3 June 2026): the families themselves, " +
       "the forensic genetics, and what it is like to be told years later that the donor you " +
       "chose on medical history, appearance and identity-release status may not have been " +
       "the one used. Worth the hour if you are weighing treatment abroad.",
@@ -130,9 +132,10 @@ export const NEWS_ITEMS: NewsItem[] = [
     outlet: "Progress Educational Trust (BioNews)",
     kind: "Report",
     topic: "Donor conception",
+    published: "2026-04-13",
     addedOn: "2026-08-18",
     note:
-      "BioNews's write-up of the same cases, including the forensic genetics behind them. " +
+      "BioNews's write-up of the first seven cases, including the forensic genetics behind them. " +
       "PET is the closest thing the UK has to a specialist fertility news desk, and its " +
       "summaries are a good way to check a headline against what the evidence supports.",
   },
@@ -143,12 +146,14 @@ export const NEWS_ITEMS: NewsItem[] = [
     outlet: "Donor Conception Network",
     kind: "Statement",
     topic: "Donor conception",
+    published: "2026-03-31",
     addedOn: "2026-08-18",
     note:
       "The response from the charity that has supported donor-conceived families in the UK " +
-      "for decades. If you are reading the Cyprus coverage and recognising your own " +
-      "treatment in it, this is the place with people who have been here before.",
-    related: { label: "Donor conception resources", href: "/resources" },
+      "for decades, updated on 18 August 2026. If you are reading the Cyprus coverage and " +
+      "recognising your own treatment in it, this is the place with people who have been " +
+      "here before.",
+    related: { label: "Peer support and organisations", href: "/support#peer-support" },
   },
   {
     id: "pet-icbs-one-nhs-funded-ivf-cycle",
@@ -157,6 +162,7 @@ export const NEWS_ITEMS: NewsItem[] = [
     outlet: "Progress Educational Trust (BioNews)",
     kind: "Report",
     topic: "Costs & funding",
+    published: "2026-02-09",
     addedOn: "2026-08-18",
     note:
       "NICE recommends up to three cycles. Most integrated care boards in England now fund " +
@@ -166,17 +172,20 @@ export const NEWS_ITEMS: NewsItem[] = [
     related: { label: "Check your NHS eligibility", href: "/funding#check" },
   },
   {
-    id: "bbc-fall-in-nhs-funded-ivf-cycles",
-    title: "Fall in proportion of IVF cycles funded by NHS",
-    url: "https://www.bbc.co.uk/news/articles/c134vvxd80go",
-    outlet: "BBC News",
-    kind: "Article",
+    id: "hfea-fertility-treatment-2024-trends-and-figures",
+    title: "Fertility treatment 2024: trends and figures",
+    url: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures/",
+    outlet: "HFEA",
+    kind: "Report",
     topic: "Costs & funding",
-    addedOn: "2026-08-18",
+    published: "2026-06-16",
+    addedOn: "2026-09-13",
     note:
-      "The long-run trend behind the funding cuts: a shrinking share of UK IVF paid for by " +
-      "the NHS, and a growing share paid for privately. Useful context for why the price of " +
-      "a cycle matters more to more people every year.",
+      "The regulator's annual report. NHS-funded IVF cycles fell from 35% of all UK IVF " +
+      "cycles in 2019 to 28% in 2024, so a growing share of patients pay privately. The " +
+      "report does not split funding by family type; the HFEA's Family Formations 2022 " +
+      "report does, and found single patients and female same-sex couples far less likely " +
+      "to have NHS funding than opposite-sex couples.",
     related: { label: "Funding and payment options", href: "/funding" },
   },
   {
@@ -186,13 +195,14 @@ export const NEWS_ITEMS: NewsItem[] = [
     outlet: "HFEA",
     kind: "Statement",
     topic: "Science & evidence",
+    published: "2023-10-19",
     addedOn: "2026-08-18",
     note:
       "The regulator's five-category rating system for treatment add-ons, and its plain " +
       "statement that for most patients the evidence behind them is missing or unreliable. " +
       "The single most useful page to have open when a clinic offers you an extra at a " +
       "price. The HFEA does not endorse this site.",
-    related: { label: "What a cycle really costs", href: "/resources" },
+    related: { label: "Avoiding add-ons", href: "/funding#avoiding-add-ons" },
   },
 ];
 
@@ -203,7 +213,7 @@ export const NEWS_ITEMS: NewsItem[] = [
  */
 export const NEWS_PROVENANCE = {
   /** ISO date the list was last added to or swept. */
-  listUpdatedOn: "2026-08-18",
+  listUpdatedOn: "2026-09-13",
   /** Where to send something for the list. */
   submitEmail: "stories@cairnfertility.com",
 } as const;
