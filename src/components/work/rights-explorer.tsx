@@ -157,8 +157,7 @@ function Sources({
           href={s.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
-          style={{ borderColor: "var(--border)" }}
+          className="inline-flex items-center gap-1.5 rounded-full bg-background px-3.5 py-1.5 text-[13px] font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
         >
           {s.label}
           <ExternalLink className="h-3 w-3 shrink-0" />

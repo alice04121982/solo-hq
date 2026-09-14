@@ -108,8 +108,7 @@ export default function ResourcesPage() {
               href="https://dcnetwork.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center gap-2 self-start rounded-full border px-6 py-3 text-sm font-sans font-[600] text-teal hover:bg-surface-hover transition-colors"
-              style={{ borderColor: "var(--teal-35)" }}
+              className="mt-auto inline-flex items-center gap-2 self-start rounded-full bg-background px-6 py-3 text-sm font-sans font-[600] text-teal hover:bg-surface-hover transition-colors"
             >
               Visit dcnetwork.org
               <ExternalLink className="h-3.5 w-3.5" />

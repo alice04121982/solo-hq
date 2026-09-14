@@ -408,10 +408,10 @@ function StepAge({
             <button
               key={String(o.value)}
               onClick={() => setDonorEggs(o.value)}
-              className={`rounded-full border px-4 py-2 text-sm font-sans transition-all duration-150 ${
+              className={`rounded-full px-4 py-2 text-sm font-sans transition-all duration-150 ${
                 s.donorEggs === o.value
-                  ? "border-teal bg-teal text-on-teal"
-                  : "border-border text-muted hover:border-teal/40 hover:text-teal"
+                  ? "bg-teal text-on-teal"
+                  : "bg-background text-muted hover:bg-surface-hover hover:text-teal"
               }`}
             >
               {o.label}
@@ -768,7 +768,7 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         {familyGuide && (
           <Link
             href={`/families/${familyGuide.slug}`}
-            className="inline-flex items-center gap-2 rounded-full border border-teal text-teal px-6 py-3 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
+            className="inline-flex items-center gap-2 rounded-full bg-background text-teal px-6 py-3 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
           >
             Read our {familyGuide.label} guide <ArrowRight className="h-3.5 w-3.5" />
           </Link>

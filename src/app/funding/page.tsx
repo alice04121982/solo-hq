@@ -162,16 +162,14 @@ export default function FundingPage() {
         <div className="mt-12 flex flex-wrap gap-3">
           <Link
             href="/resources/complete-solo-ivf-cost-breakdown"
-            className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
-            style={{ borderColor: "var(--border)" }}
+            className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
           >
             The full line-by-line cost breakdown
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <Link
             href="/resources/ivf-budget-template"
-            className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
-            style={{ borderColor: "var(--border)" }}
+            className="inline-flex items-center gap-2 rounded-full bg-background px-5 py-2.5 text-sm font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
           >
             Budget template
             <ArrowRight className="h-3.5 w-3.5" />
@@ -272,8 +270,7 @@ export default function FundingPage() {
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
-                      style={{ borderColor: "var(--border)" }}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-background px-3.5 py-1.5 text-xs font-sans transition-colors hover:bg-[var(--teal)] hover:text-white text-teal"
                     >
                       {s.label}
                       <ExternalLink className="h-3 w-3 shrink-0" />

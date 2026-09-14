@@ -204,10 +204,10 @@ function FilterTag({
       type="button"
       onClick={onToggle}
       aria-pressed={active}
-      className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
         active
-          ? "bg-teal border-teal text-on-teal"
-          : "bg-background border-teal/20 text-teal hover:bg-surface-hover"
+          ? "bg-teal text-on-teal"
+          : "bg-background text-teal hover:bg-surface-hover"
       }`}
     >
       {label}

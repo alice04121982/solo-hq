@@ -77,8 +77,8 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               onClick={() => scrollBy(-1)}
               disabled={!canScrollLeft}
               aria-label="Previous step"
-              className="h-10 w-10 rounded-full border flex items-center justify-center transition-all duration-150 disabled:opacity-30"
-              style={{ borderColor: "var(--teal-25)", color: TEAL }}
+              className="h-10 w-10 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30"
+              style={{ background: "var(--surface-hover)", color: TEAL }}
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -87,8 +87,8 @@ export function ProcessSteps({ steps }: { steps: ProcessStep[] }) {
               onClick={() => scrollBy(1)}
               disabled={!canScrollRight}
               aria-label="Next step"
-              className="h-10 w-10 rounded-full border flex items-center justify-center transition-all duration-150 disabled:opacity-30"
-              style={{ borderColor: "var(--teal-25)", color: TEAL }}
+              className="h-10 w-10 rounded-full flex items-center justify-center transition-all duration-150 disabled:opacity-30"
+              style={{ background: "var(--surface-hover)", color: TEAL }}
             >
               <ArrowRight className="h-4 w-4" />
             </button>

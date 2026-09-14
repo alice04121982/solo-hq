@@ -45,7 +45,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/resources"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 text-sm font-sans font-medium text-foreground transition-colors duration-200 hover:bg-surface-hover"
+            className="inline-flex items-center gap-2 rounded-full bg-background px-8 py-3.5 text-sm font-sans font-medium text-foreground transition-colors duration-200 hover:bg-surface-hover"
           >
             Browse the guides
           </Link>

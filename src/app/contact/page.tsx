@@ -34,7 +34,7 @@ export default function ContactPage() {
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${address}`}
-                  className="inline-flex items-center gap-2.5 rounded-full border border-teal/35 px-5 py-2.5 text-sm font-sans font-[600] text-teal hover:bg-surface-hover transition-colors duration-150"
+                  className="inline-flex items-center gap-2.5 rounded-full bg-background px-5 py-2.5 text-sm font-sans font-[600] text-teal hover:bg-surface-hover transition-colors duration-150"
                 >
                   <Mail className="h-4 w-4" aria-hidden />
                   {address}

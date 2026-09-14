@@ -76,7 +76,7 @@ export function FamilyHero({ family }: { family: FamilyType }) {
               </Link>
               <Link
                 href="/families"
-                className="inline-flex items-center gap-2 rounded-full border border-teal/20 text-teal px-8 py-3.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
+                className="inline-flex items-center gap-2 rounded-full bg-background text-teal px-8 py-3.5 text-sm font-sans font-medium hover:bg-teal hover:text-on-teal transition-colors duration-200"
               >
                 All family types
               </Link>

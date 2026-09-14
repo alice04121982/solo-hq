@@ -62,10 +62,10 @@ export function ConversationToolkit({
               aria-controls={`scenario-${s.slug}`}
               id={`tab-${s.slug}`}
               onClick={() => setActive(s.slug)}
-              className={`rounded-full border text-xs font-sans px-4 py-2 text-left transition-colors duration-150 ${
+              className={`rounded-full text-xs font-sans px-4 py-2 text-left transition-colors duration-150 ${
                 isActive
-                  ? "border-teal bg-teal text-on-teal"
-                  : "border-border text-muted hover:border-teal/40 hover:text-teal"
+                  ? "bg-teal text-on-teal"
+                  : "bg-background text-muted hover:bg-surface-hover hover:text-teal"
               }`}
             >
               {s.label}

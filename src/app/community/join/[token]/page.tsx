@@ -118,8 +118,8 @@ export default async function CommunityJoinPage({ params }: PageProps) {
             </p>
             <Link
               href="/community"
-              className="inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-teal-10"
-              style={{ borderColor: "var(--teal-35)", color: "var(--teal)" }}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-background px-8 py-3.5 text-sm font-sans transition-colors duration-200 hover:bg-surface-hover"
+              style={{ color: "var(--teal)" }}
             >
               Back to the community page
             </Link>

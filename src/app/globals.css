@@ -216,9 +216,9 @@
     --card-badge-reported-edge: var(--teal-20);
     --card-badge-reported-ink:  var(--muted);
     /* Secondary controls (Add to compare, Details) */
-    --card-control-edge:       var(--teal-20);
     --card-control-ink:        var(--teal);
     --card-control-wash:       rgba(0, 83, 83, 0.07);
+    --card-control-wash-hover: rgba(0, 83, 83, 0.13);
     /* The same control once the clinic is in the comparison */
     --card-control-active-bg:  var(--teal);
     --card-control-active-ink: var(--on-teal);
@@ -261,9 +261,9 @@
       --card-badge-verified-ink: var(--on-accent);
       --card-badge-reported-edge: var(--on-teal-muted);
       --card-badge-reported-ink:  var(--on-teal-muted);
-      --card-control-edge:       var(--on-teal-muted);
       --card-control-ink:        var(--on-teal);
       --card-control-wash:       rgba(249, 198, 218, 0.14);
+      --card-control-wash-hover: rgba(249, 198, 218, 0.26);
       --card-control-active-bg:  var(--accent);
       --card-control-active-ink: var(--on-accent);
     }
@@ -277,20 +277,20 @@
     outline-offset: -2px;
   }
 
+  /* No stroke: the control is a wash on the card paper, a shade deeper on
+     hover, and the teal fill once the clinic is in the comparison. */
   .clinic-card__control {
-    border: 1px solid var(--card-control-edge);
     color: var(--card-control-ink);
-    background: transparent;
-    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+    background: var(--card-control-wash);
+    transition: background-color 160ms ease, color 160ms ease;
   }
-  .clinic-card__control:hover:not(:disabled) { background: var(--card-control-wash); }
+  .clinic-card__control:hover:not(:disabled) { background: var(--card-control-wash-hover); }
   .clinic-card__control:disabled { opacity: 0.45; cursor: not-allowed; }
   .clinic-card__link { color: var(--card-ink-muted); }
   .clinic-card__link:hover { color: var(--card-ink); }
   .clinic-card__control--active,
   .clinic-card__control--active:hover:not(:disabled) {
     background: var(--card-control-active-bg);
-    border-color: var(--card-control-active-bg);
     color: var(--card-control-active-ink);
   }
 }
