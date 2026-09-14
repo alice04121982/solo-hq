@@ -396,9 +396,9 @@ export default function HowIVFWorksPage() {
             <a
               key={s.number}
               href={`#step-${s.number}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-teal hover:bg-teal hover:text-on-teal hover:border-teal transition-colors"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-xs font-sans text-teal hover:bg-teal hover:text-on-teal hover:border-teal transition-colors"
             >
-              <span className="font-[600] text-muted text-[12px]">{s.number}</span>
+              <span className="font-[600] text-muted text-[12px] group-hover:text-on-teal transition-colors">{s.number}</span>
               {s.title}
             </a>
           ))}
