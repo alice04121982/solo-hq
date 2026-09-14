@@ -96,8 +96,10 @@ const ALL_COUNTRIES = ["GB", "ES", "CZ", "GR", "DK", "CY"] as const;
 const TREATMENT_OPTIONS = [
   { label: "IVF", field: "offers_ivf" },
   { label: "Donor Egg IVF", field: "offers_donor_eggs" },
+  { label: "Donor Sperm", field: "offers_donor_sperm" },
   { label: "IUI", field: "offers_iui" },
   { label: "Egg Freezing", field: "offers_egg_freezing" },
+  { label: "Reciprocal IVF", field: "offers_reciprocal_ivf" },
 ] as const;
 
 type AgeGroup = "under35" | "35_37" | "38_39" | "40_42" | "43_plus";
@@ -164,20 +166,20 @@ function FilterDropdown({
         onClick={onToggle}
         className={`inline-flex items-center gap-1.5 px-4 py-3 text-sm font-sans font-medium border-b-2 transition-colors whitespace-nowrap ${
           isOpen || (activeCount && activeCount > 0)
-            ? "border-foreground text-foreground"
-            : "border-transparent text-muted hover:text-foreground"
+            ? "border-border-brand text-text-primary"
+            : "border-transparent text-text-tertiary hover:text-text-primary"
         }`}
       >
         {label}
         {activeCount && activeCount > 0 ? (
-          <span className="inline-flex items-center justify-center rounded-full w-[18px] h-[18px] text-[10px] font-bold bg-foreground text-background leading-none">
+          <span className="inline-flex items-center justify-center rounded-full w-[18px] h-[18px] text-[10px] font-bold bg-bg-brand-solid text-text-white leading-none">
             {activeCount}
           </span>
         ) : null}
         <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`} />
       </button>
       {isOpen && (
-        <div className={`absolute top-full mt-1 z-50 bg-white border border-border rounded-xl shadow-lg min-w-[200px] py-1.5 ${align === "right" ? "right-0" : "left-0"}`}>
+        <div className={`absolute top-full mt-1 z-50 bg-bg-primary border border-border-secondary rounded-xl shadow-lg min-w-[200px] py-1.5 ${align === "right" ? "right-0" : "left-0"}`}>
           {children}
         </div>
       )}
@@ -191,10 +193,10 @@ function CheckboxOption({ label, selected, onClick }: { label: string; selected:
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-2.5 text-sm font-sans flex items-center gap-3 transition-colors hover:bg-background-alt ${selected ? "text-foreground font-semibold" : "text-muted"}`}
+      className={`w-full text-left px-4 py-2.5 text-sm font-sans flex items-center gap-3 transition-colors hover:bg-bg-secondary ${selected ? "text-text-primary font-semibold" : "text-text-tertiary"}`}
     >
-      <span className={`w-3.5 h-3.5 rounded border-2 shrink-0 transition-colors flex items-center justify-center ${selected ? "border-foreground bg-foreground" : "border-border bg-transparent"}`}>
-        {selected && <Check className="h-2.5 w-2.5 text-background" strokeWidth={3} />}
+      <span className={`w-3.5 h-3.5 rounded border-2 shrink-0 transition-colors flex items-center justify-center ${selected ? "border-border-brand bg-bg-brand-solid" : "border-border-secondary bg-transparent"}`}>
+        {selected && <Check className="h-2.5 w-2.5 text-text-white" strokeWidth={3} />}
       </span>
       {label}
     </button>
@@ -207,9 +209,9 @@ function RadioOption({ label, selected, onClick }: { label: string; selected: bo
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-4 py-2.5 text-sm font-sans flex items-center gap-3 transition-colors hover:bg-background-alt ${selected ? "text-foreground font-semibold" : "text-muted"}`}
+      className={`w-full text-left px-4 py-2.5 text-sm font-sans flex items-center gap-3 transition-colors hover:bg-bg-secondary ${selected ? "text-text-primary font-semibold" : "text-text-tertiary"}`}
     >
-      <span className={`w-3.5 h-3.5 rounded-full border-2 shrink-0 transition-colors ${selected ? "border-foreground bg-foreground" : "border-border bg-transparent"}`} />
+      <span className={`w-3.5 h-3.5 rounded-full border-2 shrink-0 transition-colors ${selected ? "border-border-brand bg-bg-brand-solid" : "border-border-secondary bg-transparent"}`} />
       {label}
     </button>
   );
@@ -221,7 +223,7 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
   return (
     <button
       onClick={onRemove}
-      className="inline-flex items-center gap-1.5 rounded-full bg-foreground text-background text-[12px] font-[500] px-3 py-1.5 hover:bg-accent transition-colors"
+      className="inline-flex items-center gap-1.5 rounded-full bg-bg-brand-solid text-text-white text-xs font-medium px-3 py-1.5 hover:bg-bg-brand-solid-hover transition-colors"
     >
       {label}
       <X className="h-3 w-3 shrink-0" />
@@ -404,7 +406,7 @@ export function ClinicBrowser({
       <div className="mb-6">
         <div className="flex items-center gap-2">
           <div className="relative flex-1 max-w-md">
-            <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted pointer-events-none" />
+            <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-fg-tertiary pointer-events-none" />
             <input
               type="text"
               value={locationQuery}
@@ -413,12 +415,12 @@ export function ClinicBrowser({
                 if (e.key === "Enter" && locationQuery.trim()) geocodeQuery(locationQuery.trim());
               }}
               placeholder="Enter postcode or city to find nearby clinics"
-              className="w-full pl-9 pr-9 py-2.5 text-sm font-sans border border-border rounded-full bg-white text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors"
+              className="w-full pl-9 pr-9 py-2.5 text-sm font-sans border border-border-secondary rounded-full bg-bg-primary text-text-primary placeholder:text-text-placeholder focus:outline-none focus:ring-2 focus:ring-border-brand/20 focus:border-border-brand transition-colors"
             />
             {locationQuery && (
               <button
                 onClick={clearLocation}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-foreground transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-fg-tertiary hover:text-fg-secondary transition-colors"
                 aria-label="Clear location"
               >
                 <X className="h-3.5 w-3.5" />
@@ -429,7 +431,7 @@ export function ClinicBrowser({
           <button
             onClick={() => locationQuery.trim() ? geocodeQuery(locationQuery.trim()) : useMyLocation()}
             disabled={locationLoading}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-4 py-2.5 text-sm font-sans font-medium text-foreground hover:border-foreground transition-colors disabled:opacity-50 whitespace-nowrap"
+            className="inline-flex items-center gap-2 rounded-full border border-border-secondary bg-bg-primary px-4 py-2.5 text-sm font-sans font-medium text-text-primary hover:border-border-brand transition-colors disabled:opacity-50 whitespace-nowrap"
           >
             {locationLoading ? (
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -440,19 +442,19 @@ export function ClinicBrowser({
           </button>
 
           {userLocation && (
-            <p className="text-sm font-sans text-muted truncate max-w-[200px]">
+            <p className="text-sm font-sans text-text-tertiary truncate max-w-[200px]">
               📍 {userLocation.label}
             </p>
           )}
         </div>
 
         {locationError && (
-          <p className="mt-2 text-sm font-sans text-red-500 pl-1">{locationError}</p>
+          <p className="mt-2 text-sm font-sans text-text-error-primary pl-1">{locationError}</p>
         )}
       </div>
 
       {/* ── Nike-style filter bar ────────────────────────────────────────── */}
-      <div className="border-b border-border mb-0">
+      <div className="border-b border-border-secondary mb-0">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center">
             <FilterDropdown
@@ -472,8 +474,8 @@ export function ClinicBrowser({
               ))}
               {selectedCountries.length > 0 && (
                 <>
-                  <div className="mx-3 my-1 border-t border-border" />
-                  <button onClick={() => { setSelectedCountries([]); close(); }} className="w-full text-left px-4 py-2 text-xs font-sans text-muted hover:text-foreground transition-colors">
+                  <div className="mx-3 my-1 border-t border-border-secondary" />
+                  <button onClick={() => { setSelectedCountries([]); close(); }} className="w-full text-left px-4 py-2 text-xs font-sans text-text-tertiary hover:text-text-primary transition-colors">
                     Clear selection
                   </button>
                 </>
@@ -497,8 +499,8 @@ export function ClinicBrowser({
               ))}
               {selectedTreatments.length > 0 && (
                 <>
-                  <div className="mx-3 my-1 border-t border-border" />
-                  <button onClick={() => { setSelectedTreatments([]); close(); }} className="w-full text-left px-4 py-2 text-xs font-sans text-muted hover:text-foreground transition-colors">
+                  <div className="mx-3 my-1 border-t border-border-secondary" />
+                  <button onClick={() => { setSelectedTreatments([]); close(); }} className="w-full text-left px-4 py-2 text-xs font-sans text-text-tertiary hover:text-text-primary transition-colors">
                     Clear selection
                   </button>
                 </>
@@ -507,11 +509,11 @@ export function ClinicBrowser({
 
             <button
               onClick={() => setSoloOnly((v) => !v)}
-              className={`inline-flex items-center gap-1.5 px-4 py-3 text-sm font-sans font-medium border-b-2 transition-colors whitespace-nowrap ${soloOnly ? "border-foreground text-foreground" : "border-transparent text-muted hover:text-foreground"}`}
+              className={`inline-flex items-center gap-1.5 px-4 py-3 text-sm font-sans font-medium border-b-2 transition-colors whitespace-nowrap ${soloOnly ? "border-border-brand text-text-primary" : "border-transparent text-text-tertiary hover:text-text-primary"}`}
             >
               Solo-friendly
               {soloOnly && (
-                <span className="inline-flex items-center justify-center rounded-full w-[18px] h-[18px] text-[10px] font-bold bg-foreground text-background leading-none">1</span>
+                <span className="inline-flex items-center justify-center rounded-full w-[18px] h-[18px] text-[10px] font-bold bg-bg-brand-solid text-text-white leading-none">1</span>
               )}
             </button>
 
@@ -522,10 +524,10 @@ export function ClinicBrowser({
               onToggle={() => toggle("agegroup")}
               onClose={close}
             >
-              <p className="px-4 pt-2 pb-1 text-[11px] font-sans text-muted leading-relaxed" style={{ maxWidth: "200px" }}>
+              <p className="px-4 pt-2 pb-1 text-xs font-sans text-text-tertiary leading-relaxed" style={{ maxWidth: "200px" }}>
                 Filters success rates shown on each card to your age group.
               </p>
-              <div className="mx-3 mb-1 border-t border-border" />
+              <div className="mx-3 mb-1 border-t border-border-secondary" />
               <RadioOption label="All ages" selected={selectedAgeGroup === null} onClick={() => { setSelectedAgeGroup(null); close(); }} />
               {AGE_GROUP_OPTIONS.map((ag) => (
                 <RadioOption key={ag.key} label={ag.label} selected={selectedAgeGroup === ag.key} onClick={() => { setSelectedAgeGroup(ag.key); close(); }} />
@@ -553,7 +555,7 @@ export function ClinicBrowser({
           {activeChips.map((chip) => (
             <FilterChip key={chip.label} label={chip.label} onRemove={chip.onRemove} />
           ))}
-          <button onClick={clearAll} className="text-[12px] font-sans text-muted hover:text-foreground transition-colors underline underline-offset-2 ml-1">
+          <button onClick={clearAll} className="text-xs font-sans text-text-tertiary hover:text-text-primary transition-colors underline underline-offset-2 ml-1">
             Clear all
           </button>
         </div>
@@ -561,13 +563,13 @@ export function ClinicBrowser({
 
       {/* ── Results count row ────────────────────────────────────────────── */}
       <div className="flex items-center justify-between mt-6 mb-6">
-        <p className="text-[12px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
+        <p className="text-xs font-medium uppercase tracking-[0.15em] text-text-tertiary font-sans">
           {results.length} clinic{results.length !== 1 ? "s" : ""}
           {selectedCountries.length === 1 ? ` in ${COUNTRY_NAMES[selectedCountries[0]]}` : ""}
           {userLocation && sortKey === "nearest" ? ` near ${userLocation.label}` : ""}
         </p>
         {selectedCount > 0 && (
-          <p className="text-[12px] font-[500] uppercase tracking-[0.15em] font-sans" style={{ color: "var(--primary)" }}>
+          <p className="text-xs font-medium uppercase tracking-[0.15em] font-sans text-text-brand-secondary">
             {selectedCount} selected
           </p>
         )}
@@ -575,9 +577,9 @@ export function ClinicBrowser({
 
       {/* ── Grid ─────────────────────────────────────────────────────────── */}
       {results.length === 0 ? (
-        <div className="rounded-xl bg-background-alt border border-border p-10 text-center">
-          <p className="font-sans text-muted">No clinics match your current filters.</p>
-          <button onClick={clearAll} className="mt-4 rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-sans font-medium hover:bg-accent transition-colors">
+        <div className="rounded-xl bg-bg-tertiary border border-border-secondary p-10 text-center">
+          <p className="font-sans text-text-tertiary">No clinics match your current filters.</p>
+          <button onClick={clearAll} className="mt-4 rounded-full bg-bg-brand-solid text-text-white px-6 py-2.5 text-sm font-sans font-medium hover:bg-bg-brand-solid-hover transition-colors">
             Clear filters
           </button>
         </div>

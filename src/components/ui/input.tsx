@@ -39,7 +39,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const inputClasses = [
       "w-full font-sans bg-bg-primary text-text-primary",
-      "border rounded-lg transition-colors duration-150",
+      // shadow-sm matches Figma's shadow-xs: 0px 1px 2px rgba(10,13,18,0.05)
+      "border rounded-lg shadow-sm transition-colors duration-150",
       "placeholder:text-text-placeholder",
       "focus:outline-none focus:ring-2 focus:ring-offset-0",
       // size
@@ -69,8 +70,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className="text-sm font-medium font-sans text-text-secondary"
           >
             {label}
+            {/* brand-tertiary matches Figma's required asterisk colour (not error-red) */}
             {required && (
-              <span className="ml-0.5 text-text-error-primary" aria-hidden="true">
+              <span className="ml-0.5 text-text-brand-tertiary" aria-hidden="true">
                 *
               </span>
             )}

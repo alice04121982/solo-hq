@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Sperm donation | KLEO Fertility",
   description:
-    "Everything you need to know about using donor sperm — choosing a donor, open-ID vs anonymous, legal parenthood, and what it means for your child.",
+    "Everything you need to know about using donor sperm: choosing a donor, open-ID vs anonymous, legal parenthood, and what it means for your child.",
 };
 
 export default function SpermDonationPage() {
@@ -36,7 +36,7 @@ export default function SpermDonationPage() {
             className="text-md font-sans text-text-secondary leading-relaxed mb-10"
             style={{ maxWidth: "52ch" }}
           >
-            Everything you need to know about using donor sperm — choosing a
+            Everything you need to know about using donor sperm: choosing a
             donor, open-ID vs anonymous, legal parenthood, and what it means
             for your child.
           </p>

@@ -36,7 +36,7 @@ export function JourneyHeader() {
             style={{ maxWidth: "52ch" }}
           >
             From &ldquo;am I really doing this?&rdquo; to thriving as a solo
-            family — seven stages, honest information, and a community who
+            family: seven stages, honest information, and a community who
             understands at every step.
           </p>
         </div>

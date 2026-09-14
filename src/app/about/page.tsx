@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui";
 export const metadata: Metadata = {
   title: "About KLEO Fertility | KLEO Fertility",
   description:
-    "KLEO was built by people who've been through the fertility journey themselves. We know how hard it is to find honest, practical information — so we built it.",
+    "KLEO was built by people who've been through the fertility journey themselves. We know how hard it is to find honest, practical information, so we built it.",
 };
 
 export default function AboutPage() {
@@ -38,7 +38,7 @@ export default function AboutPage() {
           >
             KLEO was built by people who&apos;ve been through the fertility
             journey themselves. We know how hard it is to find honest, practical
-            information — so we built it.
+            information, so we built it.
           </p>
           <div className="flex flex-wrap gap-3">
             <a

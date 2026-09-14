@@ -31,7 +31,7 @@ export const CAMBRIDGE_SEED_CLINICS: ClinicData[] = [
         name: "3-Cycle IVF Package",
         price: 11500,
         saves: 2000,
-        description: "Three IVF cycles — most popular option for solo patients. Includes priority booking and a dedicated nurse coordinator.",
+        description: "Three IVF cycles: most popular option for solo patients. Includes priority booking and a dedicated nurse coordinator.",
       },
       {
         name: "3-Cycle Donor Sperm IVF",
@@ -188,7 +188,7 @@ export const CAMBRIDGE_SEED_CLINICS: ClinicData[] = [
         name: "Solo Patient 2-Cycle Package",
         price: 10800,
         saves: 1000,
-        description: "Designed specifically for solo patients — two cycles with donor sperm co-ordination, ICSI, and a solo-focused counselling session.",
+        description: "Designed specifically for solo patients: two cycles with donor sperm co-ordination, ICSI, and a solo-focused counselling session.",
       },
       {
         name: "3-Cycle IVF Package",
@@ -244,13 +244,13 @@ export const CAMBRIDGE_SEED_CLINICS: ClinicData[] = [
         name: "2-Cycle Natural/Mild IVF",
         price: 6200,
         saves: 800,
-        description: "Create's signature mild-stimulation approach — lower drug costs, gentler on the body. Two cycles at a reduced combined rate.",
+        description: "Create's signature mild-stimulation approach: lower drug costs, gentler on the body. Two cycles at a reduced combined rate.",
       },
       {
         name: "3-Cycle Mild IVF Package",
         price: 8700,
         saves: 1800,
-        description: "Three mild IVF cycles. Create specialise in natural and mild protocols — lower drug spend means total cost is often lower than standard IVF elsewhere.",
+        description: "Three mild IVF cycles. Create specialise in natural and mild protocols. Lower drug spend means total cost is often lower than standard IVF elsewhere.",
       },
       {
         name: "2-Cycle Donor Sperm Package",
@@ -389,7 +389,7 @@ export const CAMBRIDGE_SEED_CLINICS: ClinicData[] = [
       {
         name: "NHS-funded IVF (if eligible)",
         price: 0,
-        description: "Addenbrooke's offers NHS-funded treatment for eligible patients. Single women may qualify — check current Cambridgeshire ICB criteria before self-funding.",
+        description: "Addenbrooke's offers NHS-funded treatment for eligible patients. Single women may qualify. Check current Cambridgeshire ICB criteria before self-funding.",
       },
     ],
     successRates: {

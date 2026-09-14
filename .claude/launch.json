@@ -4,8 +4,178 @@
     {
       "name": "solo-hq-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "preview"],
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
+      "port": 3000,
       "autoPort": true
+    },
+    {
+      "name": "cairn-phase-1",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-copy-fixes",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3100"
+      ],
+      "port": 3100
+    },
+    {
+      "name": "cairn-phase-2",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-phase-2",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3200"
+      ],
+      "port": 3200
+    },
+    {
+      "name": "cairn-phase-3",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-phase-3",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3300"
+      ],
+      "port": 3300
+    },
+    {
+      "name": "cairn-phase-4",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-phase-4",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3400"
+      ],
+      "port": 3400
+    },
+    {
+      "name": "cairn-exclusions",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-exclusions",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3500"
+      ],
+      "port": 3500
+    },
+    {
+      "name": "cairn-review-packs",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-review-packs",
+        "run",
+        "start",
+        "--",
+        "-p",
+        "3700"
+      ],
+      "port": 3700
+    },
+    {
+      "name": "packs-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "3800",
+        "--directory",
+        "/private/tmp/claude-501/-Users-alicesmith-Desktop-Flying-Solo/6da76b94-fe8b-4f6d-ba97-0d0ebdb9090a/scratchpad/packs"
+      ],
+      "port": 3800
+    },
+    {
+      "name": "cairn-support-cards",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-support-cards",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3600"
+      ],
+      "port": 3600
+    },
+    {
+      "name": "cairn-pink-band",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-pink-band",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3800"
+      ],
+      "port": 3800
+    },
+    {
+      "name": "cairn-clinic-cards",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-clinic-cards",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "3900"
+      ],
+      "port": 3900
+    },
+    {
+      "name": "cairn-resource-pills",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-resource-pills",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "4000"
+      ],
+      "port": 4000
+    },
+    {
+      "name": "cairn-work-page",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "/Users/alicesmith/Desktop/cairn-work-page",
+        "run",
+        "dev",
+        "--",
+        "-p",
+        "4100"
+      ],
+      "port": 4100
     }
   ]
 }

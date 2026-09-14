@@ -1,0 +1,113 @@
+{
+  "createdAt": "2026-04-27",
+  "approach": "Self-host all photos under public/images/. Use next/image with fill or fixed dimensions. Apply consistent warm filter (saturate 0.9, sepia 0.05) to match existing hero style.",
+  "localFolder": "public/images/",
+  "replacements": [
+    {
+      "id": "hero-main",
+      "localPath": "public/images/hero-main.jpg",
+      "component": "src/components/hero-section.tsx",
+      "change": "Replace external Unsplash URL with /images/hero-main.jpg",
+      "dimensions": "900×1200px portrait (fill container h-[480px] lg:h-[580px])",
+      "searchQueries": ["mother baby happy", "woman newborn joy", "solo mother child"],
+      "style": "Warm, candid, editorial — natural light, not clinical",
+      "phase": 1
+    },
+    {
+      "id": "story-alice",
+      "localPath": "public/images/story-alice.jpg",
+      "component": "src/components/testimonials-section.tsx",
+      "change": "Add <Image> avatar to journeyStories[0] card (Alice, 37)",
+      "dimensions": "400×400px square",
+      "searchQueries": ["woman baby portrait warm", "mother smiling infant"],
+      "style": "Warm portrait, joyful, natural light",
+      "phase": 1
+    },
+    {
+      "id": "story-natalie",
+      "localPath": "public/images/story-natalie.jpg",
+      "component": "src/components/testimonials-section.tsx",
+      "change": "Add <Image> avatar to journeyStories[1] card (Natalie, 40 — twins)",
+      "dimensions": "400×400px square",
+      "searchQueries": ["mother twins toddlers", "woman two small children"],
+      "style": "Warm portrait, joyful",
+      "phase": 1
+    },
+    {
+      "id": "story-jo",
+      "localPath": "public/images/story-jo.jpg",
+      "component": "src/components/testimonials-section.tsx",
+      "change": "Add <Image> avatar to journeyStories[2] card (Jo, 34 — IVF wait)",
+      "dimensions": "400×400px square",
+      "searchQueries": ["woman hopeful contemplative window", "young woman thinking calm"],
+      "style": "Softer, more introspective — not sad, but thoughtful",
+      "phase": 1
+    },
+    {
+      "id": "news-article-1",
+      "localPath": "public/images/news-hfea-guidelines.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to featured article (HFEA counselling guidelines)",
+      "dimensions": "800×450px landscape 16:9",
+      "searchQueries": ["fertility doctor consultation", "medical consultation woman"],
+      "style": "Editorial, clean, professional",
+      "phase": 2
+    },
+    {
+      "id": "news-article-2",
+      "localPath": "public/images/news-ivf-costs.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to article 2 (IVF price rises)",
+      "dimensions": "600×338px landscape 16:9",
+      "searchQueries": ["financial planning savings money", "healthcare finance"],
+      "style": "Editorial",
+      "phase": 2
+    },
+    {
+      "id": "news-article-3",
+      "localPath": "public/images/news-smc-language.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to article 3 (solo mum by choice language)",
+      "dimensions": "600×338px landscape 16:9",
+      "searchQueries": ["confident woman portrait", "independent woman"],
+      "style": "Warm, empowering",
+      "phase": 2
+    },
+    {
+      "id": "news-article-4",
+      "localPath": "public/images/news-pgt-science.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to article 4 (PGT-A science)",
+      "dimensions": "600×338px landscape 16:9",
+      "searchQueries": ["genetics laboratory microscope", "science research lab"],
+      "style": "Clinical but approachable",
+      "phase": 2
+    },
+    {
+      "id": "news-article-5",
+      "localPath": "public/images/news-new-clinics.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to article 5 (new HFEA clinics)",
+      "dimensions": "600×338px landscape 16:9",
+      "searchQueries": ["modern medical clinic interior", "fertility clinic bright"],
+      "style": "Clean, modern interior",
+      "phase": 2
+    },
+    {
+      "id": "news-article-6",
+      "localPath": "public/images/news-fertility-finance.jpg",
+      "component": "src/app/news/page.tsx",
+      "change": "Add cover image to article 6 (fertility finance)",
+      "dimensions": "600×338px landscape 16:9",
+      "searchQueries": ["woman laptop finances planning", "financial advisor woman"],
+      "style": "Approachable, warm",
+      "phase": 2
+    }
+  ],
+  "codeChanges": {
+    "next.config": "Add domains: [] to next/image config (not needed — all images will be local)",
+    "heroSection": "Change src prop from external URL to /images/hero-main.jpg",
+    "testimonialsSection": "Add 64px rounded avatar <Image> above each story card's tag line",
+    "newsPage": "Add <Image> cover block above each article title in both featured and grid layouts"
+  }
+}

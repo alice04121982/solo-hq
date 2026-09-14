@@ -1,125 +1,138 @@
-import Image from "next/image";
+"use client";
 
-// Unsplash portrait photos — diverse range of women
-// face_pad crop centres on faces; fit=crop fills the frame
+import { useRef } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 const MEMBERS = [
   {
-    photo: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&h=700&q=80&face_pad=2",
-    alt: "Gemma, Flying Solo member",
-    quote:
-      "I spent a year reading everything I could find. Flying Solo was the first place that gave me real numbers, real timelines — and a community of women who said 'me too' without any judgement.",
+    photo: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&h=800&q=80&face_pad=2",
+    alt: "Gemma, KLEO Fertility member",
     name: "Gemma",
     age: 38,
     location: "Bristol",
     stage: "Mum to Arlo, 14 months · donor IUI",
   },
   {
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=700&q=80",
-    alt: "Sarah, Flying Solo member",
-    quote:
-      "The clinic comparison tool saved me weeks of research. I walked into my first consultation knowing exactly what questions to ask. I felt prepared rather than terrified.",
+    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&h=800&q=80",
+    alt: "Sarah, KLEO Fertility member",
     name: "Sarah",
     age: 35,
     location: "Manchester",
     stage: "Currently in IVF cycle 2",
   },
   {
-    photo: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=600&h=700&q=80",
-    alt: "Claire, Flying Solo member",
-    quote:
-      "I'm 42 and everyone kept telling me I'd left it too late. This community showed me women who'd had their babies at 43 and 44. It changed everything about how I saw my own chances.",
+    photo: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=600&h=800&q=80",
+    alt: "Claire, KLEO Fertility member",
     name: "Claire",
     age: 42,
     location: "Edinburgh",
-    stage: "Pregnant — due in August",
+    stage: "Pregnant, due in August",
   },
   {
-    photo: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&h=700&q=80",
-    alt: "Jo, Flying Solo member",
-    quote:
-      "The two-week wait is brutal when you're doing it alone. I found my people here during mine. We were all refreshing the same tests at 3am. Knowing that made it bearable.",
+    photo: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?auto=format&fit=crop&w=600&h=800&q=80",
+    alt: "Jo, KLEO Fertility member",
     name: "Jo",
     age: 34,
     location: "London",
     stage: "Mum to Lila, 7 months · IVF",
   },
+  {
+    photo: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&h=800&q=80",
+    alt: "Priya, KLEO Fertility member",
+    name: "Priya",
+    age: 33,
+    location: "London",
+    stage: "Preparing for first IUI",
+  },
 ];
 
-function MemberCard({
-  photo,
-  alt,
-  quote,
-  name,
-  age,
-  location,
-  stage,
-}: (typeof MEMBERS)[number]) {
+function PortraitCard({ photo, alt, name, age, location, stage }: (typeof MEMBERS)[number]) {
   return (
-    <div className="flex flex-col">
-      {/* Photo */}
-      <div className="relative w-full rounded-2xl overflow-hidden mb-5" style={{ aspectRatio: "3/4" }}>
+    /* Outer wrapper: fixed width on mobile/tablet, fills the grid column on desktop */
+    <div className="flex-shrink-0 w-[230px] sm:w-[260px] lg:w-full rounded-tl-[100px] overflow-hidden">
+      {/* Padding-top trick: 133.3% = 4/3 inverted = 3:4 portrait ratio, always reliable */}
+      <div className="relative pt-[133.3%]">
         <Image
           src={photo}
           alt={alt}
           fill
           className="object-cover object-top"
-          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 20vw, 260px"
         />
-      </div>
 
-      {/* Quote */}
-      <blockquote
-        className="font-serif italic text-text-primary leading-snug mb-4 flex-1"
-        style={{ fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)" }}
-      >
-        &ldquo;{quote}&rdquo;
-      </blockquote>
-
-      {/* Attribution */}
-      <div className="border-t border-border-secondary pt-4 mt-auto">
-        <p className="font-sans font-semibold text-text-primary text-sm">
-          {name}, {age} &nbsp;·&nbsp; {location}
-        </p>
-        <p className="font-sans text-text-tertiary text-sm mt-0.5">{stage}</p>
+        {/* Attribution overlay */}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent pt-16 pb-5 px-5">
+          <p className="text-white font-semibold text-sm font-sans leading-snug">
+            {name}, {age} &nbsp;·&nbsp; {location}
+          </p>
+          <p className="text-white/70 text-xs font-sans mt-1">{stage}</p>
+        </div>
       </div>
     </div>
   );
 }
 
 export function MembersSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  function scroll(dir: 1 | -1) {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * 280, behavior: "smooth" });
+  }
+
   return (
-    <section className="bg-bg-primary border-b border-border-secondary">
+    <section className="bg-bg-brand-primary overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28">
 
         {/* Header */}
-        <div className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="flex items-end justify-between mb-10 md:mb-14">
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-text-tertiary font-sans mb-4">
               KLEO Fertility members
             </p>
             <h2
-              className="font-serif font-semibold text-text-primary"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)", lineHeight: 1.07, maxWidth: "20ch" }}
+              className="font-display font-bold text-text-primary"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3.25rem)",
+                lineHeight: 1.07,
+                letterSpacing: "-0.02em",
+                maxWidth: "20ch",
+              }}
             >
-              Life-changing moments,{" "}
-              <em className="not-italic text-text-brand-secondary">
-                shared.
-              </em>
+              Life changing moments,{" "}
+              <em className="not-italic text-text-brand-secondary">shared.</em>
             </h2>
           </div>
-          <p
-            className="font-sans text-text-secondary leading-relaxed"
-            style={{ maxWidth: "38ch", fontSize: "1rem" }}
-          >
-            Thousands of women have found their community, their confidence, and their
-            path to motherhood through KLEO Fertility. Here are a few of their stories.
-          </p>
+
+          {/* Navigation arrows — desktop */}
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => scroll(-1)}
+              aria-label="Previous members"
+              className="p-2.5 rounded-full border border-border-secondary bg-bg-primary hover:bg-bg-secondary transition-colors duration-150"
+            >
+              <ChevronLeft className="h-5 w-5 text-fg-secondary" />
+            </button>
+            <button
+              onClick={() => scroll(1)}
+              aria-label="Next members"
+              className="p-2.5 rounded-full border border-border-secondary bg-bg-primary hover:bg-bg-secondary transition-colors duration-150"
+            >
+              <ChevronRight className="h-5 w-5 text-fg-secondary" />
+            </button>
+          </div>
         </div>
 
-        {/* 4-column grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        {/* Portrait card strip */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-5 overflow-x-auto lg:grid lg:grid-cols-5 lg:overflow-visible lg:w-full"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
           {MEMBERS.map((m) => (
-            <MemberCard key={m.name} {...m} />
+            <PortraitCard key={m.name} {...m} />
           ))}
         </div>
 

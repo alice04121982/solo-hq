@@ -1,0 +1,218 @@
+/*
+ * kleo-theme.css — KLEO Fertility design-system CSS custom properties
+ * Pulled from Figma file CYdHvZouW8jnAEmI9MkfRL (collections: _Primitives,
+ * 1. Color modes, 2. Radius, 3. Spacing, 4. Widths, 5. Containers, 6. Typography)
+ *
+ * Light mode is :root. Dark mode is [data-theme="dark"].
+ * Switch with: document.documentElement.dataset.theme = "dark"
+ *
+ * RULE: use semantic tokens in components — never a raw hex or primitive ramp.
+ */
+
+:root {
+  /* ─────────────────────────────────────────────────────────────────────────
+   * COLOUR — Background / Surface
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-bg-primary:              #FFFFFF;   /* raised card / modal */
+  --kleo-bg-secondary:            #FAFAFA;   /* page canvas */
+  --kleo-bg-secondary_subtle:     #FDFDFD;
+  --kleo-bg-tertiary:             #F5F5F5;   /* recessed well / table header */
+  --kleo-bg-quaternary:           #E9EAEB;   /* deepest inset */
+  --kleo-bg-primary_hover:        #F9FAFB;
+  --kleo-bg-secondary_hover:      #F5F5F5;
+  --kleo-bg-active:               #F9FAFB;
+  --kleo-bg-disabled:             #F5F5F5;
+  --kleo-bg-disabled_subtle:      #FAFAFA;
+
+  /* Brand (purple) */
+  --kleo-bg-brand-solid:          #7F56D9;   /* filled primary CTA */
+  --kleo-bg-brand-solid_hover:    #6941C6;
+  --kleo-bg-brand-primary:        #F9F5FF;   /* light brand tint — banners, badges */
+  --kleo-bg-brand-secondary:      #EDE9FE;   /* one step stronger */
+  --kleo-bg-brand-section:        #42307D;   /* dark brand band — CTAs, footer */
+  --kleo-bg-brand-section_subtle: #4A2B8A;
+  --kleo-bg-brand-section-deep:   #1D1430;   /* deepest brand band */
+
+  /* Status */
+  --kleo-bg-error-primary:        #FEF3F2;
+  --kleo-bg-warning-primary:      #FFFAEB;
+  --kleo-bg-success-primary:      #ECFDF3;
+  --kleo-bg-overlay:              #0A0D12;   /* modal scrim */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * COLOUR — Border
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-border-primary:          #D5D7DA;   /* input outline (resting) */
+  --kleo-border-secondary:        #E9EAEB;   /* default card / container edge */
+  --kleo-border-tertiary:         #F5F5F5;   /* faintest separator */
+  --kleo-border-secondary_alt:    rgba(0, 0, 0, 0.08);  /* on photo / coloured fill */
+  --kleo-border-brand:            #7F56D9;   /* focus ring */
+  --kleo-border-disabled:         #D5D7DA;
+  --kleo-border-disabled_subtle:  #E9EAEB;
+
+  /* Status */
+  --kleo-border-error:            #F04438;
+  --kleo-border-error_subtle:     #FDA29B;
+  --kleo-border-success:          #079455;
+  --kleo-border-success_subtle:   #A9EFC5;
+  --kleo-border-warning:          #DC6803;
+  --kleo-border-warning_subtle:   #FEDF89;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * COLOUR — Text
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-text-primary:            #181D27;   /* headings, key figures */
+  --kleo-text-secondary:          #414651;   /* body copy, labels */
+  --kleo-text-tertiary:           #535862;   /* help text, captions */
+  --kleo-text-quaternary:         #717680;   /* fine print */
+  --kleo-text-disabled:           #717680;
+  --kleo-text-placeholder:        #717680;
+  --kleo-text-white:              #FFFFFF;
+
+  /* On-brand surfaces */
+  --kleo-text-primary_on-brand:   #FFFFFF;
+  --kleo-text-secondary_on-brand: rgba(255, 255, 255, 0.70);
+  --kleo-text-tertiary_on-brand:  rgba(255, 255, 255, 0.50);
+
+  /* Brand */
+  --kleo-text-brand-primary:      #7F56D9;
+  --kleo-text-brand-secondary:    #6941C6;   /* default brand link / emphasis */
+  --kleo-text-brand-tertiary:     #7F56D9;
+  --kleo-text-brand-tertiary_alt: #7F56D9;
+
+  /* Status */
+  --kleo-text-error-primary:      #D92D20;
+  --kleo-text-warning-primary:    #DC6803;
+  --kleo-text-success-primary:    #079455;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * COLOUR — Foreground / Icon (SVG uses currentColor)
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-fg-primary:              #181D27;
+  --kleo-fg-secondary:            #414651;   /* default icon */
+  --kleo-fg-tertiary:             #535862;   /* supporting icon */
+  --kleo-fg-quaternary:           #A4A7AE;   /* decorative (chevrons, dots) */
+  --kleo-fg-disabled:             #A4A7AE;
+  --kleo-fg-white:                #FFFFFF;
+  --kleo-fg-brand-primary:        #7F56D9;
+  --kleo-fg-brand-secondary:      #6941C6;
+  --kleo-fg-error-primary:        #D92D20;
+  --kleo-fg-success-primary:      #079455;
+  --kleo-fg-warning-primary:      #DC6803;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * TYPOGRAPHY
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-font-display: "Ranade", ui-sans-serif, system-ui, sans-serif;
+  --kleo-font-body:    "Excon",  ui-sans-serif, system-ui, sans-serif;
+  --kleo-font-mono:    ui-monospace, "Cascadia Code", monospace;
+
+  /* Sizes */
+  --kleo-text-xs:           0.75rem;    /* 12px */
+  --kleo-text-sm:           0.875rem;   /* 14px */
+  --kleo-text-md:           1rem;       /* 16px */
+  --kleo-text-lg:           1.125rem;   /* 18px */
+  --kleo-text-xl:           1.25rem;    /* 20px */
+  --kleo-display-xs:        1.5rem;     /* 24px */
+  --kleo-display-sm:        1.875rem;   /* 30px */
+  --kleo-display-md:        2.25rem;    /* 36px */
+  --kleo-display-lg:        2.75rem;    /* 44px */
+  --kleo-display-xl:        3.75rem;    /* 60px */
+  --kleo-display-2xl:       4.5rem;     /* 72px */
+
+  /* Line-heights */
+  --kleo-lh-xs:           1.125rem;   /* 18px */
+  --kleo-lh-sm:           1.25rem;    /* 20px */
+  --kleo-lh-md:           1.5rem;     /* 24px */
+  --kleo-lh-lg:           1.75rem;    /* 28px */
+  --kleo-lh-xl:           1.875rem;   /* 30px */
+  --kleo-lh-display-xs:   2rem;       /* 32px */
+  --kleo-lh-display-md:   2.75rem;    /* 44px */
+  --kleo-lh-display-xl:   4.5rem;     /* 72px */
+
+  /* Weights */
+  --kleo-weight-regular:   400;
+  --kleo-weight-medium:    500;
+  --kleo-weight-semibold:  600;
+  --kleo-weight-bold:      700;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * SPACING (Figma spacing-* tokens)
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-spacing-xxs:  0.125rem;   /*   2px */
+  --kleo-spacing-xs:   0.25rem;    /*   4px */
+  --kleo-spacing-sm:   0.375rem;   /*   6px */
+  --kleo-spacing-md:   0.5rem;     /*   8px */
+  --kleo-spacing-lg:   0.75rem;    /*  12px */
+  --kleo-spacing-xl:   1rem;       /*  16px */
+  --kleo-spacing-2xl:  1.25rem;    /*  20px */
+  --kleo-spacing-3xl:  1.5rem;     /*  24px */
+  --kleo-spacing-4xl:  2rem;       /*  32px */
+  --kleo-spacing-6xl:  3rem;       /*  48px */
+  --kleo-spacing-7xl:  4rem;       /*  64px */
+  --kleo-spacing-9xl:  6rem;       /*  96px */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * RADIUS
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-radius-none:  0;
+  --kleo-radius-xxs:   0.125rem;   /*  2px */
+  --kleo-radius-xs:    0.25rem;    /*  4px */
+  --kleo-radius-sm:    0.375rem;   /*  6px */
+  --kleo-radius-md:    0.5rem;     /*  8px */
+  --kleo-radius-lg:    0.625rem;   /* 10px */
+  --kleo-radius-xl:    0.75rem;    /* 12px */
+  --kleo-radius-2xl:   1rem;       /* 16px */
+  --kleo-radius-3xl:   1.5rem;     /* 24px */
+  --kleo-radius-4xl:   2rem;       /* 32px */
+  --kleo-radius-full:  9999px;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * WIDTHS / CONTAINERS
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-width-paragraph-max:      45rem;    /* 720px — body copy line length cap */
+  --kleo-container-max:            80rem;    /* 1280px */
+  --kleo-container-padding-mobile: 1rem;     /* 16px */
+  --kleo-container-padding:        2rem;     /* 32px */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+   * SHADOWS
+   * ─────────────────────────────────────────────────────────────────────── */
+  --kleo-shadow-xs: 0 1px 2px rgba(10, 13, 18, 0.05);
+  --kleo-shadow-sm: 0 1px 3px rgba(10, 13, 18, 0.1), 0 1px 2px rgba(10, 13, 18, 0.06);
+  --kleo-shadow-md: 0 4px 6px -1px rgba(10, 13, 18, 0.1), 0 2px 4px -1px rgba(10, 13, 18, 0.06);
+  --kleo-shadow-lg: 0 10px 15px -3px rgba(10, 13, 18, 0.1), 0 4px 6px -2px rgba(10, 13, 18, 0.05);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * DARK MODE — override surface / border / text tokens
+ * ─────────────────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
+  --kleo-bg-primary:              #0C111D;
+  --kleo-bg-secondary:            #161B26;
+  --kleo-bg-secondary_subtle:     #1C2232;
+  --kleo-bg-tertiary:             #1C2232;
+  --kleo-bg-quaternary:           #212636;
+  --kleo-bg-primary_hover:        #161B26;
+  --kleo-bg-secondary_hover:      #1C2232;
+  --kleo-bg-active:               #1C2232;
+  --kleo-bg-disabled:             #1C2232;
+  --kleo-bg-disabled_subtle:      #161B26;
+
+  --kleo-border-primary:          #2A2F3D;
+  --kleo-border-secondary:        #212636;
+  --kleo-border-tertiary:         #1C2232;
+
+  --kleo-text-primary:            #F5F5F6;
+  --kleo-text-secondary:          #CECFD2;
+  --kleo-text-tertiary:           #94969C;
+  --kleo-text-quaternary:         #61646C;
+  --kleo-text-disabled:           #61646C;
+  --kleo-text-placeholder:        #61646C;
+
+  --kleo-fg-primary:              #F5F5F6;
+  --kleo-fg-secondary:            #CECFD2;
+  --kleo-fg-tertiary:             #94969C;
+  --kleo-fg-quaternary:           #61646C;
+  --kleo-fg-disabled:             #61646C;
+}

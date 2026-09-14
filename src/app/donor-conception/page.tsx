@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Donor Conception | KLEO Fertility",
   description:
-    "Whether you're using donor sperm, donor eggs, or both — clear, honest guidance on every aspect of donor conception.",
+    "Whether you're using donor sperm, donor eggs, or both, you'll find clear, honest guidance on every aspect of donor conception.",
 };
 
 const DONOR_TYPES = [
@@ -15,13 +15,13 @@ const DONOR_TYPES = [
     label: "Sperm donation",
     href: "/donor-conception/sperm-donation",
     description:
-      "Understanding sperm donation — choosing a donor, open-ID donors, legal implications, and what it means for your child.",
+      "Understanding sperm donation: choosing a donor, open-ID donors, legal implications, and what it means for your child.",
   },
   {
     label: "Egg donation",
     href: "/donor-conception/egg-donation",
     description:
-      "When using donor eggs is the right choice — finding a donor, the process, and what to expect emotionally and practically.",
+      "When using donor eggs is the right choice: finding a donor, the process, and what to expect emotionally and practically.",
   },
   {
     label: "Double donor / embryo",
@@ -65,7 +65,7 @@ export default function DonorConceptionPage() {
             className="text-md font-sans text-text-secondary leading-relaxed mb-10"
             style={{ maxWidth: "52ch" }}
           >
-            Whether you&apos;re using donor sperm, donor eggs, or both — clear,
+            Whether you&apos;re using donor sperm, donor eggs, or both, you&apos;ll find clear,
             honest guidance on every aspect of donor conception.
           </p>
           <div className="flex flex-wrap gap-3">

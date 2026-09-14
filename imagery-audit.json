@@ -1,0 +1,123 @@
+{
+  "auditedAt": "2026-04-27",
+  "summary": {
+    "existingImages": 1,
+    "placeholderSlots": 10,
+    "logoAssets": 2
+  },
+  "existingImages": [
+    {
+      "id": "hero-main",
+      "file": "src/components/hero-section.tsx",
+      "line": 73,
+      "currentSrc": "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=900&q=80",
+      "alt": "Mother and child sharing a joyful moment",
+      "type": "external-url",
+      "issue": "Externally hosted — should be self-hosted in public/images/",
+      "dimensions": "fill — container is h-[480px] lg:h-[580px], aspect roughly 3:4 portrait",
+      "priority": "high"
+    }
+  ],
+  "placeholderSlots": [
+    {
+      "id": "story-alice",
+      "file": "src/components/testimonials-section.tsx",
+      "section": "journeyStories[0]",
+      "description": "Portrait for Alice, 37 — founder's story: 'From someday to mum of one in 22 months'",
+      "suggestedCrop": "square or portrait, warm editorial",
+      "keywords": ["woman smiling baby", "mother infant happy"],
+      "priority": "high"
+    },
+    {
+      "id": "story-natalie",
+      "file": "src/components/testimonials-section.tsx",
+      "section": "journeyStories[1]",
+      "description": "Portrait for Natalie, 40 — donor egg journey: twins Evi and Rosa",
+      "suggestedCrop": "square or portrait, warm editorial",
+      "keywords": ["mother twins babies", "woman two babies"],
+      "priority": "high"
+    },
+    {
+      "id": "story-jo",
+      "file": "src/components/testimonials-section.tsx",
+      "section": "journeyStories[2]",
+      "description": "Portrait for Jo, 34 — two-week wait story, IVF cycle",
+      "suggestedCrop": "square or portrait, contemplative mood",
+      "keywords": ["woman contemplative thinking", "woman hopeful"],
+      "priority": "high"
+    },
+    {
+      "id": "news-article-1",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[0] — featured",
+      "description": "Cover for 'HFEA proposes stricter solo-patient counselling guidelines for 2025'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["fertility clinic", "medical consultation", "doctor patient"],
+      "priority": "medium"
+    },
+    {
+      "id": "news-article-2",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[1]",
+      "description": "Cover for 'Why UK IVF prices rose 18% in two years'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["money coins bills", "healthcare costs finance"],
+      "priority": "medium"
+    },
+    {
+      "id": "news-article-3",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[2]",
+      "description": "Cover for 'Solo mum by choice: How the language is finally catching up'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["woman proud confident", "solo woman portrait"],
+      "priority": "medium"
+    },
+    {
+      "id": "news-article-4",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[3]",
+      "description": "Cover for 'PGT-A: What the latest Cochrane review actually says'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["genetics laboratory science", "embryo microscope"],
+      "priority": "medium"
+    },
+    {
+      "id": "news-article-5",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[4]",
+      "description": "Cover for 'Five new HFEA-licensed clinics opened in 2024'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["fertility clinic interior", "medical clinic modern"],
+      "priority": "medium"
+    },
+    {
+      "id": "news-article-6",
+      "file": "src/app/news/page.tsx",
+      "section": "ARTICLES[5]",
+      "description": "Cover for 'Fertility finance: loans, grants, and employer schemes explained'",
+      "suggestedCrop": "landscape 16:9",
+      "keywords": ["financial planning savings", "woman finances"],
+      "priority": "medium"
+    },
+    {
+      "id": "cta-background",
+      "file": "src/components/cta-section.tsx",
+      "section": "background",
+      "description": "Optional subtle background texture or editorial image for the CTA section",
+      "suggestedCrop": "wide banner, muted/overlaid",
+      "keywords": ["soft texture background", "warm abstract"],
+      "priority": "low"
+    }
+  ],
+  "excluded": [
+    {
+      "file": "public/flying-solo-logo.png",
+      "reason": "Brand logo — do not replace"
+    },
+    {
+      "file": "public/flying-solo-logo.svg",
+      "reason": "Brand logo — do not replace"
+    }
+  ]
+}

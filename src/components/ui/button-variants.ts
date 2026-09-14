@@ -3,16 +3,19 @@
 export type ButtonVariant = "primary" | "secondary" | "tertiary" | "link";
 export type ButtonSize = "sm" | "md" | "lg";
 
+// shadow-xs from Figma: 0px 1px 2px rgba(10,13,18,0.05) — same as Tailwind shadow-sm.
+// Primary also gets a 2px white/12% border (Figma: border-2 border-white/[.12]) to frame
+// the brand fill. Secondary uses the standard border-primary outline with the same shadow.
 export const VARIANT: Record<ButtonVariant, string> = {
   primary:
-    "bg-bg-brand-solid text-text-white border border-transparent " +
+    "bg-bg-brand-solid text-text-white border-2 border-white/[.12] shadow-sm " +
     "hover:bg-bg-brand-solid-hover " +
-    "disabled:bg-bg-disabled disabled:text-text-disabled disabled:border-border-disabled",
+    "disabled:bg-bg-disabled disabled:text-text-disabled disabled:border-border-disabled disabled:shadow-none",
 
   secondary:
-    "bg-bg-primary text-text-secondary border border-border-primary " +
+    "bg-bg-primary text-text-secondary border border-border-primary shadow-sm " +
     "hover:bg-bg-secondary hover:text-text-primary " +
-    "disabled:bg-bg-disabled-subtle disabled:text-text-disabled disabled:border-border-disabled",
+    "disabled:bg-bg-disabled-subtle disabled:text-text-disabled disabled:border-border-disabled disabled:shadow-none",
 
   tertiary:
     "bg-transparent text-text-secondary border border-transparent " +
@@ -26,8 +29,9 @@ export const VARIANT: Record<ButtonVariant, string> = {
 };
 
 export const SIZE: Record<ButtonSize, string> = {
+  // px-3.5 = 14px matches Figma's px-14px spec for all sizes.
   sm: "px-3.5 py-2   text-sm  gap-1.5 rounded-lg",
-  md: "px-4   py-2.5 text-sm  gap-1.5 rounded-lg",
+  md: "px-3.5 py-2.5 text-sm  gap-1.5 rounded-lg",
   lg: "px-[18px] py-2.5 text-md gap-2   rounded-lg",
 };
 

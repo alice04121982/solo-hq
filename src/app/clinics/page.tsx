@@ -18,7 +18,7 @@ const WHAT_TO_LOOK_FOR = [
   {
     icon: <ShieldCheck className="h-4 w-4" />,
     title: "HFEA Licence (UK)",
-    desc: "Every UK fertility clinic must be HFEA-licensed. Always verify before booking — it's your legal protection as a patient.",
+    desc: "Every UK fertility clinic must be HFEA-licensed. Always verify before booking. It's your legal protection as a patient.",
   },
   {
     icon: <Heart className="h-4 w-4" />,
@@ -28,7 +28,7 @@ const WHAT_TO_LOOK_FOR = [
   {
     icon: <PoundSterling className="h-4 w-4" />,
     title: "All-In Pricing",
-    desc: "Always request a written quote covering donor sperm, ICSI, counselling, and storage — not just the headline IVF price.",
+    desc: "Always request a written quote covering donor sperm, ICSI, counselling, and storage, not just the headline IVF price.",
   },
   {
     icon: <Plane className="h-4 w-4" />,
@@ -71,7 +71,7 @@ export default async function ClinicsPage(_props: PageProps) {
             className="text-[17px] font-sans text-muted leading-relaxed mb-10"
             style={{ maxWidth: "52ch" }}
           >
-            UK clinics near you or across Europe — real pricing, success rates, and
+            UK clinics near you or across Europe, with real pricing, success rates, and
             side-by-side comparisons in one place.
           </p>
 
@@ -98,12 +98,12 @@ export default async function ClinicsPage(_props: PageProps) {
                   Live births per cycle started
                 </p>
                 <p className="text-[14px] font-sans text-muted leading-relaxed">
-                  A success rate of 40% means 40 out of 100 women who <em>started</em> a cycle took home a baby — not per egg retrieval, not per embryo transfer. Always ask which denominator a clinic is using if a figure seems unusually high.
+                  A success rate of 40% means 40 out of 100 women who <em>started</em> a cycle took home a baby, not per egg retrieval, not per embryo transfer. Always ask which denominator a clinic is using if a figure seems unusually high.
                 </p>
               </div>
               <div>
                 <p className="font-serif font-semibold text-foreground text-base mb-2">
-                  Filter for your age — not the headline
+                  Filter for your age, not the headline
                 </p>
                 <p className="text-[14px] font-sans text-muted leading-relaxed">
                   Rates fall significantly with age. The difference between under&nbsp;35 and 40–42 can be 20–30 percentage points. Use the age group filter above to see figures relevant to you, not a clinic&rsquo;s best-performing cohort.
@@ -114,7 +114,7 @@ export default async function ClinicsPage(_props: PageProps) {
                   UK vs. international figures
                 </p>
                 <p className="text-[14px] font-sans text-muted leading-relaxed">
-                  UK figures come from the HFEA — mandatory annual reporting to the national regulator. International figures are self-reported. When consulting a clinic abroad, ask to see data submitted to their national regulatory body.
+                  UK figures come from the HFEA (mandatory annual reporting to the national regulator). International figures are self-reported. When consulting a clinic abroad, ask to see data submitted to their national regulatory body.
                 </p>
               </div>
             </div>

@@ -188,7 +188,7 @@ export function ClinicComparison() {
 
       <p className="text-[12px] font-sans text-muted mt-6 leading-relaxed border-t border-border pt-4" style={{ maxWidth: "70ch" }}>
         Success rates based on HFEA published data (2022/23). Real prices are community-reported
-        estimates including solo essentials. All data is indicative — always verify directly with clinics.
+        estimates including solo essentials. All data is indicative, so always verify directly with clinics.
       </p>
     </div>
   );

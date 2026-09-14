@@ -1,13 +1,14 @@
 import Image from "next/image";
 
-// #72EF8A is a bright brand-band accent used only inside bg-bg-brand-section-deep.
-// It has no KLEO token equivalent and is kept as an inline style.
-const BRIGHT_GREEN = "#72EF8A";
+// #D6BBFB is the brand-band accent (button-primary-icon from Figma) used only
+// inside bg-bg-brand-section-deep. It has no standalone semantic token so it
+// is kept as an inline style until component-colour tokens are exported.
+const BRAND_ACCENT = "#D6BBFB";
 
 const PARAGRAPHS: { highlight: string; rest: string }[] = [
   {
     highlight: "Still figuring out the path.",
-    rest: " Whether you're considering going solo, exploring donor conception, or researching surrogacy — you're not alone in not having all the answers yet.",
+    rest: " Whether you're considering going solo, exploring donor conception, or researching surrogacy, you're not alone in not having all the answers yet.",
   },
   {
     highlight: "Two mums preparing for reciprocal IVF.",
@@ -15,11 +16,11 @@ const PARAGRAPHS: { highlight: string; rest: string }[] = [
   },
   {
     highlight: "In the two-week wait,",
-    rest: " holding hope and dread in equal measure. Solo, partnered, same-sex or otherwise — this part is hard for everyone.",
+    rest: " holding hope and dread in equal measure. Solo, partnered, same-sex or otherwise: this part is hard for everyone.",
   },
   {
     highlight: "Already a parent, doing something remarkable.",
-    rest: " Up at 3am — proud, exhausted, and quietly wondering where your people are. Whatever your path here, KLEO is for you.",
+    rest: " Up at 3am, proud, exhausted, and quietly wondering where your people are. Whatever your path here, KLEO is for you.",
   },
 ];
 
@@ -36,11 +37,11 @@ export function ForEveryoneSection() {
             </p>
 
             <h2
-              className="font-serif font-semibold text-text-white mb-10"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.25rem)", lineHeight: 1.08 }}
+              className="font-display font-bold text-text-white mb-10"
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3.25rem)", lineHeight: 1.08, letterSpacing: "-0.02em" }}
             >
               Whatever your path,{" "}
-              <em className="not-italic" style={{ color: BRIGHT_GREEN }}>
+              <em className="not-italic" style={{ color: BRAND_ACCENT }}>
                 KLEO Fertility is for you.
               </em>
             </h2>
@@ -74,7 +75,7 @@ export function ForEveryoneSection() {
                 key={highlight}
                 className="text-md font-sans leading-relaxed text-text-white opacity-80"
               >
-                <span className="font-semibold opacity-100" style={{ color: BRIGHT_GREEN }}>
+                <span className="font-semibold opacity-100" style={{ color: BRAND_ACCENT }}>
                   {highlight}
                 </span>
                 {rest}
@@ -82,15 +83,15 @@ export function ForEveryoneSection() {
             ))}
 
             <p
-              className="font-serif font-semibold text-text-white mt-2"
-              style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.5rem)", lineHeight: 1.25 }}
+              className="font-display font-bold text-text-white mt-2"
+              style={{ fontSize: "clamp(1.2rem, 1.8vw, 1.5rem)", lineHeight: 1.25, letterSpacing: "-0.01em" }}
             >
               KLEO Fertility is for every family choosing this path.
             </p>
 
             <div
               className="w-10 h-1 rounded-full opacity-50"
-              style={{ background: BRIGHT_GREEN }}
+              style={{ background: BRAND_ACCENT }}
             />
           </div>
 

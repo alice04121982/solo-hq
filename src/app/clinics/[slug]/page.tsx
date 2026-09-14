@@ -31,10 +31,10 @@ export async function generateMetadata({
     .eq("slug", slug)
     .single();
 
-  if (!data) return { title: "Clinic not found — Flying Solo" };
+  if (!data) return { title: "Clinic not found | Flying Solo" };
 
   return {
-    title: `${data.name}, ${data.city} — Flying Solo`,
+    title: `${data.name}, ${data.city} | Flying Solo`,
     description: `Full pricing, success rates and solo-friendly details for ${data.name} in ${data.city}, ${COUNTRY_NAMES[data.country_code] ?? data.country_code}.`,
   };
 }

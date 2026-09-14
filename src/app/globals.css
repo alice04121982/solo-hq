@@ -1,126 +1,128 @@
 @import "tailwindcss";
+@import "./kleo-theme.css";
 
+/* ── Legacy :root aliases — kept for any components still on the old API ── */
 :root {
-  /* ── Brand palette (legacy — phased out in Stage 3–4) ── */
-  --background:      #F6F3ED;
-  --background-alt:  #EDE8DF;
-  --foreground:      #1C1C1A;
-  --muted:           #6B665F;
-  --primary:         #2E7A51;
-  --primary-dark:    #1D5237;
-  --primary-tint:    #EAF2EC;
-  --accent:          #B5624A;
-  --accent-soft:     #F2E8E4;
-  --border:          #DDD7CB;
+  --background:      var(--kleo-bg-secondary);
+  --background-alt:  var(--kleo-bg-tertiary);
+  --foreground:      var(--kleo-text-primary);
+  --muted:           var(--kleo-text-tertiary);
+  --primary:         var(--kleo-bg-brand-solid);
+  --primary-dark:    var(--kleo-bg-brand-solid_hover);
+  --primary-tint:    var(--kleo-bg-brand-primary);
+  --accent:          var(--kleo-bg-brand-solid);
+  --accent-soft:     var(--kleo-bg-brand-primary);
+  --border:          var(--kleo-border-secondary);
+  --card-bg:         var(--kleo-bg-primary);
+  --card-border:     var(--kleo-border-secondary);
 
-  /* ── Legacy aliases (phased out in Stage 3–4) ── */
-  --lavender:        #EAF2EC;
-  --lavender-light:  #EDE8DF;
-  --lavender-dark:   #2E7A51;
-  --lime:            #2E7A51;
-  --lime-dark:       #1D5237;
-  --charcoal:        #1C1C1A;
-  --navy:            #2E7A51;
-  --warm-white:      #F6F3ED;
-  --card-bg:         #EDE8DF;
-  --card-border:     #DDD7CB;
+  --lavender:        var(--kleo-bg-brand-primary);
+  --lavender-light:  var(--kleo-bg-tertiary);
+  --lavender-dark:   var(--kleo-bg-brand-solid_hover);
+  --lime:            var(--kleo-bg-brand-solid);
+  --lime-dark:       var(--kleo-bg-brand-solid_hover);
+  --charcoal:        var(--kleo-text-primary);
+  --navy:            var(--kleo-text-primary);
+  --warm-white:      var(--kleo-bg-primary);
 }
 
+/* ── Tailwind v4 theme — maps utility classes to kleo-theme.css vars ── */
 @theme inline {
-  /* ── Legacy colour aliases (phased out in Stage 3–4) ── */
-  --color-background:      var(--background);
-  --color-background-alt:  var(--background-alt);
-  --color-foreground:      var(--foreground);
-  --color-muted:           var(--muted);
-  --color-primary:         var(--primary);
-  --color-primary-dark:    var(--primary-dark);
-  --color-primary-tint:    var(--primary-tint);
-  --color-accent:          var(--accent);
-  --color-accent-soft:     var(--accent-soft);
-  --color-border:          var(--border);
-  --color-lavender:        var(--lavender);
-  --color-lavender-light:  var(--lavender-light);
-  --color-lavender-dark:   var(--lavender-dark);
-  --color-lime:            var(--lime);
-  --color-lime-dark:       var(--lime-dark);
-  --color-charcoal:        var(--charcoal);
-  --color-navy:            var(--navy);
-  --color-warm-white:      var(--warm-white);
-  --color-card-bg:         var(--card-bg);
-  --color-card-border:     var(--card-border);
+  /* Legacy colour aliases (Tailwind bg-background, text-foreground, etc.) */
+  --color-background:      var(--kleo-bg-secondary);
+  --color-background-alt:  var(--kleo-bg-tertiary);
+  --color-foreground:      var(--kleo-text-primary);
+  --color-muted:           var(--kleo-text-tertiary);
+  --color-primary:         var(--kleo-bg-brand-solid);
+  --color-primary-dark:    var(--kleo-bg-brand-solid_hover);
+  --color-primary-tint:    var(--kleo-bg-brand-primary);
+  --color-accent:          var(--kleo-bg-brand-solid);
+  --color-accent-soft:     var(--kleo-bg-brand-primary);
+  --color-border:          var(--kleo-border-secondary);
+  --color-lavender:        var(--kleo-bg-brand-primary);
+  --color-lavender-light:  var(--kleo-bg-tertiary);
+  --color-lavender-dark:   var(--kleo-bg-brand-solid_hover);
+  --color-lime:            var(--kleo-bg-brand-solid);
+  --color-lime-dark:       var(--kleo-bg-brand-solid_hover);
+  --color-charcoal:        var(--kleo-text-primary);
+  --color-navy:            var(--kleo-text-primary);
+  --color-warm-white:      var(--kleo-bg-primary);
+  --color-card-bg:         var(--kleo-bg-primary);
+  --color-card-border:     var(--kleo-border-secondary);
 
-  /* ── KLEO surface tokens ── use as bg-bg-* ── */
-  --color-bg-primary:              #FFFFFF;   /* raised card / modal */
-  --color-bg-secondary:            #F6F3ED;   /* page canvas */
-  --color-bg-tertiary:             #EDE8DF;   /* recessed well / table header */
-  --color-bg-quaternary:           #DDD7CB;   /* deepest inset */
-  --color-bg-primary-hover:        #F6F3ED;
-  --color-bg-secondary-hover:      #EDE8DF;
-  --color-bg-active:               #F6F3ED;
-  --color-bg-disabled:             #EDE8DF;
-  --color-bg-disabled-subtle:      #F6F3ED;
-  --color-bg-brand-solid:          #2E7A51;   /* filled primary CTA */
-  --color-bg-brand-solid-hover:    #1D5237;
-  --color-bg-brand-primary:        #EAF2EC;   /* subtle green tint / banner */
-  --color-bg-brand-secondary:      #D4E9DB;
-  --color-bg-brand-section:        #1D5237;   /* dark brand footer / band */
-  --color-bg-brand-section-deep:   #0C2318;   /* deepest brand band (ForEveryone) */
-  --color-bg-error-primary:        #FEF3F2;
-  --color-bg-warning-primary:      #FFFAEB;
-  --color-bg-success-primary:      #ECFDF3;
-  --color-bg-overlay:              #1C1C1A;
+  /* ── Surface tokens — use as bg-bg-* ── */
+  --color-bg-primary:              var(--kleo-bg-primary);
+  --color-bg-secondary:            var(--kleo-bg-secondary);
+  --color-bg-tertiary:             var(--kleo-bg-tertiary);
+  --color-bg-quaternary:           var(--kleo-bg-quaternary);
+  --color-bg-primary-hover:        var(--kleo-bg-primary_hover);
+  --color-bg-secondary-hover:      var(--kleo-bg-secondary_hover);
+  --color-bg-active:               var(--kleo-bg-active);
+  --color-bg-disabled:             var(--kleo-bg-disabled);
+  --color-bg-disabled-subtle:      var(--kleo-bg-disabled_subtle);
+  --color-bg-brand-solid:          var(--kleo-bg-brand-solid);
+  --color-bg-brand-solid-hover:    var(--kleo-bg-brand-solid_hover);
+  --color-bg-brand-primary:        var(--kleo-bg-brand-primary);
+  --color-bg-brand-secondary:      var(--kleo-bg-brand-secondary);
+  --color-bg-brand-section:        var(--kleo-bg-brand-section);
+  --color-bg-brand-section-deep:   var(--kleo-bg-brand-section-deep);
+  --color-bg-error-primary:        var(--kleo-bg-error-primary);
+  --color-bg-warning-primary:      var(--kleo-bg-warning-primary);
+  --color-bg-success-primary:      var(--kleo-bg-success-primary);
+  --color-bg-overlay:              var(--kleo-bg-overlay);
 
-  /* ── KLEO border tokens ── use as border-border-* ── */
-  --color-border-primary:          #DDD7CB;   /* input outline (resting) */
-  --color-border-secondary:        #EDE8DF;   /* default card / container edge */
-  --color-border-tertiary:         #F6F3ED;   /* faintest separator */
-  --color-border-brand:            #2E7A51;   /* focus ring */
-  --color-border-error:            #F04438;
-  --color-border-error-subtle:     #FDA29B;
-  --color-border-success:          #079455;
-  --color-border-success-subtle:   #A9EFC5;
-  --color-border-warning:          #DC6803;
-  --color-border-warning-subtle:   #FEDF89;
-  --color-border-disabled:         #DDD7CB;
-  --color-border-disabled-subtle:  #EDE8DF;
+  /* ── Border tokens — use as border-border-* ── */
+  --color-border-primary:          var(--kleo-border-primary);
+  --color-border-secondary:        var(--kleo-border-secondary);
+  --color-border-tertiary:         var(--kleo-border-tertiary);
+  --color-border-brand:            var(--kleo-border-brand);
+  --color-border-error:            var(--kleo-border-error);
+  --color-border-error-subtle:     var(--kleo-border-error_subtle);
+  --color-border-success:          var(--kleo-border-success);
+  --color-border-success-subtle:   var(--kleo-border-success_subtle);
+  --color-border-warning:          var(--kleo-border-warning);
+  --color-border-warning-subtle:   var(--kleo-border-warning_subtle);
+  --color-border-disabled:         var(--kleo-border-disabled);
+  --color-border-disabled-subtle:  var(--kleo-border-disabled_subtle);
 
-  /* ── KLEO text tokens ── use as text-text-* ── */
-  --color-text-primary:            #1C1C1A;   /* headings, key figures */
-  --color-text-secondary:          #6B665F;   /* body copy, labels */
-  --color-text-tertiary:           #8A8580;   /* help text, captions */
-  --color-text-quaternary:         #A09B96;   /* fine print */
-  --color-text-disabled:           #A09B96;
-  --color-text-placeholder:        #B0ABA5;
-  --color-text-white:              #FFFFFF;
-  --color-text-brand-secondary:    #2E7A51;   /* green links / emphasis */
-  --color-text-brand-tertiary:     #3A8A61;
-  --color-text-error-primary:      #D92D20;
-  --color-text-warning-primary:    #DC6803;
-  --color-text-success-primary:    #079455;
+  /* ── Text tokens — use as text-text-* ── */
+  --color-text-primary:            var(--kleo-text-primary);
+  --color-text-secondary:          var(--kleo-text-secondary);
+  --color-text-tertiary:           var(--kleo-text-tertiary);
+  --color-text-quaternary:         var(--kleo-text-quaternary);
+  --color-text-disabled:           var(--kleo-text-disabled);
+  --color-text-placeholder:        var(--kleo-text-placeholder);
+  --color-text-white:              var(--kleo-text-white);
+  --color-text-brand-secondary:    var(--kleo-text-brand-secondary);
+  --color-text-brand-tertiary:     var(--kleo-text-brand-tertiary);
+  --color-text-error-primary:      var(--kleo-text-error-primary);
+  --color-text-warning-primary:    var(--kleo-text-warning-primary);
+  --color-text-success-primary:    var(--kleo-text-success-primary);
 
-  /* ── KLEO icon tokens ── use as text-fg-* (SVG uses currentColor) ── */
-  --color-fg-primary:              #1C1C1A;
-  --color-fg-secondary:            #6B665F;   /* default icon */
-  --color-fg-tertiary:             #8A8580;   /* supporting icon */
-  --color-fg-quaternary:           #B0ABA5;   /* decorative (chevrons, dots) */
-  --color-fg-disabled:             #B0ABA5;
-  --color-fg-white:                #FFFFFF;
-  --color-fg-brand-primary:        #2E7A51;
-  --color-fg-error-primary:        #D92D20;
-  --color-fg-success-primary:      #079455;
-  --color-fg-warning-primary:      #DC6803;
+  /* ── Icon / Foreground tokens — use as text-fg-* ── */
+  --color-fg-primary:              var(--kleo-fg-primary);
+  --color-fg-secondary:            var(--kleo-fg-secondary);
+  --color-fg-tertiary:             var(--kleo-fg-tertiary);
+  --color-fg-quaternary:           var(--kleo-fg-quaternary);
+  --color-fg-disabled:             var(--kleo-fg-disabled);
+  --color-fg-white:                var(--kleo-fg-white);
+  --color-fg-brand-primary:        var(--kleo-fg-brand-primary);
+  --color-fg-error-primary:        var(--kleo-fg-error-primary);
+  --color-fg-success-primary:      var(--kleo-fg-success-primary);
+  --color-fg-warning-primary:      var(--kleo-fg-warning-primary);
 
   /* ── Fonts ── */
-  --font-sans:    var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-serif:   var(--font-lora), "Lora", ui-serif, Georgia, serif;
-  --font-heading: var(--font-lora), "Lora", ui-serif, Georgia, serif;
-  --font-mono:    ui-monospace, "Cascadia Code", monospace;
+  --font-display: var(--kleo-font-display);
+  --font-sans:    var(--kleo-font-body);
+  --font-serif:   var(--kleo-font-display);   /* no separate serif — Excon for both */
+  --font-heading: var(--kleo-font-display);
+  --font-mono:    var(--kleo-font-mono);
 
-  /* ── Text scale (KLEO / Untitled UI aligned) ── */
+  /* ── Text scale ── */
   --text-xs:                       0.75rem;      /* 12px */
-  --text-xs--line-height:          1.125rem;     /* 18px */
+  --text-xs--line-height:          1.125rem;
   --text-sm:                       0.875rem;     /* 14px */
-  --text-sm--line-height:          1.4rem;
+  --text-sm--line-height:          1.25rem;
   --text-md:                       1rem;         /* 16px */
   --text-md--line-height:          1.5rem;
   --text-lg:                       1.125rem;     /* 18px */
@@ -128,37 +130,48 @@
   --text-xl:                       1.25rem;      /* 20px */
   --text-xl--line-height:          1.875rem;
   --text-display-xs:               1.5rem;       /* 24px */
-  --text-display-xs--line-height:  1.2;
+  --text-display-xs--line-height:  2rem;
   --text-display-sm:               1.875rem;     /* 30px */
   --text-display-sm--line-height:  1.15;
   --text-display-md:               2.25rem;      /* 36px */
-  --text-display-md--line-height:  1.1;
+  --text-display-md--line-height:  2.75rem;
   --text-display-lg:               2.75rem;      /* 44px */
   --text-display-lg--line-height:  1.08;
-  --text-display-xl:               3.25rem;      /* 52px */
-  --text-display-xl--line-height:  1.05;
-  --text-display-2xl:              3.75rem;      /* 60px */
+  --text-display-xl:               3.75rem;      /* 60px */
+  --text-display-xl--line-height:  4.5rem;
+  --text-display-2xl:              4.5rem;       /* 72px */
   --text-display-2xl--line-height: 1.02;
 }
 
 /* ── Base ── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: 1rem;   /* 16px = text-md */
+  background: var(--kleo-bg-secondary);
+  color: var(--kleo-text-primary);
+  font-family: var(--kleo-font-body);
+  font-size: 1rem;
   line-height: 1.5;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 600;
+  font-family: var(--kleo-font-display);
+  font-weight: 700;
   line-height: 1.15;
-  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--background-alt); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--kleo-bg-tertiary); }
+::-webkit-scrollbar-thumb { background: var(--kleo-border-secondary); border-radius: 3px; }
+
+/* ── Keyframe animations (replaces framer-motion for simple entrances) ── */
+@keyframes kleo-fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes kleo-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

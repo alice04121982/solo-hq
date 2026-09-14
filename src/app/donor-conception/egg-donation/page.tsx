@@ -7,7 +7,7 @@ import { buttonVariants } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Egg donation | KLEO Fertility",
   description:
-    "When using donor eggs is the right path — finding a donor, the process, success rates, and the emotional journey.",
+    "When using donor eggs is the right path: finding a donor, the process, success rates, and the emotional journey.",
 };
 
 export default function EggDonationPage() {
@@ -36,7 +36,7 @@ export default function EggDonationPage() {
             className="text-md font-sans text-text-secondary leading-relaxed mb-10"
             style={{ maxWidth: "52ch" }}
           >
-            When using donor eggs is the right path — finding a donor, the
+            When using donor eggs is the right path: finding a donor, the
             process, success rates, and the emotional journey.
           </p>
           <div className="flex flex-wrap gap-3">

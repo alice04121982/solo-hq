@@ -8,7 +8,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 const testimonials = [
   {
     quote:
-      "I'd spent two years on the fence, terrified of doing it alone. Flying Solo gave me the real numbers, the real timelines, and the community that told me — you can do this. My son Arlo is 14 months old.",
+      "I'd spent two years on the fence, terrified of doing it alone. Flying Solo gave me the real numbers, the real timelines, and the community that told me: you can do this. My son Arlo is 14 months old.",
     name: "Gemma, 38",
     location: "Bristol",
     stage: "Mum to Arlo, conceived via donor IUI",
@@ -33,7 +33,7 @@ const testimonials = [
       "I'm 42 and people kept telling me I'd left it too late. This community showed me women who'd had their babies at 43, 44, using donor eggs.",
     name: "Claire, 42",
     location: "Edinburgh",
-    stage: "Pregnant — due in August",
+    stage: "Pregnant, due in August",
   },
 ];
 
@@ -43,7 +43,7 @@ const journeyStories = [
     age: 37,
     tag: "Founder's story",
     title: "From 'someday' to mum of one in 22 months",
-    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find — most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Flying Solo because I wished something like it had existed when I was starting out.",
+    body: "I started researching solo IVF after a relationship ended in my mid-30s. I gave myself three months to decide. I spent those months reading everything I could find, most of it either terrifyingly medical or suspiciously cheerful. I wanted the real version. My daughter Iris was born in 2023 after two IUI rounds and one IVF cycle. I built Flying Solo because I wished something like it had existed when I was starting out.",
     image: "/images/story-alice.jpg",
     imageAlt: "Alice with her newborn daughter Iris",
   },
@@ -52,7 +52,7 @@ const journeyStories = [
     age: 40,
     tag: "Donor egg journey",
     title: "I used donor eggs and I'm not ashamed of it",
-    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then — after reading a dozen stories from women who'd been exactly here — at peace with it. My twins Evi and Rosa are two and a half.",
+    body: "After three failed IVF cycles with my own eggs, my consultant suggested donor eggs. I was devastated, then slowly curious, then (after reading a dozen stories from women who'd been exactly here) at peace with it. My twins Evi and Rosa are two and a half.",
     image: "/images/story-natalie.jpg",
     imageAlt: "Natalie with her twin daughters Evi and Rosa",
   },

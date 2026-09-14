@@ -182,7 +182,13 @@ export function SiteNav() {
       </div>
 
       {/* Desktop CTA */}
-      <div className="hidden md:flex items-center">
+      <div className="hidden md:flex items-center gap-3">
+        <a
+          href="/login"
+          className="text-sm font-sans text-text-secondary hover:text-text-primary transition-colors duration-150"
+        >
+          Log in
+        </a>
         <a
           href="/clinics"
           className={buttonVariants({ variant: "primary", size: "sm" })}

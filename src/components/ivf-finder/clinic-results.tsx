@@ -82,7 +82,7 @@ export function ClinicResults({
         </p>
         {source === "seed" && (
           <span className="text-[10px] bg-lavender-light text-lavender-dark px-2.5 py-1 rounded-full font-medium">
-            Indicative data — live results loading
+            Indicative data, live results loading
           </span>
         )}
         {source === "live" && (

@@ -23,9 +23,9 @@ export async function generateMetadata({
 }) {
   const { code } = await params;
   const name = COUNTRY_NAMES[code];
-  if (!name) return { title: "Country not found — Flying Solo" };
+  if (!name) return { title: "Country not found | Flying Solo" };
   return {
-    title: `IVF Clinics in ${name} — Flying Solo`,
+    title: `IVF Clinics in ${name} | Flying Solo`,
     description: `Compare IVF clinics in ${name} for solo women. Pricing, success rates, regulatory overview and solo-friendly status.`,
   };
 }

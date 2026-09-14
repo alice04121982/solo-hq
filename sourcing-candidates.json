@@ -1,0 +1,127 @@
+{
+  "sourcedAt": "2026-04-27",
+  "source": "pixabay",
+  "note": "All images are free for commercial use under the Pixabay Content License. No attribution required but appreciated. Unsplash candidates will be added once UNSPLASH_ACCESS_KEY is confirmed.",
+  "candidates": [
+    {
+      "slotId": "hero-main",
+      "localPath": "public/images/hero-main.jpg",
+      "recommendation": {
+        "pixabayId": 1178635,
+        "pageUrl": "https://pixabay.com/photos/motherhood-boy-parent-happy-mother-1178635/",
+        "largeUrl": "https://pixabay.com/get/g6b331f0c5165c5828b5f84b4196d6fa3301aa31b3d45b02d3b0e6ab13a6c2cf79d3d454217062961986c680f7ded9e6b8a70fc5e3f9e196555ec7412c97e5779_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g42e49c72bec81614b33537f6ecdc4439f645d34234654bf15dc3a2727aacc1397b26419d90e7dfce52b353801437180daa374f4f73ff95e00a05c249f5efcfd7_640.jpg",
+        "tags": "motherhood, boy, parent, happy mother, newborn baby, mother and baby",
+        "rationale": "Warm, close-up mother and baby portrait — matches the site's editorial tone. Natural light, joyful, candid feel."
+      }
+    },
+    {
+      "slotId": "story-alice",
+      "localPath": "public/images/story-alice.jpg",
+      "recommendation": {
+        "pixabayId": 8798476,
+        "pageUrl": "https://pixabay.com/photos/woman-newborn-portrait-motherhood-8798476/",
+        "largeUrl": "https://pixabay.com/get/g0c73a936444ea486d5008c111437ff3dd66d6e030960df88c5fd77f18d91f48bb234a0bb1ffd2a9b91c06b7730898853c70a8748066eba599eba6c52ac23b624_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g627a31ebf328053ab7f406f59b35b600a1175204840bc8937c249b2b9eca1959fe535f9cc4c5d0fcb46e0ef23a03f8786473b5b3b4b8c11b12a4427dcccaab9d_640.jpg",
+        "tags": "woman, newborn, portrait, motherhood, mother, love, care, family, baby",
+        "rationale": "Close portrait of woman with newborn — perfectly matched to Alice's founder story about first-time solo motherhood."
+      }
+    },
+    {
+      "slotId": "story-natalie",
+      "localPath": "public/images/story-natalie.jpg",
+      "recommendation": {
+        "pixabayId": 2386503,
+        "pageUrl": "https://pixabay.com/photos/mother-children-photo-mobile-phone-2386503/",
+        "largeUrl": "https://pixabay.com/get/g040ca4895484b369cad5094174f4b628fe194ce88e9679569841e2caeafd91520bc23956cd07d7bdc668d943fff7e90d07499b5f59e232e8f56e561bb2b46fea_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g9d74cf9f583ce97e56666236e652ab9317bb6e736dde03d56ed8e72a7fac253b7f95a537b0f3aa17dbe1dee6ccfba37eec9d4f63f38efa4912057ae5cd2633a0_640.jpg",
+        "tags": "mother, children, photo, mobile phone, twin, girls, cute, happy, smile",
+        "rationale": "Mother with twin girls — directly maps to Natalie's story about donor egg twins Evi and Rosa."
+      }
+    },
+    {
+      "slotId": "story-jo",
+      "localPath": "public/images/story-jo.jpg",
+      "recommendation": {
+        "pixabayId": 7291208,
+        "pageUrl": "https://pixabay.com/photos/woman-portrait-thoughtfulness-7291208/",
+        "largeUrl": "https://pixabay.com/get/g750e80bc392bd8d9dcc02fbd87a54ef9506f5ad555eceab5866a377e1f1f4a442c74de5ce670429a9bd5d55bc77735a7d1cdfe20b2dd5cf7dfe36affee8b92d2_1280.jpg",
+        "previewUrl": "https://cdn.pixabay.com/photo/2022/06/29/08/13/woman-7291208_150.jpg",
+        "tags": "woman, portrait, thoughtfulness, reflection, nostalgia, window, memories, thinking, considerations",
+        "rationale": "Woman at window in quiet contemplation — thoughtfulness, reflection, nostalgia. Perfect two-week-wait mood. No 'young/girl' tags; feels mid-30s+."
+      }
+    },
+    {
+      "slotId": "news-article-1",
+      "localPath": "public/images/news-hfea-guidelines.jpg",
+      "recommendation": {
+        "pixabayId": 10175189,
+        "pageUrl": "https://pixabay.com/photos/doctor-woman-female-black-african-10175189/",
+        "largeUrl": "https://pixabay.com/get/ga2c6614799fa836ed82220fb8c03d1171241d4b824ade7d0d5a1b9cb9cea00065b0e53ebdc0837df23ef7b14bff6a925cab6f805c4c7dd208b3c262797871cbd_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/ga2c6614799fa836ed82220fb8c03d1171241d4b824ade7d0d5a1b9cb9cea00065b0e53ebdc0837df23ef7b14bff6a925cab6f805c4c7dd208b3c262797871cbd_640.jpg",
+        "tags": "doctor, woman, female, medical, healthcare, consultation, patient, office, clinic, professional",
+        "rationale": "Female doctor in consultation — authoritative, professional, appropriate for HFEA policy article."
+      }
+    },
+    {
+      "slotId": "news-article-2",
+      "localPath": "public/images/news-ivf-costs.jpg",
+      "recommendation": {
+        "pixabayId": 3139127,
+        "pageUrl": "https://pixabay.com/photos/desk-work-business-office-finance-3139127/",
+        "largeUrl": "https://pixabay.com/get/gffa2f9f18efcd222630549999fe2646b17f5f0aad720edf79062bbea42540a26808b6c6685e6f95acf8e951fe6fdf27d211c324fbef33f48da1d69f2b9dd4b8a_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g6963b8acffbc4a1afeb46d13a30e83a33bbb5119ba441160ee8bdf8c9a313b7e4833ab4eca43ff04da970b4531cd80648216a764a63d56e7e9b3711d44146183_640.jpg",
+        "tags": "desk, work, business, office, finance, documents, analysis, laptop, planning",
+        "rationale": "Clean flatlay of financial/planning workspace — abstract enough to suit a costs article."
+      }
+    },
+    {
+      "slotId": "news-article-3",
+      "localPath": "public/images/news-smc-language.jpg",
+      "recommendation": {
+        "pixabayId": 4697981,
+        "pageUrl": "https://pixabay.com/photos/portrait-woman-people-model-4697981/",
+        "largeUrl": "https://pixabay.com/get/ge20707cc2ce6a5e1517b73549d7d41edf30cc18fd42742d95aeab5bec8744f3e2ecdafd198baafc21795bdd7b2b5706a5dc4f2c1e1134b586895d434294c3ce2_1280.jpg",
+        "previewUrl": "https://cdn.pixabay.com/photo/2019/12/15/20/02/portrait-4697981_150.jpg",
+        "tags": "portrait, woman, people, model, adult, lady, old, 40s, gray lady",
+        "rationale": "Portrait of a woman in her 40s — explicitly tagged '40s, gray lady'. Confident, real-looking. Right demographic for the SMC language/identity article."
+      }
+    },
+    {
+      "slotId": "news-article-4",
+      "localPath": "public/images/news-pgt-science.jpg",
+      "recommendation": {
+        "pixabayId": 6974451,
+        "pageUrl": "https://pixabay.com/photos/microbiology-laboratory-dna-6974451/",
+        "largeUrl": "https://pixabay.com/get/g9592869052f845a6ed9acdebe8d7bbf46f752e7fde4733bced972f61e107ecfb8a80ccc82632d90d6d66d048e6290950b43a56cd1ef974fc584923916409be58_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g1b1d6e16e150118002f84eedf5d9e8ec3823a7f8e7cf7ff20083402d69bc6bdf4230d996822960b107d78b495c1ba4b31895f1d01bbf7a8da60632bec933ceef_640.jpg",
+        "tags": "microbiology, laboratory, dna, microscope, science, investigation, research",
+        "rationale": "DNA/microscope science imagery — directly relevant to PGT-A genetics article."
+      }
+    },
+    {
+      "slotId": "news-article-5",
+      "localPath": "public/images/news-new-clinics.jpg",
+      "recommendation": {
+        "pixabayId": 5979689,
+        "pageUrl": "https://pixabay.com/photos/hallway-hospital-clean-rooms-5979689/",
+        "largeUrl": "https://pixabay.com/get/g5976d01846cac25b6b4e05b54cceb257456f532bcf5fa995cfba8890456b8bcb16f81ac6db8f71eff337125aa182328b224d6319ec78c26bf6899f54e96009be_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/g5976d01846cac25b6b4e05b54cceb257456f532bcf5fa995cfba8890456b8bcb16f81ac6db8f71eff337125aa182328b224d6319ec78c26bf6899f54e96009be_640.jpg",
+        "tags": "hallway, hospital, clean, rooms, doors, medical, health, interior, building",
+        "rationale": "Clean modern hospital corridor — appropriate for an article about new licensed fertility clinics."
+      }
+    },
+    {
+      "slotId": "news-article-6",
+      "localPath": "public/images/news-fertility-finance.jpg",
+      "recommendation": {
+        "pixabayId": 593357,
+        "pageUrl": "https://pixabay.com/photos/entrepreneur-startup-woman-macbook-593357/",
+        "largeUrl": "https://pixabay.com/get/g2ae4ac0df30f7da74e7af53a2fafb6e37ed511f24c7d6540a0044b84405df62235c69e6f97d0805f8ddb9978acbeb7a25b856ebe2c950ee344cdad9342036ceb_1280.jpg",
+        "previewUrl": "https://pixabay.com/get/ga629eefd72bff330968832277eb8b6f08e5029649c4af5f8625f5062f606d204b1c57dd1b76042527031a9e676227dc4_640.jpg",
+        "tags": "entrepreneur, startup, woman, macbook, laptop, planning, business, freelance, notepad",
+        "rationale": "Woman planning on laptop with notepad — suits the fertility finance/loans/grants article perfectly."
+      }
+    }
+  ]
+}
