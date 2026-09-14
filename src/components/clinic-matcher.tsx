@@ -4,7 +4,7 @@ import { useState, useMemo, type ReactNode } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { getFamilyType, type FamilyTypeSlug } from "@/lib/family-types";
-import { CLINICS, DATA_PROVENANCE, rateFor } from "@/lib/clinics";
+import { CLINICS, DATA_PROVENANCE, formatCheckedDate, rateFor } from "@/lib/clinics";
 import { eligibilityFor, type CountryEligibility } from "@/lib/country-eligibility";
 import {
   travelEstimateForCity,
@@ -17,6 +17,9 @@ import {
 } from "@/lib/travel";
 import type { AgeBracket, Clinic } from "@/types/clinic";
 import { RegulatorNotice } from "@/components/regulator-notice";
+import { CountryFlag } from "@/components/country-flag";
+import { FigureLabel, RateFigure, VerificationBadge } from "@/components/ivf-finder/rate-display";
+import { clinicCardClasses } from "@/lib/card-style";
 import { ShapeMark, FAMILY_SHAPES, type ShapeName } from "@/components/shapes";
 import {
   ArrowRight,
@@ -28,7 +31,6 @@ import {
   Mars,
   VenusAndMars,
   Plane,
-  ShieldCheck,
 } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -39,7 +41,6 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 // this file does not depend on that module landing first.
 
 const BADGE_HFEA = "From the HFEA register";
-const BADGE_CLINIC = "Clinic's own figure, not checked";
 const RATE_NOTE = "These are averages across many patients, not a prediction for you.";
 const RATE_CAVEAT =
   "These are averages across many patients, not a prediction for you. The HFEA advises using success rates as a rough guide: a difference of one or two percentage points is usually down to chance, and differences between clinics usually reflect the patients they treat.";
@@ -265,13 +266,6 @@ function groupMatches(matches: Match[], sort: SortKey): { heading: string | null
   ].filter((g) => g.items.length > 0);
 }
 
-function rateLine(clinic: Clinic): string {
-  const { verification, denominator, year } = clinic.successRates;
-  return verification === "hfea"
-    ? `live births ${denominator}, ${year} (HFEA)`
-    : `live births ${denominator}, ${year} (clinic's own figure)`;
-}
-
 // ─── Shared UI ────────────────────────────────────────────────────────────────
 
 // Icons sit in a fixed-width slot so every option's text starts on the same
@@ -487,117 +481,155 @@ function StepBudget({ s, set, isSurrogacy }: { s: WizardState; set: (b: BudgetRa
   );
 }
 
-function ResultCard({ m, surrogacy, index }: { m: Match; surrogacy: boolean; index: number }) {
+/**
+ * The rate side of a match's figures row. Own-egg IVF shows the finder's
+ * RateFigure for the chosen age group, so both tools quote a clinic the same
+ * way; IUI and surrogacy paths have no comparable per-age figure and say so.
+ */
+function MatchFigure({ m, surrogacy, age }: { m: Match; surrogacy: boolean; age: AgeBracket | null }) {
+  const ink = { color: "var(--card-ink)" };
+  const inkMuted = { color: "var(--card-ink-muted)" };
+
+  if (m.treatment === "iui") {
+    return (
+      <div>
+        <FigureLabel>Success rate</FigureLabel>
+        <p className="text-lg font-sans font-bold leading-tight" style={ink}>IUI</p>
+        <p className="text-xs font-sans mt-0.5" style={inkMuted}>{IUI_RATE_LINE}</p>
+      </div>
+    );
+  }
+  if (surrogacy || !age) {
+    return (
+      <div>
+        <FigureLabel>Success rate</FigureLabel>
+        <p className="text-lg font-sans font-bold leading-tight" style={ink}>Donor eggs</p>
+        <p className="text-xs font-sans mt-0.5 leading-relaxed" style={inkMuted}>{DONOR_EGG_RATE_NOTE}</p>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <FigureLabel>Your age group</FigureLabel>
+      <RateFigure clinic={m.clinic} bracket={age} />
+    </div>
+  );
+}
+
+/**
+ * A matched clinic. The same card as the finder's results (`.clinic-card`:
+ * fill for the edge, no stroke, dark-green hover that re-tints every child
+ * from one rule), on the cream variant because the wizard panel is white.
+ *
+ * The card carries one accent, the verification badge; everything else is
+ * teal ink on cream, in three tiers: the clinic, the two figures, the notes.
+ */
+function ResultCard({
+  m, surrogacy, age, index,
+}: {
+  m: Match; surrogacy: boolean; age: AgeBracket | null; index: number;
+}) {
   const c = m.clinic;
   const x = extras(c);
-  const hfea = c.successRates.verification === "hfea";
+  const ink = { color: "var(--card-ink)" };
+  const inkMuted = { color: "var(--card-ink-muted)" };
+  const trips = `${TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–${TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips`;
+
+  const notes: string[] = [];
+  if (x.priceIncludes) notes.push(`Headline price includes ${x.priceIncludes.replace(/\.\s*$/, "")}.`);
+  if (x.publishedAllInEstimateGbp && m.treatment === "ivf") {
+    notes.push(
+      `Clinic's own estimate of a typical total: ${formatGbp(x.publishedAllInEstimateGbp.low)}–${formatGbp(x.publishedAllInEstimateGbp.high)}.`
+    );
+  }
+  if (m.travel) {
+    notes.push(TRAVEL_ESTIMATE_SCOPE);
+    if (m.travel.destination.note) notes.push(m.travel.destination.note);
+  }
+  if (x.checkedOn) notes.push(`Checked ${formatCheckedDate(x.checkedOn)}.`);
+
   return (
     <motion.div
       key={c.slug}
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.06, duration: 0.35, ease: EASE }}
-      // Opaque so the band's backdrop shape never washes through the data
-      className="rounded-xl overflow-hidden flex flex-col bg-cream"
+      className={clinicCardClasses("cream", false)}
     >
-      <div className="flex items-start justify-between gap-4 p-4 border-b border-border">
-        <div>
-          <p className="font-sans font-medium text-teal leading-tight">{c.name}</p>
-          <div className="flex items-center gap-1 mt-1">
-            {c.region === "UK"
-              ? <MapPin className="h-3 w-3 text-muted" />
-              : <Globe className="h-3 w-3 text-muted" />}
-            <p className="text-xs font-sans text-muted">{c.city}, {c.country}</p>
-          </div>
-          {c.hfeaLicensed && (
-            <div className="flex items-center gap-1 mt-1">
-              <ShieldCheck className="h-3 w-3 text-muted" />
-              <p className="text-xs font-sans text-muted">HFEA licensed</p>
-            </div>
-          )}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
+        <VerificationBadge verification={c.successRates.verification} />
+      </div>
+
+      <h3 className="text-lg font-sans font-bold leading-tight" style={ink}>
+        {c.name}
+      </h3>
+      <p className="flex items-center gap-1.5 mt-1.5 text-xs font-sans" style={inkMuted}>
+        <CountryFlag country={c.country} />
+        <span className="min-w-0">
+          {c.city}, {c.country}
+          {c.hfeaLicensed && " · HFEA licensed"}
+        </span>
+      </p>
+
+      {/* Two labelled figures: stacked on a phone, side by side from md. In
+          the row the rate takes the room and the price column is capped, so
+          a travel line wraps under the price instead of squeezing the rate. */}
+      <div className="flex flex-col gap-5 mt-6 md:flex-row md:items-start md:justify-between">
+        <div className="min-w-0 md:flex-1">
+          <MatchFigure m={m} surrogacy={surrogacy} age={age} />
         </div>
-        <div className="text-right shrink-0">
-          <p className="text-[12px] font-sans text-muted">Headline price</p>
-          <p className="font-sans font-medium text-teal text-lg leading-tight">
+        <div className="md:shrink-0 md:max-w-[11rem] md:text-right">
+          <FigureLabel>Headline price</FigureLabel>
+          <p className="text-2xl font-sans font-bold leading-tight" style={ink}>
             {formatGbp(m.headlineGBP)}
           </p>
-          <p className="text-[12px] font-sans text-muted">
-            {m.treatment === "iui" ? "per IUI cycle" : "per IVF cycle (own eggs)"}
+          <p className="text-xs font-sans mt-0.5" style={inkMuted}>
+            {m.treatment === "iui" ? "per IUI cycle" : "per IVF cycle, own eggs"}
           </p>
-        </div>
-      </div>
-
-      <div className="bg-background p-3 border-b border-border">
-        {m.treatment === "iui" ? (
-          <>
-            <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1">IUI</p>
-            <p className="text-sm font-sans text-foreground">{IUI_RATE_LINE}</p>
-          </>
-        ) : surrogacy ? (
-          <>
-            <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1">Donor eggs</p>
-            <p className="text-[13px] font-sans text-muted leading-relaxed">{DONOR_EGG_RATE_NOTE}</p>
-          </>
-        ) : (
-          <>
-            <p className="text-[12px] font-[500] uppercase tracking-[0.1em] text-muted font-sans mb-1">
-              Your age group
-            </p>
-            <p className="font-sans font-medium text-teal text-lg leading-none">
-              {m.rate != null ? `${m.rate}%` : "Not published"}
-            </p>
-            <p className="text-[12px] font-sans text-muted mt-1">
-              {m.rate != null ? rateLine(c) : `no figure for this age group from ${hfea ? "the HFEA register" : "the clinic"}`}
-            </p>
-            <p className="text-[12px] font-sans text-muted mt-1">{hfea ? BADGE_HFEA : BADGE_CLINIC}</p>
-          </>
-        )}
-      </div>
-
-      <div className="p-4">
-        <div className="space-y-1.5 text-[13px] font-sans text-muted leading-relaxed">
-          {x.priceIncludes && <p>Headline price includes {x.priceIncludes}.</p>}
-          {x.publishedAllInEstimateGbp && m.treatment === "ivf" && (
-            <p>
-              Clinic&apos;s own estimate of a typical total: {formatGbp(x.publishedAllInEstimateGbp.low)}–{formatGbp(x.publishedAllInEstimateGbp.high)}
-            </p>
-          )}
           {m.travel && (
-            <p className="flex items-start gap-1.5">
-              <Plane className="h-3.5 w-3.5 shrink-0 mt-px" strokeWidth={1.75} />
-              <span>+ {formatRangeGbp(m.travel)} travel (estimate, {TRAVEL_ASSUMPTIONS.tripsPerCycle.low}–{TRAVEL_ASSUMPTIONS.tripsPerCycle.high} trips)</span>
+            <p className="text-xs font-sans mt-0.5 leading-snug" style={inkMuted}>
+              + {formatRangeGbp(m.travel)} travel (estimate, {trips})
             </p>
           )}
-          {m.travel && <p className="pl-5">{TRAVEL_ESTIMATE_SCOPE}</p>}
-          {m.travel?.destination.note && <p className="pl-5">{m.travel.destination.note}</p>}
-          {x.checkedOn && <p>Checked {x.checkedOn}.</p>}
         </div>
+      </div>
+
+      {notes.length > 0 && (
+        <div
+          className="mt-5 pt-4 space-y-1.5 text-xs font-sans leading-relaxed"
+          style={{ ...inkMuted, borderTop: "1px solid var(--card-rule)" }}
+        >
+          {notes.map((n) => <p key={n}>{n}</p>)}
+        </div>
+      )}
+
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-6 pt-1">
+        <Link
+          href={`/ivf-finder/${c.slug}`}
+          className="clinic-card__control inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-xs font-semibold"
+        >
+          Full details and sources <ArrowRight className="h-3 w-3" aria-hidden />
+        </Link>
         {m.travel && (
-          <p className="flex flex-wrap gap-x-4 gap-y-1 mt-2 pl-5">
+          <>
             <a
               href={googleFlightsUrl(m.travel.destination)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[13px] font-sans font-medium text-muted hover:text-foreground underline underline-offset-4 transition-colors"
+              className="clinic-card__link text-xs font-sans font-medium underline underline-offset-4 transition-colors"
             >
-              Check live flight prices
+              Check flights
             </a>
             <a
               href={staySearchUrl(m.travel.destination)}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[13px] font-sans font-medium text-muted hover:text-foreground underline underline-offset-4 transition-colors"
+              className="clinic-card__link text-xs font-sans font-medium underline underline-offset-4 transition-colors"
             >
-              Check places to stay
+              Places to stay
             </a>
-          </p>
+          </>
         )}
-        <Link
-          href={`/ivf-finder/${c.slug}`}
-          className="inline-flex items-center gap-1.5 text-[13px] font-sans font-medium text-muted hover:text-foreground underline underline-offset-4 transition-colors mt-3"
-        >
-          Full details and sources <ArrowRight className="h-3 w-3" />
-        </Link>
       </div>
     </motion.div>
   );
@@ -667,11 +699,11 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-4 max-w-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 max-w-2xl mx-auto">
         <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans">
           {matches.length} clinic{matches.length !== 1 ? "s" : ""} match
         </p>
-        <label className="flex items-center gap-2 text-[13px] font-sans text-muted">
+        <label className="flex items-center gap-2 text-[13px] font-sans text-muted whitespace-nowrap">
           Sort by
           <select
             value={sort}
@@ -691,15 +723,15 @@ function StepResults({ s, onReset }: { s: WizardState; onReset: () => void }) {
 
       {/* Matches break out of the wizard column into a grid across the page. */}
       {groups.map((g) => (
-        <div key={g.heading ?? "all"} className="mb-6">
+        <div key={g.heading ?? "all"} className="mb-8">
           {g.heading && (
             <p className="text-[13px] font-[500] uppercase tracking-[0.15em] text-muted font-sans mb-3">
               {g.heading}
             </p>
           )}
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {g.items.map((m) => (
-              <ResultCard key={m.clinic.slug} m={m} surrogacy={surrogacy} index={index++} />
+              <ResultCard key={m.clinic.slug} m={m} surrogacy={surrogacy} age={s.age} index={index++} />
             ))}
           </div>
         </div>

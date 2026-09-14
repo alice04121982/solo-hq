@@ -13,7 +13,7 @@ import {
   DEFAULT_RESULT_VARIANT,
   type ClinicCardVariant,
 } from "@/lib/card-style";
-import { RateFigure, VerificationBadge } from "./rate-display";
+import { FigureLabel, RateFigure, VerificationBadge } from "./rate-display";
 
 interface ClinicCardProps {
   clinic: Clinic;
@@ -55,53 +55,60 @@ export function ClinicCard({
         <VerificationBadge verification={clinic.successRates.verification} />
       </div>
 
-      <h3 className="text-base font-bold leading-tight" style={ink}>
+      <h3 className="text-lg font-bold leading-tight" style={ink}>
         {clinic.name}
       </h3>
-      <div className="flex items-center gap-1.5 mt-1 mb-4">
+      <p className="flex items-center gap-1.5 mt-1.5 text-xs" style={inkMuted}>
         <CountryFlag country={clinic.country} />
-        <p className="text-xs truncate" style={inkMuted}>
+        <span className="min-w-0">
           {clinic.city}, {clinic.country}
-        </p>
-      </div>
+        </span>
+      </p>
       {clinic.region !== "UK" && (
-        <p className="text-xs -mt-2 mb-4" style={inkMuted}>
+        <p className="text-xs mt-2 leading-relaxed" style={inkMuted}>
           {eligibilitySummary(clinic.country)}
         </p>
       )}
 
-      <div className="flex items-end justify-between gap-3 mb-4">
-        <RateFigure clinic={clinic} bracket={ageBracket} />
-        <div className="text-right">
-          <p className="text-sm font-bold" style={ink}>
+      {/* Two labelled figures, the same tier as the matcher's result card:
+          stacked on a phone, side by side from md. In the row the rate takes
+          the room and the price column is capped, so a travel line wraps
+          under the price rather than squeezing the rate. */}
+      <div className="flex flex-col gap-5 mt-6 md:flex-row md:items-start md:justify-between">
+        <div className="min-w-0 md:flex-1">
+          <FigureLabel>Your age group</FigureLabel>
+          <RateFigure clinic={clinic} bracket={ageBracket} />
+        </div>
+        <div className="md:shrink-0 md:max-w-[11rem] md:text-right">
+          <FigureLabel>{PRICE_HEADLINE}</FigureLabel>
+          <p className="text-2xl font-bold leading-tight" style={ink}>
             {clinic.pricePerCycleGbp != null
               ? `£${clinic.pricePerCycleGbp.toLocaleString()}`
               : "Not published"}
           </p>
-          <p className="text-xs" style={inkMuted}>
-            {PRICE_HEADLINE.toLowerCase()}, per IVF cycle
+          <p className="text-xs mt-0.5" style={inkMuted}>
+            per IVF cycle
           </p>
           {travel && clinic.pricePerCycleGbp != null && (
-            <p className="text-xs mt-0.5" style={inkMuted}>
+            <p className="text-xs mt-0.5 leading-snug" style={inkMuted}>
               + £{travel.low.toLocaleString()}–£{travel.high.toLocaleString()} travel (estimate, {trips})
-            </p>
-          )}
-          {clinic.iuiPricePerCycleGbp != null && (
-            <p className="text-xs mt-0.5" style={inkMuted}>
-              IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()}
-            </p>
-          )}
-          {clinic.checkedOn && (
-            <p className="text-xs mt-0.5" style={inkMuted}>
-              Checked {formatCheckedDate(clinic.checkedOn)}
             </p>
           )}
         </div>
       </div>
-      {travel && clinic.pricePerCycleGbp != null && (
-        <p className="text-[11px] leading-snug -mt-2 mb-4" style={inkMuted}>
-          {TRAVEL_ESTIMATE_SCOPE}
-        </p>
+
+      {/* Notes: the quiet tier under a warm rule. */}
+      {(clinic.iuiPricePerCycleGbp != null || (travel && clinic.pricePerCycleGbp != null) || clinic.checkedOn) && (
+        <div
+          className="mt-5 pt-4 mb-6 space-y-1.5 text-xs leading-relaxed"
+          style={{ ...inkMuted, borderTop: "1px solid var(--card-rule)" }}
+        >
+          {clinic.iuiPricePerCycleGbp != null && (
+            <p>IUI from £{clinic.iuiPricePerCycleGbp.toLocaleString()} per cycle.</p>
+          )}
+          {travel && clinic.pricePerCycleGbp != null && <p>{TRAVEL_ESTIMATE_SCOPE}</p>}
+          {clinic.checkedOn && <p>Checked {formatCheckedDate(clinic.checkedOn)}.</p>}
+        </div>
       )}
 
       <div className="flex gap-2 mt-auto">
