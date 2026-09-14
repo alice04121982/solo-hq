@@ -259,7 +259,7 @@ const PRIVACY: LegalPage = {
         "Pending and never reviewed: deleted 90 days after applying.",
         "Approved but the invite was never used: deleted 30 days after approval.",
         "Joined: the free text and sector declaration are cleared 90 days after applying. Your first name, email, path and stage are kept while you are a member.",
-        "Removed: everything except your email address and your status is cleared 30 days after removal, so that a removed address cannot re-apply.",
+        "Removed: everything you told us is cleared 30 days after removal. We keep your email address and your status, so that a removed address cannot re-apply, and the dates the site recorded (when you applied, when you accepted the rules, and when the removal happened).",
         "Invites: deleted 30 days after being used, revoked or expiring.",
         "Waitlist emails: until you unsubscribe or ask.",
       ],
