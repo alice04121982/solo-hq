@@ -12,6 +12,14 @@ updates:
       time: "06:30"
       timezone: Europe/London
     open-pull-requests-limit: 5
+    ignore:
+      # eslint-config-next bundles typescript-eslint (TypeScript <6.1 only) and
+      # eslint-plugin-react (ESLint 9 API), so a major bump of either breaks
+      # `npm run lint`. Lift these once eslint-config-next supports them.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
     groups:
       # Next and its ESLint config move together; a mismatch fails the build.
       next:
