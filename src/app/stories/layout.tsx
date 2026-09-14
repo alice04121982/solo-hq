@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-// /stories/page.tsx is a client component (it filters in state), so its
-// metadata lives here.
+// Metadata for /stories. Child routes (/stories/share, /stories/[id]) set
+// their own.
 export const metadata: Metadata = {
   title: "Stories | CairnFertility",
   description:
-    "Illustrative stories of building a family through fertility treatment — solo mums, solo dads, two mums, two dads, and couples — while we collect real, consented accounts.",
+    "We're collecting real accounts from people at every stage of fertility treatment, including people still trying and people whose treatment didn't work. We publish them only with the writer's consent.",
 };
 
 export default function StoriesLayout({

@@ -46,7 +46,7 @@ export default function NewsPage() {
           introWidth="56ch"
           className="mb-8"
         />
-        <ShareButtons title="In the media — CairnFertility" />
+        <ShareButtons title="In the media | CairnFertility" />
       </Section>
 
       {/* Lead item */}

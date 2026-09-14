@@ -10,7 +10,7 @@ import { CLINICS } from "@/lib/clinics";
 export const metadata: Metadata = {
   title: "Compare IVF Clinics, UK and Abroad | CairnFertility",
   description:
-    "Compare IVF clinics in the UK and abroad in one search, ranked by success rate for your age group, with every figure labelled by source and year.",
+    "UK and international clinics in one place. Each figure shows its source, year and what it measures.",
 };
 
 const WHAT_TO_LOOK_FOR = [
@@ -22,7 +22,7 @@ const WHAT_TO_LOOK_FOR = [
   {
     icon: <Scale className="h-4 w-4" />,
     title: "Comparable numbers",
-    desc: "Ask every clinic for live births per embryo transfer for your age group, and for the year it covers. If two clinics quote different measures, the higher number is not the better clinic.",
+    desc: "Ask every clinic for live births per embryo transferred for your age group, the year it covers and how many patients it is based on. If two clinics quote different measures, the higher number is not the better clinic.",
   },
   {
     icon: <PoundSterling className="h-4 w-4" />,
@@ -32,7 +32,7 @@ const WHAT_TO_LOOK_FOR = [
   {
     icon: <Video className="h-4 w-4" />,
     title: "Distance and logistics",
-    desc: "Treatment abroad usually means at least one trip of a week or more. Check what can happen remotely, what must happen in person, and who handles aftercare once you are home.",
+    desc: "Treatment abroad usually means 2–3 trips. Check what can happen remotely, what must happen in person, and who handles aftercare once you are home.",
   },
 ];
 
@@ -47,7 +47,7 @@ export default function IvfFinderPage() {
       </section>
 
       {/* Hero + finder. The band is tall (it holds the whole finder), so the
-          backdrop is the dots treatment — cropped at the band's edges — rather
+          backdrop is the dots treatment, cropped at the band's edges, rather
           than a mid-height mark that would sit behind the results list. */}
       <Section band={0} padding="pt-16 md:pt-20 pb-20 md:pb-28" backdrop={{ shape: "dots" }}>
         <p
@@ -64,8 +64,8 @@ export default function IvfFinderPage() {
           Compare IVF Clinics
         </h1>
         <p className="text-lg font-sans text-muted leading-relaxed mb-10" style={{ maxWidth: "52ch" }}>
-          UK and international clinics in one list, ranked by success rate for your age group.
-          Each figure is labelled with its source, its year and what it was measured against.
+          UK and international clinics in one place. Each figure shows its source, year and what
+          it measures.
         </p>
 
         <Suspense>

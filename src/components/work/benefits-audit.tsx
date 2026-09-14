@@ -8,15 +8,7 @@ import type { AuditStep } from "@/lib/work";
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
-type Market = "uk" | "ireland" | "europe" | "usa";
 type Situation = "solo" | "same-sex" | "couple" | "unsaid";
-
-const MARKETS: { value: Market; label: string }[] = [
-  { value: "uk", label: "United Kingdom" },
-  { value: "ireland", label: "Ireland" },
-  { value: "europe", label: "Elsewhere in Europe" },
-  { value: "usa", label: "United States" },
-];
 
 const SITUATIONS: { value: Situation; label: string }[] = [
   { value: "solo", label: "On my own" },
@@ -27,24 +19,23 @@ const SITUATIONS: { value: Situation; label: string }[] = [
 
 /**
  * The email is the point of this component. Everyone knows they should "ask
- * HR"; almost nobody knows which six questions separate a benefit that will
- * pay for treatment from one that will not — and asking them in writing is
- * what makes the answers usable later.
+ * HR"; almost nobody knows which questions separate a benefit that will pay
+ * for treatment from one that will not, and asking them in writing is what
+ * makes the answers usable later.
  *
- * It never states that the reader is in treatment, whatever they select.
+ * UK only. The same questions go to HR or, with a different opening, to a
+ * recruiter at offer stage. Questions are numbered as they are added, so the
+ * list never skips a number. It never states that the reader is in treatment,
+ * whatever they select.
  */
-function buildEmail(market: Market, situation: Situation): string {
-  const lines: string[] = [
-    "Hello,",
-    "",
-    "I'm going through our benefits package properly and wanted to ask about fertility and family-forming support. Could you point me to the written policy, and confirm the following?",
-    "",
-    "1. What support is available — a contribution, a fund, treatment cover, paid leave, or access to a support platform?",
-    "2. Is anything included via the private medical scheme separately from the standard benefits list?",
-    "3. What is inside the benefit: are medication, donor sperm or eggs, storage and frozen transfers covered, or charged separately?",
-    "4. Does treatment have to be at a partner clinic?",
-    "5. Is there a qualifying period, or is the benefit available immediately?",
-    "6. What happens to the benefit if I leave part-way through a course of treatment?",
+function buildEmail(situation: Situation, applying: boolean): string {
+  const questions: string[] = [
+    "What support is available: a contribution, a fund, treatment cover, paid leave, or access to a support platform?",
+    "Is anything included via the private medical scheme separately from the standard benefits list?",
+    "What is inside the benefit: are medication, donor sperm or eggs, storage and frozen transfers covered, or charged separately?",
+    "Does treatment have to be at a partner clinic?",
+    "Is there a qualifying period, or is the benefit available immediately?",
+    "What happens to the benefit if I leave part-way through a course of treatment?",
   ];
 
   if (situation !== "unsaid") {
@@ -53,37 +44,41 @@ function buildEmail(market: Market, situation: Situation): string {
         ? "someone building a family on their own"
         : situation === "same-sex"
           ? "same-sex couples"
-          : "couples using donor gametes";
-    lines.push(`7. Is the eligibility wording written around family building rather than an infertility diagnosis — in other words, does it cover ${who}?`);
-  }
-
-  if (market === "usa") {
-    lines.push(
-      "8. Is our health plan fully insured or self-funded?",
-      "9. What definition of infertility does the plan document use for fertility benefit eligibility?",
+          : "couples using donor sperm or eggs";
+    questions.push(
+      `Is the eligibility wording written around family building rather than an infertility diagnosis? In other words, does it cover ${who}?`,
     );
   }
 
-  if (market === "uk" || market === "ireland") {
-    lines.push(
-      `${situation !== "unsaid" ? "8" : "7"}. Is treatment-related absence recorded separately from ordinary sickness absence, and is time off for appointments paid?`,
-    );
-  }
-
-  if (market === "europe") {
-    lines.push(
-      `${situation !== "unsaid" ? "8" : "7"}. If we are part of an international group, does the group fertility policy apply to employees in this country?`,
-    );
-  }
-
-  lines.push(
-    "",
-    "A copy of the policy document itself would be ideal, rather than the intranet summary.",
-    "",
-    "Thanks very much.",
+  questions.push(
+    "Is treatment-related absence recorded separately from ordinary sickness absence, and is time off for appointments paid?",
   );
 
-  return lines.join("\n");
+  const opening = applying
+    ? [
+        "Hello [Name],",
+        "",
+        "Before I confirm, could you send me the benefits documentation, including anything on fertility and family forming, and confirm the following?",
+      ]
+    : [
+        "Hello,",
+        "",
+        "I'm going through our benefits package properly and wanted to ask about fertility and family-forming support. Could you point me to the written policy, and confirm the following?",
+      ];
+
+  const closing = applying
+    ? "The policy document itself would be ideal, rather than a summary."
+    : "A copy of the policy document itself would be ideal, rather than the intranet summary.";
+
+  return [
+    ...opening,
+    "",
+    ...questions.map((q, i) => `${i + 1}. ${q}`),
+    "",
+    closing,
+    "",
+    "Thanks very much.",
+  ].join("\n");
 }
 
 function Chip({
@@ -113,28 +108,14 @@ function Chip({
 }
 
 export function BenefitsAudit({ steps }: { steps: AuditStep[] }) {
-  const [market, setMarket] = useState<Market>("uk");
   const [situation, setSituation] = useState<Situation>("unsaid");
+  const [applying, setApplying] = useState(false);
 
-  const shown = steps.filter((s) => !s.usOnly || market === "usa");
-  const email = buildEmail(market, situation);
+  const email = buildEmail(situation, applying);
 
   return (
     <div className="rounded-2xl border p-6 md:p-10" style={{ borderColor: "var(--border)" }}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <p className="font-sans font-bold text-base mb-3" style={{ color: TEAL }}>
-            Where do you work?
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {MARKETS.map((m) => (
-              <Chip key={m.value} selected={market === m.value} onClick={() => setMarket(m.value)}>
-                {m.label}
-              </Chip>
-            ))}
-          </div>
-        </div>
-
         <div>
           <p className="font-sans font-bold text-base mb-1" style={{ color: TEAL }}>
             Who are you building a family as?
@@ -150,6 +131,24 @@ export function BenefitsAudit({ steps }: { steps: AuditStep[] }) {
             ))}
           </div>
         </div>
+
+        <div>
+          <p className="font-sans font-bold text-base mb-1" style={{ color: TEAL }}>
+            Applying for a job?
+          </p>
+          <p className="text-[13px] font-sans text-muted mb-3">
+            Swaps the opening line for one you can send a recruiter before you sign. Asking about a
+            benefit is not a declaration that you will use it.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Chip selected={!applying} onClick={() => setApplying(false)}>
+              No, asking HR
+            </Chip>
+            <Chip selected={applying} onClick={() => setApplying(true)}>
+              Yes, asking a recruiter
+            </Chip>
+          </div>
+        </div>
       </div>
 
       {/* The checklist */}
@@ -158,7 +157,7 @@ export function BenefitsAudit({ steps }: { steps: AuditStep[] }) {
           Work through these in order
         </p>
         <ol className="space-y-5">
-          {shown.map((s, i) => (
+          {steps.map((s, i) => (
             <li key={s.title} className="flex items-start gap-4">
               <span className="text-[12px] font-[700] font-sans mt-1 shrink-0" style={{ color: TEAL_SOFT }}>
                 {String(i + 1).padStart(2, "0")}
@@ -184,7 +183,7 @@ export function BenefitsAudit({ steps }: { steps: AuditStep[] }) {
             style={{ color: TEAL_SOFT }}
           >
             <Mail className="h-3.5 w-3.5" />
-            Email to send HR
+            {applying ? "Email to send the recruiter" : "Email to send HR"}
           </p>
           <CopyButton text={email} />
         </div>
@@ -198,7 +197,7 @@ export function BenefitsAudit({ steps }: { steps: AuditStep[] }) {
 
       <p className="text-[13px] font-sans leading-relaxed text-muted mt-5" style={{ maxWidth: "70ch" }}>
         The email says nothing about your own plans, and asking about a benefit is not the same as
-        invoking it. Send it from your work address like any other benefits question.
+        invoking it. Send it like any other benefits question.
       </p>
     </div>
   );

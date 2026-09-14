@@ -1,24 +1,17 @@
 /**
- * Content for /funding — how people actually pay for fertility treatment in
- * the UK, and what is free on the NHS.
+ * Content for /funding: how people pay for fertility treatment in the UK, and
+ * what is free on the NHS.
  *
- * Editorial rules for anything added to this file. Money copy goes wrong in a
- * different way to the rest of the site: a reader acts on it, signs something,
- * and finds out twelve months later that the sentence was optimistic.
- *
- *  1. Name the number, then name what the number excludes. Every price on this
- *     page is a range with its exclusions attached, because the exclusions are
- *     what the reader gets caught by.
- *  2. Say who carries the risk. Every funding route moves the risk of a failed
- *     cycle somewhere — onto the patient, the clinic, a lender or an insurer.
- *     That is the thing being bought, so it is stated on every card.
- *  3. Eligibility is local. NICE recommends; the NHS body where you live
- *     decides. Never state a national rule that is actually an ICB policy.
- *  4. No affiliate relationships, ever. Companies are listed because a reader
- *     needs to know they exist, not because they pay to be here, and every
- *     listing carries its watch-outs.
- *  5. Where the honest answer is "this depends on a policy we cannot see from
- *     here", say that rather than rounding it up to a confident sentence.
+ * Rules for this file:
+ *  1. Name the number, then what it excludes. Every price is a range with its
+ *     exclusions attached.
+ *  2. Say who carries the risk of a failed cycle on every route card.
+ *  3. Eligibility is local. Never state a national rule that is an ICB policy.
+ *  4. No affiliate relationships. Every listing carries its watch-outs.
+ *  5. Where the answer depends on a policy we cannot read, say so.
+ *  6. UK only. The four nations are covered; nothing else is.
+ *  7. Each recurring fact has one home. Anything the eligibility checker also
+ *     needs lives in SHARED_LINES and is imported, not retyped.
  */
 
 export interface SourceLink {
@@ -27,22 +20,53 @@ export interface SourceLink {
 }
 
 /** When the funding facts on the page were last checked against sources. */
-export const LAST_REVIEWED = "August 2026";
+export const LAST_REVIEWED = "13 September 2026";
 
 /**
- * Money anchors the funding routes are measured against. Kept here rather
- * than in page JSX so the periodic data re-verification covers them.
- * The NHS-funded share is England-specific, from the HFEA's "Fertility
- * treatment 2024: trends and figures" (published June 2026):
- * https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures/
- * (UK-wide the 2024 share was 28%, down from 35% in 2019.)
+ * Lines used in more than one place (page and checker). Edit here only.
+ * Sources, all read 13 September 2026:
+ * - Family-type funding split: HFEA "Family formations in fertility treatment
+ *   2022" (26 Nov 2024), patients aged 18 to 39. The 2024 trends report has no
+ *   family-type breakdown, so 2022 is the latest.
+ * - Wales private arrangements: Senedd Research IVF access article (Dec 2024).
+ * - Surrogacy: TFP Fertility LGBTQ+ funding FAQ; BLMK ICB surrogacy policy
+ *   v1.1 ("Not Normally Funded"); NHS Lothian Edinburgh Fertility Centre page.
+ * - Scotland single patients: gov.scot access criteria review (28 Aug 2026).
+ */
+export const SHARED_LINES = {
+  nhsFundedByFamilyType:
+    "In 2022, 18% of single patients and 16% of female same-sex couples aged 18 to 39 had NHS funding for their first IVF cycle, against 52% of opposite-sex couples in the same age group (HFEA, Family Formations 2022).",
+  ageAtTreatment: "Most policies apply the age limit when treatment starts, not when you are referred.",
+  partnersChild:
+    "In most English policies a partner's child counts, including adopted children. Scotland only requires one partner to have no living biological child; Wales, that you have no children together or one of you has none.",
+  diRequirement:
+    "Solo parents and female same-sex couples are usually asked for six or more donor insemination cycles at a licensed clinic before IVF funding is considered. Outside Scotland you usually pay for those cycles, and for the donor sperm, yourself.",
+  homeInsemination:
+    "Most English policies only count cycles at a licensed clinic. Wales can accept private arrangements. Separately, insemination outside a licensed clinic can affect who is the child's legal parent, so get advice first.",
+  surrogacy:
+    "Surrogacy, and the IVF and egg donation it needs, is not NHS-funded in England, Wales or Northern Ireland. In Scotland, NHS Lothian's Edinburgh Fertility Centre offers an NHS surrogacy service to male couples; ask your health board what applies to you.",
+  scotlandSingle:
+    "Single patients are not currently eligible for NHS-funded treatment in Scotland. A national review of the access criteria is due to report by early summer 2027.",
+} as const;
+
+/**
+ * Money anchors, kept here so the periodic data re-verification covers them.
+ * Prices: the site's reference price set (price lists read September 2026,
+ * method on /about#methodology): CREATE £3,795 (excludes drugs, bloods,
+ * sedation, HFEA fee); Bourn Hall £4,495 (drugs extra); LWC £3,995 and its
+ * own typical total of £9,140–£10,640. HFEA average from its IVF page.
+ * NHS share (England) from HFEA "Fertility treatment 2024: trends and
+ * figures" (June 2026); UK-wide 28% in 2024, down from 35% in 2019.
  */
 export const COST_ANCHORS: { value: string; label: string }[] = [
-  { value: "£5,000–£7,000", label: "Advertised price of a private IVF cycle, before drugs, ICSI, freezing and storage" },
-  { value: "£1,000–£2,500", label: "Drugs for a stimulated cycle — almost always charged on top of the headline price" },
-  { value: "£8,000–£14,000", label: "Realistic all-in cost of one cycle using donor sperm, once everything is counted" },
+  { value: "£3,795–£4,495", label: "Headline price per IVF cycle, own eggs, at CREATE, LWC and Bourn Hall. Drugs are extra at all three, and what else is included differs" },
+  { value: "About £5,000", label: "The HFEA's average for one cycle of IVF, which it says varies considerably" },
+  { value: "£9,140–£10,640", label: "Clinic's own estimate of a typical total: LWC's published figure for one IVF cycle once drugs and extras are counted" },
   { value: "25%", label: "Share of IVF cycles in England that were NHS-funded in 2024, down from 32% in 2019 (HFEA)" },
 ];
+
+/** Shown under the cost anchors, followed by a link to /about#methodology. */
+export const COST_ANCHORS_SOURCE = "Based on published price lists checked September 2026";
 
 /* ── The order of operations ─────────────────────────────────────────────── */
 
@@ -51,18 +75,15 @@ export interface FundingStep {
   body: string;
 }
 
-/**
- * The sequence matters more than any individual route: money spent in step 4
- * cannot be un-spent when step 1 turns out to have been available.
- */
+/** The sequence matters more than any individual route. */
 export const ORDER_OF_OPERATIONS: FundingStep[] = [
   {
     title: "See what you can access on the NHS first",
-    body: "Even where funded treatment is unlikely, a lot is often available for free: blood tests, an AMH level, scans, semen analysis where relevant, and a referral to a specialist. Those results also change which private route makes sense, so starting with a GP appointment can save you paying for the same tests at a clinic.",
+    body: "Even where funded treatment is unlikely, investigations are often free, and their results change which private route makes sense. Start with a GP appointment.",
   },
   {
     title: "Check whether someone else already pays",
-    body: "Employer fertility benefits are the most under-claimed money in this whole list. Grants, hardship funds and corporate health schemes sit here too. None of them require you to borrow anything.",
+    body: "Employer schemes are easy to miss: search your benefits portal before paying for anything. Grants, hardship funds and corporate health schemes sit here too. None of them require you to borrow anything.",
   },
   {
     title: "Reduce the price of the treatment itself",
@@ -73,8 +94,8 @@ export const ORDER_OF_OPERATIONS: FundingStep[] = [
     body: "Multi-cycle packages, refund programmes and insurance-backed plans cost more up front and pay off only if treatment fails or takes several rounds. That is a judgement about your odds, and your clinic's own estimate of them is the input.",
   },
   {
-    title: "Only then borrow, and only for the cycle in front of you",
-    body: "0% clinic plans, fertility loans and credit are the last step, not the first. Borrow for one cycle at a time so that stopping — for any reason — does not leave you paying for treatment you never had.",
+    title: "Only then borrow",
+    body: "0% clinic plans, fertility loans and credit are the last step, not the first.",
   },
 ];
 
@@ -87,37 +108,35 @@ export interface NationPolicy {
   cycles: string;
   /** HFEA's measure of how much treatment is actually NHS-funded there. */
   nhsFundedShare: string;
-  /** How the nation treats solo parents and female same-sex couples. */
+  /** Who the donor route covers, and on what terms. */
   donorRoute: string;
   criteria: string[];
   sources: SourceLink[];
 }
 
-/**
- * Four nations, four answers. England is the outlier: it has no national
- * policy at all, only 36 local ones (42 before the April 2026 ICB mergers).
- */
+/** England has no national policy, only 36 local ones (42 before April 2026). */
 export const NATION_POLICIES: NationPolicy[] = [
   {
     slug: "england",
     name: "England",
     cycles:
-      "Set locally by your Integrated Care Board, not nationally. Most ICBs fund one full cycle; a minority fund the three NICE recommends, and a few fund none.",
+      "Set locally by your Integrated Care Board, not nationally. Most English boards fund one cycle, some fund two, and very few fund the three NICE recommends (two of 42 in October 2025). Boards merged in April 2026, so policies may change.",
     nhsFundedShare:
-      "25% of IVF cycles in England were NHS-funded in 2024, down from 32% in 2019 — and it ranged from 51% in the North East to 20% in the South West and East Midlands.",
-    donorRoute:
-      "Most ICBs ask for evidence of six or more cycles of donor insemination at a licensed clinic before IVF funding is considered, and most do not pay for those insemination cycles or for the donor sperm. That requirement is what excludes the majority of solo parents and two-mum families in England, rather than any explicit ban.",
+      "25% of IVF cycles in England were NHS-funded in 2024, down from 32% in 2019, and it ranged from 51% in the North East to 20% in the South West and East Midlands.",
+    donorRoute: `Most ICBs ask for evidence of six or more cycles of donor insemination at a licensed clinic before IVF funding is considered, and most do not pay for those cycles or for the donor sperm. ${SHARED_LINES.nhsFundedByFamilyType}`,
     criteria: [
-      "Age at the point treatment starts, not at referral — commonly under 40, with a narrower band in some areas",
+      "Age at the point treatment starts, not at referral (commonly under 40, with a narrower band in some areas)",
       "BMI within a stated range, usually 19–30",
       "Both partners non-smoking, often for at least three months, with vaping treated the same way in some policies",
-      "No living children — in most policies this includes a partner's children and adopted children",
+      "No living children (in most policies this includes a partner's children and adopted children)",
       "Neither partner sterilised, and no previous NHS-funded IVF",
       "Resident in the ICB's area, sometimes with a minimum period of registration with a local GP",
     ],
     sources: [
-      { label: "HFEA — fertility treatment 2024 trends and figures", href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures" },
-      { label: "Fertility Network UK — NHS funding by area", href: "https://fertilitynetworkuk.org/access-support/nhs-funding/" },
+      { label: "HFEA: fertility treatment 2024 trends and figures", href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/fertility-treatment-2024-trends-and-figures" },
+      { label: "HFEA: family formations in fertility treatment 2022", href: "https://www.hfea.gov.uk/about-us/publications/research-and-data/family-formations-in-fertility-treatment-2022/" },
+      { label: "BFS and Fertility Alliance: Ending IVF inequity (October 2025)", href: "https://www.britishfertilitysociety.org.uk/wp-content/uploads/2025/10/Business-case-for-IVF-three-rounds-FA-BFS-final.pdf" },
+      { label: "PET: NHS fertility funding tracker", href: "https://www.progress.org.uk/fertility-policy-tracker/" },
     ],
   },
   {
@@ -125,17 +144,19 @@ export const NATION_POLICIES: NationPolicy[] = [
     name: "Scotland",
     cycles:
       "Up to three full cycles for those who meet the criteria, under a single national access policy rather than local ones.",
-    nhsFundedShare: "54% of IVF cycles in Scotland were NHS-funded in 2024 — the highest in the UK.",
-    donorRoute:
-      "The most inclusive route in the UK: NHS Scotland funds donor insemination for female same-sex couples and single women, commonly up to six cycles, before moving to one to three IVF cycles if the access criteria are met.",
+    nhsFundedShare: "54% of IVF cycles in Scotland were NHS-funded in 2024, the highest in the UK.",
+    donorRoute: `NHS Scotland funds donor insemination and then IVF for female couples who have lived together for at least two years. The national criteria refer to six to eight insemination cycles; check the number with your health board. ${SHARED_LINES.scotlandSingle}`,
     criteria: [
       "National criteria applied by every health board, so the postcode lottery within Scotland is far smaller",
       "Age, BMI and non-smoking requirements still apply, and the age band is assessed at treatment",
-      "No living children in the relationship, on the same terms as elsewhere",
+      "At least one partner has no living biological child",
+      "Couples must have lived together for at least two years",
+      "One cycle at 40–42 if you have never had IVF and there is no evidence of poor ovarian reserve",
       "Waiting times vary by board even though the criteria do not",
     ],
     sources: [
-      { label: "NHS Inform — fertility treatment in Scotland", href: "https://www.nhsinform.scot/tests-and-treatments/medical-procedures/fertility-treatment/" },
+      { label: "Scottish Government: NHS IVF access criteria review", href: "https://www.gov.scot/news/nhs-ivf-access-criteria-review/" },
+      { label: "NHS Scotland: access criteria for NHS IVF treatment (PDF)", href: "https://www.fertility.nhs.scot/wp-content/uploads/2025/02/Access-Criteria-NHS-IVF-Treatment-Scotland.pdf" },
     ],
   },
   {
@@ -144,86 +165,76 @@ export const NATION_POLICIES: NationPolicy[] = [
     cycles: "Two full cycles for those who meet the criteria, under national access criteria.",
     nhsFundedShare: "35% of IVF cycles in Wales were NHS-funded in 2024.",
     donorRoute:
-      "Wales funds treatment for single women as well as couples, and female same-sex couples are generally expected to complete donor insemination cycles before IVF funding.",
+      "Wales funds treatment for single women as well as couples. Single women and female same-sex couples are expected to complete six non-stimulated donor insemination cycles first, which can be through a private arrangement or NHS-provided IUI with donor sperm.",
     criteria: [
-      "At least one partner child-free",
+      "No living children together, or one partner with no living children (biological or adopted)",
       "BMI 19–30 and non-smoking",
+      "One cycle at 40–42 if you have never had IVF and there is no evidence of low ovarian reserve",
       "National criteria, so eligibility does not change between health boards",
     ],
     sources: [
-      { label: "NHS 111 Wales — fertility services", href: "https://111.wales.nhs.uk/fertility/" },
+      { label: "Senedd Research: access to IVF treatment in Wales", href: "https://research.senedd.wales/research-articles/what-s-the-latest-on-access-to-ivf-treatment-in-wales/" },
     ],
   },
   {
     slug: "northern-ireland",
     name: "Northern Ireland",
-    cycles: "One full cycle for eligible women under 40.",
+    cycles: "One full cycle.",
     nhsFundedShare: "50% of IVF cycles in Northern Ireland were NHS-funded in 2024.",
     donorRoute:
       "Single women and female same-sex couples are generally expected to have completed donor insemination cycles first, and donor gametes are not usually funded.",
     criteria: [
-      "Both partners with a BMI of 19–30",
-      "Neither partner sterilised",
-      "Non-smoking, and no living children",
+      "Under 40, or 40–42 if you have never had IVF and there is no evidence of low ovarian reserve",
+      "BMI of 19–30 for the woman having treatment",
+      "Neither partner sterilised, and neither has had three or more IVF cycles, NHS or private",
+      "The published criteria do not include a rule on existing children; check your local criteria",
     ],
     sources: [
-      { label: "nidirect — fertility treatment", href: "https://www.nidirect.gov.uk/articles/fertility-treatment" },
+      { label: "Belfast Trust: eligibility for publicly funded treatment", href: "https://belfasttrust.hscni.net/services/rfc/first-steps/nhs-funded-treatment/" },
     ],
   },
 ];
 
 /**
- * What NICE actually says, kept separate from what gets commissioned, because
- * conflating the two is the single most common error in fertility funding copy.
+ * What NICE says, kept separate from what gets commissioned. HFEA sentence
+ * from "HFEA response to new NICE fertility guidelines" (2026).
  */
 export const NICE_POSITION: { heading: string; body: string }[] = [
   {
     heading: "The guideline was rewritten in 2026",
-    body: "NG257 replaced the 2013 guideline (CG156) that had governed NHS fertility care for over a decade. It moves the NHS towards individualised, diagnosis-led pathways and widens who can access NHS fertility preservation, including some people with conditions such as severe endometriosis.",
+    body: "NG257 replaced the 2013 guideline (CG156) on 31 March 2026 and moves the NHS towards diagnosis-led pathways, including a new endometriosis pathway. The HFEA welcomed the update but urged NHS commissioners to review rules that leave single people and same-sex couples far less likely to get funding. LGBTQ+ campaigners and researchers said the guideline did too little for them. NICE has no power to make anyone fund anything: in England, commissioning sits with the 36 Integrated Care Boards.",
   },
   {
-    heading: "Three cycles, and possibly three more",
-    body: "For people under 40, NICE recommends an initial three full cycles of IVF, and — new in 2026 — that clinicians consider up to three further full cycles if the first three have not worked and the person is still under 40. For those aged 40 or 41 with no previous IVF, one full cycle is recommended. It is not recommended from 42 on cost-effectiveness grounds.",
+    heading: "Three cycles, and what a cycle means",
+    body: "For people under 40, NICE recommends three full cycles of IVF, and that clinicians consider up to three more if those have not worked and the person is still under 40. At 40 or 41 with no previous IVF, one full cycle. It is not recommended from 42 on cost-effectiveness grounds. A full cycle is one round of ovarian stimulation and the transfer of every resulting fresh and frozen embryo, so a local policy that funds one stimulation and a single fresh transfer is funding less than NICE means by the word.",
   },
   {
-    heading: "A 'full cycle' is more than one transfer",
-    body: "NICE defines a full cycle as one round of ovarian stimulation and the transfer of any resulting fresh and frozen embryos. A local policy that funds one stimulation and a single fresh transfer is funding less than NICE means by the word 'cycle' — worth checking, because it changes the value of the offer considerably.",
-  },
-  {
-    heading: "Donor insemination before IVF",
-    body: "For people using donor sperm, NG257 recommends six cycles of unstimulated IUI before considering IVF, and twelve cycles for people who cannot have vaginal intercourse because of a diagnosed physical disability or psychosexual problem. It recommends these be done at a licensed clinic, for clinical safety and for legal parenthood.",
-  },
-  {
-    heading: "What the guideline still does not settle",
-    body: "The update was criticised by the HFEA and by patient groups for leaving access and funding for single people and same-sex couples largely unaddressed, despite the sharp rise in treatment among those groups. NICE also has no power to make anyone fund anything: in England, commissioning sits with the Integrated Care Boards (36 since the April 2026 mergers), which is why the guideline and the offer on the ground can differ so widely.",
+    heading: "Donor insemination before IVF, and what it does not settle",
+    body: "For people using donor sperm, NG257 recommends six cycles of unstimulated insemination at a licensed clinic before IVF is considered. It does not say who pays for those cycles or for the sperm, and in most of England the patient does.",
   },
 ];
 
-/** How to actually get to a funding decision, in order. */
+/** How to get to a funding decision, in order. */
 export const NHS_APPLICATION_STEPS: FundingStep[] = [
   {
     title: "Find the exact policy that governs you",
-    body: "In England, search for your Integrated Care Board by postcode and then for its assisted conception or fertility policy — the published PDF, not a summary. In Scotland, Wales and Northern Ireland there are national criteria. Read the version in force, note its review date, and keep a copy.",
+    body: "In England, search for your Integrated Care Board by postcode and then for its assisted conception or fertility policy (the published PDF, not a summary). In Scotland, Wales and Northern Ireland there are national criteria. Read the version in force, note its review date, and keep a copy.",
   },
   {
     title: "See your GP and be specific",
-    body: "Ask for fertility investigations and a referral to an NHS fertility service. Say plainly which criteria you meet. GPs are not expected to know their ICB's fertility policy in detail, and arriving with the relevant page of it is entirely reasonable.",
+    body: "Ask for fertility investigations and a referral to an NHS fertility service. Say plainly which criteria you meet. GPs are not expected to know their ICB's fertility policy in detail, so bring the relevant page of it.",
   },
   {
     title: "Get the investigations done",
-    body: "Blood tests, AMH, an assessment of the fallopian tubes, and semen analysis where there is a male partner. These are usually NHS-funded even where treatment is not, and a diagnosis is what determines whether IUI, IVF or something else is the sensible route.",
+    body: "Blood tests, an AMH level, scans, an assessment of the fallopian tubes, and semen analysis where relevant. These are usually NHS-funded even in areas that fund no treatment, and the diagnosis determines whether IUI, IVF or something else is the route.",
   },
   {
     title: "Document every self-funded cycle",
-    body: "If your area requires donor insemination cycles first, keep the clinic's written record of each one. Cycles at a licensed UK clinic count; home insemination and unlicensed arrangements almost never do, and they carry legal-parenthood consequences as well.",
-  },
-  {
-    title: "Watch the age clock, not the referral date",
-    body: "Most policies apply the age limit at the point treatment starts. Waiting lists and the insemination requirement can quietly consume the years between the two, so work backwards from the age limit when deciding what to do first.",
+    body: `If your area requires donor insemination cycles first, keep the clinic's written record of each one. ${SHARED_LINES.homeInsemination}`,
   },
   {
     title: "If you are refused, ask for it in writing",
-    body: "Ask which specific criterion you failed and request the decision in writing. Where there is a genuinely unusual clinical reason, there is an Individual Funding Request route — a high bar, but a real one. Policies are also reviewed periodically, so a refusal is not always permanent.",
+    body: "Ask which specific criterion you failed and request the decision in writing. Where there is a genuinely unusual clinical reason, there is an Individual Funding Request route: a high bar, but a real one. Policies are also reviewed periodically, so a refusal is not always permanent.",
   },
 ];
 
@@ -231,23 +242,19 @@ export const NHS_APPLICATION_STEPS: FundingStep[] = [
 export const NHS_PITFALLS: { title: string; body: string }[] = [
   {
     title: "A partner's child counts",
-    body: "Most policies require that neither partner has a living child, including children from previous relationships, children who live elsewhere, and adopted children.",
+    body: SHARED_LINES.partnersChild,
   },
   {
     title: "Donor sperm is usually not funded",
-    body: "Even where IVF itself is funded, many policies exclude the cost of donor gametes and their storage — which for solo parents and two-mum families can be several thousand pounds of the bill left uncovered.",
+    body: "Even where IVF itself is funded, many policies exclude the cost of donor gametes and their storage, which for solo parents and two-mum families can be several thousand pounds of the bill left uncovered.",
   },
   {
     title: "Previous private cycles can count against you",
     body: "Some policies reduce or withdraw funding if you have already self-funded IVF. Check before paying for a private cycle, because the order in which you do things can be worth a funded cycle.",
   },
   {
-    title: "BMI and smoking are checked at treatment",
-    body: "Meeting the threshold at referral is not enough; it is generally reassessed before treatment starts. Some policies specify a minimum period of not smoking, and treat vaping the same way.",
-  },
-  {
-    title: "The insemination requirement is expensive",
-    body: "Six cycles of donor insemination at a licensed clinic, with sperm, typically runs to several thousand pounds — and in most of England it is a precondition of funding rather than something the NHS pays for.",
+    title: "Age, BMI and smoking are checked at treatment",
+    body: `${SHARED_LINES.ageAtTreatment} Waiting lists and any insemination requirement use up the years in between, so work backwards from the age limit. BMI and smoking are reassessed before treatment starts too; some policies set a minimum smoke-free period and treat vaping the same way.`,
   },
   {
     title: "Storage and add-ons sit outside the funding",
@@ -259,12 +266,15 @@ export const NHS_PITFALLS: { title: string; body: string }[] = [
 
 export type RouteGroup = "nhs" | "reduce" | "third-party" | "share" | "spread";
 
+/** One line, shown in the explorer under the credit and risk-sharing groups. */
+export const NOT_FINANCIAL_ADVICE = "This is general information, not financial advice. MoneyHelper offers free, impartial help.";
+
 export const ROUTE_GROUPS: { id: RouteGroup; label: string; blurb: string }[] = [
   { id: "nhs", label: "NHS-funded", blurb: "Treatment the state pays for, where you qualify." },
   { id: "reduce", label: "Reduce the price", blurb: "Ways to make the treatment itself cost less." },
   { id: "third-party", label: "Someone else pays", blurb: "Employers, insurers and charitable funds." },
-  { id: "share", label: "Share the risk", blurb: "Packages and plans that pay out if it does not work." },
-  { id: "spread", label: "Spread the cost", blurb: "Credit: cheapest last, and only for the cycle in front of you." },
+  { id: "share", label: "Share the risk", blurb: `Packages and plans that pay out if it does not work. ${NOT_FINANCIAL_ADVICE}` },
+  { id: "spread", label: "Spread the cost", blurb: `Credit, as the last step. ${NOT_FINANCIAL_ADVICE}` },
 ];
 
 export interface FundingRoute {
@@ -273,19 +283,20 @@ export interface FundingRoute {
   group: RouteGroup;
   /** One line, shown collapsed. */
   summary: string;
-  /**
-   * Which market the named providers operate in. The routes themselves are
-   * mostly universal; the companies are not, and a reader in Sydney should be
-   * told which is which rather than left to find out.
-   */
-  where?: string;
   /** Ballpark figures, with exclusions attached. */
   typicalCost: string;
   /** Who is out of pocket if the treatment does not work. */
   riskHolder: string;
   howItWorks: string[];
+  /**
+   * For nhs, reduce and third-party routes: who it suits. For share and spread
+   * routes the explorer titles this column "Might be worth looking at if", so
+   * write those entries as conditions.
+   */
   suits: string[];
   watchOuts: string[];
+  /** An internal page that covers the route in full. */
+  more?: { label: string; href: string };
   sources?: SourceLink[];
 }
 
@@ -296,56 +307,51 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "NHS-funded IVF, IUI and donor insemination",
     group: "nhs",
     summary:
-      "Free at the point of use where you meet the criteria — which depend on where you live far more than on your diagnosis.",
-    where: "UK. Most countries fund something; see the international section for what.",
+      "Free at the point of use where you meet the criteria, which depend on where you live far more than on your diagnosis.",
     typicalCost:
       "Free, apart from prescription charges in England and any element your policy excludes, commonly donor sperm and storage.",
-    riskHolder: "The NHS. A funded cycle that fails costs you nothing but the year.",
+    riskHolder: "The NHS pays. A failed cycle still costs you time, but not money.",
     howItWorks: [
       "Your GP refers you into an NHS fertility service after investigations. The funding decision is made against the written policy of the NHS body where you live.",
       "NICE guideline NG257 recommends up to three full cycles under 40 and one at 40–41, but in England each Integrated Care Board decides what it commissions.",
       "Scotland funds up to three cycles under national criteria, Wales two, Northern Ireland one.",
     ],
     suits: [
-      "Everyone, as the first thing to check, regardless of how unlikely you have been told it is",
+      "Everyone, as the first thing to check",
       "People in Scotland and Wales, where the criteria are national and more predictable",
       "Anyone under 40 who has not yet self-funded a cycle",
     ],
     watchOuts: [
-      "In England the criteria are local: age bands, BMI, smoking, existing children — including a partner's — and residency all vary by ICB.",
-      "Solo parents and female same-sex couples are usually required to complete six or more self-funded donor insemination cycles at a licensed clinic first.",
-      "Age limits are applied when treatment starts, not when you are referred.",
+      "In England the criteria are local: age bands, BMI, smoking, existing children (including a partner's) and residency all vary by ICB.",
+      SHARED_LINES.diRequirement,
+      SHARED_LINES.surrogacy,
     ],
     sources: [
-      { label: "NICE NG257 — fertility problems: assessment and treatment", href: "https://www.nice.org.uk/guidance/ng257" },
-      { label: "HFEA — costs and funding", href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/costs-and-funding/" },
+      { label: "NICE NG257 (fertility problems: assessment and treatment)", href: "https://www.nice.org.uk/guidance/ng257" },
+      { label: "HFEA: costs and funding", href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/costs-and-funding/" },
     ],
   },
   {
     slug: "nhs-fertility-preservation",
     name: "NHS fertility preservation",
     group: "nhs",
-    summary:
-      "Egg, sperm and embryo freezing funded on medical grounds — a wider group since the 2026 guideline than most people assume.",
-    where: "UK. Medical fertility preservation is publicly funded in most systems that fund anything.",
+    summary: "Egg, sperm and embryo freezing funded on medical grounds.",
     typicalCost: "Free where funded, though storage beyond the funded period is usually charged.",
     riskHolder: "The NHS, for the freezing itself. Later treatment using what you stored is a separate funding question.",
     howItWorks: [
-      "Funding is offered where treatment or a condition threatens fertility — cancer treatment being the long-standing example.",
-      "NG257 broadened the recommended group to include people with conditions affecting their reproductive organs, such as severe and recurrent endometriosis.",
+      "Funding is offered where treatment or a condition threatens fertility, cancer treatment being the long-standing example. Ask your clinician whether your condition or treatment is within your local policy's scope.",
       "People undergoing gender-affirming treatment are also within scope of NHS preservation policies, though local policies vary.",
     ],
     suits: [
       "Anyone facing chemotherapy, radiotherapy or surgery that may affect fertility",
-      "People with severe endometriosis or another condition likely to damage ovarian reserve",
       "Trans and non-binary people considering gender-affirming treatment",
     ],
     watchOuts: [
       "Ask about preservation before treatment for the underlying condition begins; afterwards is often too late.",
-      "Funded storage runs for a set period. Diarise the renewal date — storage lapses have caused real losses.",
+      "Funded storage runs for a set period. Diarise the renewal date. Storage lapses have caused real losses.",
       "Freezing being funded does not mean later IVF using those eggs or embryos is funded.",
     ],
-    sources: [{ label: "NICE NG257 — fertility preservation", href: "https://www.nice.org.uk/guidance/ng257" }],
+    sources: [{ label: "NICE NG257: fertility preservation", href: "https://www.nice.org.uk/guidance/ng257" }],
   },
 
   /* ── Reduce the price ── */
@@ -355,14 +361,13 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "reduce",
     summary:
       "You donate half the eggs from your cycle to another patient, and the clinic funds most or all of your own treatment.",
-    where: "Widely available. The identity-release rule below is UK law; donor anonymity elsewhere changes the decision entirely.",
     typicalCost:
       "Typically free or heavily discounted IVF, sometimes leaving only the HFEA licence fee and drugs. The largest single saving available to anyone who qualifies.",
     riskHolder:
-      "Shared. If too few eggs are collected the share may not go ahead and the discount can fall away, so ask what happens then before you start.",
+      "Shared. HFEA guidance says that if too few eggs are collected, you should be offered all of them for your own treatment at the agreed discount. Ask the clinic to confirm this in writing.",
     howItWorks: [
       "You have IVF as normal, and the eggs collected are split between you and a recipient who cannot use their own.",
-      "Clinics set their own criteria; commonly under 35 or 36, a BMI in range, good ovarian reserve (AMH thresholds are typical), and meeting HFEA donor screening.",
+      "Clinics set their own criteria. The HFEA's general guide is that sharers are 35 or under, with a BMI in range, good ovarian reserve (AMH thresholds are typical), and meeting HFEA donor screening.",
       "Freeze-and-share applies the same principle to elective egg freezing.",
     ],
     suits: [
@@ -371,10 +376,10 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     ],
     watchOuts: [
       "Donation in the UK is identity-release: any child born from your donated eggs can obtain your identifying details from the HFEA at 18. This is the real decision, not the money.",
-      "Counselling is required, and worth taking seriously rather than treating as a formality.",
-      "If your response to stimulation is poor, you may end up sharing eggs you would rather have kept, or losing the discount. Get the clinic's rule in writing.",
+      "Most clinics require counselling before egg sharing. Ask whether it is included in the price.",
+      "Ask what happens if your response to stimulation is poor, and get the clinic's rule in writing.",
     ],
-    sources: [{ label: "HFEA — egg sharing", href: "https://www.hfea.gov.uk/donation/donors/egg-sharing/" }],
+    sources: [{ label: "HFEA: egg sharing", href: "https://www.hfea.gov.uk/donation/donors/egg-sharing/" }],
   },
   {
     slug: "low-cost-ivf",
@@ -383,10 +388,10 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     summary:
       "Lower drug doses and a leaner service model cut the per-cycle price, at the cost of fewer eggs per attempt.",
     typicalCost:
-      "Advertised cycles from roughly £2,500–£3,500 against £5,000–£7,000 for standard IVF, though the realistic all-in figure is usually well above the headline.",
+      "Advertised prices sit below standard IVF, though the realistic all-in figure is usually well above the headline.",
     riskHolder: "You. A cheaper cycle is still a cycle you have paid for.",
     howItWorks: [
-      "Mild and natural protocols use little or no stimulation, so the drug bill — often £1,000–£2,500 in standard IVF — drops sharply.",
+      "Mild and natural protocols use little or no stimulation, so the drug bill (often £1,000–£2,500 in standard IVF) drops sharply.",
       "Low-cost providers also strip out inclusions: consultations, scans, freezing and ICSI may all be charged separately.",
     ],
     suits: [
@@ -394,11 +399,11 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "People who would rather fund several small attempts than one large one",
     ],
     watchOuts: [
-      "Fewer eggs per cycle usually means more cycles. Compare the cost of a baby, not the cost of a cycle.",
+      "Fewer eggs per cycle often means more cycles, so compare the likely total cost, not just one cycle.",
       "Ask for a written itemised quote including drugs, ICSI, freezing, storage and donor sperm before comparing anything.",
       "Check the clinic's HFEA-published results for patients like you rather than its headline success rate.",
     ],
-    sources: [{ label: "HFEA — choose a clinic", href: "https://www.hfea.gov.uk/choose-a-clinic/" }],
+    sources: [{ label: "HFEA: choose a clinic", href: "https://www.hfea.gov.uk/choose-a-clinic/" }],
   },
   {
     slug: "medication-sourcing",
@@ -410,12 +415,12 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     riskHolder: "You, and the saving is real but modest against the whole bill.",
     howItWorks: [
       "Ask your clinic for a copy of the prescription and quotes from more than one specialist fertility pharmacy.",
-      "Prices for identical products differ meaningfully between pharmacies, and protocols differ enormously in cost between patients.",
+      "Prices for identical products differ between pharmacies.",
     ],
     suits: ["Anyone self-funding a stimulated cycle"],
     watchOuts: [
       "Buy only from a registered UK pharmacy. Medication offered privately by other patients or through social media is unlawful to supply and unsafe to use.",
-      "Cold-chain handling matters for some drugs — check delivery arrangements.",
+      "Cold-chain handling matters for some drugs. Check delivery arrangements.",
       "Never change a prescribed protocol to save money without your clinician.",
     ],
   },
@@ -425,19 +430,18 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "reduce",
     summary:
       "The HFEA rates treatment add-ons by evidence, and most are rated as not proven to improve the chance of a live birth.",
-    where: "The HFEA ratings are UK, but the evidence they summarise is international and worth using anywhere.",
-    typicalCost: "Add-ons commonly run £150–£3,000 each; declining them is the cheapest decision on this page.",
-    riskHolder: "You — this is money spent, not risk transferred.",
+    typicalCost: "Add-ons are charged on top of the cycle price; declining them is the cheapest decision on this page.",
+    riskHolder: "You: this is money spent, not risk transferred.",
     howItWorks: [
-      "The HFEA publishes a traffic-light rating for each add-on based on the evidence from randomised trials.",
+      "The HFEA rates each add-on green, yellow, grey, black or red, based on evidence from trials, and rates some add-ons separately for different outcomes. When we checked, no add-on was rated green for improving the chance of a baby.",
       "Ask any clinic proposing one: what is its HFEA rating, what would it cost, and what is the evidence it improves live birth for someone with my diagnosis?",
     ],
     suits: ["Everyone paying privately, and anyone being offered a long list of extras at consultation"],
     watchOuts: [
-      "A red or grey rating does not mean fraudulent — it means the evidence is not there yet, and you are paying for that uncertainty.",
+      "Grey means there is not enough evidence. Black means the evidence shows it makes no difference. Red means there are safety concerns or evidence it could lower your chances.",
       "Some add-ons are clinically indicated for specific diagnoses. The question is whether yours is one of them.",
     ],
-    sources: [{ label: "HFEA — treatment add-ons ratings", href: "https://www.hfea.gov.uk/treatments/treatment-add-ons/" }],
+    sources: [{ label: "HFEA: treatment add-ons ratings", href: "https://www.hfea.gov.uk/treatments/treatment-add-ons/" }],
   },
   {
     slug: "treatment-abroad",
@@ -446,7 +450,7 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     summary:
       "Cycle prices in parts of Europe run well below UK levels, with travel, law and follow-up as the trade-offs.",
     typicalCost:
-      "Roughly €2,500–€4,500 a cycle in the Czech Republic and around €5,000–€6,000 in Spain, before drugs, travel, accommodation and repeat visits.",
+      "Clinic price lists abroad are often below UK headline prices, before drugs, travel, accommodation and repeat visits. Get the clinic's own itemised quote.",
     riskHolder: "You, with less regulatory protection than the HFEA provides at home.",
     howItWorks: [
       "Monitoring is often done in the UK and the collection and transfer abroad, which means coordinating two clinics.",
@@ -456,11 +460,12 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "People who have exhausted UK options, or who need donor eggs, where waiting lists and prices differ most",
     ],
     watchOuts: [
-      "Access is not universal: Spain and Greece treat single women and female same-sex couples, while some countries — the Czech Republic among them — restrict donor treatment to heterosexual couples.",
+      "Access is not universal: Spain and Greece treat single women and female same-sex couples, while some countries (the Czech Republic among them) restrict donor treatment to heterosexual couples.",
       "Donor anonymity abroad means a donor-conceived child may have no route to identifying information, which UK law would have given them. Weigh that as a decision about your child, not about the price.",
       "Add travel, accommodation, time off work and repeat trips to the quoted figure, and check what happens if a cycle is cancelled mid-way.",
       "Complications are managed by the NHS at home, by a team that did not do the treatment.",
     ],
+    more: { label: "Compare clinics abroad, with travel estimates", href: "/ivf-finder" },
   },
 
   /* ── Someone else pays ── */
@@ -468,28 +473,25 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     slug: "employer-benefits",
     name: "Employer fertility benefits",
     group: "third-party",
-    summary:
-      "The most under-claimed money in fertility, and the only route on this page where treatment can be genuinely free to you.",
-    where: "International. Carrot, Maven and Progyny operate globally; Fertifa, Peppy and Apryl are UK and European.",
+    summary: "Employer schemes are easy to miss: search your benefits portal for 'fertility', 'family forming' and 'IVF' before paying for anything.",
     typicalCost:
       "Anything from a £500 contribution to funds covering multiple cycles; the largest UK schemes run to tens of thousands.",
     riskHolder: "Your employer, up to the limit of the benefit.",
     howItWorks: [
-      "Employers buy fertility benefits through providers such as Carrot Fertility, Fertifa, Peppy, Maven and Apryl, who manage the funding and the clinical support.",
-      "Cover is generally family-building rather than infertility-specific, so solo parents and same-sex couples are usually included where the scheme is well designed.",
+      "Employers buy fertility benefits through providers such as Carrot, Maven, Fertifa and Peppy, who manage the funding and the clinical support.",
+      "Cover is generally family-building rather than infertility-specific, so solo parents and same-sex couples are usually included.",
       "Some employers also offer paid leave for treatment as part of the same policy.",
     ],
     suits: [
       "Anyone employed, particularly in financial services, tech, law, consultancy and parts of the public sector",
-      "People whose partner is employed somewhere with a scheme — many cover partners",
+      "People whose partner is employed somewhere with a scheme (many cover partners)",
     ],
     watchOuts: [
-      "Search the benefits portal for 'fertility', 'family forming' and 'IVF' before asking HR: schemes are often live but unadvertised.",
       "Check whether treatment must be at a partner clinic, and whether drugs and donor gametes are included.",
       "Ask how the benefit is treated for tax and what happens if you leave, and get the answer in writing.",
       "There is no statutory right in Great Britain to paid time off for fertility appointments. Whether you get it depends on your contract and your employer's policy.",
-      "Our IVF & Work section covers this route in full: your rights, the audit, and what to say — cairnfertility.com/work.",
     ],
+    more: { label: "IVF and work: your rights, the benefits audit and what to say", href: "/work" },
   },
   {
     slug: "private-medical-insurance",
@@ -497,18 +499,17 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "third-party",
     summary:
       "The honest answer in the UK: individual policies almost never pay for IVF, and buying one for that purpose does not work.",
-    where: "UK. This is one of the routes that differs most by country — in the US, insurance is often the main route.",
     typicalCost: "Nothing for treatment. Some policies cover investigations where infertility follows an acute condition.",
     riskHolder: "You. This route mostly does not exist in the UK.",
     howItWorks: [
       "Standard individual policies from the major UK insurers exclude assisted conception, and existing fertility diagnoses are excluded as pre-existing conditions.",
-      "Where insurers do cover fertility, it is generally as an add-on sold to corporate clients — so the route back to it is your employer, not the insurer.",
+      "Where insurers do cover fertility, it is generally as an add-on sold to corporate clients, so the route back to it is your employer, not the insurer.",
     ],
     suits: ["People whose employer's corporate health scheme includes an advanced fertility module"],
     watchOuts: [
       "Buying a policy in the hope of covering treatment you are already planning will not work, and may invalidate a claim.",
       "Do not confuse this with insurance-backed IVF plans, which are a different product sold directly to patients.",
-      "Ask your insurer specifically what diagnostic investigations are covered — that part is sometimes worth having.",
+      "Ask your insurer specifically what diagnostic investigations are covered. That part is sometimes worth having.",
     ],
   },
   {
@@ -516,20 +517,19 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Grants and charitable funds",
     group: "third-party",
     summary: "Money that does not have to be repaid, in small amounts, awarded competitively.",
-    where: "UK grant-makers named. The US has a much larger grant sector, including several funds open to solo applicants.",
     typicalCost: "UK grants are typically up to around £3,000 and are usually paid direct to the clinic.",
     riskHolder: "The charity, for the amount awarded.",
     howItWorks: [
-      "The Fertility Foundation is the main UK grant-maker, with an annual application round that opens in January and decisions by around the end of April.",
-      "Some clinics run their own hardship or bursary schemes, which are rarely advertised — ask directly.",
+      "The Fertility Foundation is the main UK grant-maker. Applications open in January each year, with decisions by the end of April.",
+      "Some clinics run their own hardship or bursary schemes, which are rarely advertised. Ask directly.",
     ],
     suits: ["People who can fund part of a cycle but not all of it, and who can apply within the annual window"],
     watchOuts: [
-      "Read the eligibility criteria before investing time: The Fertility Foundation's published criteria require a cohabiting couple, with at least one applicant in full-time employment, which rules out solo applicants.",
+      "The Fertility Foundation lists heterosexual couples, single women, and female and male same-sex couples as eligible; single men are not listed, and the grant does not cover surrogacy costs. Its published criteria: up to £3,000 per grant; applicants must be British citizens living in the UK; the woman must be 42 or under; at least one applicant must be in full-time work; couples must live together; you need proof you can fund the rest of treatment; and there is a £30 non-refundable application fee.",
       "Grants rarely cover a whole cycle, and most schemes ask for proof you can fund the remainder including drugs.",
       "Anything asking for an application fee, or promising funded IVF in exchange for a payment, should be treated as a scam.",
     ],
-    sources: [{ label: "The Fertility Foundation — IVF grants", href: "https://www.fertilityfoundation.org/ivf-grants" }],
+    sources: [{ label: "The Fertility Foundation: IVF grants", href: "https://www.fertilityfoundation.org/ivf-grants" }],
   },
 
   /* ── Share the risk ── */
@@ -538,30 +538,29 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Multi-cycle and refund programmes",
     group: "share",
     summary:
-      "A fixed fee for two or three cycles, with part or all of it refunded if you do not have a baby.",
-    where: "UK providers named; equivalents exist in most private fertility markets.",
+      "Two different products: refund programmes return part or all of a fixed fee if you do not have a baby; multi-cycle packages are cheaper per cycle, with no refund.",
     typicalCost:
-      "A discount of roughly a third against paying cycle by cycle, in exchange for paying up front. Refund levels are commonly 50%, 70% or 100% of the programme fee depending on age and plan.",
+      "Access Fertility's published refund options are 50%, 70% or 100% of the programme fee, for patients under 40, and it states a saving of at least 30% against paying the clinic directly (accessfertility.com, September 2026).",
     riskHolder:
-      "Shared, and priced accordingly. The provider carries the risk of failure; you carry the risk of succeeding first time and having pre-paid for cycles you never needed.",
+      "Shared on a refund programme: the provider carries the risk of failure; you carry the risk of succeeding first time and having pre-paid for cycles you never needed. On a multi-cycle package you carry both.",
     howItWorks: [
-      "Access Fertility is the largest UK provider, sold through around 70 clinics across the UK, Ireland and Spain. Assured Fertility is a newer entrant offering a single fixed cost with a refund if there is no baby, and a partial refund if you succeed early.",
-      "Several clinics and groups run their own refund or multi-cycle packages directly — Bourn Hall and the larger clinic groups among them — so compare the clinic's own scheme against the third-party one.",
-      "Programmes typically bundle two or three fresh cycles with unlimited frozen embryo transfers from those cycles.",
-      "Medical eligibility applies — these are underwritten products and not everyone is accepted.",
+      "Refund programmes: a fixed fee for two or three egg collections plus the frozen transfers from them, with part or all of the fee refunded if you do not have a baby. Access Fertility, the largest UK provider, offers this to patients under 40.",
+      "Multi-cycle packages: a discounted fixed price for several cycles, with nothing back if treatment does not work. Access Fertility's covers up to two cycles, or up to four at selected clinics, and is the route it offers patients aged 40 to 45.",
+      "Several clinics run their own refund or multi-cycle packages, so compare the clinic's scheme against the third-party one.",
+      "Medical eligibility applies: these are underwritten products and not everyone is accepted.",
     ],
     suits: [
-      "People who expect to need more than one cycle and want a known ceiling on the cost",
-      "Anyone for whom a failed cycle with no money left would end the attempt entirely",
+      "You expect to need more than one cycle and want a known ceiling on the cost",
+      "A failed cycle with no money left would end the attempt entirely",
     ],
     watchOuts: [
       "Read what the refund excludes. Drugs, donor gametes, ICSI, storage and consultations are frequently outside the fee and are not refunded.",
-      "Check the definition of success that ends the refund — usually a live birth, sometimes a clinical pregnancy, which are not the same thing.",
+      "Check the definition of success that ends the refund: usually a live birth, sometimes a clinical pregnancy, which are not the same thing.",
       "Check what happens if you stop early, if a cycle is cancelled before collection, or if you are withdrawn on medical grounds.",
-      "Understand that paying first time and succeeding first time means you have paid more than you needed to. That is the trade.",
+      "Paying first time and succeeding first time means you have paid more than you needed to. That is the trade.",
     ],
     sources: [
-      { label: "Access Fertility — refund programmes", href: "https://www.accessfertility.com/" },
+      { label: "Access Fertility: refund programmes", href: "https://www.accessfertility.com/" },
       { label: "Assured Fertility", href: "https://www.assuredfertility.co.uk/" },
     ],
   },
@@ -571,30 +570,26 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     group: "share",
     summary:
       "You pay a premium or protection fee; the plan carries the treatment cost, and you repay it only if you have a child.",
-    where: "Gaia in the UK; Future Family, Sunfish and BUNDL are the equivalents in the US market.",
     typicalCost:
-      "A premium priced on your own predicted odds, with the treatment cost repaid over a period of years if you have a baby.",
-    riskHolder: "The insurer, which is the entire point of the product — and it prices that risk from your clinical data.",
+      "A fee priced on your own predicted odds, with the treatment cost repaid over a period of years if you have a baby.",
+    riskHolder: "The plan provider, which prices that risk from your clinical data.",
     howItWorks: [
-      "Gaia is the established UK product and the only one here that is genuinely insurance: it assesses your data, prices a plan, and writes off the treatment cost if you do not have a child after the covered rounds. Stopping early is generally treated as a discount rather than a write-off, so check that clause specifically.",
-      "If you do have a child, you repay the treatment cost in instalments over a period of years, on top of the premiums already paid.",
-      "In the US the same idea is sold in several shapes: Future Family's monthly plans and loans, Sunfish's bundled packages with a partial money-back guarantee, and BUNDL's multi-cycle bundles with full or partial refunds. They are financing products with an outcome guarantee attached rather than regulated insurance, which changes what protection you have if the company fails.",
+      "Plans like Gaia charge a fee on top of treatment. If you do not have a baby after the covered rounds, you do not repay the treatment cost. If you do, you repay it over several years, on top of the fees already paid.",
+      "Gaia Family is the trading name of Gaia Fertility Limited; its website gives its FCA firm reference number as 985551. Check the firm on the FCA register yourself, and read what happens if you stop early.",
     ],
     suits: [
-      "People with reasonable predicted odds who cannot fund several cycles up front",
-      "Anyone for whom the worst outcome — no baby and a large debt — is the risk they most need to remove",
+      "You have reasonable predicted odds but cannot fund several cycles up front",
+      "The outcome you most need to remove is no baby and a large debt",
     ],
     watchOuts: [
-      "Eligibility is underwritten and not everyone can be offered a plan; the odds that make a plan cheap are the odds that make it hardest to get.",
+      "Eligibility is underwritten; the odds that make a plan cheap are the odds that make it hardest to get.",
       "Work out the total you pay in the success case, not just the monthly figure, and compare it against paying the clinic directly.",
-      "Check exactly what is inside the covered cost — drugs and donor gametes especially — and what happens if you stop treatment.",
+      "Check exactly what is inside the covered cost (drugs and donor gametes especially) and what happens if you stop treatment.",
       "Establish whether what you are buying is regulated insurance or a refund promise from a private company, and who stands behind it either way.",
     ],
     sources: [
-      { label: "Gaia — IVF plans", href: "https://gaiafamily.com/en-gb" },
-      { label: "Future Family", href: "https://www.futurefamily.com/" },
-      { label: "Sunfish", href: "https://www.joinsunfish.com/" },
-      { label: "BUNDL Fertility", href: "https://bundlfertility.com/" },
+      { label: "Gaia: IVF plans", href: "https://gaiafamily.com/en-gb" },
+      { label: "FCA register", href: "https://register.fca.org.uk/" },
     ],
   },
 
@@ -604,19 +599,17 @@ export const FUNDING_ROUTES: FundingRoute[] = [
     name: "Clinic 0% payment plans",
     group: "spread",
     summary:
-      "Interest-free credit arranged at the clinic, usually over 10–12 months, through a regulated healthcare lender.",
-    where: "UK lenders named; almost every private fertility market has an equivalent at the point of sale.",
+      "Interest-free credit arranged at the clinic through a regulated healthcare lender.",
     typicalCost: "No interest over the promotional term; watch for arrangement fees and monthly account charges.",
     riskHolder: "You. Credit does not reduce the cost or the risk, it only moves when you pay.",
     howItWorks: [
-      "Clinics partner with regulated lenders — Chrysalis Finance and Novuna are the ones most often seen — and the application is made at the point of treatment.",
+      "Clinics partner with regulated lenders, and the application is made at the point of treatment.",
       "Longer terms are usually available at an interest rate rather than at 0%.",
     ],
-    suits: ["People who can clear the balance within the interest-free period from income"],
+    suits: ["You can clear the balance within the interest-free period from income"],
     watchOuts: [
       "Confirm the total amount payable, not the monthly figure, and whether any fee applies.",
       "Check what happens if treatment is cancelled: the credit agreement is with the lender and generally does not pause because your cycle did.",
-      "Only borrow for the cycle in front of you.",
     ],
   },
   {
@@ -630,164 +623,11 @@ export const FUNDING_ROUTES: FundingRoute[] = [
       "A personal loan from a bank or a credit union is frequently the lowest-cost option, and is not tied to one clinic.",
       "A 0% purchase credit card can work for a smaller sum if you are certain of clearing it inside the promotional period.",
     ],
-    suits: ["People with the credit profile to access a low rate, who want to stay free to change clinic"],
+    suits: ["You can access a low rate and want to stay free to change clinic"],
     watchOuts: [
-      "Borrowing for the full projected cost of three cycles at the outset is the most common financial mistake in fertility. Borrow per cycle.",
+      "It is usually safer to borrow for one cycle at a time.",
       "Any lender must be FCA-authorised; check the register before signing anything.",
       "If treatment ends without a baby, the repayments continue. Budget for that version of events, not only the hopeful one.",
-    ],
-  },
-];
-
-/* ── Outside the UK ──────────────────────────────────────────────────────── */
-
-export interface CountryFunding {
-  slug: string;
-  name: string;
-  /** One line, shown collapsed: the shape of the system. */
-  summary: string;
-  /** What the state pays for. */
-  publicFunding: string[];
-  /** Who can actually get it — the part most guides leave out. */
-  access: string;
-  /** The private market and the products that finance it. */
-  privateRoutes: string[];
-  sources: SourceLink[];
-}
-
-/**
- * A starting map rather than a complete one. Everything above this point is
- * UK detail we can stand behind; this section exists because the questions
- * people bring to it are the same everywhere and the answers are not.
- *
- * Each entry is deliberately short: the shape of the system, who it admits,
- * and what finances the rest. Anything more specific belongs in a page of its
- * own, written the way the UK section was — from that country's own sources.
- */
-export const INTERNATIONAL_FUNDING: CountryFunding[] = [
-  {
-    slug: "ireland",
-    name: "Ireland",
-    summary: "One publicly funded cycle through a national scheme introduced in 2023, accessed via regional fertility hubs.",
-    publicFunding: [
-      "One publicly funded IVF or ICSI cycle for those who meet the criteria, introduced from September 2023 and phased in since.",
-      "The route in is a GP referral to a regional fertility hub, which assesses eligibility before referral to a participating private clinic.",
-    ],
-    access:
-      "Criteria include age and BMI limits and no existing child from the relationship, so they read much like the UK's. Check the current HSE criteria rather than any secondary summary — this scheme has changed more than once since it launched.",
-    privateRoutes: [
-      "A well-developed private market, with Access Fertility's refund and multi-cycle programmes available through Irish clinics.",
-      "Tax relief on medical expenses, including fertility treatment, is claimable through Revenue.",
-    ],
-    sources: [{ label: "HSE — free fertility treatment", href: "https://www2.hse.ie/services/fertility-treatment/" }],
-  },
-  {
-    slug: "france",
-    name: "France",
-    summary: "One of the most generous systems in Europe, and open to single women and female couples since 2021.",
-    publicFunding: [
-      "Up to four IVF attempts and six IUI cycles reimbursed by Assurance Maladie for women under 43, typically at 100% of the regulated tariff.",
-      "Reimbursement covers the treatment and, in the usual case, the drugs.",
-    ],
-    access:
-      "The 2021 bioethics law extended assisted reproduction to single women and female same-sex couples, with the same reimbursement as everyone else. Waiting times for donor sperm became the binding constraint rather than money.",
-    privateRoutes: [
-      "Because the public route is broad, private financing products barely exist by comparison with the UK or US.",
-    ],
-    sources: [{ label: "Ameli — assistance médicale à la procréation", href: "https://www.ameli.fr/assure/sante/themes/pma" }],
-  },
-  {
-    slug: "belgium-netherlands-denmark",
-    name: "Belgium, the Netherlands and Denmark",
-    summary: "Among the most generous reimbursement systems in Europe, and all three admit single women.",
-    publicFunding: [
-      "Belgium reimburses up to six IVF or ICSI cycles for women under 43.",
-      "The Netherlands covers IVF cycles under basic health insurance, commonly three, subject to the usual policy excess.",
-      "Denmark funds up to three fresh transfers towards a first child, with limits counted in started cycles as well as transfers.",
-    ],
-    access:
-      "All three treat single women and female same-sex couples within the public system, which is why Denmark in particular became a destination for solo patients from countries that did not.",
-    privateRoutes: [
-      "Private clinics exist alongside the public route, largely for people outside the funded criteria — second children in Denmark, or over the age limits.",
-    ],
-    sources: [{ label: "ESHRE — ART reimbursement across Europe", href: "https://www.eshre.eu/" }],
-  },
-  {
-    slug: "spain",
-    name: "Spain",
-    summary: "Public treatment to 40 with long waits, alongside Europe's largest and most open private sector.",
-    publicFunding: [
-      "The public system provides assisted reproduction up to age 40 for women, with waiting lists that are frequently measured in years.",
-    ],
-    access:
-      "Spanish law permits treatment regardless of marital status or sexual orientation, so single women and female couples are eligible in principle — though regional practice and waiting times vary.",
-    privateRoutes: [
-      "A very large private market at roughly €5,000–€6,000 a cycle, and the main destination for UK and European patients needing donor eggs.",
-      "Donation in Spain is anonymous, which is the opposite of UK law and the single most important thing to weigh before treating there.",
-    ],
-    sources: [{ label: "Ministerio de Sanidad", href: "https://www.sanidad.gob.es/" }],
-  },
-  {
-    slug: "israel",
-    name: "Israel",
-    summary: "The most generous public funding in the world, and the least restrictive on family status.",
-    publicFunding: [
-      "Funded treatment for women aged 18 to 45, with no cap on the number of cycles, up to the birth of two live children with a current partner.",
-    ],
-    access:
-      "Entitlement does not depend on marital status or sexual orientation, which makes it the outlier internationally: solo motherhood by choice is funded on the same terms as anyone else's treatment.",
-    privateRoutes: ["A private sector exists mainly for treatment outside the funded criteria, such as a third child."],
-    sources: [{ label: "Israel Ministry of Health", href: "https://www.gov.il/en/departments/ministry_of_health" }],
-  },
-  {
-    slug: "australia-new-zealand",
-    name: "Australia and New Zealand",
-    summary: "Not free, but heavily rebated: Medicare pays a substantial share of every cycle, with no cycle cap.",
-    publicFunding: [
-      "In Australia, Medicare rebates a large portion of IVF costs for people with a medical indication, leaving an out-of-pocket gap of several thousand dollars a cycle. There is no limit on the number of rebated cycles.",
-      "New Zealand funds a limited number of cycles through the public system against a clinical scoring threshold, with a substantial private market alongside.",
-    ],
-    access:
-      "Australian eligibility for the Medicare rebate no longer turns on relationship status, sexual orientation or gender identity, which brought solo and LGBTQ+ patients properly into the system.",
-    privateRoutes: [
-      "Bulk-billing and low-cost clinic chains compete openly on the size of the out-of-pocket gap, which is unusual and worth using.",
-    ],
-    sources: [{ label: "Services Australia — Medicare and IVF", href: "https://www.servicesaustralia.gov.au/medicare" }],
-  },
-  {
-    slug: "canada",
-    name: "Canada",
-    summary: "Province by province, and changing quickly — three provinces now fund a cycle, and tax credits do the rest.",
-    publicFunding: [
-      "Ontario funds one IVF cycle per person per lifetime, and offers a fertility tax credit refunding 25% of eligible costs up to $5,000 a year.",
-      "Quebec funds one cycle, including medication.",
-      "British Columbia launched a programme in July 2025 funding up to $19,000 towards one cycle, for applicants aged 41 or under at application.",
-    ],
-    access:
-      "The funded programmes are generally open regardless of relationship status or sexual orientation, but donor sperm, storage and medication are frequently outside what is funded.",
-    privateRoutes: [
-      "Cycle costs of roughly CA$10,000–$20,000 before medication, financed largely through clinic plans and personal credit.",
-    ],
-    sources: [{ label: "BC — publicly funded IVF programme", href: "https://www2.gov.bc.ca/gov/content/health/accessing-health-care/publicly-funded-ivf-program" }],
-  },
-  {
-    slug: "united-states",
-    name: "United States",
-    summary: "No national coverage. Whether you pay $0 or $25,000 depends on your state, your employer and your plan type.",
-    publicFunding: [
-      "There is no federal entitlement. Around 25 states and DC have fertility insurance coverage laws, of which roughly 15 plus DC specifically require IVF coverage — and only for fully insured plans.",
-      "Self-funded employer plans, which cover most people with employer insurance, are exempt from state mandates entirely.",
-      "A federal rule proposed in May 2026 would create fertility benefits as a new category of 'excepted benefits', giving employers a lighter-touch way to offer cover from plan years starting in 2027. It is a proposal, not law.",
-    ],
-    access:
-      "Employer benefits are the dominant route: Progyny, Carrot and Maven administer lifetime funds commonly in the $20,000–$50,000 range. Coverage definitions of infertility have historically excluded solo and same-sex patients by requiring a period of unprotected heterosexual intercourse; many plans have dropped that, but it is the first thing to check in the plan document.",
-    privateRoutes: [
-      "A large specialist financing sector: Future Family, Sunfish, BUNDL and CapexMD, several of which attach a partial or full refund to a multi-cycle package.",
-      "Clinic-run refund programmes are long established and heavily marketed; the same questions apply to them as to the UK ones.",
-    ],
-    sources: [
-      { label: "RESOLVE — insurance coverage by state", href: "https://resolve.org/learn/financial-resources/insurance-coverage/" },
-      { label: "Federal Register — proposed excepted fertility benefits", href: "https://www.federalregister.gov/documents/2026/05/13/2026-09479/excepted-fertility-benefits" },
     ],
   },
 ];
@@ -796,7 +636,7 @@ export const INTERNATIONAL_FUNDING: CountryFunding[] = [
 
 /** Questions to put to any provider before signing a package, plan or loan. */
 export const QUESTIONS_BEFORE_SIGNING: string[] = [
-  "What exactly is included in this fee — and is the drug bill, ICSI, donor sperm, freezing, storage and each frozen transfer inside it or outside it?",
+  "What exactly is included in this fee, and is the drug bill, ICSI, donor sperm, freezing, storage and each frozen transfer inside it or outside it?",
   "What event ends the agreement in your favour: a positive test, a clinical pregnancy, or a live birth?",
   "What happens if a cycle is cancelled before egg collection, or if I am withdrawn on medical grounds?",
   "What happens if I decide to stop, or to change clinic, part-way through?",
@@ -806,17 +646,15 @@ export const QUESTIONS_BEFORE_SIGNING: string[] = [
   "Can I have the full terms and an itemised quote in writing, to read away from the clinic?",
 ];
 
-/** Consumer-protection points specific to this market. */
+/**
+ * Consumer-protection points. Pricing: CMA "Guidance for fertility clinics on
+ * consumer law" (June 2021). Counselling: HFEA egg sharing page.
+ */
 export const PROTECTIONS: { title: string; body: string; source?: SourceLink }[] = [
   {
     title: "Clinics must publish clear prices",
-    body: "HFEA-licensed clinics are expected to give you a costed treatment plan covering everything you will be charged. If you have only been given a headline figure, ask again — an itemised written quote is a reasonable request and a normal one.",
-    source: { label: "HFEA — costs and funding", href: "https://www.hfea.gov.uk/treatments/explore-all-treatments/costs-and-funding/" },
-  },
-  {
-    title: "Success-rate claims are regulated",
-    body: "Compare clinics using the HFEA's published data rather than the figure on a clinic's own homepage, and check that the figure quoted to you is for patients of your age and diagnosis, per cycle started rather than per transfer.",
-    source: { label: "HFEA — choose a clinic", href: "https://www.hfea.gov.uk/choose-a-clinic/" },
+    body: "Under consumer law, the headline price a clinic advertises should include every compulsory charge it knows about in advance, and you should be given a costed treatment plan before you commit. If you have only a headline figure, ask for an itemised written quote.",
+    source: { label: "CMA: guidance for fertility clinics on consumer law", href: "https://www.gov.uk/government/publications/fertility-treatment-a-guide-for-clinics" },
   },
   {
     title: "Credit and insurance are FCA-regulated",
@@ -824,7 +662,8 @@ export const PROTECTIONS: { title: string; body: string; source?: SourceLink }[]
     source: { label: "FCA register", href: "https://register.fca.org.uk/" },
   },
   {
-    title: "Counselling is your right, not an upsell",
-    body: "Licensed clinics must offer counselling, and it is required before donation or egg sharing. It is one of the few things in this whole process that is routinely included in the fee.",
+    title: "Counselling must be offered",
+    body: "Licensed clinics must offer you counselling. Many require it before egg sharing or donation. Ask whether it is included in the price.",
+    source: { label: "HFEA: egg sharing", href: "https://www.hfea.gov.uk/donation/donors/egg-sharing/" },
   },
 ];

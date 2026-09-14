@@ -44,10 +44,7 @@ const FEEDS: Feed[] = [
   { outlet: "BBC News", url: "https://feeds.bbci.co.uk/news/health/rss.xml", topic: "Safety & regulation", verified: false },
   { outlet: "The Guardian", url: "https://www.theguardian.com/society/fertility-problems/rss", topic: "Costs & funding", verified: false },
   { outlet: "Progress Educational Trust (BioNews)", url: "https://www.progress.org.uk/feed/", topic: "Donor conception", verified: false },
-  // HFEA had no entry here: https://www.hfea.gov.uk/rss/news/ 404s, and neither
-  // the site's news index nor a search turned up a working feed to replace it
-  // with — gov.uk sites commonly drop RSS entirely. Re-add it if the HFEA
-  // ever publishes one; a guessed URL would just fail silently again.
+  { outlet: "HFEA", url: "https://www.hfea.gov.uk/rss/news/", topic: "Safety & regulation", verified: false },
 ];
 
 /**

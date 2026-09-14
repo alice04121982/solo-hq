@@ -12,14 +12,15 @@ import { CopyButton } from "@/components/copy-button";
 import { BenefitsAudit } from "@/components/work/benefits-audit";
 import { RightsExplorer } from "@/components/work/rights-explorer";
 import {
+  AFTER_TREATMENT_SIGNPOSTS,
   AUDIT_STEPS,
-  BENEFIT_PROVIDERS,
   BENEFIT_SHAPES,
   CASE_SOURCES,
+  HR_FIRST_EMAIL,
   NAMED_EMPLOYERS,
-  OFFER_CHECKS,
+  PLATFORM_LINE,
   POLICY_ELEMENTS,
-  RIGHTS_BY_COUNTRY,
+  UK_RIGHTS,
   WORK_LAST_REVIEWED,
   WORK_SCENARIOS,
   WORKPLACE_STATS,
@@ -28,19 +29,12 @@ import {
 export const metadata: Metadata = {
   title: "IVF & Work | CairnFertility",
   description:
-    "Fertility treatment and employment: your legal rights, what employers actually offer, how to find out what yours does, what to say without disclosing more than you want to, and how to weigh fertility benefits when you are taking a job.",
+    "Fertility treatment and employment in the UK: your rights, what employers offer, how to find out what yours does, what to say, and the leave and pay that follow a pregnancy.",
 };
 
 const TEAL = "var(--teal)";
 const TEAL_SOFT = "rgba(0, 83, 83, 0.6)";
 
-/**
- * The header composition: one oversized bloom cropped by the right edge, with
- * two small marks off it. Pinks rather than lime, because the header sits on
- * the cream band and lime goes muddy against it. The movement is deliberately
- * near-imperceptible — a minute for one rotation of the bloom — so the band
- * reads as alive rather than animated.
- */
 const HERO_MARKS: HeaderMark[] = [
   {
     name: "bloom",
@@ -69,24 +63,22 @@ const HERO_MARKS: HeaderMark[] = [
 
 const JUMP_LINKS = [
   { label: "Your rights", href: "#rights" },
+  { label: "After treatment", href: "#after-treatment" },
   { label: "What employers offer", href: "#what-employers-offer" },
   { label: "Find out what yours does", href: "#find-out" },
   { label: "What to say", href: "#asking" },
-  { label: "At the offer stage", href: "#job-offers" },
   { label: "Making the case", href: "#making-the-case" },
 ];
 
 export default function WorkPage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Nav */}
       <section className="border-b border-border px-6 md:px-12 lg:px-16">
         <div className="mx-auto">
           <SiteNav />
         </div>
       </section>
 
-      {/* Hero */}
       <Section
         band={0}
         padding="pt-20 pb-16 md:pt-28 md:pb-20"
@@ -103,16 +95,16 @@ export default function WorkPage() {
           className="font-sans font-bold mb-6"
           style={{ fontSize: "clamp(2.75rem, 5vw, 5.5rem)", lineHeight: 1.05, color: TEAL }}
         >
-          What you&rsquo;re owed, and what you have to ask for.
+          What you&rsquo;re entitled to, and what you can ask for.
         </h1>
         <p className="text-[18px] font-sans leading-[1.6] text-muted" style={{ maxWidth: "58ch" }}>
-          A small amount of this is law. A great deal of it is policy — money and time your
-          employer may already provide and never mention. The gap between the two is closed by
-          knowing what to ask, and asking it in writing.
+          A small amount of this is law. A great deal of it is policy: money and time your
+          employer may already provide and never mention. Knowing what to ask, in writing, closes
+          the gap.
         </p>
         <p className="text-[16px] font-sans leading-relaxed text-muted mt-4" style={{ maxWidth: "58ch" }}>
-          Every script here is written for someone who has told nobody, because that is most
-          people. Disclosure is a choice you make later, if you want to.
+          Most scripts here work without telling anyone about your treatment; those that rely on
+          pregnancy protection say your employer has to know.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-2">
@@ -129,35 +121,26 @@ export default function WorkPage() {
         </div>
       </Section>
 
-      {/* The numbers */}
       <Section band={1} className="border-t border-border">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
           style={{ color: "var(--teal)" }}
         >
           <ShapeMark name="spark" size={14} style={{ color: "var(--lavender)" }} />
-          Why this is worth ten minutes
+          Why it can be worth asking
         </p>
-        <h2
-          className="font-sans font-bold mb-5"
-          style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
-        >
-          Most people never ask.
-        </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Fertility benefits have grown faster than awareness of them, so the commonest outcome is
-          an employee paying for treatment their employer would have funded. The second commonest is
-          someone leaving a job they liked because nobody would move a meeting.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-0 mt-8">
           {WORKPLACE_STATS.map((s, i) => (
-            <StatCard key={s.label} value={s.value} label={s.label} delay={i * 0.08} />
+            <div key={s.label}>
+              <StatCard value={s.value} label={s.label} delay={i * 0.08} />
+              <p className="text-[12px] font-sans leading-snug -mt-4 pb-6" style={{ color: TEAL_SOFT, maxWidth: "30ch" }}>
+                Source: {s.source}
+              </p>
+            </div>
           ))}
         </div>
       </Section>
 
-      {/* Rights */}
       <Section band={2} id="rights" className="border-t border-border scroll-mt-20">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
@@ -172,17 +155,13 @@ export default function WorkPage() {
         >
           Less law than you&rsquo;d expect. More than you&rsquo;re using.
         </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "60ch" }}>
-          The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
-          <strong className="font-[600]">embryo transfer</strong> — not when a pregnancy is
-          confirmed, and not when treatment starts.
-        </p>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "60ch" }}>
-          Below, what the law actually gives you is kept apart from what is policy, proposal or
-          goodwill. Almost everything written about this subject blurs the two.
+          The one employers most often get wrong: in the UK, pregnancy protection begins at{" "}
+          <strong className="font-[600]">embryo transfer</strong>, not when a pregnancy is
+          confirmed, and not when treatment starts. It applies once your employer knows.
         </p>
 
-        <RightsExplorer entries={RIGHTS_BY_COUNTRY} />
+        <RightsExplorer entry={UK_RIGHTS} />
 
         <div className="mt-10 rounded-2xl p-6 md:p-8" style={{ background: "var(--teal)" }}>
           <p
@@ -196,15 +175,52 @@ export default function WorkPage() {
             className="text-[16px] font-sans leading-relaxed"
             style={{ color: "var(--on-teal)", maxWidth: "64ch" }}
           >
-            This is a summary of the position with its sources attached, not legal advice, and
-            CairnFertility is not a law firm. If something has already gone wrong at work — a
-            refusal, a disciplinary, a dismissal — talk to Acas, your union, or an employment
-            solicitor before you respond to it. Most of them will do a first conversation free.
+            This is a summary with its sources attached, not legal advice; CairnFertility is not a
+            law firm. If something has already gone wrong at work (a refusal, a disciplinary, a
+            dismissal), talk to Acas, your union or an employment solicitor before you respond.
+            Tribunal claims have strict time limits, currently three months less a day from the
+            event (six months less a day where the limit starts on or after 1 October 2026), so
+            contact Acas early. Acas and unions are free; some solicitors offer a free first call.
           </p>
         </div>
+
+        <div id="after-treatment" className="mt-14 scroll-mt-24">
+          <h3
+            className="font-sans font-bold mb-3"
+            style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, color: TEAL }}
+          >
+            After treatment: leave, pay and childcare.
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0 mt-8">
+            {AFTER_TREATMENT_SIGNPOSTS.map((s) => (
+              <div key={s.point} className="py-6 border-t" style={{ borderColor: "var(--border)" }}>
+                <p className="font-sans font-bold text-[15px] mb-1.5" style={{ color: TEAL }}>
+                  {s.point}
+                </p>
+                <p className="text-[14px] font-sans leading-relaxed text-muted mb-3">{s.detail}</p>
+                <a
+                  href={s.source.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[13px] font-sans underline underline-offset-2"
+                  style={{ color: TEAL }}
+                >
+                  {s.source.label}
+                  <ExternalLink className="h-3 w-3 shrink-0" />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="text-[15px] font-sans leading-relaxed text-muted mt-10">
+          <Link href="/support#work" className="underline underline-offset-2" style={{ color: TEAL }}>
+            Looking after yourself
+          </Link>
+          : work and counselling.
+        </p>
       </Section>
 
-      {/* What employers offer */}
       <Section band={3} id="what-employers-offer" className="border-t border-border scroll-mt-20">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
@@ -221,7 +237,7 @@ export default function WorkPage() {
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
           They are announced in near-identical language and differ by thousands of pounds. Work out
-          which one you actually have before you plan around it.
+          which one you have before you plan around it.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
@@ -238,39 +254,10 @@ export default function WorkPage() {
           ))}
         </div>
 
-        {/* Providers */}
-        <div className="mt-20">
-          <h3
-            className="font-sans font-bold mb-3"
-            style={{ fontSize: "clamp(1.625rem, 2.2vw, 2.25rem)", lineHeight: 1.2, color: TEAL }}
-          >
-            Who runs these schemes.
-          </h3>
-          <p className="text-[16px] font-sans leading-relaxed text-muted mb-10" style={{ maxWidth: "62ch" }}>
-            If your employer uses one of these, the platform rather than HR usually holds the detail
-            of what you can claim — and its own support team will answer questions your employer
-            never sees.
-          </p>
+        <p className="text-[16px] font-sans leading-relaxed text-muted mt-10" style={{ maxWidth: "62ch" }}>
+          {PLATFORM_LINE}
+        </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
-            {BENEFIT_PROVIDERS.map((p) => (
-              <div key={p.name} className="py-8 border-t" style={{ borderColor: "var(--border)" }}>
-                <p
-                  className="text-[12px] font-[600] uppercase tracking-[0.12em] mb-3 font-sans"
-                  style={{ color: TEAL_SOFT }}
-                >
-                  {p.scope}
-                </p>
-                <h4 className="font-sans font-bold text-base mb-2.5" style={{ color: TEAL }}>
-                  {p.name}
-                </h4>
-                <p className="text-[15px] font-sans leading-relaxed text-muted">{p.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Named employers */}
         <div className="mt-20">
           <h3
             className="font-sans font-bold mb-3"
@@ -279,12 +266,11 @@ export default function WorkPage() {
             Employers with published provision.
           </h3>
           <p className="text-[16px] font-sans leading-relaxed text-muted mb-8" style={{ maxWidth: "62ch" }}>
-            A short list on purpose. These are employers whose fertility provision has been publicly
-            reported — useful as precedent when you are asking your own employer to catch up, and as
-            a starting point if you are job-hunting.
+            A short list on purpose: UK employers whose provision has been publicly reported, with
+            the report each entry was read from.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0">
             {NAMED_EMPLOYERS.map((e) => (
               <div key={e.name} className="py-6 border-t" style={{ borderColor: "var(--border)" }}>
                 <p
@@ -296,21 +282,31 @@ export default function WorkPage() {
                 <h4 className="font-sans font-bold text-base mb-1.5" style={{ color: TEAL }}>
                   {e.name}
                 </h4>
-                <p className="text-[14px] font-sans leading-relaxed text-muted">{e.reported}</p>
+                <p className="text-[14px] font-sans leading-relaxed text-muted mb-2">{e.reported}</p>
+                <p className="text-[13px] font-sans leading-relaxed" style={{ color: TEAL_SOFT }}>
+                  {e.when}:{" "}
+                  <a
+                    href={e.source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2"
+                    style={{ color: TEAL }}
+                  >
+                    {e.source.label}
+                  </a>
+                </p>
               </div>
             ))}
           </div>
 
           <p className="text-[14px] font-sans leading-relaxed text-muted mt-8" style={{ maxWidth: "68ch" }}>
-            Reported provision as at {WORK_LAST_REVIEWED}. Benefits are withdrawn as quietly as they
-            are announced, and the detail — caps, eligibility, waiting periods — is rarely in the
-            press release. Confirm directly with the employer before relying on any of it, and never
-            accept a job on the strength of a benefit you have not seen documented.
+            Checked {WORK_LAST_REVIEWED}. Benefits are withdrawn as quietly as they are announced,
+            and caps, eligibility and waiting periods are rarely in the press release. Confirm with
+            the employer before relying on any of it.
           </p>
         </div>
       </Section>
 
-      {/* Find out */}
       <Section band={4} id="find-out" className="border-t border-border scroll-mt-20">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
@@ -326,15 +322,13 @@ export default function WorkPage() {
           The audit, and the email.
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Everyone knows to &ldquo;ask HR&rdquo;. Almost nobody knows which questions separate a
-          benefit that will pay for treatment from one that will not. Pick where you work, and this
-          builds the email — asking all of them, disclosing none of your own plans.
+          Six questions separate a benefit that will pay for treatment from one that will not. This
+          builds the email that asks them, to HR or a recruiter, without disclosing your plans.
         </p>
 
         <BenefitsAudit steps={AUDIT_STEPS} />
       </Section>
 
-      {/* Scripts */}
       <Section band={5} id="asking" className="border-t border-border scroll-mt-20">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
@@ -349,14 +343,30 @@ export default function WorkPage() {
         >
           You decide how much anyone knows.
         </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-4" style={{ maxWidth: "62ch" }}>
-          Treatment runs on a calendar you do not control: scans move at 48 hours&rsquo; notice,
-          collection lands when it lands. That unpredictability, rather than the treatment itself, is
-          what turns work into a problem — and it can be managed without telling anyone why.
-        </p>
+        {/* The first email: verbatim from the former employer-benefits guide (C9) */}
+        <div
+          className="mt-10 mb-12 rounded-2xl border bg-background p-5 md:p-7"
+          style={{ borderColor: "var(--border)" }}
+        >
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <p
+              className="inline-block rounded-full px-3 py-1 text-[11px] font-[700] uppercase tracking-[0.16em] font-sans"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+            >
+              A first email to HR
+            </p>
+            <CopyButton text={HR_FIRST_EMAIL} />
+          </div>
+          <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
+            {HR_FIRST_EMAIL}
+          </p>
+          <p className="text-[13px] font-sans leading-relaxed text-muted mt-4">
+            You do not need to say why you are asking.
+          </p>
+        </div>
+
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Pick the conversation you are having. Every line is written to be said out loud, and can be
-          copied to your phone.
+          Pick the conversation you are having. Every line is written to be said out loud.
         </p>
 
         <ConversationToolkit
@@ -371,70 +381,7 @@ export default function WorkPage() {
         />
       </Section>
 
-      {/* Offer stage */}
-      <Section band={6} id="job-offers" className="border-t border-border scroll-mt-20">
-        <p
-          className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
-          style={{ color: "var(--teal)" }}
-        >
-          <ShapeMark name="pause" size={14} style={{ color: "var(--lavender)" }} />
-          At the offer stage
-        </p>
-        <h2
-          className="font-sans font-bold mb-5"
-          style={{ fontSize: "clamp(2.5rem, 4vw, 4.25rem)", lineHeight: 1.1, color: TEAL }}
-        >
-          A benefit is part of the salary.
-        </h2>
-        <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          Employers increasingly put fertility cover in the recruitment pack, which makes it a
-          negotiable, comparable part of an offer — and one of the few where the difference between
-          two employers can exceed £10,000. Ask before you sign; it is a benefits question like
-          pension matching, and you are not declaring anything by asking it.
-        </p>
-
-        <ul className="space-y-0 max-w-[70ch]">
-          {OFFER_CHECKS.map((q, i) => (
-            <li key={q} className="py-6 border-t flex items-start gap-4" style={{ borderColor: "var(--border)" }}>
-              <span className="text-[12px] font-[700] font-sans mt-1.5 shrink-0" style={{ color: TEAL_SOFT }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <p className="text-[16px] font-sans leading-relaxed" style={{ color: TEAL }}>
-                {q}
-              </p>
-            </li>
-          ))}
-        </ul>
-
-        {/* White card, lime only as the marker: the lime fill sat straight on the
-            cream band and the two warm colours fought each other. */}
-        <div
-          className="mt-10 rounded-2xl border bg-background p-5 md:p-7"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <div className="flex items-center justify-between gap-3 mb-4">
-            <p
-              className="inline-block rounded-full px-3 py-1 text-[11px] font-[700] uppercase tracking-[0.16em] font-sans"
-              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
-            >
-              Send this to the recruiter
-            </p>
-            <CopyButton
-              text={
-                "Before I confirm, could you send me the benefits documentation — including anything on family forming and fertility? I'd like to check whether it's available from day one, what the cap is, and whether medication and donor gametes are included."
-              }
-            />
-          </div>
-          <p className="text-[17px] font-sans leading-[1.6] font-[500]" style={{ color: TEAL }}>
-            Before I confirm, could you send me the benefits documentation — including anything on
-            family forming and fertility? I&rsquo;d like to check whether it&rsquo;s available from
-            day one, what the cap is, and whether medication and donor gametes are included.
-          </p>
-        </div>
-      </Section>
-
-      {/* Making the case */}
-      <Section band={7} id="making-the-case" className="border-t border-border scroll-mt-20">
+      <Section band={6} id="making-the-case" className="border-t border-border scroll-mt-20">
         <p
           className="text-[13px] font-[600] uppercase tracking-[2px] font-sans flex items-center gap-2 mb-4"
           style={{ color: "var(--teal)" }}
@@ -449,10 +396,9 @@ export default function WorkPage() {
           Making the case.
         </h2>
         <p className="text-lg font-sans leading-relaxed text-muted mb-12" style={{ maxWidth: "62ch" }}>
-          You are under no obligation to fix your employer while you are in treatment, and plenty of
-          people rightly decide this is not their job. If you do want to raise it, the retention
-          argument is the one that lands: more than a third of employees in treatment have left or
-          considered leaving, and replacing them costs more than a policy does.
+          You are under no obligation to fix your employer while you are in treatment. If you do
+          raise it, the retention argument is the one employers respond to; the figures above and
+          the CIPD guidance below are the material.
         </p>
 
         <h3 className="font-sans font-bold text-xl mb-5" style={{ color: TEAL }}>
@@ -485,15 +431,12 @@ export default function WorkPage() {
 
         <div className="mt-14 rounded-2xl border p-6 flex flex-col sm:flex-row sm:items-center gap-5" style={{ borderColor: "var(--border)" }}>
           <div className="flex-1">
-            <p className="text-[12px] font-[600] uppercase tracking-[0.12em] text-muted mb-2 font-sans">
-              Once you know what you have
-            </p>
             <p className="font-sans font-semibold text-base mb-1" style={{ color: TEAL }}>
               Funding &amp; payment options
             </p>
             <p className="text-sm font-sans text-muted leading-relaxed" style={{ maxWidth: "52ch" }}>
-              Employer benefits are one route among many. What is free on the NHS and how to qualify,
-              plus every way people pay for the rest.
+              Employer benefits are one route among several. What the NHS funds, and how people pay
+              for the rest.
             </p>
           </div>
           <Link
@@ -508,10 +451,9 @@ export default function WorkPage() {
 
         <p className="text-[15px] font-sans leading-relaxed text-muted mt-14" style={{ maxWidth: "68ch" }}>
           Employment and benefits information last reviewed {WORK_LAST_REVIEWED}. Law, policy and
-          employer provision all change; treat everything here as a starting point for a question
-          rather than a statement of your own position. CairnFertility is not a law firm and nothing
-          on this page is legal advice. We receive no payment from any employer or provider named on
-          it.
+          employer provision change; treat this as a starting point for a question, not a statement
+          of your position. CairnFertility is not a law firm and nothing here is legal advice. We
+          receive no payment from any employer or provider named.
         </p>
       </Section>
 

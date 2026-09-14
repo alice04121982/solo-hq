@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { FORMS_CLOSED_API_MESSAGE, FORMS_OPEN } from "@/lib/launch";
 import { clientKey, rateLimit } from "@/lib/rate-limit";
 import { isGuardFailure, readJsonBody, readString, withSupabase } from "@/lib/api-guard";
 
@@ -14,6 +15,11 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * chatty is worth more than the confirmation message it cost.
  */
 export async function POST(request: Request) {
+  // Closed until launch (see src/lib/launch.ts).
+  if (!FORMS_OPEN) {
+    return NextResponse.json({ error: FORMS_CLOSED_API_MESSAGE }, { status: 503 });
+  }
+
   const limit = rateLimit(`waitlist:${clientKey(request)}`, 5, 60_000);
   if (!limit.ok) {
     return NextResponse.json(

@@ -5,14 +5,14 @@ import { SiteNav } from "@/components/site-nav";
 import { CTASection } from "@/components/cta-section";
 import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
-import { ShapeMark, Spark } from "@/components/shapes";
+import { Spark } from "@/components/shapes";
 import { DATA_PROVENANCE } from "@/lib/clinics";
 import { CONTACT_EMAILS } from "@/lib/legal";
 import { CLINIC_EXCLUSIONS } from "@/lib/clinic-exclusions";
 import { HFEA } from "@/lib/regulators";
 
 /**
- * The CMA's June 2021 consumer-law guidance for fertility clinics — adopted
+ * The CMA's June 2021 consumer-law guidance for fertility clinics, adopted
  * here as Cairn's editorial standard for presenting prices and success rates.
  */
 const CMA_FERTILITY_GUIDANCE_URL =
@@ -21,37 +21,14 @@ const CMA_FERTILITY_GUIDANCE_URL =
 export const metadata: Metadata = {
   title: "About | CairnFertility",
   description:
-    "CairnFertility is an independent information service helping solo parents, LGBTQ+ families, and couples compare IVF clinics — built in the open, with the story so far and what's coming next.",
+    "CairnFertility is an independent information service helping solo parents, LGBTQ+ families, and couples compare IVF clinics. Built in the open, with the story so far and what's coming next.",
 };
-
-const VALUES = [
-  {
-    shape: "bloom" as const,
-    title: "Every family, on equal footing",
-    body: "Solo mums, solo dads, two mums, two dads, straight couples: the guides, comparisons, and tools here are built for all of it, not retrofitted from a template built for one kind of family.",
-  },
-  {
-    shape: "spark" as const,
-    title: "The real cost, not the headline one",
-    body: "Clinics abroad often look cheaper until flights and hotels are added. We show the honest, all-in comparison next to UK options so a price is something you can actually plan around.",
-  },
-  {
-    shape: "egg" as const,
-    title: "Evidence over hype",
-    body: "Success rates are population statistics, not a promise. We label HFEA-verified UK data separately from self-reported overseas figures, and we say plainly when a treatment add-on has no strong evidence behind it.",
-  },
-  {
-    shape: "halves" as const,
-    title: "Privacy by design",
-    body: "No accounts, no cookies, no tracking. The clinic matcher's answers, including anything about your health, stay in your browser. We built it that way on purpose, not as an afterthought.",
-  },
-];
 
 const MILESTONES = [
   {
     tag: "Live",
     title: "Comparing UK and overseas clinics",
-    body: "The clinic finder and matcher went live first: true-cost comparisons, HFEA-verified success rates where they exist, and filters for solo- and LGBTQ+-friendliness that most comparison sites don't ask about.",
+    body: "The clinic finder and matcher went live first: UK and overseas clinics side by side, with the source and year behind every figure.",
   },
   {
     tag: "Live",
@@ -59,14 +36,14 @@ const MILESTONES = [
     body: "Solo mums, solo dads, two mums, two dads, and couples each get their own guide, written for their actual path rather than adapted from a straight-couple template.",
   },
   {
-    tag: "Live",
-    title: "Real stories, honestly labelled",
-    body: "Stories and quotes from the community, built to make an unfamiliar process feel less abstract, clearly marked as illustrative composites rather than presented as verified case studies.",
+    tag: "Paused",
+    title: "Real stories, when we have them",
+    body: "We've taken down our example stories and quotes. We'll publish real accounts, including ones where treatment didn't work, only with the writer's consent.",
   },
   {
     tag: "Building now",
     title: "A community, not just a comparison tool",
-    body: "The next thing we're building is a place to find other people at your stage, hear from people who've been through it, and find local meetups. That's what the waitlist below is for.",
+    body: "The next thing we're building is a place to find other people at your stage, and hear from people who've been through it. That's what the waitlist below is for.",
   },
 ];
 
@@ -92,7 +69,7 @@ export default function AboutPage() {
             />
           </div>
 
-          {/* Arch-cropped photo — the same geometric mask the hero grid uses,
+          {/* Arch-cropped photo: the same geometric mask the hero grid uses,
               with a spark pinned over the corner as on the CTA band. */}
           <div className="relative w-64 md:w-80 justify-self-center lg:justify-self-end">
             <div className="relative aspect-[4/5] overflow-hidden rounded-t-full">
@@ -122,10 +99,10 @@ export default function AboutPage() {
             </h2>
             <ul className="space-y-3">
               {[
-                "Compare UK and overseas IVF clinics on true cost, verified success rates, and solo- and LGBTQ+-friendliness.",
+                "Compare UK and overseas IVF clinics on headline price, travel and published success rates, with the source behind every figure.",
                 "Publish plain-English guides for every family type and every stage of the process.",
                 "Run a clinic matcher that narrows the field to your situation, entirely in your own browser.",
-                "Share real, illustrative stories from the community, clearly labelled as composites.",
+                "Publish real stories from people at every stage, only with their consent.",
               ].map((item) => (
                 <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
                   {item}
@@ -153,24 +130,10 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Values */}
-      <Section band={2} backdrop={{ shape: "dots", side: "left" }}>
-        <SectionHeading eyebrow="Our principles" mark="egg" title="What we build against" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {VALUES.map((v) => (
-            <div key={v.title} className="rounded-2xl bg-background p-6 md:p-7">
-              <ShapeMark name={v.shape} size={28} className="mb-4" style={{ color: "var(--lavender)" }} />
-              <h3 className="font-sans font-semibold text-teal text-lg mb-2">{v.title}</h3>
-              <p className="text-sm font-sans text-muted leading-relaxed">{v.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Methodology — the editorial standard the numbers are held to, and
+      {/* Methodology: the editorial standard the numbers are held to, and
           where every figure comes from. This is the public statement behind
           the provenance notes shown beside the finder, matcher and guides. */}
-      <Section band={3} id="methodology">
+      <Section band={2} id="methodology">
         <SectionHeading eyebrow="Methodology" mark="halves" title="How we check our numbers." className="mb-5" />
         <p className="text-lg font-sans text-muted leading-relaxed mb-4" style={{ maxWidth: "58ch" }}>
           Our editorial standard for presenting prices and success rates is the{" "}
@@ -186,21 +149,21 @@ export default function AboutPage() {
           </a>{" "}
           (June 2021). It was written for clinics, but it is the definitive UK statement of
           what fair price and success-rate information looks like, and we hold our own pages
-          to it: all-in costs rather than headline prices, and success rates that always say
-          what they measure, which year they cover, and where they come from.
+          to it: headline prices with what they leave out stated beside them, and success rates
+          that always say what they measure, which year they cover, and where they come from.
         </p>
         <p className="text-[15px] font-sans text-muted leading-relaxed mb-8" style={{ maxWidth: "58ch" }}>
           In practice, that means:
         </p>
         <ul className="space-y-3 max-w-3xl">
           {[
-            `UK success rates come from the ${HFEA.shortName}'s public Choose a Clinic register, the independently verified source, and are labelled with their year and denominator (live births per embryo transfer). Overseas figures are self-reported by each clinic and labelled as not independently verified.`,
-            "A success-rate bracket a clinic has not published is shown as \"not published\" — never guessed, estimated, or filled with a zero.",
-            `Prices are compiled from ${DATA_PROVENANCE.pricesSourceLabel} and sanity-checked against the HFEA's and NHS's national cost benchmarks. Our comparisons show the estimated all-in cost — medications, consultations, donor material, travel where relevant — beside the headline quote, never instead of it.`,
+            `UK success rates are copied from the ${HFEA.shortName}'s public Choose a Clinic page for each clinic, which currently shows 2023 births per embryo transferred for two age groups (under 38, and 38 and over) with the ${HFEA.shortName}'s verdict against the national average. Overseas figures are the clinic's own, labelled as not checked by us, and are never sorted into one list with UK figures.`,
+            "A success-rate age group a clinic has not published is shown as \"not published\", never guessed, estimated, or filled with a zero.",
+            `Prices are headline figures from ${DATA_PROVENANCE.pricesSourceLabel}, sanity-checked against the HFEA's national cost guidance. Beside the headline price we show a travel estimate for treatment abroad and, where a clinic publishes one, its own estimate of a typical total. Drugs, ICSI, donor material and storage are usually charged on top.`,
             `Every price-bearing page shows its verification date. The data was last re-verified on ${new Date(`${DATA_PROVENANCE.pricesVerifiedOn}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}, and an automated check fails our build if it goes stale, so an out-of-date figure cannot sit here quietly.`,
             "Fertility medications are discussed by category with typical cost ranges only. Prescription medicines are never named or promoted here: prescribing decisions belong with your clinician.",
             "Some clinics are deliberately not listed. Where credible reporting or an open regulatory investigation means we cannot stand behind what a clinic tells patients, we leave it out of the finder rather than list it with a caveat, and we say which clinics and why below.",
-            `Spotted a figure that looks wrong or out of date? Email ${CONTACT_EMAILS.general} — corrections go to the top of the list.`,
+            `Spotted a figure that looks wrong or out of date? Email ${CONTACT_EMAILS.general}. Corrections go to the top of the list.`,
           ].map((item) => (
             <li key={item} className="text-[15px] font-sans text-muted leading-relaxed pl-5 border-l-2 border-border">
               {item}
@@ -209,64 +172,57 @@ export default function AboutPage() {
         </ul>
 
         {/* The exclusions themselves, in full. A policy of leaving clinics
-            out is only honest if the list is visible and sourced — the same
+            out is only honest if the list is visible and sourced, the same
             standard we hold the numbers to. */}
         <div className="mt-12 rounded-[24px] bg-cream p-6 md:p-8" style={{ maxWidth: "72ch" }}>
           <h3 className="font-sans font-semibold text-foreground text-lg mb-2">
             Clinics we do not list
           </h3>
-          <p className="text-[15px] font-sans text-muted leading-relaxed mb-6">
+          <p className="text-[15px] font-sans text-muted leading-relaxed mb-4">
             Leaving a clinic out is not a finding against it, and nothing here is an allegation
-            of ours. Each entry records what a named publication has reported, links to it, and
-            notes any response on the record. Each is reviewed on the date shown.
+            of ours. While the wording is under legal review we publish only the reason below,
+            with links to the reporting it rests on. Each exclusion is reviewed on the date shown.
           </p>
-          <ul className="space-y-6">
-            {CLINIC_EXCLUSIONS.map((x) => (
-              <li key={x.name} className="pl-5 border-l-2 border-border">
-                <p className="font-sans font-semibold text-teal text-[15px] mb-1">
-                  {x.name} &mdash; {x.country}
-                </p>
-                <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">{x.reason}</p>
-                {x.response && (
-                  <p className="text-[15px] font-sans text-muted leading-relaxed mb-2">
-                    <span className="font-medium text-foreground">Their response:</span> {x.response}
-                  </p>
-                )}
-                <p className="text-[13px] font-sans text-muted leading-relaxed">
-                  Sources:{" "}
-                  {x.sources.map((src, i) => (
-                    <span key={src.url}>
-                      {i > 0 && "; "}
-                      <a
-                        href={src.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium text-teal hover:underline underline-offset-2"
-                      >
-                        {src.label}
-                        <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
-                      </a>
-                    </span>
-                  ))}
-                  . Next review{" "}
-                  {new Date(`${x.reviewOn}T00:00:00Z`).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                    timeZone: "UTC",
-                  })}
-                  .
-                </p>
-              </li>
-            ))}
-          </ul>
+          {/* Neutral wording (see src/lib/clinic-exclusions.ts): the shared
+              reason, a count by country, and the sources deduplicated. Clinic
+              names are deliberately not rendered here or in the finder. */}
+          {[...new Set(CLINIC_EXCLUSIONS.map((x) => x.reason))].map((reason) => (
+            <p key={reason} className="text-[15px] font-sans text-muted leading-relaxed mb-3">
+              {reason}
+            </p>
+          ))}
+          <p className="text-[13px] font-sans text-muted leading-relaxed">
+            Currently {CLINIC_EXCLUSIONS.length} clinics in{" "}
+            {[...new Set(CLINIC_EXCLUSIONS.map((x) => x.country))].join(" and ")}. Reporting:{" "}
+            {CLINIC_EXCLUSIONS.flatMap((x) => x.sources)
+              .filter((src, i, all) => all.findIndex((s) => s.url === src.url) === i)
+              .map((src, i) => (
+                <span key={src.url}>
+                  {i > 0 && "; "}
+                  <a
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-teal hover:underline underline-offset-2"
+                  >
+                    {src.label}
+                    <ExternalLink className="inline h-3 w-3 ml-1 align-baseline" aria-hidden />
+                  </a>
+                </span>
+              ))}
+            . Next review{" "}
+            {new Date(
+              `${[...CLINIC_EXCLUSIONS.map((x) => x.reviewOn)].sort()[0]}T00:00:00Z`
+            ).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}
+            .
+          </p>
         </div>
       </Section>
 
-      {/* Our story — the running build-in-the-open log, merged in from the
+      {/* Our story: the running build-in-the-open log, merged in from the
           old /our-story page (which now redirects here). Sits last so the
           "building now" milestone hands straight off to the waitlist CTA. */}
-      <Section band={4} id="story">
+      <Section band={3} id="story">
         <SectionHeading
           eyebrow="Our story"
           mark="spark"

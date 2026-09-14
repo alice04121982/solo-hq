@@ -11,7 +11,15 @@ import {
   type Region,
   type Treatment,
 } from "@/types/clinic";
-import { cheapestPublishedPrice, priceBounds } from "@/lib/clinics";
+import {
+  cheapestPublishedPrice,
+  FINDER_SORTS,
+  priceBounds,
+  rateFor,
+  verdictFor,
+  type FinderSort,
+} from "@/lib/clinics";
+import { RATE_NOTE } from "@/lib/rate-labels";
 import {
   FilterTogglePill,
   MultiSelectDropdown,
@@ -24,13 +32,15 @@ import { CountryFlag } from "@/components/country-flag";
 /**
  * Filter state for the Cairn clinic finder.
  *
- * Everything except the age bracket is optional and combinable, and none of it
- * gates results: the empty state matches every clinic in the database. The age
- * bracket is required because it drives the ranking, not because it narrows
- * the list.
+ * Everything except the age bracket and the sort is optional and combinable,
+ * and none of it gates results: the empty state matches every clinic in the
+ * database. The age bracket is required because it chooses which published
+ * figure a card shows, not because it narrows the list. The sort is display
+ * order only and is never counted as a filter.
  */
 export interface FinderFilterState {
   ageBracket: AgeBracket;
+  sort: FinderSort;
   regions: Region[];
   countries: string[];
   treatments: Treatment[];
@@ -38,17 +48,47 @@ export interface FinderFilterState {
   priceCeiling: number | null;
   donorAnonymity: "any" | "identifiable" | "anonymous";
   remoteConsultation: boolean;
+  /**
+   * Narrow by the published rate for the chosen age bracket. The two
+   * "average" options use the HFEA's own verdict on each UK clinic, so they
+   * never compare figures across clinics ourselves; overseas clinics have no
+   * verdict and drop out of those two. "published" keeps any clinic with a
+   * figure for the bracket, whoever published it.
+   */
+  successRate: SuccessRateFilter;
 }
+
+export type SuccessRateFilter = "any" | "above" | "consistentOrAbove" | "published";
 
 export const DEFAULT_FINDER_FILTERS: FinderFilterState = {
   ageBracket: "under35",
+  sort: "name",
   regions: [],
   countries: [],
   treatments: [],
   priceCeiling: null,
   donorAnonymity: "any",
   remoteConsultation: false,
+  successRate: "any",
 };
+
+const SUCCESS_RATE_OPTIONS: FilterOption<SuccessRateFilter>[] = [
+  { value: "any", label: "Any" },
+  {
+    value: "above",
+    label: "Above the national average (HFEA)",
+    shortLabel: "above national average",
+  },
+  {
+    value: "consistentOrAbove",
+    label: "At or above the national average (HFEA)",
+    shortLabel: "at or above national average",
+  },
+  { value: "published", label: "Has a published rate", shortLabel: "published rate" },
+];
+
+const SUCCESS_RATE_NOTE =
+  "The average options use the HFEA's own verdict for the chosen age group, so they show UK clinics only. Rates are averages across many patients, not a prediction for you.";
 
 const DONOR_OPTIONS: FilterOption<FinderFilterState["donorAnonymity"]>[] = [
   { value: "any", label: "Any" },
@@ -80,7 +120,7 @@ export function priceCeilingOptions(): FilterOption<string>[] {
  * The price the ceiling filter compares against, priced per treatment: IUI is
  * a fraction of an IVF cycle, so a £1,500 budget with IUI selected must look
  * at the IUI price, not the IVF headline. With no treatment selected, the
- * clinic's cheapest published price counts — "treatment under £5k" includes
+ * clinic's cheapest published price counts, "treatment under £5k" includes
  * IUI, not just IVF. Undefined means nothing relevant is published, and the
  * clinic is excluded while a ceiling is set.
  */
@@ -124,6 +164,13 @@ export function matchesFilters(clinic: Clinic, f: FinderFilterState): boolean {
 
   if (f.remoteConsultation && !clinic.remoteConsultation) return false;
 
+  if (f.successRate === "published" && rateFor(clinic, f.ageBracket) == null) return false;
+  if (f.successRate === "above" && verdictFor(clinic, f.ageBracket) !== "above") return false;
+  if (f.successRate === "consistentOrAbove") {
+    const verdict = verdictFor(clinic, f.ageBracket);
+    if (verdict !== "above" && verdict !== "consistent") return false;
+  }
+
   return true;
 }
 
@@ -134,7 +181,8 @@ export function countActiveFilters(f: FinderFilterState): number {
     f.treatments.length +
     (f.priceCeiling != null ? 1 : 0) +
     (f.donorAnonymity !== "any" ? 1 : 0) +
-    (f.remoteConsultation ? 1 : 0)
+    (f.remoteConsultation ? 1 : 0) +
+    (f.successRate !== "any" ? 1 : 0)
   );
 }
 
@@ -180,7 +228,7 @@ interface FilterControlsProps {
  * belongs to instead of padding out the page.
  *
  * Each pill states its own selection, so where the row itself is visible it is
- * the whole account of the current narrowing — no second strip repeating it.
+ * the whole account of the current narrowing, no second strip repeating it.
  *
  * Rendered inline on desktop and inside the filter sheet on mobile, so both
  * share one source of truth.
@@ -202,10 +250,16 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
     label: t,
   }));
   const priceOptions = priceCeilingOptions();
+  const sortOptions: FilterOption<FinderSort>[] = FINDER_SORTS.map((s) => ({
+    value: s.value,
+    label: s.label,
+    shortLabel: s.label.toLowerCase(),
+  }));
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {/* Age drives the ranking, so it is required and always shows its value. */}
+      {/* Age chooses which published figure each card shows, so it is
+          required and always shows its value. */}
       <SingleSelectDropdown
         label="Age"
         options={ageOptions}
@@ -213,7 +267,7 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         defaultValue={DEFAULT_FINDER_FILTERS.ageBracket}
         alwaysShowValue
         onChange={(ageBracket) => onChange({ ...filters, ageBracket })}
-        note="Results rank by live birth rate for this age group."
+        note={RATE_NOTE}
       />
 
       {/* Region and country narrow the same list; neither gates it. */}
@@ -243,7 +297,7 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         onChange={(value) =>
           onChange({ ...filters, priceCeiling: value === "any" ? null : Number(value) })
         }
-        note="Compares the cheapest published price for your selected treatments — IUI prices where IUI is selected, all treatments when none are."
+        note="Filters on IUI price if you pick IUI, otherwise on the IVF price."
       />
 
       <SingleSelectDropdown
@@ -258,6 +312,37 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
         label="Remote consultations"
         active={filters.remoteConsultation}
         onToggle={() => onChange({ ...filters, remoteConsultation: !filters.remoteConsultation })}
+      />
+
+      {/* Someone narrowing by rate wants the strongest figures first, so
+          choosing an option here also moves the list into rate order when
+          it is still in the default alphabetical order. The sort stays
+          theirs to change afterwards. */}
+      <SingleSelectDropdown
+        label="Success rate"
+        options={SUCCESS_RATE_OPTIONS}
+        value={filters.successRate}
+        defaultValue="any"
+        onChange={(successRate) =>
+          onChange({
+            ...filters,
+            successRate,
+            sort: successRate !== "any" && filters.sort === "name" ? "rate" : filters.sort,
+          })
+        }
+        note={SUCCESS_RATE_NOTE}
+      />
+
+      {/* Display order, not a filter: it never narrows the list and is not
+          counted in the active-filter badge. */}
+      <SingleSelectDropdown
+        label="Sort"
+        options={sortOptions}
+        value={filters.sort}
+        defaultValue={DEFAULT_FINDER_FILTERS.sort}
+        alwaysShowValue
+        onChange={(sort) => onChange({ ...filters, sort })}
+        note="Sorting by rate shows HFEA register figures and clinics' own figures as two separate groups, because the measures differ."
       />
 
       {onClearAll && countActiveFilters(filters) > 0 && (
@@ -275,8 +360,8 @@ export function FilterControls({ filters, onChange, onClearAll }: FilterControls
 
 /**
  * Removable Tags for every active optional filter. These stand in for the
- * filter row where it is not on screen — on mobile, where the controls live
- * behind the sheet — so the current narrowing is still visible and reversible
+ * filter row where it is not on screen, on mobile, where the controls live
+ * behind the sheet, so the current narrowing is still visible and reversible
  * in one tap. The age bracket is not here: it is required, so it has no
  * removed state.
  */
@@ -338,10 +423,17 @@ export function ActiveFilterTags({ filters, onChange }: FilterControlsProps) {
           onToggle={() => remove({ remoteConsultation: false })}
         />
       )}
+      {filters.successRate !== "any" && (
+        <FilterTag
+          label={SUCCESS_RATE_OPTIONS.find((o) => o.value === filters.successRate)?.label ?? ""}
+          active
+          onToggle={() => remove({ successRate: "any" })}
+        />
+      )}
       <button
         type="button"
         onClick={() =>
-          onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket })
+          onChange({ ...DEFAULT_FINDER_FILTERS, ageBracket: filters.ageBracket, sort: filters.sort })
         }
         className="text-xs font-medium text-muted underline underline-offset-2 hover:opacity-70 transition-opacity"
       >

@@ -5,7 +5,7 @@ import type { Region } from "@/types/clinic";
  *
  * The finder exists to help people choose a clinic, so the list of clinics we
  * decline to put in front of anyone is an editorial decision that has to be
- * written down, sourced, and reviewable — not a quiet deletion from
+ * written down, sourced, and reviewable, not a quiet deletion from
  * `src/lib/clinics.ts` that nobody can audit later.
  *
  * How it is enforced, twice over:
@@ -27,12 +27,35 @@ import type { Region } from "@/types/clinic";
  * - Individuals are never named here. The unit of the decision is the clinic.
  * - An exclusion is shown, not hidden. The finder renders these entries under
  *   its results, and `country`/`region` put them in reach of the same geography
- *   filters as a listed clinic — so someone searching where a clinic operates
- *   is told it was removed and why, instead of being handed an empty list.
+ *   filters as a listed clinic, so someone searching where a clinic operates
+ *   is told it is not listed and why, instead of being handed an empty list.
+ * - Every factual sentence in `reason` and `response` maps to a sentence in
+ *   one of the entry's sources and says who reported it. Sentences that only
+ *   state our own position ("We do not list...") are the exception.
+ *
+ * Wording, 13 September 2026: until a media solicitor has reviewed the
+ * entries, the site publishes a NEUTRAL version. The finder says that clinics
+ * in northern Cyprus named in BBC News reporting are not listed while the
+ * territory's investigation is open, and links to that reporting. It does not
+ * repeat any allegation against a named clinic, and `name` is no longer
+ * rendered anywhere (it is kept so the exclusion still matches the database).
+ * The fuller, attributed wording that was checked against syndicated copies of
+ * the BBC articles on 13 September 2026 is in the git history of this file
+ * (commit "Copy review phase 2") and can be restored once reviewed.
  */
 
+/** The one reason shown for every exclusion while the neutral wording is in force. */
+const NEUTRAL_REASON =
+  "BBC News reported in 2026 that the northern Cyprus Ministry of Health had opened an " +
+  "investigation into the use of donor sperm and eggs at IVF clinics there. We do not list " +
+  "clinics named in that reporting while the investigation is open. This is a holding " +
+  "position, not a finding of our own, and it is reviewed on the date held with the entry.";
+
 export interface ClinicExclusion {
-  /** The clinic's primary trading name, for display. */
+  /**
+   * The clinic's primary trading name. Used for matching and for the audit
+   * trail in this file; NOT rendered while the neutral wording is in force.
+   */
   name: string;
   /**
    * Every name the clinic is known by, including `name`. A database entry is
@@ -70,38 +93,29 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     countries: ["cyprus"],
     country: "Northern Cyprus",
     region: "Europe",
-    reason:
-      "BBC News reported in August 2026 that at least 30 children, most of them British, are " +
-      "feared to have been conceived in northern Cyprus using sperm or egg donors other than " +
-      "the ones their parents selected, and that half of those children were born from " +
-      "procedures at this clinic. The territory's Ministry of Health has said it opened an " +
-      "official investigation. Cryos International, the sperm bank the clinic advertised as a " +
-      "supplier, told the BBC it has no record of ever delivering sperm to the clinic and has " +
-      "blacklisted it since 2016. Donor provenance is the one thing a patient cannot check " +
-      "for themselves afterwards, so while that is unresolved we will not put the clinic in " +
-      "front of anyone as an option.",
+    reason: NEUTRAL_REASON,
     sources: [
       {
         label:
-          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "BBC News: IVF staff accused of misleading UK parents about sperm and egg donors " +
           "in northern Cyprus",
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (BBC documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
-        label: "Cyprus Mail — North launches probe into IVF clinic after sperm mix-up claims",
+        label: "Cyprus Mail: North launches probe into IVF clinic after sperm mix-up claims",
         url: "https://cyprus-mail.com/2026/04/02/north-launches-probe-into-ivf-clinic-after-sperm-mix-up-claims",
       },
       {
-        label: "Progress Educational Trust — UK families treated with wrong donor sperm in Northern Cyprus",
+        label: "Progress Educational Trust: UK families treated with wrong donor sperm in Northern Cyprus",
         url: "https://www.progress.org.uk/uk-families-treated-with-wrong-donor-sperm-in-northern-cyprus/",
       },
     ],
     excludedOn: "2026-08-18",
-    reviewOn: "2027-02-18",
+    reviewOn: "2026-12-01",
   },
   {
     name: "Miracle IVF",
@@ -109,33 +123,25 @@ export const CLINIC_EXCLUSIONS: ClinicExclusion[] = [
     countries: ["cyprus"],
     country: "Northern Cyprus",
     region: "Europe",
-    reason:
-      "Named in the same BBC News reporting, which linked further cases of the same kind to " +
-      "the clinic. Cryos International told the BBC it has suspended supplying the clinic " +
-      "until the northern Cyprus Ministry of Health investigation concludes. We are holding " +
-      "to the same line as the sperm bank: not listed while the investigation is open.",
-    response:
-      "The clinic says it has always complied with the law, that patients sign consent forms " +
-      "explaining how donors are chosen, and that it has been cleared of breaching any laws. " +
-      "The BBC reported it was unable to confirm that clearance with the Ministry of Health.",
+    reason: NEUTRAL_REASON,
     sources: [
       {
         label:
-          "BBC News — IVF staff accused of misleading UK parents about sperm and egg donors " +
+          "BBC News: IVF staff accused of misleading UK parents about sperm and egg donors " +
           "in northern Cyprus",
         url: "https://www.bbc.co.uk/news/articles/c75gv9xnr3po",
       },
       {
-        label: "BBC News — Sunshine & Secrets: The Hidden Side of IVF (File on 4 documentary)",
+        label: "BBC News: Sunshine & Secrets: The Hidden Side of IVF (BBC documentary)",
         url: "https://www.youtube.com/watch?v=1kzwW2yO2T4",
       },
       {
-        label: "Progress Educational Trust — UK families treated with wrong donor sperm in Northern Cyprus",
+        label: "Progress Educational Trust: UK families treated with wrong donor sperm in Northern Cyprus",
         url: "https://www.progress.org.uk/uk-families-treated-with-wrong-donor-sperm-in-northern-cyprus/",
       },
     ],
     excludedOn: "2026-08-18",
-    reviewOn: "2027-02-18",
+    reviewOn: "2026-12-01",
   },
 ];
 

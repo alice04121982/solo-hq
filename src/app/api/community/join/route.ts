@@ -27,7 +27,7 @@ const INVALID_MESSAGE =
  * token found in a log is not a way in.
  *
  * This is a POST for a reason. The link in the invite email is a GET, and GETs
- * get followed by things that are not the recipient — mail scanners, link
+ * get followed by things that are not the recipient: mail scanners, link
  * previewers, corporate security proxies. If GET burned the invite, half of
  * them would be dead before anyone clicked. So GET renders a page, and only a
  * deliberate submit spends the token.
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         error:
-          "We couldn't open the door just now. Please email us and we'll sort it out straight away.",
+          "We couldn't open the door just now. Please email us at hello@cairnfertility.com and we'll sort it out straight away.",
       },
       { status: 500 }
     );

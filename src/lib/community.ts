@@ -40,7 +40,7 @@ export interface CommunityOption<T extends string> {
 }
 
 /**
- * Deliberately looser than `FamilyTypeSlug` — someone can apply long before
+ * Deliberately looser than `FamilyTypeSlug`: someone can apply long before
  * they'd pick a treatment pathway, so "still deciding" is a first-class
  * answer rather than a fallback.
  *
@@ -59,7 +59,7 @@ export const PATHWAY_OPTIONS: CommunityOption<CommunityPathway>[] = [
 
 export const STAGE_OPTIONS: CommunityOption<CommunityStage>[] = [
   { value: "deciding", label: "Researching and deciding" },
-  { value: "preparing", label: "Preparing — tests, donor, money" },
+  { value: "preparing", label: "Preparing: tests, donor, money" },
   { value: "in-treatment", label: "In treatment now" },
   { value: "pregnant", label: "Pregnant" },
   { value: "parent", label: "Already a parent" },
@@ -81,15 +81,15 @@ export const INTEREST_VALUES = INTEREST_OPTIONS.map((o) => o.value);
 export const COMMUNITY_FEATURES = [
   {
     title: "Find others at your stage",
-    body: "Deciding, stimming, in the two-week wait, or holding a newborn — talk to people in the same week of the journey, not just the same postcode.",
+    body: "Deciding, on injections, in the two-week wait, or holding a newborn: talk to people in the same week of the journey, not just the same postcode.",
   },
   {
     title: "Hear from people who've been through it",
     body: "Honest answers from members who are two steps ahead of you: what they'd repeat, what they'd skip, what nobody warned them about.",
   },
   {
-    title: "Set up local meetups",
-    body: "Coffee with someone who gets it beats another evening of forum threads. Find members near you and take the conversation offline.",
+    title: "Meet locally, if you want to",
+    body: "Some members arrange to meet locally. Meet in public, and only when you both want to.",
   },
 ] as const;
 
@@ -102,11 +102,11 @@ export const COMMUNITY_FEATURES = [
 export const JOIN_STEPS = [
   {
     title: "You apply",
-    body: "A short form — who you are, where you are in the journey, and why you want in. The last part matters most: it is what a person reads.",
+    body: "A short form: who you are, where you are in the journey, and why you want in. The last part matters most: it is what a person reads.",
   },
   {
     title: "A person reads it",
-    body: "Not an algorithm, and not instantly. Usually within a few days. We are a small group and we would rather grow slowly than let the wrong person in.",
+    body: "Not an algorithm, and not instantly. Usually within a week. We keep the group small so it stays safe.",
   },
   {
     title: "You get a personal invite",
@@ -121,16 +121,16 @@ export const JOIN_STEPS = [
 /**
  * The safety promises, stated on the page because a member's decision to
  * share something painful depends on them being true. Each one is a claim
- * this codebase or the group's settings has to keep — check before editing.
+ * this codebase or the group's settings has to keep. Check before editing.
  */
 export const SAFETY_PROMISES = [
   {
     title: "Every member is checked by a person",
-    body: "Nobody joins by finding a link. Every single member applied, was read, and was approved individually.",
+    body: "Every member applied, was read by a person, and was approved individually.",
   },
   {
-    title: "The invite link is never public",
-    body: "It is not on this site, not in a search result, and not in an email you can forward usefully. Each invite works once and dies after seven days.",
+    title: "Invites are personal and short-lived",
+    body: "Each invite works once, only with the email it was sent to, and expires after seven days. Even then, an admin approves every join request inside WhatsApp.",
   },
   {
     title: "No clinics, no brands, no recruiters",
@@ -138,7 +138,7 @@ export const SAFETY_PROMISES = [
   },
   {
     title: "We ask for as little as we can",
-    body: "No phone number is ever collected by this website. No address, no date of birth, no medical records. What you write in the form is deleted once it has done its job.",
+    body: "No phone number is ever collected by this website. No address, no date of birth, no medical records. What you write is deleted on the schedule in our privacy policy.",
   },
 ] as const;
 
@@ -151,13 +151,13 @@ export interface CommunityRule {
 
 /**
  * The rules every applicant has to accept before applying, and again before
- * redeeming an invite. Kept short enough that people actually read them —
+ * redeeming an invite. Kept short enough that people actually read them:
  * a code of conduct nobody finishes protects nobody.
  */
 export const COMMUNITY_RULES: CommunityRule[] = [
   {
     title: "What is said here stays here",
-    body: "No screenshots, no forwarding, no quoting members anywhere else — not to a partner, not to a journalist, not on social media. This is the rule that makes every other one worth having, and breaking it is the fastest way out.",
+    body: "No screenshots, forwarding or quoting. Talk about your own experience with whoever you like, but never share anything that could identify another member. This is the rule that makes every other one worth having, and breaking it is the fastest way out.",
   },
   {
     title: "Nobody's numbers are yours to keep",
@@ -165,11 +165,11 @@ export const COMMUNITY_RULES: CommunityRule[] = [
   },
   {
     title: "Share your own story, not someone else's",
-    body: "Your donor, your ex, your clinic staff, your family — they did not join this group. Keep them unidentifiable.",
+    body: "Your donor, your ex, your clinic staff, your family: they did not join this group. Keep them unidentifiable.",
   },
   {
     title: "No medical advice, ever",
-    body: "Say what happened to you. Do not tell anyone what to take, what to ask for, or what to stop. Protocols are between a person and their clinic.",
+    body: "Share what happened to you, not instructions. Decisions about medication and protocols belong with your clinic.",
   },
   {
     title: "No selling, promoting, or recruiting",
@@ -193,9 +193,21 @@ export const COMMUNITY_RULES: CommunityRule[] = [
  * The one thing the site cannot engineer away, said plainly rather than
  * buried. Group messaging exposes members' phone numbers to each other; every
  * applicant is told before they apply and again before they redeem.
+ *
+ * The full notice is shown on /community and on the invite page; its
+ * canonical home is /community/guidelines#phone. The admin-visibility
+ * sentence is contract C4 and appears word for word in the privacy policy
+ * (src/lib/legal.ts) and the runbook; change all three together.
  */
 export const PHONE_NUMBER_NOTICE =
-  "The group runs on a messaging app, which means members can see each other's phone numbers. We cannot change that, and we would rather you knew now than found out later. If that is not a trade you want to make, this is the wrong group — and that is a completely reasonable place to land.";
+  "The group runs on a messaging app, which means members can see each other's phone numbers. We cannot change that, and we would rather you knew now than found out later. As group admin, we can see members' phone numbers in WhatsApp when we approve join requests and match them to applications. We do not copy them anywhere else. If that is not a trade you want to make, this is the wrong group, and that is a completely reasonable place to land.";
+
+/**
+ * The one-line version for places that only need to point at the notice.
+ * Contains a single markdown link; render it with a link-aware helper.
+ */
+export const PHONE_NUMBER_LINE =
+  "Members, and the admin, can see each other's phone numbers. [Read what that means](/community/guidelines#phone).";
 
 /** Grounds for removal, stated up front so removal is never a surprise. */
 export const REMOVAL_GROUNDS = [

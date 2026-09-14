@@ -32,7 +32,8 @@ export function WaitlistForm() {
       }
 
       // The API answers the same way whether this address was new or already
-      // on the list — see the note in src/app/api/waitlist/route.ts.
+      // on the list (see the note in src/app/api/waitlist/route.ts), so there
+      // is only one success state.
       setStatus("joined");
     } catch {
       setStatus("error");
@@ -51,10 +52,10 @@ export function WaitlistForm() {
         </span>
         <div>
           <p className="font-sans font-semibold text-teal mb-1">
-            {status === "joined" ? "You're on the list." : "You're already on the list."}
+            You&apos;re on the list.
           </p>
           <p className="text-sm font-sans text-muted leading-relaxed">
-            We&apos;ll email you when there is something worth telling you. The community itself is open now and takes applications —{" "}
+            We&apos;ll email you occasionally about new guides, price changes and IVF funding or law. Every email has an unsubscribe link. The community itself is open now and takes applications:{" "}
             <a href="/community" className="underline decoration-muted/40 hover:decoration-teal">apply to join</a>.
           </p>
         </div>
@@ -84,7 +85,7 @@ export function WaitlistForm() {
           className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90 disabled:opacity-60 shrink-0"
           style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
-          {status === "loading" ? "Joining…" : "Join the waitlist"}
+          {status === "loading" ? "Sending…" : "Keep me posted"}
           {status !== "loading" && <ArrowRight className="h-3.5 w-3.5" />}
         </button>
       </div>
@@ -92,7 +93,7 @@ export function WaitlistForm() {
         <p className="text-sm font-sans mt-3" style={{ color: "#C4406B" }}>{errorMessage}</p>
       )}
       <p className="text-xs font-sans text-muted mt-4 leading-relaxed">
-        We&apos;ll only use this to email you when the community opens. Read how we handle it in our{" "}
+        We&apos;ll email you occasionally about new guides, price changes and IVF funding or law. Every email has an unsubscribe link. Read how we handle your address in our{" "}
         <a href="/privacy" className="underline decoration-muted/40 hover:decoration-teal">privacy policy</a>.
       </p>
     </form>
