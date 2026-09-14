@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     "Fertility treatment guidance for every family: solo mums, solo dads, two mums, two dads, and couples navigating IVF together.",
 };
 
-// Display order: Solo Mums, Solo Dads, Two Mums, Two Dads, Couples (opposite-sex)
-const DISPLAY_ORDER = ["solo-mum", "single-dad", "same-sex-female", "same-sex-male", "heterosexual-couple"];
+// Display order: Mum and Dad, Solo Mums, Solo Dads, Two Mums, Two Dads
+const DISPLAY_ORDER = ["heterosexual-couple", "solo-mum", "single-dad", "same-sex-female", "same-sex-male"];
 
 function getOrdered(): FamilyType[] {
   return DISPLAY_ORDER.map((slug) => FAMILY_TYPES.find((f) => f.slug === slug)!).filter(Boolean);
