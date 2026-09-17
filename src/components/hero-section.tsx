@@ -7,10 +7,12 @@ import { HeroShapeGrid } from "./hero-shape-grid";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/* Pull-out features — one line each, the hero intro carries the why. */
 const TRUST_SIGNALS = [
-  "Travel estimates beside overseas prices",
-  "UK success rates from the HFEA register",
-  "Donor sperm & egg options compared",
+  "Guides for every kind of family",
+  "Plain-English walkthrough of how IVF works",
+  "Clinic comparison with honest costs and success rates",
+  "Funding, work and wellbeing support at every stage",
 ];
 
 export function HeroSection() {
@@ -38,18 +40,19 @@ export function HeroSection() {
                 color: "var(--on-teal)",
               }}
             >
-              IVF made clearer, for every kind of family.
+              A cairn marks the way. So do we.
             </h1>
 
-            {/* Kept under 30 words — the trust signals below carry the detail
-                this used to spell out. */}
+            {/* Leads with the name and what it means — the feature list below
+                carries the specifics. */}
             <p
               className="text-[18px] leading-[28px] mb-7 font-sans max-w-[560px]"
               style={{ color: "var(--on-teal-muted)" }}
             >
-              Clinics abroad often look cheaper until you add flights and hotels. We show a{" "}
-              <span style={{ color: "var(--on-teal)" }}>travel estimate</span> beside every overseas
-              price, and every success rate says where it came from.
+              Walkers stack stones to show the next person the path. IVF is a long walk with
+              a lot of unknowns, so Cairn is here to{" "}
+              <span style={{ color: "var(--on-teal)" }}>mark each step of the way</span>, for every
+              kind of family.
             </p>
 
             {/* Trust signals — a vertical list, sitting above the CTA */}
