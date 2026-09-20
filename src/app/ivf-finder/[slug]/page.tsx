@@ -282,9 +282,12 @@ export default async function ClinicDetailPage({ params }: PageProps) {
             <h2 className="text-base font-bold text-teal-ink mb-5">Key facts</h2>
             <div className="mb-4">
               {facts.map((f) => (
-                <div key={f.label} className="flex items-start justify-between gap-4 py-2.5 border-t border-border-warm">
-                  <span className="text-sm text-muted shrink-0">{f.label}</span>
-                  <span className="text-sm font-medium text-foreground text-right">{f.value}</span>
+                <div
+                  key={f.label}
+                  className="flex flex-col gap-0.5 py-2.5 border-t border-border-warm sm:flex-row sm:items-start sm:justify-between sm:gap-4"
+                >
+                  <span className="text-sm text-muted sm:shrink-0">{f.label}</span>
+                  <span className="text-sm font-medium text-foreground sm:text-right">{f.value}</span>
                 </div>
               ))}
             </div>
