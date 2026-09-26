@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored third-party skill (bundled browser scripts), not app code.
+    ".claude/skills/impeccable/**",
   ]),
 ]);
 
