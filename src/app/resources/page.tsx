@@ -149,7 +149,7 @@ export default function ResourcesPage() {
                 style={{ color: "var(--accent)" }}
               />
               <h3 className="font-sans font-semibold text-lg text-on-teal">{family.label}</h3>
-              <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-[600] font-sans text-on-teal-muted group-hover:text-on-teal transition-colors duration-150">
+              <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-[600] font-sans text-on-teal-body group-hover:text-on-teal transition-colors duration-150">
                 View resources <ArrowRight className="h-3 w-3" />
               </span>
             </Link>

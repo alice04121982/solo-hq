@@ -34,10 +34,10 @@ export default function GetStartedPage() {
           >
             Find clinics that fit your situation.
           </h1>
-          <p className="text-[16px] font-sans leading-[1.65]" style={{ color: "var(--on-teal-muted)" }}>
+          <p className="text-[16px] font-sans leading-[1.65]" style={{ color: "var(--on-teal-body)" }}>
             Answer four questions and we&apos;ll show you clinics that fit your family type, budget and travel range, with every figure&apos;s source.
           </p>
-          <p className="text-[13px] font-sans leading-relaxed mt-4" style={{ color: "var(--on-teal-muted)" }}>
+          <p className="text-[13px] font-sans leading-relaxed mt-4" style={{ color: "var(--on-teal-body)" }}>
             Your answers stay on your device. The matching runs entirely in your browser, and
             nothing you enter here is sent to us or stored anywhere. See our{" "}
             <Link href="/privacy" className="underline underline-offset-2 hover:text-[var(--on-teal)] transition-colors">

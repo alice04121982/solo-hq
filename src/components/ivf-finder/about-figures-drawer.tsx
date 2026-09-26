@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DATA_PROVENANCE, formatCheckedDate } from "@/lib/clinics";
+import { useDialogFocus } from "@/lib/use-dialog-focus";
 
 interface AboutFiguresDrawerProps {
   isOpen: boolean;
@@ -21,16 +22,8 @@ interface AboutFiguresDrawerProps {
  */
 export function AboutFiguresDrawer({ isOpen, onClose, clinicCount }: AboutFiguresDrawerProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    closeRef.current?.focus();
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, onClose]);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(isOpen, drawerRef, onClose, closeRef);
 
   const sections: { heading: string; body: React.ReactNode }[] = [
     {
@@ -112,6 +105,7 @@ export function AboutFiguresDrawer({ isOpen, onClose, clinicCount }: AboutFigure
 
           <motion.div
             key="drawer"
+            ref={drawerRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="about-figures-title"

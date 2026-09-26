@@ -94,7 +94,7 @@ export default function Home() {
             introWidth="46ch"
             className="mb-5"
           />
-          <p className="text-lg font-sans leading-relaxed mb-10" style={{ maxWidth: "46ch", color: "var(--on-teal-muted)" }}>
+          <p className="text-lg font-sans leading-relaxed mb-10" style={{ maxWidth: "46ch", color: "var(--on-teal-body)" }}>
             Filter by treatment (IVF, ICSI, IUI, donor egg, donor sperm or double donation) and compare UK success rates by age group from the HFEA register.
           </p>
           <Link

@@ -4,7 +4,7 @@ import { ShapeMark, type ShapeName } from "./shapes";
 /**
  * A card on the teal band — the treatment from the homepage comparison
  * teaser. White at 7% over the teal reads as a lighter green panel, and the
- * writing on it is pink: `--on-teal` for the value, `--on-teal-muted` for the
+ * writing on it is pink: `--on-teal` for the value, `--on-teal-body` for the
  * label, with the shape mark in lime so each card carries one bright note.
  *
  * Use this for anything boxed on a teal surface. Solid white cards belong on
@@ -51,7 +51,7 @@ export function TealCard({
         </p>
       )}
       {label && (
-        <p className="text-sm font-sans leading-snug" style={{ color: "var(--on-teal-muted)" }}>
+        <p className="text-sm font-sans leading-snug" style={{ color: "var(--on-teal-body)" }}>
           {label}
         </p>
       )}

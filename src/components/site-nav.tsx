@@ -109,11 +109,9 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
 
       {/* Desktop links — eight items across primary + "More" no longer fit
           beside the logo and CTA at the md breakpoint, so the burger still
-          carries the full list until lg. The inactive-link tint on dark is
-          #deb8c8 rather than the standard --on-teal-muted body-copy token
-          (#c4a0ae only clears ~3.8:1 on --teal, short of the 4.5:1 text
-          needs at nav size); #deb8c8 clears ~5:1 while staying in the same
-          mauve-pink family as the active state. */}
+          carries the full list until lg. Inactive links on dark take
+          --on-teal-body (~5:1 on --teal) rather than --on-teal-muted, which
+          only clears ~3.8:1 and is reserved for large text. */}
       <div className="hidden lg:flex items-center gap-5 xl:gap-8">
         {PRIMARY_LINKS.map((l) => (
           <a
@@ -121,7 +119,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             href={l.href}
             className={`text-sm font-sans transition-colors duration-150 ${
               isDark
-                ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
+                ? pathname === l.href ? "text-on-teal" : "text-on-teal-body hover:text-on-teal"
                 : pathname === l.href ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
@@ -139,7 +137,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             aria-expanded={moreOpen}
             className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
               isDark
-                ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
+                ? moreActive ? "text-on-teal" : "text-on-teal-body hover:text-on-teal"
                 : moreActive ? "text-teal" : "text-muted hover:text-teal"
             }`}
           >
@@ -230,7 +228,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
                 style={{
                   fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
                   lineHeight: 1.2,
-                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
+                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-body)",
                 }}
               >
                 {l.label}
@@ -242,7 +240,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
             className="px-6 py-6 flex items-center justify-between gap-4 border-t"
             style={{ borderColor: "rgba(249, 198, 218, 0.15)" }}
           >
-            <p className="text-xs font-sans leading-snug" style={{ color: "var(--on-teal-muted)" }}>
+            <p className="text-xs font-sans leading-snug" style={{ color: "var(--on-teal-body)" }}>
               Clear, honest guidance.
               <br />
               Free to use.
