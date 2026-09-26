@@ -34,7 +34,7 @@ IVF) rather than only heterosexual couples.
 - Markets: the UK stays at the current URLs. The US market lives under
   `/us`, and its home page leads with the coverage checker. The market switch
   sits in both the header and the footer. `/us/coverage` has a draft
-  coverage checker (California and New York), awaiting review by a US
+  coverage checker (California, New York, Texas and Florida), awaiting review by a US
   insurance expert; other US tools and content are not built yet.
 
 ## Brand Commitments
