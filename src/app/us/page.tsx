@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { SiteNav } from "@/components/site-nav";
 import { Section } from "@/components/section";
 import { MarketArrivalNote } from "@/components/market-arrival-note";
+import { CHECKED_STATE_NAMES } from "@/lib/us-coverage";
 
 export const metadata: Metadata = {
   alternates: {
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 const COMING = [
   {
     title: "A coverage checker, in draft now",
-    body: "Answer a few questions about your health plan: who provides it, how it's funded, and which state regulates it. You'll see what IVF cover the law requires for a plan like yours. It runs in your browser and stores nothing. California and New York first, other states to follow.",
+    body: `Answer a few questions about your health plan: who provides it, how it's funded, and which state regulates it. You'll see what IVF cover the law requires for a plan like yours. It runs in your browser and stores nothing. ${CHECKED_STATE_NAMES} first, other states to follow.`,
   },
   {
     title: "US clinic costs, in dollars",

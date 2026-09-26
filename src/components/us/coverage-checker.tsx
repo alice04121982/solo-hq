@@ -18,6 +18,7 @@ import {
 import { OptionCard } from "@/components/option-card";
 import {
   AWAITING_US_REVIEW,
+  CHECKED_STATE_NAMES,
   EMPTY_ANSWERS,
   LARGE_GROUP_MIN_EMPLOYEES,
   STATE_RULES,
@@ -77,9 +78,8 @@ const QUESTIONS: { [K in Exclude<StepId, "result">]: Question<K> } = {
     title: "Which state regulates the plan?",
     sub: "Usually the state where your employer's plan was issued, which may not be where you live.",
     options: [
-      { value: "CA", title: STATE_RULES.CA.name },
-      { value: "NY", title: STATE_RULES.NY.name },
-      { value: "other", title: "Another state", subtitle: "We've checked California and New York so far" },
+      ...Object.values(STATE_RULES).map((r) => ({ value: r.code, title: r.name })),
+      { value: "other", title: "Another state", subtitle: `We've checked ${CHECKED_STATE_NAMES} so far` },
     ],
   },
   size: {
@@ -197,6 +197,16 @@ function Result({ result, onReset }: { result: CoverageResult; onReset: () => vo
             <ul className="list-disc pl-5 space-y-1 font-sans text-foreground marker:text-teal">
               {result.requires.map((r) => (
                 <li key={r}>{r}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {result.conditions && (
+          <div>
+            <h4 className="text-sm font-sans font-semibold text-foreground mb-2">Conditions the law allows plans to set</h4>
+            <ul className="list-disc pl-5 space-y-1 font-sans text-foreground marker:text-teal">
+              {result.conditions.map((c) => (
+                <li key={c}>{c}</li>
               ))}
             </ul>
           </div>

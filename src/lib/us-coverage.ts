@@ -39,7 +39,7 @@ export interface Provenance {
 
 export type CoverSource = "employer" | "individual" | "medicaid" | "tricare" | "fehb" | "none";
 export type Funding = "fully-insured" | "self-funded" | "unsure";
-export type CheckedState = "CA" | "NY";
+export type CheckedState = "CA" | "NY" | "TX" | "FL";
 export type PlanState = CheckedState | "other";
 export type EmployerSize = "small" | "large" | "unsure";
 export type FertilityBenefit = "yes" | "no" | "unsure";
@@ -68,26 +68,49 @@ export const LARGE_GROUP_MIN_EMPLOYEES = 101;
 
 // ─── State rules ──────────────────────────────────────────────────────────────
 
-export interface StateRule extends Provenance {
+interface StateRuleBase extends Provenance {
   code: CheckedState;
   name: string;
   law: string;
-  inForceFrom: string;
+  /** Whether single people and same-sex couples can use the cover, as sourced. */
+  whoQualifies: string;
+  exemptions: string[];
+  /** Related requirements worth knowing, such as fertility preservation. */
+  alsoRequired?: string[];
+}
+
+/** The state requires fully insured plans above a size threshold to cover IVF. */
+export interface CoverRule extends StateRuleBase {
+  kind: "cover";
   /** What a fully insured plan for an employer of 101+ must include. */
   largeGroup: string[];
   /** What applies to a fully insured plan for a smaller employer. */
   smallGroup: string;
-  /** Whether people who need donor sperm or eggs are covered, as sourced. */
-  whoQualifies: string;
-  exemptions: string[];
 }
+
+/** The state requires insurers to offer IVF cover, which the employer can decline. */
+export interface OfferRule extends StateRuleBase {
+  kind: "offer";
+  /** What the insurer must offer. */
+  offer: string;
+  /** Conditions the law lets a plan attach to that cover. */
+  conditions: string[];
+}
+
+/** The state has no IVF requirement for private plans. */
+export interface NoMandateRule extends StateRuleBase {
+  kind: "none";
+  summary: string;
+}
+
+export type StateRule = CoverRule | OfferRule | NoMandateRule;
 
 export const STATE_RULES: Record<CheckedState, StateRule> = {
   CA: {
+    kind: "cover",
     code: "CA",
     name: "California",
     law: "SB 729",
-    inForceFrom: "2026-01-01",
     largeGroup: [
       "Diagnosis and treatment of infertility, including IVF",
       "Up to three completed egg retrievals",
@@ -121,10 +144,10 @@ export const STATE_RULES: Record<CheckedState, StateRule> = {
     usReviewed: false,
   },
   NY: {
+    kind: "cover",
     code: "NY",
     name: "New York",
     law: "New York Insurance Law (IVF and fertility preservation, 2020)",
-    inForceFrom: "2020-01-01",
     largeGroup: [
       "Up to three cycles of IVF",
       "Diagnosis and treatment of infertility",
@@ -144,7 +167,77 @@ export const STATE_RULES: Record<CheckedState, StateRule> = {
     reviewBy: "2026-12-31",
     usReviewed: false,
   },
+  TX: {
+    kind: "offer",
+    code: "TX",
+    name: "Texas",
+    law: "Texas Insurance Code, chapter 1366",
+    offer:
+      "Group plans that cover pregnancy must offer IVF cover on the same terms as other pregnancy care. The employer decides whether to buy it.",
+    conditions: [
+      "The eggs are fertilized only with the sperm of the patient's spouse",
+      "At least five years of infertility, or one of a list of medical causes",
+      "Cheaper treatments the plan covers have been tried first",
+      "Treatment is at a facility that meets ASRM standards",
+    ],
+    whoQualifies:
+      "Because the law allows plans to require the spouse's sperm, the cover it describes doesn't reach single people, two mums using donor sperm, or anyone using donor eggs or sperm. A plan can choose to cover more than the law requires.",
+    exemptions: ["plans of employers affiliated with a religious denomination that objects to IVF"],
+    alsoRequired: [
+      "Since September 2023, plans must cover fertility preservation, such as egg or sperm freezing, before medical treatment that may cause infertility, such as chemotherapy.",
+    ],
+    sources: [
+      {
+        label: "Texas Insurance Code \u00a7 1366.003: IVF cover must be offered",
+        url: "https://codes.findlaw.com/tx/insurance-code/ins-sect-1366-003",
+      },
+      {
+        label: "Texas Insurance Code \u00a7 1366.005: conditions on IVF cover",
+        url: "https://codes.findlaw.com/tx/insurance-code/ins-sect-1366-005.html",
+      },
+      {
+        label: "Texas House Bill 1649 (2023): fertility preservation",
+        url: "https://capitol.texas.gov/tlodocs/88R/analysis/html/HB01649E.htm",
+      },
+    ],
+    checkedOn: "2026-09-26",
+    reviewBy: "2026-12-31",
+    usReviewed: false,
+  },
+  FL: {
+    kind: "none",
+    code: "FL",
+    name: "Florida",
+    law: "Florida law",
+    summary:
+      "Florida has no law requiring private health plans to cover IVF or other infertility treatment.",
+    whoQualifies:
+      "With no state rule, who qualifies is whatever your plan says. Check how it defines infertility if you're single or in a same-sex couple.",
+    exemptions: [],
+    alsoRequired: [
+      "From 2026, the state employees' health plan must cover egg and sperm freezing before cancer treatment. That applies only to people covered through a Florida state job.",
+    ],
+    sources: [
+      {
+        label: "Cofertility: fertility insurance mandates by state, 2026",
+        url: "https://www.cofertility.com/family-learn/fertility-insurance-mandates-how-does-my-state-stack-up",
+      },
+      {
+        label: "RESOLVE: insurance coverage by state",
+        url: "https://resolve.org/learn/financial-resources/insurance-coverage/insurance-coverage-by-state/",
+      },
+    ],
+    checkedOn: "2026-09-26",
+    reviewBy: "2026-12-31",
+    usReviewed: false,
+  },
 };
+
+const joinNames = (names: string[]) =>
+  names.length < 2 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+
+/** "California, New York, Texas and Florida": the states checked so far. */
+export const CHECKED_STATE_NAMES = joinNames(Object.values(STATE_RULES).map((r) => r.name));
 
 // ─── Rules that don't depend on the state ─────────────────────────────────────
 
@@ -225,7 +318,8 @@ export function stepsFor(a: CoverageAnswers): StepId[] {
     steps.push("funding");
     if (a.funding === "fully-insured") {
       steps.push("state");
-      if (a.state === "CA" || a.state === "NY") steps.push("size");
+      // Only states whose law turns on employer size ask for it.
+      if (a.state && a.state !== "other" && STATE_RULES[a.state].kind === "cover") steps.push("size");
     }
     steps.push("benefit");
   }
@@ -253,6 +347,8 @@ export interface CoverageResult {
   body: string[];
   /** Bullet list shown under "What the law requires", when a state rule applies. */
   requires?: string[];
+  /** Bullet list shown under "Conditions the law allows", for offer-only states. */
+  conditions?: string[];
   nextSteps: string[];
   provenance: Provenance[];
 }
@@ -333,7 +429,7 @@ export function assessCoverage(a: CoverageAnswers): CoverageResult {
         verdict: "plan-decides",
         headline: "Your plan's own terms decide.",
         body: [
-          "Plans you buy yourself follow a standard set of benefits chosen by your state, and most states' standard set doesn't include IVF. The state IVF laws we've checked, in California and New York, apply to large employer plans rather than plans you buy yourself.",
+          "Plans you buy yourself follow a standard set of benefits chosen by your state, and most states' standard set doesn't include IVF. The state IVF laws we've checked apply to employer plans rather than plans you buy yourself.",
         ],
         nextSteps: [
           "Read the plan's Summary of Benefits and Coverage under “infertility services” before you enrol.",
@@ -386,7 +482,7 @@ function assessEmployer(a: CoverageAnswers): CoverageResult {
       verdict: "not-checked",
       headline: "We haven't checked your state's law yet.",
       body: [
-        "So far we've checked California and New York. About 15 states and Washington, D.C. require some fully insured plans to cover IVF, and the rules vary a lot: some only require insurers to offer it, and many apply only above a certain employer size.",
+        `So far we've checked ${CHECKED_STATE_NAMES}. About 15 states and Washington, D.C. require some fully insured plans to cover IVF, and the rules vary a lot: some only require insurers to offer it, and many apply only above a certain employer size.`,
       ],
       nextSteps: [
         "RESOLVE, the national infertility association, keeps a guide to each state's law.",
@@ -397,6 +493,36 @@ function assessEmployer(a: CoverageAnswers): CoverageResult {
   }
 
   const rule = STATE_RULES[a.state];
+  const also = rule.alsoRequired ?? [];
+
+  if (rule.kind === "offer") {
+    return {
+      verdict: "plan-decides",
+      headline: `${rule.name} law requires insurers to offer IVF cover, but your employer can turn it down.`,
+      body: [
+        rule.offer,
+        rule.whoQualifies,
+        ...also,
+        ...(rule.exemptions.length ? [`The law doesn't reach ${rule.exemptions.join(", ")}.`] : []),
+      ],
+      conditions: rule.conditions,
+      nextSteps: [
+        "Ask HR whether your employer took up the IVF cover its insurer had to offer.",
+        ASK_FOR_DOCUMENTS,
+      ],
+      provenance: [rule],
+    };
+  }
+
+  if (rule.kind === "none") {
+    return {
+      verdict: "plan-decides",
+      headline: `${rule.name} law doesn't require your plan to cover IVF.`,
+      body: [rule.summary, "Your plan may still include it. The plan documents will say.", rule.whoQualifies, ...also],
+      nextSteps: [ASK_FOR_DOCUMENTS],
+      provenance: [rule],
+    };
+  }
 
   if (a.size === "large") {
     return {
@@ -406,6 +532,7 @@ function assessEmployer(a: CoverageAnswers): CoverageResult {
         `Under ${rule.law}, fully insured plans for employers with ${LARGE_GROUP_MIN_EMPLOYEES} or more staff must cover IVF.`,
         rule.whoQualifies,
         `The law doesn't reach ${rule.exemptions.join(", ")}.`,
+        ...also,
       ],
       requires: rule.largeGroup,
       nextSteps: [

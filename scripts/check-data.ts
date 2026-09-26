@@ -559,9 +559,20 @@ const expectVerdict = (label: string, answers: Partial<CoverageAnswers>, verdict
   const got = assessCoverage({ ...EMPTY_ANSWERS, ...answers }).verdict;
   if (got !== verdict) errors.push(`us-coverage.ts: ${label} should give "${verdict}", got "${got}".`);
 };
-for (const code of Object.keys(STATE_RULES) as (keyof typeof STATE_RULES)[]) {
-  expectVerdict(`${code} fully insured, 101+ staff`, { source: "employer", funding: "fully-insured", state: code, size: "large" }, "required");
-  expectVerdict(`${code} fully insured, 100 or fewer staff`, { source: "employer", funding: "fully-insured", state: code, size: "small" }, "plan-decides");
+for (const rule of Object.values(STATE_RULES)) {
+  const base = { source: "employer", funding: "fully-insured", state: rule.code } as const;
+  const asksSize = stepsFor({ ...EMPTY_ANSWERS, ...base }).includes("size");
+  if (rule.kind === "cover") {
+    if (!asksSize) errors.push(`us-coverage.ts: ${rule.code} requires cover above a size threshold, so the checker must ask employer size.`);
+    expectVerdict(`${rule.code} fully insured, 101+ staff`, { ...base, size: "large" }, "required");
+    expectVerdict(`${rule.code} fully insured, 100 or fewer staff`, { ...base, size: "small" }, "plan-decides");
+  } else {
+    // Offer-only and no-mandate states never say the law requires cover.
+    if (asksSize) errors.push(`us-coverage.ts: ${rule.code} has no size threshold, so the checker must not ask employer size.`);
+    expectVerdict(`${rule.code} fully insured plan`, base, "plan-decides");
+  }
+  if (rule.kind === "offer" && rule.conditions.length === 0)
+    errors.push(`us-coverage.ts: ${rule.code} is offer-only but lists no conditions.`);
 }
 expectVerdict("self-funded employer plan", { source: "employer", funding: "self-funded" }, "plan-decides");
 expectVerdict("fully insured plan in an unchecked state", { source: "employer", funding: "fully-insured", state: "other" }, "not-checked");
