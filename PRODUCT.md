@@ -33,8 +33,9 @@ IVF) rather than only heterosexual couples.
   `connect-src` to `'self'`. Pages are statically generated.
 - Markets: the UK stays at the current URLs. The US market lives under
   `/us`, and its home page leads with the coverage checker. The market switch
-  sits in both the header and the footer. So far `/us` is a holding
-  page; the US tools and content are not built yet.
+  sits in both the header and the footer. `/us/coverage` has a draft
+  coverage checker (California and New York), awaiting review by a US
+  insurance expert; other US tools and content are not built yet.
 
 ## Brand Commitments
 - The name refers to a cairn: a stack of stones marking a route where the

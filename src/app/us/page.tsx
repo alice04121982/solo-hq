@@ -18,8 +18,8 @@ export const metadata: Metadata = {
  */
 const COMING = [
   {
-    title: "A coverage checker",
-    body: "Answer a few questions about your health plan: who provides it, how it's funded, and which state regulates it. You'll see what IVF cover the law requires for a plan like yours, and what you'd likely pay yourself. It runs in your browser and stores nothing.",
+    title: "A coverage checker, in draft now",
+    body: "Answer a few questions about your health plan: who provides it, how it's funded, and which state regulates it. You'll see what IVF cover the law requires for a plan like yours. It runs in your browser and stores nothing. California and New York first, other states to follow.",
   },
   {
     title: "US clinic costs, in dollars",
@@ -53,6 +53,14 @@ export default function UsHome() {
             building Cairn for the US to answer it plainly, for every kind of
             family.
           </p>
+          <a
+            href="/us/coverage"
+            className="mt-8 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-sans font-medium transition-opacity duration-200 hover:opacity-90"
+            style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+          >
+            Check your coverage
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </a>
         </div>
       </Section>
 

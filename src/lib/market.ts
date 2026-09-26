@@ -60,6 +60,9 @@ export const MARKET_ORDER: MarketId[] = ["uk", "us"];
  */
 export const PAGE_PAIRS: ReadonlyArray<readonly [uk: string, us: string]> = [
   ["/", "/us"],
+  // The nearest UK equivalent of "who pays for my IVF" is the NHS funding
+  // page, so each market's answer to that question points at the other's.
+  ["/funding", "/us/coverage"],
 ];
 
 /** Query flag on a market home page when the visitor's page had no match. */
