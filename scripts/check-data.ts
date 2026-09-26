@@ -27,6 +27,15 @@ import { ALL_STORIES, FEATURED_STORIES } from "../src/lib/stories.ts";
 import { DESTINATIONS, TRAVEL_PROVENANCE } from "../src/lib/travel.ts";
 import { NEWS_ITEMS, NEWS_PROVENANCE } from "../src/lib/news.ts";
 import { PLACES, distanceMiles, postcodeArea, searchPlaces } from "../src/lib/geo.ts";
+import {
+  EMPTY_ANSWERS,
+  STATE_RULES,
+  allProvenance,
+  assessCoverage,
+  stepsFor,
+  type CoverageAnswers,
+  type Verdict,
+} from "../src/lib/us-coverage.ts";
 
 const STALE_DAYS = Number(process.env.STALE_DAYS ?? 120);
 
@@ -512,6 +521,64 @@ if (searchPlaces("Bath")[0]?.name !== "Bath")
   errors.push('geo.ts: "Bath" should find the city, not the BA postcode area.');
 if (searchPlaces("manch")[0]?.name !== "Manchester")
   errors.push('geo.ts: "manch" should suggest Manchester first.');
+
+// ── US coverage rules (src/lib/us-coverage.ts) ──
+// Each rule must cite at least one https source and carry valid checkedOn and
+// reviewBy dates. Passing reviewBy is an error: a coverage rule that nobody
+// has looked at since its review date must not keep answering visitors.
+const provenanceRecords = allProvenance();
+let unreviewed = 0;
+for (const { id, provenance } of provenanceRecords) {
+  if (provenance.sources.length === 0) errors.push(`us-coverage.ts: ${id} cites no sources.`);
+  for (const src of provenance.sources) {
+    if (!src.url.startsWith("https://")) errors.push(`us-coverage.ts: ${id} source "${src.label}" is not an https URL.`);
+    if (!src.label.trim()) errors.push(`us-coverage.ts: ${id} has a source with no label.`);
+  }
+  const checked = new Date(`${provenance.checkedOn}T00:00:00Z`);
+  const reviewBy = new Date(`${provenance.reviewBy}T00:00:00Z`);
+  if (Number.isNaN(checked.getTime())) errors.push(`us-coverage.ts: ${id}.checkedOn is not a valid ISO date.`);
+  else if (checked.getTime() > Date.now()) errors.push(`us-coverage.ts: ${id}.checkedOn is in the future.`);
+  if (Number.isNaN(reviewBy.getTime())) {
+    errors.push(`us-coverage.ts: ${id}.reviewBy is not a valid ISO date.`);
+  } else {
+    const daysLeft = Math.floor((reviewBy.getTime() - Date.now()) / 86_400_000);
+    if (daysLeft < 0)
+      errors.push(`us-coverage.ts: ${id} was due for review on ${provenance.reviewBy}. Re-check it against its sources, then move reviewBy on.`);
+    else if (daysLeft <= 30) warnings.push(`us-coverage.ts: ${id} is due for review in ${daysLeft} day(s) (${provenance.reviewBy}).`);
+  }
+  if (!provenance.usReviewed) unreviewed++;
+}
+if (unreviewed > 0)
+  warnings.push(
+    `us-coverage.ts: ${unreviewed} of ${provenanceRecords.length} coverage rules await review by a US insurance expert. ` +
+      "The checker shows a draft notice until every rule has usReviewed: true.",
+  );
+
+// A few answers whose outcome must not drift.
+const expectVerdict = (label: string, answers: Partial<CoverageAnswers>, verdict: Verdict) => {
+  const got = assessCoverage({ ...EMPTY_ANSWERS, ...answers }).verdict;
+  if (got !== verdict) errors.push(`us-coverage.ts: ${label} should give "${verdict}", got "${got}".`);
+};
+for (const rule of Object.values(STATE_RULES)) {
+  const base = { source: "employer", funding: "fully-insured", state: rule.code } as const;
+  const asksSize = stepsFor({ ...EMPTY_ANSWERS, ...base }).includes("size");
+  if (rule.kind === "cover") {
+    if (!asksSize) errors.push(`us-coverage.ts: ${rule.code} requires cover above a size threshold, so the checker must ask employer size.`);
+    expectVerdict(`${rule.code} fully insured, 101+ staff`, { ...base, size: "large" }, "required");
+    expectVerdict(`${rule.code} fully insured, 100 or fewer staff`, { ...base, size: "small" }, "plan-decides");
+  } else {
+    // Offer-only and no-mandate states never say the law requires cover.
+    if (asksSize) errors.push(`us-coverage.ts: ${rule.code} has no size threshold, so the checker must not ask employer size.`);
+    expectVerdict(`${rule.code} fully insured plan`, base, "plan-decides");
+  }
+  if (rule.kind === "offer" && rule.conditions.length === 0)
+    errors.push(`us-coverage.ts: ${rule.code} is offer-only but lists no conditions.`);
+}
+expectVerdict("self-funded employer plan", { source: "employer", funding: "self-funded" }, "plan-decides");
+expectVerdict("fully insured plan in an unchecked state", { source: "employer", funding: "fully-insured", state: "other" }, "not-checked");
+expectVerdict("Medicaid", { source: "medicaid" }, "unlikely");
+if (stepsFor({ ...EMPTY_ANSWERS, source: "employer", funding: "self-funded" }).includes("state"))
+  errors.push("us-coverage.ts: a self-funded plan must not be asked for its state; state law doesn't apply to it.");
 
 // ── Report ──
 for (const w of warnings) console.warn(`WARN  ${w}`);

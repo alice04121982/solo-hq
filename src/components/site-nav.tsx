@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Logo } from "./logo";
+import { MarketSwitch, MarketSwitchInline } from "./market-switch";
+import { MarketSuggestion } from "./market-suggestion";
+import { marketFromPath } from "@/lib/market";
 
 // Core links stay flat on the bar. Lighter-weight pages live behind "More" so
 // a 7th/8th item never has to fight the logo and CTA for room at lg.
@@ -56,6 +59,7 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
   const moreRef = useRef<HTMLDivElement>(null);
   const isDark = theme === "dark";
   const moreActive = MORE_LINKS.some((l) => l.href === pathname);
+  const homeHref = marketFromPath(pathname ?? "/").basePath || "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -98,167 +102,176 @@ export function SiteNav({ theme = "light" }: SiteNavProps) {
   }, [moreOpen]);
 
   return (
-    <nav
-      className={`relative flex items-center justify-between gap-8 py-6 transition-all duration-300 ${
-        scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
-      }`}
-    >
-      <Link href="/" className="flex items-center">
-        <Logo height={44} onDark={isDark} />
-      </Link>
+    <>
+      <nav
+        className={`relative flex items-center justify-between gap-8 py-6 transition-all duration-300 ${
+          scrolled ? `border-b ${isDark ? "border-white/10" : "border-border"}` : ""
+        }`}
+      >
+        <Link href={homeHref} className="flex items-center">
+          <Logo height={44} onDark={isDark} />
+        </Link>
 
-      {/* Desktop links — eight items across primary + "More" no longer fit
-          beside the logo and CTA at the md breakpoint, so the burger still
-          carries the full list until lg. The inactive-link tint on dark is
-          #deb8c8 rather than the standard --on-teal-muted body-copy token
-          (#c4a0ae only clears ~3.8:1 on --teal, short of the 4.5:1 text
-          needs at nav size); #deb8c8 clears ~5:1 while staying in the same
-          mauve-pink family as the active state. */}
-      <div className="hidden lg:flex items-center gap-5 xl:gap-8">
-        {PRIMARY_LINKS.map((l) => (
-          <a
-            key={l.href}
-            href={l.href}
-            className={`text-sm font-sans transition-colors duration-150 ${
-              isDark
-                ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : pathname === l.href ? "text-teal" : "text-muted hover:text-teal"
-            }`}
-          >
-            {l.label}
-          </a>
-        ))}
-
-        {/* "More" — a small dropdown for lighter-weight pages, so the bar
-            stays short without dropping them from desktop nav entirely. */}
-        <div className="relative" ref={moreRef}>
-          <button
-            type="button"
-            onClick={() => setMoreOpen((v) => !v)}
-            aria-haspopup="menu"
-            aria-expanded={moreOpen}
-            className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
-              isDark
-                ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
-                : moreActive ? "text-teal" : "text-muted hover:text-teal"
-            }`}
-          >
-            More
-            <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-150 ${moreOpen ? "rotate-180" : ""}`} />
-          </button>
-
-          {moreOpen && (
-            <div
-              role="menu"
-              className="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-border bg-white p-2 shadow-xl z-50"
+        {/* Desktop links — eight items across primary + "More" no longer fit
+            beside the logo and CTA at the md breakpoint, so the burger still
+            carries the full list until lg. The inactive-link tint on dark is
+            #deb8c8 rather than the standard --on-teal-muted body-copy token
+            (#c4a0ae only clears ~3.8:1 on --teal, short of the 4.5:1 text
+            needs at nav size); #deb8c8 clears ~5:1 while staying in the same
+            mauve-pink family as the active state. */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-8">
+          {PRIMARY_LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className={`text-sm font-sans transition-colors duration-150 ${
+                isDark
+                  ? pathname === l.href ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
+                  : pathname === l.href ? "text-teal" : "text-muted hover:text-teal"
+              }`}
             >
-              {MORE_LINKS.map((l) => (
+              {l.label}
+            </a>
+          ))}
+
+          {/* "More" — a small dropdown for lighter-weight pages, so the bar
+              stays short without dropping them from desktop nav entirely. */}
+          <div className="relative" ref={moreRef}>
+            <button
+              type="button"
+              onClick={() => setMoreOpen((v) => !v)}
+              aria-haspopup="menu"
+              aria-expanded={moreOpen}
+              className={`flex items-center gap-1 text-sm font-sans transition-colors duration-150 ${
+                isDark
+                  ? moreActive ? "text-[#f9c6da]" : "text-[#deb8c8] hover:text-[#f9c6da]"
+                  : moreActive ? "text-teal" : "text-muted hover:text-teal"
+              }`}
+            >
+              More
+              <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-150 ${moreOpen ? "rotate-180" : ""}`} />
+            </button>
+
+            {moreOpen && (
+              <div
+                role="menu"
+                className="absolute right-0 top-full mt-3 w-56 rounded-2xl border border-border bg-white p-2 shadow-xl z-50"
+              >
+                {MORE_LINKS.map((l) => (
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    role="menuitem"
+                    onClick={() => setMoreOpen(false)}
+                    className={`block rounded-lg px-3 py-2.5 text-sm font-sans transition-colors duration-150 ${
+                      pathname === l.href ? "text-teal bg-surface-hover" : "text-muted hover:text-teal hover:bg-surface-hover"
+                    }`}
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Market switch and CTA */}
+        <div className="hidden lg:flex items-center gap-6">
+          <MarketSwitch theme={theme} />
+          <a
+            href="/get-started"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
+            style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+          >
+            Get Started
+            <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
+
+        {/* Mobile burger */}
+        <button
+          className={`lg:hidden p-1 ${isDark ? "text-on-teal" : "text-teal"}`}
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={open}
+        >
+          <BurgerIcon />
+        </button>
+
+        {/* Full-screen menu */}
+        {open && (
+          <div
+            className="fixed inset-0 z-[100] flex flex-col lg:hidden"
+            style={{ background: "var(--teal)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu"
+          >
+            <div className="flex items-center justify-between gap-8 px-6 py-6">
+              <Link href={homeHref} onClick={() => setOpen(false)} className="flex items-center">
+                <Logo height={44} onDark />
+              </Link>
+              <button
+                className="p-1"
+                style={{ color: "var(--on-teal)" }}
+                onClick={() => setOpen(false)}
+                aria-label="Close menu"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+
+            {/* Links fill the space between the header and the footer action.
+                Eight of them at this type size can exceed a short phone
+                viewport, so the column scrolls rather than clipping the last
+                item. The desktop primary/"More" grouping is not carried over
+                here — one even column reads better at this scale. */}
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center-safe gap-5 px-6 py-4">
+              {[...PRIMARY_LINKS, ...MORE_LINKS].map((l) => (
                 <a
                   key={l.href}
                   href={l.href}
-                  role="menuitem"
-                  onClick={() => setMoreOpen(false)}
-                  className={`block rounded-lg px-3 py-2.5 text-sm font-sans transition-colors duration-150 ${
-                    pathname === l.href ? "text-teal bg-surface-hover" : "text-muted hover:text-teal hover:bg-surface-hover"
-                  }`}
+                  onClick={() => setOpen(false)}
+                  className="font-sans text-center transition-opacity duration-150 hover:opacity-70"
+                  style={{
+                    fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
+                    lineHeight: 1.2,
+                    color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
+                  }}
                 >
                   {l.label}
                 </a>
               ))}
+              {/* Last in the scrolling column, so it never takes fixed
+                  height from the links on a short phone screen. */}
+              <div className="pt-3">
+                <MarketSwitchInline onNavigate={() => setOpen(false)} />
+              </div>
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* CTA */}
-      <div className="hidden lg:flex items-center">
-        <a
-          href="/get-started"
-          className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-sans font-medium transition-colors duration-200"
-          style={{ background: "var(--accent)", color: "var(--on-accent)" }}
-        >
-          Get Started
-          <ArrowRight className="h-3.5 w-3.5" />
-        </a>
-      </div>
-
-      {/* Mobile burger */}
-      <button
-        className={`lg:hidden p-1 ${isDark ? "text-on-teal" : "text-teal"}`}
-        onClick={() => setOpen(true)}
-        aria-label="Open menu"
-        aria-expanded={open}
-      >
-        <BurgerIcon />
-      </button>
-
-      {/* Full-screen menu */}
-      {open && (
-        <div
-          className="fixed inset-0 z-[100] flex flex-col lg:hidden"
-          style={{ background: "var(--teal)" }}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menu"
-        >
-          <div className="flex items-center justify-between gap-8 px-6 py-6">
-            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-              <Logo height={44} onDark />
-            </Link>
-            <button
-              className="p-1"
-              style={{ color: "var(--on-teal)" }}
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
+            <div
+              className="px-6 py-6 flex items-center justify-between gap-4 border-t"
+              style={{ borderColor: "rgba(249, 198, 218, 0.15)" }}
             >
-              <CloseIcon />
-            </button>
-          </div>
-
-          {/* Links fill the space between the header and the footer action.
-              Eight of them at this type size can exceed a short phone
-              viewport, so the column scrolls rather than clipping the last
-              item. The desktop primary/"More" grouping is not carried over
-              here — one even column reads better at this scale. */}
-          <div className="flex-1 min-h-0 overflow-y-auto flex flex-col items-center justify-center gap-5 px-6 py-4">
-            {[...PRIMARY_LINKS, ...MORE_LINKS].map((l) => (
+              <p className="text-xs font-sans leading-snug" style={{ color: "var(--on-teal-muted)" }}>
+                Clear, honest guidance.
+                <br />
+                Free to use.
+              </p>
               <a
-                key={l.href}
-                href={l.href}
+                href="/get-started"
                 onClick={() => setOpen(false)}
-                className="font-sans text-center transition-opacity duration-150 hover:opacity-70"
-                style={{
-                  fontSize: "clamp(1.75rem, 8vw, 2.5rem)",
-                  lineHeight: 1.2,
-                  color: pathname === l.href ? "var(--on-teal)" : "var(--on-teal-muted)",
-                }}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium shrink-0"
+                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
               >
-                {l.label}
+                Get Started
+                <ArrowRight className="h-3.5 w-3.5" />
               </a>
-            ))}
+            </div>
           </div>
-
-          <div
-            className="px-6 py-6 flex items-center justify-between gap-4 border-t"
-            style={{ borderColor: "rgba(249, 198, 218, 0.15)" }}
-          >
-            <p className="text-xs font-sans leading-snug" style={{ color: "var(--on-teal-muted)" }}>
-              Clear, honest guidance.
-              <br />
-              Free to use.
-            </p>
-            <a
-              href="/get-started"
-              onClick={() => setOpen(false)}
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-sans font-medium shrink-0"
-              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
-            >
-              Get Started
-              <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-        </div>
-      )}
-    </nav>
+        )}
+      </nav>
+      <MarketSuggestion theme={theme} />
+    </>
   );
 }

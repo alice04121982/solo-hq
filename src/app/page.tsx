@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { HeroSection } from "@/components/hero-section";
@@ -6,6 +7,13 @@ import { Section } from "@/components/section";
 import { SectionHeading } from "@/components/section-heading";
 import { FAMILY_SHAPES, ShapeMark } from "@/components/shapes";
 import { FAMILY_TYPES } from "@/lib/family-types";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: { "en-GB": "/", "en-US": "/us", "x-default": "/" },
+  },
+};
 
 const CARD_THEME = { bg: "var(--background)", text: "var(--teal)" };
 

@@ -26,6 +26,10 @@ export const metadata: Metadata = {
   title: "Funding & Payment Options | CairnFertility",
   description:
     "What fertility treatment is free on the NHS in England, Scotland, Wales and Northern Ireland, how to qualify, and the routes people use to pay for the rest: employer benefits, egg sharing, refund programmes, grants and clinic finance.",
+  alternates: {
+    canonical: "/funding",
+    languages: { "en-GB": "/funding", "en-US": "/us/coverage" },
+  },
 };
 
 const TEAL = "var(--teal)";

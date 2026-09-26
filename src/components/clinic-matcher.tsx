@@ -21,12 +21,12 @@ import { CountryFlag } from "@/components/country-flag";
 import { FigureLabel, RateFigure, VerificationBadge } from "@/components/ivf-finder/rate-display";
 import { clinicCardClasses } from "@/lib/card-style";
 import { ShapeMark, FAMILY_SHAPES, type ShapeName } from "@/components/shapes";
+import { OptionCard } from "@/components/option-card";
 import {
   ArrowRight,
   ArrowLeft,
   MapPin,
   Globe,
-  Check,
   Venus,
   Mars,
   VenusAndMars,
@@ -270,48 +270,6 @@ function groupMatches(matches: Match[], sort: SortKey): { heading: string | null
 
 // Icons sit in a fixed-width slot so every option's text starts on the same
 // left edge, whether its glyph is a single symbol or a pair.
-function OptionCard({
-  selected, onClick, title, subtitle, icon,
-}: {
-  selected: boolean; onClick: () => void; title: string; subtitle?: string; icon?: ReactNode;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={`w-full text-left p-4 rounded-xl border transition-all duration-150 ${
-        selected ? "border-teal bg-teal/5" : "border-border hover:border-teal/40"
-      }`}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          {icon && (
-            <span
-              className={`shrink-0 mt-0.5 flex w-6 justify-center transition-colors ${
-                selected ? "text-foreground" : "text-muted"
-              }`}
-            >
-              {icon}
-            </span>
-          )}
-          <div>
-            <p className={`text-sm font-sans font-medium leading-snug ${selected ? "text-foreground" : "text-foreground/80"}`}>
-              {title}
-            </p>
-            {subtitle && (
-              <p className="text-xs font-sans text-muted mt-1 leading-relaxed">{subtitle}</p>
-            )}
-          </div>
-        </div>
-        <div className={`shrink-0 h-5 w-5 rounded-full border-2 flex items-center justify-center transition-colors mt-0.5 ${
-          selected ? "border-teal bg-teal" : "border-border"
-        }`}>
-          {selected && <Check className="h-3 w-3 text-background" strokeWidth={3} />}
-        </div>
-      </div>
-    </button>
-  );
-}
-
 // ─── Steps ────────────────────────────────────────────────────────────────────
 
 // One glyph per parent, so the icon carries the same information as the label.

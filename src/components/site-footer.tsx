@@ -1,4 +1,5 @@
 import { Logo } from "./logo";
+import { FooterHelpLine, FooterMarketRow } from "./footer-market";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
 const TEAL = "var(--teal)";
@@ -111,20 +112,14 @@ export function SiteFooter() {
           className="border-t pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
           style={{ borderColor: "rgba(249,198,218,0.2)" }}
         >
-          <p className="text-xs font-sans" style={{ color: PINK }}>
-            &copy; {new Date().getFullYear()} CairnFertility. Made in the UK.
-          </p>
-          <div className="flex flex-col gap-3" style={{ maxWidth: "60ch" }}>
-            <p className="text-xs font-sans leading-relaxed" style={{ color: PINK }}>
-              Need help now? Call 999 in an emergency, or Samaritans free on{" "}
-              <a href="tel:116123" className="underline underline-offset-2">
-                116 123
-              </a>
-              , any time. More support:{" "}
-              <a href="/support#crisis" className="underline underline-offset-2">
-                Looking after yourself
-              </a>
+          <div className="flex flex-col gap-3">
+            <p className="text-xs font-sans" style={{ color: PINK }}>
+              &copy; {new Date().getFullYear()} CairnFertility. Made in the UK.
             </p>
+            <FooterMarketRow />
+          </div>
+          <div className="flex flex-col gap-3" style={{ maxWidth: "60ch" }}>
+            <FooterHelpLine />
             <p
               className="text-xs font-sans leading-relaxed"
               style={{ color: PINK_MUTED }}
