@@ -10,8 +10,8 @@ web
 People going through IVF or planning to: solo mums, solo dads, two mums, two
 dads and couples. They often arrive anxious and short of money, while
 comparing options that are expensive, medical and hard to read from the
-outside. Today they are in the UK. A US audience is planned (see
-`reports/US IVF market expansion plan.md`).
+outside. Two markets: the UK (live) and the US (committed 2026-09-26, being
+built; see `reports/US IVF market expansion plan.md`).
 
 ## Product Purpose
 Cairn is an independent IVF clinic comparison and guidance site. It compares
@@ -31,8 +31,9 @@ IVF) rather than only heterosexual couples.
   verification date shown wherever prices appear.
 - No analytics, pixels or third-party requests. The CSP restricts
   `connect-src` to `'self'`. Pages are statically generated.
-- Markets: the UK stays at the current URLs. A US market is planned under
-  `/us` (decided 2026-09-26). Not built yet.
+- Markets: the UK stays at the current URLs. The US market lives under
+  `/us`, and its home page leads with the coverage checker. The market switch
+  sits in both the header and the footer. The US site is not built yet.
 
 ## Brand Commitments
 - The name refers to a cairn: a stack of stones marking a route where the
@@ -56,5 +57,5 @@ IVF) rather than only heterosexual couples.
 4. Calm over urgency: no dark patterns, no blocking interruptions.
 
 ## Accessibility & Inclusion
-The site has an accessibility statement at `/accessibility`. The research
-recommends targeting WCAG 2.2 AA for the US launch.
+WCAG 2.2 AA is the binding standard for all UI work, in both markets. The
+public statement is at `/accessibility`.
