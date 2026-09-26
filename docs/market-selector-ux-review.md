@@ -86,9 +86,60 @@ never mistakes pounds for dollars.
 - A modal on arrival.
 - Keeping state or market in a cookie that is sent to the server.
 
-## Open questions for you
+## Decisions (confirmed 2026-09-26)
 
-1. Should the UK stay at the current URLs (recommended), or move under `/uk`?
-2. Should the US home page lead with the coverage checker or the clinic
-   finder?
-3. Header control on desktop, or footer only at first?
+1. The UK keeps its current URLs. The US goes under `/us`.
+2. The US home page leads with the coverage checker.
+3. The market switch goes in both the header and the footer.
+
+## Design brief (impeccable `shape`)
+
+**Job and audience.** A visitor, often anxious, who has landed on the wrong
+market's pages. Or a UK reader who wants to see US information on purpose.
+Mode: Operate. They need to know which market they're in and get to the right
+one in one step.
+
+**Outcome.** The visitor can always see the current market and its currency,
+and can switch to the matching page in one or two clicks without losing their
+place. Success: nobody reads £ prices thinking they're in dollars, and nobody
+is moved to another market without choosing to be.
+
+**Direction.** This works inside the existing Cairn look; no new visual style.
+- The **header control** shows a flag, a short code and currency ("UK · £").
+  It opens a small two-row menu (United Kingdom, £ GBP / United States, $ USD)
+  with a tick on the current one.
+- The **footer row** is the full written-out version with a "Change" link.
+- The **first-visit strip** is the only new element. It sits under the nav
+  and uses the same muted card treatment as the existing regulator notice,
+  not an alert colour.
+
+**Scope and boundaries.** Planning only, nothing built. Out of scope: the US
+pages themselves, a state picker (it belongs inside the coverage checker), and
+any IP or geolocation lookup. The UK site must look identical for UK visitors
+except for the new control.
+
+**States.**
+- The current page has a matching page in the other market: switch straight
+  to it.
+- There's no matching page: go to the other market's home page, with a
+  one-line note ("That page is UK only. Here's the US home page.").
+- First visit with a US browser language on a UK page: show the strip. On a
+  UK browser the strip never shows.
+- The strip has been dismissed or a market chosen: never show it again in
+  this browser.
+- JavaScript is off: the footer "Change" is a plain link to the other
+  market's home page, so switching still works.
+- Mobile: the header control moves to the bottom of the menu drawer, and the
+  strip stacks its two buttons full-width.
+
+**Interaction.** A switch is a normal link (`<a href>`), so it can be opened in
+a new tab and works with the Back button. The menu closes on Escape or a click
+outside, and focus returns to the trigger. The strip's buttons read "Go to US
+site" and "Stay on UK site". Never just "OK".
+
+**Constraints and open decisions.**
+- Use the existing `CountryFlag` and the nav's "More" menu behaviour; don't
+  build a second dropdown system.
+- Wording on the strip needs a final copy pass.
+- Whether `/us` shows the strip in reverse (for en-GB browsers) is still to
+  decide. Recommendation: yes, with the same rules.
