@@ -462,7 +462,7 @@ export default function FundingPage() {
         <div className="mt-14 rounded-2xl p-6 md:p-8" style={{ background: "var(--teal)" }}>
           <p
             className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-4 font-sans"
-            style={{ color: "var(--on-teal-muted)" }}
+            style={{ color: "var(--on-teal-body)" }}
           >
             Walk away from these
           </p>

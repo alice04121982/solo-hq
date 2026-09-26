@@ -106,7 +106,7 @@ export function SectionHeading({
         <p
           className="text-lg font-sans leading-relaxed mt-2"
           style={{
-            color: onTeal ? "var(--on-teal-muted)" : "var(--muted)",
+            color: onTeal ? "var(--on-teal-body)" : "var(--muted)",
             maxWidth: introWidth,
           }}
         >

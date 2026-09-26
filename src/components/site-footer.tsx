@@ -2,8 +2,8 @@ import { Logo } from "./logo";
 import { FAMILY_TYPES } from "@/lib/family-types";
 
 const TEAL = "var(--teal)";
-const PINK = "#f9c6da";
-const PINK_MUTED = "#c4a0ae";
+const PINK = "var(--on-teal)";
+const PINK_MUTED = "var(--on-teal-body)";
 
 // Derived from the canonical family-type data so footer naming can never
 // drift from the labels used on the family pages themselves, in the same

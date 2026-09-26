@@ -379,7 +379,7 @@ export default function FaithPage() {
           >
             <p
               className="text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
-              style={{ color: "var(--on-teal-muted)" }}
+              style={{ color: "var(--on-teal-body)" }}
             >
               When it stops being a disagreement
             </p>

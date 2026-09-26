@@ -137,7 +137,7 @@ export default function CommunityPage() {
           </h2>
           <p
             className="text-sm font-sans leading-relaxed"
-            style={{ color: "var(--on-teal-muted)", maxWidth: "52ch" }}
+            style={{ color: "var(--on-teal-body)", maxWidth: "52ch" }}
           >
             People going through fertility treatment are a target for clinics
             and supplement sellers. Four things about how this group works,
@@ -155,7 +155,7 @@ export default function CommunityPage() {
               </p>
               <p
                 className="text-sm font-sans leading-relaxed"
-                style={{ color: "var(--on-teal-muted)", maxWidth: "44ch" }}
+                style={{ color: "var(--on-teal-body)", maxWidth: "44ch" }}
               >
                 {promise.body}
               </p>
@@ -166,7 +166,7 @@ export default function CommunityPage() {
         <p
           className="text-sm font-sans leading-relaxed mt-14 pt-10 border-t"
           style={{
-            color: "var(--on-teal-muted)",
+            color: "var(--on-teal-body)",
             borderColor: "rgba(249, 198, 218, 0.2)",
             maxWidth: "60ch",
           }}

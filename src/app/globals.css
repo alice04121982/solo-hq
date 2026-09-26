@@ -45,8 +45,8 @@
 
   /* Pinks that sit on the teal surface */
   --on-teal:         #f9c6da;   /* headings / high-contrast */
-  --on-teal-muted:   #c4a0ae;   /* body copy */
-  --on-teal-body:    #deb8c8;   /* small body copy on teal: 4.99:1, AA at 12px (on-teal-muted is 3.8:1) */
+  --on-teal-muted:   #c4a0ae;   /* large text (24px+) and decoration only: 3.8:1 fails AA for body */
+  --on-teal-body:    #deb8c8;   /* body copy on teal at any size: 4.99:1 */
 
   /* Cards on the teal surface. White at low alpha, so the card reads as a
      lighter green lifted out of the band rather than a new hue — the

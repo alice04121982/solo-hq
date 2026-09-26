@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -46,8 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${generalSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
-        {children}
-        <SiteFooter />
+        <MotionProvider>
+          {children}
+          <SiteFooter />
+        </MotionProvider>
       </body>
     </html>
   );

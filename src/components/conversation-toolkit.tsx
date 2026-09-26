@@ -174,7 +174,7 @@ export function ConversationToolkit({
               >
                 <p
                   className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-2 font-sans"
-                  style={{ color: "var(--on-teal-muted)" }}
+                  style={{ color: "var(--on-teal-body)" }}
                 >
                   <DoorOpen className="h-3.5 w-3.5" />
                   {labels?.exit ?? "A way out"}

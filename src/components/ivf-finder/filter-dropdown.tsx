@@ -70,7 +70,27 @@ export function FilterDropdown({
     if (returnFocus) triggerRef.current?.focus();
   }, []);
 
-  const closeAndFocus = useCallback(() => close(true), [close]);
+  // Arrow keys move through a radio group and fire `change` as they go, so a
+  // single-select panel only closes on a click, Space or Enter, never on an
+  // arrow press, or keyboard users could only ever reach the next option.
+  const arrowNavRef = useRef(false);
+  const onPanelKeyDown = (e: React.KeyboardEvent) => {
+    arrowNavRef.current = e.key.startsWith("Arrow");
+    if (closeOnSelect && e.key === "Enter") {
+      e.preventDefault();
+      close(true);
+    }
+  };
+  const onPanelChange = () => {
+    if (arrowNavRef.current) {
+      arrowNavRef.current = false;
+      return;
+    }
+    close(true);
+  };
+  const onPanelPointerDown = () => {
+    arrowNavRef.current = false;
+  };
 
   const toggle = () => {
     if (!open && triggerRef.current) {
@@ -86,14 +106,18 @@ export function FilterDropdown({
     const onPointerDown = (e: PointerEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) close(false);
     };
+    // Capture phase, so Escape closes this panel and stops there instead of
+    // also closing the mobile filter sheet the panel sits in.
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close(true);
+      if (e.key !== "Escape") return;
+      e.stopPropagation();
+      close(true);
     };
     document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, true);
     return () => {
       document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("keydown", onKeyDown, true);
     };
   }, [open, close]);
 
@@ -125,10 +149,12 @@ export function FilterDropdown({
           }`}
         >
           {/* Change events from the inputs bubble to here, so a single-value
-              filter can dismiss itself the moment it is answered. */}
+              filter can dismiss itself once it is answered. */}
           <div
             className="max-h-72 overflow-y-auto"
-            onChange={closeOnSelect ? closeAndFocus : undefined}
+            onKeyDown={onPanelKeyDown}
+            onPointerDown={onPanelPointerDown}
+            onChange={closeOnSelect ? onPanelChange : undefined}
           >
             {children}
           </div>

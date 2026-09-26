@@ -162,7 +162,7 @@ export default function WorkPage() {
         <div className="mt-10 rounded-2xl p-6 md:p-8" style={{ background: "var(--teal)" }}>
           <p
             className="inline-flex items-center gap-2 text-[12px] font-[700] uppercase tracking-[0.14em] mb-3 font-sans"
-            style={{ color: "var(--on-teal-muted)" }}
+            style={{ color: "var(--on-teal-body)" }}
           >
             <Info className="h-3.5 w-3.5" />
             Where this stops

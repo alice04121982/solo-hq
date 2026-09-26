@@ -75,7 +75,7 @@ export function CTASection() {
               </a>
             </div>
 
-            <p className="text-xs font-sans mt-6" style={{ color: "rgba(0, 83, 83, 0.5)" }}>
+            <p className="text-xs font-sans mt-6" style={{ color: "var(--teal)" }}>
               No spam. No toxic positivity. Members agree to keep what&rsquo;s shared in the group private.
             </p>
           </motion.div>

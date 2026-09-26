@@ -26,9 +26,11 @@ export function HeroSection() {
             columns sit side by side rather than overlapping, so the grid
             can carry photographs without crowding the headline. */}
         <div className="flex flex-col xl:flex-row xl:items-center xl:gap-12 pt-4 pb-20 md:pb-28 xl:pt-20 xl:pb-28">
+          {/* Slides only, no fade: the h1 is the LCP element, so it must be
+              visible in the server HTML before any JS runs. */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 16 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.7, ease: EASE }}
             className="order-2 xl:order-1 xl:flex-1"
           >
@@ -47,7 +49,7 @@ export function HeroSection() {
                 carries the specifics. */}
             <p
               className="text-[18px] leading-[28px] mb-7 font-sans max-w-[560px]"
-              style={{ color: "var(--on-teal-muted)" }}
+              style={{ color: "var(--on-teal-body)" }}
             >
               Walkers stack stones to show the next person the path. IVF is a long walk with
               a lot of unknowns, so Cairn is here to{" "}
@@ -61,7 +63,7 @@ export function HeroSection() {
                 <span
                   key={s}
                   className="text-sm leading-5 font-sans font-medium flex items-center gap-2"
-                  style={{ color: "var(--on-teal-muted)" }}
+                  style={{ color: "var(--on-teal-body)" }}
                 >
                   <span
                     className="h-1 w-1 rounded-full inline-block shrink-0"

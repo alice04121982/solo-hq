@@ -36,7 +36,8 @@ replace it with the token it duplicates (table below).
 | `--teal` | #005353 | brand surface (hero, footer) and brand ink on light |
 | `--teal-10/20/25/35` | rgba(0,83,83,α) | translucent teal borders and washes |
 | `--on-teal` | #f9c6da | headings and high-contrast text on teal |
-| `--on-teal-muted` | #c4a0ae | body copy on teal |
+| `--on-teal-muted` | #c4a0ae | large text (24px+) and decoration on teal only (3.8:1) |
+| `--on-teal-body` | #deb8c8 | body copy on teal at any size (4.99:1) |
 | `--cream` | #FBF2EB | warm section bands, story tag pills |
 | `--lavender` | #F0A8C4 | bubblegum pink: CTA band, shape marks |
 | `--lavender-light` / `--lavender-dark` | #FBE0EE / #C47098 | pink tints and shades |
@@ -105,7 +106,7 @@ canonical names in new code.
   recessed section bands and the scrollbar track; `--surface-sunken` for
   control internals on white surfaces (switch tracks, segmented-control
   tracks) and `--surface-hover` for hover states on white only.
-- On `--teal` surfaces: headings `--on-teal`, body `--on-teal-muted`,
+- On `--teal` surfaces: headings `--on-teal`, body `--on-teal-body`,
   accents `--accent`. Never `--foreground` or `--muted` on teal.
 - On light surfaces: headings `--foreground`, body/captions `--muted`,
   brand-coloured text and eyebrows `--teal`.
@@ -118,7 +119,7 @@ canonical names in new code.
   pink-tinted on teal (footer pattern). Card edges: none — see the rule at
   the top of this list.
 - Card hover on a light band: fill with `--teal` and invert the contents to
-  the on-teal set (`--on-teal`, `--on-teal-muted`, `--accent` for badges).
+  the on-teal set (`--on-teal`, `--on-teal-body`, `--accent` for badges).
   The finder cards do this from custom properties set on `.clinic-card` in
   globals.css, so one rule re-tints the whole card; copy that pattern rather
   than hanging `group-hover:` on every child.
