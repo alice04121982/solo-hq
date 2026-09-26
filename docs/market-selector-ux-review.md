@@ -1,6 +1,11 @@
 # Market selector: UX pattern review
 
-Status: proposal for review. Nothing here is built.
+Status: built (market switch, first-visit strip, footer row and the `/us`
+holding page). Code: `src/lib/market.ts`, `src/components/market-switch.tsx`,
+`src/components/market-suggestion.tsx`, `src/components/footer-market.tsx`,
+`src/app/us/`. One change from the brief: under the white nav the strip uses
+the pale citrus fill, not cream, because most pages open on a cream band
+directly below and a cream strip merged into it.
 
 How a visitor moves between the UK site and a future US site, and how US
 visitors tell us their state. The patterns come from Mobbin (web), checked
